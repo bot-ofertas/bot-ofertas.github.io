@@ -2,9 +2,13 @@ name: Bot Ofertas ML
 
 on:
   schedule:
-    # Roda a cada hora das 07h às 23h (horário Brasília = UTC-3)
-    - cron: '0 10-02 * * *'   # 07h-23h BRT = 10h-02h UTC
-  workflow_dispatch:           # permite rodar manualmente no GitHub
+    # Exatamente a cada 45 minutos das 07h às 22h45 (Brasília = UTC-3)
+    # Sequência: 10:00, 10:45, 11:30, 12:15, 13:00, 13:45, 14:30...
+    - cron: '0 10,13,16,19,22 * * *'
+    - cron: '15 12,15,18,21 * * *'
+    - cron: '30 11,14,17,20 * * *'
+    - cron: '45 10,11,13,14,16,17,19,20,22 * * *'
+  workflow_dispatch:  # permite rodar manualmente no GitHub
 
 jobs:
   rastrear:

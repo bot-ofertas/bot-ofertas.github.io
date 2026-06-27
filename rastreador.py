@@ -50,7 +50,7 @@ CANAIS = {"geral": os.getenv("CANAL_GERAL", "")}
 CATEGORIAS_ATIVAS = ["celulares", "eletronicos", "informatica", "casa", "esportes"]
 DESCONTO_MINIMO   = 15
 SCORE_MINIMO      = 50
-MAX_POR_EXECUCAO  = 5
+MAX_POR_EXECUCAO  = 1
 PAUSA_ENTRE_POSTS = 10   # segundos
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
