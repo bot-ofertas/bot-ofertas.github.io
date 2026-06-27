@@ -1,9 +1,9 @@
-.claude/
-__pycache__/
-*.pyc
-*.pyo
+﻿# Credenciais — nunca subir
 .env
+
+# Cache Python
+__pycache__/
+*.py[cod]
+
+# Dados locais
 envios.log
-monitor.log
-data/historico.json
-data/monitor_status.json

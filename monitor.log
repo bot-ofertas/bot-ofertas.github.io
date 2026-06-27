@@ -1,0 +1,1 @@
+2026-06-27 00:30:33,636 WARNING Falhas detectadas: ['telegram'] — {'verificado_em': '2026-06-27T00:30:31.632658', 'telegram': {'ok': False, 'erro': 'The token `8939890814:AAGy43Qz2AYjrSAqeV1iszchf_2xtzFh_2c` was rejected by the server.'}, 'produtos': {'ok': True, 'total': 0, 'pendentes': 0}}

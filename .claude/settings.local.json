@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "PowerShell(python --version 2>&1)",
+      "PowerShell(Get-ChildItem -Recurse C:\\\\bot_ofertas -Exclude \".git\" | Where-Object { !$_.PSIsContainer } | Select-Object FullName, Length)"
+    ]
+  }
+}
