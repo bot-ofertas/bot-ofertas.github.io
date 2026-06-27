@@ -2,7 +2,7 @@
 """
 ADICIONAR PRODUTO À FILA
 =========================
-Assistente simples por linha de comando. Roda, faz 5 perguntas, salva tudo
+Assistente simples por linha de comando. Roda, faz 6 perguntas, salva tudo
 certinho em produtos.json (em UTF-8, sem risco de "bagunçar" emoji ou acento
 como acontecia colando no Bloco de Notas).
 
