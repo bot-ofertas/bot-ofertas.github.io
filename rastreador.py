@@ -28,7 +28,7 @@ from core.scorer import calcular_score
 from core.validador import validar, score_demanda
 from core.deduplicator import e_duplicata, registrar_envio
 from core.scheduler import e_bom_momento, resumo_horario
-from integrations.mercadolivre import buscar_ofertas, obter_reputacao_vendedor, CATEGORIAS_ML
+from integrations.mercadolivre import buscar_ofertas_nicho, obter_reputacao_vendedor, TERMOS_BUSCA
 from integrations.telegram_bot import publicar
 
 load_dotenv()
@@ -68,7 +68,7 @@ async def processar_categoria(
 
     log(f"\n🔍 [{nome}] buscando ofertas...")
     try:
-        itens = buscar_ofertas(cat_id, desconto_min=DESCONTO_MINIMO)
+        itens = buscar_ofertas_nicho(nome, desconto_min=DESCONTO_MINIMO)
     except RuntimeError as e:
         log(f"  ❌ {e}")
         return
@@ -133,9 +133,8 @@ async def rodar_uma_vez() -> None:
 
     async with Bot(token=TOKEN_TELEGRAM) as bot:
         for nome in CATEGORIAS_ATIVAS:
-            cat_id = CATEGORIAS_ML.get(nome)
-            if cat_id:
-                await processar_categoria(bot, nome, cat_id, publicados)
+            if nome in TERMOS_BUSCA:
+                await processar_categoria(bot, nome, nome, publicados)
 
     log(f"\n{'='*55}")
     log(f"Rodada concluída — {publicados[0]} produto(s) publicado(s).")

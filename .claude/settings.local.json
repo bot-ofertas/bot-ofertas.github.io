@@ -3,7 +3,8 @@
     "allow": [
       "Bash(gh auth *)",
       "PowerShell(python --version 2>&1)",
-      "PowerShell(Get-ChildItem -Recurse C:\\\\bot_ofertas -Exclude \".git\" | Where-Object { !$_.PSIsContainer } | Select-Object FullName, Length)"
+      "PowerShell(Get-ChildItem -Recurse C:\\\\bot_ofertas -Exclude \".git\" | Where-Object { !$_.PSIsContainer } | Select-Object FullName, Length)",
+      "PowerShell(python \"C:\\\\Users\\\\Daniel\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--bot-ofertas\\\\ce383293-57c4-4b79-8b54-f0b189e1a59e\\\\scratchpad\\\\test_endpoints.py\" 2>&1)"
     ]
   }
 }

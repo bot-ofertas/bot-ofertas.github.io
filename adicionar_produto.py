@@ -2,19 +2,12 @@
 """
 ADICIONAR PRODUTO À FILA
 =========================
-Assistente simples por linha de comando. Roda, faz 7 perguntas, salva tudo
-certinho em produtos.json e calcula o score da oferta na hora.
+Cole o link de afiliado — o bot extrai título, preço e foto automaticamente.
+Você só confirma ou corrige o que estiver errado.
 
 Como usar:
     python adicionar_produto.py
-
-Antes de rodar, gere o link de afiliado no app ou site do Mercado Livre:
-  1. Abra o produto que você quer divulgar.
-  2. Toque em "Compartilhar" (se a Barra de Afiliados estiver ativada) OU vá
-     em Portal do Afiliado → Gerador de link → cole a URL → Gerar link.
-  3. Cole o link gerado aqui quando solicitado.
 """
-
 import json
 import os
 import sys
@@ -23,6 +16,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(__file__))
 from core.scorer import calcular_score, COMISSOES_ML
 from core.deduplicator import e_duplicata
+from integrations.ml_extrator import extrair
 
 ARQUIVO = "produtos.json"
 
@@ -39,70 +33,90 @@ def _salvar(produtos: list[dict]) -> None:
         json.dump(produtos, f, ensure_ascii=False, indent=2)
 
 
-def _pedir_preco(rotulo: str) -> float | None:
-    valor = input(rotulo).strip().replace("R$", "").replace(",", ".").strip()
+def _pedir_preco(rotulo: str, sugestao: float | None = None) -> float | None:
+    hint = f" [ENTER = {sugestao:.2f}]" if sugestao else " [ENTER para pular]"
+    valor = input(f"{rotulo}{hint}: ").strip().replace("R$", "").replace(",", ".").strip()
     if not valor:
-        return None
+        return sugestao
     try:
         return float(valor)
     except ValueError:
-        print("  (não entendi esse número, deixando em branco)")
-        return None
+        print("  (não entendi esse número)")
+        return sugestao
+
+
+def _confirmar(rotulo: str, valor: str) -> str:
+    entrada = input(f"{rotulo} [ENTER = '{valor}']: ").strip()
+    return entrada if entrada else valor
 
 
 def main() -> None:
     produtos = _carregar()
+    print("=== Adicionar produto à fila ===\n")
 
-    print("=== Adicionar novo produto à fila ===\n")
-
-    link = input("1) LINK DE AFILIADO (gerado no Portal do Afiliado ML): ").strip()
+    link = input("Cole o LINK DE AFILIADO (meli.la/... ou URL completa): ").strip()
     if not link:
         print("Link em branco, cancelando.")
         return
 
-    titulo = input("2) Título do produto (como vai aparecer na mensagem): ").strip()
-    preco = _pedir_preco("3) Preço atual (ex: 149.90, ENTER se não souber): ")
-    preco_original = _pedir_preco("4) Preço ANTES do desconto (ENTER se não houver): ")
-    foto = input("5) Link da foto do produto (ENTER para sem foto): ").strip()
+    # Extração automática
+    print("  🔍 Buscando dados do produto...")
+    dados = None
+    try:
+        dados = extrair(link)
+    except RuntimeError as e:
+        print(f"  ⚠️  Não consegui acessar o link: {e}")
+
+    if dados:
+        print(f"  ✅ Produto encontrado!\n")
+        link_final = dados.get("link", link)
+    else:
+        print("  ⚠️  Não consegui extrair dados automaticamente. Preencha manualmente.\n")
+        link_final = link
+        dados = {}
+
+    # Confirmação / correção dos dados extraídos
+    titulo        = _confirmar("Título", dados.get("titulo") or "Produto sem título")
+    preco         = _pedir_preco("Preço atual (R$)",        dados.get("preco"))
+    preco_original= _pedir_preco("Preço antes do desconto", dados.get("preco_original"))
+    foto_sugerida = dados.get("foto") or ""
+    foto_entrada  = input(f"Foto (URL) [ENTER = {'extraída automaticamente' if foto_sugerida else 'sem foto'}]: ").strip()
+    foto          = foto_entrada or foto_sugerida or None
 
     cats = ", ".join(COMISSOES_ML.keys())
-    categoria = input(f"6) Categoria ({cats}) [ENTER = geral]: ").strip().lower() or "geral"
-
-    canal = input("7) Nome do canal (deve existir em CANAIS no bot_ofertas.py, ENTER = 'geral'): ").strip()
+    categoria = input(f"Categoria ({cats}) [ENTER = geral]: ").strip().lower() or "geral"
+    canal     = input("Canal (ENTER = 'geral'): ").strip() or "geral"
 
     novo = {
-        "id": f"p{len(produtos) + 1}_{int(datetime.now().timestamp())}",
-        "titulo": titulo or "Produto sem título",
-        "preco": preco,
-        "preco_original": preco_original,
-        "link": link,
-        "foto": foto or None,
-        "categoria": categoria,
-        "canal": canal or "geral",
-        "status": "pendente",
-        "adicionado_em": datetime.now().isoformat(),
+        "id":              f"p{len(produtos) + 1}_{int(datetime.now().timestamp())}",
+        "titulo":          titulo,
+        "preco":           preco,
+        "preco_original":  preco_original,
+        "link":            link_final,
+        "foto":            foto,
+        "categoria":       categoria,
+        "canal":           canal,
+        "status":          "pendente",
+        "adicionado_em":   datetime.now().isoformat(),
     }
-
     novo["score"] = calcular_score(novo)
 
     if e_duplicata(novo):
-        print(f"\n⚠️  Atenção: este produto parece duplicado (mesmo link ou título muito similar a um já enviado).")
-        confirmar = input("Deseja adicionar mesmo assim? (s/N): ").strip().lower()
-        if confirmar != "s":
+        print(f"\n⚠️  Produto parece duplicado (mesmo link ou título similar já enviado).")
+        if input("Adicionar mesmo assim? (s/N): ").strip().lower() != "s":
             print("Cancelado.")
             return
 
     produtos.append(novo)
     _salvar(produtos)
 
-    pendentes = sum(1 for p in produtos if p.get("status") not in ("enviado", "duplicata"))
-    score = novo["score"]
+    score     = novo["score"]
     qualidade = "🟢 ótima" if score >= 75 else ("🟡 boa" if score >= 50 else "🔴 baixa")
+    pendentes = sum(1 for p in produtos if p.get("status") not in ("enviado", "duplicata"))
 
     print(f"\n✅ Produto adicionado!")
-    print(f"   Score da oferta: {score}/100 ({qualidade})")
-    print(f"   {pendentes} produto(s) aguardando envio na fila.")
-    print("   Rode 'python bot_ofertas.py' quando quiser disparar a fila.")
+    print(f"   Score: {score}/100 ({qualidade})")
+    print(f"   {pendentes} produto(s) na fila. Rode 'python bot_ofertas.py' para enviar.")
 
 
 if __name__ == "__main__":
