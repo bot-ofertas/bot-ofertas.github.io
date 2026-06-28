@@ -4,3 +4,4 @@ flask
 requests
 playwright
 anthropic>=0.40.0
+Pillow>=10.1.0

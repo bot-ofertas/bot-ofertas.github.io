@@ -32,7 +32,7 @@ from core.scheduler import e_bom_momento, resumo_horario
 import core.database as db
 from affiliates.registry import get_provider, health_report
 from integrations.ml_browser import buscar_ofertas_browser_async
-from integrations.telegram_bot import publicar
+from integrations.telegram_bot import publicar, publicar_alerta_cupom
 
 try:
     from core.ai_rewriter import reescrever_titulo, reescrever_descricao
@@ -214,7 +214,12 @@ async def processar_categoria(
                 pass
 
         # ── 6. Publicar ───────────────────────────────────────────────────────
-        sucesso = await publicar(bot, item, CANAIS, titulo_reescrito=titulo_ia)
+        tem_cupom = bool(item.get("cupom"))
+        if tem_cupom:
+            log(f"     \U0001f3f7️  Cupom detectado: {item['cupom']} — enviando ALERTA CUPOM")
+            sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
+        else:
+            sucesso = await publicar(bot, item, CANAIS, titulo_reescrito=titulo_ia)
         if sucesso:
             item["status"] = "enviado"
             item["adicionado_em"] = datetime.now().isoformat()

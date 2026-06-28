@@ -44,15 +44,29 @@ jobs:
         run: python -m playwright install chromium --with-deps
 
       - name: Criar diretórios necessários
-        run: mkdir -p data
+        run: mkdir -p data assets
 
-      - name: Rodar o bot
+      - name: Gerar banner ALERTA CUPOM
+        run: python -m core.banner_cupom
+        continue-on-error: true   # não trava o build se Pillow tiver problema
+
+      - name: Rodar o bot (Mercado Livre)
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           ML_AFFILIATE_TOOL_ID: ${{ secrets.ML_AFFILIATE_TOOL_ID }}
           PYTHONIOENCODING: utf-8
         run: python rastreador.py
+
+      - name: Rodar cupons Amazon (se configurado)
+        if: ${{ secrets.AMAZON_AFFILIATE_TAG != '' }}
+        env:
+          TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
+          CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
+          AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
+          PYTHONIOENCODING: utf-8
+        run: python rastreador_amazon.py
+        continue-on-error: true   # Amazon não bloqueia o ML
 
       - name: Salvar banco atualizado no cache
         uses: actions/cache/save@v4

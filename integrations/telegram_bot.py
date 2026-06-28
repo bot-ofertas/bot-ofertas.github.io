@@ -464,6 +464,117 @@ async def _responder_faq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     )
 
 
+# ── Alerta de Cupom ──────────────────────────────────────────────────────────
+
+async def publicar_alerta_cupom(
+    bot: Bot,
+    produto: dict,
+    canais: dict,
+) -> bool:
+    """Publica ALERTA DE CUPOM com banner especial e mensagem formatada.
+
+    Prioridade de imagem: banner estático → foto do produto → texto puro.
+    """
+    canal_nome = produto.get("canal") or "geral"
+    chat_id = canais.get(canal_nome) or next(iter(canais.values()))
+
+    titulo = html.escape(produto.get("titulo") or "Produto em oferta")
+    preco: float | None = produto.get("preco")
+    preco_original: float | None = produto.get("preco_original")
+    link: str = produto.get("link") or produto.get("affiliate_link") or "#"
+    cupom: str = produto.get("cupom") or ""
+    categoria: str = produto.get("categoria") or "geral"
+    fonte: str = produto.get("fonte") or "ml"  # "ml" ou "amazon"
+
+    # Linha de desconto
+    desc_linha = ""
+    if preco_original and preco and preco_original > preco:
+        pct = int(round((1 - preco / preco_original) * 100))
+        desc_linha = f"\n<s>De R$ {preco_original:.2f}</s> — {pct}% OFF"
+
+    # Linha de preço
+    preco_linha = f"💰 <b>R$ {preco:.2f}</b>{desc_linha}" if preco else ""
+
+    # Créditos de fonte
+    fonte_emoji = "🛒" if fonte == "amazon" else "🛍️"
+    fonte_label = "Amazon Brasil" if fonte == "amazon" else "Mercado Livre"
+
+    mensagem = "\n".join(filter(None, [
+        "🏷️ <b>ALERTA DE CUPOM!</b>",
+        "",
+        f"<b>{titulo}</b>",
+        "",
+        preco_linha,
+        "",
+        f"🎟️ <b>CUPOM:</b> <code>{html.escape(cupom)}</code>",
+        "↳ Copie e use na finalização da compra!",
+        "",
+        "🛡️ <b>Oferta verificada</b> · link oficial de afiliado",
+        f"{fonte_emoji} Via <b>{fonte_label}</b>",
+        "",
+        f"➡️ {html.escape(link, quote=True)}",
+        "",
+        f"#{html.escape(categoria)} #cupom #desconto #publicidade",
+    ]))
+
+    site = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
+    teclado = InlineKeyboardMarkup([
+        [InlineKeyboardButton(f"🎟️ Usar Cupom Agora", url=link)],
+        [
+            InlineKeyboardButton(
+                "📤 Compartilhar",
+                url=f"https://t.me/share/url?url={html.escape(link, quote=True)}"
+                    f"&text={html.escape(f'Cupom {cupom} → {titulo}', quote=True)}",
+            ),
+            InlineKeyboardButton("🔎 Mais Cupons", url=site),
+        ],
+    ])
+
+    # Tenta enviar com banner "ALERTA CUPOM" estático
+    try:
+        from core.banner_cupom import banner_bytes
+        dados = banner_bytes()
+        if dados:
+            await bot.send_photo(
+                chat_id=chat_id,
+                photo=dados,
+                caption=mensagem,
+                parse_mode=ParseMode.HTML,
+                reply_markup=teclado,
+            )
+            return True
+    except Exception:
+        pass
+
+    # Fallback: foto do próprio produto
+    try:
+        if produto.get("foto"):
+            await bot.send_photo(
+                chat_id=chat_id,
+                photo=produto["foto"],
+                caption=mensagem,
+                parse_mode=ParseMode.HTML,
+                reply_markup=teclado,
+            )
+            return True
+    except Exception:
+        pass
+
+    # Fallback final: texto puro
+    try:
+        await bot.send_message(
+            chat_id=chat_id,
+            text=mensagem,
+            parse_mode=ParseMode.HTML,
+            reply_markup=teclado,
+            disable_web_page_preview=False,
+        )
+        return True
+    except Exception as e:
+        log.error("Erro ao publicar alerta cupom '%s': %s", produto.get("titulo"), e)
+        return False
+
+
 # ── Criação da aplicação ──────────────────────────────────────────────────────
 
 def criar_aplicacao(token: str):
