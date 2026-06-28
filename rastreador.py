@@ -48,11 +48,16 @@ TOKEN_TELEGRAM = os.getenv("TOKEN_TELEGRAM", "")
 CANAIS = {"geral": os.getenv("CANAL_GERAL", "")}
 
 # ── Configuração ──────────────────────────────────────────────────────────────
-CATEGORIAS_ATIVAS = ["celulares", "eletronicos", "informatica", "casa", "esportes", "moda"]
+CATEGORIAS_ATIVAS = [
+    "celulares", "eletronicos", "informatica", "casa",
+    "esportes", "moda", "beleza", "automotivo",
+    "games", "brinquedos", "ferramentas", "pet",
+]
 DESCONTO_MINIMO   = 20
 SCORE_MINIMO      = 60
-MAX_POR_EXECUCAO  = 1
-PAUSA_ENTRE_POSTS = 10   # segundos
+MAX_POR_EXECUCAO  = 3   # máximo de posts por execução (rotaciona categorias)
+MAX_POR_CATEGORIA = 1   # nunca posta a mesma categoria 2x no mesmo run
+PAUSA_ENTRE_POSTS = 8   # segundos entre posts
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
@@ -231,16 +236,24 @@ async def rodar_uma_vez() -> None:
 
     publicados: list[int] = [0]
 
-    # Rotaciona categorias para distribuir posts entre nichos ao longo do dia
+    # Rotaciona e distribui — garante variedade de categorias por run
     ordem = CATEGORIAS_ATIVAS[:]
     random.shuffle(ordem)
     log(f"  Ordem desta rodada: {' → '.join(ordem)}")
+
+    categorias_postadas: set[str] = set()
 
     async with Bot(token=TOKEN_TELEGRAM) as bot:
         for nicho in ordem:
             if publicados[0] >= MAX_POR_EXECUCAO:
                 break
+            # Nunca posta a mesma categoria duas vezes no mesmo run
+            if nicho in categorias_postadas:
+                continue
+            antes = publicados[0]
             await processar_categoria(bot, nicho, publicados, exec_id, contadores)
+            if publicados[0] > antes:
+                categorias_postadas.add(nicho)
 
     db.finalizar_execucao(
         exec_id,

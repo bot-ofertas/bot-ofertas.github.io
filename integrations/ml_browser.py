@@ -23,6 +23,12 @@ _FILTROS_CATEGORIA: dict[str, str] = {
     "casa":        "https://www.mercadolivre.com.br/ofertas?category=MLB1574",
     "esportes":    "https://www.mercadolivre.com.br/ofertas?category=MLB1276",
     "moda":        "https://www.mercadolivre.com.br/ofertas?category=MLB1430",
+    "beleza":      "https://www.mercadolivre.com.br/ofertas?category=MLB1246",
+    "automotivo":  "https://www.mercadolivre.com.br/ofertas?category=MLB1747",
+    "games":       "https://www.mercadolivre.com.br/ofertas?category=MLB1144",
+    "brinquedos":  "https://www.mercadolivre.com.br/ofertas?category=MLB1132",
+    "ferramentas": "https://www.mercadolivre.com.br/ofertas?category=MLB1039",
+    "pet":         "https://www.mercadolivre.com.br/ofertas?category=MLB1514",
 }
 
 _UA = (

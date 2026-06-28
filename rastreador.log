@@ -1,34 +1,1134 @@
-2026-06-27 01:15:30,206 
+2026-06-27 02:43:03,642 
 =======================================================
-2026-06-27 01:15:30,207 Rastreador iniciado — Sáb 01:15 — horário ruim 🔴 (score 0)
-2026-06-27 01:15:30,207 ⏰ Horário não ideal para engajamento, mas prosseguindo...
-2026-06-27 01:15:31,851 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
-2026-06-27 01:15:31,852 
+2026-06-27 02:43:03,643 Rastreador iniciado � S�b 02:43 � hor�rio ruim \U0001f534 (score 0)
+2026-06-27 02:43:03,643 \u23f0 Hor�rio n�o ideal para engajamento, prosseguindo mesmo assim
+2026-06-27 02:43:05,298 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
+2026-06-27 02:43:05,299 
+\U0001f50d [celulares] buscando ofertas via browser...
+2026-06-27 02:43:11,994   20 produto(s) com desconto \u226515%
+2026-06-27 02:43:11,994   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C
+2026-06-27 02:43:12,017   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A07 256gb 8gb C�mera 50mp Verde
+2026-06-27 02:43:12,017   \u21a9\ufe0f  Duplicata: Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1
+2026-06-27 02:43:12,018   \u21a9\ufe0f  Duplicata: Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R
+2026-06-27 02:43:12,018   \U0001f4ca Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T
+     42% OFF | score 90
+2026-06-27 02:43:12,802 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 02:43:12,804   \u2705 Publicado! (1/5 desta rodada)
+2026-06-27 02:43:22,820   \U0001f4ca Samsung Galaxy A06 5g Dual Sim 128gb Preto
+     35% OFF | score 74
+2026-06-27 02:43:23,610 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 02:43:23,614   \u2705 Publicado! (2/5 desta rodada)
+2026-06-27 02:43:33,636   \u21a9\ufe0f  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T
+2026-06-27 02:43:33,637   \u21a9\ufe0f  Duplicata: Rel�gio Inteligente Gps Smartwatch Amoled 3atm Outdoor 
+2026-06-27 02:43:33,637   \U0001f4ca Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, C�mera De
+     36% OFF | score 86
+2026-06-27 02:43:34,430 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 02:43:34,434   \u2705 Publicado! (3/5 desta rodada)
+2026-06-27 02:43:44,451   \U0001f4ca Smartphone Infinix Smart 10 4gb Ram 256gb Ssd C�mera 8m
+     56% OFF | score 90
+2026-06-27 02:43:45,245 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 02:43:45,247   \u2705 Publicado! (4/5 desta rodada)
+2026-06-27 02:43:55,271   \U0001f4ca iPhone 17 256�gb - S�lvia - Distribuidor Autorizado
+     28% OFF | score 78
+2026-06-27 02:43:56,080 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 02:43:56,082   \u2705 Publicado! (5/5 desta rodada)
+2026-06-27 02:44:06,098 
+=======================================================
+2026-06-27 02:44:06,098 Rodada conclu�da � 5 produto(s) publicado(s).
+
+=======================================================
+Rastreador iniciado — Sáb 02:43 — horário ruim 🔴 (score 0)
+⏰ Horário não ideal para engajamento, prosseguindo mesmo assim
+
+🔍 [celulares] buscando ofertas via browser...
+  20 produto(s) com desconto ≥15%
+  ↩️  Duplicata: Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C
+  ↩️  Duplicata: Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde
+  ↩️  Duplicata: Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1
+  ↩️  Duplicata: Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R
+  📊 Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T
+     42% OFF | score 90
+  ✅ Publicado! (1/5 desta rodada)
+  📊 Samsung Galaxy A06 5g Dual Sim 128gb Preto
+     35% OFF | score 74
+  ✅ Publicado! (2/5 desta rodada)
+  ↩️  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T
+  ↩️  Duplicata: Relógio Inteligente Gps Smartwatch Amoled 3atm Outdoor 
+  📊 Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, Câmera De
+     36% OFF | score 86
+  ✅ Publicado! (3/5 desta rodada)
+  📊 Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8m
+     56% OFF | score 90
+  ✅ Publicado! (4/5 desta rodada)
+  📊 iPhone 17 256 gb - Sálvia - Distribuidor Autorizado
+     28% OFF | score 78
+  ✅ Publicado! (5/5 desta rodada)
+
+=======================================================
+Rodada concluída — 5 produto(s) publicado(s).
+2026-06-27 08:00:01,138 
+=======================================================
+2026-06-27 08:00:01,138 Rastreador iniciado � S�b 08:00 � hor�rio bom \U0001f7e1 (score 56)
+2026-06-27 08:00:01,139   Provedor mercadolivre: \u26a0\ufe0f  n�o configurado
+2026-06-27 08:00:01,139   Provedor amazon: \u26a0\ufe0f  n�o configurado
+2026-06-27 08:00:01,139   Provedor shopee: \u26a0\ufe0f  n�o configurado
+2026-06-27 08:00:01,139   Provedor magalu: \u26a0\ufe0f  n�o configurado
+2026-06-27 08:00:01,139   Provedor kabum: \u26a0\ufe0f  n�o configurado
+2026-06-27 08:00:02,769 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
+2026-06-27 08:00:02,771 
+\U0001f50d [celulares] buscando ofertas...
+2026-06-27 08:00:09,476   20 produto(s) com desconto \u226515%
+2026-06-27 08:00:09,481   \U0001f4ca Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+2026-06-27 08:00:09,482   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,507   \U0001f4ca Celular Samsung Galaxy A07 256gb 8gb C�mera 50mp Verde | 55% OFF | score 90
+2026-06-27 08:00:09,507   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,530   \U0001f4ca Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+2026-06-27 08:00:09,530   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,555   \U0001f4ca Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+2026-06-27 08:00:09,555   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,583   \U0001f4ca Samsung Galaxy A06 5g Dual Sim 128gb Preto | 35% OFF | score 74
+2026-06-27 08:00:09,583   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,607   \U0001f4ca Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T | 42% OFF | score 90
+2026-06-27 08:00:09,607   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,632   \U0001f4ca Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T | 49% OFF | score 90
+2026-06-27 08:00:09,632   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,656   \U0001f4ca Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, C�mera De | 36% OFF | score 86
+2026-06-27 08:00:09,656   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,713   \U0001f4ca Rel�gio Inteligente Gps Smartwatch Amoled 3atm Outdoor  | 49% OFF | score 81
+2026-06-27 08:00:09,719   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,745   \U0001f4ca Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+2026-06-27 08:00:09,745   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,770   \U0001f4ca Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, C�m  | 43% OFF | score 90
+2026-06-27 08:00:09,771   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,796   \U0001f4ca Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+2026-06-27 08:00:09,796   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,821   \U0001f4ca Smartphone Infinix Smart 10 4gb Ram 256gb Ssd C�mera 8m | 56% OFF | score 90
+2026-06-27 08:00:09,821   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,846   \U0001f4ca Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lan�amento C/  | 40% OFF | score 90
+2026-06-27 08:00:09,846   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,871   \U0001f4ca Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb R | 52% OFF | score 90
+2026-06-27 08:00:09,871   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,897   \U0001f4ca Carregador Port�til Power Bank Turbo 20000mah 22.5w Har | 50% OFF | score 72
+2026-06-27 08:00:09,897   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,921   \U0001f4ca Smartphone Motorola Edge 70 Fusion 5g - 256gb 24gb (8gb | 42% OFF | score 90
+2026-06-27 08:00:09,921   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,945   \U0001f4ca Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+2026-06-27 08:00:09,945   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:09,979   \U0001f4ca Smartphone Xiaomi Redmi Note 15 Pro 4g 8gb 256gb Tela A | 39% OFF | score 89
+2026-06-27 08:00:09,980   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:10,004   \U0001f4ca Apple iPhone 13 128 Gb Estelar (novo Com Caixa Aberta) | 40% OFF | score 90
+2026-06-27 08:00:10,004   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:10,025 
+\U0001f50d [eletronicos] buscando ofertas...
+2026-06-27 08:00:14,246   20 produto(s) com desconto \u226515%
+2026-06-27 08:00:14,250   \U0001f4ca Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processa | 56% OFF | score 90
+2026-06-27 08:00:14,250   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,274   \U0001f4ca Smart Tv 32 Philco Roku Tv Dolby �udio Hdr10 P32crb | 40% OFF | score 90
+2026-06-27 08:00:14,275   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,295   \U0001f4ca Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43 | 50% OFF | score 90
+2026-06-27 08:00:14,296   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,319   \U0001f4ca Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hd | 44% OFF | score 90
+2026-06-27 08:00:14,320   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,344   \U0001f4ca Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio W | 43% OFF | score 90
+2026-06-27 08:00:14,344   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,368   \U0001f4ca Galaxy Buds Core Preto | 35% OFF | score 64
+2026-06-27 08:00:14,369   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,391   \U0001f4ca Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+2026-06-27 08:00:14,391   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,416   \U0001f4ca Smart Tv LG Uhd Ai Ua85 50 Polegadas Hdr10 Pro Processa | 43% OFF | score 90
+2026-06-27 08:00:14,416   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,441   \U0001f4ca Smart Tv LG Uhd Ai Ua75 55 Polegadas Hdr10 Pro Processa | 35% OFF | score 85
+2026-06-27 08:00:14,441   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,466   \U0001f4ca Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hd | 38% OFF | score 88
+2026-06-27 08:00:14,466   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,534   \U0001f4ca Caixa De Som Bluetooth Boombox 4 Jbl, Com Ai Sound Boos | 40% OFF | score 90
+2026-06-27 08:00:14,535   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,569   \U0001f4ca Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+2026-06-27 08:00:14,569   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,601   \U0001f4ca Smart Tv LG 43 Full Hd, Processador A5 Ger6, Ai, Alexa  | 34% OFF | score 84
+2026-06-27 08:00:14,601   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,626   \U0001f4ca Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+2026-06-27 08:00:14,626   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,650   \U0001f4ca Smart Tv 4k 65  LG Qned73 Portal De Games Processador A | 30% OFF | score 80
+2026-06-27 08:00:14,651   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,676   \U0001f4ca Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-f | 38% OFF | score 88
+2026-06-27 08:00:14,676   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,701   \U0001f4ca Smart Tv Profissional LG 43  Full Hd Processador A5 Ger | 31% OFF | score 81
+2026-06-27 08:00:14,701   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,724   \U0001f4ca Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+2026-06-27 08:00:14,724   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,749   \U0001f4ca Score 47 < 50: Projetor Hy320 Hardline Smart Tv Android Wifi 6 390 Ans
+2026-06-27 08:00:14,751   \U0001f4ca Smart Tv Aoc 50u6125 50'' 4k Led | 48% OFF | score 85
+2026-06-27 08:00:14,751   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:14,773 
+\U0001f50d [informatica] buscando ofertas...
+2026-06-27 08:00:18,976   20 produto(s) com desconto \u226515%
+2026-06-27 08:00:18,980   \U0001f4ca Monitor Gamer LG Ultragear 24 24gs60f-b Ips Full Hd 180 | 41% OFF | score 89
+2026-06-27 08:00:18,981   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,005   \U0001f4ca Monitor Gamer Curvo 24 3000r 144hz 1ms Fhd Alto-falante | 39% OFF | score 82
+2026-06-27 08:00:19,005   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,030   \U0001f4ca Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 40% OFF | score 90
+2026-06-27 08:00:19,030   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,057   \U0001f4ca Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+2026-06-27 08:00:19,057   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,082   \U0001f4ca Controle Gamesir T4 Nova Lite Sem Fio Para Pc Switch An | 41% OFF | score 74
+2026-06-27 08:00:19,082   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,108   \U0001f4ca Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+2026-06-27 08:00:19,108   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,131   \U0001f4ca Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+2026-06-27 08:00:19,131   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,156   \U0001f4ca Monitor Gamer LG Ultragear Curvo 34g600a-b 34  Quadhd 2 | 19% OFF | score 69
+2026-06-27 08:00:19,157   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,183   \U0001f4ca Kit De Internet Via Satelite Starlink Mini Branco | 43% OFF | score 85
+2026-06-27 08:00:19,183   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,226   \U0001f4ca Notebook Acer Aspire 5 A515-45-r2a3 Amd Ryzen 5 Windows | 36% OFF | score 86
+2026-06-27 08:00:19,226   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,251   \U0001f4ca Positivo Vision Tab10 T3010 4gb Ram 128gb Ssd Com Capa  | 40% OFF | score 90
+2026-06-27 08:00:19,252   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,278   \U0001f4ca Monitor LG Ultrawide - Tela Ips De 29 , 21:9, Hdr10, Sr | 23% OFF | score 67
+2026-06-27 08:00:19,278   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,304   \U0001f4ca Caixa Som Philco Extreme 1200w Connection Tws Pcx6900 2 | 29% OFF | score 74
+
+=======================================================
+Rastreador iniciado — Sáb 08:00 — horário bom 🟡 (score 56)
+  Provedor mercadolivre: ⚠️  não configurado
+  Provedor amazon: ⚠️  não configurado
+  Provedor shopee: ⚠️  não configurado
+  Provedor magalu: ⚠️  não configurado
+  Provedor kabum: ⚠️  não configurado
+
 🔍 [celulares] buscando ofertas...
-2026-06-27 01:15:32,527   ❌ Erro na busca ML: 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?category=MLB1051&sort=relevance&limit=30&access_token=APP_USR-1854183194510353-062700-e1f894178d09501bcd540f3077f01f58-576075567
-2026-06-27 01:15:32,530 
+  20 produto(s) com desconto ≥15%
+  📊 Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde | 55% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Samsung Galaxy A06 5g Dual Sim 128gb Preto | 35% OFF | score 74
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T | 42% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T | 49% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, Câmera De | 36% OFF | score 86
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Relógio Inteligente Gps Smartwatch Amoled 3atm Outdoor  | 49% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm  | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8m | 56% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lançamento C/  | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb R | 52% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Carregador Portátil Power Bank Turbo 20000mah 22.5w Har | 50% OFF | score 72
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Edge 70 Fusion 5g - 256gb 24gb (8gb | 42% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Xiaomi Redmi Note 15 Pro 4g 8gb 256gb Tela A | 39% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Apple iPhone 13 128 Gb Estelar (novo Com Caixa Aberta) | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
 🔍 [eletronicos] buscando ofertas...
-2026-06-27 01:15:33,207   ❌ Erro na busca ML: 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?category=MLB1000&sort=relevance&limit=30&access_token=APP_USR-1854183194510353-062700-e1f894178d09501bcd540f3077f01f58-576075567
-2026-06-27 01:15:33,210 
+  20 produto(s) com desconto ≥15%
+  📊 Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processa | 56% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43 | 50% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hd | 44% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio W | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Galaxy Buds Core Preto | 35% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG Uhd Ai Ua85 50 Polegadas Hdr10 Pro Processa | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG Uhd Ai Ua75 55 Polegadas Hdr10 Pro Processa | 35% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hd | 38% OFF | score 88
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Caixa De Som Bluetooth Boombox 4 Jbl, Com Ai Sound Boos | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG 43 Full Hd, Processador A5 Ger6, Ai, Alexa  | 34% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 4k 65  LG Qned73 Portal De Games Processador A | 30% OFF | score 80
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-f | 38% OFF | score 88
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Profissional LG 43  Full Hd Processador A5 Ger | 31% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Score 47 < 50: Projetor Hy320 Hardline Smart Tv Android Wifi 6 390 Ans
+  📊 Smart Tv Aoc 50u6125 50'' 4k Led | 48% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
 🔍 [informatica] buscando ofertas...
-2026-06-27 01:15:33,919   ❌ Erro na busca ML: 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?category=MLB1648&sort=relevance&limit=30&access_token=APP_USR-1854183194510353-062700-e1f894178d09501bcd540f3077f01f58-576075567
-2026-06-27 01:15:33,921 
+  20 produto(s) com desconto ≥15%
+  📊 Monitor Gamer LG Ultragear 24 24gs60f-b Ips Full Hd 180 | 41% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Monitor Gamer Curvo 24 3000r 144hz 1ms Fhd Alto-falante | 39% OFF | score 82
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Controle Gamesir T4 Nova Lite Sem Fio Para Pc Switch An | 41% OFF | score 74
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Monitor Gamer LG Ultragear Curvo 34g600a-b 34  Quadhd 2 | 19% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit De Internet Via Satelite Starlink Mini Branco | 43% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Notebook Acer Aspire 5 A515-45-r2a3 Amd Ryzen 5 Windows | 36% OFF | score 86
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Positivo Vision Tab10 T3010 4gb Ram 128gb Ssd Com Capa  | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Monitor LG Ultrawide - Tela Ips De 29 , 21:9, Hdr10, Sr | 23% OFF | score 67
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Caixa Som Philco Extreme 1200w Connection Tws Pcx6900 2 | 29% OFF | score 74
+  ❌ Provedor mercadolivre não configurado. Execute setup.2026-06-27 08:00:19,305   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,328   \U0001f4ca Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+2026-06-27 08:00:19,328   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,353   \U0001f4ca Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 18% OFF | score 58
+2026-06-27 08:00:19,354   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,381   \U0001f4ca Notebook Gamer Acer Nitro V15 Anv15-52-737p Intel� Core | 27% OFF | score 77
+2026-06-27 08:00:19,381   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,407   \U0001f4ca Placa De V�deo Msi Geforce Rtx 5060 Shadow 2x Oc 8gb Gd | 26% OFF | score 76
+2026-06-27 08:00:19,407   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,432   \U0001f4ca Computador Pc Completo Efacini, I7, 16gb, Monitor 23.8, | 38% OFF | score 88
+2026-06-27 08:00:19,432   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,457   \U0001f4ca Ssd240gb Adata 3 2.5 Su650 Asu650ss-240gt-r 240gb Preto | 21% OFF | score 54
+2026-06-27 08:00:19,457   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,484   \U0001f4ca Mochila God Talent Notebook 40l Masculina Escolar Passe | 35% OFF | score 64
+2026-06-27 08:00:19,484   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:19,507 
+\U0001f50d [casa] buscando ofertas...
+2026-06-27 08:00:24,647   20 produto(s) com desconto \u226515%
+2026-06-27 08:00:24,651   \U0001f4ca C�mera Inteligente Intelbras Im5sc Con Wi-fi Full Hd Co | 36% OFF | score 77
+2026-06-27 08:00:24,651   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,675   \U0001f4ca Fechadura Digital De Sobrepor Fr 101 V Preta Intelbras  | 26% OFF | score 64
+2026-06-27 08:00:24,676   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,702   \U0001f4ca Kit 2 Travesseiros 70x50 Antial�rgico Lav�vel Fibra Sil | 43% OFF | score 76
+2026-06-27 08:00:24,702   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,727   \U0001f4ca C�mera Inteligente Intelbras Ime 360 3mp Vis�o 360 Wi-f | 39% OFF | score 78
+2026-06-27 08:00:24,727   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,751   \U0001f4ca Kit De 2 Cadeiras Organik Em Madeira Am�ndoa Com Assent | 19% OFF | score 65
+2026-06-27 08:00:24,751   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,775   \U0001f4ca Cobertor Queen Grosso Coberdrom L� Carneiro Dupla Face  | 23% OFF | score 59
+2026-06-27 08:00:24,775   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,799   \U0001f4ca Cobertor Manta Flannel Soft King Queen 2,20x2,40 Luxo C | 42% OFF | score 76
+2026-06-27 08:00:24,799   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,822   \U0001f4ca C�mera De V�deo Wi-fi Intelbras Im3 C Microsd 32gb Bran | 43% OFF | score 82
+2026-06-27 08:00:24,823   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,846   \U0001f4ca Jogo De Toalhas Karsten 100% Algod�o Floral Grossa 4 Pe | 27% OFF | score 62
+2026-06-27 08:00:24,846   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,869   \U0001f4ca C�mera Inteligente Im3 C Black Intelbras Preto | 25% OFF | score 57
+2026-06-27 08:00:24,869   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,893   \U0001f4ca Aparelho De Jantar E Ch� 30 Pe�as Oxford Unni Brisa Mar | 55% OFF | score 89
+2026-06-27 08:00:24,893   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,916   \U0001f4ca C�mera Inteligente Vis�o 360� Im4 C Intelbras Branco | 20% OFF | score 57
+2026-06-27 08:00:24,917   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:24,940   \U0001f4ca Escorredor De Lou�a Revestimento Inoxid�vel Com Porta P | 30% OFF | score 65
+2026-06-27 08:00:24,940   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,003   \U0001f4ca C�mera Wi-fi Full Hd Intelbras Im7+ Zoom Full Color Cor | 25% OFF | score 68
+2026-06-27 08:00:25,004   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,070   \U0001f4ca Jogo De Toalhas Buddemeyer Atena Fio Penteado Banho Ver | 37% OFF | score 76
+2026-06-27 08:00:25,070   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,097   \U0001f4ca C�mera Inteligente Resistente A Chuva E Poeira Im7 S Br | 19% OFF | score 57
+2026-06-27 08:00:25,097   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,122   \U0001f4ca Conjunto Panelas Antiaderente 10 Pe�as Teflon V�rias Co | 19% OFF | score 54
+2026-06-27 08:00:25,122   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,147   \U0001f4ca C�mera L�mpada Intelbras Im6 Full Color 3mp 360 Wifi In | 31% OFF | score 69
+2026-06-27 08:00:25,147   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,171   \U0001f4ca Vaso Sanit�rio Monobloco Caixa Acoplada Completo - Priv | 44% OFF | score 90
+2026-06-27 08:00:25,171   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,192   \U0001f4ca Kit C/ 4 Toalha De Banho Gigante 80 X 1,50 Atacado + So | 50% OFF | score 78
+2026-06-27 08:00:25,193   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:25,212 
+\U0001f50d [esportes] buscando ofertas...
+2026-06-27 08:00:29,462   20 produto(s) com desconto \u226515%
+2026-06-27 08:00:29,467   \U0001f4ca Creatina Monohidratada Pura 500g Dark Lab Unidade Sem S | 65% OFF | score 75
+2026-06-27 08:00:29,467   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,513   \U0001f4ca T�nis Masculino Feminino Kappa Park 2.0 Original | 50% OFF | score 70
+2026-06-27 08:00:29,513   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,568   \u26a0\ufe0f  Rejeitado [desconto irreal 77% (poss�vel pre�o inflado)]: Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Imp
+2026-06-27 08:00:29,571   \U0001f4ca Nac 600mg - F�rmula Exclusiva Com M�xima Concentra��o E | 47% OFF | score 73
+2026-06-27 08:00:29,571   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,597   \U0001f4ca adidas Feminino T�nis Streettalk Kz6277 Marrom Lisa 36  | 36% OFF | score 73
+2026-06-27 08:00:29,598   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,624   \U0001f4ca Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sa | 62% OFF | score 75
+2026-06-27 08:00:29,624   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,651   \U0001f4ca Creatina Monohidratada 250g Growth Supplements - Sem Sa | 38% OFF | score 69
+2026-06-27 08:00:29,652   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,679   \U0001f4ca Bicicleta Spinning Com Roda De In�rcia De 13kg Wct Fitn | 38% OFF | score 90
+2026-06-27 08:00:29,680   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,705   \U0001f4ca T�nis Olympikus Masculino Gama Chumbo/preto Lisa 39 Br | 49% OFF | score 78
+2026-06-27 08:00:29,706   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,730   \U0001f4ca Camisa Torcedor 1.1 Tailand Masculina Amarela 2026 | 66% OFF | score 83
+2026-06-27 08:00:29,731   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,757   \U0001f4ca Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Co | 27% OFF | score 60
+2026-06-27 08:00:29,758   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,784   \U0001f4ca Bicicleta Ergom�trica Fitness Para Cardio E Muscula��o  | 46% OFF | score 92
+2026-06-27 08:00:29,784   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,808   \U0001f4ca Garrafa T�rmica 1 Litro Com Term�metro Led Para Ch�s /  | 34% OFF | score 67
+2026-06-27 08:00:29,808   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,834   \U0001f4ca T�nis Lacoste T-base Lancamento | 57% OFF | score 78
+2026-06-27 08:00:29,834   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,863   \U0001f4ca T�nis Lacoste Europa Original Em Promo��o | 35% OFF | score 67
+2026-06-27 08:00:29,863   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,901   \U0001f4ca T�nis Kappa Galaxy Masculino Feminino | 41% OFF | score 69
+2026-06-27 08:00:29,901   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,925   \U0001f4ca Bicicleta Ergom�trica Owo Fitness Roda De In�rcia 7kg P | 57% OFF | score 92
+2026-06-27 08:00:29,925   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,950   \U0001f4ca Tenis Feminino Chunky Ramarim Casual Conforto Original | 57% OFF | score 81
+2026-06-27 08:00:29,950   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:29,975   \U0001f4ca Polo Masculina Lacoste Slim Fit - Original | 52% OFF | score 77
+2026-06-27 08:00:29,975   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:30,001   \U0001f4ca T�nis Casual Kappa Zenit Masculino Unissex Conforto | 56% OFF | score 77
+2026-06-27 08:00:30,001   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 08:00:30,044 
 =======================================================
-2026-06-27 01:15:33,921 Rodada concluída — 0 produto(s) publicado(s).
-2026-06-27 01:16:48,678 
+2026-06-27 08:00:30,045 Rodada conclu�da � 0 publicado(s), 0 link(s) oficial(is), 98 falha(s) de link.
+
+  📊 Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 18% OFF | score 58
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Notebook Gamer Acer Nitro V15 Anv15-52-737p Intel® Core | 27% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Placa De Vídeo Msi Geforce Rtx 5060 Shadow 2x Oc 8gb Gd | 26% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Computador Pc Completo Efacini, I7, 16gb, Monitor 23.8, | 38% OFF | score 88
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Ssd240gb Adata 3 2.5 Su650 Asu650ss-240gt-r 240gb Preto | 21% OFF | score 54
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mochila God Talent Notebook 40l Masculina Escolar Passe | 35% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
+🔍 [casa] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  📊 Câmera Inteligente Intelbras Im5sc Con Wi-fi Full Hd Co | 36% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Fechadura Digital De Sobrepor Fr 101 V Preta Intelbras  | 26% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 2 Travesseiros 70x50 Antialérgico Lavável Fibra Sil | 43% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Intelbras Ime 360 3mp Visão 360 Wi-f | 39% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit De 2 Cadeiras Organik Em Madeira Amêndoa Com Assent | 19% OFF | score 65
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Cobertor Queen Grosso Coberdrom Lã Carneiro Dupla Face  | 23% OFF | score 59
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Cobertor Manta Flannel Soft King Queen 2,20x2,40 Luxo C | 42% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera De Vídeo Wi-fi Intelbras Im3 C Microsd 32gb Bran | 43% OFF | score 82
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Jogo De Toalhas Karsten 100% Algodão Floral Grossa 4 Pe | 27% OFF | score 62
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Im3 C Black Intelbras Preto | 25% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Aparelho De Jantar E Chá 30 Peças Oxford Unni Brisa Mar | 55% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Visão 360° Im4 C Intelbras Branco | 20% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Escorredor De Louça Revestimento Inoxidável Com Porta P | 30% OFF | score 65
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Wi-fi Full Hd Intelbras Im7+ Zoom Full Color Cor | 25% OFF | score 68
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Jogo De Toalhas Buddemeyer Atena Fio Penteado Banho Ver | 37% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Resistente A Chuva E Poeira Im7 S Br | 19% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Conjunto Panelas Antiaderente 10 Peças Teflon Várias Co | 19% OFF | score 54
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Lâmpada Intelbras Im6 Full Color 3mp 360 Wifi In | 31% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Vaso Sanitário Monobloco Caixa Acoplada Completo - Priv | 44% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit C/ 4 Toalha De Banho Gigante 80 X 1,50 Atacado + So | 50% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
+🔍 [esportes] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  📊 Creatina Monohidratada Pura 500g Dark Lab Unidade Sem S | 65% OFF | score 75
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Masculino Feminino Kappa Park 2.0 Original | 50% OFF | score 70
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  ⚠️  Rejeitado [desconto irreal 77% (possível preço inflado)]: Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Imp
+  📊 Nac 600mg - Fórmula Exclusiva Com Máxima Concentração E | 47% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 adidas Feminino Tênis Streettalk Kz6277 Marrom Lisa 36  | 36% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sa | 62% OFF | score 75
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Creatina Monohidratada 250g Growth Supplements - Sem Sa | 38% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitn | 38% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Olympikus Masculino Gama Chumbo/preto Lisa 39 Br | 49% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Camisa Torcedor 1.1 Tailand Masculina Amarela 2026 | 66% OFF | score 83
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Co | 27% OFF | score 60
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Ergométrica Fitness Para Cardio E Musculação  | 46% OFF | score 92
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Garrafa Térmica 1 Litro Com Termômetro Led Para Chás /  | 34% OFF | score 67
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Lacoste T-base Lancamento | 57% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Lacoste Europa Original Em Promoção | 35% OFF | score 67
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Kappa Galaxy Masculino Feminino | 41% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Ergométrica Owo Fitness Roda De Inércia 7kg P | 57% OFF | score 92
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tenis Feminino Chunky Ramarim Casual Conforto Original | 57% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Polo Masculina Lacoste Slim Fit - Original | 52% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Casual Kappa Zenit Masculino Unissex Conforto | 56% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
 =======================================================
-2026-06-27 01:16:48,678 Rastreador iniciado — Sáb 01:16 — horário ruim 🔴 (score 0)
-2026-06-27 01:16:48,678 ⏰ Horário não ideal para engajamento, mas prosseguindo...
-2026-06-27 01:16:50,289 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
-2026-06-27 01:16:50,290 
+Rodada concluída — 0 publicado(s), 0 link(s) oficial(is), 98 falha(s) de link.
+2026-06-27 09:00:01,107 
+=======================================================
+2026-06-27 09:00:01,107 Rastreador iniciado � S�b 09:00 � hor�rio bom \U0001f7e1 (score 49)
+2026-06-27 09:00:01,108   Provedor mercadolivre: \u26a0\ufe0f  n�o configurado
+2026-06-27 09:00:01,108   Provedor amazon: \u26a0\ufe0f  n�o configurado
+2026-06-27 09:00:01,108   Provedor shopee: \u26a0\ufe0f  n�o configurado
+2026-06-27 09:00:01,108   Provedor magalu: \u26a0\ufe0f  n�o configurado
+2026-06-27 09:00:01,108   Provedor kabum: \u26a0\ufe0f  n�o configurado
+2026-06-27 09:00:02,737 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
+2026-06-27 09:00:02,738 
+\U0001f50d [celulares] buscando ofertas...
+2026-06-27 09:00:09,371   20 produto(s) com desconto \u226515%
+2026-06-27 09:00:09,375   \U0001f4ca Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+2026-06-27 09:00:09,375   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,401   \U0001f4ca Celular Samsung Galaxy A07 256gb 8gb C�mera 50mp Verde | 55% OFF | score 90
+2026-06-27 09:00:09,402   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,425   \U0001f4ca Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+2026-06-27 09:00:09,425   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,450   \U0001f4ca Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+2026-06-27 09:00:09,451   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,486   \U0001f4ca Samsung Galaxy A06 5g Dual Sim 128gb Preto | 28% OFF | score 64
+2026-06-27 09:00:09,487   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,511   \U0001f4ca Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T | 42% OFF | score 90
+2026-06-27 09:00:09,511   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,536   \U0001f4ca Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T | 49% OFF | score 90
+2026-06-27 09:00:09,536   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,560   \U0001f4ca Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, C�mera De | 36% OFF | score 86
+2026-06-27 09:00:09,560   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,584   \U0001f4ca Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, C�m  | 43% OFF | score 90
+2026-06-27 09:00:09,584   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,607   \U0001f4ca Rel�gio Inteligente Gps Smartwatch Amoled 3atm Outdoor  | 49% OFF | score 81
+2026-06-27 09:00:09,607   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,631   \U0001f4ca Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+2026-06-27 09:00:09,631   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,657   \U0001f4ca Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lan�amento C/  | 40% OFF | score 90
+2026-06-27 09:00:09,658   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,681   \U0001f4ca Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+2026-06-27 09:00:09,681   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,705   \U0001f4ca Power Bank Turbo Carregador Port�til 50.000mah Turbo 22 | 37% OFF | score 69
+2026-06-27 09:00:09,705   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,732   \U0001f4ca Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+2026-06-27 09:00:09,732   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,756   \U0001f4ca Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb R | 52% OFF | score 90
+2026-06-27 09:00:09,756   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,780   \U0001f4ca Smartphone Infinix Smart 10 4gb Ram 256gb Ssd C�mera 8m | 56% OFF | score 90
+2026-06-27 09:00:09,781   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,807   \U0001f4ca Carregador Port�til Power Bank Turbo 20000mah 22.5w Har | 50% OFF | score 72
+2026-06-27 09:00:09,807   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,833   \U0001f4ca Rel�gio Smartwatch Bettdow Fb041 Gps Alexa 5m/ip68 � Pr | 65% OFF | score 85
+2026-06-27 09:00:09,833   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,857   \U0001f4ca Kit Par 2 Radio Baofeng 777s Walk Talk Comunicador 16 C | 46% OFF | score 72
+2026-06-27 09:00:09,857   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:09,879 
+\U0001f50d [eletronicos] buscando ofertas...
+2026-06-27 09:00:14,018   20 produto(s) com desconto \u226515%
+2026-06-27 09:00:14,022   \U0001f4ca Smart Tv 32 Philco Roku Tv Dolby �udio Hdr10 P32crb | 40% OFF | score 90
+2026-06-27 09:00:14,023   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,047   \U0001f4ca Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43 | 50% OFF | score 90
+2026-06-27 09:00:14,047   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,074   \U0001f4ca Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processa | 56% OFF | score 90
+2026-06-27 09:00:14,074   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,096   \U0001f4ca Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio W | 43% OFF | score 90
+2026-06-27 09:00:14,096   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,119   \U0001f4ca Caixa De Som Bluetooth Boombox 4 Jbl, Com Ai Sound Boos | 40% OFF | score 90
+2026-06-27 09:00:14,119   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,142   \U0001f4ca Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hd | 44% OFF | score 90
+2026-06-27 09:00:14,142   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,168   \U0001f4ca Smart Tv LG 43 Full Hd, Processador A5 Ger6, Ai, Alexa  | 34% OFF | score 84
+2026-06-27 09:00:14,168   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,191   \U0001f4ca Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hd | 38% OFF | score 88
+2026-06-27 09:00:14,191   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,215   \U0001f4ca Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+2026-06-27 09:00:14,215   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,240   \U0001f4ca Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+2026-06-27 09:00:14,240   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,272   \U0001f4ca Galaxy Buds Core Preto | 35% OFF | score 64
+2026-06-27 09:00:14,272   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,304   \U0001f4ca Smart Tv LG Uhd Ai Ua75 55 Polegadas Hdr10 Pro Processa | 35% OFF | score 85
+2026-06-27 09:00:14,305   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,401   \U0001f4ca Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+2026-06-27 09:00:14,401   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,425   \U0001f4ca Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-f | 38% OFF | score 88
+2026-06-27 09:00:14,425   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,451   \U0001f4ca Smart Tv Roku Tv 50 7045 4k Uhd Aoc Bivolt | 28% OFF | score 73
+2026-06-27 09:00:14,451   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,474   \U0001f4ca Smart Tv 4k 65  LG Qned73 Portal De Games Processador A | 30% OFF | score 80
+2026-06-27 09:00:14,475   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,498   \U0001f4ca Smart Tv LG Uhd Ai Ua85 50 Polegadas Hdr10 Pro Processa | 43% OFF | score 90
+2026-06-27 09:00:14,498   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,522   \U0001f4ca Smart Tv Profissional LG 43  Full Hd Processador A5 Ger | 31% OFF | score 81
+2026-06-27 09:00:14,522   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,545   \U0001f4ca Suporte Universal Tv Articulado Bra�o P/monit. Parede 1 | 32% OFF | score 63
+2026-06-27 09:00:14,545   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,569   \U0001f4ca Smart Tv 4k 50  LG Qned73 Portal De Games Processador A | 37% OFF | score 87
+2026-06-27 09:00:14,569   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:14,589 
+\U0001f50d [informatica] buscando ofertas...
+2026-06-27 09:00:18,765   20 produto(s) com desconto \u226515%
+2026-06-27 09:00:18,769   \U0001f4ca Controle Gamesir T4 Nova Lite Sem Fio Para Pc Switch An | 41% OFF | score 74
+2026-06-27 09:00:18,769   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,794   \U0001f4ca Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+2026-06-27 09:00:18,795   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,820   \U0001f4ca Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+2026-06-27 09:00:18,820   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,845   \U0001f4ca Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 40% OFF | score 90
+2026-06-27 09:00:18,845   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,869   \U0001f4ca Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+2026-06-27 09:00:18,869   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,897   \U0001f4ca Mochila God Talent Notebook 40l Masculina Escolar Passe | 35% OFF | score 64
+2026-06-27 09:00:18,897   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,924   \U0001f4ca Kit De Internet Via Satelite Starlink Mini Branco | 43% OFF | score 85
+2026-06-27 09:00:18,924   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,948   \U0001f4ca Monitor Gamer LG Ultragear Curvo 34g600a-b 34  Quadhd 2 | 19% OFF | score 69
+2026-06-27 09:00:18,949   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,973   \U0001f4ca Caixa Som Philco Extreme 1200w Connection Tws Pcx6900 2 | 29% OFF | score 74
+2026-06-27 09:00:18,973   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:18,997   \U0001f4ca Placa-m�e Asus P/amd Am4 B550m-plus Tuf Gaming 4xddr4 M | 26% OFF | score 66
+2026-06-27 09:00:18,998   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,022   \U0001f4ca Positivo Vision Tab10 T3010 4gb Ram 128gb Ssd Com Capa  | 40% OFF | score 90
+2026-06-27 09:00:19,023   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,047   \U0001f4ca Impressora Hp Smart Tank 210 Colorida 1 Usb 2.0 De Alta | 44% OFF | score 90
+2026-06-27 09:00:19,047   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+
+=======================================================
+Rastreador iniciado — Sáb 09:00 — horário bom 🟡 (score 49)
+  Provedor mercadolivre: ⚠️  não configurado
+  Provedor amazon: ⚠️  não configurado
+  Provedor shopee: ⚠️  não configurado
+  Provedor magalu: ⚠️  não configurado
+  Provedor kabum: ⚠️  não configurado
+
 🔍 [celulares] buscando ofertas...
-2026-06-27 01:16:50,977   ❌ Erro na busca 'smartphone': 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?q=smartphone&sort=relevance&limit=20
-2026-06-27 01:16:50,979 
+  20 produto(s) com desconto ≥15%
+  📊 Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde | 55% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Samsung Galaxy A06 5g Dual Sim 128gb Preto | 28% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T | 42% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T | 49% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, Câmera De | 36% OFF | score 86
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm  | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Relógio Inteligente Gps Smartwatch Amoled 3atm Outdoor  | 49% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lançamento C/  | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Power Bank Turbo Carregador Portátil 50.000mah Turbo 22 | 37% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb R | 52% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8m | 56% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Carregador Portátil Power Bank Turbo 20000mah 22.5w Har | 50% OFF | score 72
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Relógio Smartwatch Bettdow Fb041 Gps Alexa 5m/ip68 À Pr | 65% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit Par 2 Radio Baofeng 777s Walk Talk Comunicador 16 C | 46% OFF | score 72
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
 🔍 [eletronicos] buscando ofertas...
-2026-06-27 01:16:51,664   ❌ Erro na busca 'fone bluetooth': 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?q=fone+bluetooth&sort=relevance&limit=20
-2026-06-27 01:16:51,666 
+  20 produto(s) com desconto ≥15%
+  📊 Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43 | 50% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processa | 56% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio W | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Caixa De Som Bluetooth Boombox 4 Jbl, Com Ai Sound Boos | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hd | 44% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG 43 Full Hd, Processador A5 Ger6, Ai, Alexa  | 34% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hd | 38% OFF | score 88
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Galaxy Buds Core Preto | 35% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG Uhd Ai Ua75 55 Polegadas Hdr10 Pro Processa | 35% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-f | 38% OFF | score 88
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Roku Tv 50 7045 4k Uhd Aoc Bivolt | 28% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 4k 65  LG Qned73 Portal De Games Processador A | 30% OFF | score 80
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv LG Uhd Ai Ua85 50 Polegadas Hdr10 Pro Processa | 43% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv Profissional LG 43  Full Hd Processador A5 Ger | 31% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Suporte Universal Tv Articulado Braço P/monit. Parede 1 | 32% OFF | score 63
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Smart Tv 4k 50  LG Qned73 Portal De Games Processador A | 37% OFF | score 87
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
 🔍 [informatica] buscando ofertas...
-2026-06-27 01:16:52,361   ❌ Erro na busca 'notebook': 403 Client Error: Forbidden for url: https://api.mercadolibre.com/sites/MLB/search?q=notebook&sort=relevance&limit=20
-2026-06-27 01:16:52,364 
+  20 produto(s) com desconto ≥15%
+  📊 Controle Gamesir T4 Nova Lite Sem Fio Para Pc Switch An | 41% OFF | score 74
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em  | 70% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi  | 21% OFF | score 53
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Impressora Multifuncional Cor Epson Ecotank L3250 Preto | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluet | 31% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Mochila God Talent Notebook 40l Masculina Escolar Passe | 35% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit De Internet Via Satelite Starlink Mini Branco | 43% OFF | score 85
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Monitor Gamer LG Ultragear Curvo 34g600a-b 34  Quadhd 2 | 19% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Caixa Som Philco Extreme 1200w Connection Tws Pcx6900 2 | 29% OFF | score 74
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Placa-mãe Asus P/amd Am4 B550m-plus Tuf Gaming 4xddr4 M | 26% OFF | score 66
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Positivo Vision Tab10 T3010 4gb Ram 128gb Ssd Com Capa  | 40% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Impressora Hp Smart Tank 210 Colorida 1 Usb 2.0 De Alta | 44% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Cadeira Gamer E Escritório X-ray Fit Com Led Rgb Ergonô | 48% OFF | score 892026-06-27 09:00:19,070   \U0001f4ca Cadeira Gamer E Escrit�rio X-ray Fit Com Led Rgb Ergon� | 48% OFF | score 89
+2026-06-27 09:00:19,070   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,093   \U0001f4ca Impressora Multifuncional Epson Ecotank L3250 127/220v  | 22% OFF | score 64
+2026-06-27 09:00:19,094   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,118   \U0001f4ca Placa De V�deo Msi Geforce Rtx 5060 Shadow 2x Oc 8gb Gd | 26% OFF | score 76
+2026-06-27 09:00:19,118   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,142   \U0001f4ca Score 47 < 50: Projetor Hy320 Hardline Smart Tv Android Wifi 6 390 Ans
+2026-06-27 09:00:19,146   \U0001f4ca Kit De Roteadores Sistema Wi-fi Mesh Ac1200 Deco M4 (3- | 39% OFF | score 84
+2026-06-27 09:00:19,146   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,171   \U0001f4ca Emeet Pixy 4k Ai Tracking Autofoco Dual Webcam 300� Ptz | 19% OFF | score 55
+2026-06-27 09:00:19,171   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,196   \U0001f4ca Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+2026-06-27 09:00:19,196   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,220   \U0001f4ca Maxnova Projetor Hy300 4k Port�til Branco 127/220v | 34% OFF | score 67
+2026-06-27 09:00:19,220   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:19,240 
+\U0001f50d [casa] buscando ofertas...
+2026-06-27 09:00:23,623   20 produto(s) com desconto \u226515%
+2026-06-27 09:00:23,627   \U0001f4ca C�mera Inteligente Intelbras Im5sc Con Wi-fi Full Hd Co | 36% OFF | score 77
+2026-06-27 09:00:23,627   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,652   \U0001f4ca Kit 2 Travesseiros 70x50 Antial�rgico Lav�vel Fibra Sil | 43% OFF | score 76
+2026-06-27 09:00:23,653   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,675   \U0001f4ca C�mera Inteligente Intelbras Ime 360 3mp Vis�o 360 Wi-f | 39% OFF | score 78
+2026-06-27 09:00:23,675   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,699   \U0001f4ca Kit C/ 4 Toalha De Banho Gigante 80 X 1,50 Atacado + So | 50% OFF | score 78
+2026-06-27 09:00:23,699   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,724   \U0001f4ca Lustre Led Sala Moderno 60w, 3 Arcos Pendente Lumin�ria | 51% OFF | score 81
+2026-06-27 09:00:23,725   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,749   \U0001f4ca Cobertor Queen Grosso Coberdrom L� Carneiro Dupla Face  | 23% OFF | score 59
+2026-06-27 09:00:23,749   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,772   \U0001f4ca C�mera Seguran�a Ip Externa Wifi A28 App Icsee � Prova  | 47% OFF | score 78
+2026-06-27 09:00:23,773   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,796   \U0001f4ca Aparelho De Jantar E Ch� 30 Pe�as Oxford Unni Brisa Mar | 55% OFF | score 89
+2026-06-27 09:00:23,796   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,823   \U0001f4ca C�mera De V�deo Wi-fi Intelbras Im3 C Microsd 32gb Bran | 43% OFF | score 82
+2026-06-27 09:00:23,823   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,847   \U0001f4ca Cobertor Manta Flannel Soft King Queen 2,20x2,40 Luxo C | 42% OFF | score 76
+2026-06-27 09:00:23,847   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,872   \U0001f4ca Jogo De Toalhas Karsten 100% Algod�o Floral Grossa 4 Pe | 27% OFF | score 62
+2026-06-27 09:00:23,872   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,895   \U0001f4ca C�mera Inteligente Vis�o 360� Im4 C Intelbras Branco | 20% OFF | score 57
+2026-06-27 09:00:23,895   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,922   \U0001f4ca Conjunto Panelas Antiaderente 10 Pe�as Teflon V�rias Co | 19% OFF | score 54
+2026-06-27 09:00:23,922   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,948   \U0001f4ca Kit 2 C�mera Seguran�a Ip Interna Externa Wifi Icsee In | 45% OFF | score 81
+2026-06-27 09:00:23,948   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:23,974   \U0001f4ca Conj De Panelas 8 Pe�as Ceramic Life Smart Plus Vanilla | 45% OFF | score 95
+2026-06-27 09:00:23,974   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,000   \U0001f4ca Vaso Sanit�rio Monobloco Caixa Acoplada Completo - Priv | 44% OFF | score 90
+2026-06-27 09:00:24,000   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,024   \U0001f4ca C�mera L�mpada Intelbras Im6 Full Color 3mp 360 Wifi In | 31% OFF | score 69
+2026-06-27 09:00:24,025   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,049   \U0001f4ca Chuveiro Eletr�nico Lorenzetti Acqua Storm Ultra Preto  | 29% OFF | score 70
+2026-06-27 09:00:24,050   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,075   \U0001f4ca C�mera Inteligente Im3 C Black Intelbras Preto | 25% OFF | score 57
+2026-06-27 09:00:24,075   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,100   \U0001f4ca Kit 2 Camera Seguran�a A31 Icsee Prova D'agua Lente Dup | 47% OFF | score 81
+2026-06-27 09:00:24,100   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:24,120 
+\U0001f50d [esportes] buscando ofertas...
+2026-06-27 09:00:28,394   20 produto(s) com desconto \u226515%
+2026-06-27 09:00:28,398   \U0001f4ca Creatina Monohidratada Pura 500g Dark Lab Unidade Sem S | 65% OFF | score 75
+2026-06-27 09:00:28,398   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,421   \u26a0\ufe0f  Rejeitado [desconto irreal 77% (poss�vel pre�o inflado)]: Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Imp
+2026-06-27 09:00:28,424   \U0001f4ca T�nis Masculino Feminino Kappa Park 2.0 Original | 50% OFF | score 70
+2026-06-27 09:00:28,424   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,447   \U0001f4ca Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sa | 62% OFF | score 75
+2026-06-27 09:00:28,447   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,470   \U0001f4ca Creatina Monohidratada 250g Growth Supplements - Sem Sa | 38% OFF | score 69
+2026-06-27 09:00:28,470   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,496   \U0001f4ca adidas Feminino T�nis Streettalk Kz6277 Marrom Lisa 36  | 36% OFF | score 73
+2026-06-27 09:00:28,496   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,524   \U0001f4ca Nac 600mg - F�rmula Exclusiva Com M�xima Concentra��o E | 47% OFF | score 73
+2026-06-27 09:00:28,524   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,554   \U0001f4ca Bicicleta Spinning Com Roda De In�rcia De 13kg Wct Fitn | 38% OFF | score 90
+2026-06-27 09:00:28,554   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,584   \U0001f4ca Bicicleta Ergom�trica Fitness Para Cardio E Muscula��o  | 46% OFF | score 92
+2026-06-27 09:00:28,584   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,616   \U0001f4ca Bicicleta Ergom�trica Spinning Mecanica Roda In�rcia 13 | 41% OFF | score 92
+2026-06-27 09:00:28,616   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,646   \U0001f4ca T�nis Lacoste T-base Lancamento | 57% OFF | score 78
+2026-06-27 09:00:28,646   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,674   \U0001f4ca Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Co | 27% OFF | score 60
+2026-06-27 09:00:28,674   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,706   \U0001f4ca T�nis Olympikus Masculino Gama Chumbo/preto Lisa 39 Br | 49% OFF | score 78
+2026-06-27 09:00:28,707   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,736   \U0001f4ca Kit 3 Nac Alwaysfit N-acetil L-ciste�na - 600mg 30 C�ps | 36% OFF | score 70
+2026-06-27 09:00:28,736   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,766   \U0001f4ca Supercoffee 3.0 Super Coffee (380g) - Caffeine Army Sab | 23% OFF | score 57
+2026-06-27 09:00:28,767   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,794   \U0001f4ca T�nis Casual Kappa Zenit Masculino Unissex Conforto | 56% OFF | score 77
+2026-06-27 09:00:28,795   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,826   \U0001f4ca Vitamina D3 + K2 Menaquinona-7 - F�rmula Com M�xima Con | 45% OFF | score 73
+2026-06-27 09:00:28,826   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,853   \U0001f4ca T�nis Kappa Galaxy Masculino Feminino | 36% OFF | score 65
+2026-06-27 09:00:28,854   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,888   \U0001f4ca Garrafa T�rmica 1 Litro Com Term�metro Led Para Ch�s /  | 34% OFF | score 67
+2026-06-27 09:00:28,888   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,918   \U0001f4ca Whey 100% Hd Refil Black Skull 900g Wpc Wpi E Wph Sabor | 31% OFF | score 64
+2026-06-27 09:00:28,918   \u274c Provedor mercadolivre n�o configurado. Execute setup.
+2026-06-27 09:00:28,963 
 =======================================================
-2026-06-27 01:16:52,364 Rodada concluída — 0 produto(s) publicado(s).
+2026-06-27 09:00:28,963 Rodada conclu�da � 0 publicado(s), 0 link(s) oficial(is), 98 falha(s) de link.
+
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Impressora Multifuncional Epson Ecotank L3250 127/220v  | 22% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Placa De Vídeo Msi Geforce Rtx 5060 Shadow 2x Oc 8gb Gd | 26% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Score 47 < 50: Projetor Hy320 Hardline Smart Tv Android Wifi 6 390 Ans
+  📊 Kit De Roteadores Sistema Wi-fi Mesh Ac1200 Deco M4 (3- | 39% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Emeet Pixy 4k Ai Tracking Autofoco Dual Webcam 300° Ptz | 19% OFF | score 55
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Projetor Magcubic L018 Led Full Hd 1080p, Com Android 1 | 38% OFF | score 84
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Maxnova Projetor Hy300 4k Portátil Branco 127/220v | 34% OFF | score 67
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
+🔍 [casa] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  📊 Câmera Inteligente Intelbras Im5sc Con Wi-fi Full Hd Co | 36% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 2 Travesseiros 70x50 Antialérgico Lavável Fibra Sil | 43% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Intelbras Ime 360 3mp Visão 360 Wi-f | 39% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit C/ 4 Toalha De Banho Gigante 80 X 1,50 Atacado + So | 50% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Lustre Led Sala Moderno 60w, 3 Arcos Pendente Luminária | 51% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Cobertor Queen Grosso Coberdrom Lã Carneiro Dupla Face  | 23% OFF | score 59
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Segurança Ip Externa Wifi A28 App Icsee À Prova  | 47% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Aparelho De Jantar E Chá 30 Peças Oxford Unni Brisa Mar | 55% OFF | score 89
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera De Vídeo Wi-fi Intelbras Im3 C Microsd 32gb Bran | 43% OFF | score 82
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Cobertor Manta Flannel Soft King Queen 2,20x2,40 Luxo C | 42% OFF | score 76
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Jogo De Toalhas Karsten 100% Algodão Floral Grossa 4 Pe | 27% OFF | score 62
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Visão 360° Im4 C Intelbras Branco | 20% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Conjunto Panelas Antiaderente 10 Peças Teflon Várias Co | 19% OFF | score 54
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee In | 45% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla | 45% OFF | score 95
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Vaso Sanitário Monobloco Caixa Acoplada Completo - Priv | 44% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Lâmpada Intelbras Im6 Full Color 3mp 360 Wifi In | 31% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Chuveiro Eletrônico Lorenzetti Acqua Storm Ultra Preto  | 29% OFF | score 70
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Câmera Inteligente Im3 C Black Intelbras Preto | 25% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 2 Camera Segurança A31 Icsee Prova D'agua Lente Dup | 47% OFF | score 81
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
+🔍 [esportes] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  📊 Creatina Monohidratada Pura 500g Dark Lab Unidade Sem S | 65% OFF | score 75
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  ⚠️  Rejeitado [desconto irreal 77% (possível preço inflado)]: Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Imp
+  📊 Tênis Masculino Feminino Kappa Park 2.0 Original | 50% OFF | score 70
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sa | 62% OFF | score 75
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Creatina Monohidratada 250g Growth Supplements - Sem Sa | 38% OFF | score 69
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 adidas Feminino Tênis Streettalk Kz6277 Marrom Lisa 36  | 36% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Nac 600mg - Fórmula Exclusiva Com Máxima Concentração E | 47% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitn | 38% OFF | score 90
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Ergométrica Fitness Para Cardio E Musculação  | 46% OFF | score 92
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Bicicleta Ergométrica Spinning Mecanica Roda Inércia 13 | 41% OFF | score 92
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Lacoste T-base Lancamento | 57% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Co | 27% OFF | score 60
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Olympikus Masculino Gama Chumbo/preto Lisa 39 Br | 49% OFF | score 78
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Kit 3 Nac Alwaysfit N-acetil L-cisteína - 600mg 30 Cáps | 36% OFF | score 70
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Supercoffee 3.0 Super Coffee (380g) - Caffeine Army Sab | 23% OFF | score 57
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Casual Kappa Zenit Masculino Unissex Conforto | 56% OFF | score 77
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Vitamina D3 + K2 Menaquinona-7 - Fórmula Com Máxima Con | 45% OFF | score 73
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Tênis Kappa Galaxy Masculino Feminino | 36% OFF | score 65
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Garrafa Térmica 1 Litro Com Termômetro Led Para Chás /  | 34% OFF | score 67
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+  📊 Whey 100% Hd Refil Black Skull 900g Wpc Wpi E Wph Sabor | 31% OFF | score 64
+  ❌ Provedor mercadolivre não configurado. Execute setup.
+
+=======================================================
+Rodada concluída — 0 publicado(s), 0 link(s) oficial(is), 98 falha(s) de link.
+2026-06-27 10:00:01,041 
+=======================================================
+2026-06-27 10:00:01,042 Rastreador iniciado � S�b 10:00 � hor�rio bom \U0001f7e1 (score 42)
+2026-06-27 10:00:01,042   Provedor mercadolivre: \u26a0\ufe0f  n�o configurado
+2026-06-27 10:00:01,042   Provedor amazon: \u26a0\ufe0f  n�o configurado
+2026-06-27 10:00:01,042   Provedor shopee: \u26a0\ufe0f  n�o configurado
+2026-06-27 10:00:01,042   Provedor magalu: \u26a0\ufe0f  n�o configurado
+2026-06-27 10:00:01,042   Provedor kabum: \u26a0\ufe0f  n�o configurado
+2026-06-27 10:00:02,702 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
+2026-06-27 10:00:02,703 
+\U0001f50d [celulares] buscando ofertas...
+2026-06-27 10:00:09,610   20 produto(s) com desconto \u226515%
+2026-06-27 10:00:09,614   \U0001f4ca Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+2026-06-27 10:00:09,614      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 10:00:09,615      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-r
+2026-06-27 10:00:10,401 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 10:00:10,470   \u2705 Publicado! (1/5)
+2026-06-27 10:00:20,483   \U0001f4ca Celular Samsung Galaxy A07 256gb 8gb C�mera 50mp Verde | 55% OFF | score 90
+2026-06-27 10:00:20,483      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 10:00:20,483      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-
+2026-06-27 10:00:21,279 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 10:00:21,351   \u2705 Publicado! (2/5)
+2026-06-27 10:00:31,360   \U0001f4ca Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+2026-06-27 10:00:31,360      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 10:00:31,360      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-edge-60-neo-5g-256gb-24gb-12
+2026-06-27 10:00:32,195 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 10:00:32,263   \u2705 Publicado! (3/5)
+2026-06-27 10:00:42,286   \U0001f4ca Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+2026-06-27 10:00:42,287      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 10:00:42,287      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-moto-g86-5g-256gb-24gb-8gb-r
+2026-06-27 10:00:43,092 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 10:00:43,160   \u2705 Publicado! (4/5)
+2026-06-27 10:00:53,169   \U0001f4ca Samsung Galaxy A06 5g Dual Sim 128gb Preto | 35% OFF | score 74
+2026-06-27 10:00:53,169      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 10:00:53,169      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB
+2026-06-27 10:00:53,977 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 10:00:54,056   \u2705 Publicado! (5/5)
+2026-06-27 10:01:04,101 
+=======================================================
+2026-06-27 10:01:04,101 Rodada conclu�da � 5 publicado(s), 5 link(s) oficial(is), 0 falha(s) de link.
+
+=======================================================
+Rastreador iniciado — Sáb 10:00 — horário bom 🟡 (score 42)
+  Provedor mercadolivre: ⚠️  não configurado
+  Provedor amazon: ⚠️  não configurado
+  Provedor shopee: ⚠️  não configurado
+  Provedor magalu: ⚠️  não configurado
+  Provedor kabum: ⚠️  não configurado
+
+🔍 [celulares] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  📊 Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C | 60% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-r
+  ✅ Publicado! (1/5)
+  📊 Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde | 55% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-
+  ✅ Publicado! (2/5)
+  📊 Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R | 55% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-edge-60-neo-5g-256gb-24gb-12
+  ✅ Publicado! (3/5)
+  📊 Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1 | 50% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-moto-g86-5g-256gb-24gb-8gb-r
+  ✅ Publicado! (4/5)
+  📊 Samsung Galaxy A06 5g Dual Sim 128gb Preto | 35% OFF | score 74
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB
+  ✅ Publicado! (5/5)
+
+=======================================================
+Rodada concluída — 5 publicado(s), 5 link(s) oficial(is), 0 falha(s) de link.
+2026-06-27 11:00:00,897 
+=======================================================
+2026-06-27 11:00:00,898 Rastreador iniciado � S�b 11:00 � hor�rio bom \U0001f7e1 (score 42)
+2026-06-27 11:00:00,898   Provedor mercadolivre: \u26a0\ufe0f  n�o configurado
+2026-06-27 11:00:00,898   Provedor amazon: \u26a0\ufe0f  n�o configurado
+2026-06-27 11:00:00,898   Provedor shopee: \u26a0\ufe0f  n�o configurado
+2026-06-27 11:00:00,898   Provedor magalu: \u26a0\ufe0f  n�o configurado
+2026-06-27 11:00:00,898   Provedor kabum: \u26a0\ufe0f  n�o configurado
+2026-06-27 11:00:02,509 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/getMe "HTTP/1.1 200 OK"
+2026-06-27 11:00:02,510 
+\U0001f50d [celulares] buscando ofertas...
+2026-06-27 11:00:09,061   20 produto(s) com desconto \u226515%
+2026-06-27 11:00:09,065   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C
+2026-06-27 11:00:09,067   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A07 256gb 8gb C�mera 50mp Verde
+2026-06-27 11:00:09,070   \u21a9\ufe0f  Duplicata: Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R
+2026-06-27 11:00:09,072   \u21a9\ufe0f  Duplicata: Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1
+2026-06-27 11:00:09,075   \u21a9\ufe0f  Duplicata: Samsung Galaxy A06 5g Dual Sim 128gb Preto
+2026-06-27 11:00:09,078   \u21a9\ufe0f  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T
+2026-06-27 11:00:09,080   \u21a9\ufe0f  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram C�mera T
+2026-06-27 11:00:09,082   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, C�mera De
+2026-06-27 11:00:09,085   \u21a9\ufe0f  Duplicata: Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, C�m 
+2026-06-27 11:00:09,087   \u21a9\ufe0f  Duplicata: Rel�gio Inteligente Gps Smartwatch Amoled 3atm Outdoor 
+2026-06-27 11:00:09,089   \U0001f4ca Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+2026-06-27 11:00:09,090      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 11:00:09,090      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/carregador-turbo-baseus-20w-com-cabo-para-iphone
+2026-06-27 11:00:09,931 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 11:00:10,105   \u2705 Publicado! (1/5)
+2026-06-27 11:00:20,116   \U0001f4ca Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lan�amento C/  | 40% OFF | score 90
+2026-06-27 11:00:20,116      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 11:00:20,116      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/xiaomi-poco-x8-pro-12gb-ram-512gb-global-lancame
+2026-06-27 11:00:20,930 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 11:00:21,009   \u2705 Publicado! (2/5)
+2026-06-27 11:00:31,021   \U0001f4ca Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+2026-06-27 11:00:31,021      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 11:00:31,021      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/fone-de-ouvido-bluetooth-54-soundcore-p30i-da-an
+2026-06-27 11:00:31,840 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 11:00:31,918   \u2705 Publicado! (3/5)
+2026-06-27 11:00:41,927   \U0001f4ca Power Bank Turbo Carregador Port�til 50.000mah Turbo 22 | 37% OFF | score 69
+2026-06-27 11:00:41,927      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 11:00:41,927      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/power-bank-turbo-carregador-portatil-50000mah-tu
+2026-06-27 11:00:42,734 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 11:00:42,812   \u2705 Publicado! (4/5)
+2026-06-27 11:00:52,835   \U0001f4ca Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+2026-06-27 11:00:52,835      \U0001f517 Gerando link de afiliado (mercadolivre)...
+2026-06-27 11:00:52,835      \u2705 link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8
+2026-06-27 11:00:53,637 HTTP Request: POST https://api.telegram.org/bot8939890814:AAEJ1pb4n3_9lf_qZLZnOw8b0K9pEaKClOI/sendPhoto "HTTP/1.1 200 OK"
+2026-06-27 11:00:53,714   \u2705 Publicado! (5/5)
+2026-06-27 11:01:03,746 
+=======================================================
+2026-06-27 11:01:03,746 Rodada conclu�da � 5 publicado(s), 5 link(s) oficial(is), 0 falha(s) de link.
+
+=======================================================
+Rastreador iniciado — Sáb 11:00 — horário bom 🟡 (score 42)
+  Provedor mercadolivre: ⚠️  não configurado
+  Provedor amazon: ⚠️  não configurado
+  Provedor shopee: ⚠️  não configurado
+  Provedor magalu: ⚠️  não configurado
+  Provedor kabum: ⚠️  não configurado
+
+🔍 [celulares] buscando ofertas...
+  20 produto(s) com desconto ≥15%
+  ↩️  Duplicata: Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, C
+  ↩️  Duplicata: Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde
+  ↩️  Duplicata: Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb R
+  ↩️  Duplicata: Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+1
+  ↩️  Duplicata: Samsung Galaxy A06 5g Dual Sim 128gb Preto
+  ↩️  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T
+  ↩️  Duplicata: Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera T
+  ↩️  Duplicata: Celular Samsung Galaxy A26 5g 256gb, 8gb Ram, Câmera De
+  ↩️  Duplicata: Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm 
+  ↩️  Duplicata: Relógio Inteligente Gps Smartwatch Amoled 3atm Outdoor 
+  📊 Carregador Turbo Baseus 20w Com Cabo Para iPhone 14 Cor | 24% OFF | score 55
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/carregador-turbo-baseus-20w-com-cabo-para-iphone
+  ✅ Publicado! (1/5)
+  📊 Xiaomi Poco X8 Pro 12gb Ram 512gb Global Lançamento C/  | 40% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/xiaomi-poco-x8-pro-12gb-ram-512gb-global-lancame
+  ✅ Publicado! (2/5)
+  📊 Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, C | 48% OFF | score 77
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/fone-de-ouvido-bluetooth-54-soundcore-p30i-da-an
+  ✅ Publicado! (3/5)
+  📊 Power Bank Turbo Carregador Portátil 50.000mah Turbo 22 | 37% OFF | score 69
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/power-bank-turbo-carregador-portatil-50000mah-tu
+  ✅ Publicado! (4/5)
+  📊 Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb  | 41% OFF | score 90
+     🔗 Gerando link de afiliado (mercadolivre)...
+     ✅ link direto c/ afiliado: https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8
+  ✅ Publicado! (5/5)
+
+=======================================================
+Rodada concluída — 5 publicado(s), 5 link(s) oficial(is), 0 falha(s) de link.
