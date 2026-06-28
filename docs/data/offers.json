@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 - Marca Redfin Preto",
+      "preco": 54.88,
+      "preco_original": 89.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762912-MLA105696431793_012026-AB.webp",
+      "categoria": "games",
+      "score": 69,
+      "enviado_em": "2026-06-28T21:46:49.111344",
+      "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 54.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Xbox Wireless Series X|s Carbon Black",
+      "preco": 346.75,
+      "preco_original": 599.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658374-MLA99957214369_112025-AB.webp",
+      "categoria": "games",
+      "score": 75,
+      "enviado_em": "2026-06-28T21:46:42.530082",
+      "link": "https://www.mercadolivre.com.br/controle-xbox-wireless-series-xs-carbon-black/p/MLB16268160?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 346.75,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Console Playstation 5 Slim Edição Digital 825 Gb Branco",
+      "preco": 3825.0,
+      "preco_original": 4990.0,
+      "desconto_pct": 23.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971864-MLA91925160023_092025-AB.webp",
+      "categoria": "games",
+      "score": 73,
+      "enviado_em": "2026-06-28T21:46:35.939134",
+      "link": "https://www.mercadolivre.com.br/console-playstation-5-slim-edico-digital-825-gb/p/MLB54963150?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3825.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Playstation 5 Slim Cor Branco 1 Tb Versão Mídia Física",
+      "preco": 4099.0,
+      "preco_original": 5399.0,
+      "desconto_pct": 24.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_846325-MLA99503539342_112025-AB.webp",
+      "categoria": "games",
+      "score": 74,
+      "enviado_em": "2026-06-28T21:46:29.369257",
+      "link": "https://www.mercadolivre.com.br/playstation-5-slim-cor-branco-1-tb-verso-midia-fisica/p/MLB31067313?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4099.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Sanduicheira Elétrica Cadence San 400 Preto 220v",
       "preco": 89.21,
       "preco_original": 149.0,
@@ -1405,6 +1465,8 @@
       "enviado_em": "2026-06-27T20:26:28.808547",
       "link": "https://www.mercadolivre.com.br/cadeira-gamer-e-escritorio-x-ray-fit-com-led-rgb-ergonmica-cor-preta-material-do-estofamento-couro-sintetico/p/MLB43950252?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
+      "menor_preco_30d": 513.21,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -2895,6 +2957,12 @@
       "desconto_medio": 49,
       "maior_desconto": 75
     },
+    "games": {
+      "total": 4,
+      "score_medio": 73,
+      "desconto_medio": 32,
+      "maior_desconto": 42
+    },
     "beleza": {
       "total": 4,
       "score_medio": 89,
@@ -2908,6 +2976,6 @@
       "maior_desconto": 53
     }
   },
-  "updated_at": "2026-06-28T21:36:23.970440",
-  "total": 218
+  "updated_at": "2026-06-28T21:46:55.987224",
+  "total": 222
 }
