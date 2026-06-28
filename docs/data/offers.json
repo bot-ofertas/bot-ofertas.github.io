@@ -1,6 +1,17 @@
 {
   "products": [
     {
+      "titulo": "Smartphone Motorola Moto G06 - 128gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com Ai Bateria De 5.2 Ah Tela 6.9 Verde",
+      "preco": 699.0,
+      "preco_original": 999.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_689704-MLA96194618638_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 72,
+      "enviado_em": "2026-06-28T15:06:24.030908",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g06-128gb-12gb-4gb-ram-8gb-ram-boost-e-camera-50mp-com-ai-bateria-de-52-ah-tela-69/p/MLB61381499?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
       "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
       "preco": 1325.0,
       "preco_original": 2599.0,
@@ -111,6 +122,6 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T14:44:04.401046",
-  "total": 10
+  "updated_at": "2026-06-28T15:06:34.878629",
+  "total": 11
 }
