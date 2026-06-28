@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Sanduicheira Elétrica Cadence San 400 Preto 220v",
+      "preco": 89.21,
+      "preco_original": 149.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633183-MLA99468751756_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 67,
+      "enviado_em": "2026-06-28T21:36:17.119314",
+      "link": "https://www.mercadolivre.com.br/sanduicheira-eletrica-cadence-san-400-preto/p/MLB25741527?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.21,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop De Indução 4 Bocas Dako Supreme Preto Com Trava De Segurança 220v",
+      "preco": 1075.0,
+      "preco_original": 1540.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_652323-MLU77315319959_062024-AB.webp",
+      "categoria": "bebes",
+      "score": 78,
+      "enviado_em": "2026-06-28T21:36:10.542331",
+      "link": "https://www.mercadolivre.com.br/cooktop-de-induco-4-bocas-dako-supreme-preto-com-trava-de-seguranca-220v/p/MLB19481428?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1075.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Secadora De Roupas 12kg Wanke Comfort 12 Programas Branca Swsa120p Branco 220v",
+      "preco": 1961.0,
+      "preco_original": 2716.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_758285-MLA91555025152_092025-AB.webp",
+      "categoria": "bebes",
+      "score": 77,
+      "enviado_em": "2026-06-28T21:36:03.872885",
+      "link": "https://www.mercadolivre.com.br/secadora-de-roupas-12kg-wanke-comfort-12-programas-branca-swsa120p/p/MLB39020893?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1961.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lava E Seca 11kg Philco Interver Plus 16 Programas Pls11d 127v Preto",
+      "preco": 2699.0,
+      "preco_original": 5749.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_642661-MLB112360667348_062026-AB.webp",
+      "categoria": "bebes",
+      "score": 90,
+      "enviado_em": "2026-06-28T21:35:57.299233",
+      "link": "https://www.mercadolivre.com.br/lava-e-seca-11kg-philco-interver-plus-16-programas-pls11d/up/MLBU4136345322?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2699.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Lattafa Asad 100ml Eau De Parfum Original Árabe Original Com Nota Fiscal E Selo Original Lataffa",
       "preco": 156.0,
       "preco_original": 289.0,
@@ -2840,8 +2900,14 @@
       "score_medio": 89,
       "desconto_medio": 47,
       "maior_desconto": 57
+    },
+    "bebes": {
+      "total": 4,
+      "score_medio": 78,
+      "desconto_medio": 38,
+      "maior_desconto": 53
     }
   },
-  "updated_at": "2026-06-28T19:46:47.578410",
-  "total": 214
+  "updated_at": "2026-06-28T21:36:23.970440",
+  "total": 218
 }
