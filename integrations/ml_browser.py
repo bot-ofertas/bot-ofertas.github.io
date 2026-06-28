@@ -71,7 +71,14 @@ _DOM_SCRIPT = """
             const imgEl = card.querySelector('img');
             const foto = imgEl ? (imgEl.src || imgEl.getAttribute('data-src') || '') : '';
 
-            resultado.push({ titulo, link, precoTexto, origTexto, descTexto, foto });
+            // Cupom de desconto adicional
+            const cupomEl = card.querySelector(
+                '[class*="coupon"], [class*="cupom"], .poly-coupons__discount, ' +
+                '.andes-badge__content, [data-testid*="coupon"], [class*="badge--coupon"]'
+            );
+            const cupomTexto = cupomEl ? cupomEl.textContent.trim() : '';
+
+            resultado.push({ titulo, link, precoTexto, origTexto, descTexto, foto, cupomTexto });
         } catch(e) {}
     }
     return resultado;
@@ -121,6 +128,15 @@ def _normalizar_dom(raw: list) -> list[dict]:
             desconto_pct = 0.0
 
         foto = item.get("foto", "")
+
+        # Normaliza cupom: extrai percentual ou valor em reais
+        cupom_raw = item.get("cupomTexto", "").strip()
+        cupom = None
+        if cupom_raw:
+            cupom_raw_lower = cupom_raw.lower()
+            if any(k in cupom_raw_lower for k in ("cupom", "coupon", "%")):
+                cupom = cupom_raw
+
         produtos.append({
             "titulo":         titulo,
             "preco":          preco,
@@ -128,6 +144,7 @@ def _normalizar_dom(raw: list) -> list[dict]:
             "desconto_pct":   desconto_pct,
             "link":           link,
             "foto":           foto if foto and foto.startswith("http") else None,
+            "cupom":          cupom,
         })
     return produtos
 

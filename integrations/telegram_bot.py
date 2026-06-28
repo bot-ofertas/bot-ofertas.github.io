@@ -109,6 +109,7 @@ def _montar_mensagem(
     link: str = produto.get("link") or produto.get("affiliate_link") or "#"
     score: int = produto.get("score", 0)
     categoria: str = produto.get("categoria") or produto.get("canal") or "geral"
+    cupom: str | None = produto.get("cupom")
 
     linhas = [f"🛍️ <b>{titulo}</b>", ""]
 
@@ -120,6 +121,9 @@ def _montar_mensagem(
         )
     elif preco:
         linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
+
+    if cupom:
+        linhas.append(f"🎟️ <b>Cupom disponível:</b> <code>{html.escape(cupom)}</code>")
 
     if descricao_reescrita:
         linhas.append("")
@@ -133,7 +137,7 @@ def _montar_mensagem(
         "",
         f'🔗 <a href="{html.escape(link, quote=True)}">Ver oferta no Mercado Livre</a>',
         "",
-        f"#{html.escape(categoria.lower().replace(' ', '_'))} #publicidade",
+        f"#{html.escape(categoria.lower().replace(' ', '_'))} #oferta #publicidade",
     ]
     return "\n".join(linhas)
 
