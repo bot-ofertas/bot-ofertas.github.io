@@ -123,6 +123,34 @@ def calcular_score(produto: dict) -> int:
     return min(100, max(0, score))
 
 
+def classificar_score(score: int) -> str:
+    """Classifica a oferta a partir do score (0-100).
+
+    Returns: 'excelente' | 'boa' | 'media' | 'ruim'
+      excelente (>=85): publicar com destaque
+      boa       (>=65): publicar normalmente
+      media     (>=45): guardar para análise
+      ruim      (<45):  descartar
+    """
+    if score >= 85:
+        return "excelente"
+    if score >= 65:
+        return "boa"
+    if score >= 45:
+        return "media"
+    return "ruim"
+
+
+def selo_classificacao(score: int) -> tuple[str, str]:
+    """Retorna (emoji, rótulo) para exibir a classificação ao usuário."""
+    return {
+        "excelente": ("🔥", "Oferta Imperdível"),
+        "boa":       ("✅", "Boa Oferta"),
+        "media":     ("👍", "Oferta OK"),
+        "ruim":      ("⚪", "Comum"),
+    }[classificar_score(score)]
+
+
 def top_produtos(produtos: list[dict], n: int = 10) -> list[dict]:
     """Ordena ``produtos`` por score decrescente e retorna os top ``n``.
 

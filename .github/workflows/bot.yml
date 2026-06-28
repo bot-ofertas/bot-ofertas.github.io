@@ -23,12 +23,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Restaurar banco de dados (deduplicação)
+        # Em cache-miss, mantém o DB versionado no repo (seed com histórico).
         uses: actions/cache@v4
         with:
           path: data/bot_ofertas.db
-          key: sqlite-db-${{ github.run_number }}
+          key: sqlite-db-v2-${{ github.run_number }}
           restore-keys: |
-            sqlite-db-
+            sqlite-db-v2-
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -58,7 +59,7 @@ jobs:
         if: always()
         with:
           path: data/bot_ofertas.db
-          key: sqlite-db-${{ github.run_number }}
+          key: sqlite-db-v2-${{ github.run_number }}
 
       - name: Atualizar site (GitHub Pages)
         if: success()

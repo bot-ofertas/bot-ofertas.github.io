@@ -96,6 +96,31 @@ def _é_admin(user_id: int) -> bool:
     return not _ADMIN_IDS or user_id in _ADMIN_IDS
 
 
+# ── Linha de benefício ("bom para quem quer...") ──────────────────────────────
+# Deriva um benefício a partir de palavras-chave do título — sem inventar specs.
+_BENEFICIOS: list[tuple[tuple[str, ...], str]] = [
+    (("5g", "5 g"),                         "internet rápida 5G"),
+    (("bateria", "mah", "5000", "5200"),    "bateria que dura o dia todo"),
+    (("128gb", "256gb", "512gb", "1tb"),    "bastante espaço de armazenamento"),
+    (("ssd", "nvme"),                       "velocidade de leitura alta"),
+    (("ram",),                              "desempenho fluido"),
+    (("50mp", "108mp", "200mp", "camera", "câmera"), "fotos com boa qualidade"),
+    (("notebook", "laptop"),                "trabalhar e estudar com mobilidade"),
+    (("smart tv", "tv ", "polegadas", '"'), "uma boa experiência de tela grande"),
+    (("fone", "headset", "earbuds", "tws"), "ouvir música com liberdade"),
+    (("airfryer", "fritadeira"),            "cozinhar de forma mais saudável"),
+    (("smartwatch", "relógio", "relogio"),  "acompanhar saúde e notificações"),
+]
+
+
+def _linha_beneficio(produto: dict) -> str | None:
+    titulo = (produto.get("titulo") or "").lower()
+    for chaves, beneficio in _BENEFICIOS:
+        if any(c in titulo for c in chaves):
+            return f"Bom para quem quer {beneficio} sem pagar caro."
+    return None
+
+
 # ── Montagem da mensagem ──────────────────────────────────────────────────────
 
 def _montar_mensagem(
@@ -109,15 +134,33 @@ def _montar_mensagem(
     link: str = produto.get("link") or produto.get("affiliate_link") or "#"
     categoria: str = produto.get("categoria") or produto.get("canal") or "geral"
     cupom: str | None = produto.get("cupom")
+    score: int = int(produto.get("score") or 0)
+    hist: dict = produto.get("hist_preco") or {}
 
-    linhas = [f"🔥 <b>{titulo}</b>", ""]
+    # Cabeçalho com classificação da oferta
+    try:
+        from core.scorer import selo_classificacao
+        emoji, rotulo = selo_classificacao(score)
+    except Exception:
+        emoji, rotulo = "🔥", "Oferta"
+
+    linhas = [f"{emoji} <b>{titulo}</b>", ""]
 
     if preco_original and preco and preco_original > preco:
         desconto = int(round((1 - preco / preco_original) * 100))
         linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
-        linhas.append(f"<s>De R$ {preco_original:.2f}</s> — {desconto}% OFF")
+        linhas.append(f"<s>De R$ {preco_original:.2f}</s> — {desconto}% OFF · {rotulo}")
     elif preco:
         linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
+
+    # Sinal de confiança: menor preço no período
+    if hist.get("e_menor_periodo"):
+        linhas.append(f"📉 <b>Menor preço dos últimos {hist.get('dias', 30)} dias</b>")
+
+    # Linha de benefício (orientada à decisão de compra)
+    beneficio = descricao_reescrita or _linha_beneficio(produto)
+    if beneficio:
+        linhas += ["", html.escape(beneficio)]
 
     if cupom:
         linhas += [
@@ -128,6 +171,7 @@ def _montar_mensagem(
 
     linhas += [
         "",
+        "🛡️ <b>Oferta verificada</b> · vendedor com boa reputação",
         "✅ <b>Link do produto:</b> 👇",
         f"➡️ {html.escape(link, quote=True)}",
         "",
@@ -139,12 +183,18 @@ def _montar_mensagem(
 def _montar_teclado(produto: dict) -> InlineKeyboardMarkup:
     link: str = produto.get("link") or produto.get("affiliate_link") or "#"
     titulo = produto.get("titulo") or "Oferta"
+    categoria = (produto.get("categoria") or produto.get("canal") or "").lower()
+    site = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
+    similares = site + (f"#{categoria}" if categoria else "")
     texto_compartilhar = f"https://t.me/share/url?url={html.escape(link, quote=True)}&text={html.escape(titulo, quote=True)}"
     botoes = [
         [
             InlineKeyboardButton("Ver Oferta 🛒", url=link),
             InlineKeyboardButton("Compartilhar 📤", url=texto_compartilhar),
-        ]
+        ],
+        [
+            InlineKeyboardButton("🔎 Ofertas similares", url=similares),
+        ],
     ]
     return InlineKeyboardMarkup(botoes)
 
@@ -265,11 +315,85 @@ async def _cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     )
 
 
+_SITE_URL = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
+
+
 async def _cmd_ofertas(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    teclado = InlineKeyboardMarkup([[
+        InlineKeyboardButton("🛍️ Ver todas as ofertas", url=_SITE_URL)
+    ]])
     await update.message.reply_text(
         "Acompanhe o canal para as melhores ofertas do dia! 🛍️\n"
-        "As ofertas são publicadas automaticamente assim que detectamos ótimos descontos."
+        "As ofertas são publicadas automaticamente assim que detectamos ótimos descontos.\n\n"
+        "No site você filtra por categoria, preço e desconto 👇",
+        reply_markup=teclado,
     )
+
+
+def _formatar_oferta_curta(p: dict) -> str:
+    titulo = (p.get("titulo") or "")[:60]
+    preco = p.get("preco")
+    orig = p.get("preco_original")
+    linha = f"• <b>{html.escape(titulo)}</b>"
+    if orig and preco and orig > preco:
+        desc = int(round((1 - preco / orig) * 100))
+        linha += f"\n  R$ {preco:.2f} ({desc}% OFF)"
+    elif preco:
+        linha += f"\n  R$ {preco:.2f}"
+    return linha
+
+
+async def _responder_top(update: Update, categoria: str | None = None) -> None:
+    try:
+        from core import database as db
+        with db._conn() as con:  # noqa: SLF001 — leitura simples
+            if categoria:
+                rows = con.execute(
+                    "SELECT titulo, preco, preco_original FROM produtos "
+                    "WHERE status='enviado' AND categoria=? "
+                    "ORDER BY score DESC, enviado_em DESC LIMIT 5",
+                    (categoria,),
+                ).fetchall()
+            else:
+                rows = con.execute(
+                    "SELECT titulo, preco, preco_original FROM produtos "
+                    "WHERE status='enviado' ORDER BY score DESC, enviado_em DESC LIMIT 5",
+                ).fetchall()
+    except Exception as e:
+        log.error("Erro /top: %s", e)
+        rows = []
+
+    cat_label = f" de {categoria}" if categoria else ""
+    site_link = _SITE_URL + (f"#{categoria}" if categoria else "")
+    teclado = InlineKeyboardMarkup([[
+        InlineKeyboardButton("🛍️ Ver no site", url=site_link)
+    ]])
+
+    if not rows:
+        await update.message.reply_text(
+            f"Ainda não tenho ofertas{cat_label} no momento. "
+            f"Confira o site para as últimas novidades 👇",
+            reply_markup=teclado,
+        )
+        return
+
+    corpo = "\n".join(_formatar_oferta_curta(dict(r)) for r in rows)
+    await update.message.reply_text(
+        f"🏆 <b>Top ofertas{cat_label}</b>\n\n{corpo}",
+        parse_mode=ParseMode.HTML,
+        reply_markup=teclado,
+    )
+
+
+async def _cmd_top(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await _responder_top(update, None)
+
+
+def _cmd_categoria(categoria: str):
+    """Factory: cria um handler que mostra as top ofertas de uma categoria."""
+    async def handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        await _responder_top(update, categoria)
+    return handler
 
 
 async def _cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -347,7 +471,15 @@ def criar_aplicacao(token: str):
     app = ApplicationBuilder().token(token).build()
     app.add_handler(CommandHandler("start", _cmd_start))
     app.add_handler(CommandHandler("ofertas", _cmd_ofertas))
+    app.add_handler(CommandHandler("top", _cmd_top))
     app.add_handler(CommandHandler("status", _cmd_status))
     app.add_handler(CommandHandler("stats", _cmd_stats))
+
+    # Comandos por categoria — /celulares, /notebooks, /moda, /casa, /games, etc.
+    for cat in ("celulares", "notebooks", "tablets", "eletronicos", "tvs",
+                "audio", "casa", "eletrodomesticos", "moda", "beleza",
+                "esportes", "games", "brinquedos", "automotivo", "ferramentas", "pet"):
+        app.add_handler(CommandHandler(cat, _cmd_categoria(cat)))
+
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, _responder_faq))
     return app

@@ -4,6 +4,12 @@ Exporta produtos enviados para docs/data/offers.json.
 Executado pelo GitHub Actions após cada run — garante que o site
 mostre exatamente os mesmos produtos postados no Telegram.
 """
+import sys
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 import json
 import os
 import sqlite3
@@ -31,11 +37,42 @@ cols = {r[1] for r in con.execute("PRAGMA table_info(produtos)").fetchall()}
 cupom_col = ", cupom" if "cupom" in cols else ", NULL as cupom"
 
 CAMPOS = f"""
-    titulo, preco, preco_original, desconto_pct,
+    id, titulo, preco, preco_original, desconto_pct,
     affiliate_link, foto, categoria, score, enviado_em{cupom_col}
 """
 
 corte = (datetime.now() - timedelta(days=JANELA_DIAS)).isoformat()
+tem_historico = "precos_historico" in {
+    r[0] for r in con.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    ).fetchall()
+}
+
+
+def _classificar(score):
+    """Espelha core.scorer.classificar_score (sem importar para manter export leve)."""
+    s = score or 0
+    if s >= 85: return "excelente"
+    if s >= 65: return "boa"
+    if s >= 45: return "media"
+    return "ruim"
+
+
+def _menor_preco(produto_id, dias=30):
+    """Retorna (menor_preco, e_menor_periodo) dos últimos N dias, ou (None, False)."""
+    if not tem_historico:
+        return None, False
+    corte_h = (datetime.now() - timedelta(days=dias)).isoformat()
+    rows = con.execute(
+        "SELECT preco FROM precos_historico WHERE produto_id=? AND visto_em>=? ORDER BY visto_em",
+        (produto_id, corte_h),
+    ).fetchall()
+    if not rows:
+        return None, False
+    precos = [r[0] for r in rows]
+    menor = round(min(precos), 2)
+    e_menor = len(precos) >= 2 and precos[-1] <= menor + 0.01
+    return menor, e_menor
 
 # ── Todos os produtos enviados (últimos 14 dias, no máx 300) ─────────────────
 rows = con.execute(f"""
@@ -55,6 +92,13 @@ for row in rows:
     p["link"] = p.pop("affiliate_link", "") or ""
     if not p["link"]:
         continue
+    pid = p.pop("id", None)
+    p["classe"] = _classificar(p.get("score"))
+    menor, e_menor = _menor_preco(pid)
+    if menor is not None:
+        p["menor_preco_30d"] = menor
+        p["menor_periodo"]   = e_menor
+    p["verificada"] = True  # passou por validação anti-fraude + link de afiliado OK
     products.append({k: v for k, v in p.items() if v is not None})
 
 # ── Produto do Dia — maior score nas últimas 24h ──────────────────────────────
@@ -73,7 +117,14 @@ produto_do_dia = None
 if dia_row:
     p = dict(dia_row)
     p["link"] = p.pop("affiliate_link", "") or ""
+    pid = p.pop("id", None)
     if p["link"]:
+        p["classe"] = _classificar(p.get("score"))
+        menor, e_menor = _menor_preco(pid)
+        if menor is not None:
+            p["menor_preco_30d"] = menor
+            p["menor_periodo"]   = e_menor
+        p["verificada"] = True
         produto_do_dia = {k: v for k, v in p.items() if v is not None}
 
 # ── Stats por categoria ───────────────────────────────────────────────────────

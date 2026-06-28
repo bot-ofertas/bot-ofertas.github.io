@@ -69,9 +69,17 @@ CREATE TABLE IF NOT EXISTS erros_log (
     ocorrido_em TEXT
 );
 
+CREATE TABLE IF NOT EXISTS precos_historico (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    produto_id  TEXT NOT NULL,
+    preco       REAL NOT NULL,
+    visto_em    TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_produtos_status ON produtos(status);
 CREATE INDEX IF NOT EXISTS idx_produtos_adicionado ON produtos(adicionado_em);
 CREATE INDEX IF NOT EXISTS idx_produtos_affiliate ON produtos(affiliate_status);
+CREATE INDEX IF NOT EXISTS idx_precos_produto ON precos_historico(produto_id);
 """
 
 
@@ -255,3 +263,60 @@ def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
             "INSERT INTO erros_log (tipo, mensagem, produto_id, ocorrido_em) VALUES (?,?,?,?)",
             (tipo, mensagem, produto_id, now)
         )
+
+
+# ── Histórico de preço ────────────────────────────────────────────────────────
+
+def registrar_preco(produto_id: str, preco: float | None) -> None:
+    """Registra um ponto de preço no histórico (1x por produto por dia).
+
+    Usado para detectar preço inflado e exibir 'menor preço em X dias'.
+    Evita duplicar registros do mesmo dia para o mesmo produto.
+    """
+    if not produto_id or not preco or preco <= 0:
+        return
+    now = datetime.now()
+    hoje = now.date().isoformat()
+    with _conn() as con:
+        ja_hoje = con.execute(
+            "SELECT 1 FROM precos_historico WHERE produto_id=? AND substr(visto_em,1,10)=? LIMIT 1",
+            (produto_id, hoje),
+        ).fetchone()
+        if ja_hoje:
+            return
+        con.execute(
+            "INSERT INTO precos_historico (produto_id, preco, visto_em) VALUES (?,?,?)",
+            (produto_id, float(preco), now.isoformat()),
+        )
+
+
+def historico_preco(produto_id: str, dias: int = 30) -> dict:
+    """Retorna estatísticas de preço dos últimos N dias para um produto.
+
+    Returns:
+        dict com: menor, maior, atual (último registrado), pontos (qtd de leituras),
+        e_menor_periodo (bool — preço atual é o menor do período).
+        Campos ausentes/None se não houver histórico.
+    """
+    from datetime import timedelta
+    corte = (datetime.now() - timedelta(days=dias)).isoformat()
+    with _conn() as con:
+        rows = con.execute(
+            "SELECT preco, visto_em FROM precos_historico "
+            "WHERE produto_id=? AND visto_em >= ? ORDER BY visto_em",
+            (produto_id, corte),
+        ).fetchall()
+    if not rows:
+        return {"menor": None, "maior": None, "atual": None,
+                "pontos": 0, "e_menor_periodo": False, "dias": dias}
+    precos = [r["preco"] for r in rows]
+    atual = precos[-1]
+    menor = min(precos)
+    return {
+        "menor":           round(menor, 2),
+        "maior":           round(max(precos), 2),
+        "atual":           round(atual, 2),
+        "pontos":          len(precos),
+        "e_menor_periodo": atual <= menor + 0.01 and len(precos) >= 2,
+        "dias":            dias,
+    }

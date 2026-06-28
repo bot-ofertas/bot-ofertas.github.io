@@ -135,6 +135,9 @@ async def processar_categoria(
         produto_id = _id_produto(item)
         item["id"] = produto_id
 
+        # ── 0. Histórico de preço (registra mesmo se for duplicata) ───────────
+        db.registrar_preco(produto_id, item.get("preco"))
+
         # ── 1. Duplicata ──────────────────────────────────────────────────────
         if _e_duplicata(item):
             log(f"  ↩️  Duplicata: {titulo_curto}")
@@ -190,6 +193,15 @@ async def processar_categoria(
         log(f"     ✅ {tipo_link}: {link_afiliado[:80]}")
         contadores["links_gerados"] += 1
         item["link"] = link_afiliado
+
+        # Sinal de confiança: menor preço no período (se houver histórico)
+        try:
+            hist = db.historico_preco(produto_id, dias=30)
+            item["hist_preco"] = hist
+            if hist.get("e_menor_periodo"):
+                log(f"     📉 Menor preço em {hist['dias']} dias!")
+        except Exception:
+            pass
 
         # ── 5. Reescrita com IA (opcional) ───────────────────────────────────
         titulo_ia = None

@@ -157,6 +157,13 @@
     .c-coupon { background: #fff8f0; border: 1px dashed var(--accent); border-radius: 5px; padding: .22rem .38rem; font-size: .61rem; }
     .c-coupon-code { font-family: monospace; font-weight: 800; color: var(--accent-h); }
     .c-time  { font-size: .58rem; color: #b2bec3; }
+    .c-low   { font-size: .61rem; color: var(--accent-h); font-weight: 700; }
+    .c-trust { display: flex; align-items: center; gap: .25rem; font-size: .58rem; color: var(--green); font-weight: 600; }
+    .c-class { display: inline-block; font-size: .58rem; font-weight: 800; padding: .12rem .35rem;
+               border-radius: 4px; align-self: flex-start; }
+    .cls-excelente { background: #ffece0; color: var(--accent-h); }
+    .cls-boa       { background: #e3f7ec; color: var(--green); }
+    .cls-media     { background: #eef1f3; color: var(--muted); }
     .btn-buy { display: block; text-align: center; background: var(--green); color: #fff;
                font-weight: 700; font-size: .75rem; padding: .46rem; border-radius: 6px;
                text-decoration: none; margin-top: .32rem; transition: background .15s; }
@@ -347,6 +354,10 @@ function cardHtml(p) {
     : '<div class="no-img">🛍️</div>';
   const coupon = p.cupom
     ? `<div class="c-coupon">🏷️ <span class="c-coupon-code">${esc(p.cupom)}</span></div>` : '';
+  const CLS = { excelente: ['🔥', 'Imperdível'], boa: ['✅', 'Boa oferta'], media: ['👍', 'OK'] };
+  const cls = CLS[p.classe] ? `<span class="c-class cls-${p.classe}">${CLS[p.classe][0]} ${CLS[p.classe][1]}</span>` : '';
+  const low = p.menor_periodo ? `<div class="c-low">📉 Menor preço em 30 dias</div>` : '';
+  const trust = p.verificada ? `<div class="c-trust">🛡️ Oferta verificada</div>` : '';
   return `
     <div class="card" onclick="window.open('${esc(p.link)}','_blank','noopener')">
       <div class="c-badges">
@@ -355,11 +366,14 @@ function cardHtml(p) {
       </div>
       <div class="c-img">${img}</div>
       <div class="c-body">
+        ${cls}
         <div class="c-title">${t}</div>
         ${orig  ? `<div class="c-orig">${orig}</div>`   : ''}
         ${price ? `<div class="c-price">${price}</div>` : ''}
         ${save  ? `<div class="c-save">💰 Economia ${save}</div>` : ''}
+        ${low}
         ${coupon}
+        ${trust}
         ${ago   ? `<div class="c-time">⏱ ${ago}</div>` : ''}
         <a class="btn-buy" href="${esc(p.link)}" target="_blank" rel="noopener sponsored"
            onclick="event.stopPropagation()">Comprar no ML 🛒</a>
