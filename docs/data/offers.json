@@ -1,6 +1,17 @@
 {
   "products": [
     {
+      "titulo": "Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8mp + Ia, Tela 6.67 Hd+ 120hz, Bateria 5000mah, Processador T7250, Android 15 Go, Dual Chip - Preto",
+      "preco": 639.9,
+      "preco_original": 1458.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_964227-MLA100071062557_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-28T15:51:50.934282",
+      "link": "https://www.mercadolivre.com.br/smartphone-infinix-smart-10-4gb-ram-256gb-ssd-cmera-8mp-ia-tela-667-hd-120hz-bateria-5000mah-processador-t7250-android-15-go-dual-chip-preto/p/MLB56327005?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
       "titulo": "Smartphone Motorola Moto G06 - 128gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com Ai Bateria De 5.2 Ah Tela 6.9 Verde",
       "preco": 699.0,
       "preco_original": 999.0,
@@ -122,6 +133,6 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T15:06:34.878629",
-  "total": 11
+  "updated_at": "2026-06-28T15:52:01.375386",
+  "total": 12
 }
