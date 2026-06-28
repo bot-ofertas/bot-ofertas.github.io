@@ -1,6 +1,17 @@
 {
   "products": [
     {
+      "titulo": "Relógio Smartwatch Prova D'água Ultra Mulher Preto Original Rosa",
+      "preco": 143.2,
+      "preco_original": 259.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_731527-MLB109198726528_042026-AB.webp",
+      "categoria": "celulares",
+      "score": 74,
+      "enviado_em": "2026-06-28T12:08:45.305993",
+      "link": "https://www.mercadolivre.com.br/relogio-smartwatch-prova-dagua-ultra-mulher-preto-original/up/MLBU3678040114?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
       "titulo": "Power Bank Basike 20000mah Preto, Carga Rápida 22.5w Para iPhone E Samsung, Com Cabos Embutidos E Display",
       "preco": 134.85,
       "preco_original": 213.0,
@@ -67,6 +78,6 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T11:43:57.669117",
-  "total": 6
+  "updated_at": "2026-06-28T12:08:55.741819",
+  "total": 7
 }
