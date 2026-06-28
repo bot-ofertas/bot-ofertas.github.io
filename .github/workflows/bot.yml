@@ -59,13 +59,17 @@ jobs:
         run: python rastreador.py
 
       - name: Rodar cupons Amazon (se configurado)
-        if: ${{ secrets.AMAZON_AFFILIATE_TAG != '' }}
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
           PYTHONIOENCODING: utf-8
-        run: python rastreador_amazon.py
+        run: |
+          if [ -n "$AMAZON_AFFILIATE_TAG" ]; then
+            python rastreador_amazon.py
+          else
+            echo "AMAZON_AFFILIATE_TAG nao configurada — pulando Amazon."
+          fi
         continue-on-error: true   # Amazon não bloqueia o ML
 
       - name: Salvar banco atualizado no cache
