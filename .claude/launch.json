@@ -5,7 +5,14 @@
       "name": "painel",
       "runtimeExecutable": "python",
       "runtimeArgs": ["web/app.py"],
-      "port": 5000
+      "port": 5000,
+      "autoPort": false
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "docs"],
+      "port": 8080
     }
   ]
 }

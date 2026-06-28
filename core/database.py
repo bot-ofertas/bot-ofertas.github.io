@@ -41,6 +41,9 @@ CREATE TABLE IF NOT EXISTS produtos (
     clicks              INTEGER DEFAULT 0,
     commission_status   TEXT DEFAULT 'unknown',
 
+    -- Conteúdo extra
+    cupom               TEXT,
+
     -- Datas
     adicionado_em       TEXT NOT NULL,
     enviado_em          TEXT
@@ -103,13 +106,17 @@ def inicializar():
 def inserir_produto(p: dict) -> None:
     now = datetime.now().isoformat()
     with _conn() as con:
+        # Adiciona coluna cupom se não existir (migração automática)
+        cols = {r[1] for r in con.execute("PRAGMA table_info(produtos)").fetchall()}
+        if "cupom" not in cols:
+            con.execute("ALTER TABLE produtos ADD COLUMN cupom TEXT")
         con.execute("""
             INSERT OR IGNORE INTO produtos
                 (id, titulo, preco, preco_original, desconto_pct, foto,
-                 categoria, canal, status, score, adicionado_em)
+                 categoria, canal, status, score, cupom, adicionado_em)
             VALUES
                 (:id, :titulo, :preco, :preco_original, :desconto_pct, :foto,
-                 :categoria, :canal, :status, :score, :adicionado_em)
+                 :categoria, :canal, :status, :score, :cupom, :adicionado_em)
         """, {
             "id":            p.get("id", f"p_{int(datetime.now().timestamp())}"),
             "titulo":        p.get("titulo", ""),
@@ -121,6 +128,7 @@ def inserir_produto(p: dict) -> None:
             "canal":         p.get("canal", "geral"),
             "status":        p.get("status", "pendente"),
             "score":         p.get("score", 0),
+            "cupom":         p.get("cupom"),
             "adicionado_em": p.get("adicionado_em", now),
         })
 

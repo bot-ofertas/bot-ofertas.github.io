@@ -10,6 +10,9 @@ on:
     - cron: '45 10,11,13,14,16,17,19,20,22 * * *'
   workflow_dispatch:  # permite rodar manualmente no GitHub
 
+permissions:
+  contents: write
+
 jobs:
   rastrear:
     runs-on: ubuntu-latest
@@ -56,3 +59,18 @@ jobs:
         with:
           path: data/bot_ofertas.db
           key: sqlite-db-${{ github.run_number }}
+
+      - name: Atualizar site (GitHub Pages)
+        if: success()
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python export_json.py
+
+      - name: Commitar ofertas no site
+        if: success()
+        run: |
+          git config user.name "Bot-Ofertas"
+          git config user.email "bot@github.com"
+          git add docs/data/offers.json
+          git diff --cached --quiet || git commit -m "chore: atualiza ofertas do site [skip ci]"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
