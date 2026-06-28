@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Fralda Geriátrica Plenitud Protect Plus P/m E G/xg 32un",
+      "preco": 114.0,
+      "preco_original": 167.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_974873-MLB112150839389_052026-AB-fralda-geriatrica-plenitud-protect-plus-pm-e-gxg-32un.webp",
+      "categoria": "livros",
+      "score": 63,
+      "enviado_em": "2026-06-28T23:00:08.432807",
+      "link": "https://produto.mercadolivre.com.br/MLB-2840087975-fralda-geriatrica-plenitud-protect-plus-pm-e-gxg-32un-_JM#polycard_client=offers&deal_print_id=141cf260-acfa-4c4c-9f6b-bb11ab720ac8&position=6&tracking_id=323154f2-90be-4ab4-8ea3-1388aa20ac62?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 114.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lavadora De Alta Pressão 1700w 2000psi Bosch Ghp 200 Azul 127v 60",
+      "preco": 799.9,
+      "preco_original": 1499.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_756695-MLA99452591170_112025-AB.webp",
+      "categoria": "livros",
+      "score": 90,
+      "enviado_em": "2026-06-28T23:00:01.920851",
+      "link": "https://www.mercadolivre.com.br/lavadora-de-alta-presso-1700w-2000psi-bosch-ghp-200/p/MLB36522645?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 5 Calça Moletom Infantil Grosso Peluciado Creche Frio",
+      "preco": 62.72,
+      "preco_original": 125.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_820407-MLB83495626391_042025-AB-kit-5-calca-moletom-infantil-grosso-peluciado-creche-frio.webp",
+      "categoria": "livros",
+      "score": 72,
+      "enviado_em": "2026-06-28T22:59:55.421313",
+      "link": "https://produto.mercadolivre.com.br/MLB-5337639696-kit-5-calca-moletom-infantil-grosso-peluciado-creche-frio-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 62.72,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Relógio Condor Masculino Dourado Co2115mwi/k4p Dourado Preto",
+      "preco": 130.49,
+      "preco_original": 298.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841501-MLA110481160809_042026-AB.webp",
+      "categoria": "livros",
+      "score": 76,
+      "enviado_em": "2026-06-28T22:59:48.798255",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://www.mercadolivre.com.br/kit-relogio-condor-masculino-dourado-co2115mwik4p-dourado-preto/p/MLB68066002?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 130.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Patinete Elétrico Triciclo Infantil Drift 350w 36v Bluetooth Vermelho",
       "preco": 803.6,
       "preco_original": 1400.0,
@@ -1083,6 +1144,8 @@
       "enviado_em": "2026-06-28T03:02:33.351401",
       "link": "https://www.mercadolivre.com.br/impressora-multifuncional-cor-canon-pixma-g3110/p/MLB15246153?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
+      "menor_preco_30d": 849.0,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -2970,6 +3033,8 @@
       "enviado_em": "2026-06-27T10:00:10.447095",
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
+      "menor_preco_30d": 734.4,
+      "menor_periodo": false,
       "verificada": true
     }
   ],
@@ -3017,6 +3082,12 @@
       "desconto_medio": 49,
       "maior_desconto": 75
     },
+    "livros": {
+      "total": 4,
+      "score_medio": 75,
+      "desconto_medio": 46,
+      "maior_desconto": 56
+    },
     "games": {
       "total": 4,
       "score_medio": 73,
@@ -3042,6 +3113,6 @@
       "maior_desconto": 53
     }
   },
-  "updated_at": "2026-06-28T22:14:17.760893",
-  "total": 226
+  "updated_at": "2026-06-28T23:00:15.069827",
+  "total": 230
 }
