@@ -1,6 +1,18 @@
 {
   "products": [
     {
+      "titulo": "Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb Ram + 12gb Ram Boost) 50mp Sony Camera Moto Ai E Tela 1.5k Super Hd - Late Latte",
+      "preco": 2159.0,
+      "preco_original": 4499.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_703571-MLA93504208204_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-28T17:49:23.668643",
+      "cupom": "Cupom R$100 OFF",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-edge-60-neo-5g-512gb-24gb-12gb-ram-12gb-ram-boost-50mp-sony-camera-moto-ai-e-tela-15k-super-hd-late/p/MLB58590203?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
       "titulo": "Smartphone Motorola Moto G35 5g - 128gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai Nfc Tela 6.7  Com Superbrilho - Verde - Vegan Leather",
       "preco": 848.79,
       "preco_original": 1327.0,
@@ -166,6 +178,6 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T17:46:02.965762",
-  "total": 15
+  "updated_at": "2026-06-28T17:49:34.545764",
+  "total": 16
 }
