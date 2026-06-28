@@ -1,72 +1,72 @@
 {
   "products": [
     {
-      "titulo": "Creatina Monohidratada Pura 500g Dark Lab",
-      "preco": 59.90,
-      "preco_original": 99.90,
-      "desconto_pct": 40,
-      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-500g-dark-lab-unidade/p/MLB26796581?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_756815-MLB79296428584_092024-F.webp",
-      "categoria": "esportes",
-      "score": 82,
-      "cupom": "CREATORS10"
-    },
-    {
-      "titulo": "Processador AMD Ryzen 7 9800X3D 4.7GHz AM5",
-      "preco": 2339.00,
-      "preco_original": 2999.00,
-      "desconto_pct": 22,
-      "link": "https://www.mercadolivre.com.br/processador-amd-ryzen-7-9800x3d/p/MLB1234567?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_986079-MLB79217855474_092024-F.webp",
-      "categoria": "informatica",
-      "score": 91,
-      "cupom": null
-    },
-    {
-      "titulo": "Smartphone Samsung Galaxy A55 5G 256GB 8GB RAM",
-      "preco": 1599.00,
-      "preco_original": 2299.00,
-      "desconto_pct": 30,
-      "link": "https://www.mercadolivre.com.br/samsung-galaxy-a55/p/MLB9876543?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_615272-MLB75218478615_042024-F.webp",
+      "titulo": "Power Bank Basike 20000mah Preto, Carga Rápida 22.5w Para iPhone E Samsung, Com Cabos Embutidos E Display",
+      "preco": 134.85,
+      "preco_original": 213.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_719636-MLA99381510294_112025-AB.webp",
       "categoria": "celulares",
-      "score": 88,
-      "cupom": null
+      "score": 69,
+      "enviado_em": "2026-06-28T11:43:46.733287",
+      "link": "https://www.mercadolivre.com.br/power-bank-basike-20000mah-preto-carga-rapida-225w-para-iphone-e-samsung-com-cabos-embutidos-e-display/p/MLB50592250?matt_tool=47114387&matt_source=bot_telegram"
     },
     {
-      "titulo": "Fone de Ouvido JBL Tune 510BT Bluetooth 40h",
-      "preco": 149.90,
-      "preco_original": 249.90,
-      "desconto_pct": 40,
-      "link": "https://www.mercadolivre.com.br/jbl-tune-510bt/p/MLB111222?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_985811-MLB52936487702_122022-F.webp",
-      "categoria": "eletronicos",
-      "score": 79,
-      "cupom": null
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Branco",
+      "preco": 1274.0,
+      "preco_original": 2212.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968548-MLA99944961199_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-28T03:32:47.271429",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-branco/p/MLB47109375?matt_tool=47114387&matt_source=bot_telegram"
     },
     {
-      "titulo": "Fritadeira Air Fryer Mondial Family 4L Inox AF-40I",
-      "preco": 189.90,
-      "preco_original": 349.90,
-      "desconto_pct": 46,
-      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-mondial/p/MLB333444?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_714531-MLB72528394476_102023-F.webp",
-      "categoria": "casa",
-      "score": 75,
-      "cupom": "CASA15"
+      "titulo": "Smartphone Motorola Edge 60 Neo 5g - 256gb 24gb (12gb Ram + 12gb Ram Boost) 50mp Sony Camera Moto Ai E Tela 1.5k Super Hd - Cinza",
+      "preco": 1799.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_763543-MLA99919842737_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-28T03:31:09.879486",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-edge-60-neo-5g-256gb-24gb-12gb-ram-12gb-ram-boost-50mp-sony-camera-moto-ai-e-tela-15k-super-hd-cinza/p/MLB58684601?matt_tool=47114387&matt_source=bot_telegram"
     },
     {
-      "titulo": "Notebook Lenovo IdeaPad 3i Intel Core i5 8GB 256GB SSD",
-      "preco": 2199.00,
-      "preco_original": 3299.00,
-      "desconto_pct": 33,
-      "link": "https://www.mercadolivre.com.br/lenovo-ideapad-3i/p/MLB555666?matt_tool=47114387&matt_source=bot_telegram",
-      "foto": "https://http2.mlstatic.com/D_NQ_NP_2X_881431-MLB74561521867_022024-F.webp",
-      "categoria": "informatica",
-      "score": 86,
-      "cupom": null
+      "titulo": "Smartphone Motorola Moto G86 5g - 256gb 24gb (8gb Ram+16gb Ram Boost) Tela 1.5k Poled, 50mp Sony Camera Ois Moto Ai, Videos Em 4k, Ip68 + Ip69 - Grafite",
+      "preco": 1490.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-28T03:00:25.797082",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g86-5g-256gb-24gb-8gb-ram16gb-ram-boost-tela-15k-poled-50mp-sony-camera-ois-moto-ai-videos-em-4k-ip68-ip69-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
+      "preco": 799.2,
+      "preco_original": 1799.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-27T23:41:16.587054",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-verde/p/MLB54963045?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 735.25,
+      "preco_original": 1855.0,
+      "desconto_pct": 60.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 78,
+      "enviado_em": "2026-06-27T22:56:51.696934",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T10:00:00",
+  "updated_at": "2026-06-28T11:43:57.669117",
   "total": 6
 }
