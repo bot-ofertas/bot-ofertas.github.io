@@ -120,7 +120,11 @@ def _montar_mensagem(
         linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
 
     if cupom:
-        linhas.append(f"🎟️ <b>Cupom:</b> <code>{html.escape(cupom)}</code>")
+        linhas += [
+            "",
+            f"🏷️ <b>Cupom de desconto:</b> <code>{html.escape(cupom)}</code>",
+            f"↳ Use o cupom <b><code>{html.escape(cupom)}</code></b> ao finalizar a compra para garantir o desconto!",
+        ]
 
     linhas += [
         "",
