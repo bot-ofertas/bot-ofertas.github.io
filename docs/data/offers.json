@@ -1,6 +1,17 @@
 {
   "products": [
     {
+      "titulo": "Kit C/12 Utensílios De Cozinha Silicone Cabo Madeira",
+      "preco": 38.07,
+      "preco_original": 60.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_912654-MLB71781728024_092023-AB-kit-c12-utensilios-de-cozinha-silicone-cabo-madeira.webp",
+      "categoria": "casa",
+      "score": 71,
+      "enviado_em": "2026-06-28T18:46:08.148418",
+      "link": "https://produto.mercadolivre.com.br/MLB-3274998198-kit-c12-utensilios-de-cozinha-silicone-cabo-madeira-_JM?matt_tool=47114387&matt_source=bot_telegram"
+    },
+    {
       "titulo": "Smartphone Motorola Edge 60 Neo 5g - 512gb 24gb (12gb Ram + 12gb Ram Boost) 50mp Sony Camera Moto Ai E Tela 1.5k Super Hd - Late Latte",
       "preco": 2159.0,
       "preco_original": 4499.0,
@@ -178,6 +189,6 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram"
     }
   ],
-  "updated_at": "2026-06-28T17:49:34.545764",
-  "total": 16
+  "updated_at": "2026-06-28T18:46:18.707988",
+  "total": 17
 }
