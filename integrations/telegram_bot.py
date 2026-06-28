@@ -107,35 +107,25 @@ def _montar_mensagem(
     preco: float | None = produto.get("preco")
     preco_original: float | None = produto.get("preco_original")
     link: str = produto.get("link") or produto.get("affiliate_link") or "#"
-    score: int = produto.get("score", 0)
     categoria: str = produto.get("categoria") or produto.get("canal") or "geral"
     cupom: str | None = produto.get("cupom")
 
-    linhas = [f"🛍️ <b>{titulo}</b>", ""]
+    linhas = [f"🔥 <b>{titulo}</b>", ""]
 
     if preco_original and preco and preco_original > preco:
         desconto = int(round((1 - preco / preco_original) * 100))
-        linhas.append(
-            f"De <s>R$ {preco_original:.2f}</s> por <b>R$ {preco:.2f}</b> "
-            f"({desconto}% OFF) 🔥"
-        )
+        linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
+        linhas.append(f"<s>De R$ {preco_original:.2f}</s> — {desconto}% OFF")
     elif preco:
         linhas.append(f"💰 <b>R$ {preco:.2f}</b>")
 
     if cupom:
-        linhas.append(f"🎟️ <b>Cupom disponível:</b> <code>{html.escape(cupom)}</code>")
-
-    if descricao_reescrita:
-        linhas.append("")
-        linhas.append(html.escape(descricao_reescrita))
-
-    if score >= 75:
-        linhas.append("")
-        linhas.append("⭐ <i>Oferta em destaque</i>")
+        linhas.append(f"🎟️ <b>Cupom:</b> <code>{html.escape(cupom)}</code>")
 
     linhas += [
         "",
-        f'🔗 <a href="{html.escape(link, quote=True)}">Ver oferta no Mercado Livre</a>',
+        "✅ <b>Link do produto:</b> 👇",
+        f"➡️ {html.escape(link, quote=True)}",
         "",
         f"#{html.escape(categoria.lower().replace(' ', '_'))} #oferta #publicidade",
     ]
