@@ -47,9 +47,9 @@ TOKEN_TELEGRAM = os.getenv("TOKEN_TELEGRAM", "")
 CANAIS = {"geral": os.getenv("CANAL_GERAL", "")}
 
 # ── Configuração ──────────────────────────────────────────────────────────────
-CATEGORIAS_ATIVAS = ["celulares", "eletronicos", "informatica", "casa", "esportes"]
-DESCONTO_MINIMO   = 15
-SCORE_MINIMO      = 50
+CATEGORIAS_ATIVAS = ["celulares", "eletronicos", "informatica", "casa", "esportes", "moda"]
+DESCONTO_MINIMO   = 20
+SCORE_MINIMO      = 60
 MAX_POR_EXECUCAO  = 1
 PAUSA_ENTRE_POSTS = 10   # segundos
 
