@@ -74,6 +74,9 @@ async def rodar_uma_vez() -> None:
         return
 
     db.inicializar()
+    removidos = db.limpar_antigos(dias=2)
+    if removidos:
+        log(f"🧹 Limpeza automática: {removidos} produto(s) antigos removidos do banco")
 
     log("\n" + "=" * 55)
     log("Rastreador Amazon Cupons iniciado")

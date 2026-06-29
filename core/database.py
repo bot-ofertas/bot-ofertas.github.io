@@ -234,6 +234,36 @@ def stats() -> dict:
     }
 
 
+# ── Limpeza automática ────────────────────────────────────────────────────────
+
+def limpar_antigos(dias: int = 2) -> int:
+    """Remove produtos, erros e histórico de preço com mais de `dias` dias.
+
+    Chamada automaticamente no início de cada execução do rastreador.
+    Garante que o mesmo produto com oferta diferente possa ser repostado
+    após o período definido, sem acúmulo de dados antigos.
+    """
+    with _conn() as con:
+        con.execute(
+            "DELETE FROM produtos WHERE adicionado_em < datetime('now', ?)",
+            (f"-{dias} days",)
+        )
+        removidos = con.execute("SELECT changes()").fetchone()[0]
+        con.execute(
+            "DELETE FROM erros_log WHERE ocorrido_em < datetime('now', ?)",
+            (f"-{dias} days",)
+        )
+        con.execute(
+            "DELETE FROM precos_historico WHERE visto_em < datetime('now', ?)",
+            (f"-{dias} days",)
+        )
+        con.execute(
+            "DELETE FROM execucoes WHERE iniciado_em < datetime('now', ?)",
+            (f"-{dias} days",)
+        )
+    return removidos
+
+
 # ── Execuções ─────────────────────────────────────────────────────────────────
 
 def iniciar_execucao() -> int:

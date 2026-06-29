@@ -267,6 +267,9 @@ async def processar_categoria(
 async def rodar_uma_vez() -> None:
     t_inicio = time.time()
     db.inicializar()
+    removidos = db.limpar_antigos(dias=2)
+    if removidos:
+        log(f"🧹 Limpeza automática: {removidos} produto(s) antigos removidos do banco")
 
     if not TOKEN_TELEGRAM:
         print("❌ TOKEN_TELEGRAM não definido no .env")

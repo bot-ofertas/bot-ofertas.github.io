@@ -11,7 +11,7 @@ import os
 from datetime import datetime, timedelta
 
 _HISTORICO = os.path.join(os.path.dirname(__file__), "..", "data", "historico.json")
-_JANELA_DIAS = 30
+_JANELA_DIAS = 2   # limpa automaticamente a cada 2 dias
 _LIMIAR = 0.80
 
 
