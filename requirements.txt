@@ -6,9 +6,9 @@ playwright
 anthropic>=0.40.0
 Pillow>=10.1.0
 tweepy>=4.14.0
-pywhatkit
 pyautogui
 pygetwindow
 pyperclip
 instagrapi
 psutil
+telethon>=1.44.0

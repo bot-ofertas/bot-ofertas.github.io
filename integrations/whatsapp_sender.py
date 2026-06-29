@@ -116,25 +116,55 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         except Exception as e:
             log.warning("Evolution API falhou: %s", e)
 
-    # ── Tentativa 2: pywhatkit (requer WhatsApp Web aberto localmente) ────────
-    # Pula automaticamente em GitHub Actions (sem display nem sessão WhatsApp Web)
+    # ── Tentativa 2: pyautogui (requer WhatsApp Web aberto no Chrome) ────────
     if os.getenv("GITHUB_ACTIONS"):
-        log.debug("pywhatkit ignorado em GitHub Actions (sem display/WhatsApp Web)")
+        log.debug("pyautogui ignorado em GitHub Actions (sem display)")
         return False
-    try:
-        import pywhatkit  # noqa: PLC0415
-        pywhatkit.sendwhatmsg_to_group_instantly(
-            group_id=_GROUP_ID,
-            message=mensagem,
-            wait_time=10,
-            tab_close=True,
-            close_time=3,
-        )
-        log.info("WhatsApp enviado via pywhatkit para grupo %s", _GROUP_ID)
-        return True
-    except ImportError:
-        log.debug("pywhatkit não instalado — instale com: pip install pywhatkit")
-    except Exception as e:
-        log.warning("pywhatkit falhou: %s", e)
+    return _enviar_via_pyautogui(mensagem)
 
-    return False
+
+def _enviar_via_pyautogui(mensagem: str) -> bool:
+    """Envia via automação do Chrome com WhatsApp Web aberto na guia do grupo Bot-Ofertas."""
+    import time  # noqa: PLC0415
+    try:
+        import pygetwindow as gw  # noqa: PLC0415
+        import pyautogui          # noqa: PLC0415
+        import pyperclip          # noqa: PLC0415
+    except ImportError:
+        log.warning("Falta pyautogui/pygetwindow/pyperclip — instale: pip install pyautogui pygetwindow pyperclip")
+        return False
+
+    janelas = gw.getWindowsWithTitle("WhatsApp")
+    if not janelas:
+        log.warning("WhatsApp Web não encontrado. Abra o Chrome com https://web.whatsapp.com e o grupo 'Bot-Ofertas' aberto.")
+        return False
+
+    pyautogui.FAILSAFE = True
+    pyautogui.PAUSE = 0.4
+
+    try:
+        janelas[0].activate()
+        time.sleep(1.5)
+
+        pyautogui.hotkey("ctrl", "alt", "/")
+        time.sleep(0.8)
+
+        pyautogui.typewrite("Bot-Ofertas", interval=0.07)
+        time.sleep(1.5)
+
+        pyautogui.press("down")
+        time.sleep(0.3)
+        pyautogui.press("enter")
+        time.sleep(2.0)
+
+        pyperclip.copy(mensagem)
+        pyautogui.hotkey("ctrl", "v")
+        time.sleep(0.5)
+        pyautogui.press("enter")
+        time.sleep(0.5)
+
+        log.info("✅ WhatsApp enviado via pyautogui para grupo %s", _GROUP_ID)
+        return True
+    except Exception as e:
+        log.warning("pyautogui falhou: %s", e)
+        return False

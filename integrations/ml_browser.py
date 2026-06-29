@@ -106,7 +106,8 @@ _DOM_SCRIPT = """
             const descTexto = descEl ? descEl.textContent.trim() : '';
 
             const imgEl = card.querySelector('img');
-            const foto = imgEl ? (imgEl.src || imgEl.getAttribute('data-src') || '') : '';
+            const fotoUrl = imgEl ? (imgEl.getAttribute('data-src') || imgEl.getAttribute('data-lazy') || imgEl.src || '') : '';
+            const foto = fotoUrl.startsWith('http') ? fotoUrl : '';
 
             // Cupom de desconto adicional
             const cupomEl = card.querySelector(
