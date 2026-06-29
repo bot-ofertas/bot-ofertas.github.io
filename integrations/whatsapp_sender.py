@@ -117,6 +117,10 @@ async def enviar_para_grupo(produto: dict) -> bool:
             log.warning("Evolution API falhou: %s", e)
 
     # ── Tentativa 2: pywhatkit (requer WhatsApp Web aberto localmente) ────────
+    # Pula automaticamente em GitHub Actions (sem display nem sessão WhatsApp Web)
+    if os.getenv("GITHUB_ACTIONS"):
+        log.debug("pywhatkit ignorado em GitHub Actions (sem display/WhatsApp Web)")
+        return False
     try:
         import pywhatkit  # noqa: PLC0415
         pywhatkit.sendwhatmsg_to_group_instantly(
