@@ -121,14 +121,53 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     if os.getenv("GITHUB_ACTIONS"):
         log.debug("pyautogui ignorado em GitHub Actions (sem display)")
         return False
-    return _enviar_via_pyautogui(mensagem)
+    foto_url = produto.get("foto") or produto.get("imagem") or ""
+    return _enviar_via_pyautogui(mensagem, foto_url)
 
 
-def _enviar_via_pyautogui(mensagem: str) -> bool:
-    """Envia via automação do Chrome com WhatsApp Web.
+def _copiar_imagem_clipboard(foto_url: str) -> bool:
+    """Baixa a foto do produto e copia para a área de transferência do Windows.
 
-    Garante que a aba do WhatsApp Web está ativa antes de enviar,
-    mesmo que o Chrome esteja em outra aba.
+    Retorna True se a imagem foi copiada com sucesso (pronta para Ctrl+V).
+    """
+    if not foto_url or not foto_url.startswith("http"):
+        return False
+    try:
+        import io  # noqa: PLC0415
+        import requests  # noqa: PLC0415
+        import win32clipboard  # noqa: PLC0415
+        from PIL import Image  # noqa: PLC0415
+
+        r = requests.get(foto_url, timeout=12)
+        if r.status_code != 200 or not r.content:
+            return False
+
+        img = Image.open(io.BytesIO(r.content)).convert("RGB")
+        # Limita tamanho para evitar imagens gigantes
+        img.thumbnail((1280, 1280))
+
+        # Converte para BMP/DIB (formato exigido pelo clipboard do Windows)
+        out = io.BytesIO()
+        img.save(out, "BMP")
+        dib = out.getvalue()[14:]  # remove o cabeçalho BMP de 14 bytes -> DIB
+        out.close()
+
+        win32clipboard.OpenClipboard()
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardData(win32clipboard.CF_DIB, dib)
+        win32clipboard.CloseClipboard()
+        return True
+    except Exception as e:
+        log.warning("Falha ao copiar imagem para clipboard: %s", e)
+        return False
+
+
+def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
+    """Envia via automação do Chrome com WhatsApp Web, com foto do produto.
+
+    Garante que a aba do WhatsApp Web está ativa antes de enviar, mesmo que o
+    Chrome esteja em outra aba. Se houver foto, cola a imagem (preview) e usa a
+    mensagem como legenda; caso contrário envia só texto.
     """
     import time  # noqa: PLC0415
     try:
@@ -178,13 +217,27 @@ def _enviar_via_pyautogui(mensagem: str) -> bool:
         pyautogui.press("enter")
         time.sleep(2.0)
 
+        # ── Com foto: cola imagem → abre preview → legenda → enviar ───────────
+        if foto_url and _copiar_imagem_clipboard(foto_url):
+            pyautogui.hotkey("ctrl", "v")   # cola a imagem (abre tela de preview)
+            time.sleep(2.5)                 # aguarda preview da imagem abrir
+            # A caixa de legenda já vem focada; cola o texto como legenda
+            pyperclip.copy(mensagem)
+            pyautogui.hotkey("ctrl", "v")
+            time.sleep(0.6)
+            pyautogui.press("enter")        # envia imagem + legenda
+            time.sleep(1.0)
+            log.info("✅ WhatsApp enviado COM FOTO via pyautogui para grupo %s", _group_id())
+            return True
+
+        # ── Sem foto: só texto ───────────────────────────────────────────────
         pyperclip.copy(mensagem)
         pyautogui.hotkey("ctrl", "v")
         time.sleep(0.5)
         pyautogui.press("enter")
         time.sleep(0.5)
 
-        log.info("✅ WhatsApp enviado via pyautogui para grupo %s", _group_id())
+        log.info("✅ WhatsApp enviado (texto) via pyautogui para grupo %s", _group_id())
         return True
     except Exception as e:
         log.warning("pyautogui falhou: %s", e)
