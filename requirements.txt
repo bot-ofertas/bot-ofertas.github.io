@@ -11,3 +11,4 @@ pyautogui
 pygetwindow
 pyperclip
 instagrapi
+psutil

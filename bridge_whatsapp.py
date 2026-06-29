@@ -39,6 +39,26 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
+# ── Proteção de instância única ───────────────────────────────────────────────
+import atexit
+
+_LOCK_FILE = os.path.join(os.path.dirname(__file__), "data", "bridge.lock")
+
+def _verificar_instancia_unica():
+    if os.path.exists(_LOCK_FILE):
+        try:
+            with open(_LOCK_FILE) as f:
+                pid_antigo = int(f.read().strip())
+            import psutil
+            if psutil.pid_exists(pid_antigo):
+                print(f"❌ Bridge já está rodando (PID {pid_antigo}). Feche a janela anterior primeiro.")
+                sys.exit(1)
+        except Exception:
+            pass  # lock file inválido — sobrescreve
+    with open(_LOCK_FILE, "w") as f:
+        f.write(str(os.getpid()))
+    atexit.register(lambda: os.remove(_LOCK_FILE) if os.path.exists(_LOCK_FILE) else None)
+
 TOKEN = os.getenv("TOKEN_TELEGRAM", "")
 CANAL_ID = os.getenv("CANAL_GERAL", "")
 GROUP_ID = os.getenv("WHATSAPP_GROUP_ID", "")
@@ -243,6 +263,8 @@ async def _handler_nova_mensagem(update: Update, context: ContextTypes.DEFAULT_T
 
 
 def main():
+    _verificar_instancia_unica()
+
     if not TOKEN:
         print("❌ TOKEN_TELEGRAM não configurado no .env")
         return
