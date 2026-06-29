@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Aspirador De Pó E Água Wap Gtw 20 1600w De Potência Amarelo/preto 220v",
+      "preco": 362.9,
+      "preco_original": 555.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_771466-MLA100014405685_122025-AB.webp",
+      "categoria": "livros",
+      "score": 71,
+      "enviado_em": "2026-06-29T01:50:19.217216",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-wap-gtw-20-1600w-de-potncia/p/MLB15826089?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 362.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Camisa Xadrez Longa Blusa Manga Festa Junina Social De Botão",
+      "preco": 48.4,
+      "preco_original": 89.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798662-MLB109951242394_042026-AB-camisa-xadrez-longa-blusa-manga-festa-junina-social-de-boto.webp",
+      "categoria": "livros",
+      "score": 71,
+      "enviado_em": "2026-06-29T01:50:12.464710",
+      "link": "https://produto.mercadolivre.com.br/MLB-5381846748-camisa-xadrez-longa-blusa-manga-festa-junina-social-de-boto-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 48.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Spinning Inércia 32kg + Bluetooth App Preto",
+      "preco": 911.77,
+      "preco_original": 1599.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_610793-MLB110576719813_042026-AB.webp",
+      "categoria": "livros",
+      "score": 90,
+      "enviado_em": "2026-06-29T01:50:05.713221",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-spinning-inercia-32kg--bluetooth-app/up/MLBU3868048606?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 911.77,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Nível Laser Verde 16 Linhas War Shark 2 Bateria+1.2m Tripé",
+      "preco": 269.0,
+      "preco_original": 397.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_742918-MLA112697663090_062026-AB.webp",
+      "categoria": "livros",
+      "score": 67,
+      "enviado_em": "2026-06-29T01:49:58.970505",
+      "link": "https://www.mercadolivre.com.br/nivel-laser-verde-16-linhas-war-shark-2-bateria12m-tripe/p/MLB62445524?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 269.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Máquina De Acabamento Corta Cabelo Profissional Kemei 2299 P Preto 127/220v",
       "preco": 79.12,
       "preco_original": 139.0,
@@ -102,7 +162,7 @@
       "link": "https://produto.mercadolivre.com.br/MLB-5337639696-kit-5-calca-moletom-infantil-grosso-peluciado-creche-frio-_JM?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 62.72,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -118,7 +178,7 @@
       "link": "https://www.mercadolivre.com.br/kit-relogio-condor-masculino-dourado-co2115mwik4p-dourado-preto/p/MLB68066002?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 130.49,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -3094,7 +3154,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 734.4,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     }
   ],
@@ -3142,17 +3202,17 @@
       "desconto_medio": 49,
       "maior_desconto": 75
     },
+    "livros": {
+      "total": 8,
+      "score_medio": 75,
+      "desconto_medio": 42,
+      "maior_desconto": 56
+    },
     "bebes": {
       "total": 8,
       "score_medio": 75,
       "desconto_medio": 38,
       "maior_desconto": 53
-    },
-    "livros": {
-      "total": 4,
-      "score_medio": 75,
-      "desconto_medio": 46,
-      "maior_desconto": 56
     },
     "games": {
       "total": 4,
@@ -3173,6 +3233,6 @@
       "maior_desconto": 57
     }
   },
-  "updated_at": "2026-06-28T23:48:30.027469",
-  "total": 234
+  "updated_at": "2026-06-29T01:53:14.366869",
+  "total": 238
 }
