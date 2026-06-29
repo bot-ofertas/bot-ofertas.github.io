@@ -28,16 +28,12 @@ import urllib.parse
 
 log = logging.getLogger(__name__)
 
-_GROUP_ID       = os.getenv("WHATSAPP_GROUP_ID", "")
-_WEBHOOK_URL    = os.getenv("WHATSAPP_WEBHOOK_URL", "")     # ex: http://localhost:8080
-_WA_INSTANCE    = os.getenv("WHATSAPP_INSTANCE", "default") # nome da instância Evolution
-_WA_API_KEY     = os.getenv("WHATSAPP_API_KEY", "")
-
-_ATIVO = bool(_GROUP_ID)
+def _group_id() -> str:
+    return os.getenv("WHATSAPP_GROUP_ID", "")
 
 
 def wa_ativo() -> bool:
-    return _ATIVO
+    return bool(_group_id())
 
 
 def montar_mensagem_wa(produto: dict) -> str:
@@ -92,25 +88,30 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     """Tenta enviar para o grupo WhatsApp configurado.
 
     Usa mensagem_override se fornecida (conteúdo gerado por IA), caso contrário
-    monta a mensagem padrão. Tenta Evolution API primeiro, cai para pywhatkit.
+    monta a mensagem padrão. Tenta Evolution API primeiro, cai para pyautogui.
     """
-    if not _ATIVO:
+    group_id = _group_id()
+    if not group_id:
         return False
 
     mensagem = mensagem_override or montar_mensagem_wa(produto)
 
+    webhook_url = os.getenv("WHATSAPP_WEBHOOK_URL", "")
+    wa_api_key  = os.getenv("WHATSAPP_API_KEY", "")
+    wa_instance = os.getenv("WHATSAPP_INSTANCE", "default")
+
     # ── Tentativa 1: Evolution API (headless, funciona em server) ─────────────
-    if _WEBHOOK_URL and _WA_API_KEY:
+    if webhook_url and wa_api_key:
         try:
             import requests  # noqa: PLC0415
             resp = requests.post(
-                f"{_WEBHOOK_URL}/message/sendText/{_WA_INSTANCE}",
-                headers={"apikey": _WA_API_KEY, "Content-Type": "application/json"},
-                json={"number": _GROUP_ID, "textMessage": {"text": mensagem}},
+                f"{webhook_url}/message/sendText/{wa_instance}",
+                headers={"apikey": wa_api_key, "Content-Type": "application/json"},
+                json={"number": group_id, "textMessage": {"text": mensagem}},
                 timeout=10,
             )
             if resp.status_code in (200, 201):
-                log.info("WhatsApp enviado via Evolution API para %s", _GROUP_ID)
+                log.info("WhatsApp enviado via Evolution API para %s", group_id)
                 return True
             log.warning("Evolution API erro %s: %s", resp.status_code, resp.text[:200])
         except Exception as e:
@@ -163,7 +164,7 @@ def _enviar_via_pyautogui(mensagem: str) -> bool:
         pyautogui.press("enter")
         time.sleep(0.5)
 
-        log.info("✅ WhatsApp enviado via pyautogui para grupo %s", _GROUP_ID)
+        log.info("✅ WhatsApp enviado via pyautogui para grupo %s", _group_id())
         return True
     except Exception as e:
         log.warning("pyautogui falhou: %s", e)
