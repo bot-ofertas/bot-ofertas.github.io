@@ -91,11 +91,14 @@ def gerar_conteudo(produto: dict) -> dict:
 
     loja = "Amazon Brasil" if fonte == "amazon" else "Mercado Livre"
 
+    preco_str = f"R$ {preco:.2f}" if preco else "não informado"
+    preco_orig_str = f"R$ {preco_original:.2f}" if preco_original else "não informado"
+
     prompt = f"""Você é especialista em copywriting de ofertas para redes sociais brasileiras.
 Dados do produto:
 - Título: {titulo}
-- Preço atual: R$ {preco:.2f if preco else 'não informado'}
-- Preço original: R$ {preco_original:.2f if preco_original else 'não informado'}
+- Preço atual: {preco_str}
+- Preço original: {preco_orig_str}
 - Desconto: {desconto_pct:.0f}%
 - Economia: {economia or 'não calculada'}
 - Categoria: {categoria}
