@@ -12,6 +12,22 @@ LOG  = os.path.join(BASE, "data", "rastreador_local.log")
 PID  = os.path.join(BASE, "data", "rastreador.pid")
 
 
+def ja_rodando() -> bool:
+    """Evita duplicatas: True se já existe um rastreador.py em execução."""
+    try:
+        import psutil  # noqa: PLC0415
+        for p in psutil.process_iter(["name", "cmdline"]):
+            try:
+                cmd = " ".join(p.info.get("cmdline") or [])
+                if "rastreador.py" in cmd and "python" in (p.info.get("name") or "").lower():
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+    except ImportError:
+        pass
+    return False
+
+
 def abrir_whatsapp_web():
     subprocess.Popen("chrome.exe --new-window https://web.whatsapp.com", shell=True)
     time.sleep(10)  # aguarda WhatsApp Web carregar completamente
@@ -27,6 +43,9 @@ def iniciar_rastreador():
 
 
 if __name__ == "__main__":
-    abrir_whatsapp_web()
-    proc = iniciar_rastreador()
-    proc.wait()
+    if ja_rodando():
+        print("Rastreador já está em execução — não iniciando duplicata.")
+    else:
+        abrir_whatsapp_web()
+        proc = iniciar_rastreador()
+        proc.wait()
