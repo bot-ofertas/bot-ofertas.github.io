@@ -7,6 +7,7 @@ from __future__ import annotations
 import html
 import logging
 import os
+import urllib.parse
 from datetime import datetime
 from typing import Callable, Awaitable, Any
 
@@ -183,17 +184,25 @@ def _montar_mensagem(
 def _montar_teclado(produto: dict) -> InlineKeyboardMarkup:
     link: str = produto.get("link") or produto.get("affiliate_link") or "#"
     titulo = produto.get("titulo") or "Oferta"
+    preco: float | None = produto.get("preco")
     categoria = (produto.get("categoria") or produto.get("canal") or "").lower()
     site = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
     similares = site + (f"#{categoria}" if categoria else "")
-    texto_compartilhar = f"https://t.me/share/url?url={html.escape(link, quote=True)}&text={html.escape(titulo, quote=True)}"
+
+    tg_share = f"https://t.me/share/url?url={html.escape(link, quote=True)}&text={html.escape(titulo, quote=True)}"
+
+    preco_txt = f" | R${preco:.0f}" if preco else ""
+    wa_text = urllib.parse.quote(f"🔥 {titulo}{preco_txt}\n👉 {link}")
+    wa_share = f"https://wa.me/?text={wa_text}"
+
     botoes = [
         [
             InlineKeyboardButton("Ver Oferta 🛒", url=link),
-            InlineKeyboardButton("Compartilhar 📤", url=texto_compartilhar),
+            InlineKeyboardButton("📤 Telegram", url=tg_share),
         ],
         [
-            InlineKeyboardButton("🔎 Ofertas similares", url=similares),
+            InlineKeyboardButton("💚 WhatsApp", url=wa_share),
+            InlineKeyboardButton("🔎 Mais Ofertas", url=similares),
         ],
     ]
     return InlineKeyboardMarkup(botoes)
@@ -518,16 +527,21 @@ async def publicar_alerta_cupom(
     ]))
 
     site = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
+    _titulo_raw = produto.get("titulo") or "Produto em oferta"
+    _preco_raw: float | None = produto.get("preco")
+    _preco_txt = f" | R${_preco_raw:.0f}" if _preco_raw else ""
+    _wa_txt = urllib.parse.quote(f"🏷️ CUPOM {cupom} → {_titulo_raw}{_preco_txt}\n👉 {link}")
     teclado = InlineKeyboardMarkup([
-        [InlineKeyboardButton(f"🎟️ Usar Cupom Agora", url=link)],
+        [InlineKeyboardButton("🎟️ Usar Cupom Agora", url=link)],
         [
             InlineKeyboardButton(
-                "📤 Compartilhar",
+                "📤 Telegram",
                 url=f"https://t.me/share/url?url={html.escape(link, quote=True)}"
-                    f"&text={html.escape(f'Cupom {cupom} → {titulo}', quote=True)}",
+                    f"&text={html.escape(f'Cupom {cupom} → {_titulo_raw}', quote=True)}",
             ),
-            InlineKeyboardButton("🔎 Mais Cupons", url=site),
+            InlineKeyboardButton("💚 WhatsApp", url=f"https://wa.me/?text={_wa_txt}"),
         ],
+        [InlineKeyboardButton("🔎 Mais Cupons", url=site)],
     ])
 
     # Tenta enviar com banner "ALERTA CUPOM" estático

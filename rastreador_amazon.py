@@ -29,6 +29,7 @@ from core.scorer import calcular_score
 from core.validador import validar
 from integrations.amazon_scraper import buscar_cupons_amazon_async, amazon_ativo
 from integrations.telegram_bot import publicar_alerta_cupom
+from integrations.social_poster import publicar_todas_redes, resumo_redes
 
 load_dotenv()
 
@@ -127,6 +128,12 @@ async def rodar_uma_vez() -> None:
                 db.marcar_enviado(produto_id)
                 publicados += 1
                 log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
+                try:
+                    redes = await publicar_todas_redes(item)
+                    if redes:
+                        log(f"     🌐 Redes sociais: {resumo_redes(redes)}")
+                except Exception as _e:
+                    log(f"     ⚠️  Social: {_e}")
                 await asyncio.sleep(PAUSA_ENTRE_POSTS)
 
     log(f"\n{'=' * 55}")

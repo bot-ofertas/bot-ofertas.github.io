@@ -17,6 +17,12 @@ from __future__ import annotations
 import os
 import re
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 _AFFILIATE_TAG = os.getenv("AMAZON_AFFILIATE_TAG", "")
 
 _UA = (
@@ -34,7 +40,7 @@ _URLS_AMAZON: list[tuple[str, str]] = [
     ("casa",        "https://www.amazon.com.br/s?i=kitchen&rh=p_n_deal_type%3A23566064011"),
 ]
 
-_DOM_SCRIPT = """
+_DOM_SCRIPT = r"""
 () => {
     const resultado = [];
 

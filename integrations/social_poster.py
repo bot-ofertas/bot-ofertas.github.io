@@ -1,0 +1,240 @@
+# -*- coding: utf-8 -*-
+"""
+Publicador unificado para múltiplas redes sociais.
+
+Plataformas suportadas:
+    - Telegram   ← já configurado (sempre ativo)
+    - WhatsApp   ← via WHATSAPP_GROUP_ID + Evolution API ou pywhatkit
+    - Instagram  ← via INSTAGRAM_USERNAME + INSTAGRAM_PASSWORD (instagrapi)
+    - Twitter/X  ← via TWITTER_API_KEY + TWITTER_API_SECRET + tokens (tweepy)
+    - Facebook   ← via FACEBOOK_PAGE_TOKEN + FACEBOOK_PAGE_ID (fb_messenger)
+
+Variáveis .env necessárias por plataforma (todas opcionais exceto Telegram):
+
+  # WhatsApp
+  WHATSAPP_GROUP_ID=ABC123@g.us
+  WHATSAPP_WEBHOOK_URL=http://localhost:8080   # Evolution API (opcional)
+  WHATSAPP_API_KEY=sua_api_key                 # Evolution API (opcional)
+
+  # Instagram
+  INSTAGRAM_USERNAME=seu_usuario
+  INSTAGRAM_PASSWORD=sua_senha
+
+  # Twitter/X
+  TWITTER_API_KEY=...
+  TWITTER_API_SECRET=...
+  TWITTER_ACCESS_TOKEN=...
+  TWITTER_ACCESS_SECRET=...
+
+  # Facebook
+  FACEBOOK_PAGE_TOKEN=...
+  FACEBOOK_PAGE_ID=...
+"""
+from __future__ import annotations
+
+import asyncio
+import logging
+import os
+import urllib.parse
+
+log = logging.getLogger(__name__)
+
+_IG_USER   = os.getenv("INSTAGRAM_USERNAME", "")
+_IG_PASS   = os.getenv("INSTAGRAM_PASSWORD", "")
+_TW_KEY    = os.getenv("TWITTER_API_KEY", "")
+_TW_SECRET = os.getenv("TWITTER_API_SECRET", "")
+_TW_TOKEN  = os.getenv("TWITTER_ACCESS_TOKEN", "")
+_TW_TSECRET= os.getenv("TWITTER_ACCESS_SECRET", "")
+_FB_TOKEN  = os.getenv("FACEBOOK_PAGE_TOKEN", "")
+_FB_PAGE   = os.getenv("FACEBOOK_PAGE_ID", "")
+
+
+def plataformas_ativas() -> list[str]:
+    ativas = ["telegram"]
+    from integrations.whatsapp_sender import wa_ativo
+    if wa_ativo():
+        ativas.append("whatsapp")
+    if _IG_USER and _IG_PASS:
+        ativas.append("instagram")
+    if _TW_KEY and _TW_TOKEN:
+        ativas.append("twitter")
+    if _FB_TOKEN and _FB_PAGE:
+        ativas.append("facebook")
+    return ativas
+
+
+def _montar_texto_social(produto: dict, max_chars: int = 280) -> str:
+    """Monta texto curto para redes sociais (Twitter tem limite de 280)."""
+    titulo = (produto.get("titulo") or "")[:100]
+    preco: float | None = produto.get("preco")
+    preco_original: float | None = produto.get("preco_original")
+    link: str = produto.get("link") or produto.get("affiliate_link") or ""
+    cupom: str | None = produto.get("cupom")
+    categoria: str = produto.get("categoria") or ""
+
+    desc = ""
+    if preco and preco_original and preco_original > preco:
+        pct = int(round((1 - preco / preco_original) * 100))
+        desc = f" -{pct}%"
+
+    preco_txt = f"R${preco:.0f}{desc}" if preco else ""
+    cupom_txt = f" | Cupom: {cupom}" if cupom else ""
+    tags = f" #{categoria} #oferta #desconto" if categoria else " #oferta #desconto"
+
+    base = f"🔥 {titulo} {preco_txt}{cupom_txt} 👉 {link}"
+    if len(base + tags) <= max_chars:
+        return base + tags
+    return base[:max_chars - 3] + "..."
+
+
+async def publicar_instagram(produto: dict) -> bool:
+    if not (_IG_USER and _IG_PASS):
+        return False
+    try:
+        from instagrapi import Client  # noqa: PLC0415
+        titulo = produto.get("titulo") or "Oferta"
+        preco: float | None = produto.get("preco")
+        preco_original: float | None = produto.get("preco_original")
+        link: str = produto.get("link") or produto.get("affiliate_link") or ""
+        cupom: str | None = produto.get("cupom")
+        categoria: str = produto.get("categoria") or "oferta"
+
+        pct = ""
+        if preco and preco_original and preco_original > preco:
+            p = int(round((1 - preco / preco_original) * 100))
+            pct = f"-{p}% OFF"
+
+        caption = "\n".join(filter(None, [
+            f"🔥 {titulo}",
+            "",
+            f"💰 R$ {preco:.2f} {pct}" if preco else "",
+            f"🏷️ Cupom: {cupom}" if cupom else "",
+            "",
+            "🛡️ Oferta verificada · link na bio!",
+            "",
+            f"#{categoria} #oferta #desconto #mercadolivre #amazon #publicidade",
+        ]))
+
+        cl = Client()
+        cl.login(_IG_USER, _IG_PASS)
+
+        foto_url = produto.get("foto")
+        if foto_url:
+            import tempfile
+            import requests as req  # noqa: PLC0415
+            r = req.get(foto_url, timeout=10)
+            with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
+                f.write(r.content)
+                tmp_path = f.name
+            cl.photo_upload(tmp_path, caption=caption)
+            os.unlink(tmp_path)
+        else:
+            log.info("Instagram: sem foto para %s, pulando", titulo)
+            return False
+
+        log.info("Instagram: publicado '%s'", titulo[:50])
+        return True
+    except ImportError:
+        log.debug("instagrapi não instalado — pip install instagrapi")
+    except Exception as e:
+        log.warning("Instagram falhou: %s", e)
+    return False
+
+
+async def publicar_twitter(produto: dict) -> bool:
+    if not (_TW_KEY and _TW_TOKEN):
+        return False
+    try:
+        import tweepy  # noqa: PLC0415
+        client = tweepy.Client(
+            consumer_key=_TW_KEY,
+            consumer_secret=_TW_SECRET,
+            access_token=_TW_TOKEN,
+            access_token_secret=_TW_TSECRET,
+        )
+        texto = _montar_texto_social(produto, max_chars=280)
+        client.create_tweet(text=texto)
+        log.info("Twitter/X: postado '%s'", produto.get("titulo", "")[:50])
+        return True
+    except ImportError:
+        log.debug("tweepy não instalado — pip install tweepy")
+    except Exception as e:
+        log.warning("Twitter/X falhou: %s", e)
+    return False
+
+
+async def publicar_facebook(produto: dict) -> bool:
+    if not (_FB_TOKEN and _FB_PAGE):
+        return False
+    try:
+        import requests  # noqa: PLC0415
+        titulo = produto.get("titulo") or "Oferta"
+        preco: float | None = produto.get("preco")
+        link: str = produto.get("link") or produto.get("affiliate_link") or ""
+        cupom: str | None = produto.get("cupom")
+        categoria: str = produto.get("categoria") or "oferta"
+
+        msg = "\n".join(filter(None, [
+            f"🔥 {titulo}",
+            f"💰 R$ {preco:.2f}" if preco else "",
+            f"🏷️ Cupom: {cupom}" if cupom else "",
+            "",
+            "🛡️ Oferta verificada",
+            link,
+            f"\n#{categoria} #oferta #desconto #publicidade",
+        ]))
+
+        r = requests.post(
+            f"https://graph.facebook.com/{_FB_PAGE}/feed",
+            data={"message": msg, "link": link, "access_token": _FB_TOKEN},
+            timeout=10,
+        )
+        if r.status_code == 200:
+            log.info("Facebook: postado '%s'", titulo[:50])
+            return True
+        log.warning("Facebook erro %s: %s", r.status_code, r.text[:200])
+    except Exception as e:
+        log.warning("Facebook falhou: %s", e)
+    return False
+
+
+async def publicar_todas_redes(produto: dict) -> dict[str, bool]:
+    """Publica em todas as redes sociais configuradas (exceto Telegram, já feito)."""
+    resultados: dict[str, bool] = {}
+
+    from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
+    if wa_ativo():
+        resultados["whatsapp"] = await enviar_para_grupo(produto)
+
+    tasks = []
+    nomes = []
+
+    if _IG_USER and _IG_PASS:
+        tasks.append(publicar_instagram(produto))
+        nomes.append("instagram")
+    if _TW_KEY and _TW_TOKEN:
+        tasks.append(publicar_twitter(produto))
+        nomes.append("twitter")
+    if _FB_TOKEN and _FB_PAGE:
+        tasks.append(publicar_facebook(produto))
+        nomes.append("facebook")
+
+    if tasks:
+        resultados_async = await asyncio.gather(*tasks, return_exceptions=True)
+        for nome, res in zip(nomes, resultados_async):
+            resultados[nome] = res is True
+
+    return resultados
+
+
+def resumo_redes(resultados: dict[str, bool]) -> str:
+    if not resultados:
+        return ""
+    ok = [k for k, v in resultados.items() if v]
+    fail = [k for k, v in resultados.items() if not v]
+    partes = []
+    if ok:
+        partes.append(f"✅ {', '.join(ok)}")
+    if fail:
+        partes.append(f"❌ {', '.join(fail)}")
+    return " | ".join(partes)

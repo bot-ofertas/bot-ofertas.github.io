@@ -33,6 +33,7 @@ import core.database as db
 from affiliates.registry import get_provider, health_report
 from integrations.ml_browser import buscar_ofertas_browser_async
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
+from integrations.social_poster import publicar_todas_redes, resumo_redes
 
 try:
     from core.ai_rewriter import reescrever_titulo, reescrever_descricao
@@ -229,6 +230,13 @@ async def processar_categoria(
             publicados[0] += 1
             contadores["publicados"] += 1
             log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
+            # Publicar nas demais redes sociais (WhatsApp, Instagram, Twitter…)
+            try:
+                redes = await publicar_todas_redes(item)
+                if redes:
+                    log(f"     🌐 Redes sociais: {resumo_redes(redes)}")
+            except Exception as _e_social:
+                log(f"     ⚠️  Social: {_e_social}")
             await asyncio.sleep(PAUSA_ENTRE_POSTS)
         else:
             db.registrar_erro("telegram", "falha ao publicar", produto_id)

@@ -168,6 +168,16 @@
                font-weight: 700; font-size: .75rem; padding: .46rem; border-radius: 6px;
                text-decoration: none; margin-top: .32rem; transition: background .15s; }
     .btn-buy:hover { background: #007a3e; }
+    .btn-share-row { display: flex; gap: .3rem; margin-top: .22rem; }
+    .btn-wpp { flex: 1; display: flex; align-items: center; justify-content: center; gap: .22rem;
+               background: #25d366; color: #fff; font-weight: 700; font-size: .65rem;
+               padding: .36rem .3rem; border-radius: 6px; text-decoration: none; transition: background .15s; }
+    .btn-wpp:hover { background: #128c7e; }
+    .btn-tg  { flex: 1; display: flex; align-items: center; justify-content: center; gap: .22rem;
+               background: #229ed9; color: #fff; font-weight: 700; font-size: .65rem;
+               padding: .36rem .3rem; border-radius: 6px; text-decoration: none; transition: background .15s; }
+    .btn-tg:hover  { background: #1a7fb5; }
+    .b-amz { background: rgba(255,153,0,.9); color: #fff; font-size: .6rem; font-weight: 700; padding: .17rem .4rem; border-radius: 4px; }
 
     /* GRID VIEW */
     #grid-section { display: none; }
@@ -358,11 +368,19 @@ function cardHtml(p) {
   const cls = CLS[p.classe] ? `<span class="c-class cls-${p.classe}">${CLS[p.classe][0]} ${CLS[p.classe][1]}</span>` : '';
   const low = p.menor_periodo ? `<div class="c-low">📉 Menor preço em 30 dias</div>` : '';
   const trust = p.verificada ? `<div class="c-trust">🛡️ Oferta verificada</div>` : '';
+  const fonte = p.fonte || 'ml';
+  const fonteLabel = fonte === 'amazon' ? '🟠 Amazon' : '✓ ML';
+  const fonteCls   = fonte === 'amazon' ? 'b-amz' : 'b-ok';
+  const buyLabel   = fonte === 'amazon' ? 'Comprar na Amazon 🛒' : 'Comprar no ML 🛒';
+  const waText  = encodeURIComponent('🔥 ' + p.titulo + (p.preco ? ' | R$' + p.preco.toFixed(0) : '') + '\n👉 ' + p.link);
+  const tgText  = encodeURIComponent(p.titulo || 'Oferta');
+  const waLink  = 'https://wa.me/?text=' + waText;
+  const tgLink  = 'https://t.me/share/url?url=' + encodeURIComponent(p.link) + '&text=' + tgText;
   return `
     <div class="card" onclick="window.open('${esc(p.link)}','_blank','noopener')">
       <div class="c-badges">
         ${off > 0 ? `<span class="b-off">-${off}%</span>` : '<span></span>'}
-        <span class="b-ok">✓ ML</span>
+        <span class="${fonteCls}">${fonteLabel}</span>
       </div>
       <div class="c-img">${img}</div>
       <div class="c-body">
@@ -376,7 +394,11 @@ function cardHtml(p) {
         ${trust}
         ${ago   ? `<div class="c-time">⏱ ${ago}</div>` : ''}
         <a class="btn-buy" href="${esc(p.link)}" target="_blank" rel="noopener sponsored"
-           onclick="event.stopPropagation()">Comprar no ML 🛒</a>
+           onclick="event.stopPropagation()">${buyLabel}</a>
+        <div class="btn-share-row" onclick="event.stopPropagation()">
+          <a class="btn-wpp" href="${waLink}" target="_blank" rel="noopener" title="Compartilhar no WhatsApp">💚 WhatsApp</a>
+          <a class="btn-tg"  href="${tgLink}" target="_blank" rel="noopener" title="Compartilhar no Telegram">✈️ Telegram</a>
+        </div>
       </div>
     </div>`;
 }
