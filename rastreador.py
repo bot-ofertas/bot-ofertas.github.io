@@ -345,6 +345,30 @@ async def rodar_uma_vez() -> None:
         pass
 
 
+def _ja_existe_outra_instancia() -> bool:
+    """True se já houver outro rastreador.py em modo --loop rodando.
+
+    Evita instâncias duplicadas que causam posts repetidos e conflito no
+    pyautogui (vários processos disputando o WhatsApp Web ao mesmo tempo).
+    """
+    try:
+        import psutil  # noqa: PLC0415
+        meu_pid = os.getpid()
+        for p in psutil.process_iter(["pid", "name", "cmdline"]):
+            try:
+                if p.info["pid"] == meu_pid:
+                    continue
+                cmd = " ".join(p.info.get("cmdline") or [])
+                nome = (p.info.get("name") or "").lower()
+                if "rastreador.py" in cmd and "--loop" in cmd and "python" in nome:
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+    except ImportError:
+        pass
+    return False
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rastreador automático de ofertas ML")
     parser.add_argument(
@@ -354,6 +378,9 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.loop:
+        if _ja_existe_outra_instancia():
+            log("⛔ Outro rastreador --loop já está rodando. Encerrando para evitar duplicatas.")
+            return
         log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
         while True:
             asyncio.run(rodar_uma_vez())

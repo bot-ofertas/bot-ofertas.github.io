@@ -126,28 +126,51 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
 
 def _baixar_foto(foto_url: str) -> str:
-    """Baixa a foto do produto e salva como JPG em data/. Retorna o caminho ou ''."""
+    """Baixa a foto do produto e salva como JPG otimizado em data/. Retorna o caminho ou ''.
+
+    Imagem reduzida a 800px e qualidade 80 — sobe rápido no WhatsApp e
+    carrega rápido para quem recebe, sem perder nitidez no chat.
+    """
     if not foto_url or not foto_url.startswith("http"):
         return ""
     try:
-        import io  # noqa: PLC0415
+        import io    # noqa: PLC0415
+        import time  # noqa: PLC0415
         import requests  # noqa: PLC0415
         from PIL import Image  # noqa: PLC0415
 
-        r = requests.get(foto_url, timeout=12)
+        r = requests.get(foto_url, timeout=10)
         if r.status_code != 200 or not r.content:
             return ""
 
         img = Image.open(io.BytesIO(r.content)).convert("RGB")
-        img.thumbnail((1280, 1280))
+        img.thumbnail((800, 800))
 
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        destino = os.path.join(base, "data", "wa_foto_tmp.jpg")
-        img.save(destino, "JPEG", quality=88)
+        # Nome único evita conflito se dois envios ocorrerem em sequência
+        destino = os.path.join(base, "data", f"wa_foto_{int(time.time() * 1000)}.jpg")
+        img.save(destino, "JPEG", quality=80, optimize=True)
         return destino
     except Exception as e:
         log.warning("Falha ao baixar foto: %s", e)
         return ""
+
+
+def _limpar_fotos_antigas() -> None:
+    """Remove fotos temporárias do WhatsApp com mais de alguns minutos."""
+    try:
+        import glob  # noqa: PLC0415
+        import time  # noqa: PLC0415
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        agora = time.time()
+        for f in glob.glob(os.path.join(base, "data", "wa_foto_*.jpg")):
+            try:
+                if agora - os.path.getmtime(f) > 300:  # 5 min
+                    os.remove(f)
+            except OSError:
+                pass
+    except Exception:
+        pass
 
 
 def _copiar_arquivo_clipboard(caminho: str) -> bool:
@@ -186,7 +209,8 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
     Chrome esteja em outra aba. Se houver foto, cola a imagem (preview) e usa a
     mensagem como legenda; caso contrário envia só texto.
     """
-    import time  # noqa: PLC0415
+    import threading  # noqa: PLC0415
+    import time       # noqa: PLC0415
     try:
         import pygetwindow as gw  # noqa: PLC0415
         import pyautogui          # noqa: PLC0415
@@ -196,7 +220,17 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
         return False
 
     pyautogui.FAILSAFE = True
-    pyautogui.PAUSE = 0.4
+    pyautogui.PAUSE = 0.3
+
+    # ── Baixa a foto EM PARALELO enquanto navega a janela (economiza tempo) ──
+    _foto = {"caminho": ""}
+    if foto_url:
+        def _baixar():
+            _foto["caminho"] = _baixar_foto(foto_url)
+        t_foto = threading.Thread(target=_baixar, daemon=True)
+        t_foto.start()
+    else:
+        t_foto = None
 
     # Encontra janela Chrome com aba WhatsApp ativa OU qualquer janela Chrome
     janelas_wa = gw.getWindowsWithTitle("WhatsApp")
@@ -210,7 +244,7 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
 
     def _trazer_para_frente(win):
         """Ativa a janela tolerando o falso-erro 'Error code 0' do pygetwindow."""
-        for tentativa in (1, 2):
+        for _ in (1, 2):
             try:
                 win.activate()
                 return
@@ -223,17 +257,17 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
                     win.maximize()
                 except Exception:
                     pass
-                time.sleep(0.4)
+                time.sleep(0.3)
 
     try:
         _trazer_para_frente(janela)
-        time.sleep(1.2)
+        time.sleep(0.8)
 
         # Se a aba ativa não é WhatsApp, navega para web.whatsapp.com na barra de endereço
         if not janelas_wa:
             log.info("Aba WhatsApp não ativa — navegando para web.whatsapp.com...")
             pyautogui.hotkey("ctrl", "l")   # foca barra de endereço
-            time.sleep(0.5)
+            time.sleep(0.4)
             pyperclip.copy("https://web.whatsapp.com")
             pyautogui.hotkey("ctrl", "v")
             pyautogui.press("enter")
@@ -241,27 +275,30 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
 
         # Abre o grupo Bot-Ofertas via atalho de busca
         pyautogui.hotkey("ctrl", "alt", "/")
-        time.sleep(0.8)
+        time.sleep(0.6)
 
-        pyautogui.typewrite("Bot-Ofertas", interval=0.07)
-        time.sleep(1.5)
+        pyautogui.typewrite("Bot-Ofertas", interval=0.05)
+        time.sleep(1.0)
 
         pyautogui.press("down")
-        time.sleep(0.3)
+        time.sleep(0.2)
         pyautogui.press("enter")
-        time.sleep(2.0)
+        time.sleep(1.2)
 
         # ── Com foto: cola o ARQUIVO → preview faz upload → legenda → enviar ──
-        caminho_foto = _baixar_foto(foto_url) if foto_url else ""
+        if t_foto:
+            t_foto.join(timeout=12)         # garante que a foto terminou de baixar
+        caminho_foto = _foto["caminho"]
         if caminho_foto and _copiar_arquivo_clipboard(caminho_foto):
             pyautogui.hotkey("ctrl", "v")   # cola o arquivo (WhatsApp faz upload real)
-            time.sleep(4.0)                 # aguarda upload + preview da imagem
+            time.sleep(3.0)                 # aguarda upload + preview (imagem 800px sobe rápido)
             # A caixa de legenda já vem focada; cola o texto como legenda
             pyperclip.copy(mensagem)
             pyautogui.hotkey("ctrl", "v")
-            time.sleep(0.8)
+            time.sleep(0.6)
             pyautogui.press("enter")        # envia imagem + legenda
-            time.sleep(1.5)
+            time.sleep(1.0)
+            _limpar_fotos_antigas()
             log.info("✅ WhatsApp enviado COM FOTO (arquivo) para grupo %s", _group_id())
             return True
 
