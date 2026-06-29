@@ -199,12 +199,8 @@ async def publicar_facebook(produto: dict) -> bool:
 
 
 async def publicar_todas_redes(produto: dict) -> dict[str, bool]:
-    """Publica em todas as redes sociais configuradas (exceto Telegram, já feito)."""
+    """Publica em todas as redes sociais configuradas (exceto Telegram e WhatsApp, já feitos pelo rastreador)."""
     resultados: dict[str, bool] = {}
-
-    from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
-    if wa_ativo():
-        resultados["whatsapp"] = await enviar_para_grupo(produto)
 
     tasks = []
     nomes = []
