@@ -108,7 +108,7 @@ def _extrair_produto_da_mensagem(texto: str, entidade_urls: list = None) -> dict
 
 
 async def _enviar_whatsapp(produto: dict, texto_original: str) -> bool:
-    """Gera conteúdo IA e envia para WhatsApp."""
+    """Gera conteúdo IA e envia para o grupo WhatsApp via automação do Chrome."""
     try:
         from core.ai_content import gerar_conteudo
         conteudo = gerar_conteudo(produto)
@@ -119,30 +119,79 @@ async def _enviar_whatsapp(produto: dict, texto_original: str) -> bool:
         log.warning("IA falhou: %s — usando texto original", e)
         mensagem_wa = texto_original[:500]
 
-    if not GROUP_ID:
-        log.warning("WHATSAPP_GROUP_ID não configurado")
+    if not mensagem_wa:
         return False
 
     if os.getenv("GITHUB_ACTIONS"):
-        log.info("GitHub Actions detectado — pywhatkit ignorado")
+        log.info("GitHub Actions detectado — WhatsApp local ignorado")
         return False
 
+    return await asyncio.get_event_loop().run_in_executor(
+        None, _enviar_via_pyautogui, mensagem_wa
+    )
+
+
+def _enviar_via_pyautogui(mensagem: str) -> bool:
+    """
+    Controla o WhatsApp Web aberto no Chrome para enviar mensagem no grupo.
+
+    Sequência:
+      1. Localiza a janela do Chrome com WhatsApp Web
+      2. Foca a janela e abre a busca (Ctrl+Alt+/)
+      3. Digita o nome do grupo, seleciona, abre o chat
+      4. Cola a mensagem e envia
+    """
     try:
-        import pywhatkit
-        pywhatkit.sendwhatmsg_to_group_instantly(
-            group_id=GROUP_ID,
-            message=mensagem_wa,
-            wait_time=12,
-            tab_close=True,
-            close_time=3,
-        )
-        log.info("✅ WhatsApp enviado para grupo %s", GROUP_ID)
-        return True
+        import pygetwindow as gw
+        import pyautogui
+        import pyperclip
     except ImportError:
-        log.error("pywhatkit não instalado. Execute: pip install pywhatkit")
+        log.error("Instale: pip install pyautogui pygetwindow pyperclip")
         return False
+
+    NOME_GRUPO = "Bot-Ofertas"
+    pyautogui.FAILSAFE = True
+    pyautogui.PAUSE = 0.4
+
+    # 1. Encontra a janela do Chrome com WhatsApp Web
+    janelas = gw.getWindowsWithTitle("WhatsApp")
+    if not janelas:
+        log.error("WhatsApp Web não encontrado. Abra web.whatsapp.com no Chrome.")
+        return False
+
+    wa_janela = janelas[0]
+    wa_janela.activate()
+    time.sleep(1.2)
+
+    try:
+        # 2. Abre a caixa de busca de conversa (atalho do WhatsApp Web)
+        pyautogui.hotkey("ctrl", "alt", "/")
+        time.sleep(0.8)
+
+        # 3. Digita o nome do grupo e aguarda autocomplete
+        pyautogui.typewrite(NOME_GRUPO, interval=0.07)
+        time.sleep(1.5)
+
+        # 4. Seleciona o primeiro resultado e abre o chat
+        pyautogui.press("down")
+        time.sleep(0.3)
+        pyautogui.press("enter")
+        time.sleep(1.8)
+
+        # 5. Cola a mensagem via clipboard (suporta emojis e quebras de linha)
+        pyperclip.copy(mensagem)
+        pyautogui.hotkey("ctrl", "v")
+        time.sleep(0.5)
+
+        # 6. Envia
+        pyautogui.press("enter")
+        time.sleep(0.5)
+
+        log.info("✅ WhatsApp: mensagem enviada no grupo %s", NOME_GRUPO)
+        return True
+
     except Exception as e:
-        log.error("pywhatkit falhou: %s", e)
+        log.error("pyautogui falhou: %s", e)
         return False
 
 
