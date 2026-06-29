@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Refletor Rgb Controlado Remotamente Com Um Tripé De 156 Cm Preto Rgb",
+      "preco": 225.57,
+      "preco_original": 598.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_992167-MLB106722569475_022026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 72,
+      "enviado_em": "2026-06-29T06:30:13.274140",
+      "link": "https://www.mercadolivre.com.br/refletor-rgb-controlado-remotamente-com-um-tripe-de-156-cm/up/MLBU3528977466?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 225.57,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Gimbal Estabilizador Com Tripé Para Celular Con Led Preto",
+      "preco": 332.71,
+      "preco_original": 470.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_820366-MLB109928371010_042026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 64,
+      "enviado_em": "2026-06-29T06:30:05.959695",
+      "link": "https://www.mercadolivre.com.br/gimbal-estabilizador-com-tripe-para-celular-con-led/up/MLBU3925932974?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 332.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Lapela Mymotors Preto Sem Fio Tipo C",
+      "preco": 69.9,
+      "preco_original": 129.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662543-MLA99985670637_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 67,
+      "enviado_em": "2026-06-29T06:29:59.070320",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/microfone-lapela-mymotors-preto-sem-fio-tipo-c/p/MLB53429683?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tripé Inteligente 1.8m Com Rastreamento Facial Ai Estável 360° Para Celularcâmeravlog E Gopro, Basike Tripé Celular Profissional Universal Bastão Selfie Com Controle Remoto Bluetooth Preto",
+      "preco": 212.74,
+      "preco_original": 342.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_951013-MLA99448401816_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 72,
+      "enviado_em": "2026-06-29T06:29:52.029789",
+      "link": "https://www.mercadolivre.com.br/tripe-inteligente-18m-com-rastreamento-facial-ai-estavel-360-para-celularcmeravlog-e-gopro-basike-tripe-celular-profissional-universal-basto-selfie-com-controle-remoto-bluetooth/p/MLB54097914?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 212.74,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Aspirador De Pó E Água Wap Gtw 20 1600w De Potência Amarelo/preto 220v",
       "preco": 362.9,
       "preco_original": 555.0,
@@ -3220,6 +3281,12 @@
       "desconto_medio": 32,
       "maior_desconto": 42
     },
+    "ferramentas": {
+      "total": 4,
+      "score_medio": 69,
+      "desconto_medio": 44,
+      "maior_desconto": 62
+    },
     "brinquedos": {
       "total": 4,
       "score_medio": 85,
@@ -3233,6 +3300,6 @@
       "maior_desconto": 57
     }
   },
-  "updated_at": "2026-06-29T01:53:14.366869",
-  "total": 238
+  "updated_at": "2026-06-29T06:33:09.003023",
+  "total": 242
 }
