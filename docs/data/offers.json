@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Acer Gamer Nitro V15 Ryzen 7 7735hs 16gb Rtx4050 1tb Ssd Linux Tela 165hz Full Hd 15.6 Anv15-41-r8zp Preto",
+      "preco": 6303.0,
+      "preco_original": 12499.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826075-MLA109766539988_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-06-29T17:15:10.107087",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 6303.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Hp 256r G9 Intel Core I5-1334u 15.6 Hd Intel Uhd 256gb Ssd 16gb Ram Windows 11 Home 64 Pls Sl - Bq9l2at#ak4 Cinza-escuro",
+      "preco": 3839.0,
+      "preco_original": 6379.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900459-MLA87482556488_072025-AB.webp",
+      "categoria": "notebooks",
+      "score": 89,
+      "enviado_em": "2026-06-29T17:15:03.016977",
+      "link": "https://www.mercadolivre.com.br/notebook-hp-256r-g9-intel-core-i5-1334u-156-hd-intel-uhd-256gb-ssd-16gb-ram-windows-11-home-64-pls-sl-bq9l2atak4/p/MLB52351863?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3839.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Aspire Go 15 Ag15-71pt-72el Intel® Core I7-13620h 16gb 512ssd Windows 11 Tela De 15.6' Touchscreen Verde-escuro",
+      "preco": 5699.0,
+      "preco_original": 7999.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_617393-MLA99491757448_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 78,
+      "enviado_em": "2026-06-29T17:14:56.370592",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-go-15-ag15-71pt-72el-intel-core-i7-13620h-16gb-512ssd-windows-11-tela-de-156-touchscreen/p/MLB55055942?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 5699.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Gamer Acer Nitro V15 Anv15-52-737p Intel® Core I7-13620h 13ªg 16gb Ram 512gb Ssd Rtx4050 Fhd 15.6",
+      "preco": 6499.0,
+      "preco_original": 8999.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_840134-MLA99989589639_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 77,
+      "enviado_em": "2026-06-29T17:14:49.761811",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-acer-nitro-v15-anv15-52-737p-intel-core-i7-13620h-13g-16gb-ram-512gb-ssd-rtx4050-fhd-156/p/MLB54176209?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 6499.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
       "preco": 62.03,
       "preco_original": 249.0,
@@ -1375,6 +1435,8 @@
       "enviado_em": "2026-06-28T03:02:44.613172",
       "link": "https://www.mercadolivre.com.br/notebook-hp-ia-pc-probook-14-440-g11-i-intel-core-ultra-5-125u-16gb-ram-ssd-512gb-windows-11-home-sku-cl5x4la/p/MLB57503810?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
+      "menor_preco_30d": 4799.0,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -2510,6 +2572,8 @@
       "enviado_em": "2026-06-27T17:17:45.919934",
       "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
+      "menor_preco_30d": 3580.0,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -3340,6 +3404,12 @@
       "desconto_medio": 38,
       "maior_desconto": 53
     },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 84,
+      "desconto_medio": 36,
+      "maior_desconto": 49
+    },
     "moda": {
       "total": 4,
       "score_medio": 75,
@@ -3371,6 +3441,6 @@
       "maior_desconto": 57
     }
   },
-  "updated_at": "2026-06-29T14:09:05.727115",
-  "total": 246
+  "updated_at": "2026-06-29T17:17:36.427472",
+  "total": 250
 }
