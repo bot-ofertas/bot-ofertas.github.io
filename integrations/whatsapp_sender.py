@@ -125,40 +125,57 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     return _enviar_via_pyautogui(mensagem, foto_url)
 
 
-def _copiar_imagem_clipboard(foto_url: str) -> bool:
-    """Baixa a foto do produto e copia para a área de transferência do Windows.
-
-    Retorna True se a imagem foi copiada com sucesso (pronta para Ctrl+V).
-    """
+def _baixar_foto(foto_url: str) -> str:
+    """Baixa a foto do produto e salva como JPG em data/. Retorna o caminho ou ''."""
     if not foto_url or not foto_url.startswith("http"):
-        return False
+        return ""
     try:
         import io  # noqa: PLC0415
         import requests  # noqa: PLC0415
-        import win32clipboard  # noqa: PLC0415
         from PIL import Image  # noqa: PLC0415
 
         r = requests.get(foto_url, timeout=12)
         if r.status_code != 200 or not r.content:
-            return False
+            return ""
 
         img = Image.open(io.BytesIO(r.content)).convert("RGB")
-        # Limita tamanho para evitar imagens gigantes
         img.thumbnail((1280, 1280))
 
-        # Converte para BMP/DIB (formato exigido pelo clipboard do Windows)
-        out = io.BytesIO()
-        img.save(out, "BMP")
-        dib = out.getvalue()[14:]  # remove o cabeçalho BMP de 14 bytes -> DIB
-        out.close()
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        destino = os.path.join(base, "data", "wa_foto_tmp.jpg")
+        img.save(destino, "JPEG", quality=88)
+        return destino
+    except Exception as e:
+        log.warning("Falha ao baixar foto: %s", e)
+        return ""
+
+
+def _copiar_arquivo_clipboard(caminho: str) -> bool:
+    """Copia um ARQUIVO para a área de transferência (CF_HDROP), como no Explorer.
+
+    Ao colar (Ctrl+V) no WhatsApp Web, o arquivo é anexado de verdade — o
+    navegador faz upload dos bytes reais, sem corrupção de imagem.
+    """
+    if not caminho or not os.path.exists(caminho):
+        return False
+    try:
+        import struct  # noqa: PLC0415
+        import win32clipboard  # noqa: PLC0415
+        import win32con  # noqa: PLC0415
+
+        # DROPFILES: pFiles(offset), pt.x, pt.y, fNC, fWide  = 20 bytes
+        offset = 20
+        lista = (caminho + "\0\0").encode("utf-16-le")  # dupla terminação nula
+        dropfiles = struct.pack("<LllII", offset, 0, 0, 0, 1)  # fWide=1 (unicode)
+        buf = dropfiles + lista
 
         win32clipboard.OpenClipboard()
         win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardData(win32clipboard.CF_DIB, dib)
+        win32clipboard.SetClipboardData(win32con.CF_HDROP, buf)
         win32clipboard.CloseClipboard()
         return True
     except Exception as e:
-        log.warning("Falha ao copiar imagem para clipboard: %s", e)
+        log.warning("Falha ao copiar arquivo para clipboard: %s", e)
         return False
 
 
@@ -191,9 +208,26 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
         log.warning("Chrome não encontrado. Abra o Chrome com https://web.whatsapp.com")
         return False
 
+    def _trazer_para_frente(win):
+        """Ativa a janela tolerando o falso-erro 'Error code 0' do pygetwindow."""
+        for tentativa in (1, 2):
+            try:
+                win.activate()
+                return
+            except Exception:
+                # pygetwindow lança "Error code 0 (sucesso)" mesmo quando funciona;
+                # tenta restaurar/maximizar como alternativa e segue em frente
+                try:
+                    if win.isMinimized:
+                        win.restore()
+                    win.maximize()
+                except Exception:
+                    pass
+                time.sleep(0.4)
+
     try:
-        janela.activate()
-        time.sleep(1.0)
+        _trazer_para_frente(janela)
+        time.sleep(1.2)
 
         # Se a aba ativa não é WhatsApp, navega para web.whatsapp.com na barra de endereço
         if not janelas_wa:
@@ -217,17 +251,18 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
         pyautogui.press("enter")
         time.sleep(2.0)
 
-        # ── Com foto: cola imagem → abre preview → legenda → enviar ───────────
-        if foto_url and _copiar_imagem_clipboard(foto_url):
-            pyautogui.hotkey("ctrl", "v")   # cola a imagem (abre tela de preview)
-            time.sleep(2.5)                 # aguarda preview da imagem abrir
+        # ── Com foto: cola o ARQUIVO → preview faz upload → legenda → enviar ──
+        caminho_foto = _baixar_foto(foto_url) if foto_url else ""
+        if caminho_foto and _copiar_arquivo_clipboard(caminho_foto):
+            pyautogui.hotkey("ctrl", "v")   # cola o arquivo (WhatsApp faz upload real)
+            time.sleep(4.0)                 # aguarda upload + preview da imagem
             # A caixa de legenda já vem focada; cola o texto como legenda
             pyperclip.copy(mensagem)
             pyautogui.hotkey("ctrl", "v")
-            time.sleep(0.6)
+            time.sleep(0.8)
             pyautogui.press("enter")        # envia imagem + legenda
-            time.sleep(1.0)
-            log.info("✅ WhatsApp enviado COM FOTO via pyautogui para grupo %s", _group_id())
+            time.sleep(1.5)
+            log.info("✅ WhatsApp enviado COM FOTO (arquivo) para grupo %s", _group_id())
             return True
 
         # ── Sem foto: só texto ───────────────────────────────────────────────
@@ -237,7 +272,7 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
         pyautogui.press("enter")
         time.sleep(0.5)
 
-        log.info("✅ WhatsApp enviado (texto) via pyautogui para grupo %s", _group_id())
+        log.info("✅ WhatsApp enviado (texto) para grupo %s", _group_id())
         return True
     except Exception as e:
         log.warning("pyautogui falhou: %s", e)
