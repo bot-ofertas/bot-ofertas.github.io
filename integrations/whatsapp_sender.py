@@ -125,7 +125,11 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
 
 def _enviar_via_pyautogui(mensagem: str) -> bool:
-    """Envia via automação do Chrome com WhatsApp Web aberto na guia do grupo Bot-Ofertas."""
+    """Envia via automação do Chrome com WhatsApp Web.
+
+    Garante que a aba do WhatsApp Web está ativa antes de enviar,
+    mesmo que o Chrome esteja em outra aba.
+    """
     import time  # noqa: PLC0415
     try:
         import pygetwindow as gw  # noqa: PLC0415
@@ -135,18 +139,34 @@ def _enviar_via_pyautogui(mensagem: str) -> bool:
         log.warning("Falta pyautogui/pygetwindow/pyperclip — instale: pip install pyautogui pygetwindow pyperclip")
         return False
 
-    janelas = gw.getWindowsWithTitle("WhatsApp")
-    if not janelas:
-        log.warning("WhatsApp Web não encontrado. Abra o Chrome com https://web.whatsapp.com e o grupo 'Bot-Ofertas' aberto.")
-        return False
-
     pyautogui.FAILSAFE = True
     pyautogui.PAUSE = 0.4
 
-    try:
-        janelas[0].activate()
-        time.sleep(1.5)
+    # Encontra janela Chrome com aba WhatsApp ativa OU qualquer janela Chrome
+    janelas_wa = gw.getWindowsWithTitle("WhatsApp")
+    janelas_chrome = [w for w in gw.getAllWindows()
+                      if "chrome" in w.title.lower() or "google" in w.title.lower()]
 
+    janela = (janelas_wa or janelas_chrome or [None])[0]
+    if not janela:
+        log.warning("Chrome não encontrado. Abra o Chrome com https://web.whatsapp.com")
+        return False
+
+    try:
+        janela.activate()
+        time.sleep(1.0)
+
+        # Se a aba ativa não é WhatsApp, navega para web.whatsapp.com na barra de endereço
+        if not janelas_wa:
+            log.info("Aba WhatsApp não ativa — navegando para web.whatsapp.com...")
+            pyautogui.hotkey("ctrl", "l")   # foca barra de endereço
+            time.sleep(0.5)
+            pyperclip.copy("https://web.whatsapp.com")
+            pyautogui.hotkey("ctrl", "v")
+            pyautogui.press("enter")
+            time.sleep(6)                   # aguarda WhatsApp Web carregar
+
+        # Abre o grupo Bot-Ofertas via atalho de busca
         pyautogui.hotkey("ctrl", "alt", "/")
         time.sleep(0.8)
 
