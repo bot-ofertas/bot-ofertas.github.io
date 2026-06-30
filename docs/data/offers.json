@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Samsung Galaxy A06 5g Dual Sim 128gb Preto",
+      "preco": 638.82,
+      "preco_original": 989.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716412-MLA99524473372_122025-AB.webp",
+      "categoria": "monitores",
+      "score": 74,
+      "enviado_em": "2026-06-30T02:30:54.804742",
+      "link": "https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB48946861?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 638.82,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Colchão Emma Original Casal - Tecnologia Alemã Cor Branco/cinza",
+      "preco": 2135.0,
+      "preco_original": 5369.0,
+      "desconto_pct": 60.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_622005-MLA107431320527_022026-AB.webp",
+      "categoria": "monitores",
+      "score": 78,
+      "enviado_em": "2026-06-30T02:30:48.027440",
+      "link": "https://www.mercadolivre.com.br/colcho-emma-original-casal-tecnologia-alem-cor-brancocinza/p/MLB18724648?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2135.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit De Internet Via Satelite Starlink Mini Branco",
+      "preco": 799.0,
+      "preco_original": 1664.0,
+      "desconto_pct": 51.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_607302-MLA110946584985_042026-AB.webp",
+      "categoria": "monitores",
+      "score": 85,
+      "enviado_em": "2026-06-30T02:30:41.278571",
+      "link": "https://www.mercadolivre.com.br/kit-de-internet-via-satelite-starlink-mini-branco/p/MLB40656539?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
+      "preco": 799.11,
+      "preco_original": 1799.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
+      "categoria": "monitores",
+      "score": 90,
+      "enviado_em": "2026-06-30T02:30:34.451468",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-verde/p/MLB54963045?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.11,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Body Splash Masculino Barbarius + Enigma + Midtown 200ml",
       "preco": 87.2,
       "preco_original": 140.0,
@@ -147,7 +207,7 @@
       "link": "https://www.mercadolivre.com.br/kit-2-cornetas-vuvuzela-grande-torcida-copa-2026-brasil/up/MLBU3853703587?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 21.18,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -162,7 +222,7 @@
       "link": "https://www.mercadolivre.com.br/parafusadeira-furadeira-de-impacto-a-bateria-21v-38-bivolt-1400-rpm-com-acessorios-e-maleta-tb-21pzw-the-black-tools/p/MLB60012839?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 128.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1980,6 +2040,12 @@
       "desconto_medio": 44,
       "maior_desconto": 52
     },
+    "monitores": {
+      "total": 4,
+      "score_medio": 82,
+      "desconto_medio": 50,
+      "maior_desconto": 60
+    },
     "moda": {
       "total": 4,
       "score_medio": 75,
@@ -2017,6 +2083,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-06-30T01:39:18.395031",
-  "total": 135
+  "updated_at": "2026-06-30T02:33:49.847834",
+  "total": 139
 }
