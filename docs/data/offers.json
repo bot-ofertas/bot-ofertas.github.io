@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Álbum Copa Do Mundo 26 Dourado Ouro Oficial + 140 Figurinha",
+      "preco": 199.99,
+      "preco_original": 819.0,
+      "desconto_pct": 75.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_923414-MLB110550719764_052026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 75,
+      "enviado_em": "2026-06-30T06:41:00.663241",
+      "link": "https://www.mercadolivre.com.br/album-copa-do-mundo-26-dourado-ouro-oficial--140-figurinha/up/MLBU3951121111?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 199.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Album Capa Dura Ouro + 70 Figurinhas Kit Copa Do Mundo 2026 Capa Ouro C/ 10 Envelopes",
+      "preco": 96.9,
+      "preco_original": 300.0,
+      "desconto_pct": 67.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_908756-MLB111505411293_052026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 71,
+      "enviado_em": "2026-06-30T06:40:53.891336",
+      "link": "https://www.mercadolivre.com.br/album-capa-dura-ouro--70-figurinhas-kit-copa-do-mundo-2026/up/MLBU3987215957?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 96.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+      "preco": 599.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 95,
+      "enviado_em": "2026-06-30T06:40:47.081534",
+      "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 599.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit C/ 36 Envelopes (252 Cromos) - Copa Do Mundo Fifa 2026 Copa Do Mundo Fifa 2026",
+      "preco": 211.84,
+      "preco_original": 479.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_693436-MLB109274954182_042026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 85,
+      "enviado_em": "2026-06-30T06:40:40.273878",
+      "link": "https://www.mercadolivre.com.br/kit-c-36-envelopes-252-cromos--copa-do-mundo-fifa-2026/up/MLBU3881327409?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 211.84,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Samsung Galaxy A06 5g Dual Sim 128gb Preto",
       "preco": 638.82,
       "preco_original": 989.0,
@@ -753,7 +813,7 @@
       "link": "https://www.mercadolivre.com.br/kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini/up/MLBU3896643809?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 67.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -768,7 +828,7 @@
       "link": "https://www.mercadolivre.com.br/kit-c-100-envelopes-3o-lote-700-cromos-copa-do-mundo-2026/up/MLBU3881305329?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 591.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -783,7 +843,7 @@
       "link": "https://www.mercadolivre.com.br/kit-com-10-envelopes-3o-lote-70-cromos-copa-do-mundo-fifa-26/up/MLBU3892342728?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 65.06,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1959,17 +2019,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Máquina Singer Facilita Pro 4423 Zig Zag 23 Pontos Decorativos Portatil Cinza 127v",
-    "preco": 1349.0,
-    "preco_original": 2833.0,
-    "desconto_pct": 52.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_644742-MLA99455776856_112025-AB.webp",
-    "categoria": "moveis",
+    "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+    "preco": 599.9,
+    "preco_original": 1299.0,
+    "desconto_pct": 53.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+    "categoria": "brinquedos",
     "score": 95,
-    "enviado_em": "2026-06-29T21:00:17.646277",
-    "link": "https://www.mercadolivre.com.br/maquina-singer-facilita-pro-4423-zig-zag-23-pontos-decorativos-portatil/p/MLB16323394?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-06-30T06:40:47.081534",
+    "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1349.0,
+    "menor_preco_30d": 599.9,
     "menor_periodo": false,
     "verificada": true
   },
@@ -2003,6 +2063,12 @@
       "score_medio": 74,
       "desconto_medio": 44,
       "maior_desconto": 56
+    },
+    "brinquedos": {
+      "total": 8,
+      "score_medio": 83,
+      "desconto_medio": 54,
+      "maior_desconto": 75
     },
     "beleza": {
       "total": 8,
@@ -2064,12 +2130,6 @@
       "desconto_medio": 44,
       "maior_desconto": 62
     },
-    "brinquedos": {
-      "total": 4,
-      "score_medio": 85,
-      "desconto_medio": 45,
-      "maior_desconto": 51
-    },
     "automotivo": {
       "total": 4,
       "score_medio": 81,
@@ -2083,6 +2143,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-06-30T02:33:49.847834",
-  "total": 139
+  "updated_at": "2026-06-30T06:43:56.320040",
+  "total": 143
 }
