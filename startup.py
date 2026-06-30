@@ -28,9 +28,36 @@ def ja_rodando() -> bool:
     return False
 
 
+def _achar_chrome() -> str:
+    for c in (r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"):
+        if os.path.exists(c):
+            return c
+    return "chrome.exe"
+
+
+def abrir_chrome_bot():
+    """Abre o Chrome dedicado do bot (perfil próprio + porta de depuração 9222).
+
+    Janela própria, separada do Chrome do usuário. Fica logada no WhatsApp Web e
+    é controlada em segundo plano via CDP. --window-position joga para um canto.
+    """
+    perfil = os.path.join(BASE, "data", "chrome_bot")
+    chrome = _achar_chrome()
+    subprocess.Popen([
+        chrome,
+        f"--user-data-dir={perfil}",
+        "--remote-debugging-port=9222",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--window-position=2000,2000",
+        "--window-size=420,640",
+        "https://web.whatsapp.com",
+    ])
+    time.sleep(12)
+
+
 def iniciar_rastreador():
-    # O WhatsApp roda em navegador headless próprio (whatsapp_playwright) — não
-    # precisa abrir o Chrome do usuário nem atrapalhar o uso do PC.
     cmd = f'cmd /c python "{os.path.join(BASE, "rastreador.py")}" --loop 20 >> "{LOG}" 2>&1'
     proc = subprocess.Popen(cmd, shell=True, cwd=BASE)
     with open(PID, "w") as f:
@@ -42,5 +69,6 @@ if __name__ == "__main__":
     if ja_rodando():
         print("Rastreador já está em execução — não iniciando duplicata.")
     else:
+        abrir_chrome_bot()
         proc = iniciar_rastreador()
         proc.wait()

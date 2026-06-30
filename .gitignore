@@ -17,10 +17,13 @@ data/teste_completo.log
 
 # Sessão do WhatsApp (CREDENCIAIS — nunca subir)
 data/wa_profile/
+data/chrome_bot/
 data/qr.png
 data/qr_b64.txt
 data/wa_status.txt
 data/wa_foto_*.jpg
+data/wa_verify*.png
+data/preview_foto.png
 data/setup_wa.log
 data/pw_err.log
 data/pw_test.log
