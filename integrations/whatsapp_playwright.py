@@ -152,14 +152,36 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
         return False
 
 
+def _setup_em_andamento() -> bool:
+    """True se o login por QR estiver rodando (segura o perfil do WhatsApp).
+
+    Evita que o rastreador e o setup disputem o mesmo perfil ao mesmo tempo.
+    """
+    status_path = os.path.join(_BASE, "data", "wa_status.txt")
+    try:
+        with open(status_path, encoding="utf-8") as f:
+            s = f.read().strip()
+        return s in ("INICIANDO", "QR")
+    except OSError:
+        return False
+
+
 async def enviar_whatsapp_bg(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
     """Envia uma oferta ao grupo em segundo plano (headless, sem mexer no PC).
 
     Retorna True se enviou. Se a sessão não estiver logada, retorna False e avisa
     para o usuário escanear o QR (python setup_whatsapp_qr.py + data/qr.html).
     """
+    if _setup_em_andamento():
+        log.info("Login do WhatsApp por QR em andamento — pulando envio nesta rodada (Telegram segue normal).")
+        return False
+
     try:
-        page = await _abrir_contexto()
+        page = await asyncio.wait_for(_abrir_contexto(), timeout=45)
+    except asyncio.TimeoutError:
+        log.warning("Abertura do WhatsApp headless excedeu o tempo (perfil ocupado?). Pulando.")
+        await fechar_whatsapp()
+        return False
     except Exception as e:
         log.warning("Não foi possível abrir o navegador headless do WhatsApp: %s", e)
         return False
