@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 220v",
+      "preco": 500.12,
+      "preco_original": 689.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821650-MLA99991748727_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 64,
+      "enviado_em": "2026-06-30T12:11:38.745611",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-teclas-faceis-limpa-facil-1400w-pm36-220v/p/MLB44898096?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 500.12,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fogão 5 Bocas Atlas Atenas Glass A Gás Com Mesa De Vidro E Mega Chama Preto Bivolt 127/220v",
+      "preco": 1116.0,
+      "preco_original": 1859.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604920-MLA109320873306_042026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 89,
+      "enviado_em": "2026-06-30T12:11:31.948016",
+      "link": "https://www.mercadolivre.com.br/fogo-5-bocas-atlas-atenas-glass-a-gas-com-mesa-de-vidro-e-mega-chama-preto-bivolt/p/MLB18612048?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1116.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 5 Bocas A Gás Atlas Agile Up Mega Chama Preto 127/220v",
+      "preco": 386.91,
+      "preco_original": 602.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861641-MLA100053796807_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 73,
+      "enviado_em": "2026-06-30T12:11:25.216825",
+      "link": "https://www.mercadolivre.com.br/cooktop-5-bocas-a-gas-atlas-agile-up-mega-chama-preto/p/MLB50829128?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 386.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas A Gás Itatiaia Itamega Preto Bivolt 127/220v",
+      "preco": 341.9,
+      "preco_original": 589.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716130-MLA109054205360_032026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 79,
+      "enviado_em": "2026-06-30T12:11:18.132563",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-a-gas-itatiaia-itamega-preto-bivolt/p/MLB67473936?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 341.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Álbum Copa Do Mundo 26 Dourado Ouro Oficial + 140 Figurinha",
       "preco": 199.99,
       "preco_original": 819.0,
@@ -371,8 +431,8 @@
       "enviado_em": "2026-06-29T19:18:16.040295",
       "link": "https://www.mercadolivre.com.br/fogo-5-bocas-dako-magister-style-com-frente-espelhada-mesa-de-vidro-e-tripla-chama-bivolt/p/MLB18636583?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 1669.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 1586.0,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -707,7 +767,7 @@
       "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-atlas-agile-up-mesa-vidro-mega-chama-bivolt/p/MLB46671029?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 317.81,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -933,7 +993,7 @@
       "link": "https://www.mercadolivre.com.br/cooktop-de-induco-4-bocas-dako-supreme-preto-com-trava-de-seguranca-220v/p/MLB19481428?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1075.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2088,6 +2148,12 @@
       "desconto_medio": 40,
       "maior_desconto": 61
     },
+    "eletrodomesticos": {
+      "total": 6,
+      "score_medio": 78,
+      "desconto_medio": 35,
+      "maior_desconto": 43
+    },
     "saude": {
       "total": 4,
       "score_medio": 68,
@@ -2135,14 +2201,8 @@
       "score_medio": 81,
       "desconto_medio": 39,
       "maior_desconto": 42
-    },
-    "eletrodomesticos": {
-      "total": 2,
-      "score_medio": 81,
-      "desconto_medio": 35,
-      "maior_desconto": 43
     }
   },
-  "updated_at": "2026-06-30T06:43:56.320040",
-  "total": 143
+  "updated_at": "2026-06-30T12:14:33.870353",
+  "total": 147
 }
