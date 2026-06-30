@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cama Elástica Pula Pula Infantil Trampolim 1,4 Metros Atentu",
+      "preco": 246.9,
+      "preco_original": 659.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_917104-MLA96155675715_102025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 79,
+      "enviado_em": "2026-06-30T19:11:58.384359",
+      "link": "https://www.mercadolivre.com.br/cama-elastica-pula-pula-infantil-trampolim-14-metros-atentu/p/MLB28717101?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 246.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cama Elástica Infantil Justfun 1,8 M Colorida Com Rede De Proteção Para 100 Kg",
+      "preco": 370.64,
+      "preco_original": 689.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_719790-MLA95699862540_102025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 87,
+      "enviado_em": "2026-06-30T19:11:51.789619",
+      "link": "https://www.mercadolivre.com.br/cama-elastica-infantil-justfun-18-m-colorida-com-rede-de-proteco-para-100-kg/p/MLB19728496?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 370.64,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Infantil Nathor Aro 12 Menino Veloz De 2 A 5 Anos Cor Azul",
+      "preco": 221.99,
+      "preco_original": 348.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716102-MLU77395555059_072024-AB.webp",
+      "categoria": "brinquedos",
+      "score": 76,
+      "enviado_em": "2026-06-30T19:11:44.344348",
+      "link": "https://www.mercadolivre.com.br/bicicleta-infantil-nathor-aro-12-menino-veloz-de-2-a-5-anos-cor-azul/p/MLB13136817?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 221.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Infantil Menina 2 A 4 Anos Aro 12 Disney Minnie Rosa/violeta 12",
+      "preco": 249.68,
+      "preco_original": 449.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_603536-MLB110856634147_042026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 82,
+      "enviado_em": "2026-06-30T19:11:37.745582",
+      "link": "https://www.mercadolivre.com.br/bicicleta-infantil-menina-2-a-4-anos-aro-12-disney-minnie/up/MLBU3159355918?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 249.68,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Ar Condicionado LG Ai Smart Inverter Voice 9000 Btus Frio Branco 220v",
       "preco": 1709.0,
       "preco_original": 2479.0,
@@ -2233,6 +2293,12 @@
       "desconto_medio": 39,
       "maior_desconto": 71
     },
+    "brinquedos": {
+      "total": 12,
+      "score_medio": 82,
+      "desconto_medio": 52,
+      "maior_desconto": 75
+    },
     "bebes": {
       "total": 12,
       "score_medio": 78,
@@ -2256,12 +2322,6 @@
       "score_medio": 74,
       "desconto_medio": 44,
       "maior_desconto": 56
-    },
-    "brinquedos": {
-      "total": 8,
-      "score_medio": 83,
-      "desconto_medio": 54,
-      "maior_desconto": 75
     },
     "beleza": {
       "total": 8,
@@ -2324,6 +2384,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-06-30T17:09:25.499354",
-  "total": 155
+  "updated_at": "2026-06-30T19:14:52.514103",
+  "total": 159
 }
