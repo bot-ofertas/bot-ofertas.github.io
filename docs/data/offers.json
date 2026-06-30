@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Estabilizador Celular Gimbal Com Tripé 3 Eixos Suport Câmera",
+      "preco": 390.09,
+      "preco_original": 599.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_974342-MLB109299038714_042026-AB-estabilizador-celular-gimbal-com-tripe-3-eixos-suport-cmera.webp",
+      "categoria": "ferramentas",
+      "score": 72,
+      "enviado_em": "2026-06-30T14:46:59.881901",
+      "link": "https://produto.mercadolivre.com.br/MLB-5981245518-estabilizador-celular-gimbal-com-tripe-3-eixos-suport-cmera-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 390.09,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Camera Digital 4k Compacta Hd Zoom 16x C/ Vídeo 1080p Áudio Prata",
+      "preco": 100.15,
+      "preco_original": 249.0,
+      "desconto_pct": 59.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_867748-MLB111660531811_052026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 75,
+      "enviado_em": "2026-06-30T14:46:52.540284",
+      "link": "https://www.mercadolivre.com.br/camera-digital-4k-compacta-hd-zoom-16x-c-video-1080p-audio/up/MLBU3767188562?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 100.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Binóculo Visão Noturna Monocular R19 Infravermelho Integrado",
+      "preco": 247.88,
+      "preco_original": 499.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_640458-MLB110967077228_052026-AB-binoculo-viso-noturna-monocular-r19-infravermelho-integrado.webp",
+      "categoria": "ferramentas",
+      "score": 80,
+      "enviado_em": "2026-06-30T14:46:45.720252",
+      "cupom": "Cupom R$2 OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-4694812961-binoculo-viso-noturna-monocular-r19-infravermelho-integrado-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 247.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cartão Memória Microsd Tf 128gb Original De Câmera Segurança Cartao 128gb Para Camera Segurança",
+      "preco": 173.85,
+      "preco_original": 300.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_952732-MLB104390559607_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 75,
+      "enviado_em": "2026-06-30T14:46:38.387903",
+      "link": "https://www.mercadolivre.com.br/cartao-memoria-microsd-tf-128gb-original-de-camera-seguranca/up/MLBU753882916?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 173.85,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 220v",
       "preco": 500.12,
       "preco_original": 689.0,
@@ -2118,6 +2179,12 @@
       "desconto_medio": 42,
       "maior_desconto": 56
     },
+    "ferramentas": {
+      "total": 8,
+      "score_medio": 72,
+      "desconto_medio": 45,
+      "maior_desconto": 62
+    },
     "esportes": {
       "total": 8,
       "score_medio": 74,
@@ -2190,12 +2257,6 @@
       "desconto_medio": 32,
       "maior_desconto": 42
     },
-    "ferramentas": {
-      "total": 4,
-      "score_medio": 69,
-      "desconto_medio": 44,
-      "maior_desconto": 62
-    },
     "automotivo": {
       "total": 4,
       "score_medio": 81,
@@ -2203,6 +2264,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-06-30T12:14:33.870353",
-  "total": 147
+  "updated_at": "2026-06-30T14:48:55.247974",
+  "total": 151
 }
