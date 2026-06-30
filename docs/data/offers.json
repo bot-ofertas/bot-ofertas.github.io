@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 789.21,
+      "preco_original": 1599.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-30T21:10:05.505076",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 789.21,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
+      "preco": 1316.0,
+      "preco_original": 2212.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705075-MLA99943632917_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-30T21:09:58.693203",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1316.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G35 5g - 256gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai Nfc Tela 6.7 Com Superbrilho - Coral - Vegan Leather",
+      "preco": 899.1,
+      "preco_original": 1899.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_637143-MLA100031537749_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-06-30T21:09:51.863665",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g35-5g-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-nfc-tela-67-com-superbrilho-coral-vegan-leather/p/MLB41540860?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 899.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 736.1,
+      "preco_original": 1849.0,
+      "desconto_pct": 60.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 78,
+      "enviado_em": "2026-06-30T21:09:44.994574",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 734.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cama Elástica Pula Pula Infantil Trampolim 1,4 Metros Atentu",
       "preco": 246.9,
       "preco_original": 659.0,
@@ -2281,17 +2341,17 @@
       "desconto_medio": 43,
       "maior_desconto": 60
     },
+    "celulares": {
+      "total": 23,
+      "score_medio": 74,
+      "desconto_medio": 41,
+      "maior_desconto": 71
+    },
     "informatica": {
       "total": 20,
       "score_medio": 73,
       "desconto_medio": 34,
       "maior_desconto": 74
-    },
-    "celulares": {
-      "total": 19,
-      "score_medio": 71,
-      "desconto_medio": 39,
-      "maior_desconto": 71
     },
     "brinquedos": {
       "total": 12,
@@ -2384,6 +2444,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-06-30T19:14:52.514103",
-  "total": 159
+  "updated_at": "2026-06-30T21:11:30.463249",
+  "total": 163
 }
