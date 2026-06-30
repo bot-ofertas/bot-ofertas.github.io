@@ -336,6 +336,13 @@ async def rodar_uma_vez() -> None:
     )
     log(f"⏱️  Tempo total: {time.time() - t_inicio:.1f}s")
 
+    # Fecha o navegador do WhatsApp (libera o event loop desta rodada)
+    try:
+        from integrations.whatsapp_playwright import fechar_whatsapp
+        await fechar_whatsapp()
+    except Exception:
+        pass
+
     # Monitoramento (alerta se muitos erros)
     try:
         if contadores["erros"] > 5:

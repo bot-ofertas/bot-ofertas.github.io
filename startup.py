@@ -28,13 +28,9 @@ def ja_rodando() -> bool:
     return False
 
 
-def abrir_whatsapp_web():
-    subprocess.Popen("chrome.exe --new-window https://web.whatsapp.com", shell=True)
-    time.sleep(10)  # aguarda WhatsApp Web carregar completamente
-
-
 def iniciar_rastreador():
-    # cmd /c redireciona stdout+stderr para o log
+    # O WhatsApp roda em navegador headless próprio (whatsapp_playwright) — não
+    # precisa abrir o Chrome do usuário nem atrapalhar o uso do PC.
     cmd = f'cmd /c python "{os.path.join(BASE, "rastreador.py")}" --loop 20 >> "{LOG}" 2>&1'
     proc = subprocess.Popen(cmd, shell=True, cwd=BASE)
     with open(PID, "w") as f:
@@ -46,6 +42,5 @@ if __name__ == "__main__":
     if ja_rodando():
         print("Rastreador já está em execução — não iniciando duplicata.")
     else:
-        abrir_whatsapp_web()
         proc = iniciar_rastreador()
         proc.wait()

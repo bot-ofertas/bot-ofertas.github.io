@@ -85,16 +85,20 @@ def share_url(produto: dict) -> str:
 
 
 async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None) -> bool:
-    """Tenta enviar para o grupo WhatsApp configurado.
+    """Envia para o grupo WhatsApp configurado.
 
-    Usa mensagem_override se fornecida (conteúdo gerado por IA), caso contrário
-    monta a mensagem padrão. Tenta Evolution API primeiro, cai para pyautogui.
+    Ordem de tentativa:
+      1. Evolution API (se configurada) — headless, ideal para servidor.
+      2. Playwright em SEGUNDO PLANO — método padrão local. NÃO mexe no
+         mouse/teclado físicos nem rouba o foco; o usuário usa o PC normalmente.
+      3. pyautogui — apenas se WHATSAPP_PYAUTOGUI_FALLBACK=1 (atrapalha a tela).
     """
     group_id = _group_id()
     if not group_id:
         return False
 
     mensagem = mensagem_override or montar_mensagem_wa(produto)
+    foto_url = produto.get("foto") or produto.get("imagem") or ""
 
     webhook_url = os.getenv("WHATSAPP_WEBHOOK_URL", "")
     wa_api_key  = os.getenv("WHATSAPP_API_KEY", "")
@@ -117,12 +121,29 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         except Exception as e:
             log.warning("Evolution API falhou: %s", e)
 
-    # ── Tentativa 2: pyautogui (requer WhatsApp Web aberto no Chrome) ────────
     if os.getenv("GITHUB_ACTIONS"):
-        log.debug("pyautogui ignorado em GitHub Actions (sem display)")
+        log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
         return False
-    foto_url = produto.get("foto") or produto.get("imagem") or ""
-    return _enviar_via_pyautogui(mensagem, foto_url)
+
+    # ── Tentativa 2: Playwright em segundo plano (PADRÃO, não atrapalha o PC) ──
+    try:
+        from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
+        nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
+        caminho = _baixar_foto(foto_url) if foto_url else ""
+        ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
+        _limpar_fotos_antigas()
+        if ok:
+            return True
+        log.info("WhatsApp em segundo plano não enviou (sessão pode não estar logada).")
+    except Exception as e:
+        log.warning("WhatsApp Playwright falhou: %s", e)
+
+    # ── Tentativa 3: pyautogui — só se explicitamente habilitado (usa a tela) ──
+    if os.getenv("WHATSAPP_PYAUTOGUI_FALLBACK", "0") == "1":
+        log.info("Usando fallback pyautogui (atrapalha a digitação).")
+        return _enviar_via_pyautogui(mensagem, foto_url)
+
+    return False
 
 
 def _baixar_foto(foto_url: str) -> str:
