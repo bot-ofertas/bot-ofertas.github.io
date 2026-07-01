@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Monitor Gamer LG Ultragear 27 Ips, 180hz, 1ms (gtg), Nvidia G-sync , Amd Freesync, Hdr10, Srgb 99% - 27gs60f-b Preto 127/220v",
+      "preco": 1088.0,
+      "preco_original": 1476.0,
+      "desconto_pct": 26.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_761900-MLA99509379216_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 71,
+      "enviado_em": "2026-07-01T21:12:12.628039",
+      "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-ultragear-27-ips-180hz-1ms-gtg-nvidia-g-sync-amd-freesync-hdr10-srgb-99-27gs60f-b/p/MLB44317631?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1088.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Colchão Emma Queen - Tecnologia Alemã Cor Branco/cinza",
+      "preco": 2213.0,
+      "preco_original": 5909.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_734791-MLA107665706897_022026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 78,
+      "enviado_em": "2026-07-01T21:12:05.989681",
+      "link": "https://www.mercadolivre.com.br/colcho-emma-queen-tecnologia-alem-cor-brancocinza/p/MLB17351734?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2213.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Omega Plus 240 Caps Dark Lab Sem Sabor",
+      "preco": 179.9,
+      "preco_original": 599.0,
+      "desconto_pct": 70.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767057-MLA108660577007_032026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 69,
+      "enviado_em": "2026-07-01T21:11:59.342147",
+      "cupom": "Cupom R$80 OFF",
+      "link": "https://www.mercadolivre.com.br/omega-plus-240-caps-dark-lab/p/MLB66597831?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Relógio Tommy Hilfiger Masculino Aço Prateado 1710671 Prateado Preto",
+      "preco": 470.0,
+      "preco_original": 990.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767847-MLB111623676968_062026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 90,
+      "enviado_em": "2026-07-01T21:11:52.510810",
+      "cupom": "Cupom 20% OFF",
+      "link": "https://www.mercadolivre.com.br/relogio-tommy-hilfiger-masculino-aco-prateado-1710671/up/MLBU4052258844?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 470.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Positivo Vision I15m Com Minitela, Intel Core 3, 8gb De Ram, Ssd De 256gb E Tela De 15,6  Full Hd Ips Antirreflexo Preto",
       "preco": 2429.0,
       "preco_original": 3570.0,
@@ -1557,6 +1619,12 @@
       "desconto_medio": 39,
       "maior_desconto": 42
     },
+    "armazenamento": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 53,
+      "maior_desconto": 70
+    },
     "games": {
       "total": 3,
       "score_medio": 79,
@@ -1576,6 +1644,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-01T19:25:51.365281",
-  "total": 96
+  "updated_at": "2026-07-01T21:13:38.563450",
+  "total": 100
 }
