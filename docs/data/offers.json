@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Chinelo Havaianas Dual Masculina",
+      "preco": 53.99,
+      "preco_original": 78.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_780756-MLB71803949208_092023-AB-chinelo-havaianas-dual-masculina.webp",
+      "categoria": "moda",
+      "score": 67,
+      "enviado_em": "2026-07-01T06:54:47.281150",
+      "link": "https://produto.mercadolivre.com.br/MLB-4057042938-chinelo-havaianas-dual-masculina-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 53.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 6 Cuecas Lupo Boxer Box Sem Costura Basic Microfibra",
+      "preco": 139.19,
+      "preco_original": 288.0,
+      "desconto_pct": 51.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_738813-MLB83279416363_032025-AB-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra.webp",
+      "categoria": "moda",
+      "score": 87,
+      "enviado_em": "2026-07-01T06:54:40.586242",
+      "link": "https://produto.mercadolivre.com.br/MLB-1010954920-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 139.19,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 6 Pares Meia Cano Médio Alto Unissex Algodão Polo Fit",
+      "preco": 33.15,
+      "preco_original": 54.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_854672-MLB100380099112_122025-AB-kit-6-pares-meia-cano-medio-alto-unissex-algodo-polo-fit.webp",
+      "categoria": "moda",
+      "score": 80,
+      "enviado_em": "2026-07-01T06:54:33.870224",
+      "link": "https://produto.mercadolivre.com.br/MLB-4341521443-kit-6-pares-meia-cano-medio-alto-unissex-algodo-polo-fit-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 6 Cuecas Masculinas Boxer Variadas Alta Qualidade Aaa",
+      "preco": 37.51,
+      "preco_original": 59.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_965180-MLB95166690302_102025-AB-kit-6-cuecas-masculinas-boxer-variadas-alta-qualidade-aaa.webp",
+      "categoria": "moda",
+      "score": 78,
+      "enviado_em": "2026-07-01T06:54:27.222897",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-5089419598-kit-6-cuecas-masculinas-boxer-variadas-alta-qualidade-aaa-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 37.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
       "preco": 89.9,
       "preco_original": 297.0,
@@ -1149,31 +1210,31 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
-    "preco": 599.9,
-    "preco_original": 1299.0,
-    "desconto_pct": 53.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
-    "categoria": "brinquedos",
-    "score": 95,
-    "enviado_em": "2026-06-30T06:40:47.081534",
-    "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8mp + Ia, Tela 6.67 Hd+ 120hz, Bateria 5000mah, Processador T7250, Android 15 Go, Dual Chip - Preto",
+    "preco": 604.35,
+    "preco_original": 1458.0,
+    "desconto_pct": 58.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_964227-MLA100071062557_122025-AB.webp",
+    "categoria": "celulares",
+    "score": 90,
+    "enviado_em": "2026-07-01T00:07:06.070512",
+    "link": "https://www.mercadolivre.com.br/smartphone-infinix-smart-10-4gb-ram-256gb-ssd-cmera-8mp-ia-tela-667-hd-120hz-bateria-5000mah-processador-t7250-android-15-go-dual-chip-preto/p/MLB56327005?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 599.9,
+    "menor_preco_30d": 604.35,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "moda": {
+      "total": 12,
+      "score_medio": 79,
+      "desconto_medio": 50,
+      "maior_desconto": 75
+    },
     "brinquedos": {
       "total": 12,
       "score_medio": 81,
       "desconto_medio": 50,
-      "maior_desconto": 75
-    },
-    "moda": {
-      "total": 8,
-      "score_medio": 80,
-      "desconto_medio": 55,
       "maior_desconto": 75
     },
     "ferramentas": {
@@ -1249,6 +1310,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-01T02:38:23.157643",
-  "total": 76
+  "updated_at": "2026-07-01T06:57:10.996079",
+  "total": 80
 }
