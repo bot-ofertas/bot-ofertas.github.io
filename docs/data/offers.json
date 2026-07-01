@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 75.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-01T15:24:23.730428",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sabor",
+      "preco": 59.9,
+      "preco_original": 159.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 63,
+      "enviado_em": "2026-07-01T15:24:16.696414",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café Preto",
+      "preco": 51.96,
+      "preco_original": 75.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658148-MLB89993492671_082025-AB.webp",
+      "categoria": "esportes",
+      "score": 62,
+      "enviado_em": "2026-07-01T15:24:07.596608",
+      "link": "https://www.mercadolivre.com.br/garrafa-termica-1-litro-com-termometro-led-para-chas--cafe/up/MLBU1755921090?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 51.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Aro 29 Aço Carbono Freios A Disco Suspensão 21 Vel",
+      "preco": 573.18,
+      "preco_original": 899.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_872071-MLB91746760832_092025-AB-bicicleta-aro-29-aco-carbono-freios-a-disco-suspenso-21-vel.webp",
+      "categoria": "esportes",
+      "score": 81,
+      "enviado_em": "2026-07-01T15:24:00.796167",
+      "link": "https://produto.mercadolivre.com.br/MLB-4226793452-bicicleta-aro-29-aco-carbono-freios-a-disco-suspenso-21-vel-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 573.18,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio Wi-fi Hdr10 110/220v",
       "preco": 1994.0,
       "preco_original": 3499.0,
@@ -1345,6 +1407,12 @@
       "desconto_medio": 39,
       "maior_desconto": 46
     },
+    "esportes": {
+      "total": 4,
+      "score_medio": 68,
+      "desconto_medio": 51,
+      "maior_desconto": 75
+    },
     "eletronicos": {
       "total": 4,
       "score_medio": 86,
@@ -1376,6 +1444,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-01T12:38:24.988070",
-  "total": 84
+  "updated_at": "2026-07-01T15:26:49.079296",
+  "total": 88
 }
