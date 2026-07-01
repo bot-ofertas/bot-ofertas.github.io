@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Positivo Vision I15m Com Minitela, Intel Core 3, 8gb De Ram, Ssd De 256gb E Tela De 15,6  Full Hd Ips Antirreflexo Preto",
+      "preco": 2429.0,
+      "preco_original": 3570.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_817115-MLA99156919548_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 81,
+      "enviado_em": "2026-07-01T19:23:57.348227",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-i15m-com-minitela-intel-core-3-8gb-de-ram-ssd-de-256gb-e-tela-de-156-full-hd-ips-antirreflexo/p/MLB56961557?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2429.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Multi Ultra Celeron N4020c 4gb 128gb W11 14'' Cinza",
+      "preco": 1579.0,
+      "preco_original": 2064.0,
+      "desconto_pct": 23.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_898360-MLA99980257507_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 72,
+      "enviado_em": "2026-07-01T19:23:50.654968",
+      "link": "https://www.mercadolivre.com.br/notebook-multi-ultra-celeron-n4020c-4gb-128gb-w11-14-cinza/p/MLB32101651?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1579.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Lenovo Ideapad Slim 3 83mms00100 512gb 8gb + Ebook",
+      "preco": 3699.0,
+      "preco_original": 4754.0,
+      "desconto_pct": 22.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_611758-MLB100386637021_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 72,
+      "enviado_em": "2026-07-01T19:23:43.946905",
+      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-83mms00100-512gb-8gb--ebook/up/MLBU3607212552?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3699.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Aspire 5 A515-45-r2a3 Amd Ryzen 5 Windows 11 Home 8gb 512gb Ssd 15,6' Full Hd Gamut",
+      "preco": 3672.0,
+      "preco_original": 5609.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759351-MLU77118311686_062024-AB.webp",
+      "categoria": "notebooks",
+      "score": 84,
+      "enviado_em": "2026-07-01T19:23:37.247521",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3580.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Headset Gamer Redragon H510-pro Zeus Rgb Wireless 7.1 53mm Preto",
       "preco": 299.25,
       "preco_original": 489.0,
@@ -1173,7 +1233,7 @@
       "link": "https://www.mercadolivre.com.br/notebook-hp-256r-g9-intel-core-i5-1334u-156-hd-intel-uhd-256gb-ssd-16gb-ram-windows-11-home-64-pls-sl-bq9l2atak4/p/MLB52351863?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 3839.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1419,6 +1479,12 @@
       "desconto_medio": 50,
       "maior_desconto": 75
     },
+    "notebooks": {
+      "total": 8,
+      "score_medio": 80,
+      "desconto_medio": 32,
+      "maior_desconto": 49
+    },
     "ferramentas": {
       "total": 8,
       "score_medio": 72,
@@ -1442,12 +1508,6 @@
       "score_medio": 68,
       "desconto_medio": 38,
       "maior_desconto": 50
-    },
-    "notebooks": {
-      "total": 4,
-      "score_medio": 84,
-      "desconto_medio": 36,
-      "maior_desconto": 49
     },
     "moveis": {
       "total": 4,
@@ -1516,6 +1576,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-01T17:35:33.166029",
-  "total": 92
+  "updated_at": "2026-07-01T19:25:51.365281",
+  "total": 96
 }
