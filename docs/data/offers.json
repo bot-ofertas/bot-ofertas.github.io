@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio Wi-fi Hdr10 110/220v",
+      "preco": 1994.0,
+      "preco_original": 3499.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753324-MLA108743670040_032026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-01T12:35:29.256493",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-50-p50vik-4k-uhd-led-roku-dolby-audio-wi-fi-hdr10-110220v/p/MLB67267597?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1994.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1399.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-01T12:35:22.342815",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Android 11 Hy320 4k Bluetooth Smart Cinema Em Casa Cor Preto 127/220v",
+      "preco": 263.8,
+      "preco_original": 699.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_614142-MLA95239230374_102025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 75,
+      "enviado_em": "2026-07-01T12:35:15.529011",
+      "link": "https://www.mercadolivre.com.br/projetor-android-11-hy320-4k-bluetooth-smart-cinema-em-casa-cor-preto/p/MLB49782891?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 206.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processador 7 Ai Ger8 Webos 25",
+      "preco": 2252.0,
+      "preco_original": 5000.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_884169-MLA106908124660_022026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-01T12:35:08.679538",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-50-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53201474?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2252.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Chinelo Havaianas Dual Masculina",
       "preco": 53.99,
       "preco_original": 78.0,
@@ -1285,6 +1345,12 @@
       "desconto_medio": 39,
       "maior_desconto": 46
     },
+    "eletronicos": {
+      "total": 4,
+      "score_medio": 86,
+      "desconto_medio": 51,
+      "maior_desconto": 62
+    },
     "beleza": {
       "total": 4,
       "score_medio": 81,
@@ -1310,6 +1376,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-01T06:57:10.996079",
-  "total": 80
+  "updated_at": "2026-07-01T12:38:24.988070",
+  "total": 84
 }
