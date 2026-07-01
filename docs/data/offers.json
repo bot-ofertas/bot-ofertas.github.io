@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Headset Gamer Redragon H510-pro Zeus Rgb Wireless 7.1 53mm Preto",
+      "preco": 299.25,
+      "preco_original": 489.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_797324-MLA95633278998_102025-AB.webp",
+      "categoria": "games",
+      "score": 75,
+      "enviado_em": "2026-07-01T17:33:36.427119",
+      "link": "https://www.mercadolivre.com.br/headset-gamer-redragon-h510-pro-zeus-rgb-wireless-71-53mm-preto/p/MLB35061904?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 299.25,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ghost Of Yotei Ps5 Br Midia Fisica",
+      "preco": 251.0,
+      "preco_original": 470.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675861-MLB98172243122_112025-AB.webp",
+      "categoria": "games",
+      "score": 73,
+      "enviado_em": "2026-07-01T17:33:29.775712",
+      "link": "https://www.mercadolivre.com.br/ghost-of-yotei-ps5-br-midia-fisica/up/MLBU3571302942?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 251.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Playstation Vr2 Sony Para Ps5 Headset Realidade Virtual Branco",
+      "preco": 2198.0,
+      "preco_original": 5195.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_885321-MLA99456388372_112025-AB.webp",
+      "categoria": "games",
+      "score": 90,
+      "enviado_em": "2026-07-01T17:33:23.028641",
+      "link": "https://www.mercadolivre.com.br/playstation-vr2-sony-para-ps5-headset-realidade-virtual-branco/p/MLB22534557?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2198.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira E Adubadeira Manual Foowei Agrícola Para Grãos, Com 14 Bicos De Aço Inoxidável",
+      "preco": 749.0,
+      "preco_original": 1699.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_991055-MLA110390416970_052026-AB.webp",
+      "categoria": "pet",
+      "score": 90,
+      "enviado_em": "2026-07-01T17:33:13.956048",
+      "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-foowei-agricola-para-gros-com-14-bicos-de-aco-inoxidavel/p/MLB67329688?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 749.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
       "preco": 59.9,
       "preco_original": 239.0,
@@ -1437,13 +1497,25 @@
       "desconto_medio": 39,
       "maior_desconto": 42
     },
+    "games": {
+      "total": 3,
+      "score_medio": 79,
+      "desconto_medio": 47,
+      "maior_desconto": 57
+    },
     "informatica": {
       "total": 2,
       "score_medio": 78,
       "desconto_medio": 38,
       "maior_desconto": 46
+    },
+    "pet": {
+      "total": 1,
+      "score_medio": 90,
+      "desconto_medio": 55,
+      "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-01T15:26:49.079296",
-  "total": 88
+  "updated_at": "2026-07-01T17:35:33.166029",
+  "total": 92
 }
