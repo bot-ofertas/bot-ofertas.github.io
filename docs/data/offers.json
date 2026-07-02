@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Camera Segurança Wifi Yoosee Mini Dome Full Hd Vianova Branco",
+      "preco": 69.9,
+      "preco_original": 139.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_775175-MLA112458093842_062026-AB.webp",
+      "categoria": "monitores",
+      "score": 72,
+      "enviado_em": "2026-07-02T16:26:07.784160",
+      "link": "https://www.mercadolivre.com.br/camera-seguranca-wifi-yoosee-mini-dome-full-hd-vianova-branco/p/MLB54543594?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A36 5g 256gb 8gb Ram Branco",
+      "preco": 1758.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697102-MLA99477666220_112025-AB.webp",
+      "categoria": "monitores",
+      "score": 88,
+      "enviado_em": "2026-07-02T16:26:00.853850",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a36-5g-256gb-8gb-ram-branco/p/MLB47106610?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1758.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Huggies Fralda Pants Roupinha Proteção Acolchoada Xg - 64 Un Extra Grande (xg) Sem Gênero",
+      "preco": 69.66,
+      "preco_original": 114.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_979794-MLA99442042486_112025-AB.webp",
+      "categoria": "monitores",
+      "score": 69,
+      "enviado_em": "2026-07-02T16:25:54.003982",
+      "link": "https://www.mercadolivre.com.br/huggies-fralda-pants-roupinha-proteco-acolchoada-xg-64-un/p/MLB25836673?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.66,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Térmico Impressora Peripage A40 A4 21x30 - 3 Rolos Branco",
+      "preco": 44.58,
+      "preco_original": 118.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_952014-MLB96504394921_102025-AB.webp",
+      "categoria": "tablets",
+      "score": 60,
+      "enviado_em": "2026-07-02T16:25:44.199273",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/papel-termico-impressora-peripage-a40-a4-21x30--3-rolos/up/MLBU797003953?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 44.58,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem Sabor Em Pó",
       "preco": 39.9,
       "preco_original": 64.0,
@@ -1447,17 +1508,17 @@
       "desconto_medio": 45,
       "maior_desconto": 64
     },
+    "monitores": {
+      "total": 7,
+      "score_medio": 79,
+      "desconto_medio": 47,
+      "maior_desconto": 60
+    },
     "notebooks": {
       "total": 4,
       "score_medio": 77,
       "desconto_medio": 28,
       "maior_desconto": 34
-    },
-    "monitores": {
-      "total": 4,
-      "score_medio": 82,
-      "desconto_medio": 50,
-      "maior_desconto": 60
     },
     "ferramentas": {
       "total": 4,
@@ -1489,6 +1550,12 @@
       "desconto_medio": 47,
       "maior_desconto": 57
     },
+    "tablets": {
+      "total": 1,
+      "score_medio": 60,
+      "desconto_medio": 62,
+      "maior_desconto": 62
+    },
     "pet": {
       "total": 1,
       "score_medio": 90,
@@ -1496,6 +1563,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-02T14:34:33.455761",
-  "total": 92
+  "updated_at": "2026-07-02T16:29:04.209251",
+  "total": 96
 }
