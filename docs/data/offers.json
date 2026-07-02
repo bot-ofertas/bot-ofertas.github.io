@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Moldura Paralama Dianteiro Esquerdo Jeep Renegade +presilhas",
+      "preco": 212.0,
+      "preco_original": 357.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_851050-MLB84101329460_052025-AB.webp",
+      "categoria": "automotivo",
+      "score": 72,
+      "enviado_em": "2026-07-02T18:19:38.943568",
+      "link": "https://www.mercadolivre.com.br/moldura-paralama-dianteiro-esquerdo-jeep-renegade-presilhas/up/MLBU3002925014?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 212.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Case Suporte Veícular Teto Carro Externo Starlink Mini Imã88",
+      "preco": 327.0,
+      "preco_original": 799.0,
+      "desconto_pct": 59.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_717569-MLB109283370016_042026-AB-case-suporte-veicular-teto-carro-externo-starlink-mini-im88.webp",
+      "categoria": "automotivo",
+      "score": 85,
+      "enviado_em": "2026-07-02T18:19:32.115239",
+      "link": "https://produto.mercadolivre.com.br/MLB-6085020128-case-suporte-veicular-teto-carro-externo-starlink-mini-im88-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 327.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Carro Infantil Max360 Isofix 36kgs Maxi Baby - Preto",
+      "preco": 748.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_788401-MLU78410200759_082024-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-02T18:19:25.156532",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-max360-isofix-36kgs-maxi-baby-preto/p/MLB26415897?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 681.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeirinha Cosco Kids, Evolutty 360 X 0 A 36kg Com Isofix Preto",
+      "preco": 779.9,
+      "preco_original": 1099.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_625519-MLA99497207940_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 68,
+      "enviado_em": "2026-07-02T18:19:18.302545",
+      "link": "https://www.mercadolivre.com.br/cadeirinha-cosco-kids-evolutty-360-x-0-a-36kg-com-isofix-preto/p/MLB26821494?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 779.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Camera Segurança Wifi Yoosee Mini Dome Full Hd Vianova Branco",
       "preco": 69.9,
       "preco_original": 139.0,
@@ -1508,6 +1568,12 @@
       "desconto_medio": 45,
       "maior_desconto": 64
     },
+    "automotivo": {
+      "total": 8,
+      "score_medio": 80,
+      "desconto_medio": 44,
+      "maior_desconto": 59
+    },
     "monitores": {
       "total": 7,
       "score_medio": 79,
@@ -1531,12 +1597,6 @@
       "score_medio": 86,
       "desconto_medio": 51,
       "maior_desconto": 62
-    },
-    "automotivo": {
-      "total": 4,
-      "score_medio": 82,
-      "desconto_medio": 45,
-      "maior_desconto": 52
     },
     "armazenamento": {
       "total": 4,
@@ -1563,6 +1623,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-02T16:29:04.209251",
-  "total": 96
+  "updated_at": "2026-07-02T18:21:37.830995",
+  "total": 100
 }
