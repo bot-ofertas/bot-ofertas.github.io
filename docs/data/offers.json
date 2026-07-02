@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smartwatch Huawei Watch Gt 6 Pro 46mm Bateria Com Autonomia De Até 21 Dias Mais De 100 Modos Esportivos Corrida De... Prateado-escuro",
+      "preco": 1745.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_681278-MLA103632118572_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 92,
+      "enviado_em": "2026-07-02T23:44:18.349142",
+      "link": "https://www.mercadolivre.com.br/smartwatch-huawei-watch-gt-6-pro-46mm-bateria-com-autonomia-de-ate-21-dias-mais-de-100-modos-esportivos-corrida-de-trilha-golfe-ciclismo-analise-de-ecg-compativel-com-ios-e-android-gps-preto/p/MLB54589097?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1745.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Penta Magnésio - Bisglicinato + Dimalato + Citrato + Taurato + Óxido De Magnésio - A Combinação Perfeita De 5 Magnésios Com Máxima Pureza E Biodisponibilidade - 60 Cápsulas Sem Sabor",
+      "preco": 53.93,
+      "preco_original": 94.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871438-MLA112831456570_072026-AB.webp",
+      "categoria": "esportes",
+      "score": 73,
+      "enviado_em": "2026-07-02T23:44:11.734151",
+      "link": "https://www.mercadolivre.com.br/penta-magnesio-bisglicinato-dimalato-citrato-taurato-oxido-de-magnesio-a-combinaco-perfeita-de-5-magnesios-com-maxima-pureza-e-biodisponibilidade-60-capsulas/p/MLB61669343?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 53.93,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey 100% Hd Refil Black Skull 900g Wpc Wpi E Wph Sabor Baunilha",
+      "preco": 73.49,
+      "preco_original": 109.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_616489-MLA99455779132_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 65,
+      "enviado_em": "2026-07-02T23:44:04.798033",
+      "link": "https://www.mercadolivre.com.br/whey-100-hd-refil-black-skull-900g-wpc-wpi-e-wph-sabor-baunilha/p/MLB18995411?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Nac 600mg - Fórmula Exclusiva Com Máxima Concentração E Pureza - N-acetil L-cisteína - 60 Cápsulas Sem Sabor",
+      "preco": 46.77,
+      "preco_original": 89.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628799-MLA105714524195_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 73,
+      "enviado_em": "2026-07-02T23:43:58.164548",
+      "link": "https://www.mercadolivre.com.br/nac-600mg-formula-exclusiva-com-maxima-concentraco-e-pureza-n-acetil-l-cisteina-60-capsulas/p/MLB58579835?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 46.77,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
       "preco": 549.9,
       "preco_original": 1099.0,
@@ -1709,9 +1769,9 @@
   },
   "stats": {
     "esportes": {
-      "total": 12,
-      "score_medio": 70,
-      "desconto_medio": 46,
+      "total": 16,
+      "score_medio": 72,
+      "desconto_medio": 45,
       "maior_desconto": 75
     },
     "celulares": {
@@ -1811,6 +1871,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-02T22:34:40.228503",
-  "total": 112
+  "updated_at": "2026-07-02T23:46:45.261208",
+  "total": 116
 }
