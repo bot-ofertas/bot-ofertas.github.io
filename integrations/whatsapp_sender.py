@@ -87,11 +87,11 @@ def share_url(produto: dict) -> str:
 async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None) -> bool:
     """Envia para o grupo WhatsApp configurado.
 
-    Ordem de tentativa:
+    Ordem de tentativa (mais confiável primeiro):
       1. Evolution API (se configurada) — headless, ideal para servidor.
-      2. Playwright em SEGUNDO PLANO — método padrão local. NÃO mexe no
-         mouse/teclado físicos nem rouba o foco; o usuário usa o PC normalmente.
-      3. pyautogui — apenas se WHATSAPP_PYAUTOGUI_FALLBACK=1 (atrapalha a tela).
+      2. WhatsApp Desktop nativo (Windows) — usa app já logado; envia foto real.
+      3. Playwright/CDP (Chrome dedicado) — precisa de QR scan uma vez.
+      4. pyautogui em WhatsApp Web — só se WHATSAPP_PYAUTOGUI_FALLBACK=1.
     """
     group_id = _group_id()
     if not group_id:
@@ -99,6 +99,7 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
     mensagem = mensagem_override or montar_mensagem_wa(produto)
     foto_url = produto.get("foto") or produto.get("imagem") or ""
+    nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
 
     webhook_url = os.getenv("WHATSAPP_WEBHOOK_URL", "")
     wa_api_key  = os.getenv("WHATSAPP_API_KEY", "")
@@ -125,20 +126,32 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
         return False
 
-    # ── Tentativa 2: Playwright em segundo plano (PADRÃO, não atrapalha o PC) ──
+    # ── Tentativa 2: WhatsApp Desktop (app nativo Windows já logado) ─────────
+    try:
+        from integrations.whatsapp_desktop import (  # noqa: PLC0415
+            enviar_para_grupo_desktop, _janela_whatsapp,
+        )
+        if _janela_whatsapp() is not None:
+            ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
+            if ok:
+                return True
+            log.info("WhatsApp Desktop não enviou; caindo para Playwright.")
+    except Exception as e:
+        log.warning("WhatsApp Desktop falhou: %s", e)
+
+    # ── Tentativa 3: Playwright em segundo plano (Chrome dedicado do bot) ────
     try:
         from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
-        nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
         caminho = _baixar_foto(foto_url) if foto_url else ""
         ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
         _limpar_fotos_antigas()
         if ok:
             return True
-        log.info("WhatsApp em segundo plano não enviou (sessão pode não estar logada).")
+        log.info("WhatsApp Playwright não enviou (sessão pode não estar logada).")
     except Exception as e:
         log.warning("WhatsApp Playwright falhou: %s", e)
 
-    # ── Tentativa 3: pyautogui — só se explicitamente habilitado (usa a tela) ──
+    # ── Tentativa 4: pyautogui em Web — só se explicitamente habilitado ──────
     if os.getenv("WHATSAPP_PYAUTOGUI_FALLBACK", "0") == "1":
         log.info("Usando fallback pyautogui (atrapalha a digitação).")
         return _enviar_via_pyautogui(mensagem, foto_url)
