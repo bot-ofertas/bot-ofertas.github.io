@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv H5000f Hd 32 Polegadas 2025 Preto Samsung Bivolt",
+      "preco": 967.12,
+      "preco_original": 1395.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_973138-MLA99968160801_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 77,
+      "enviado_em": "2026-07-02T19:58:31.285561",
+      "link": "https://www.mercadolivre.com.br/smart-tv-h5000f-hd-32-polegadas-2025-preto-samsung-bivolt/p/MLB48954912?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 967.12,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 928.31,
+      "preco_original": 1499.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 88,
+      "enviado_em": "2026-07-02T19:58:24.582769",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 928.31,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa De Som Jbl Boombox 4 Bluetooth Portátil 210w Bivolt Azul",
+      "preco": 2279.0,
+      "preco_original": 3299.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_674627-MLA100016786223_122025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 80,
+      "enviado_em": "2026-07-02T19:58:17.921048",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-jbl-boombox-4-bluetooth-portatil-210w-bivolt-azul/p/MLB57082682?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2279.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Galaxy Buds Core Preto",
+      "preco": 220.5,
+      "preco_original": 349.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650858-MLA97317826023_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 66,
+      "enviado_em": "2026-07-02T19:58:11.243424",
+      "link": "https://www.mercadolivre.com.br/galaxy-buds-core-preto/p/MLB58315694?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 220.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Moldura Paralama Dianteiro Esquerdo Jeep Renegade +presilhas",
       "preco": 212.0,
       "preco_original": 357.0,
@@ -753,7 +813,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1399.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -783,7 +843,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-50-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53201474?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 2252.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1550,6 +1610,12 @@
       "desconto_medio": 44,
       "maior_desconto": 75
     },
+    "eletronicos": {
+      "total": 8,
+      "score_medio": 82,
+      "desconto_medio": 42,
+      "maior_desconto": 62
+    },
     "eletrodomesticos": {
       "total": 8,
       "score_medio": 74,
@@ -1592,12 +1658,6 @@
       "desconto_medio": 46,
       "maior_desconto": 59
     },
-    "eletronicos": {
-      "total": 4,
-      "score_medio": 86,
-      "desconto_medio": 51,
-      "maior_desconto": 62
-    },
     "armazenamento": {
       "total": 4,
       "score_medio": 77,
@@ -1623,6 +1683,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-02T18:21:37.830995",
-  "total": 100
+  "updated_at": "2026-07-02T19:59:28.368838",
+  "total": 104
 }
