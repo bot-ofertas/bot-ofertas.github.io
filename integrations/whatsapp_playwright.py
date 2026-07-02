@@ -40,11 +40,23 @@ _page = None
 
 
 async def _conectar():
-    """Conecta ao Chrome do bot via CDP e localiza (ou abre) a aba do WhatsApp Web."""
+    """Conecta ao Chrome do bot via CDP e localiza (ou abre) a aba do WhatsApp Web.
+
+    Sequência resiliente:
+      1) Chama chrome_manager.garantir_chrome_pronto() — inicia Chrome se cair
+         e espera a porta 9222 responder de fato antes de conectar.
+      2) Só então tenta connect_over_cdp — impede ECONNREFUSED.
+      3) Reaproveita aba existente do WhatsApp; abre nova só se não existir.
+    """
     global _pw, _browser, _page
 
     if _page is not None and not _page.is_closed():
         return _page
+
+    # 1) Garante Chrome operante ANTES de conectar (elimina ECONNREFUSED)
+    from core.chrome_manager import garantir_chrome_pronto  # noqa: PLC0415
+    if not garantir_chrome_pronto(timeout=45):
+        raise RuntimeError("Chrome do bot não subiu na porta 9222 dentro do timeout")
 
     from playwright.async_api import async_playwright  # noqa: PLC0415
 
@@ -138,14 +150,52 @@ async def _enviar_texto(page, mensagem: str) -> bool:
         return False
 
 
-# Botão "enviar" do preview de mídia (jun/2026): data-icon wds-ic-send-filled,
+# Botão "enviar" do preview de mídia: data-icon wds-ic-send-filled,
 # aria-label "Enviar N item(ns) selecionado(s)". NÃO usar Enter (cai no sticker).
 _SEND_PREVIEW_SEL = ('[data-icon="wds-ic-send-filled"], '
                      'div[role="button"][aria-label^="Enviar"], '
                      'button[aria-label^="Enviar"]')
-_LEGENDA_SEL = ('[contenteditable="true"][aria-label*="legenda"], '
-                '[contenteditable="true"][aria-label*="Adicione"], '
-                '[contenteditable="true"][data-tab="1"]')
+
+
+async def _achar_legenda(page):
+    """Localiza a caixa de legenda do preview de mídia com heurística robusta.
+
+    O WhatsApp muda esses seletores com frequência. Estratégias, em ordem:
+      1) contenteditable com aria-label falando de legenda/caption
+      2) qualquer contenteditable VISÍVEL que NÃO esteja no footer da conversa
+         (a caixa da conversa está no footer; a de legenda fica no dialog de preview)
+      3) role=textbox com data-tab=1 (compatibilidade com versões antigas)
+    Retorna o ElementHandle ou None.
+    """
+    handle = await page.evaluate_handle("""() => {
+        // 1) match por aria-label
+        const byAria = [...document.querySelectorAll('[contenteditable="true"][aria-label]')]
+            .find(e => {
+                const a = (e.getAttribute('aria-label') || '').toLowerCase();
+                return a.includes('legenda') || a.includes('caption') || a.includes('adicione');
+            });
+        if (byAria) return byAria;
+
+        // 2) contenteditable visível FORA do footer (o footer é da conversa)
+        const eds = [...document.querySelectorAll('[contenteditable="true"]')].filter(e => {
+            const r = e.getBoundingClientRect();
+            if (r.width < 40 || r.height < 20) return false;
+            if (e.closest('footer')) return false;
+            return true;
+        });
+        if (eds.length) return eds[0];
+
+        // 3) textbox data-tab=1
+        return document.querySelector('[role="textbox"][data-tab="1"]');
+    }""")
+    if handle is None:
+        return None
+    # Converte JSHandle em ElementHandle
+    try:
+        el = handle.as_element()
+        return el
+    except Exception:
+        return None
 
 
 async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
@@ -156,17 +206,38 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
         await file_input.set_input_files(caminho_foto)
 
         # Aguarda o preview montar — confirmado pela presença do botão "Enviar"
-        await page.wait_for_selector(_SEND_PREVIEW_SEL, timeout=12000)
-        await asyncio.sleep(1.0)
+        await page.wait_for_selector(_SEND_PREVIEW_SEL, timeout=15000)
+        await asyncio.sleep(1.5)  # tempo para animação e caixa de legenda montar
 
-        # Legenda: digita na caixa do preview (sem disparar envio)
-        try:
-            cap = await page.wait_for_selector(_LEGENDA_SEL, timeout=4000)
-            await cap.click()
-            await page.keyboard.insert_text(legenda)
-            await asyncio.sleep(0.4)
-        except Exception:
-            log.info("Caixa de legenda não encontrada — enviando foto sem legenda.")
+        # Localiza a caixa de legenda (heurística robusta) e digita
+        caixa_legenda = None
+        for tentativa in range(3):
+            caixa_legenda = await _achar_legenda(page)
+            if caixa_legenda:
+                break
+            await asyncio.sleep(0.8)
+
+        if caixa_legenda is None:
+            log.warning("Caixa de legenda NÃO encontrada — foto irá sem descrição.")
+        else:
+            try:
+                await caixa_legenda.click()
+                await asyncio.sleep(0.3)
+                # Cola em vez de digitar (mais rápido e preserva quebras de linha)
+                await page.evaluate("nav => navigator.clipboard.writeText(nav)", legenda)
+                await page.keyboard.press("Control+V")
+                await asyncio.sleep(0.4)
+                # Verifica se digitou
+                texto = await caixa_legenda.inner_text()
+                if not texto.strip():
+                    # Fallback: insert_text
+                    await caixa_legenda.click()
+                    await page.keyboard.insert_text(legenda)
+                    await asyncio.sleep(0.4)
+                    texto = await caixa_legenda.inner_text()
+                log.info("Legenda digitada (%d chars): %r", len(texto), texto[:50])
+            except Exception as e:
+                log.warning("Falha ao digitar legenda: %s", e)
 
         # Clica o botão de enviar correto (nunca Enter — evita virar figurinha)
         enviar = await page.wait_for_selector(_SEND_PREVIEW_SEL, timeout=6000)

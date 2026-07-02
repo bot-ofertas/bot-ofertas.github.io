@@ -241,11 +241,18 @@ async def processar_categoria(
             contadores["publicados"] += 1
             log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
 
-            # WhatsApp simultâneo (local com pywhatkit ou Evolution API)
+            # WhatsApp em segundo plano — ISOLADO do Telegram (best-effort).
+            # Se WhatsApp travar/falhar por qualquer motivo, o Telegram continua.
+            # Timeout de 90s por envio evita bloquear a rodada inteira.
             if wa_ativo():
                 try:
-                    wa_ok = await enviar_para_grupo(item, mensagem_override=texto_wa)
-                    log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sem servidor headless)'}")
+                    wa_ok = await asyncio.wait_for(
+                        enviar_para_grupo(item, mensagem_override=texto_wa),
+                        timeout=90.0,
+                    )
+                    log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
+                except asyncio.TimeoutError:
+                    log("     ⏱️  WhatsApp: timeout 90s (Chrome ocupado ou caído)")
                 except Exception as _e_wa:
                     log(f"     ⚠️  WhatsApp: {_e_wa}")
 

@@ -38,12 +38,19 @@ def _servir():
 
 async def main():
     from playwright.async_api import async_playwright
+    from core.chrome_manager import garantir_chrome_pronto
 
     _status("INICIANDO")
     threading.Thread(target=_servir, daemon=True).start()
     print("=" * 55)
     print("  ABRA NO NAVEGADOR:  http://localhost:8723/qr.html")
     print("=" * 55, flush=True)
+
+    # Garante Chrome pronto ANTES de conectar (elimina ECONNREFUSED)
+    if not garantir_chrome_pronto(timeout=60):
+        _status("ERRO_CHROME")
+        print("Chrome do bot não subiu — abortando setup.", flush=True)
+        return
 
     async with async_playwright() as p:
         browser = await p.chromium.connect_over_cdp(CDP, timeout=15000)
