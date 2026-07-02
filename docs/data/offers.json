@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "iPhone 16e (128 Gb) - Preto - Distribuidor Autorizado",
+      "preco": 3238.0,
+      "preco_original": 5799.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_961264-MLA95713213402_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-02T02:26:14.708302",
+      "link": "https://www.mercadolivre.com.br/iphone-16e-128-gb-preto-distribuidor-autorizado/p/MLB1046215784?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3238.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Azul Light Blue",
+      "preco": 748.8,
+      "preco_original": 1499.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_907031-MLA99504284188_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-02T02:26:08.071965",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-azul/p/MLB54986607?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 748.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G06 - 128gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com Ai Bateria De 5200 Mah Tela 6.9 - Laranja",
+      "preco": 614.69,
+      "preco_original": 1299.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_808109-MLA91806834554_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-02T02:26:01.215112",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g06-128gb-12gb-4gb-ram-8gb-ram-boost-e-camera-50mp-com-ai-bateria-de-5200-mah-tela-69-laranja/p/MLB55762040?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 614.69,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Basike Fone De Ouvido Sem Fio Bluetooth Com Gancho Gamer Esportivo Baixa Latência 100h, Design Aberto Preto",
+      "preco": 103.12,
+      "preco_original": 184.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_795376-MLA109618625490_042026-AB.webp",
+      "categoria": "celulares",
+      "score": 73,
+      "enviado_em": "2026-07-02T02:25:54.511011",
+      "link": "https://www.mercadolivre.com.br/basike-fone-de-ouvido-sem-fio-bluetooth-com-gancho-gamer-esportivo-baixa-latncia-100h-design-aberto/p/MLB67646413?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 103.12,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Loção Hidratante Corporal Sem Perfume, Com Ceramidas Essenciais E Ácido Hialurônico, Textura Fluida Cerave 473ml Sem Fragrância",
       "preco": 79.9,
       "preco_original": 141.0,
@@ -724,7 +784,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 736.1,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1165,6 +1225,12 @@
     "verificada": true
   },
   "stats": {
+    "celulares": {
+      "total": 12,
+      "score_medio": 86,
+      "desconto_medio": 48,
+      "maior_desconto": 60
+    },
     "brinquedos": {
       "total": 12,
       "score_medio": 81,
@@ -1176,12 +1242,6 @@
       "score_medio": 81,
       "desconto_medio": 47,
       "maior_desconto": 69
-    },
-    "celulares": {
-      "total": 8,
-      "score_medio": 86,
-      "desconto_medio": 49,
-      "maior_desconto": 60
     },
     "beleza": {
       "total": 8,
@@ -1256,6 +1316,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-02T00:13:17.518085",
-  "total": 76
+  "updated_at": "2026-07-02T02:29:08.634024",
+  "total": 80
 }
