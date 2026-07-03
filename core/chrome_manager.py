@@ -118,8 +118,15 @@ def _limpar_locks_perfil() -> None:
 def iniciar_chrome() -> subprocess.Popen | None:
     """Inicia o Chrome do bot com perfil dedicado + porta de depuração.
 
-    Se já estiver rodando, não faz nada e retorna None. Se falhar, retorna None.
+    ATENÇÃO: só inicia se WHATSAPP_CHROME_FALLBACK=1 no .env.
+    Por padrão o WhatsApp usa o app nativo (WhatsApp Desktop) — o Chrome do
+    bot só é útil como fallback opt-in. Isso evita abrir janelas de QR
+    espontaneamente.
     """
+    if os.getenv("WHATSAPP_CHROME_FALLBACK", "0") != "1":
+        log.debug("Chrome do bot desativado (WHATSAPP_CHROME_FALLBACK != 1).")
+        return None
+
     if _chrome_do_bot_rodando() and porta_aberta():
         log.info("Chrome do bot já está rodando na porta %d — reaproveitando.", PORTA_CDP)
         return None

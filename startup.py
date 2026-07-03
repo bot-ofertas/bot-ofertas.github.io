@@ -2,17 +2,19 @@
 """
 STARTUP — Inicialização sequencial e resiliente do bot de ofertas.
 
-Ordem correta (elimina ~99% dos erros de integração):
+Ordem correta:
 
     1. Validar configurações (.env, TOKEN_TELEGRAM)
-    2. Iniciar Chrome do bot com --remote-debugging-port=9222
-    3. AGUARDAR a porta 9222 responder /json/version
-    4. Iniciar watchdog (monitor contínuo do Chrome)
-    5. Iniciar rastreador em loop (Telegram sempre, WhatsApp best-effort)
+    2. Verificar WhatsApp Desktop instalado (janela detectável)
+    3. Iniciar healthcheck HTTP (:8724/health)
+    4. Iniciar rastreador em loop (Telegram sempre, WhatsApp best-effort)
 
-Regra de ouro: o Telegram NUNCA depende do WhatsApp. Se o Chrome cair, o
-Telegram continua postando; o watchdog cuida de recuperar o WhatsApp em
-background e reintegrar quando voltar.
+Regra de ouro: Telegram NUNCA depende do WhatsApp. Se o WhatsApp Desktop
+não estiver aberto, o rastreador continua postando no Telegram sem falha.
+
+WhatsApp usa exclusivamente o app nativo do Windows (WhatsApp Desktop).
+O Chrome dedicado do bot foi desativado por padrão — para reativá-lo
+como fallback opcional, defina WHATSAPP_CHROME_FALLBACK=1 no .env.
 
 Registrado como tarefa do Windows (BotOfertas-AutoStart) — roda no login.
 """
@@ -23,7 +25,7 @@ import sys
 import time
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, BASE)  # garante que core/ e integrations/ resolvem
+sys.path.insert(0, BASE)
 
 LOG_PATH = os.path.join(BASE, "data", "rastreador_local.log")
 PID_PATH = os.path.join(BASE, "data", "rastreador.pid")
@@ -41,7 +43,6 @@ log = logging.getLogger("startup")
 
 
 def _rastreador_ja_rodando() -> bool:
-    """Evita duplicata: True se já há um rastreador.py --loop em execução."""
     try:
         import psutil  # noqa: PLC0415
         for p in psutil.process_iter(["name", "cmdline"]):
@@ -58,64 +59,74 @@ def _rastreador_ja_rodando() -> bool:
 
 
 def etapa_1_validar_config() -> bool:
-    """Valida que o .env carrega e que TOKEN_TELEGRAM existe."""
+    """Valida .env + TOKEN_TELEGRAM."""
     try:
         from dotenv import load_dotenv  # noqa: PLC0415
         load_dotenv(os.path.join(BASE, ".env"))
     except Exception as e:
-        log.error("[1/5] Falha ao carregar .env: %s", e)
+        log.error("[1/4] Falha ao carregar .env: %s", e)
         return False
 
     token = os.getenv("TOKEN_TELEGRAM")
     if not token:
-        log.error("[1/5] TOKEN_TELEGRAM ausente no .env — Telegram não vai funcionar.")
+        log.error("[1/4] TOKEN_TELEGRAM ausente no .env — Telegram não vai funcionar.")
         return False
-    log.info("[1/5] Config OK — TOKEN_TELEGRAM presente.")
+    log.info("[1/4] Config OK — TOKEN_TELEGRAM presente.")
     return True
 
 
-def etapa_2_iniciar_chrome() -> bool:
-    """Inicia o Chrome do bot e AGUARDA a porta 9222 responder de fato."""
-    from core.chrome_manager import garantir_chrome_pronto  # noqa: PLC0415
-    log.info("[2/5] Iniciando Chrome do bot e aguardando porta 9222…")
-    if garantir_chrome_pronto(timeout=60):
-        log.info("[2/5] Chrome OK — CDP respondendo em 127.0.0.1:9222.")
+def etapa_2_verificar_whatsapp_desktop() -> bool:
+    """Verifica se o app WhatsApp Desktop está aberto (janela ou processo)."""
+    try:
+        from integrations.whatsapp_desktop import _janela_whatsapp  # noqa: PLC0415
+    except Exception as e:
+        log.warning("[2/4] whatsapp_desktop indisponível: %s", e)
+        return False
+
+    w = _janela_whatsapp()
+    if w:
+        log.info("[2/4] WhatsApp Desktop detectado — envio nativo ativo.")
         return True
-    log.warning("[2/5] Chrome não subiu — WhatsApp ficará indisponível, "
-                "mas Telegram vai continuar postando.")
+
+    # Tenta detectar via processo (janela pode estar minimizada em tray)
+    try:
+        import psutil  # noqa: PLC0415
+        for p in psutil.process_iter(["name"]):
+            n = (p.info.get("name") or "").lower()
+            if "whatsapp" in n:
+                log.info("[2/4] WhatsApp Desktop rodando (%s) — envio nativo ativo.", n)
+                return True
+    except ImportError:
+        pass
+
+    log.warning("[2/4] WhatsApp Desktop NÃO detectado — só Telegram vai postar. "
+                "Abra o WhatsApp Desktop para ativar WhatsApp.")
     return False
 
 
-def etapa_3_watchdog() -> None:
-    """Ativa watchdog + healthcheck (monitoramento contínuo)."""
-    try:
-        from core.watchdog import iniciar_watchdog  # noqa: PLC0415
-        iniciar_watchdog()
-        log.info("[3/5] Watchdog ativo — checa Chrome a cada 30s.")
-    except Exception as e:
-        log.warning("[3/5] Watchdog não subiu: %s (não crítico).", e)
+def etapa_3_healthcheck() -> None:
     try:
         from core.healthcheck import iniciar_healthcheck  # noqa: PLC0415
         iniciar_healthcheck()
+        log.info("[3/4] Healthcheck em http://127.0.0.1:8724/health")
     except Exception as e:
-        log.warning("[3/5] Healthcheck não subiu: %s (não crítico).", e)
+        log.warning("[3/4] Healthcheck não subiu: %s (não crítico).", e)
 
 
 def etapa_4_iniciar_rastreador() -> subprocess.Popen:
-    """Sobe o rastreador em loop (Telegram sempre; WhatsApp best-effort)."""
-    log.info("[4/5] Iniciando rastreador (loop 20 min)…")
+    log.info("[4/4] Iniciando rastreador (loop 20 min)…")
     cmd = [sys.executable, os.path.join(BASE, "rastreador.py"), "--loop", "20"]
     log_f = open(LOG_PATH, "a", encoding="utf-8")
     proc = subprocess.Popen(cmd, stdout=log_f, stderr=log_f, cwd=BASE)
     with open(PID_PATH, "w") as f:
         f.write(str(proc.pid))
-    log.info("[4/5] Rastreador PID=%d — log em %s", proc.pid, LOG_PATH)
+    log.info("[4/4] Rastreador PID=%d — log em %s", proc.pid, LOG_PATH)
     return proc
 
 
-def etapa_5_monitorar(proc: subprocess.Popen) -> None:
-    """Aguarda o rastreador; se ele morrer, tenta reiniciar 3x com backoff."""
-    log.info("[5/5] Sistema em produção. Watchdog + rastreador ativos.")
+def monitorar(proc: subprocess.Popen) -> None:
+    """Reinicia o rastreador com backoff se ele cair."""
+    log.info("Sistema em produção — rastreador + healthcheck ativos.")
     falhas = 0
     while True:
         code = proc.wait()
@@ -132,7 +143,7 @@ def etapa_5_monitorar(proc: subprocess.Popen) -> None:
 
 def main() -> None:
     log.info("=" * 60)
-    log.info("BOT OFERTAS — inicialização sequencial")
+    log.info("BOT OFERTAS — inicialização sequencial (WhatsApp Desktop nativo)")
     log.info("=" * 60)
 
     if _rastreador_ja_rodando():
@@ -143,11 +154,10 @@ def main() -> None:
         log.error("Configuração inválida. Corrija .env antes de continuar.")
         sys.exit(1)
 
-    # Chrome é best-effort: Telegram funciona sem ele
-    etapa_2_iniciar_chrome()
-    etapa_3_watchdog()
+    etapa_2_verificar_whatsapp_desktop()
+    etapa_3_healthcheck()
     proc = etapa_4_iniciar_rastreador()
-    etapa_5_monitorar(proc)
+    monitorar(proc)
 
 
 if __name__ == "__main__":

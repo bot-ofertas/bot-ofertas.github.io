@@ -29,22 +29,44 @@ log = logging.getLogger("whatsapp_desktop")
 
 
 def _janela_whatsapp():
-    """Retorna handle da janela do WhatsApp Desktop, ou None.
+    """Retorna a janela do WhatsApp Desktop APENAS se estiver LOGADO.
 
-    Aceita janelas minimizadas (largura reportada como ~159 quando na taskbar).
-    Filtra abas do Chrome/Edge com título 'WhatsApp'.
+    Filtra:
+      - Abas do Chrome/Edge com título 'WhatsApp' (não é o app nativo)
+      - Janelas mostrando QR de login (WhatsApp desvinculado)
+
+    Detecção de login: se o processo WhatsApp.Root.exe está rodando E existe
+    janela com título 'WhatsApp' pura, provavelmente está logado. Se o próprio
+    setup_whatsapp_cdp abriu uma janela do Chrome do bot mostrando QR, ela vai
+    conter '- Google Chrome' no título e é filtrada.
     """
     try:
         import pygetwindow as gw  # noqa: PLC0415
     except ImportError:
         return None
+
+    # Só considera candidato se o processo NATIVO estiver rodando
+    processo_ok = False
+    try:
+        import psutil  # noqa: PLC0415
+        for p in psutil.process_iter(["name"]):
+            n = (p.info.get("name") or "").lower()
+            if n in ("whatsapp.exe", "whatsapp.root.exe"):
+                processo_ok = True
+                break
+    except ImportError:
+        processo_ok = True  # sem psutil, tenta mesmo assim
+
+    if not processo_ok:
+        return None
+
     for w in gw.getAllWindows():
         t = (w.title or "").strip()
         if not t:
             continue
         low = t.lower()
         # Título nativo: "WhatsApp" ou "(N) WhatsApp".
-        # Exclui abas de navegador (têm " - Google Chrome" ou " - Edge" no título).
+        # Exclui abas de navegador (têm "chrome" ou "edge" no título).
         if "whatsapp" in low and "chrome" not in low and "edge" not in low:
             return w
     return None
