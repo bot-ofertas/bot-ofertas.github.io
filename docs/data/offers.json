@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Bicicleta Spinning Ergométrica Lafit Pro 4kg 100kg Preto 127/220v",
+      "preco": 455.4,
+      "preco_original": 1100.0,
+      "desconto_pct": 58.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_851986-MLA103724457130_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 92,
+      "enviado_em": "2026-07-03T14:35:23.466213",
+      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-ergometrica-lafit-pro-4kg-100kg-preto/p/MLB61810741?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 455.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Nike Sb Malor Masculino",
+      "preco": 269.99,
+      "preco_original": 549.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_832865-MLB100353427732_122025-AB-tnis-nike-sb-malor-masculino.webp",
+      "categoria": "esportes",
+      "score": 78,
+      "enviado_em": "2026-07-03T14:35:16.623984",
+      "link": "https://produto.mercadolivre.com.br/MLB-4262723141-tnis-nike-sb-malor-masculino-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 269.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit2 Calça Moletom Masculina Academia Corrida Chimpa Esporte",
+      "preco": 71.2,
+      "preco_original": 149.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_953460-MLB108170752070_032026-AB-kit2-calca-moletom-masculina-academia-corrida-chimpa-esporte.webp",
+      "categoria": "esportes",
+      "score": 75,
+      "enviado_em": "2026-07-03T14:35:09.812173",
+      "link": "https://produto.mercadolivre.com.br/MLB-4995928434-kit2-calca-moletom-masculina-academia-corrida-chimpa-esporte-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 71.2,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tenis Mizuno Jet 8 Masculino",
+      "preco": 225.71,
+      "preco_original": 359.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_923785-MLB107391725800_032026-AB-tenis-mizuno-jet-8-masculino.webp",
+      "categoria": "esportes",
+      "score": 69,
+      "enviado_em": "2026-07-03T14:35:02.942810",
+      "link": "https://produto.mercadolivre.com.br/MLB-3872723957-tenis-mizuno-jet-8-masculino-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 225.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Câmera Veicular 70mai A200-1 Full Hd 1080p Hdr + 1080p 2  Tela Wi-fi App 24h Visão Noturna/ Câmera Traseira Uber Nightvis",
       "preco": 474.96,
       "preco_original": 1399.0,
@@ -331,7 +391,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-500g-dark-lab-unidade/p/MLB26796581?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 39.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -557,7 +617,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 39.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -572,7 +632,7 @@
       "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 559.99,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -587,7 +647,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 72.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1410,8 +1470,8 @@
   },
   "stats": {
     "esportes": {
-      "total": 16,
-      "score_medio": 72,
+      "total": 20,
+      "score_medio": 73,
       "desconto_medio": 45,
       "maior_desconto": 75
     },
@@ -1512,6 +1572,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T12:13:23.913319",
-  "total": 92
+  "updated_at": "2026-07-03T14:38:19.638328",
+  "total": 96
 }
