@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Maquina Acabamento Cortar Cabelo Barba E Pelos Kemei 032 Prateado 127/220v",
+      "preco": 37.52,
+      "preco_original": 78.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809090-MLB112050371271_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 71,
+      "enviado_em": "2026-07-03T16:11:59.935386",
+      "link": "https://www.mercadolivre.com.br/maquina-acabamento-cortar-cabelo-barba-e-pelos-kemei-032/up/MLBU3256334594?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 37.52,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Elétrica Air Fryer Quad Fry 4,2 L,1400w Preto Elgin 127v",
+      "preco": 165.0,
+      "preco_original": 299.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_813389-MLA99520090726_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 75,
+      "enviado_em": "2026-07-03T16:11:53.217070",
+      "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-air-fryer-quad-fry-42-l1400w-preto-elgin/p/MLB52868715?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 165.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Sanduicheira Elétrica Cadence San 400 Preto 220v",
+      "preco": 74.9,
+      "preco_original": 129.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633183-MLA99468751756_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 67,
+      "enviado_em": "2026-07-03T16:11:46.401815",
+      "link": "https://www.mercadolivre.com.br/sanduicheira-eletrica-cadence-san-400-preto/p/MLB25741527?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 74.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Grill Sanduicheira Cadence San400 Elétrica Chapa Misteira Tostex Tostequeira Hambúrguer Click Preto 127v",
+      "preco": 74.9,
+      "preco_original": 129.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_901582-MLA84838790809_052025-AB.webp",
+      "categoria": "bebes",
+      "score": 72,
+      "enviado_em": "2026-07-03T16:11:39.655028",
+      "link": "https://www.mercadolivre.com.br/grill-sanduicheira-cadence-san400-eletrica-chapa-misteira-tostex-tostequeira-hamburguer-click/p/MLB25850957?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 74.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Bicicleta Spinning Ergométrica Lafit Pro 4kg 100kg Preto 127/220v",
       "preco": 455.4,
       "preco_original": 1100.0,
@@ -767,7 +827,7 @@
       "link": "https://www.mercadolivre.com.br/liquidificador-philco-1200w-3l-12-velocidades-preto-ph900/p/MLB15578941?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 94.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1499,6 +1559,12 @@
       "desconto_medio": 47,
       "maior_desconto": 58
     },
+    "bebes": {
+      "total": 8,
+      "score_medio": 74,
+      "desconto_medio": 45,
+      "maior_desconto": 64
+    },
     "tvs": {
       "total": 4,
       "score_medio": 82,
@@ -1535,12 +1601,6 @@
       "desconto_medio": 47,
       "maior_desconto": 52
     },
-    "bebes": {
-      "total": 4,
-      "score_medio": 77,
-      "desconto_medio": 45,
-      "maior_desconto": 64
-    },
     "armazenamento": {
       "total": 4,
       "score_medio": 77,
@@ -1572,6 +1632,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T14:38:19.638328",
-  "total": 96
+  "updated_at": "2026-07-03T16:14:28.221938",
+  "total": 100
 }
