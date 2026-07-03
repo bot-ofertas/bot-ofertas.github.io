@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 127v",
+      "preco": 399.0,
+      "preco_original": 623.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+      "categoria": "cameras",
+      "score": 73,
+      "enviado_em": "2026-07-03T17:53:07.427105",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 3 Cuecas Masculinas Boxer Cotton Calvin Klein 998 - Multi Liso L",
+      "preco": 156.65,
+      "preco_original": 269.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628024-MLB51694656869_092022-AB.webp",
+      "categoria": "cameras",
+      "score": 74,
+      "enviado_em": "2026-07-03T17:53:00.705736",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/kit-3-cuecas-masculinas-boxer-cotton-calvin-klein/up/MLBU733164810?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 156.65,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tapete Higiênico 50 Unidades (60x55) Descartável Manta Fralda Absorvente Gel Para Cachorro Pet Cão Branco Branco",
+      "preco": 48.0,
+      "preco_original": 69.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675085-MLA110471471788_052026-AB.webp",
+      "categoria": "cameras",
+      "score": 60,
+      "enviado_em": "2026-07-03T17:52:54.016614",
+      "link": "https://www.mercadolivre.com.br/tapete-higinico-50-unidades-60x55-descartavel-manta-fralda-absorvente-gel-para-cachorro-pet-co/p/MLB28131416?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 48.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Higiênico Neve Supreme Folha Tripla Leve 32 Pague 28",
+      "preco": 61.98,
+      "preco_original": 92.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_665705-MLA112543139575_052026-AB.webp",
+      "categoria": "cameras",
+      "score": 63,
+      "enviado_em": "2026-07-03T17:52:47.421891",
+      "link": "https://www.mercadolivre.com.br/papel-higinico-neve-supreme-folha-tripla-leve-32-pague-28/p/MLB16084447?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 61.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Maquina Acabamento Cortar Cabelo Barba E Pelos Kemei 032 Prateado 127/220v",
       "preco": 37.52,
       "preco_original": 78.0,
@@ -1595,6 +1656,12 @@
       "desconto_medio": 38,
       "maior_desconto": 50
     },
+    "cameras": {
+      "total": 4,
+      "score_medio": 68,
+      "desconto_medio": 35,
+      "maior_desconto": 41
+    },
     "beleza": {
       "total": 4,
       "score_medio": 88,
@@ -1632,6 +1699,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T16:14:28.221938",
-  "total": 100
+  "updated_at": "2026-07-03T17:55:06.807521",
+  "total": 104
 }
