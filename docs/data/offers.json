@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Monitor LG Gamer 24  24ms500-b Ips Fhd 100hz Anti-reflexo Pr Preto Bivolt",
+      "preco": 519.0,
+      "preco_original": 899.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871469-MLB93485352059_092025-AB.webp",
+      "categoria": "informatica",
+      "score": 85,
+      "enviado_em": "2026-07-03T23:31:58.886712",
+      "link": "https://www.mercadolivre.com.br/monitor-lg-gamer-24--24ms500b-ips-fhd-100hz-antireflexo-pr/up/MLBU3013726314?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 519.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Hp Smart Tank 584 - Preta Preto 127/220v",
+      "preco": 776.67,
+      "preco_original": 1399.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_883539-MLA112255562562_062026-AB.webp",
+      "categoria": "informatica",
+      "score": 90,
+      "enviado_em": "2026-07-03T23:31:52.037015",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-smart-tank-584-preta/p/MLB34801962?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 776.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor LG Ultragear 27g411a-b 27 ,fhd, 144hz, 1ms (mbr), Nvidia G-sync, Amd Freesync, Hdr10 Preto 127/220v",
+      "preco": 799.0,
+      "preco_original": 1098.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_629075-MLA104879398469_012026-AB.webp",
+      "categoria": "informatica",
+      "score": 68,
+      "enviado_em": "2026-07-03T23:31:41.884585",
+      "link": "https://www.mercadolivre.com.br/monitor-lg-ultragear-27g411a-b-27fhd-144hz-1ms-mbr-nvidia-g-sync-amd-freesync-hdr10/p/MLB64311324?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 799.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cabo Rede Furukawa Soho Plus Cat6 Utp 305m Cmx U/utp Anti-chamas",
+      "preco": 1079.0,
+      "preco_original": 1815.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889960-MLA99896046059_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 90,
+      "enviado_em": "2026-07-03T23:31:35.046188",
+      "link": "https://www.mercadolivre.com.br/cabo-rede-furukawa-soho-plus-cat6-utp-305m-cmx-uutp-anti-chamas/p/MLB55749903?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1079.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 3 Calça Jeans Masculina Slim Com Lycra Elastano Original",
       "preco": 118.89,
       "preco_original": 186.0,
@@ -1755,17 +1815,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
-    "preco": 549.9,
-    "preco_original": 1099.0,
-    "desconto_pct": 50.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
-    "categoria": "casa",
-    "score": 95,
-    "enviado_em": "2026-07-02T22:33:13.805734",
-    "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Bicicleta Spinning Ergométrica Lafit Pro 4kg 100kg Preto 127/220v",
+    "preco": 455.4,
+    "preco_original": 1100.0,
+    "desconto_pct": 58.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_851986-MLA103724457130_012026-AB.webp",
+    "categoria": "esportes",
+    "score": 92,
+    "enviado_em": "2026-07-03T14:35:23.466213",
+    "link": "https://www.mercadolivre.com.br/bicicleta-spinning-ergometrica-lafit-pro-4kg-100kg-preto/p/MLB61810741?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 549.9,
+    "menor_preco_30d": 455.4,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1787,6 +1847,12 @@
       "score_medio": 78,
       "desconto_medio": 42,
       "maior_desconto": 66
+    },
+    "informatica": {
+      "total": 8,
+      "score_medio": 78,
+      "desconto_medio": 36,
+      "maior_desconto": 52
     },
     "eletronicos": {
       "total": 8,
@@ -1823,12 +1889,6 @@
       "score_medio": 77,
       "desconto_medio": 28,
       "maior_desconto": 34
-    },
-    "informatica": {
-      "total": 4,
-      "score_medio": 73,
-      "desconto_medio": 33,
-      "maior_desconto": 52
     },
     "casa": {
       "total": 4,
@@ -1885,6 +1945,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T22:08:53.553923",
-  "total": 116
+  "updated_at": "2026-07-03T23:34:28.837453",
+  "total": 120
 }
