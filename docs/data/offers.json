@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit 3 Calça Jeans Masculina Slim Com Lycra Elastano Original",
+      "preco": 118.89,
+      "preco_original": 186.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_880488-MLB106040037106_022026-AB-kit-3-calca-jeans-masculina-slim-com-lycra-elastano-original.webp",
+      "categoria": "moda",
+      "score": 80,
+      "enviado_em": "2026-07-03T22:06:26.496009",
+      "link": "https://produto.mercadolivre.com.br/MLB-1618759652-kit-3-calca-jeans-masculina-slim-com-lycra-elastano-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 118.89,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Corrida",
+      "preco": 71.09,
+      "preco_original": 102.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745140-MLB108142856101_032026-AB-kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida.webp",
+      "categoria": "moda",
+      "score": 73,
+      "enviado_em": "2026-07-03T22:06:19.881413",
+      "link": "https://produto.mercadolivre.com.br/MLB-6216002052-kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 71.09,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Fila Diffusion Masculino Original Corrida Confortável",
+      "preco": 219.99,
+      "preco_original": 457.0,
+      "desconto_pct": 51.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_831540-MLB92356364088_092025-AB-tnis-fila-diffusion-masculino-original-corrida-confortavel.webp",
+      "categoria": "moda",
+      "score": 91,
+      "enviado_em": "2026-07-03T22:06:13.263852",
+      "link": "https://produto.mercadolivre.com.br/MLB-5256354974-tnis-fila-diffusion-masculino-original-corrida-confortavel-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 219.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Camisetas Tommy Hilfiger Preta/marinho 2un - Original",
+      "preco": 230.37,
+      "preco_original": 499.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926789-MLB79881228509_102024-AB-camisetas-tommy-hilfiger-pretamarinho-2un-original.webp",
+      "categoria": "moda",
+      "score": 92,
+      "enviado_em": "2026-07-03T22:06:06.590410",
+      "link": "https://produto.mercadolivre.com.br/MLB-3873518769-camisetas-tommy-hilfiger-pretamarinho-2un-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 230.37,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 127v",
       "preco": 513.21,
       "preco_original": 689.0,
@@ -1716,17 +1776,17 @@
       "desconto_medio": 45,
       "maior_desconto": 75
     },
+    "moda": {
+      "total": 12,
+      "score_medio": 82,
+      "desconto_medio": 46,
+      "maior_desconto": 69
+    },
     "automotivo": {
       "total": 12,
       "score_medio": 78,
       "desconto_medio": 42,
       "maior_desconto": 66
-    },
-    "moda": {
-      "total": 8,
-      "score_medio": 81,
-      "desconto_medio": 47,
-      "maior_desconto": 69
     },
     "eletronicos": {
       "total": 8,
@@ -1825,6 +1885,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T20:45:47.705497",
-  "total": 112
+  "updated_at": "2026-07-03T22:08:53.553923",
+  "total": 116
 }
