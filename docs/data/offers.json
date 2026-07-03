@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Câmera Veicular 70mai A200-1 Full Hd 1080p Hdr + 1080p 2  Tela Wi-fi App 24h Visão Noturna/ Câmera Traseira Uber Nightvis",
+      "preco": 474.96,
+      "preco_original": 1399.0,
+      "desconto_pct": 66.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_727188-MLA112838170964_072026-AB.webp",
+      "categoria": "automotivo",
+      "score": 75,
+      "enviado_em": "2026-07-03T12:10:56.734989",
+      "link": "https://www.mercadolivre.com.br/cmera-veicular-70mai-a200-1-full-hd-1080p-hdr-1080p-2-tela-wi-fi-app-24h-viso-noturna-cmera-traseira-uber-nightvis/p/MLB29162185?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 474.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bagageiro De Teto 600l Truff Premium Preto",
+      "preco": 1399.0,
+      "preco_original": 2108.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_817531-MLB110337620432_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 75,
+      "enviado_em": "2026-07-03T12:10:50.078555",
+      "link": "https://www.mercadolivre.com.br/bagageiro-de-teto-600l-truff-premium/up/MLBU3949645776?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Orbital 360 I-size, Black, Safety 1st Preto",
+      "preco": 1357.0,
+      "preco_original": 2099.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_663112-MLA98391291478_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 82,
+      "enviado_em": "2026-07-03T12:10:43.294442",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-orbital-360-i-size-black-safety-1st/p/MLB62322005?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1357.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeirinha Infantil Reclinável Legacy Cinza E Preto Mescla Voyage Preto/cinza",
+      "preco": 599.0,
+      "preco_original": 799.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_856035-MLA99488954664_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 60,
+      "enviado_em": "2026-07-03T12:10:36.462124",
+      "link": "https://www.mercadolivre.com.br/cadeirinha-infantil-reclinavel-legacy-cinza-e-preto-mescla-voyage/p/MLB33387739?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 539.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Impressora Multifuncional Cor Epson Ecotank L3250 Preto 127/220v",
       "preco": 1047.0,
       "preco_original": 1499.0,
@@ -390,7 +451,7 @@
       "link": "https://produto.mercadolivre.com.br/MLB-6085020128-case-suporte-veicular-teto-carro-externo-starlink-mini-im88-_JM?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 327.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1354,6 +1415,12 @@
       "desconto_medio": 45,
       "maior_desconto": 75
     },
+    "automotivo": {
+      "total": 12,
+      "score_medio": 78,
+      "desconto_medio": 42,
+      "maior_desconto": 66
+    },
     "moda": {
       "total": 8,
       "score_medio": 81,
@@ -1371,12 +1438,6 @@
       "score_medio": 86,
       "desconto_medio": 47,
       "maior_desconto": 58
-    },
-    "automotivo": {
-      "total": 8,
-      "score_medio": 80,
-      "desconto_medio": 44,
-      "maior_desconto": 59
     },
     "tvs": {
       "total": 4,
@@ -1451,6 +1512,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T06:08:46.748704",
-  "total": 88
+  "updated_at": "2026-07-03T12:13:23.913319",
+  "total": 92
 }
