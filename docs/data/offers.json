@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Impressora Multifuncional Cor Epson Ecotank L3250 Preto 127/220v",
+      "preco": 1047.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_827740-MLA99943629541_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 78,
+      "enviado_em": "2026-07-03T06:05:50.915222",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-cor-epson-ecotank-l3250/p/MLB34229008?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1047.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluetooth Branco 127/220v",
+      "preco": 209.9,
+      "preco_original": 299.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_902043-MLA96988011016_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 62,
+      "enviado_em": "2026-07-03T06:05:44.108622",
+      "link": "https://www.mercadolivre.com.br/mini-projetor-davely-hy300-4k-android-com-wi-fi-e-bluetooth/p/MLB48955624?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 209.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Cor Epson Ecotank L3250 Preto 127/220v",
+      "preco": 1047.0,
+      "preco_original": 1356.0,
+      "desconto_pct": 22.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_867179-MLA99966959445_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 64,
+      "enviado_em": "2026-07-03T06:05:37.316701",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-cor-epson-ecotank-l3250/p/MLB26986602?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 1047.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Gamer Lancer Preta Healer Preto Couro Sintético",
+      "preco": 427.4,
+      "preco_original": 899.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_986648-MLA105118436464_012026-AB.webp",
+      "categoria": "informatica",
+      "score": 88,
+      "enviado_em": "2026-07-03T06:05:30.456051",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-lancer-preta-healer/p/MLB18628781?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 427.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Samsung Led 55 Lh55befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
       "preco": 2899.0,
       "preco_original": 3999.0,
@@ -1329,6 +1390,12 @@
       "desconto_medio": 28,
       "maior_desconto": 34
     },
+    "informatica": {
+      "total": 4,
+      "score_medio": 73,
+      "desconto_medio": 33,
+      "maior_desconto": 52
+    },
     "eletrodomesticos": {
       "total": 4,
       "score_medio": 72,
@@ -1384,6 +1451,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T02:03:39.849073",
-  "total": 84
+  "updated_at": "2026-07-03T06:08:46.748704",
+  "total": 88
 }
