@@ -162,6 +162,64 @@ def _ativar_janela(janela) -> bool:
     return False
 
 
+def _processo_wa_rodando() -> bool:
+    """True se o processo nativo do WhatsApp está rodando."""
+    try:
+        import psutil  # noqa: PLC0415
+        for p in psutil.process_iter(["name"]):
+            n = (p.info.get("name") or "").lower()
+            if n in ("whatsapp.exe", "whatsapp.root.exe"):
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def _abrir_whatsapp_desktop() -> bool:
+    """Abre o app WhatsApp Desktop via URI protocol (whatsapp:).
+
+    O URI whatsapp:// é registrado pelo próprio app quando instalado (via
+    Microsoft Store). Funciona em Windows 10/11.
+    """
+    try:
+        import subprocess  # noqa: PLC0415
+        # explorer.exe abre URIs registrados; não bloqueia se falhar
+        subprocess.Popen(
+            ["explorer.exe", "whatsapp:"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        # Aguarda janela aparecer (até 15s)
+        for _ in range(15):
+            time.sleep(1)
+            if _processo_wa_rodando():
+                time.sleep(2)  # deixa carregar a UI
+                return True
+        return False
+    except Exception as e:
+        log.warning("Não consegui abrir WhatsApp Desktop: %s", e)
+        return False
+
+
+def garantir_whatsapp_aberto() -> bool:
+    """Garante que o WhatsApp Desktop está aberto e detectável.
+
+    Se o processo não está rodando, tenta abrir automaticamente via whatsapp:
+    URI. Retorna True se está pronto para uso.
+    """
+    if _janela_whatsapp() is not None:
+        return True
+    if _processo_wa_rodando():
+        # Processo rodando mas sem janela — aguarda janela aparecer
+        for _ in range(8):
+            time.sleep(1)
+            if _janela_whatsapp() is not None:
+                return True
+    log.info("WhatsApp Desktop não detectado — tentando abrir…")
+    if _abrir_whatsapp_desktop():
+        return _janela_whatsapp() is not None
+    return False
+
+
 def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = "") -> bool:
     """Envia foto+legenda ao grupo via WhatsApp Desktop (app nativo).
 
@@ -173,9 +231,13 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
         log.warning("pyautogui não instalado — pip install pyautogui")
         return False
 
+    # Garante que WhatsApp Desktop está aberto (reabre se fechado)
+    if not garantir_whatsapp_aberto():
+        log.warning("WhatsApp Desktop não pôde ser aberto — pulando envio.")
+        return False
     janela = _janela_whatsapp()
     if not janela:
-        log.warning("WhatsApp Desktop não está aberto (WhatsApp.Root.exe).")
+        log.warning("WhatsApp Desktop sem janela após abrir — pulando.")
         return False
 
     # Baixa foto antes de ativar a janela (mais rápido depois)

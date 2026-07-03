@@ -111,6 +111,13 @@ def etapa_3_healthcheck() -> None:
         log.info("[3/4] Healthcheck em http://127.0.0.1:8724/health")
     except Exception as e:
         log.warning("[3/4] Healthcheck não subiu: %s (não crítico).", e)
+    # Watchdog do WhatsApp Desktop — reabre app se cair
+    try:
+        from core.wa_desktop_watchdog import iniciar_wa_watchdog  # noqa: PLC0415
+        iniciar_wa_watchdog()
+        log.info("[3/4] Watchdog WhatsApp Desktop ativo (checa a cada 60s).")
+    except Exception as e:
+        log.warning("[3/4] Watchdog WhatsApp Desktop não subiu: %s", e)
 
 
 def etapa_4_iniciar_rastreador() -> subprocess.Popen:
