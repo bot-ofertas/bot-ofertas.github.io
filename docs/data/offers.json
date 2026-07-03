@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 748.8,
+      "preco_original": 1499.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-03T19:26:00.870693",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 748.8,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Aparador E Raspador Oneblade Intimate Qp1924/10 Philips Branco 127/220v",
+      "preco": 138.6,
+      "preco_original": 224.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_712069-MLB89354888748_082025-AB.webp",
+      "categoria": "saude",
+      "score": 71,
+      "enviado_em": "2026-07-03T19:25:53.720061",
+      "link": "https://www.mercadolivre.com.br/aparador-e-raspador-oneblade-intimate-qp192410-philips/up/MLBU3117106937?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 138.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
+      "preco": 799.2,
+      "preco_original": 1799.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-03T19:25:47.056042",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-verde/p/MLB54963045?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.2,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Térmico Carta 21.6cm X 27.9cm Para Impressoras De 150 Folhas Branco",
+      "preco": 53.94,
+      "preco_original": 87.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871485-MLA100868634664_122025-AB.webp",
+      "categoria": "tablets",
+      "score": 69,
+      "enviado_em": "2026-07-03T19:25:37.546171",
+      "link": "https://www.mercadolivre.com.br/papel-termico-carta-216cm-x-279cm-para-impressoras-de-150-folhas/p/MLB63096110?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 53.94,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 127v",
       "preco": 399.0,
       "preco_original": 623.0,
@@ -723,7 +783,7 @@
       "link": "https://www.mercadolivre.com.br/papel-termico-impressora-peripage-a40-a4-21x30--3-rolos/up/MLBU797003953?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 44.58,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1674,6 +1734,12 @@
       "desconto_medio": 53,
       "maior_desconto": 70
     },
+    "saude": {
+      "total": 3,
+      "score_medio": 84,
+      "desconto_medio": 48,
+      "maior_desconto": 55
+    },
     "monitores": {
       "total": 3,
       "score_medio": 76,
@@ -1687,9 +1753,9 @@
       "maior_desconto": 57
     },
     "tablets": {
-      "total": 1,
-      "score_medio": 60,
-      "desconto_medio": 62,
+      "total": 2,
+      "score_medio": 65,
+      "desconto_medio": 50,
       "maior_desconto": 62
     },
     "pet": {
@@ -1699,6 +1765,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-03T17:55:06.807521",
-  "total": 104
+  "updated_at": "2026-07-03T19:28:55.195468",
+  "total": 108
 }
