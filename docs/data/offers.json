@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Kit 2 Porta Retrato Madeira 15x20 Foto Decoração Marrom Liso",
+      "preco": 44.61,
+      "preco_original": 78.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_800535-MLB112154993914_062026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 71,
+      "enviado_em": "2026-07-04T21:00:18.872415",
+      "link": "https://www.mercadolivre.com.br/kit-2-porta-retrato-madeira-15x20-foto-decoracao/up/MLBU3948600248?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 44.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Espelho Balcão Ótica Óculos Maquiagem Metal Giratório",
+      "preco": 434.13,
+      "preco_original": 799.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_857669-MLB72575080708_112023-AB.webp",
+      "categoria": "ferramentas",
+      "score": 84,
+      "enviado_em": "2026-07-04T21:00:12.135924",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/espelho-balcao-otica-oculos-maquiagem-metal-giratorio/up/MLBU1750851645?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 434.13,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Axnen Tripé Fotográfico Para Câmera Profissional Preto",
+      "preco": 201.76,
+      "preco_original": 359.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_869042-MLA99483689804_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 76,
+      "enviado_em": "2026-07-04T21:00:05.203529",
+      "link": "https://www.mercadolivre.com.br/axnen-tripe-fotografico-para-camera-profissional/up/MLBU3970075428?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 201.76,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Instantânea Fujifilm Instax Mini 12 Branca Fotos Kit Câmera E 10 Fotos",
+      "preco": 630.49,
+      "preco_original": 1193.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_614053-MLB113709443761_062026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 90,
+      "enviado_em": "2026-07-04T20:59:57.241668",
+      "link": "https://www.mercadolivre.com.br/camera-instantanea-fujifilm-instax-mini-12-branca-fotos/up/MLBU4158374154?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 630.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smartphone Motorola Moto G86 5g + Moto Buds - 256gb 24gb (8gb Ram+16gb Ram Boost) Tela 1.5k Poled, 50mp Sony Camera Ois Moto Ai, Videos Em 4k, Ip68 + Ip69 - Vermelho",
       "preco": 1599.0,
       "preco_original": 1999.0,
@@ -1895,6 +1956,12 @@
       "desconto_medio": 46,
       "maior_desconto": 75
     },
+    "ferramentas": {
+      "total": 12,
+      "score_medio": 77,
+      "desconto_medio": 44,
+      "maior_desconto": 61
+    },
     "eletrodomesticos": {
       "total": 12,
       "score_medio": 69,
@@ -1918,12 +1985,6 @@
       "score_medio": 78,
       "desconto_medio": 36,
       "maior_desconto": 52
-    },
-    "ferramentas": {
-      "total": 8,
-      "score_medio": 76,
-      "desconto_medio": 44,
-      "maior_desconto": 61
     },
     "celulares": {
       "total": 8,
@@ -1992,6 +2053,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T19:44:38.769662",
-  "total": 124
+  "updated_at": "2026-07-04T21:02:46.766744",
+  "total": 128
 }
