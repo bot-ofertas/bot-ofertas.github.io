@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Desodorante Colônia Floratta Flores Secretas Fragrância Delicada Floral Frutal O Boticário 75ml",
+      "preco": 83.92,
+      "preco_original": 174.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_999191-MLA105259973416_012026-AB.webp",
+      "categoria": "beleza",
+      "score": 88,
+      "enviado_em": "2026-07-04T05:47:01.646726",
+      "link": "https://www.mercadolivre.com.br/desodorante-colnia-floratta-flores-secretas-fragrncia-delicada-floral-frutal-o-boticario-75ml/p/MLB62200454?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 83.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Loção Hidratante Cetaphil Para Pele Normal A Seca X 1 L",
+      "preco": 119.92,
+      "preco_original": 205.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826492-MLA111951442001_052026-AB.webp",
+      "categoria": "beleza",
+      "score": 88,
+      "enviado_em": "2026-07-04T05:46:54.904404",
+      "cupom": "Cupom 15% OFF",
+      "link": "https://www.mercadolivre.com.br/loco-hidratante-cetaphil-para-pele-normal-a-seca-x-1-l/p/MLB55232692?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 119.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Lattafa Asad 100ml Eau De Parfum Original Árabe Original Com Nota Fiscal E Selo Original Lataffa",
+      "preco": 156.0,
+      "preco_original": 289.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687418-MLB81527468562_012025-AB.webp",
+      "categoria": "beleza",
+      "score": 90,
+      "enviado_em": "2026-07-04T05:46:48.111992",
+      "link": "https://www.mercadolivre.com.br/perfume-lattafa-asad-100ml-eau-de-parfum-original-arabe-original-com-nota-fiscal-e-selo-original-lataffa/up/MLBU2927448939?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 156.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Bean Attracione Men Masculino 50mloriginal Defábrica",
+      "preco": 59.0,
+      "preco_original": 79.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_667962-MLB106537682309_022026-AB.webp",
+      "categoria": "beleza",
+      "score": 70,
+      "enviado_em": "2026-07-04T05:46:41.436793",
+      "link": "https://www.mercadolivre.com.br/perfume-bean-attracione-men-masculino-50mloriginal-defabrica/up/MLBU3778286192?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 2 Controles Para Ps4 Sem Fio Bluetooth Videogame Tv Smart Pc Gamer Celular Dual Shock Joystick Manete - Crowley",
       "preco": 106.9,
       "preco_original": 159.0,
@@ -1384,7 +1445,7 @@
       "link": "https://www.mercadolivre.com.br/creme-multirreparador-calmante-cicaplast-baume-b5-para-todos-os-tipos-de-pele-com-40ml-la-roche-posay/p/MLB24529498?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 61.7,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     }
   ],
@@ -1421,6 +1482,12 @@
       "score_medio": 68,
       "desconto_medio": 31,
       "maior_desconto": 35
+    },
+    "beleza": {
+      "total": 8,
+      "score_medio": 86,
+      "desconto_medio": 44,
+      "maior_desconto": 52
     },
     "bebes": {
       "total": 8,
@@ -1482,12 +1549,6 @@
       "desconto_medio": 35,
       "maior_desconto": 41
     },
-    "beleza": {
-      "total": 4,
-      "score_medio": 88,
-      "desconto_medio": 47,
-      "maior_desconto": 52
-    },
     "saude": {
       "total": 3,
       "score_medio": 84,
@@ -1507,6 +1568,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T02:02:25.554161",
-  "total": 92
+  "updated_at": "2026-07-04T05:49:56.402212",
+  "total": 96
 }
