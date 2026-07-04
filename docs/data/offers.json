@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Micro-ondas Electrolux 36l Cor Inox Efficient Com Descongelamento Assistido Me36s 127v",
+      "preco": 711.55,
+      "preco_original": 989.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_864516-MLA99700643378_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 69,
+      "enviado_em": "2026-07-04T11:29:35.389138",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-cor-inox-efficient-com-descongelamento-assistido-me36s/p/MLB19750516?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 711.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cafeteira Espresso Lattego Ep2330 Série 2300 Philips Walita Cinza 127v",
+      "preco": 2849.0,
+      "preco_original": 4799.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_967709-MLA99508460866_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 90,
+      "enviado_em": "2026-07-04T11:29:28.313350",
+      "link": "https://www.mercadolivre.com.br/cafeteira-espresso-lattego-ep2330-serie-2300-philips-walita-cinza/p/MLB49646722?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2849.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Mto30 20l Com Função Tira Odor E Descongelar Cor Branco Electrolux 220v",
+      "preco": 386.1,
+      "preco_original": 599.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_818175-MLA108913885928_032026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-04T11:29:21.648184",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-mto30-20l-com-funco-tira-odor-e-descongelar-cor-branco-electrolux/p/MLB6309816?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 386.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux 20l Branco Com Função Tira Odor E Descongelar Mto30 127v",
+      "preco": 386.1,
+      "preco_original": 599.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_787358-MLA100187065347_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-04T11:29:14.992182",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-20l-branco-com-funco-tira-odor-e-descongelar-mto30/p/MLB6309815?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 386.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Desodorante Colônia Floratta Flores Secretas Fragrância Delicada Floral Frutal O Boticário 75ml",
       "preco": 83.92,
       "preco_original": 174.0,
@@ -510,7 +570,7 @@
       "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-air-fryer-quad-fry-42-l1400w-preto-elgin/p/MLB52868715?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 165.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1415,7 +1475,7 @@
       "link": "https://www.mercadolivre.com.br/maquina-de-acabamento-corta-cabelo-profissional-kemei-2299-p/up/MLBU3555982525?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 75.19,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1471,6 +1531,12 @@
       "desconto_medio": 44,
       "maior_desconto": 69
     },
+    "bebes": {
+      "total": 12,
+      "score_medio": 75,
+      "desconto_medio": 41,
+      "maior_desconto": 64
+    },
     "informatica": {
       "total": 8,
       "score_medio": 78,
@@ -1488,12 +1554,6 @@
       "score_medio": 86,
       "desconto_medio": 44,
       "maior_desconto": 52
-    },
-    "bebes": {
-      "total": 8,
-      "score_medio": 74,
-      "desconto_medio": 45,
-      "maior_desconto": 64
     },
     "automotivo": {
       "total": 8,
@@ -1568,6 +1628,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T05:49:56.402212",
-  "total": 96
+  "updated_at": "2026-07-04T11:32:30.148284",
+  "total": 100
 }
