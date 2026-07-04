@@ -33,6 +33,21 @@ os.makedirs(LOG_DIR, exist_ok=True)
 TXT_LOG = os.path.join(LOG_DIR, "bot.log")
 JSON_LOG = os.path.join(LOG_DIR, "errors.jsonl")
 
+# Bloco de notas humano-legível na Área de Trabalho — para o usuário revisar
+def _desktop_path() -> str:
+    for env in ("USERPROFILE", "HOME"):
+        p = os.environ.get(env)
+        if p:
+            d = os.path.join(p, "Desktop")
+            if os.path.isdir(d):
+                return d
+            d = os.path.join(p, "Área de Trabalho")
+            if os.path.isdir(d):
+                return d
+    return LOG_DIR  # fallback: grava em data/
+
+DESKTOP_TXT = os.path.join(_desktop_path(), "Problemas de execução para corrigir.txt")
+
 
 def setup_logging(nivel: int = logging.INFO) -> None:
     """Configura logging estruturado (idempotente)."""
@@ -84,12 +99,42 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) ->
             f.write(json.dumps(entrada, ensure_ascii=False) + "\n")
     except Exception:
         pass
+    # Bloco de notas humano-legível na Área de Trabalho
+    try:
+        _gravar_desktop_txt(entrada)
+    except Exception:
+        pass
     # Texto tradicional
     logging.getLogger("bot").error(
         "[%s] %s: %s @ %s:%d ctx=%s",
         operacao, entrada["exception"], entrada["mensagem"],
         entrada["arquivo"], entrada["linha"], entrada["contexto"],
     )
+
+
+def _gravar_desktop_txt(e: dict) -> None:
+    """Anexa o erro em formato humano-legível no bloco de notas do Desktop."""
+    header_novo = not os.path.exists(DESKTOP_TXT)
+    with open(DESKTOP_TXT, "a", encoding="utf-8") as f:
+        if header_novo:
+            f.write("=" * 78 + "\n")
+            f.write("  PROBLEMAS DE EXECUÇÃO PARA CORRIGIR — Bot Ofertas\n")
+            f.write("  Cada bloco abaixo é 1 erro que aconteceu no bot.\n")
+            f.write("  Verifique 'operação', 'onde' e 'mensagem' para saber o que corrigir.\n")
+            f.write("=" * 78 + "\n\n")
+        f.write("─" * 60 + "\n")
+        f.write(f"⏱️  Quando   : {e['ts']}\n")
+        f.write(f"⚙️  Operação : {e['operacao']}\n")
+        f.write(f"❌ Erro     : {e['exception']}: {e['mensagem']}\n")
+        f.write(f"📍 Onde     : {e['arquivo']} → função {e['funcao']}(), linha {e['linha']}\n")
+        if e.get("contexto"):
+            ctx_str = ", ".join(f"{k}={v}" for k, v in e["contexto"].items())
+            f.write(f"📝 Contexto : {ctx_str}\n")
+        if e.get("traceback"):
+            f.write("🔍 Traceback:\n")
+            for linha in e["traceback"]:
+                f.write(f"     {linha}\n")
+        f.write("\n")
 
 
 def erros_recentes(limite: int = 50) -> list[dict]:
