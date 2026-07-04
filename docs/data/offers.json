@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Drone 360° Controle Remoto Rx122pro Azul3 Velocidades Com Luzes Legais Para Iniciantes E Crianças2 Bateria De Reserva",
+      "preco": 135.78,
+      "preco_original": 349.0,
+      "desconto_pct": 61.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_746127-MLA111749555254_062026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 66,
+      "enviado_em": "2026-07-04T17:08:51.659755",
+      "link": "https://www.mercadolivre.com.br/drone-360-controle-remoto-rx122pro-azul3-velocidades-com-luzes-legais-para-iniciantes-e-criancas2-bateria-de-reserva/p/MLB68342041?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 135.78,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Basike 1.8m Tripé Magnético Autoabre, Tripé Celular Universal Portatil Com Controle Remoto Bluetooth, Anel Magnético... Preto-tripé Magnético",
+      "preco": 161.48,
+      "preco_original": 274.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_812352-MLA106303859960_022026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 74,
+      "enviado_em": "2026-07-04T17:08:44.616774",
+      "link": "https://www.mercadolivre.com.br/basike-18m-tripe-magnetico-autoabre-tripe-celular-universal-portatil-com-controle-remoto-bluetooth-anel-magnetico-adesivo-e-rosca-14-basto-de-selfie-para-celularcmera-e-gopro/p/MLB64255484?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 161.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lanterna De Fotografia Led Rgb Smallrig 7500mah Com 20 Filtr",
+      "preco": 253.1,
+      "preco_original": 405.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_684261-CBT105550353012_012026-AB-lanterna-de-fotografia-led-rgb-smallrig-7500mah-com-20-filtr.webp",
+      "categoria": "ferramentas",
+      "score": 73,
+      "enviado_em": "2026-07-04T17:08:37.727381",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-4451319647-lanterna-de-fotografia-led-rgb-smallrig-7500mah-com-20-filtr-_JM#polycard_client=offers&deal_print_id=b207db93-7913-4c13-b89f-8b7f43fb2c10&position=8&tracking_id=fc87966a-fe12-44d1-b353-ed213205facc?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 253.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tripé Para Celular Profissional E Bastão De Selfie Bem Alto Basike Com Controle Remoto Bluetooth Pé Abre Automático,tripe Camera Portatil Para Gravar Vídeo Tiktok Preto",
+      "preco": 159.0,
+      "preco_original": 257.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_839967-MLA104696511408_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 71,
+      "enviado_em": "2026-07-04T17:08:30.271725",
+      "link": "https://www.mercadolivre.com.br/tripe-para-celular-profissional-e-basto-de-selfie-bem-alto-basike-com-controle-remoto-bluetooth-pe-abre-automaticotripe-camera-portatil-para-gravar-video-tiktok/p/MLB64537521?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 159.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cooktop De Indução 4 Bocas Dako Supreme Preto Com Trava De Segurança 220v",
       "preco": 1075.0,
       "preco_original": 1540.0,
@@ -1736,6 +1797,12 @@
       "desconto_medio": 36,
       "maior_desconto": 52
     },
+    "ferramentas": {
+      "total": 8,
+      "score_medio": 76,
+      "desconto_medio": 44,
+      "maior_desconto": 61
+    },
     "beleza": {
       "total": 8,
       "score_medio": 86,
@@ -1765,12 +1832,6 @@
       "score_medio": 68,
       "desconto_medio": 35,
       "maior_desconto": 38
-    },
-    "ferramentas": {
-      "total": 4,
-      "score_medio": 80,
-      "desconto_medio": 45,
-      "maior_desconto": 54
     },
     "eletronicos": {
       "total": 4,
@@ -1809,6 +1870,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T15:49:55.825175",
-  "total": 112
+  "updated_at": "2026-07-04T17:11:19.491571",
+  "total": 116
 }
