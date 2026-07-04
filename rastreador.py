@@ -251,9 +251,15 @@ async def processar_categoria(
                         timeout=90.0,
                     )
                     log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
-                except asyncio.TimeoutError:
+                except asyncio.TimeoutError as _e:
+                    from core.error_logger import log_erro
+                    log_erro("wa.timeout_90s", _e,
+                             {"produto_id": produto_id, "titulo": titulo_curto})
                     log("     ⏱️  WhatsApp: timeout 90s (Chrome ocupado ou caído)")
                 except Exception as _e_wa:
+                    from core.error_logger import log_erro
+                    log_erro("wa.envio_falha", _e_wa,
+                             {"produto_id": produto_id, "titulo": titulo_curto})
                     log(f"     ⚠️  WhatsApp: {_e_wa}")
 
             # Demais redes (Instagram, Twitter…)
@@ -387,19 +393,38 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Rastreador automático de ofertas ML")
     parser.add_argument(
         "--loop", type=int, metavar="MINUTOS",
-        help="Rodar em loop a cada N minutos (ex: --loop 60)"
+        help="Rodar em loop a cada N minutos fixos (ex: --loop 60)"
+    )
+    parser.add_argument(
+        "--loop-min", type=int, default=30, metavar="MIN",
+        help="Intervalo mínimo (min) para modo aleatório. Padrão: 30"
+    )
+    parser.add_argument(
+        "--loop-max", type=int, default=45, metavar="MIN",
+        help="Intervalo máximo (min) para modo aleatório. Padrão: 45"
+    )
+    parser.add_argument(
+        "--random", action="store_true",
+        help="Usa intervalo aleatório entre --loop-min e --loop-max (padrão: 30-45 min)"
     )
     args = parser.parse_args()
 
-    if args.loop:
+    if args.loop or args.random:
         if _ja_existe_outra_instancia():
             log("⛔ Outro rastreador --loop já está rodando. Encerrando para evitar duplicatas.")
             return
-        log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
+        if args.random:
+            log(f"Modo contínuo ALEATÓRIO: {args.loop_min}-{args.loop_max} min. Ctrl+C para parar.")
+        else:
+            log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
         while True:
             asyncio.run(rodar_uma_vez())
-            log(f"\n⏳ Próxima rodada em {args.loop} minuto(s)...")
-            time.sleep(args.loop * 60)
+            if args.random:
+                proximo = random.randint(args.loop_min, args.loop_max)
+            else:
+                proximo = args.loop
+            log(f"\n⏳ Próxima rodada em {proximo} minuto(s)...")
+            time.sleep(proximo * 60)
     else:
         asyncio.run(rodar_uma_vez())
 

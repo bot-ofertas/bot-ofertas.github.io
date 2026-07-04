@@ -76,29 +76,49 @@ class _Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return  # silencia log de requests HTTP
 
-    def do_GET(self):
-        if self.path != "/health":
-            self.send_response(404)
-            self.end_headers()
-            return
-        payload = {
-            "chrome": _status_chrome(),
-            "whatsapp": _status_whatsapp(),
-            "telegram": _status_telegram(),
-            "rastreador": _status_rastreador(),
-            "sistema": _status_sistema(),
-        }
-        overall_ok = all([
-            payload["chrome"]["ok"] or True,  # chrome é best-effort
-            payload["telegram"]["ok"],
-            payload["rastreador"]["ok"],
-        ])
+    def _resp(self, code: int, payload):
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
-        self.send_response(200 if overall_ok else 503)
+        self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")  # para n8n
         self.end_headers()
         self.wfile.write(body)
+
+    def do_GET(self):
+        if self.path == "/health":
+            payload = {
+                "chrome": _status_chrome(),
+                "whatsapp": _status_whatsapp(),
+                "telegram": _status_telegram(),
+                "rastreador": _status_rastreador(),
+                "sistema": _status_sistema(),
+            }
+            overall_ok = all([
+                payload["chrome"]["ok"] or True,
+                payload["telegram"]["ok"],
+                payload["rastreador"]["ok"],
+            ])
+            self._resp(200 if overall_ok else 503, payload)
+            return
+        if self.path.startswith("/errors"):
+            # /errors?limit=50 — últimos erros em JSON (para n8n)
+            from urllib.parse import urlparse, parse_qs  # noqa: PLC0415
+            q = parse_qs(urlparse(self.path).query)
+            limite = int(q.get("limit", ["50"])[0])
+            from core.error_logger import erros_recentes  # noqa: PLC0415
+            self._resp(200, {"erros": erros_recentes(limite)})
+            return
+        if self.path == "/stats":
+            # Estatísticas para n8n dashboard
+            try:
+                from core import database as db  # noqa: PLC0415
+                self._resp(200, db.stats())
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
+        self._resp(404, {"error": "not found",
+                         "endpoints": ["/health", "/errors", "/stats"]})
 
 
 def _servir():

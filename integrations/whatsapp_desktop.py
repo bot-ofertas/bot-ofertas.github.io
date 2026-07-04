@@ -224,20 +224,26 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
     """Envia foto+legenda ao grupo via WhatsApp Desktop (app nativo).
 
     Retorna True se enviou. Ativa a janela por ~5s, envia e devolve o foco.
+    Registra erros estruturados em data/errors.jsonl.
     """
+    from core.error_logger import log_erro  # noqa: PLC0415
+
     try:
         import pyautogui  # noqa: PLC0415
-    except ImportError:
-        log.warning("pyautogui não instalado — pip install pyautogui")
+    except ImportError as e:
+        log_erro("wa_desktop.import_pyautogui", e,
+                 {"grupo": nome_grupo, "acao": "pip install pyautogui"})
         return False
 
     # Garante que WhatsApp Desktop está aberto (reabre se fechado)
     if not garantir_whatsapp_aberto():
-        log.warning("WhatsApp Desktop não pôde ser aberto — pulando envio.")
+        log_erro("wa_desktop.abrir_app", RuntimeError("não conseguiu abrir WhatsApp Desktop"),
+                 {"grupo": nome_grupo})
         return False
     janela = _janela_whatsapp()
     if not janela:
-        log.warning("WhatsApp Desktop sem janela após abrir — pulando.")
+        log_erro("wa_desktop.janela_missing", RuntimeError("sem janela após abrir"),
+                 {"grupo": nome_grupo})
         return False
 
     # Baixa foto antes de ativar a janela (mais rápido depois)
@@ -317,7 +323,9 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
 
         return resultado
     except Exception as e:
-        log.warning("pyautogui WhatsApp Desktop falhou: %s", e)
+        log_erro("wa_desktop.envio_pyautogui", e,
+                 {"grupo": nome_grupo, "tem_foto": tem_foto,
+                  "mensagem_len": len(mensagem)})
         try:
             janela.minimize()
         except Exception:

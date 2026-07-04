@@ -12,3 +12,4 @@ pyperclip
 instagrapi
 psutil
 telethon>=1.44.0
+pywinauto

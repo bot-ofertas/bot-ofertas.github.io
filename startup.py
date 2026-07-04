@@ -31,14 +31,10 @@ LOG_PATH = os.path.join(BASE, "data", "rastreador_local.log")
 PID_PATH = os.path.join(BASE, "data", "rastreador.pid")
 
 os.makedirs(os.path.join(BASE, "data"), exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(name)s] %(levelname)s %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler(os.path.join(BASE, "data", "startup.log"), encoding="utf-8"),
-    ],
-)
+
+# Logging estruturado (texto rotativo + JSONL para erros — n8n consome)
+from core.error_logger import setup_logging  # noqa: E402
+setup_logging()
 log = logging.getLogger("startup")
 
 
@@ -121,8 +117,11 @@ def etapa_3_healthcheck() -> None:
 
 
 def etapa_4_iniciar_rastreador() -> subprocess.Popen:
-    log.info("[4/4] Iniciando rastreador (loop 20 min)…")
-    cmd = [sys.executable, os.path.join(BASE, "rastreador.py"), "--loop", "20"]
+    log.info("[4/4] Iniciando rastreador (intervalo aleatório 30-45 min)…")
+    cmd = [
+        sys.executable, os.path.join(BASE, "rastreador.py"),
+        "--random", "--loop-min", "30", "--loop-max", "45",
+    ]
     log_f = open(LOG_PATH, "a", encoding="utf-8")
     proc = subprocess.Popen(cmd, stdout=log_f, stderr=log_f, cwd=BASE)
     with open(PID_PATH, "w") as f:
