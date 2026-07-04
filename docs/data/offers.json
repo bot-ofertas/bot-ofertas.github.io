@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 75.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-04T18:16:25.387864",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Pré-treino Haze Hardcore 300g Growth Supplements - Uva",
+      "preco": 74.95,
+      "preco_original": 114.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_947028-MLA98776405883_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-04T18:16:18.501951",
+      "link": "https://www.mercadolivre.com.br/pre-treino-haze-hardcore-300g-growth-supplements-uva/p/MLB45676040?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 74.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sabor",
+      "preco": 59.9,
+      "preco_original": 159.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 63,
+      "enviado_em": "2026-07-04T18:16:11.791150",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Camiseta Core Insider",
+      "preco": 94.83,
+      "preco_original": 189.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_940060-MLB86042491923_062025-AB-camiseta-core-insider.webp",
+      "categoria": "esportes",
+      "score": 70,
+      "enviado_em": "2026-07-04T18:16:04.988740",
+      "link": "https://produto.mercadolivre.com.br/MLB-3996373493-camiseta-core-insider-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 94.83,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Drone 360° Controle Remoto Rx122pro Azul3 Velocidades Com Luzes Legais Para Iniciantes E Crianças2 Bateria De Reserva",
       "preco": 135.78,
       "preco_original": 349.0,
@@ -1491,7 +1553,7 @@
       "enviado_em": "2026-07-02T14:32:55.179968",
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
-      "menor_preco_30d": 72.9,
+      "menor_preco_30d": 68.9,
       "menor_periodo": true,
       "verificada": true
     },
@@ -1768,10 +1830,10 @@
   },
   "stats": {
     "esportes": {
-      "total": 16,
-      "score_medio": 74,
-      "desconto_medio": 44,
-      "maior_desconto": 69
+      "total": 20,
+      "score_medio": 73,
+      "desconto_medio": 46,
+      "maior_desconto": 75
     },
     "eletrodomesticos": {
       "total": 12,
@@ -1870,6 +1932,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T17:11:19.491571",
-  "total": 116
+  "updated_at": "2026-07-04T18:19:19.759059",
+  "total": 120
 }
