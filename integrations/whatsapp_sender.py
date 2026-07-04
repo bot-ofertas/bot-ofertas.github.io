@@ -101,26 +101,18 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     foto_url = produto.get("foto") or produto.get("imagem") or ""
     nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
 
-    webhook_url = os.getenv("WHATSAPP_WEBHOOK_URL", "")
-    wa_api_key  = os.getenv("WHATSAPP_API_KEY", "")
-    wa_instance = os.getenv("WHATSAPP_INSTANCE", "default")
-
-    # ── Tentativa 1: Evolution API (headless, funciona em server) ─────────────
-    if webhook_url and wa_api_key:
-        try:
-            import requests  # noqa: PLC0415
-            resp = requests.post(
-                f"{webhook_url}/message/sendText/{wa_instance}",
-                headers={"apikey": wa_api_key, "Content-Type": "application/json"},
-                json={"number": group_id, "textMessage": {"text": mensagem}},
-                timeout=10,
-            )
-            if resp.status_code in (200, 201):
-                log.info("WhatsApp enviado via Evolution API para %s", group_id)
+    # ── Tentativa 1: Evolution API (endpoint HTTP com foto+legenda) ──────────
+    # Método preferido — funciona em servidor headless e não depende do PC ligado.
+    try:
+        from integrations.whatsapp_api import (  # noqa: PLC0415
+            enviar_oferta_completa, _configurada as _api_configurada,
+        )
+        if _api_configurada():
+            if enviar_oferta_completa(produto, mensagem):
                 return True
-            log.warning("Evolution API erro %s: %s", resp.status_code, resp.text[:200])
-        except Exception as e:
-            log.warning("Evolution API falhou: %s", e)
+            log.info("WA API não enviou — caindo para WhatsApp Desktop.")
+    except Exception as e:
+        log.warning("WA API falhou: %s", e)
 
     if os.getenv("GITHUB_ACTIONS"):
         log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
@@ -139,17 +131,20 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     except Exception as e:
         log.warning("WhatsApp Desktop falhou: %s", e)
 
-    # ── Tentativa 3: Playwright em segundo plano (Chrome dedicado do bot) ────
-    try:
-        from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
-        caminho = _baixar_foto(foto_url) if foto_url else ""
-        ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
-        _limpar_fotos_antigas()
-        if ok:
-            return True
-        log.info("WhatsApp Playwright não enviou (sessão pode não estar logada).")
-    except Exception as e:
-        log.warning("WhatsApp Playwright falhou: %s", e)
+    # ── Tentativa 3: Playwright/CDP — OPT-IN (WHATSAPP_CHROME_FALLBACK=1) ────
+    # Por padrão desligado: usamos exclusivamente WhatsApp Desktop nativo.
+    # Ativar só se o Desktop não puder ser usado por algum motivo.
+    if os.getenv("WHATSAPP_CHROME_FALLBACK", "0") == "1":
+        try:
+            from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
+            caminho = _baixar_foto(foto_url) if foto_url else ""
+            ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
+            _limpar_fotos_antigas()
+            if ok:
+                return True
+            log.info("WhatsApp Playwright não enviou (sessão pode não estar logada).")
+        except Exception as e:
+            log.warning("WhatsApp Playwright falhou: %s", e)
 
     # ── Tentativa 4: pyautogui em Web — só se explicitamente habilitado ──────
     if os.getenv("WHATSAPP_PYAUTOGUI_FALLBACK", "0") == "1":

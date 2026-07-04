@@ -39,12 +39,22 @@ def _status_telegram() -> dict:
 
 
 def _status_whatsapp() -> dict:
+    """Retorna o melhor método de envio disponível para WhatsApp."""
+    # 1º: Evolution API (headless, mais confiável)
     try:
-        from core.chrome_manager import esta_pronto  # noqa: PLC0415
-        if not esta_pronto():
-            return {"ok": False, "motivo": "chrome-off"}
-        # não abrimos playwright aqui (é caro) — só reportamos ok se chrome está up
-        return {"ok": True, "motivo": "chrome-up"}
+        from integrations.whatsapp_api import _configurada, esta_conectada  # noqa: PLC0415
+        if _configurada():
+            if esta_conectada():
+                return {"ok": True, "metodo": "evolution-api"}
+            return {"ok": False, "motivo": "evolution-desconectada"}
+    except Exception:
+        pass
+    # 2º: WhatsApp Desktop (nativo)
+    try:
+        from integrations.whatsapp_desktop import _processo_wa_rodando  # noqa: PLC0415
+        if _processo_wa_rodando():
+            return {"ok": True, "metodo": "desktop"}
+        return {"ok": False, "motivo": "desktop-fechado"}
     except Exception as e:
         return {"ok": False, "motivo": str(e)[:80]}
 
