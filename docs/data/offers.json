@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smartphone Motorola Moto G86 5g + Moto Buds - 256gb 24gb (8gb Ram+16gb Ram Boost) Tela 1.5k Poled, 50mp Sony Camera Ois Moto Ai, Videos Em 4k, Ip68 + Ip69 - Vermelho",
+      "preco": 1599.0,
+      "preco_original": 1999.0,
+      "desconto_pct": 20.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_918430-MLA99498691720_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 66,
+      "enviado_em": "2026-07-04T19:41:43.014351",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g86-5g-moto-buds-256gb-24gb-8gb-ram16gb-ram-boost-tela-15k-poled-50mp-sony-camera-ois-moto-ai-videos-em-4k-ip68-ip69-vermelho/p/MLB51706778?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Violeta",
+      "preco": 1327.0,
+      "preco_original": 2538.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925275-MLA99995733515_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-04T19:41:36.215912",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-violeta/p/MLB47113437?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1327.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Cinza",
+      "preco": 748.8,
+      "preco_original": 1499.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807545-MLA91949036595_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-04T19:41:29.356410",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-cinza/p/MLB55044657?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 748.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 764.15,
+      "preco_original": 1849.0,
+      "desconto_pct": 58.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-04T19:41:22.559345",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 764.15,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
       "preco": 59.9,
       "preco_original": 239.0,
@@ -1865,6 +1925,12 @@
       "desconto_medio": 44,
       "maior_desconto": 61
     },
+    "celulares": {
+      "total": 8,
+      "score_medio": 85,
+      "desconto_medio": 46,
+      "maior_desconto": 58
+    },
     "beleza": {
       "total": 8,
       "score_medio": 86,
@@ -1901,12 +1967,6 @@
       "desconto_medio": 34,
       "maior_desconto": 38
     },
-    "celulares": {
-      "total": 4,
-      "score_medio": 86,
-      "desconto_medio": 48,
-      "maior_desconto": 52
-    },
     "casa": {
       "total": 4,
       "score_medio": 79,
@@ -1932,6 +1992,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T18:19:19.759059",
-  "total": 120
+  "updated_at": "2026-07-04T19:44:38.769662",
+  "total": 124
 }
