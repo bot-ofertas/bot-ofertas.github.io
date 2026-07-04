@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cooktop De Indução 4 Bocas Dako Supreme Preto Com Trava De Segurança 220v",
+      "preco": 1075.0,
+      "preco_original": 1540.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_652323-MLU77315319959_062024-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 78,
+      "enviado_em": "2026-07-04T15:47:01.624236",
+      "link": "https://www.mercadolivre.com.br/cooktop-de-induco-4-bocas-dako-supreme-preto-com-trava-de-seguranca-220v/p/MLB19481428?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1075.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux 36l Branco Efficient Com Descongelamento Assistido Me36b 220v",
+      "preco": 602.66,
+      "preco_original": 899.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_700594-MLA99497292644_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 73,
+      "enviado_em": "2026-07-04T15:46:54.976551",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-branco-efficient-com-descongelamento-assistido-me36b/p/MLB19790746?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 602.66,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux 36l Branco Efficient Com Descongelamento Assistido Me36b 127v",
+      "preco": 658.63,
+      "preco_original": 899.0,
+      "desconto_pct": 26.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871719-MLA99476767400_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 65,
+      "enviado_em": "2026-07-04T15:46:48.009708",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-branco-efficient-com-descongelamento-assistido-me36b/p/MLB19790745?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 658.63,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux 36l Cor Inox Efficient Com Descongelamento Assistido Me36s 220v",
+      "preco": 711.55,
+      "preco_original": 989.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_953193-MLA100186644785_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 69,
+      "enviado_em": "2026-07-04T15:46:41.243510",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-cor-inox-efficient-com-descongelamento-assistido-me36s/p/MLB19750537?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 711.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Morango",
       "preco": 78.9,
       "preco_original": 129.0,
@@ -525,7 +585,7 @@
       "link": "https://www.mercadolivre.com.br/forno-eletrico-philco-50l-dupla-resistncia-pfe52p/p/MLB28529446?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 380.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -540,7 +600,7 @@
       "link": "https://www.mercadolivre.com.br/cooktop-5-bocas-a-gas-atlas-agile-up-mega-chama-preto/p/MLB50829128?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 386.91,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1652,6 +1712,12 @@
       "desconto_medio": 44,
       "maior_desconto": 69
     },
+    "eletrodomesticos": {
+      "total": 12,
+      "score_medio": 69,
+      "desconto_medio": 30,
+      "maior_desconto": 35
+    },
     "bebes": {
       "total": 12,
       "score_medio": 75,
@@ -1669,12 +1735,6 @@
       "score_medio": 78,
       "desconto_medio": 36,
       "maior_desconto": 52
-    },
-    "eletrodomesticos": {
-      "total": 8,
-      "score_medio": 68,
-      "desconto_medio": 31,
-      "maior_desconto": 35
     },
     "beleza": {
       "total": 8,
@@ -1749,6 +1809,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T14:42:35.909066",
-  "total": 108
+  "updated_at": "2026-07-04T15:49:55.825175",
+  "total": 112
 }
