@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Morango",
+      "preco": 78.9,
+      "preco_original": 129.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_779193-MLA99886212521_112025-AB.webp",
+      "categoria": "saude",
+      "score": 70,
+      "enviado_em": "2026-07-04T14:39:39.990491",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/whey-isolate-protein-fuse-900g-dark-lab-sabor-morango/p/MLB19381120?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 78.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa Amplificada Mondial 300w Bivolt Cm-300-n Preto 127/220v",
+      "preco": 293.04,
+      "preco_original": 450.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_885359-MLA108544665414_032026-AB.webp",
+      "categoria": "saude",
+      "score": 70,
+      "enviado_em": "2026-07-04T14:39:32.965450",
+      "link": "https://www.mercadolivre.com.br/caixa-amplificada-mondial-300w-bivolt-cm-300-n/p/MLB66274919?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 293.04,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lustre Led Sala Moderno 60w, 3 Arcos Pendente Luminária Teto 127/220v Dourado",
+      "preco": 151.99,
+      "preco_original": 298.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_693366-MLB89308241348_082025-AB.webp",
+      "categoria": "saude",
+      "score": 75,
+      "enviado_em": "2026-07-04T14:39:26.077732",
+      "link": "https://www.mercadolivre.com.br/lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto/up/MLBU3320959149?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 151.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Espelho Arco Oval Corpo Inteiro 162x52 Moldura Dourada Chão Dourado",
+      "preco": 325.72,
+      "preco_original": 569.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_689247-MLB113702082963_062026-AB.webp",
+      "categoria": "saude",
+      "score": 79,
+      "enviado_em": "2026-07-04T14:39:18.929772",
+      "link": "https://www.mercadolivre.com.br/espelho-arco-oval-corpo-inteiro-162x52-moldura-dourada-chao/up/MLBU3513795406?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 325.72,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
       "preco": 1399.0,
       "preco_original": 2499.0,
@@ -1570,17 +1631,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Bicicleta Spinning Ergométrica Lafit Pro 4kg 100kg Preto 127/220v",
-    "preco": 455.4,
-    "preco_original": 1100.0,
-    "desconto_pct": 58.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_851986-MLA103724457130_012026-AB.webp",
-    "categoria": "esportes",
+    "titulo": "Camisetas Tommy Hilfiger Preta/marinho 2un - Original",
+    "preco": 230.37,
+    "preco_original": 499.0,
+    "desconto_pct": 53.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926789-MLB79881228509_102024-AB-camisetas-tommy-hilfiger-pretamarinho-2un-original.webp",
+    "categoria": "moda",
     "score": 92,
-    "enviado_em": "2026-07-03T14:35:23.466213",
-    "link": "https://www.mercadolivre.com.br/bicicleta-spinning-ergometrica-lafit-pro-4kg-100kg-preto/p/MLB61810741?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-03T22:06:06.590410",
+    "link": "https://produto.mercadolivre.com.br/MLB-3873518769-camisetas-tommy-hilfiger-pretamarinho-2un-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 455.4,
+    "menor_preco_30d": 230.37,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1627,6 +1688,12 @@
       "desconto_medio": 41,
       "maior_desconto": 66
     },
+    "saude": {
+      "total": 7,
+      "score_medio": 78,
+      "desconto_medio": 44,
+      "maior_desconto": 55
+    },
     "moda": {
       "total": 4,
       "score_medio": 84,
@@ -1669,12 +1736,6 @@
       "desconto_medio": 35,
       "maior_desconto": 41
     },
-    "saude": {
-      "total": 3,
-      "score_medio": 84,
-      "desconto_medio": 48,
-      "maior_desconto": 55
-    },
     "monitores": {
       "total": 3,
       "score_medio": 76,
@@ -1688,6 +1749,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T12:51:40.392394",
-  "total": 104
+  "updated_at": "2026-07-04T14:42:35.909066",
+  "total": 108
 }
