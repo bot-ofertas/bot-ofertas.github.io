@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Lixeira Com Sensor Automático Inteligente Abre Fácil Em Toque Cesto Lixo Casa 16 Litros Cor Branco",
+      "preco": 70.67,
+      "preco_original": 119.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_647231-MLA96051001426_102025-AB.webp",
+      "categoria": "casa",
+      "score": 76,
+      "enviado_em": "2026-07-04T22:07:13.177526",
+      "link": "https://www.mercadolivre.com.br/lixeira-com-sensor-automatico-inteligente-abre-facil-em-toque-cesto-lixo-casa-16-litros-cor-branco/p/MLB61316810?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 70.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Segurança Ip Externa Wifi A28 App Icsee À Prova Dágua Ip66 Dome Lente Dupla Lentes 2 Em 1 Vigilancia Visão Noturna Infravermelho  4k Uhd Nova Geração Lançamento 2026 Nexgen",
+      "preco": 105.71,
+      "preco_original": 200.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_927792-MLB91185357960_092025-AB.webp",
+      "categoria": "casa",
+      "score": 78,
+      "enviado_em": "2026-07-04T22:07:06.555157",
+      "link": "https://www.mercadolivre.com.br/camera-seguranca-ip-externa-wifi-a28-app-icsee-a-prova-dagua/up/MLBU3403280878?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 105.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fechadura Digital De Sobrepor Fr 101 V Preta Intelbras Preto",
+      "preco": 217.6,
+      "preco_original": 344.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_916058-MLA109588424588_042026-AB.webp",
+      "categoria": "casa",
+      "score": 76,
+      "enviado_em": "2026-07-04T22:06:59.913065",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://www.mercadolivre.com.br/fechadura-digital-de-sobrepor-fr-101-v-preta-intelbras/p/MLB63279922?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 217.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo Talheres Faqueiro Búzios Aço Inox 24 Peças Tramontina Aço Inoxidável",
+      "preco": 53.31,
+      "preco_original": 108.0,
+      "desconto_pct": 51.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_885228-MLA105354697197_012026-AB.webp",
+      "categoria": "casa",
+      "score": 77,
+      "enviado_em": "2026-07-04T22:06:52.992666",
+      "link": "https://www.mercadolivre.com.br/jogo-talheres-faqueiro-buzios-aco-inox-24-pecas-tramontina/p/MLB35092029?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 53.31,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 2 Porta Retrato Madeira 15x20 Foto Decoração Marrom Liso",
       "preco": 44.61,
       "preco_original": 78.0,
@@ -1935,18 +1996,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Camisetas Tommy Hilfiger Preta/marinho 2un - Original",
-    "preco": 230.37,
-    "preco_original": 499.0,
-    "desconto_pct": 53.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926789-MLB79881228509_102024-AB-camisetas-tommy-hilfiger-pretamarinho-2un-original.webp",
-    "categoria": "moda",
-    "score": 92,
-    "enviado_em": "2026-07-03T22:06:06.590410",
-    "link": "https://produto.mercadolivre.com.br/MLB-3873518769-camisetas-tommy-hilfiger-pretamarinho-2un-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+    "preco": 764.15,
+    "preco_original": 1849.0,
+    "desconto_pct": 58.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+    "categoria": "celulares",
+    "score": 90,
+    "enviado_em": "2026-07-04T19:41:22.559345",
+    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 230.37,
-    "menor_periodo": false,
+    "menor_preco_30d": 764.15,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -1992,6 +2053,12 @@
       "desconto_medio": 46,
       "maior_desconto": 58
     },
+    "casa": {
+      "total": 8,
+      "score_medio": 78,
+      "desconto_medio": 41,
+      "maior_desconto": 51
+    },
     "beleza": {
       "total": 8,
       "score_medio": 86,
@@ -2028,12 +2095,6 @@
       "desconto_medio": 34,
       "maior_desconto": 38
     },
-    "casa": {
-      "total": 4,
-      "score_medio": 79,
-      "desconto_medio": 38,
-      "maior_desconto": 50
-    },
     "cameras": {
       "total": 4,
       "score_medio": 68,
@@ -2053,6 +2114,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T21:02:46.766744",
-  "total": 128
+  "updated_at": "2026-07-04T22:09:12.167695",
+  "total": 132
 }
