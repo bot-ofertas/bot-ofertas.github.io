@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit 2 Controles Para Ps4 Sem Fio Bluetooth Videogame Tv Smart Pc Gamer Celular Dual Shock Joystick Manete - Crowley",
+      "preco": 106.9,
+      "preco_original": 159.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_613135-MLA110467313620_052026-AB.webp",
+      "categoria": "games",
+      "score": 64,
+      "enviado_em": "2026-07-04T01:59:29.937520",
+      "link": "https://www.mercadolivre.com.br/kit-2-controles-para-ps4-sem-fio-bluetooth-videogame-tv-smart-pc-gamer-celular-dual-shock-joystick-manete-crowley/p/MLB69284011?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 106.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 - Marca Redfin Preto",
+      "preco": 54.88,
+      "preco_original": 89.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762912-MLA105696431793_012026-AB.webp",
+      "categoria": "games",
+      "score": 69,
+      "enviado_em": "2026-07-04T01:59:22.983769",
+      "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 54.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Xbox Wireless Series X|s Carbon Black",
+      "preco": 331.55,
+      "preco_original": 520.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658374-MLA99957214369_112025-AB.webp",
+      "categoria": "games",
+      "score": 68,
+      "enviado_em": "2026-07-04T01:59:16.179343",
+      "link": "https://www.mercadolivre.com.br/controle-xbox-wireless-series-xs-carbon-black/p/MLB16268160?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 331.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Joystick Sem Fio Sony Playstation Dualsense Branco",
+      "preco": 365.0,
+      "preco_original": 559.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_734154-MLA95669318090_102025-AB.webp",
+      "categoria": "games",
+      "score": 71,
+      "enviado_em": "2026-07-04T01:59:09.412113",
+      "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-dualsense-branco/p/MLB33997846?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 365.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Telescópio Astronômico 60mm 900mm Lua Crateras Planetas Prateado",
       "preco": 359.9,
       "preco_original": 789.0,
@@ -1386,6 +1446,12 @@
       "desconto_medio": 43,
       "maior_desconto": 53
     },
+    "games": {
+      "total": 4,
+      "score_medio": 68,
+      "desconto_medio": 35,
+      "maior_desconto": 38
+    },
     "ferramentas": {
       "total": 4,
       "score_medio": 80,
@@ -1441,6 +1507,6 @@
       "maior_desconto": 62
     }
   },
-  "updated_at": "2026-07-04T01:17:59.612053",
-  "total": 88
+  "updated_at": "2026-07-04T02:02:25.554161",
+  "total": 92
 }
