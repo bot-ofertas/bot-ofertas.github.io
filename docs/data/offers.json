@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Kit C/ 4 Toalha De Banho Gigante 80 X 150 Cm Atacado + Softmax",
+      "preco": 76.62,
+      "preco_original": 154.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_655993-MLA112117491538_062026-AB.webp",
+      "categoria": "impressoras",
+      "score": 73,
+      "enviado_em": "2026-07-05T14:45:52.372339",
+      "link": "https://www.mercadolivre.com.br/kit-c-4-toalha-de-banho-gigante-80-x-150-cm-atacado-softmax/p/MLB29561684?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 76.62,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa Amplificada Connect Lights Cm-400 Mondial Cor Preto Preto/vermelho 127/220v",
+      "preco": 350.55,
+      "preco_original": 806.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_668758-MLA99963187239_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 88,
+      "enviado_em": "2026-07-05T14:45:45.266990",
+      "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-lights-cm-400-mondial-cor-preto/p/MLB18247621?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 350.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Etiquetas Em Folhas P/ Bijuteria E Óculos - Kit 25 Folhas Branco",
+      "preco": 23.04,
+      "preco_original": 49.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821287-MLB32337107682_092019-AB.webp",
+      "categoria": "tablets",
+      "score": 61,
+      "enviado_em": "2026-07-05T14:45:35.685054",
+      "link": "https://www.mercadolivre.com.br/etiquetas-em-folhas-p-bijuteria-e-oculos--kit-25-folhas/up/MLBU1652474100?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 23.04,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Térmico Impressora Peripage A40 A4 21x30 - 3 Rolos Branco",
+      "preco": 44.58,
+      "preco_original": 118.0,
+      "desconto_pct": 62.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_952014-MLB96504394921_102025-AB.webp",
+      "categoria": "tablets",
+      "score": 60,
+      "enviado_em": "2026-07-05T14:45:28.868076",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/papel-termico-impressora-peripage-a40-a4-21x30--3-rolos/up/MLBU797003953?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 44.58,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Câmera Veicular 4k Sony 70mai A810s 4g Gps Adas Com Sd Card A810s-2 Com Sd 64g",
       "preco": 1601.0,
       "preco_original": 3548.0,
@@ -1766,6 +1827,12 @@
       "desconto_medio": 44,
       "maior_desconto": 55
     },
+    "tablets": {
+      "total": 4,
+      "score_medio": 67,
+      "desconto_medio": 50,
+      "maior_desconto": 62
+    },
     "games": {
       "total": 4,
       "score_medio": 68,
@@ -1796,13 +1863,13 @@
       "desconto_medio": 41,
       "maior_desconto": 52
     },
-    "tablets": {
+    "impressoras": {
       "total": 2,
-      "score_medio": 73,
-      "desconto_medio": 44,
-      "maior_desconto": 49
+      "score_medio": 81,
+      "desconto_medio": 53,
+      "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T12:55:24.713475",
-  "total": 112
+  "updated_at": "2026-07-05T14:48:47.607991",
+  "total": 116
 }
