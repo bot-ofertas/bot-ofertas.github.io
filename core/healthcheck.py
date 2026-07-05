@@ -26,6 +26,13 @@ log = logging.getLogger("healthcheck")
 _BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORTA = 8724
 
+# Carrega .env explicitamente para healthcheck rodando em thread separada
+try:
+    from dotenv import load_dotenv  # noqa: PLC0415
+    load_dotenv(os.path.join(_BASE, ".env"))
+except Exception:
+    pass
+
 
 def _status_chrome() -> dict:
     from core.chrome_manager import esta_pronto  # noqa: PLC0415
@@ -33,6 +40,12 @@ def _status_chrome() -> dict:
 
 
 def _status_telegram() -> dict:
+    # Recarrega .env por precaução (thread do healthcheck às vezes perde env)
+    try:
+        from dotenv import load_dotenv  # noqa: PLC0415
+        load_dotenv(os.path.join(_BASE, ".env"))
+    except Exception:
+        pass
     tok = os.getenv("TOKEN_TELEGRAM", "")
     canal = os.getenv("CANAL_GERAL", "")
     return {"ok": bool(tok and canal), "canal": bool(canal)}
@@ -60,15 +73,41 @@ def _status_whatsapp() -> dict:
 
 
 def _status_rastreador() -> dict:
-    """Última linha do log do rastreador para saber se está vivo."""
+    """Status do rastreador — usa processo + log combinados.
+
+    Considera ok se:
+      - Existe processo python rodando rastreador.py --loop OU --random
+      - Log tem menos de 55 min (cobrindo intervalo aleatório 30-45 min + margem)
+    """
     log_path = os.path.join(_BASE, "data", "rastreador_local.log")
+    processo_vivo = False
+    try:
+        import psutil  # noqa: PLC0415
+        for p in psutil.process_iter(["name", "cmdline"]):
+            try:
+                cl = p.info.get("cmdline") or []
+                n = (p.info.get("name") or "").lower()
+                if "python" in n and any(a.endswith("rastreador.py") for a in cl):
+                    processo_vivo = True
+                    break
+            except Exception:
+                continue
+    except ImportError:
+        pass
+
     if not os.path.exists(log_path):
-        return {"ok": False, "motivo": "sem-log"}
+        return {"ok": processo_vivo, "motivo": "sem-log", "processo": processo_vivo}
     try:
         idade = time.time() - os.path.getmtime(log_path)
-        return {"ok": idade < 1800, "idade_s": round(idade)}
+        # 55 min = cobre intervalo aleatório 30-45min + tempo de rodada + margem
+        log_recente = idade < 3300
+        return {
+            "ok": processo_vivo and log_recente,
+            "idade_s": round(idade),
+            "processo": processo_vivo,
+        }
     except Exception:
-        return {"ok": False}
+        return {"ok": processo_vivo}
 
 
 def _status_sistema() -> dict:
