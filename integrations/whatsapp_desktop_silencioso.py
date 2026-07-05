@@ -114,51 +114,82 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
         log.warning("pywinauto: janela não existe — %s", e)
         return False
 
+    # WhatsApp UWP precisa da janela em foreground para processar teclas.
+    # Estratégia: restaurar/ativar bem rápido, enviar, minimizar de volta.
+    # Total: ~4 segundos com janela visível vs. 8-10s do pyautogui antigo.
     try:
-        # 1. Ache a caixa de busca (edit) e digite o nome do grupo
+        import pygetwindow as gw  # noqa: PLC0415
+        # Guarda janela ativa atual para devolver o foco no fim
+        janela_anterior = gw.getActiveWindow()
+    except Exception:
+        janela_anterior = None
+
+    # Restaura janela minimizada (mas mantém em posição existente)
+    try:
+        win.restore()
+        win.set_focus()
+        time.sleep(0.4)
+    except Exception:
+        pass
+
+    try:
+        # 1. Busca conversa
         edits = win.descendants(control_type="Edit")
         if not edits:
             log.info("pywinauto: sem controles Edit visíveis")
             return False
         busca = edits[0]
-        # set_edit_text funciona em background (usa mensagens do Windows,
-        # não teclas físicas — não afeta o foco atual do usuário)
-        busca.set_edit_text(nome_grupo)
-        time.sleep(1.2)
-        busca.type_keys("{ENTER}", set_foreground=False)
-        time.sleep(1.5)
+        busca.set_edit_text(nome_grupo)   # não usa teclas físicas
+        time.sleep(0.9)
+        busca.type_keys("{ENTER}", set_foreground=True)
+        time.sleep(1.3)
 
-        # 2. Localiza o campo de compose (última Edit visível)
+        # 2. Localiza compose (última Edit visível)
         edits = win.descendants(control_type="Edit")
         compose = edits[-1] if edits else None
         if compose is None:
             return False
 
-        # 3. Foto: coloca no clipboard e cola via Ctrl+V (set_foreground=False)
+        # 3. Foto + legenda
         if caminho_foto and os.path.exists(caminho_foto):
             if _copiar_foto_hdrop(caminho_foto):
-                compose.type_keys("^v", set_foreground=False)
-                time.sleep(3.0)
-                # Cola legenda
+                compose.type_keys("^v", set_foreground=True)
+                time.sleep(2.8)  # aguarda upload+preview
                 if _copiar_texto(mensagem):
-                    compose.type_keys("^v", set_foreground=False)
-                    time.sleep(0.6)
-                compose.type_keys("{ENTER}", set_foreground=False)
-                time.sleep(1.2)
+                    compose.type_keys("^v", set_foreground=True)
+                    time.sleep(0.5)
+                compose.type_keys("{ENTER}", set_foreground=True)
+                time.sleep(1.0)
+                _devolver_foco(win, janela_anterior)
                 log.info("✅ WA silencioso: foto+legenda enviada para '%s'", nome_grupo)
                 return True
 
         # 4. Sem foto: só texto
         if _copiar_texto(mensagem):
-            compose.type_keys("^v", set_foreground=False)
+            compose.type_keys("^v", set_foreground=True)
             time.sleep(0.4)
         else:
             compose.set_edit_text(mensagem)
-        compose.type_keys("{ENTER}", set_foreground=False)
-        time.sleep(0.8)
+        compose.type_keys("{ENTER}", set_foreground=True)
+        time.sleep(0.6)
+        _devolver_foco(win, janela_anterior)
         log.info("✅ WA silencioso: texto enviado para '%s'", nome_grupo)
         return True
     except Exception as e:
         from core.error_logger import log_erro  # noqa: PLC0415
         log_erro("wa_silencioso.envio", e, {"grupo": nome_grupo})
+        _devolver_foco(win, janela_anterior)
         return False
+
+
+def _devolver_foco(win_wa, janela_anterior) -> None:
+    """Minimiza WhatsApp e devolve foco pra janela que o usuário estava usando."""
+    try:
+        win_wa.minimize()
+    except Exception:
+        pass
+    try:
+        if janela_anterior:
+            janela_anterior.activate()
+    except Exception:
+        pass
