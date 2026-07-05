@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "170cm Tripé Câmera Profissional Basike Para Câmera E Celular  Cabeça 3 Vias 630° Panorâmico, Nível Bolha, Bolsa De Transporte,suporte De Celular  Ideal Para Fotografia, Live, Vlog Preto",
+      "preco": 228.9,
+      "preco_original": 380.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_781924-MLA110926508508_052026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 75,
+      "enviado_em": "2026-07-05T22:38:04.090096",
+      "link": "https://www.mercadolivre.com.br/170cm-tripe-cmera-profissional-basike-para-cmera-e-celular-cabeca-3-vias-630-panormico-nivel-bolha-bolsa-de-transportesuporte-de-celular-ideal-para-fotografia-live-vlog/p/MLB67483781?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 228.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Capa Mergulho Celular Câmera Tripla Vertical Prova D'água Preto",
+      "preco": 237.59,
+      "preco_original": 356.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_970989-MLB109769748099_032026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 67,
+      "enviado_em": "2026-07-05T22:37:57.202658",
+      "link": "https://www.mercadolivre.com.br/capa-mergulho-celular-camera-tripla-vertical-prova-dagua/up/MLBU3577081618?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 237.59,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Basike Tripé Magnético Portátil 1.8m, Tripé Celular Profissional Rotação 360° + Inclinação De 270° Com Controle Remoto Bluetooth Recarregável,suporte De Selfie Para Celular Gopro Câmera E iPhone Preto",
+      "preco": 174.58,
+      "preco_original": 290.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_792576-MLA109084595885_032026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 73,
+      "enviado_em": "2026-07-05T22:37:50.315994",
+      "link": "https://www.mercadolivre.com.br/basike-tripe-magnetico-portatil-18m-tripe-celular-profissional-rotaco-360-inclinaco-de-270-com-controle-remoto-bluetooth-recarregavelsuporte-de-selfie-para-celular-gopro-cmera-e-iphone/p/MLB66843697?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 174.58,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lens Wipes 200 Lenços Limpa Lentes Óculos Câmeras Multimídia",
+      "preco": 37.24,
+      "preco_original": 62.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_704915-MLB99598209600_122025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 69,
+      "enviado_em": "2026-07-05T22:37:43.480487",
+      "link": "https://www.mercadolivre.com.br/lens-wipes-200-lencos-limpa-lentes-oculos-cameras-multimidia/up/MLBU3642151597?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 37.24,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Galaxy Buds Core Preto",
       "preco": 220.5,
       "preco_original": 349.0,
@@ -2076,17 +2136,17 @@
     "verificada": true
   },
   "stats": {
+    "ferramentas": {
+      "total": 19,
+      "score_medio": 74,
+      "desconto_medio": 42,
+      "maior_desconto": 61
+    },
     "automotivo": {
       "total": 16,
       "score_medio": 76,
       "desconto_medio": 43,
       "maior_desconto": 66
-    },
-    "ferramentas": {
-      "total": 15,
-      "score_medio": 75,
-      "desconto_medio": 44,
-      "maior_desconto": 61
     },
     "tvs": {
       "total": 12,
@@ -2191,6 +2251,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T21:33:50.972410",
-  "total": 136
+  "updated_at": "2026-07-05T22:41:00.133492",
+  "total": 140
 }
