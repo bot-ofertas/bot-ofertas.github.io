@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Galaxy Buds Core Preto",
+      "preco": 220.5,
+      "preco_original": 349.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650858-MLA97317826023_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 66,
+      "enviado_em": "2026-07-05T21:30:56.282690",
+      "link": "https://www.mercadolivre.com.br/galaxy-buds-core-preto/p/MLB58315694?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 220.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa De Som Boombox Aiwa Aws-bbs-01-b 200w Ip66 30hs De Bateria Preto 127/220v",
+      "preco": 1229.0,
+      "preco_original": 1999.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_864411-MLA99591392870_122025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 88,
+      "enviado_em": "2026-07-05T21:30:49.629436",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-boombox-aiwa-aws-bbs-01-b-200w-ip66-30hs-de-bateria/p/MLB34113516?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1229.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa Amplificada Connect Power Plus Cm-550 Preto Mondial 127/220v",
+      "preco": 416.13,
+      "preco_original": 929.0,
+      "desconto_pct": 55.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-05T21:30:42.886734",
+      "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 416.13,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa De Som Partybox Aiwa Pb-06 Bluetooth 20h Rgb Usb Tws Preto 127/220v",
+      "preco": 1072.0,
+      "preco_original": 1749.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_890159-MLA99508458050_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 88,
+      "enviado_em": "2026-07-05T21:30:36.262845",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-partybox-aiwa-pb-06-bluetooth-20h-rgb-usb-tws/p/MLB40288174?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1072.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Câmera Veicular 4k Hdr 3 Canais 70mai T800e-1 Gps 24h App 4k T800e-1 (3 Canais)",
       "preco": 1162.0,
       "preco_original": 2999.0,
@@ -2001,17 +2061,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Câmera Instantânea Fujifilm Instax Mini 12 Branca Fotos Kit Câmera E 10 Fotos",
-    "preco": 630.49,
-    "preco_original": 1193.0,
-    "desconto_pct": 47.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_614053-MLB113709443761_062026-AB.webp",
-    "categoria": "ferramentas",
+    "titulo": "Caixa Amplificada Connect Power Plus Cm-550 Preto Mondial 127/220v",
+    "preco": 416.13,
+    "preco_original": 929.0,
+    "desconto_pct": 55.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
+    "categoria": "eletronicos",
     "score": 90,
-    "enviado_em": "2026-07-04T20:59:57.241668",
-    "link": "https://www.mercadolivre.com.br/camera-instantanea-fujifilm-instax-mini-12-branca-fotos/up/MLBU4158374154?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-05T21:30:42.886734",
+    "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 630.49,
+    "menor_preco_30d": 416.13,
     "menor_periodo": false,
     "verificada": true
   },
@@ -2088,6 +2148,12 @@
       "desconto_medio": 35,
       "maior_desconto": 38
     },
+    "eletronicos": {
+      "total": 4,
+      "score_medio": 83,
+      "desconto_medio": 42,
+      "maior_desconto": 55
+    },
     "celulares": {
       "total": 4,
       "score_medio": 84,
@@ -2125,6 +2191,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T20:18:42.012138",
-  "total": 132
+  "updated_at": "2026-07-05T21:33:50.972410",
+  "total": 136
 }
