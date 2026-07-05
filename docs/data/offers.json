@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv LG Uhd Ai Ua75 50 Polegadas Hdr10 Pro Processador 7 Ai Ger8 Webos 25",
+      "preco": 2051.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_884169-MLA106908124660_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 81,
+      "enviado_em": "2026-07-05T23:43:44.702337",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-50-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53201474?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2051.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio Wi-fi Hdr10 110/220v",
+      "preco": 2089.0,
+      "preco_original": 3499.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753324-MLA108743670040_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-05T23:43:38.052349",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-50-p50vik-4k-uhd-led-roku-dolby-audio-wi-fi-hdr10-110220v/p/MLB67267597?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2089.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Samsung Led 65 Lh65befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
+      "preco": 3609.0,
+      "preco_original": 5799.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_712967-MLA96969981644_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 87,
+      "enviado_em": "2026-07-05T23:43:31.411721",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-led-65-lh65befh4ggxzd-led-crystal-processor-4k-uhd-tizen-110v220v/p/MLB58375066?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3609.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 4k 65  LG Qned73 Portal De Games Processador Ai 7 Ger8 4k Super Upscaling Google Cast Integrado Controle Ai Magic Webos 25 Modo Esportes Alerta De Esportes",
+      "preco": 3495.0,
+      "preco_original": 4999.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_830052-MLA108511019788_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 80,
+      "enviado_em": "2026-07-05T23:43:24.756591",
+      "link": "https://www.mercadolivre.com.br/smart-tv-4k-65-lg-qned73-portal-de-games-processador-ai-7-ger8-4k-super-upscaling-google-cast-integrado-controle-ai-magic-webos-25-modo-esportes-alerta-de-esportes/p/MLB65916404?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3495.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "170cm Tripé Câmera Profissional Basike Para Câmera E Celular  Cabeça 3 Vias 630° Panorâmico, Nível Bolha, Bolsa De Transporte,suporte De Celular  Ideal Para Fotografia, Live, Vlog Preto",
       "preco": 228.9,
       "preco_original": 380.0,
@@ -2086,7 +2146,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB67270079?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1299.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2116,7 +2176,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-4k-55-lg-qned73-portal-de-games-processador-ai-7-gen8-4k-super-upscaling-google-cast-integrado-controle-ai-magic-webos-25-modo-esportes-alerta-de-esportes/p/MLB66998788?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 2687.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     }
   ],
@@ -2142,17 +2202,17 @@
       "desconto_medio": 42,
       "maior_desconto": 61
     },
+    "tvs": {
+      "total": 16,
+      "score_medio": 84,
+      "desconto_medio": 35,
+      "maior_desconto": 44
+    },
     "automotivo": {
       "total": 16,
       "score_medio": 76,
       "desconto_medio": 43,
       "maior_desconto": 66
-    },
-    "tvs": {
-      "total": 12,
-      "score_medio": 83,
-      "desconto_medio": 35,
-      "maior_desconto": 44
     },
     "esportes": {
       "total": 12,
@@ -2251,6 +2311,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T22:41:00.133492",
-  "total": 140
+  "updated_at": "2026-07-05T23:46:38.927524",
+  "total": 144
 }
