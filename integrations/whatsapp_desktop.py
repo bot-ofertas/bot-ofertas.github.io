@@ -251,19 +251,25 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
     tem_foto = bool(caminho_foto and os.path.exists(caminho_foto))
 
     # ── MODO SILENCIOSO (pywinauto UIA) — NÃO ATIVA A JANELA ────────────────
-    # Tenta primeiro o envio invisível que não interfere no PC do usuário.
-    # Só cai para pyautogui (rouba foco) se falhar.
+    # PADRÃO: só usa este modo. Não cai mais para pyautogui automaticamente
+    # (pyautogui rouba o foco e atrapalha o usuário).
+    try:
+        from integrations.whatsapp_desktop_silencioso import (  # noqa: PLC0415
+            enviar_silencioso,
+        )
+        if enviar_silencioso(nome_grupo, mensagem, caminho_foto):
+            _limpar_fotos_antigas()
+            return True
+        log.info("Modo silencioso não conseguiu enviar.")
+    except Exception as e:
+        log.info("Modo silencioso indisponível: %s", e)
+
+    # Fallback pyautogui: SÓ se o usuário explicitamente autorizar via
+    # WHATSAPP_MODO_ATRAPALHA=1 no .env. Caso contrário, retorna False e
+    # deixa o Telegram continuar (isolamento).
     if os.getenv("WHATSAPP_MODO_ATRAPALHA", "0") != "1":
-        try:
-            from integrations.whatsapp_desktop_silencioso import (  # noqa: PLC0415
-                enviar_silencioso,
-            )
-            if enviar_silencioso(nome_grupo, mensagem, caminho_foto):
-                _limpar_fotos_antigas()
-                return True
-            log.info("Modo silencioso não enviou — tentando fallback pyautogui.")
-        except Exception as e:
-            log.info("Modo silencioso indisponível: %s", e)
+        log.info("WhatsApp: pulando envio (pyautogui desativado — não atrapalha o PC).")
+        return False
 
     pyautogui.FAILSAFE = True
     pyautogui.PAUSE = 0.25

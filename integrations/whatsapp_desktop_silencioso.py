@@ -74,26 +74,44 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
         log.info("pywinauto não instalado — pip install pywinauto")
         return False
 
+    # Conecta pelo HANDLE da janela detectada pelo pygetwindow (funciona
+    # com o WhatsApp UWP, que não expõe processo em modo normal).
+    app = None
+    win = None
     try:
-        # Conecta pelo processo (não pelo título — mais estável)
-        app = Application(backend="uia").connect(
-            path="WhatsApp.exe", timeout=5
-        )
-    except Exception:
-        try:
-            app = Application(backend="uia").connect(
-                path="WhatsApp.Root.exe", timeout=5
-            )
-        except Exception as e:
-            log.info("pywinauto: não conectou ao WhatsApp — %s", e)
-            return False
+        import pygetwindow as gw  # noqa: PLC0415
+        for w in gw.getAllWindows():
+            t = (w.title or "").strip().lower()
+            if "whatsapp" in t and "chrome" not in t and "edge" not in t:
+                try:
+                    hwnd = w._hWnd if hasattr(w, "_hWnd") else None
+                    if hwnd:
+                        app = Application(backend="uia").connect(handle=hwnd, timeout=5)
+                        win = app.window(handle=hwnd)
+                        break
+                except Exception:
+                    continue
+    except Exception as e:
+        log.debug("pygetwindow: %s", e)
+
+    if app is None:
+        # Fallback — tenta pelo processo (funciona em algumas versões)
+        for path in ("WhatsApp.exe", "WhatsApp.Root.exe"):
+            try:
+                app = Application(backend="uia").connect(path=path, timeout=5)
+                win = app.top_window()
+                break
+            except Exception:
+                continue
+
+    if app is None or win is None:
+        log.info("pywinauto: não conectou ao WhatsApp Desktop")
+        return False
 
     try:
-        win = app.top_window()
-        # Aguarda janela existir (não precisa estar visível)
-        win.wait("exists", timeout=8)
+        win.wait("exists", timeout=5)
     except Exception as e:
-        log.warning("pywinauto: janela não localizada — %s", e)
+        log.warning("pywinauto: janela não existe — %s", e)
         return False
 
     try:
