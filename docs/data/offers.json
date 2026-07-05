@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Kit Teclado Musical Estudante Iniciante 5/8 + Capa Suporte 127/220v Preto",
+      "preco": 399.9,
+      "preco_original": 763.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828294-MLB108024238365_032026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 84,
+      "enviado_em": "2026-07-05T16:11:32.201298",
+      "link": "https://www.mercadolivre.com.br/kit-teclado-musical-estudante-iniciante-58--capa-suporte/up/MLBU755382748?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 2 Travesseiros 70x50 Antialérgico Lavável Fibra Siliconada Toque De Pluma De Ganso Oaktex Cor Branco",
+      "preco": 34.99,
+      "preco_original": 63.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_774639-MLA100083759943_122025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 71,
+      "enviado_em": "2026-07-05T16:11:25.511922",
+      "link": "https://www.mercadolivre.com.br/kit-2-travesseiros-70x50-antialergico-lavavel-fibra-siliconada-toque-de-pluma-de-ganso-oaktex-cor-branco/p/MLB43954645?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 34.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lavadora De Alta Pressão Bosch Ghp 200 1700w 2000 Psi Com Acessórios Azul 220v 60",
+      "preco": 789.9,
+      "preco_original": 1499.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848972-MLA88062658976_072025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 90,
+      "enviado_em": "2026-07-05T16:11:18.833115",
+      "link": "https://www.mercadolivre.com.br/lavadora-de-alta-presso-bosch-ghp-200-1700w-2000-psi-com-acessorios/p/MLB38520576?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 789.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Em Pote 300g 100% Pura Dark Lab Sem Sabor",
+      "preco": 39.9,
+      "preco_original": 78.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716663-MLA99599672360_122025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 71,
+      "enviado_em": "2026-07-05T16:11:12.239650",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-em-pote-300g-100-pura-dark-lab/p/MLB19506691?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit C/ 4 Toalha De Banho Gigante 80 X 150 Cm Atacado + Softmax",
       "preco": 76.62,
       "preco_original": 154.0,
@@ -1863,6 +1924,12 @@
       "desconto_medio": 41,
       "maior_desconto": 52
     },
+    "armazenamento": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 47,
+      "maior_desconto": 49
+    },
     "impressoras": {
       "total": 2,
       "score_medio": 81,
@@ -1870,6 +1937,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T14:48:47.607991",
-  "total": 116
+  "updated_at": "2026-07-05T16:14:26.076033",
+  "total": 120
 }
