@@ -250,6 +250,21 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
     caminho_foto = _baixar_e_salvar_foto(foto_url) if foto_url else ""
     tem_foto = bool(caminho_foto and os.path.exists(caminho_foto))
 
+    # ── MODO SILENCIOSO (pywinauto UIA) — NÃO ATIVA A JANELA ────────────────
+    # Tenta primeiro o envio invisível que não interfere no PC do usuário.
+    # Só cai para pyautogui (rouba foco) se falhar.
+    if os.getenv("WHATSAPP_MODO_ATRAPALHA", "0") != "1":
+        try:
+            from integrations.whatsapp_desktop_silencioso import (  # noqa: PLC0415
+                enviar_silencioso,
+            )
+            if enviar_silencioso(nome_grupo, mensagem, caminho_foto):
+                _limpar_fotos_antigas()
+                return True
+            log.info("Modo silencioso não enviou — tentando fallback pyautogui.")
+        except Exception as e:
+            log.info("Modo silencioso indisponível: %s", e)
+
     pyautogui.FAILSAFE = True
     pyautogui.PAUSE = 0.25
 
