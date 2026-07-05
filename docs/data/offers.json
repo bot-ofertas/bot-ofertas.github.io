@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Câmera Veicular 4k Sony 70mai A810s 4g Gps Adas Com Sd Card A810s-2 Com Sd 64g",
+      "preco": 1601.0,
+      "preco_original": 3548.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_876303-MLB106700466263_022026-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-05T12:52:57.739894",
+      "link": "https://www.mercadolivre.com.br/camera-veicular-4k-sony-70mai-a810s-4g-gps-adas-com-sd-card/up/MLBU3773399115?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1601.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bagageiro Maleiro De Teto Truff Premium 600l Preto",
+      "preco": 1399.0,
+      "preco_original": 2108.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_943409-MLB110337442092_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 80,
+      "enviado_em": "2026-07-05T12:52:51.145689",
+      "link": "https://www.mercadolivre.com.br/bagageiro-maleiro-de-teto-truff-premium-600l/up/MLBU3937829995?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Case Suporte Veícular Teto Carro Externo Starlink Mini Imã88",
+      "preco": 327.0,
+      "preco_original": 799.0,
+      "desconto_pct": 59.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_717569-MLB109283370016_042026-AB-case-suporte-veicular-teto-carro-externo-starlink-mini-im88.webp",
+      "categoria": "automotivo",
+      "score": 85,
+      "enviado_em": "2026-07-05T12:52:44.540071",
+      "link": "https://produto.mercadolivre.com.br/MLB-6085020128-case-suporte-veicular-teto-carro-externo-starlink-mini-im88-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 327.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Veicular Dupla 70mai 4k+1080p Noturna Hdr Gps A800se 4k A800se-1",
+      "preco": 932.23,
+      "preco_original": 2199.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861805-MLB113939229937_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-05T12:52:37.903024",
+      "link": "https://www.mercadolivre.com.br/camera-veicular-dupla-70mai-4k1080p-noturna-hdr-gps-a800se/up/MLBU3480298772?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 932.23,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tênis Casual Kappa Zenit Masculino Unissex Conforto",
       "preco": 99.9,
       "preco_original": 229.0,
@@ -1670,6 +1730,12 @@
       "desconto_medio": 30,
       "maior_desconto": 40
     },
+    "automotivo": {
+      "total": 12,
+      "score_medio": 78,
+      "desconto_medio": 44,
+      "maior_desconto": 66
+    },
     "tvs": {
       "total": 8,
       "score_medio": 85,
@@ -1693,12 +1759,6 @@
       "score_medio": 74,
       "desconto_medio": 40,
       "maior_desconto": 52
-    },
-    "automotivo": {
-      "total": 8,
-      "score_medio": 75,
-      "desconto_medio": 40,
-      "maior_desconto": 66
     },
     "saude": {
       "total": 7,
@@ -1743,6 +1803,6 @@
       "maior_desconto": 49
     }
   },
-  "updated_at": "2026-07-05T11:40:18.981581",
-  "total": 108
+  "updated_at": "2026-07-05T12:55:24.713475",
+  "total": 112
 }
