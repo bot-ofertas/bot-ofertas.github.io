@@ -1,36 +1,36 @@
 # -*- coding: utf-8 -*-
 """
-WHATSAPP DESKTOP SILENCIOSO — envia mensagens SEM roubar o foco.
+WHATSAPP DESKTOP — envio rápido com foco brevíssimo.
 
-Usa pywinauto UIA (UI Automation da Microsoft) que consegue enviar teclas
-para controles específicos da janela em segundo plano, mesmo quando ela
-está minimizada ou fora do foco.
+Abandonei UIA (150+ Edits na árvore → 5s+ por operação). Volto ao
+pyautogui MAS com garantias:
 
-Fluxo:
-  1. Localiza a janela do WhatsApp Desktop (mesmo minimizada)
-  2. Conecta via pywinauto backend='uia'
-  3. Encontra o campo de busca (Edit) e digita nome do grupo
-  4. Encontra o campo de mensagem (Edit no rodapé)
-  5. Coloca foto no clipboard e envia via mensagem SendMessage do Windows
-  6. Nunca ativa/traz a janela para frente
+  1. LIMPA estado residual (Escape 3x) antes de tudo
+  2. Verifica que preview fechou após cada envio (não acumula fotos)
+  3. Minimiza janela imediatamente após envio confirmado
+  4. Guarda janela ativa do usuário e devolve foco no final
 
-Vantagem: 100% invisível. Usuário pode estar digitando em outro app que
-o bot não interfere.
+Total: ~5s com WhatsApp em foreground vs. 10s+ do pyautogui antigo.
+Nunca acumula fotos em um mesmo preview.
 """
 from __future__ import annotations
 
 import logging
 import os
+import struct
 import time
-from typing import Optional
 
 log = logging.getLogger("wa_silencioso")
 
 
 def _copiar_foto_hdrop(caminho: str) -> bool:
-    """Copia arquivo (CF_HDROP) para o clipboard."""
+    """Copia foto como ARQUIVO no clipboard (CF_HDROP).
+
+    Testes mostraram que copiar também CF_DIB (pixels) faz o WhatsApp
+    Desktop escolher os pixels, que chegam corrompidos. Só CF_HDROP funciona
+    corretamente — o WhatsApp anexa o arquivo como imagem original.
+    """
     try:
-        import struct  # noqa: PLC0415
         import win32clipboard  # noqa: PLC0415
         import win32con  # noqa: PLC0415
         offset = 20
@@ -43,7 +43,7 @@ def _copiar_foto_hdrop(caminho: str) -> bool:
         win32clipboard.CloseClipboard()
         return True
     except Exception as e:
-        log.warning("clipboard foto: %s", e)
+        log.warning("clipboard CF_HDROP: %s", e)
         return False
 
 
@@ -61,131 +61,132 @@ def _copiar_texto(texto: str) -> bool:
         return False
 
 
-def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
-    """Envia foto+legenda ao grupo SEM ativar a janela do WhatsApp.
-
-    Retorna True se enviou. Se pywinauto não conseguir operar em background,
-    retorna False para o chamador tentar o método pyautogui como fallback.
-    """
-    try:
-        from pywinauto import Application  # noqa: PLC0415
-        from pywinauto.keyboard import send_keys as _sk  # noqa: PLC0415, F401
-    except ImportError:
-        log.info("pywinauto não instalado — pip install pywinauto")
-        return False
-
-    # Conecta pelo HANDLE da janela detectada pelo pygetwindow (funciona
-    # com o WhatsApp UWP, que não expõe processo em modo normal).
-    app = None
-    win = None
+def _achar_janela_wa():
+    """Retorna janela do WhatsApp Desktop (aceita minimizada). None se não achou."""
     try:
         import pygetwindow as gw  # noqa: PLC0415
         for w in gw.getAllWindows():
-            t = (w.title or "").strip().lower()
-            if "whatsapp" in t and "chrome" not in t and "edge" not in t:
-                try:
-                    hwnd = w._hWnd if hasattr(w, "_hWnd") else None
-                    if hwnd:
-                        app = Application(backend="uia").connect(handle=hwnd, timeout=5)
-                        win = app.window(handle=hwnd)
-                        break
-                except Exception:
-                    continue
-    except Exception as e:
-        log.debug("pygetwindow: %s", e)
-
-    if app is None:
-        # Fallback — tenta pelo processo (funciona em algumas versões)
-        for path in ("WhatsApp.exe", "WhatsApp.Root.exe"):
-            try:
-                app = Application(backend="uia").connect(path=path, timeout=5)
-                win = app.top_window()
-                break
-            except Exception:
+            t = (w.title or "").strip()
+            if not t:
                 continue
+            low = t.lower()
+            if "whatsapp" in low and "chrome" not in low and "edge" not in low:
+                return w
+    except Exception:
+        pass
+    return None
 
-    if app is None or win is None:
-        log.info("pywinauto: não conectou ao WhatsApp Desktop")
-        return False
 
+def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
+    """Envia foto+legenda ao grupo. Retorna True se enviou (com verificação)."""
     try:
-        win.wait("exists", timeout=5)
-    except Exception as e:
-        log.warning("pywinauto: janela não existe — %s", e)
-        return False
-
-    # WhatsApp UWP precisa da janela em foreground para processar teclas.
-    # Estratégia: restaurar/ativar bem rápido, enviar, minimizar de volta.
-    # Total: ~4 segundos com janela visível vs. 8-10s do pyautogui antigo.
-    try:
+        import pyautogui       # noqa: PLC0415
         import pygetwindow as gw  # noqa: PLC0415
-        # Guarda janela ativa atual para devolver o foco no fim
+    except ImportError:
+        log.info("pyautogui/pygetwindow não instalados")
+        return False
+
+    janela = _achar_janela_wa()
+    if janela is None:
+        log.info("WhatsApp Desktop não encontrado")
+        return False
+
+    # Guarda janela ativa atual para devolver foco no fim
+    try:
         janela_anterior = gw.getActiveWindow()
     except Exception:
         janela_anterior = None
 
-    # Restaura janela minimizada (mas mantém em posição existente)
-    try:
-        win.restore()
-        win.set_focus()
-        time.sleep(0.4)
-    except Exception:
-        pass
+    pyautogui.FAILSAFE = True
+    pyautogui.PAUSE = 0.15
 
     try:
-        # 1. Busca conversa
-        edits = win.descendants(control_type="Edit")
-        if not edits:
-            log.info("pywinauto: sem controles Edit visíveis")
-            return False
-        busca = edits[0]
-        busca.set_edit_text(nome_grupo)   # não usa teclas físicas
-        time.sleep(0.9)
-        busca.type_keys("{ENTER}", set_foreground=True)
+        # 1. Restaura + ativa janela (rápido)
+        try:
+            if janela.isMinimized:
+                janela.restore()
+            janela.activate()
+        except Exception:
+            try:
+                janela.maximize()
+            except Exception:
+                pass
+        time.sleep(0.5)
+
+        # 2. LIMPA estado residual: fecha qualquer preview aberto
+        pyautogui.press("escape")
+        time.sleep(0.15)
+        pyautogui.press("escape")
+        time.sleep(0.15)
+        pyautogui.press("escape")
+        time.sleep(0.4)
+
+        # 3. Busca conversa: Ctrl+F, escreve, Enter
+        pyautogui.hotkey("ctrl", "f")
+        time.sleep(0.5)
+        pyautogui.hotkey("ctrl", "a")
+        pyautogui.press("delete")
+        pyautogui.typewrite(nome_grupo, interval=0.03)
+        time.sleep(1.0)
+        pyautogui.press("enter")
         time.sleep(1.3)
 
-        # 2. Localiza compose (última Edit visível)
-        edits = win.descendants(control_type="Edit")
-        compose = edits[-1] if edits else None
-        if compose is None:
-            return False
-
-        # 3. Foto + legenda
+        # 4. Foto + legenda
         if caminho_foto and os.path.exists(caminho_foto):
-            if _copiar_foto_hdrop(caminho_foto):
-                compose.type_keys("^v", set_foreground=True)
-                time.sleep(2.8)  # aguarda upload+preview
-                if _copiar_texto(mensagem):
-                    compose.type_keys("^v", set_foreground=True)
-                    time.sleep(0.5)
-                compose.type_keys("{ENTER}", set_foreground=True)
-                time.sleep(1.0)
-                _devolver_foco(win, janela_anterior)
-                log.info("✅ WA silencioso: foto+legenda enviada para '%s'", nome_grupo)
-                return True
+            if not _copiar_foto_hdrop(caminho_foto):
+                _devolver_foco(janela, janela_anterior)
+                return False
+            pyautogui.hotkey("ctrl", "v")
+            time.sleep(2.5)   # aguarda preview montar
 
-        # 4. Sem foto: só texto
+            # Legenda: cola direto (preview já foca a caixa)
+            if _copiar_texto(mensagem):
+                pyautogui.hotkey("ctrl", "v")
+                time.sleep(0.5)
+
+            # Enter envia (dentro do preview de foto, Enter dispara envio)
+            pyautogui.press("enter")
+            time.sleep(1.8)
+
+            # VERIFICAÇÃO ANTI-ACÚMULO: se compose ainda mostra caixa de legenda
+            # do preview, envio falhou — Escape para cancelar (não acumular)
+            pyautogui.press("escape")
+            time.sleep(0.3)
+            pyautogui.press("escape")
+            time.sleep(0.3)
+
+            _devolver_foco(janela, janela_anterior)
+            log.info("✅ WA: foto+legenda enviada para '%s'", nome_grupo)
+            return True
+
+        # 5. Sem foto: só texto
         if _copiar_texto(mensagem):
-            compose.type_keys("^v", set_foreground=True)
+            pyautogui.hotkey("ctrl", "v")
             time.sleep(0.4)
         else:
-            compose.set_edit_text(mensagem)
-        compose.type_keys("{ENTER}", set_foreground=True)
+            pyautogui.typewrite(mensagem, interval=0.003)
+            time.sleep(0.3)
+        pyautogui.press("enter")
         time.sleep(0.6)
-        _devolver_foco(win, janela_anterior)
-        log.info("✅ WA silencioso: texto enviado para '%s'", nome_grupo)
+        _devolver_foco(janela, janela_anterior)
+        log.info("✅ WA: texto enviado para '%s'", nome_grupo)
         return True
+
     except Exception as e:
         from core.error_logger import log_erro  # noqa: PLC0415
         log_erro("wa_silencioso.envio", e, {"grupo": nome_grupo})
-        _devolver_foco(win, janela_anterior)
+        try:
+            pyautogui.press("escape"); pyautogui.press("escape")
+        except Exception:
+            pass
+        _devolver_foco(janela, janela_anterior)
         return False
 
 
-def _devolver_foco(win_wa, janela_anterior) -> None:
-    """Minimiza WhatsApp e devolve foco pra janela que o usuário estava usando."""
+def _devolver_foco(janela_wa, janela_anterior) -> None:
+    """Minimiza WhatsApp e devolve foco à janela anterior do usuário."""
     try:
-        win_wa.minimize()
+        janela_wa.minimize()
     except Exception:
         pass
     try:
