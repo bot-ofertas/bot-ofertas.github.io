@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cooktop Mueller 5 Bocas Com Queimador Ultra Chama Preto 127/220v",
+      "preco": 523.48,
+      "preco_original": 750.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633858-MLA100016345635_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 69,
+      "enviado_em": "2026-07-05T06:16:33.421525",
+      "link": "https://www.mercadolivre.com.br/cooktop-mueller-5-bocas-com-queimador-ultra-chama-preto/p/MLB18371222?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 523.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas A Gás Itatiaia Itamega Preto Bivolt 127/220v",
+      "preco": 348.23,
+      "preco_original": 589.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716130-MLA109054205360_032026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 79,
+      "enviado_em": "2026-07-05T06:16:26.631357",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-a-gas-itatiaia-itamega-preto-bivolt/p/MLB67473936?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 348.23,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Panasonic Nn-st54rbru 27 Litros Preto 127v",
+      "preco": 569.0,
+      "preco_original": 799.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_722395-MLA106786831636_022026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 67,
+      "enviado_em": "2026-07-05T06:16:19.781952",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-panasonic-nn-st54rbru-27-litros-preto/p/MLB65836536?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 569.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas Atlas Agile Up Mesa Vidro Mega Chama Bivolt Preto",
+      "preco": 316.96,
+      "preco_original": 483.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662369-MLA99422748970_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 70,
+      "enviado_em": "2026-07-05T06:16:12.996349",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-atlas-agile-up-mesa-vidro-mega-chama-bivolt/p/MLB46671029?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 316.96,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira De Carro Infantil Max360 Isofix 36kgs Maxi Baby - Preto",
       "preco": 748.9,
       "preco_original": 1299.0,
@@ -499,7 +559,7 @@
       "link": "https://www.mercadolivre.com.br/cooktop-de-induco-4-bocas-dako-supreme-preto-com-trava-de-seguranca-220v/p/MLB19481428?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1075.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -544,7 +604,7 @@
       "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-cor-inox-efficient-com-descongelamento-assistido-me36s/p/MLB19750537?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 711.55,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -680,7 +740,7 @@
       "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-cor-inox-efficient-com-descongelamento-assistido-me36s/p/MLB19750516?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 711.55,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1042,7 +1102,7 @@
       "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-teclas-faceis-limpa-facil-1400w-pm36-127v/p/MLB44898097?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 513.21,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1542,6 +1602,12 @@
       "desconto_medio": 48,
       "maior_desconto": 75
     },
+    "eletrodomesticos": {
+      "total": 12,
+      "score_medio": 69,
+      "desconto_medio": 30,
+      "maior_desconto": 40
+    },
     "tvs": {
       "total": 8,
       "score_medio": 85,
@@ -1553,12 +1619,6 @@
       "score_medio": 78,
       "desconto_medio": 36,
       "maior_desconto": 52
-    },
-    "eletrodomesticos": {
-      "total": 8,
-      "score_medio": 68,
-      "desconto_medio": 29,
-      "maior_desconto": 35
     },
     "bebes": {
       "total": 8,
@@ -1621,6 +1681,6 @@
       "maior_desconto": 49
     }
   },
-  "updated_at": "2026-07-05T02:09:44.707343",
-  "total": 100
+  "updated_at": "2026-07-05T06:19:29.810833",
+  "total": 104
 }
