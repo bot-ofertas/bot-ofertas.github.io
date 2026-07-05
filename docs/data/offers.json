@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cadeira De Carro Infantil Max360 Isofix 36kgs Maxi Baby - Preto",
+      "preco": 748.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_788401-MLU78410200759_082024-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-05T02:07:16.685624",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-max360-isofix-36kgs-maxi-baby-preto/p/MLB26415897?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 748.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Carro Infantil 0 A 36kg Eternity 360º Maxi Baby",
+      "preco": 558.9,
+      "preco_original": 999.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_945061-MLB89126707653_082025-AB-cadeira-de-carro-infantil-0-a-36kg-eternity-360-maxi-baby.webp",
+      "categoria": "automotivo",
+      "score": 84,
+      "enviado_em": "2026-07-05T02:07:09.728262",
+      "link": "https://produto.mercadolivre.com.br/MLB-5153334980-cadeira-de-carro-infantil-0-a-36kg-eternity-360-maxi-baby-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 558.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Carro Infantil 0 A 36kg Elite 4 Em 1 - Maxi Baby - Preto Liso",
+      "preco": 379.9,
+      "preco_original": 670.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_786782-MLA99523938502_122025-AB.webp",
+      "categoria": "automotivo",
+      "score": 78,
+      "enviado_em": "2026-07-05T02:07:03.030603",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-0-a-36kg-elite-4-em-1-maxi-baby-preto/p/MLB29756545?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 379.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bebê Conforto Para Bebê Comfort De 0 À 13kgs Preto Maxi Baby Liso",
+      "preco": 206.91,
+      "preco_original": 299.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_814542-MLA99940292565_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 60,
+      "enviado_em": "2026-07-05T02:06:56.345059",
+      "link": "https://www.mercadolivre.com.br/beb-conforto-para-beb-comfort-de-0-13kgs-preto-maxi-baby/p/MLB37883472?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 206.91,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Ring Light Iluminador Led Profissional 26cm Tripé 2,10m Luz Branco Frio Quente Neutro 127/220v Preto 3 Cores",
       "preco": 42.23,
       "preco_original": 99.0,
@@ -1506,6 +1566,12 @@
       "desconto_medio": 40,
       "maior_desconto": 52
     },
+    "automotivo": {
+      "total": 8,
+      "score_medio": 75,
+      "desconto_medio": 40,
+      "maior_desconto": 66
+    },
     "saude": {
       "total": 7,
       "score_medio": 78,
@@ -1548,12 +1614,6 @@
       "desconto_medio": 41,
       "maior_desconto": 52
     },
-    "automotivo": {
-      "total": 4,
-      "score_medio": 73,
-      "desconto_medio": 40,
-      "maior_desconto": 66
-    },
     "tablets": {
       "total": 2,
       "score_medio": 73,
@@ -1561,6 +1621,6 @@
       "maior_desconto": 49
     }
   },
-  "updated_at": "2026-07-05T01:15:14.584535",
-  "total": 96
+  "updated_at": "2026-07-05T02:09:44.707343",
+  "total": 100
 }
