@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Tênis Casual Kappa Zenit Masculino Unissex Conforto",
+      "preco": 99.9,
+      "preco_original": 229.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_727838-MLA106862284149_022026-AB-tnis-casual-kappa-zenit-masculino-unissex-conforto.webp",
+      "categoria": "moda",
+      "score": 87,
+      "enviado_em": "2026-07-05T11:37:24.235973",
+      "cupom": "Cupom R$30 OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-5408593708-tnis-casual-kappa-zenit-masculino-unissex-conforto-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 99.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Esportivo Masculino Voa 2 Olympikus Lunmho Lisa 42 Br",
+      "preco": 176.79,
+      "preco_original": 329.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_758819-MLB82785016095_022025-AB.webp",
+      "categoria": "moda",
+      "score": 88,
+      "enviado_em": "2026-07-05T11:37:17.356071",
+      "cupom": "Cupom R$25 OFF",
+      "link": "https://www.mercadolivre.com.br/tenis-esportivo-masculino-voa-2-olympikus/up/MLBU2977602733?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 176.79,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
+      "preco": 89.9,
+      "preco_original": 297.0,
+      "desconto_pct": 69.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_741399-MLB112035982759_052026-AB.webp",
+      "categoria": "moda",
+      "score": 78,
+      "enviado_em": "2026-07-05T11:37:10.515801",
+      "link": "https://www.mercadolivre.com.br/mochila-dos-homens-com-faixa-impermeavel-para-expansao/up/MLBU3454994034?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 6 Cuecas Lupo Boxer Box Sem Costura Basic Microfibra",
+      "preco": 129.9,
+      "preco_original": 288.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_946503-MLB82989859698_032025-AB-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra.webp",
+      "categoria": "moda",
+      "score": 88,
+      "enviado_em": "2026-07-05T11:37:03.894166",
+      "link": "https://produto.mercadolivre.com.br/MLB-1010954920-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 129.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cooktop Mueller 5 Bocas Com Queimador Ultra Chama Preto 127/220v",
       "preco": 523.48,
       "preco_original": 750.0,
@@ -1614,6 +1676,12 @@
       "desconto_medio": 36,
       "maior_desconto": 44
     },
+    "moda": {
+      "total": 8,
+      "score_medio": 85,
+      "desconto_medio": 49,
+      "maior_desconto": 69
+    },
     "informatica": {
       "total": 8,
       "score_medio": 78,
@@ -1637,12 +1705,6 @@
       "score_medio": 78,
       "desconto_medio": 44,
       "maior_desconto": 55
-    },
-    "moda": {
-      "total": 4,
-      "score_medio": 84,
-      "desconto_medio": 43,
-      "maior_desconto": 53
     },
     "games": {
       "total": 4,
@@ -1681,6 +1743,6 @@
       "maior_desconto": 49
     }
   },
-  "updated_at": "2026-07-05T06:19:29.810833",
-  "total": 104
+  "updated_at": "2026-07-05T11:40:18.981581",
+  "total": 108
 }
