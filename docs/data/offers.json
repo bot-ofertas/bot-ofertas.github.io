@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Purificador De Água Gelada Fria E Natural Eletrônico Placa Compacto Electrolux Pe12g Com Filtro Carvão 6 Meses Ou 3000l Painel Touch Cinza 127/220v",
+      "preco": 565.15,
+      "preco_original": 769.0,
+      "desconto_pct": 26.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619844-MLA99938311049_112025-AB.webp",
+      "categoria": "livros",
+      "score": 64,
+      "enviado_em": "2026-07-05T18:42:58.873722",
+      "link": "https://www.mercadolivre.com.br/purificador-de-agua-gelada-fria-e-natural-eletrnico-placa-compacto-electrolux-pe12g-com-filtro-carvo-6-meses-ou-3000l-painel-touch-cinza/p/MLB24804661?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 565.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Venda E Cia Bicicleta Spinning Para Exercícios Xhjscrb8009 Preto Vermelho",
+      "preco": 422.53,
+      "preco_original": 899.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_975299-MLA95940273687_102025-AB.webp",
+      "categoria": "livros",
+      "score": 89,
+      "enviado_em": "2026-07-05T18:42:52.209910",
+      "link": "https://www.mercadolivre.com.br/venda-e-cia-bicicleta-spinning-para-exercicios-xhjscrb8009-preto-vermelho/p/MLB35331298?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 422.53,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Baunilha",
+      "preco": 74.9,
+      "preco_original": 129.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_689088-MLA99988196355_112025-AB.webp",
+      "categoria": "livros",
+      "score": 72,
+      "enviado_em": "2026-07-05T18:42:45.509411",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/whey-isolate-protein-fuse-900g-dark-lab-sabor-baunilha/p/MLB19373961?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 74.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo De 6 Xícaras Grandes 200 Ml Com Pires Unni Brisa Oxford Marrom / Off White Liso",
+      "preco": 111.05,
+      "preco_original": 178.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634075-MLA96145384249_102025-AB.webp",
+      "categoria": "livros",
+      "score": 69,
+      "enviado_em": "2026-07-05T18:42:38.707288",
+      "link": "https://www.mercadolivre.com.br/jogo-de-6-xicaras-grandes-200-ml-com-pires-unni-brisa-oxford/p/MLB38622935?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 111.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Profissional LG 43  Full Hd Processador A5 Ger6 Ai Alexa Integrada Webos 23  43lr671c-b",
       "preco": 1499.0,
       "preco_original": 2284.0,
@@ -725,7 +786,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 764.15,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1890,7 +1951,7 @@
     "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
     "menor_preco_30d": 764.15,
-    "menor_periodo": false,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -1954,6 +2015,12 @@
       "desconto_medio": 50,
       "maior_desconto": 62
     },
+    "livros": {
+      "total": 4,
+      "score_medio": 74,
+      "desconto_medio": 40,
+      "maior_desconto": 53
+    },
     "games": {
       "total": 4,
       "score_medio": 68,
@@ -1997,6 +2064,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-05T17:36:29.643840",
-  "total": 124
+  "updated_at": "2026-07-05T18:44:24.900353",
+  "total": 128
 }
