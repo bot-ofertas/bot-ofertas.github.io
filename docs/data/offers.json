@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Jogo Soquetes Catracas Ferramentas Kit Chave 216 Peças Completa Oficina Master Maleta Tkf216 The Black Tools",
+      "preco": 468.9,
+      "preco_original": 799.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_765367-MLA99991145075_112025-AB.webp",
+      "categoria": "redes",
+      "score": 83,
+      "enviado_em": "2026-07-06T06:49:14.927735",
+      "link": "https://www.mercadolivre.com.br/jogo-soquetes-catracas-ferramentas-kit-chave-216-pecas-completa-oficina-master-maleta-tkf216-the-black-tools/p/MLB58515071?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 468.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mop Giratório 360° Balde Inox 8 Litros Centrífuga C/ 2 Refis Preto E Amarelo",
+      "preco": 52.9,
+      "preco_original": 94.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_780385-MLB111032613279_042026-AB.webp",
+      "categoria": "redes",
+      "score": 71,
+      "enviado_em": "2026-07-06T06:49:08.118274",
+      "link": "https://www.mercadolivre.com.br/mop-giratorio-360-balde-inox-8-litros-centrifuga-c-2-refis/up/MLBU3921478838?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 52.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G56 5g - 256gb 16gb (8gb Ram+8gb Ram Boost) Camera 50mp Sony Lytia 600 Certificado De Ultrarresistencia Militar E Ip68 + Ip69 - Verde",
+      "preco": 1438.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_919734-MLA99464900322_112025-AB.webp",
+      "categoria": "redes",
+      "score": 90,
+      "enviado_em": "2026-07-06T06:49:01.256024",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-16gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-certificado-de-ultrarresistencia-militar-e-ip68-ip69-verde/p/MLB50302985?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1438.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Opk Relógio Masculino Original Prata À Prova D'água 6010",
+      "preco": 76.47,
+      "preco_original": 240.0,
+      "desconto_pct": 68.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_907844-MLB82669186517_022025-AB-opk-relogio-masculino-original-prata-prova-dagua-6010.webp",
+      "categoria": "redes",
+      "score": 64,
+      "enviado_em": "2026-07-06T06:48:50.729090",
+      "link": "https://produto.mercadolivre.com.br/MLB-5225236028-opk-relogio-masculino-original-prata-prova-dagua-6010-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 76.47,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Monitor Gamer LG Ultragear 24 24gs60f-b Ips Full Hd 180hz 1ms (gtg) Nvidia® G-sync® Amd Freesync Hdr10 Srgb 99% Hdmi Displayport Preto 127/220v",
       "preco": 758.54,
       "preco_original": 999.0,
@@ -1689,6 +1749,12 @@
       "desconto_medio": 41,
       "maior_desconto": 48
     },
+    "redes": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 50,
+      "maior_desconto": 68
+    },
     "moda": {
       "total": 4,
       "score_medio": 85,
@@ -1762,6 +1828,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T02:14:58.048420",
-  "total": 108
+  "updated_at": "2026-07-06T06:52:10.671209",
+  "total": 112
 }
