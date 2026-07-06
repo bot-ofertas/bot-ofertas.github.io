@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Tênis New Speed Esporte Masculino: Ideal Para Corridas",
+      "preco": 159.53,
+      "preco_original": 239.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_796256-MLB108363345849_032026-AB-tnis-new-speed-esporte-masculino-ideal-para-corridas.webp",
+      "categoria": "esportes",
+      "score": 68,
+      "enviado_em": "2026-07-06T23:34:22.466078",
+      "link": "https://produto.mercadolivre.com.br/MLB-5328448952-tnis-new-speed-esporte-masculino-ideal-para-corridas-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 159.53,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem Sabor Em Pó",
+      "preco": 38.7,
+      "preco_original": 64.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 72,
+      "enviado_em": "2026-07-06T23:34:15.723832",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 38.7,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 500g Dark Lab Unidade Sem Sabor",
+      "preco": 39.9,
+      "preco_original": 129.0,
+      "desconto_pct": 69.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_942122-MLA99923169249_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 63,
+      "enviado_em": "2026-07-06T23:34:09.059489",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-500g-dark-lab-unidade/p/MLB26796581?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+      "preco": 549.9,
+      "preco_original": 1094.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+      "categoria": "esportes",
+      "score": 92,
+      "enviado_em": "2026-07-06T23:34:02.172989",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 549.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 220v",
       "preco": 442.72,
       "preco_original": 689.0,
@@ -1236,7 +1297,7 @@
       "link": "https://www.mercadolivre.com.br/testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-vitamina-b6-precursor-da-testosterona-60-capsulas/p/MLB58582424?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 51.08,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1252,7 +1313,7 @@
       "link": "https://www.mercadolivre.com.br/bola-de-futebol-trionda-training-copa-do-mundo-da-fifa-26tm-adidas/p/MLB54774833?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 161.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1465,7 +1526,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 59.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2000,18 +2061,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
-    "preco": 539.9,
-    "preco_original": 1299.0,
-    "desconto_pct": 58.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
-    "categoria": "saude",
-    "score": 90,
-    "enviado_em": "2026-07-06T18:56:30.104798",
-    "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+    "preco": 549.9,
+    "preco_original": 1094.0,
+    "desconto_pct": 49.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+    "categoria": "esportes",
+    "score": 92,
+    "enviado_em": "2026-07-06T23:34:02.172989",
+    "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 539.9,
-    "menor_periodo": false,
+    "menor_preco_30d": 549.9,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -2039,6 +2100,12 @@
       "desconto_medio": 40,
       "maior_desconto": 67
     },
+    "esportes": {
+      "total": 12,
+      "score_medio": 70,
+      "desconto_medio": 47,
+      "maior_desconto": 75
+    },
     "eletrodomesticos": {
       "total": 12,
       "score_medio": 71,
@@ -2050,12 +2117,6 @@
       "score_medio": 79,
       "desconto_medio": 44,
       "maior_desconto": 58
-    },
-    "esportes": {
-      "total": 8,
-      "score_medio": 68,
-      "desconto_medio": 47,
-      "maior_desconto": 75
     },
     "redes": {
       "total": 7,
@@ -2130,6 +2191,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T22:17:59.382622",
-  "total": 132
+  "updated_at": "2026-07-06T23:37:17.082065",
+  "total": 136
 }
