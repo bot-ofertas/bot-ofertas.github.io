@@ -118,18 +118,20 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
         return False
 
-    # ── Tentativa 2: WhatsApp Desktop (app nativo Windows já logado) ─────────
-    try:
-        from integrations.whatsapp_desktop import (  # noqa: PLC0415
-            enviar_para_grupo_desktop, _janela_whatsapp,
-        )
-        if _janela_whatsapp() is not None:
-            ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
-            if ok:
-                return True
-            log.info("WhatsApp Desktop não enviou; caindo para Playwright.")
-    except Exception as e:
-        log.warning("WhatsApp Desktop falhou: %s", e)
+    # ── Tentativa 2: WhatsApp Desktop (só Windows) — pula em Linux/VPS ──────
+    import sys  # noqa: PLC0415
+    if sys.platform == "win32":
+        try:
+            from integrations.whatsapp_desktop import (  # noqa: PLC0415
+                enviar_para_grupo_desktop, _janela_whatsapp,
+            )
+            if _janela_whatsapp() is not None:
+                ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
+                if ok:
+                    return True
+                log.info("WhatsApp Desktop não enviou; caindo para Playwright.")
+        except Exception as e:
+            log.warning("WhatsApp Desktop falhou: %s", e)
 
     # ── Tentativa 3: Playwright/CDP — OPT-IN (WHATSAPP_CHROME_FALLBACK=1) ────
     # Por padrão desligado: usamos exclusivamente WhatsApp Desktop nativo.

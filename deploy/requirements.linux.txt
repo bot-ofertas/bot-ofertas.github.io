@@ -1,0 +1,9 @@
+python-dotenv
+python-telegram-bot>=20.0
+requests
+playwright
+Pillow>=10.1.0
+psutil
+anthropic>=0.40.0
+tweepy>=4.14.0
+instagrapi
