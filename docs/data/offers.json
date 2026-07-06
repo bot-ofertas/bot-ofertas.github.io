@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Samsung Galaxy A06 5g Dual Sim 128gb Preto",
+      "preco": 642.16,
+      "preco_original": 989.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716412-MLA99524473372_122025-AB.webp",
+      "categoria": "livros",
+      "score": 73,
+      "enviado_em": "2026-07-06T16:53:40.556503",
+      "link": "https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB48946861?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 642.16,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor Em Pó",
+      "preco": 72.9,
+      "preco_original": 104.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "categoria": "livros",
+      "score": 60,
+      "enviado_em": "2026-07-06T16:53:33.753465",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 68.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ar Condicionado Split Hw LG Dual Voice Ai Inverter 12kqf220v",
+      "preco": 2127.0,
+      "preco_original": 4121.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_727662-MLB107319097802_032026-AB.webp",
+      "categoria": "livros",
+      "score": 90,
+      "enviado_em": "2026-07-06T16:53:26.941658",
+      "link": "https://www.mercadolivre.com.br/ar-condicionado-split-hw-lg-dual-voice-ai-inverter-12kqf220v/up/MLBU3817191383?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2127.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Café Em Grao Torrado Expresso Arábica Torra Escura Grãos 1kg Gourmet Cafe Italle",
+      "preco": 62.0,
+      "preco_original": 99.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_620439-MLA99452591834_112025-AB.webp",
+      "categoria": "livros",
+      "score": 68,
+      "enviado_em": "2026-07-06T16:53:20.084225",
+      "link": "https://www.mercadolivre.com.br/cafe-em-grao-torrado-expresso-arabica-torra-escura-gros-1kg-gourmet-cafe-italle/p/MLB19542141?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 62.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Jaqueta Feminina Puffer Impermeável Capuz Frio Inverno",
       "preco": 99.9,
       "preco_original": 148.0,
@@ -769,7 +829,7 @@
       "link": "https://www.mercadolivre.com.br/mochila-dos-homens-com-faixa-impermeavel-para-expansao/up/MLBU3454994034?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 89.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1193,7 +1253,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-cinza/p/MLB55044657?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 748.8,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1786,17 +1846,17 @@
       "desconto_medio": 36,
       "maior_desconto": 44
     },
+    "livros": {
+      "total": 12,
+      "score_medio": 73,
+      "desconto_medio": 40,
+      "maior_desconto": 67
+    },
     "automotivo": {
       "total": 12,
       "score_medio": 77,
       "desconto_medio": 45,
       "maior_desconto": 61
-    },
-    "livros": {
-      "total": 8,
-      "score_medio": 73,
-      "desconto_medio": 42,
-      "maior_desconto": 67
     },
     "esportes": {
       "total": 8,
@@ -1889,6 +1949,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T13:50:35.518784",
-  "total": 116
+  "updated_at": "2026-07-06T16:56:36.047620",
+  "total": 120
 }
