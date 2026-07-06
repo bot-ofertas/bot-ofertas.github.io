@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Jaqueta Feminina Puffer Impermeável Capuz Frio Inverno",
+      "preco": 99.9,
+      "preco_original": 148.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_690822-MLB111789846753_052026-AB-jaqueta-feminina-puffer-impermeavel-capuz-frio-inverno.webp",
+      "categoria": "livros",
+      "score": 63,
+      "enviado_em": "2026-07-06T13:47:41.326610",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-4027334079-jaqueta-feminina-puffer-impermeavel-capuz-frio-inverno-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 99.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Moleton Capuz Blusa De Frio Lisa Cordão Neon Canguru Macio",
+      "preco": 52.99,
+      "preco_original": 99.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821511-MLB70135576456_062023-AB-moleton-capuz-blusa-de-frio-lisa-cordo-neon-canguru-macio.webp",
+      "categoria": "livros",
+      "score": 71,
+      "enviado_em": "2026-07-06T13:47:28.217150",
+      "link": "https://produto.mercadolivre.com.br/MLB-1536601373-moleton-capuz-blusa-de-frio-lisa-cordo-neon-canguru-macio-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 52.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Chave De Impacto A Bateria Profissional Recarregável 88v 4ah Brushless Parafusadeira Furadeira Alta Potência Sem Escova 2 Baterias Mestri M-88v Amarelo E Preto 127/220v",
+      "preco": 208.02,
+      "preco_original": 640.0,
+      "desconto_pct": 67.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_953057-MLA111837806534_062026-AB.webp",
+      "categoria": "livros",
+      "score": 75,
+      "enviado_em": "2026-07-06T13:47:21.461949",
+      "link": "https://www.mercadolivre.com.br/chave-de-impacto-a-bateria-profissional-recarregavel-88v-4ah-brushless-parafusadeira-furadeira-alta-potncia-sem-escova-2-baterias-mestri-m-88v/p/MLB69175240?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 208.02,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Hisense Smart Tv Fhd 43  Polegadas 43a4nv Com Hdr10, Dts Virtual X, Compatibilidade Alexa E Google Home",
+      "preco": 1209.0,
+      "preco_original": 1749.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_607149-MLA96660729501_102025-AB.webp",
+      "categoria": "livros",
+      "score": 80,
+      "enviado_em": "2026-07-06T13:47:14.735835",
+      "link": "https://www.mercadolivre.com.br/hisense-smart-tv-fhd-43-polegadas-43a4nv-com-hdr10-dts-virtual-x-compatibilidade-alexa-e-google-home/p/MLB57724059?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1209.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Jogo Soquetes Catracas Ferramentas Kit Chave 216 Peças Completa Oficina Master Maleta Tkf216 The Black Tools",
       "preco": 468.9,
       "preco_original": 799.0,
@@ -1194,7 +1255,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 59.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1731,6 +1792,12 @@
       "desconto_medio": 45,
       "maior_desconto": 61
     },
+    "livros": {
+      "total": 8,
+      "score_medio": 73,
+      "desconto_medio": 42,
+      "maior_desconto": 67
+    },
     "esportes": {
       "total": 8,
       "score_medio": 68,
@@ -1760,12 +1827,6 @@
       "score_medio": 85,
       "desconto_medio": 56,
       "maior_desconto": 69
-    },
-    "livros": {
-      "total": 4,
-      "score_medio": 74,
-      "desconto_medio": 40,
-      "maior_desconto": 53
     },
     "informatica": {
       "total": 4,
@@ -1828,6 +1889,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T06:52:10.671209",
-  "total": 112
+  "updated_at": "2026-07-06T13:50:35.518784",
+  "total": 116
 }
