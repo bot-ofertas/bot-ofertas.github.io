@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Console Playstation 5 Slim Edição Digital 825 Gb Branco",
+      "preco": 3599.0,
+      "preco_original": 4599.0,
+      "desconto_pct": 21.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971864-MLA91925160023_092025-AB.webp",
+      "categoria": "saude",
+      "score": 71,
+      "enviado_em": "2026-07-06T18:56:50.367147",
+      "link": "https://www.mercadolivre.com.br/console-playstation-5-slim-edico-digital-825-gb/p/MLB54963150?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Extratora De Sujeira Portátil Wap Spot Cleaner W3 Borrifa Esfrega E Extrai 1450w De Potência E Bico De Autolimpeza Cinza/roxo 220v",
+      "preco": 399.92,
+      "preco_original": 879.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_865352-MLA99448833158_112025-AB.webp",
+      "categoria": "saude",
+      "score": 89,
+      "enviado_em": "2026-07-06T18:56:43.555969",
+      "link": "https://www.mercadolivre.com.br/extratora-de-sujeira-portatil-wap-spot-cleaner-w3-borrifa-esfrega-e-extrai-1450w-de-potncia-e-bico-de-autolimpeza/p/MLB26797982?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 399.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Relógio Tommy Hilfiger Masculino Aço Prateado 1710671 Prateado Preto",
+      "preco": 470.0,
+      "preco_original": 990.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767847-MLB111623676968_062026-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-06T18:56:36.857362",
+      "link": "https://www.mercadolivre.com.br/relogio-tommy-hilfiger-masculino-aco-prateado-1710671/up/MLBU4052258844?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 470.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+      "preco": 539.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 58.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-06T18:56:30.104798",
+      "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 539.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Samsung Galaxy A06 5g Dual Sim 128gb Preto",
       "preco": 642.16,
       "preco_original": 989.0,
@@ -509,7 +569,7 @@
       "link": "https://www.mercadolivre.com.br/venda-e-cia-bicicleta-spinning-para-exercicios-xhjscrb8009-preto-vermelho/p/MLB35331298?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 422.53,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1819,17 +1879,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Caixa Amplificada Connect Power Plus Cm-550 Preto Mondial 127/220v",
-    "preco": 416.13,
-    "preco_original": 929.0,
-    "desconto_pct": 55.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
-    "categoria": "eletronicos",
+    "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+    "preco": 539.9,
+    "preco_original": 1299.0,
+    "desconto_pct": 58.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+    "categoria": "saude",
     "score": 90,
-    "enviado_em": "2026-07-05T21:30:42.886734",
-    "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-06T18:56:30.104798",
+    "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 416.13,
+    "menor_preco_30d": 539.9,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1858,6 +1918,12 @@
       "desconto_medio": 45,
       "maior_desconto": 61
     },
+    "saude": {
+      "total": 8,
+      "score_medio": 79,
+      "desconto_medio": 44,
+      "maior_desconto": 58
+    },
     "esportes": {
       "total": 8,
       "score_medio": 68,
@@ -1869,12 +1935,6 @@
       "score_medio": 71,
       "desconto_medio": 31,
       "maior_desconto": 40
-    },
-    "saude": {
-      "total": 4,
-      "score_medio": 74,
-      "desconto_medio": 41,
-      "maior_desconto": 48
     },
     "redes": {
       "total": 4,
@@ -1949,6 +2009,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T16:56:36.047620",
-  "total": 120
+  "updated_at": "2026-07-06T18:59:44.747251",
+  "total": 124
 }
