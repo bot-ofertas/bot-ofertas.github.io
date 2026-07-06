@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 220v",
+      "preco": 442.72,
+      "preco_original": 689.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821650-MLA99991748727_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 74,
+      "enviado_em": "2026-07-06T22:15:32.691872",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-teclas-faceis-limpa-facil-1400w-pm36-220v/p/MLB44898096?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 442.72,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas 33l Philco Teclas Fáceis Limpa Fácil 1400w Pm36 127v",
+      "preco": 442.72,
+      "preco_original": 689.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_884918-MLA99856402643_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 74,
+      "enviado_em": "2026-07-06T22:15:25.991441",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-teclas-faceis-limpa-facil-1400w-pm36-127v/p/MLB44898097?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 442.72,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 5 Bocas A Gás Atlas Agile Up Mega Chama Preto 127/220v",
+      "preco": 374.01,
+      "preco_original": 602.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861641-MLA100053796807_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 76,
+      "enviado_em": "2026-07-06T22:15:19.303348",
+      "link": "https://www.mercadolivre.com.br/cooktop-5-bocas-a-gas-atlas-agile-up-mega-chama-preto/p/MLB50829128?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 374.01,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Forno Elétrico Philco 50l Dupla Resistência Pfe52p 127v Preto",
+      "preco": 380.0,
+      "preco_original": 529.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_992228-MLA99495565436_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 63,
+      "enviado_em": "2026-07-06T22:15:12.668046",
+      "link": "https://www.mercadolivre.com.br/forno-eletrico-philco-50l-dupla-resistncia-pfe52p/p/MLB28529446?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 380.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Ddpai N1 Dual Câmera Veicular 1296p 135° Nightvis +  Sd 64gb",
       "preco": 479.66,
       "preco_original": 1075.0,
@@ -1979,6 +2039,12 @@
       "desconto_medio": 40,
       "maior_desconto": 67
     },
+    "eletrodomesticos": {
+      "total": 12,
+      "score_medio": 71,
+      "desconto_medio": 32,
+      "maior_desconto": 40
+    },
     "saude": {
       "total": 8,
       "score_medio": 79,
@@ -1990,12 +2056,6 @@
       "score_medio": 68,
       "desconto_medio": 47,
       "maior_desconto": 75
-    },
-    "eletrodomesticos": {
-      "total": 8,
-      "score_medio": 71,
-      "desconto_medio": 31,
-      "maior_desconto": 40
     },
     "redes": {
       "total": 7,
@@ -2070,6 +2130,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-06T20:57:52.093954",
-  "total": 128
+  "updated_at": "2026-07-06T22:17:59.382622",
+  "total": 132
 }
