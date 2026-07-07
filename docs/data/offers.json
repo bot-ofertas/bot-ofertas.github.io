@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Purificador Consul Cpb33 Água Gelada E Natural Cor Cinza 127/220v",
+      "preco": 541.87,
+      "preco_original": 899.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_621897-MLA99985256073_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 83,
+      "enviado_em": "2026-07-07T15:34:23.351285",
+      "link": "https://www.mercadolivre.com.br/purificador-consul-cpb33-agua-gelada-e-natural-cor-cinza/p/MLB23745094?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 541.87,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cafeteira Nescafé Dolce Gusto Mini Me Preta 110v Preto 127v",
+      "preco": 350.1,
+      "preco_original": 579.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_760107-MLA99937163685_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 78,
+      "enviado_em": "2026-07-07T15:34:16.488073",
+      "link": "https://www.mercadolivre.com.br/cafeteira-nescafe-dolce-gusto-mini-me-preta-110v/p/MLB15154779?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 350.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Philco Pmo23eb Limpa Fácil 20l Potência De 1100w Cor Branco 127v",
+      "preco": 421.95,
+      "preco_original": 679.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_784423-MLA99929513333_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 77,
+      "enviado_em": "2026-07-07T15:34:09.552658",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20l-potncia-de-1100w-cor-branco/p/MLB17484024?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 421.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Philco Pmo23eb Limpa Fácil 20 Litros Potência De 1100w Cor Branco 220v",
+      "preco": 421.95,
+      "preco_original": 679.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_672560-MLA99502210056_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 77,
+      "enviado_em": "2026-07-07T15:34:02.548329",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20-litros-potncia-de-1100w-cor-branco/p/MLB17484025?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 421.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "O Boticário Floratta Red Passion Eau De Parfum 75ml",
       "preco": 156.8,
       "preco_original": 259.0,
@@ -979,8 +1039,8 @@
       "enviado_em": "2026-07-05T18:42:58.873722",
       "link": "https://www.mercadolivre.com.br/purificador-de-agua-gelada-fria-e-natural-eletrnico-placa-compacto-electrolux-pe12g-com-filtro-carvo-6-meses-ou-3000l-painel-touch-cinza/p/MLB24804661?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
-      "menor_preco_30d": 565.15,
-      "menor_periodo": false,
+      "menor_preco_30d": 561.45,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1615,6 +1675,12 @@
       "desconto_medio": 44,
       "maior_desconto": 52
     },
+    "bebes": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 38,
+      "maior_desconto": 39
+    },
     "armazenamento": {
       "total": 4,
       "score_medio": 79,
@@ -1634,6 +1700,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T12:31:48.737205",
-  "total": 100
+  "updated_at": "2026-07-07T15:37:19.546372",
+  "total": 104
 }
