@@ -1,6 +1,70 @@
 {
   "products": [
     {
+      "titulo": "Notebook Asus Vivobook Go 15 Amd Ryzen 5 7520u 16gb 512ssd Mixed Black Preto",
+      "preco": 3381.0,
+      "preco_original": 4299.0,
+      "desconto_pct": 21.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_722728-MLA110061030541_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 71,
+      "enviado_em": "2026-07-07T06:20:11.261327",
+      "cupom": "Cupom R$200 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-amd-ryzen-5-7520u-16gb-512ssd-mixed-black/p/MLB43417665?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3381.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision R15m Amd Ryzen 5-5625u Linux 8gb Ram 256gb Ssd Wi-fi 6 Tela 15 Full Hd Ips Antirreflexo - Minitela - Permite Upgrade De Memória Ram E Ssd - Preto",
+      "preco": 2726.0,
+      "preco_original": 3855.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_733885-MLA101679394133_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 79,
+      "enviado_em": "2026-07-07T06:20:04.479299",
+      "cupom": "Cupom R$200 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-r15m-amd-ryzen-5-5625u-linux-8gb-ram-256gb-ssd-wi-fi-6-tela-15-full-hd-ips-antirreflexo-minitela-permite-upgrade-de-memoria-ram-e-ssd-preto/p/MLB53471779?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2726.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Aspire 5 A515-45-r2a3 Amd Ryzen 5 Windows 11 Home 8gb 512gb Ssd 15,6' Full Hd Gamut",
+      "preco": 3239.0,
+      "preco_original": 5609.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759351-MLU77118311686_062024-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-07T06:19:57.703990",
+      "cupom": "Cupom R$200 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3239.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Gamer Nitro V15 Ryzen 7 7735hs 16gb Rtx4050 1tb Ssd Linux Tela 165hz Full Hd 15.6 Anv15-41-r8zp Preto",
+      "preco": 6303.0,
+      "preco_original": 12499.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826075-MLA109766539988_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-07T06:19:50.893826",
+      "cupom": "Cupom R$400 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 6303.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
       "preco": 1399.0,
       "preco_original": 2499.0,
@@ -1449,6 +1513,12 @@
       "desconto_medio": 46,
       "maior_desconto": 58
     },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 83,
+      "desconto_medio": 35,
+      "maior_desconto": 49
+    },
     "moda": {
       "total": 4,
       "score_medio": 85,
@@ -1498,6 +1568,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T02:10:29.189609",
-  "total": 92
+  "updated_at": "2026-07-07T06:22:39.097839",
+  "total": 96
 }
