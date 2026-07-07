@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Aparelho De Jantar E Chá Ryo Maresia 20 Peças Branco E Marrom Oxford",
+      "preco": 271.9,
+      "preco_original": 599.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619198-MLA96107579199_102025-AB.webp",
+      "categoria": "casa",
+      "score": 88,
+      "enviado_em": "2026-07-07T17:36:32.050540",
+      "link": "https://www.mercadolivre.com.br/aparelho-de-jantar-e-cha-ryo-maresia-20-pecas-branco-e-marrom-oxford/p/MLB33630217?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 271.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo De Jantar E Chá 20 Peças Unni Brisa Oxford Aw20-5903 Bege",
+      "preco": 191.8,
+      "preco_original": 499.0,
+      "desconto_pct": 61.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_771183-MLA95712551934_102025-AB.webp",
+      "categoria": "casa",
+      "score": 75,
+      "enviado_em": "2026-07-07T17:36:25.400472",
+      "link": "https://www.mercadolivre.com.br/jogo-de-jantar-e-cha-20-pecas-unni-brisa-oxford-aw20-5903/p/MLB33795714?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 191.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Vaso Sanitário Tubrax Monobloco Vab0002 Caixa Acoplada Completo Privada Cor Branco",
+      "preco": 485.9,
+      "preco_original": 894.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "categoria": "casa",
+      "score": 91,
+      "enviado_em": "2026-07-07T17:36:18.754015",
+      "link": "https://www.mercadolivre.com.br/vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco/p/MLB24273671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 485.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
+      "preco": 499.9,
+      "preco_original": 1099.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
+      "categoria": "casa",
+      "score": 95,
+      "enviado_em": "2026-07-07T17:36:11.977602",
+      "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 499.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Purificador Consul Cpb33 Água Gelada E Natural Cor Cinza 127/220v",
       "preco": 541.87,
       "preco_original": 899.0,
@@ -1576,17 +1636,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
-    "preco": 549.9,
-    "preco_original": 1094.0,
-    "desconto_pct": 49.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
-    "categoria": "esportes",
-    "score": 92,
-    "enviado_em": "2026-07-06T23:34:02.172989",
-    "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
+    "preco": 499.9,
+    "preco_original": 1099.0,
+    "desconto_pct": 54.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
+    "categoria": "casa",
+    "score": 95,
+    "enviado_em": "2026-07-07T17:36:11.977602",
+    "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 549.9,
+    "menor_preco_30d": 499.9,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1663,6 +1723,12 @@
       "desconto_medio": 42,
       "maior_desconto": 55
     },
+    "casa": {
+      "total": 4,
+      "score_medio": 87,
+      "desconto_medio": 54,
+      "maior_desconto": 61
+    },
     "cameras": {
       "total": 4,
       "score_medio": 76,
@@ -1700,6 +1766,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T15:37:19.546372",
-  "total": 104
+  "updated_at": "2026-07-07T17:38:59.276157",
+  "total": 108
 }
