@@ -1,6 +1,69 @@
 {
   "products": [
     {
+      "titulo": "Kit Com 10 Cuecas Boxer Masculina Microfibra Original",
+      "preco": 69.99,
+      "preco_original": 138.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882952-MLB106804965837_022026-AB-kit-com-10-cuecas-boxer-masculina-microfibra-original.webp",
+      "categoria": "moda",
+      "score": 84,
+      "enviado_em": "2026-07-07T21:10:53.559565",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-1837525408-kit-com-10-cuecas-boxer-masculina-microfibra-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jaqueta Masculina Puffer Bobojaco Nylon Frio Inverno Luxo",
+      "preco": 80.99,
+      "preco_original": 139.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798904-MLB106758143336_022026-AB-jaqueta-masculina-puffer-bobojaco-nylon-frio-inverno-luxo.webp",
+      "categoria": "moda",
+      "score": 84,
+      "enviado_em": "2026-07-07T21:10:46.846246",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-6225077892-jaqueta-masculina-puffer-bobojaco-nylon-frio-inverno-luxo-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 80.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tenis Fila Speedzone  Promoçao Relampago",
+      "preco": 368.67,
+      "preco_original": 549.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_857212-MLB112869015368_072026-AB-tenis-fila-speedzone-promocao-relampago.webp",
+      "categoria": "moda",
+      "score": 76,
+      "enviado_em": "2026-07-07T21:10:40.140830",
+      "link": "https://produto.mercadolivre.com.br/MLB-6086948770-tenis-fila-speedzone-promocao-relampago-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 368.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Masculino Feminino Kappa Park 2.0 Original",
+      "preco": 79.7,
+      "preco_original": 169.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636204-MLB92283366432_092025-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
+      "categoria": "moda",
+      "score": 80,
+      "enviado_em": "2026-07-07T21:10:33.501512",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://produto.mercadolivre.com.br/MLB-4049279695-tnis-masculino-feminino-kappa-park-20-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 79.7,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 10 Cuecas Boxer Lupo Algodão Confortável Box Original",
       "preco": 169.99,
       "preco_original": 499.0,
@@ -1509,8 +1572,8 @@
       "enviado_em": "2026-07-05T11:37:03.894166",
       "link": "https://produto.mercadolivre.com.br/MLB-1010954920-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra-_JM?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 129.9,
-      "menor_periodo": false,
+      "menor_preco_30d": 119.51,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1729,6 +1792,12 @@
       "desconto_medio": 40,
       "maior_desconto": 67
     },
+    "moda": {
+      "total": 9,
+      "score_medio": 83,
+      "desconto_medio": 52,
+      "maior_desconto": 69
+    },
     "eletrodomesticos": {
       "total": 8,
       "score_medio": 72,
@@ -1752,12 +1821,6 @@
       "score_medio": 68,
       "desconto_medio": 46,
       "maior_desconto": 62
-    },
-    "moda": {
-      "total": 5,
-      "score_medio": 85,
-      "desconto_medio": 58,
-      "maior_desconto": 69
     },
     "saude": {
       "total": 4,
@@ -1826,6 +1889,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T19:27:34.779532",
-  "total": 112
+  "updated_at": "2026-07-07T21:13:20.148740",
+  "total": 116
 }
