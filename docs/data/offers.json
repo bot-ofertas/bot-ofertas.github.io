@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Fritadeira Elétrica Afon-12l-bg Forno Oven 12 Litros Preto Mondial 127v",
+      "preco": 393.3,
+      "preco_original": 899.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900387-MLA109507200694_042026-AB.webp",
+      "categoria": "bebes",
+      "score": 90,
+      "enviado_em": "2026-07-07T22:34:20.491338",
+      "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-afon-12l-bg-forno-oven-12-litros-preto-mondial/p/MLB45070708?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 393.3,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+      "preco": 399.0,
+      "preco_original": 623.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_862713-MLA111337700549_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-07T22:34:13.908416",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto/p/MLB66787599?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cafeteira Espresso Lov Preta V - Tres 3 Corações Preto 127v",
+      "preco": 284.05,
+      "preco_original": 630.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_810727-MLA99451825776_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 83,
+      "enviado_em": "2026-07-07T22:34:07.347087",
+      "cupom": "Cupom R$30 OFF",
+      "link": "https://www.mercadolivre.com.br/cafeteira-espresso-lov-preta-v-tres-3-coracoes-preto/p/MLB24527144?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 284.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 127v",
+      "preco": 399.0,
+      "preco_original": 623.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-07T22:34:00.514754",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Com 10 Cuecas Boxer Masculina Microfibra Original",
       "preco": 69.99,
       "preco_original": 138.0,
@@ -1804,6 +1865,12 @@
       "desconto_medio": 33,
       "maior_desconto": 40
     },
+    "bebes": {
+      "total": 8,
+      "score_medio": 79,
+      "desconto_medio": 42,
+      "maior_desconto": 56
+    },
     "redes": {
       "total": 7,
       "score_medio": 80,
@@ -1870,12 +1937,6 @@
       "desconto_medio": 44,
       "maior_desconto": 52
     },
-    "bebes": {
-      "total": 4,
-      "score_medio": 79,
-      "desconto_medio": 38,
-      "maior_desconto": 39
-    },
     "armazenamento": {
       "total": 4,
       "score_medio": 79,
@@ -1889,6 +1950,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T21:13:20.148740",
-  "total": 116
+  "updated_at": "2026-07-07T22:37:16.102353",
+  "total": 120
 }
