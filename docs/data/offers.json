@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit 10 Cuecas Boxer Lupo Algodão Confortável Box Original",
+      "preco": 169.99,
+      "preco_original": 499.0,
+      "desconto_pct": 66.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753249-MLB84466321970_052025-AB-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
+      "categoria": "moda",
+      "score": 83,
+      "enviado_em": "2026-07-07T19:25:35.405808",
+      "link": "https://produto.mercadolivre.com.br/MLB-1473758753-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 169.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "4000 Peça 5cmx2,5cm Etiqueta Térmica Adesiva Envio Full Sku Cor Branco",
+      "preco": 40.0,
+      "preco_original": 69.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861704-MLA105355792463_012026-AB.webp",
+      "categoria": "tablets",
+      "score": 71,
+      "enviado_em": "2026-07-07T19:25:26.384340",
+      "link": "https://www.mercadolivre.com.br/4000-peca-5cmx25cm-etiqueta-termica-adesiva-envio-full-sku-cor-branco/p/MLB27159626?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 40.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Térmico A4 150 Folhas Térmico Impressora Peripage Xprinter Aiyin A4l Aiyin A40s Processo Lista Branco Impressoras Processo Lista 150 Folhas Papel Térmico A4 150 Folhasalta Qualidade",
+      "preco": 53.94,
+      "preco_original": 87.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871485-MLA100868634664_122025-AB.webp",
+      "categoria": "tablets",
+      "score": 69,
+      "enviado_em": "2026-07-07T19:25:18.682493",
+      "link": "https://www.mercadolivre.com.br/papel-termico-a4-150-folhas-termico-impressora-peripage-xprinter-aiyin-a4l-aiyin-a40s-processo-lista-branco-impressoras-processo-lista-150-folhas-papel-termico-a4-150-folhasalta-qualidade/p/MLB63096110?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 53.94,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Sulfite A4 Suzano Premium Report 75g Caixa C/10 Resmas Branco",
+      "preco": 297.0,
+      "preco_original": 449.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_845127-MLB110657281477_042026-AB.webp",
+      "categoria": "tablets",
+      "score": 69,
+      "enviado_em": "2026-07-07T19:25:11.751543",
+      "link": "https://www.mercadolivre.com.br/papel-sulfite-a4-suzano-premium-report-75g-caixa-c10-resmas/up/MLBU3917331638?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 297.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Aparelho De Jantar E Chá Ryo Maresia 20 Peças Branco E Marrom Oxford",
       "preco": 271.9,
       "preco_original": 599.0,
@@ -1687,6 +1747,18 @@
       "desconto_medio": 39,
       "maior_desconto": 57
     },
+    "tablets": {
+      "total": 6,
+      "score_medio": 68,
+      "desconto_medio": 46,
+      "maior_desconto": 62
+    },
+    "moda": {
+      "total": 5,
+      "score_medio": 85,
+      "desconto_medio": 58,
+      "maior_desconto": 69
+    },
     "saude": {
       "total": 4,
       "score_medio": 85,
@@ -1698,12 +1770,6 @@
       "score_medio": 83,
       "desconto_medio": 35,
       "maior_desconto": 49
-    },
-    "moda": {
-      "total": 4,
-      "score_medio": 85,
-      "desconto_medio": 56,
-      "maior_desconto": 69
     },
     "informatica": {
       "total": 4,
@@ -1753,12 +1819,6 @@
       "desconto_medio": 47,
       "maior_desconto": 49
     },
-    "tablets": {
-      "total": 3,
-      "score_medio": 66,
-      "desconto_medio": 54,
-      "maior_desconto": 62
-    },
     "impressoras": {
       "total": 2,
       "score_medio": 81,
@@ -1766,6 +1826,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T17:38:59.276157",
-  "total": 108
+  "updated_at": "2026-07-07T19:27:34.779532",
+  "total": 112
 }
