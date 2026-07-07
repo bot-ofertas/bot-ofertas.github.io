@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "O Boticário Floratta Red Passion Eau De Parfum 75ml",
+      "preco": 156.8,
+      "preco_original": 259.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_665552-MLA110462403349_042026-AB.webp",
+      "categoria": "beleza",
+      "score": 88,
+      "enviado_em": "2026-07-07T12:28:53.099630",
+      "link": "https://www.mercadolivre.com.br/o-boticario-floratta-red-passion-eau-de-parfum-75ml/p/MLB45991710?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 156.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Loção Hidratante Corporal Sem Perfume, Com Ceramidas Essenciais E Ácido Hialurônico, Textura Fluida Cerave 473ml Sem Fragrância",
+      "preco": 79.9,
+      "preco_original": 141.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841667-MLA110746696146_052026-AB.webp",
+      "categoria": "beleza",
+      "score": 87,
+      "enviado_em": "2026-07-07T12:28:46.220372",
+      "link": "https://www.mercadolivre.com.br/loco-hidratante-corporal-sem-perfume-com-ceramidas-essenciais-e-acido-hialurnico-textura-fluida-cerave-473ml/p/MLB21361292?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 79.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creme Multirreparador Calmante, Cicaplast Baume B5+ La Roche-posay, 40ml Todo Tipo De Pele Dia/noite",
+      "preco": 61.7,
+      "preco_original": 106.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_630919-MLA114210163571_072026-AB.webp",
+      "categoria": "beleza",
+      "score": 86,
+      "enviado_em": "2026-07-07T12:28:39.288201",
+      "link": "https://www.mercadolivre.com.br/creme-multirreparador-calmante-cicaplast-baume-b5-la-roche-posay-40ml/p/MLB24529498?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 61.7,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Floratta Flores Secretas Fragrância Delicada Floral Frutal O Boticário 75ml",
+      "preco": 83.92,
+      "preco_original": 174.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_999191-MLA105259973416_012026-AB.webp",
+      "categoria": "beleza",
+      "score": 88,
+      "enviado_em": "2026-07-07T12:28:32.418894",
+      "link": "https://www.mercadolivre.com.br/floratta-flores-secretas-fragrncia-delicada-floral-frutal-o-boticario-75ml/p/MLB62200454?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 83.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Asus Vivobook Go 15 Amd Ryzen 5 7520u 16gb 512ssd Mixed Black Preto",
       "preco": 3381.0,
       "preco_original": 4299.0,
@@ -1549,6 +1609,12 @@
       "desconto_medio": 44,
       "maior_desconto": 63
     },
+    "beleza": {
+      "total": 4,
+      "score_medio": 87,
+      "desconto_medio": 44,
+      "maior_desconto": 52
+    },
     "armazenamento": {
       "total": 4,
       "score_medio": 79,
@@ -1568,6 +1634,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T06:22:39.097839",
-  "total": 96
+  "updated_at": "2026-07-07T12:31:48.737205",
+  "total": 100
 }
