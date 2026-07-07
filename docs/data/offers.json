@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Fogão 5 Bocas Dako Supreme Black Glass Com Mesa De Vidro Tripla Chama E Timer Digital Bivolt Preto 127/220v",
+      "preco": 1546.0,
+      "preco_original": 2879.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651893-MLA84413356184_052025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 90,
+      "enviado_em": "2026-07-07T23:34:50.045987",
+      "cupom": "Cupom R$80 OFF",
+      "link": "https://www.mercadolivre.com.br/fogo-5-bocas-dako-supreme-black-glass-com-mesa-de-vidro-tripla-chama-e-timer-digital-bivolt/p/MLB49999007?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1546.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux De Bancada Branco Com Função Tira Odor E Manter Aquecido 34l Meo44 127v",
+      "preco": 598.5,
+      "preco_original": 799.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889684-MLA99475706302_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 63,
+      "enviado_em": "2026-07-07T23:34:43.310544",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-de-bancada-branco-com-funco-tira-odor-e-manter-aquecido-34l-meo44/p/MLB8742310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 598.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas 33l Philco Espelhado/branco 1400w 220v Pmo38e",
+      "preco": 532.0,
+      "preco_original": 799.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921991-MLA99504374070_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 73,
+      "enviado_em": "2026-07-07T23:34:36.713777",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-espelhadobranco-1400w-220v-pmo38e/p/MLB38429792?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 532.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas 33l Philco Espelhado/branco 1400w 127v Pmo38e",
+      "preco": 516.04,
+      "preco_original": 799.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687815-MLA99957156929_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 76,
+      "enviado_em": "2026-07-07T23:34:30.102453",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-espelhadobranco-1400w-127v-pmo38e/p/MLB38279894?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 516.04,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Fritadeira Elétrica Afon-12l-bg Forno Oven 12 Litros Preto Mondial 127v",
       "preco": 393.3,
       "preco_original": 899.0,
@@ -636,7 +697,7 @@
       "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-teclas-faceis-limpa-facil-1400w-pm36-127v/p/MLB44898097?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 442.72,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1853,17 +1914,17 @@
       "desconto_medio": 40,
       "maior_desconto": 67
     },
+    "eletrodomesticos": {
+      "total": 12,
+      "score_medio": 73,
+      "desconto_medio": 34,
+      "maior_desconto": 46
+    },
     "moda": {
       "total": 9,
       "score_medio": 83,
       "desconto_medio": 52,
       "maior_desconto": 69
-    },
-    "eletrodomesticos": {
-      "total": 8,
-      "score_medio": 72,
-      "desconto_medio": 33,
-      "maior_desconto": 40
     },
     "bebes": {
       "total": 8,
@@ -1950,6 +2011,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-07T22:37:16.102353",
-  "total": 120
+  "updated_at": "2026-07-07T23:37:17.895494",
+  "total": 124
 }
