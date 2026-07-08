@@ -1,6 +1,69 @@
 {
   "products": [
     {
+      "titulo": "Creatina Monohidratada em Pote 300g 100% Pura Dark Lab",
+      "preco": 39.9,
+      "preco_original": 78.0,
+      "desconto_pct": 48.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716663-MLA99599672360_122025-AB.webp",
+      "categoria": "esportes",
+      "score": 73,
+      "enviado_em": "2026-07-08T23:33:39.664293",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-em-pote-300g-100-pura-dark-lab/p/MLB19506691?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 1kg Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 74.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-08T23:33:32.388627",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem sabor",
+      "preco": 69.9,
+      "preco_original": 159.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 75,
+      "enviado_em": "2026-07-08T23:33:25.691404",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Omega Plus 240 Caps Dark Lab",
+      "preco": 179.9,
+      "preco_original": 599.0,
+      "desconto_pct": 70.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767057-MLA108660577007_032026-AB.webp",
+      "categoria": "esportes",
+      "score": 71,
+      "enviado_em": "2026-07-08T23:33:18.856103",
+      "cupom": "Cupom R$80 OFF",
+      "link": "https://www.mercadolivre.com.br/omega-plus-240-caps-dark-lab/p/MLB66597831?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Câmera Instax Mini 12 Fujifilm Rosa Gloss - Fotos Em 10s",
       "preco": 472.71,
       "preco_original": 665.0,
@@ -1271,7 +1334,7 @@
       "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 549.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1749,6 +1812,12 @@
       "desconto_medio": 46,
       "maior_desconto": 68
     },
+    "esportes": {
+      "total": 8,
+      "score_medio": 73,
+      "desconto_medio": 55,
+      "maior_desconto": 74
+    },
     "eletrodomesticos": {
       "total": 8,
       "score_medio": 74,
@@ -1772,12 +1841,6 @@
       "score_medio": 85,
       "desconto_medio": 46,
       "maior_desconto": 58
-    },
-    "esportes": {
-      "total": 4,
-      "score_medio": 74,
-      "desconto_medio": 48,
-      "maior_desconto": 69
     },
     "celulares": {
       "total": 4,
@@ -1822,6 +1885,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T22:11:52.742786",
-  "total": 112
+  "updated_at": "2026-07-08T23:36:06.713252",
+  "total": 116
 }
