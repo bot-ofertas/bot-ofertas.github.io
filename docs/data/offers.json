@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smartphone Motorola Edge 60 5g - 512gb 24gb (12gb Ram+12gb Ram Boost) Tela Quad-curve Moto Ai 50mp Sony Camera Ultrarresistencia Militar Ip68 + Ip69 - Verde",
+      "preco": 1999.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 20.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_920690-MLA100089053193_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 70,
+      "enviado_em": "2026-07-08T11:48:17.644825",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-edge-60-5g-512gb-24gb-12gb-ram12gb-ram-boost-tela-quad-curve-moto-ai-50mp-sony-camera-ultrarresistencia-militar-ip68-ip69-verde/p/MLB48930797?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
+      "preco": 887.78,
+      "preco_original": 1499.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-08T11:48:11.042954",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-cmera-50mp-verde/p/MLB54963045?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 887.78,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai E Night Vision Bateria De 5200 Mah Tela Fhd+ 6.7 Com Superbrilho Nfc - Grafite",
+      "preco": 862.9,
+      "preco_original": 1389.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650904-MLA100002714503_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 87,
+      "enviado_em": "2026-07-08T11:48:04.377572",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-bateria-de-5200-mah-tela-fhd-67-com-superbrilho-nfc-grafite/p/MLB44665473?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 862.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Violeta",
+      "preco": 1248.0,
+      "preco_original": 2538.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925275-MLA99995733515_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-08T11:47:57.759357",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-violeta/p/MLB47113437?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1248.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Ring Light Iluminador Led Profissional 26cm Tripé 2,10m Luz Branco Frio Quente Neutro 127/220v Preto 3 Cores",
       "preco": 42.23,
       "preco_original": 99.0,
@@ -1047,7 +1107,7 @@
       "link": "https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB48946861?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 642.16,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1359,6 +1419,12 @@
       "desconto_medio": 48,
       "maior_desconto": 69
     },
+    "celulares": {
+      "total": 4,
+      "score_medio": 84,
+      "desconto_medio": 37,
+      "maior_desconto": 50
+    },
     "casa": {
       "total": 4,
       "score_medio": 87,
@@ -1390,6 +1456,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T05:03:38.019758",
-  "total": 84
+  "updated_at": "2026-07-08T11:50:43.342749",
+  "total": 88
 }
