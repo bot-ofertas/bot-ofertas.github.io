@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Acer Aspire 5 Ryzen 5 5500u Vega7 8gb Ram 256gb Ssd Cor Prata",
+      "preco": 3068.0,
+      "preco_original": 4061.0,
+      "desconto_pct": 24.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_983067-MLA106542233674_022026-AB.webp",
+      "categoria": "informatica",
+      "score": 74,
+      "enviado_em": "2026-07-08T17:55:37.490279",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-ryzen-5-5500u-vega7-8gb-ram-256gb-ssd-cor-prata/p/MLB65568122?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3068.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor Gamer LG 24ms500-b 24ms Ips Fullhd 100hz Ajuste De Inclinação Negro Preto 127/220v",
+      "preco": 489.0,
+      "preco_original": 749.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921982-MLA99962503055_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 74,
+      "enviado_em": "2026-07-08T17:55:30.577193",
+      "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-24ms500-b-24ms-ips-fullhd-100hz-ajuste-de-inclinaco-negro/p/MLB38017111?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 489.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor Gamer LG Ultragear 27 Ips, 180hz, 1ms (gtg), Nvidia G-sync , Amd Freesync, Hdr10, Srgb 99% - 27gs60f-b Preto 127/220v",
+      "preco": 899.1,
+      "preco_original": 1476.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_761900-MLA99509379216_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 89,
+      "enviado_em": "2026-07-08T17:55:23.691166",
+      "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-ultragear-27-ips-180hz-1ms-gtg-nvidia-g-sync-amd-freesync-hdr10-srgb-99-27gs60f-b/p/MLB44317631?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 899.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Samsung 32'' Hd Tizen Hdr Wi-fi Hdmi Monitor Bivolt Preta Preto",
+      "preco": 858.36,
+      "preco_original": 1299.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_924175-MLA99993108321_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 80,
+      "enviado_em": "2026-07-08T17:55:16.724203",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-32-hd-tizen-hdr-wi-fi-hdmi-monitor-bivolt-preta-preto/p/MLB52027456?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 858.36,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv LG Uhd Ai Ua75 65 Polegadas Hdr10 Pro Processador 7 Ai Ger8 Webos 25",
       "preco": 3329.0,
       "preco_original": 4999.0,
@@ -1458,17 +1518,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
-    "preco": 499.9,
-    "preco_original": 1099.0,
-    "desconto_pct": 54.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
-    "categoria": "casa",
-    "score": 95,
-    "enviado_em": "2026-07-07T17:36:11.977602",
-    "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Fritadeira Elétrica Afon-12l-bg Forno Oven 12 Litros Preto Mondial 127v",
+    "preco": 393.3,
+    "preco_original": 899.0,
+    "desconto_pct": 56.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900387-MLA109507200694_042026-AB.webp",
+    "categoria": "bebes",
+    "score": 90,
+    "enviado_em": "2026-07-07T22:34:20.491338",
+    "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-afon-12l-bg-forno-oven-12-litros-preto-mondial/p/MLB45070708?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 499.9,
+    "menor_preco_30d": 393.3,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1497,6 +1557,12 @@
       "desconto_medio": 41,
       "maior_desconto": 67
     },
+    "informatica": {
+      "total": 8,
+      "score_medio": 77,
+      "desconto_medio": 33,
+      "maior_desconto": 41
+    },
     "eletrodomesticos": {
       "total": 8,
       "score_medio": 74,
@@ -1520,12 +1586,6 @@
       "score_medio": 85,
       "desconto_medio": 46,
       "maior_desconto": 58
-    },
-    "informatica": {
-      "total": 4,
-      "score_medio": 75,
-      "desconto_medio": 34,
-      "maior_desconto": 41
     },
     "ferramentas": {
       "total": 4,
@@ -1576,6 +1636,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T16:16:32.000108",
-  "total": 96
+  "updated_at": "2026-07-08T17:58:32.149998",
+  "total": 100
 }
