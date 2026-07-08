@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Câmera Instax Mini 12 Fujifilm Rosa Gloss - Fotos Em 10s",
+      "preco": 472.71,
+      "preco_original": 665.0,
+      "desconto_pct": 28.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687238-MLA99913349601_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-07-08T22:09:25.743685",
+      "link": "https://www.mercadolivre.com.br/cmera-instax-mini-12-fujifilm-rosa-gloss-fotos-em-10s/p/MLB28766073?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 472.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Lapela Hollyland Lark M2 Duplo Usb C E Lightning Preto",
+      "preco": 682.74,
+      "preco_original": 1350.0,
+      "desconto_pct": 49.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_614057-MLB112469844944_062026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 90,
+      "enviado_em": "2026-07-08T22:09:19.030866",
+      "link": "https://www.mercadolivre.com.br/microfone-lapela-hollyland-lark-m2-duplo-usb-c-e-lightning/up/MLBU3833408794?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 682.74,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Lapela Duplo Hollyland Lark M2 Combo Usb C Câmera Preto",
+      "preco": 649.0,
+      "preco_original": 1119.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_669006-MLA111392025195_052026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 88,
+      "enviado_em": "2026-07-08T22:09:12.318378",
+      "link": "https://www.mercadolivre.com.br/microfone-lapela-duplo-hollyland-lark-m2-combo-usb-c-cmera-preto/p/MLB66115888?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 649.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark M2 Duo Combo Duplo Para 2 Pessoas USB-C, Lightning e Camera preto",
+      "preco": 634.0,
+      "preco_original": 1280.0,
+      "desconto_pct": 50.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_974504-MLA99991742439_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 90,
+      "enviado_em": "2026-07-08T22:09:05.572390",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-m2-duo-combo-duplo-para-2-pessoas-usb-c-lightning-e-camera-preto/p/MLB34016199?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 634.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Robô aspirador Robot W90 varre aspira e passa pano 30w Wap cor preto",
       "preco": 285.9,
       "preco_original": 514.0,
@@ -1683,6 +1743,12 @@
       "desconto_medio": 33,
       "maior_desconto": 41
     },
+    "ferramentas": {
+      "total": 8,
+      "score_medio": 78,
+      "desconto_medio": 46,
+      "maior_desconto": 68
+    },
     "eletrodomesticos": {
       "total": 8,
       "score_medio": 74,
@@ -1706,12 +1772,6 @@
       "score_medio": 85,
       "desconto_medio": 46,
       "maior_desconto": 58
-    },
-    "ferramentas": {
-      "total": 4,
-      "score_medio": 72,
-      "desconto_medio": 49,
-      "maior_desconto": 68
     },
     "esportes": {
       "total": 4,
@@ -1762,6 +1822,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T20:50:00.387234",
-  "total": 108
+  "updated_at": "2026-07-08T22:11:52.742786",
+  "total": 112
 }
