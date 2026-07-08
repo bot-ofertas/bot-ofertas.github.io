@@ -188,9 +188,74 @@ class _Handler(BaseHTTPRequestHandler):
             except Exception as e:
                 self._resp(500, {"error": str(e)})
             return
+        if self.path == "/quedas":
+            # Maiores quedas de preço no BD
+            try:
+                from core.price_alerts import listar_maiores_quedas  # noqa: PLC0415
+                self._resp(200, listar_maiores_quedas(20))
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
+        if self.path in ("/dashboard", "/dashboard/", "/"):
+            # Dashboard HTML visual
+            try:
+                dash_path = os.path.join(_BASE, "core", "dashboard.html")
+                with open(dash_path, "rb") as f:
+                    body = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
+        if self.path == "/feed.xml":
+            # RSS feed das últimas ofertas — SEO grátis (agregadores/Zapier)
+            try:
+                from core import database as db  # noqa: PLC0415
+                import html  # noqa: PLC0415
+                produtos = db.listar_todos(limite=30)
+                items = []
+                for p in produtos:
+                    if p.get("status") != "enviado":
+                        continue
+                    titulo = html.escape(p.get("titulo", "")[:120])
+                    link = html.escape(p.get("affiliate_link") or "#")
+                    desc = html.escape(
+                        f"R$ {p.get('preco', 0):.2f} — "
+                        f"{p.get('desconto_pct', 0):.0f}% OFF"
+                    )
+                    items.append(
+                        f"<item><title>{titulo}</title>"
+                        f"<link>{link}</link>"
+                        f"<description>{desc}</description>"
+                        f"<guid>{link}</guid></item>"
+                    )
+                xml = (
+                    '<?xml version="1.0" encoding="UTF-8"?>'
+                    '<rss version="2.0"><channel>'
+                    '<title>Bot Ofertas — Melhores promoções</title>'
+                    '<link>https://bot-ofertas.github.io/</link>'
+                    '<description>Ofertas com maior desconto</description>'
+                    f'{"".join(items)}</channel></rss>'
+                )
+                body = xml.encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/rss+xml; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(body)
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
         self._resp(404, {"error": "not found",
-                         "endpoints": ["/health", "/errors", "/stats",
-                                       "/metrics", "/cache", "POST /oferta"]})
+                         "endpoints": [
+                             "/dashboard", "/health", "/errors", "/stats",
+                             "/metrics", "/cache", "/quedas", "/feed.xml",
+                             "POST /oferta",
+                         ]})
 
     def do_POST(self):
         """POST /oferta — recebe oferta manual via n8n/webhook para postar."""

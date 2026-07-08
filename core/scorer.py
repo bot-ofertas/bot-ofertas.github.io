@@ -141,6 +141,37 @@ def classificar_score(score: int) -> str:
     return "ruim"
 
 
+def score_inteligente(produto: dict) -> int:
+    """Score enriquecido: base + queda de preço + Google Trends.
+
+    Chame no lugar do calcular_score() para priorizar ofertas mais lucrativas.
+    Adiciona até +40 pts se produto está viral e em queda de preço.
+    """
+    base = calcular_score(produto)
+    # Boost por queda de preço (usa histórico do BD)
+    try:
+        from core.price_alerts import score_boost_por_queda  # noqa: PLC0415
+        base += score_boost_por_queda(produto)
+    except Exception:
+        pass
+    # Boost por trending (Google Trends BR)
+    try:
+        from core.trending import score_trending  # noqa: PLC0415
+        titulo = produto.get("titulo", "")
+        if titulo:
+            # Extrai as 3 primeiras palavras (marca+modelo geralmente)
+            keywords = " ".join(titulo.split()[:3])
+            trend = score_trending(keywords)
+            # trend >70 = viral: +15; >50: +5
+            if trend >= 70:
+                base += 15
+            elif trend >= 50:
+                base += 5
+    except Exception:
+        pass
+    return min(base, 150)  # cap em 150
+
+
 def selo_classificacao(score: int) -> tuple[str, str]:
     """Retorna (emoji, rótulo) para exibir a classificação ao usuário."""
     return {

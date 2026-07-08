@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Bot Ofertas — Dashboard</title>
+<style>
+:root { color-scheme: dark; }
+body { font-family: system-ui,-apple-system,sans-serif; background:#0e1116; color:#e6edf3; margin:0; padding:24px; }
+h1 { margin:0 0 8px; font-size:22px; font-weight:600; }
+.subtitle { color:#8b949e; margin-bottom:24px; font-size:14px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px; }
+.card { background:#151b23; border:1px solid #262c36; border-radius:12px; padding:16px 20px; }
+.card .lbl { color:#8b949e; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
+.card .val { font-size:28px; font-weight:600; }
+.card.good .val { color:#3fb950; }
+.card.warn .val { color:#f0883e; }
+.card.bad .val { color:#f85149; }
+.status { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; margin-left:8px; }
+.status.up { background:#1a4a2b; color:#3fb950; }
+.status.down { background:#4a1e1e; color:#f85149; }
+table { width:100%; border-collapse:collapse; background:#151b23; border:1px solid #262c36; border-radius:12px; overflow:hidden; }
+th, td { padding:10px 16px; text-align:left; border-bottom:1px solid #262c36; font-size:13px; }
+th { background:#1c2129; color:#8b949e; font-weight:500; font-size:12px; text-transform:uppercase; }
+tr:last-child td { border-bottom:none; }
+.mono { font-family:ui-monospace,monospace; font-size:12px; }
+h2 { margin:32px 0 12px; font-size:16px; color:#8b949e; font-weight:500; }
+.refresh { position:fixed; top:16px; right:16px; background:#238636; color:#fff; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; font-size:12px; }
+.refresh:hover { background:#2ea043; }
+.pill { display:inline-block; padding:2px 8px; background:#1c2129; border-radius:8px; font-size:11px; color:#8b949e; margin-right:6px; }
+</style>
+</head>
+<body>
+<button class="refresh" onclick="location.reload()">↻ Atualizar</button>
+<h1>Bot Ofertas — Dashboard</h1>
+<p class="subtitle" id="subtitle">Carregando…</p>
+
+<div class="grid" id="kpis"></div>
+
+<h2>Componentes</h2>
+<div class="grid" id="componentes"></div>
+
+<h2>Maiores quedas de preço</h2>
+<table id="quedas"><thead><tr><th>Produto</th><th>De</th><th>Por</th><th>Off</th></tr></thead><tbody></tbody></table>
+
+<h2>Últimos erros</h2>
+<table id="erros"><thead><tr><th>Quando</th><th>Operação</th><th>Mensagem</th></tr></thead><tbody></tbody></table>
+
+<script>
+async function fetchJSON(path) {
+  try {
+    const r = await fetch(path);
+    return await r.json();
+  } catch (e) { return null; }
+}
+
+function card(lbl, val, klass='') {
+  return `<div class="card ${klass}"><div class="lbl">${lbl}</div><div class="val">${val}</div></div>`;
+}
+
+async function load() {
+  const [health, stats, errors, quedas] = await Promise.all([
+    fetchJSON('/health'),
+    fetchJSON('/stats'),
+    fetchJSON('/errors?limit=5'),
+    fetchJSON('/quedas'),
+  ]);
+
+  // KPIs
+  const kpiEl = document.getElementById('kpis');
+  if (stats) {
+    kpiEl.innerHTML = [
+      card('Total produtos', stats.total || 0),
+      card('Enviados', stats.enviados || 0, 'good'),
+      card('Pendentes', stats.pendentes || 0),
+      card('Score médio', stats.score_medio || 0, 'good'),
+      card('Taxa afiliado', (stats.taxa_afiliado || 0) + '%', 'good'),
+    ].join('');
+  }
+
+  // Componentes
+  const compEl = document.getElementById('componentes');
+  if (health) {
+    const stat = (ok) => ok ? '<span class="status up">UP</span>' : '<span class="status down">DOWN</span>';
+    compEl.innerHTML = [
+      card('Telegram', stat(health.telegram?.ok)),
+      card('WhatsApp', stat(health.whatsapp?.ok) + ' <span class="pill">' + (health.whatsapp?.metodo || '?') + '</span>'),
+      card('Rastreador', stat(health.rastreador?.ok) + ' <span class="pill">' + (health.rastreador?.idade_s || 0) + 's</span>'),
+      card('CPU', (health.sistema?.cpu || 0) + '%'),
+      card('RAM', (health.sistema?.ram_pct || 0) + '%'),
+    ].join('');
+  }
+
+  // Maiores quedas
+  const qBody = document.querySelector('#quedas tbody');
+  if (quedas && quedas.length) {
+    qBody.innerHTML = quedas.slice(0, 8).map(p => `
+      <tr>
+        <td>${(p.titulo || '').slice(0, 60)}</td>
+        <td class="mono">R$ ${(p.preco_original || 0).toFixed(2)}</td>
+        <td class="mono">R$ ${(p.preco || 0).toFixed(2)}</td>
+        <td><span class="status up">${p.desconto_pct}%</span></td>
+      </tr>`).join('');
+  } else {
+    qBody.innerHTML = '<tr><td colspan="4" style="color:#8b949e; text-align:center;">Sem quedas registradas</td></tr>';
+  }
+
+  // Erros
+  const eBody = document.querySelector('#erros tbody');
+  if (errors && errors.erros && errors.erros.length) {
+    eBody.innerHTML = errors.erros.slice().reverse().map(e => `
+      <tr>
+        <td class="mono">${(e.ts || '').slice(0, 19).replace('T', ' ')}</td>
+        <td>${e.operacao}</td>
+        <td>${(e.mensagem || '').slice(0, 80)}</td>
+      </tr>`).join('');
+  } else {
+    eBody.innerHTML = '<tr><td colspan="3" style="color:#3fb950; text-align:center;">Sem erros ✓</td></tr>';
+  }
+
+  document.getElementById('subtitle').textContent =
+    'Atualizado ' + new Date().toLocaleTimeString('pt-BR') + ' — recarrega automático a cada 30s';
+}
+load();
+setInterval(load, 30000);
+</script>
+</body>
+</html>
