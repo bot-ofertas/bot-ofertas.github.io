@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Robô aspirador Robot W90 varre aspira e passa pano 30w Wap cor preto",
+      "preco": 285.9,
+      "preco_original": 514.0,
+      "desconto_pct": 44.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748103-MLA99906601653_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 79,
+      "enviado_em": "2026-07-08T20:47:05.809375",
+      "link": "https://www.mercadolivre.com.br/rob-aspirador-robot-w90-varre-aspira-e-passa-pano-30w-wap-cor-preto/p/MLB19731776?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 285.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ar Split Electrolux Color Adapt Wi-fi 12k Inverter R-32 220v Branca 220v",
+      "preco": 1659.0,
+      "preco_original": 2229.0,
+      "desconto_pct": 25.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_990641-MLB107807523236_032026-AB.webp",
+      "categoria": "bebes",
+      "score": 75,
+      "enviado_em": "2026-07-08T20:46:58.848064",
+      "link": "https://www.mercadolivre.com.br/ar-split-electrolux-color-adapt-wifi-12k-inverter-r32-220v/up/MLBU3843920278?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1659.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Secador De Cabelo 2000 Watts - Style Pro Taiff",
+      "preco": 186.4,
+      "preco_original": 394.0,
+      "desconto_pct": 52.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889216-MLA99506441392_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-08T20:46:51.923643",
+      "link": "https://www.mercadolivre.com.br/secador-de-cabelo-2000-watts-style-pro-taiff/p/MLB18572392?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 186.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Purificador De Água Consul refrigerado Natural E Gelada com proteção antibactérias Bivolt Consul Branco - CPB34ASVNA",
+      "preco": 371.44,
+      "preco_original": 559.0,
+      "desconto_pct": 33.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_975106-MLA100053871947_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 70,
+      "enviado_em": "2026-07-08T20:46:45.121810",
+      "link": "https://www.mercadolivre.com.br/purificador-de-agua-consul-refrigerado-natural-e-gelada-com-proteco-antibacterias-bivolt-consul-branco-cpb34asvna/p/MLB23501697?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 371.44,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "LEGO Icons Ferrari F2004 e Michael Schumacher 11375; Carro de Fórmula 1 para Montar",
       "preco": 417.91,
       "preco_original": 799.0,
@@ -1593,17 +1653,17 @@
     "verificada": true
   },
   "stats": {
+    "bebes": {
+      "total": 16,
+      "score_medio": 77,
+      "desconto_medio": 41,
+      "maior_desconto": 56
+    },
     "notebooks": {
       "total": 12,
       "score_medio": 82,
       "desconto_medio": 34,
       "maior_desconto": 53
-    },
-    "bebes": {
-      "total": 12,
-      "score_medio": 79,
-      "desconto_medio": 41,
-      "maior_desconto": 56
     },
     "tvs": {
       "total": 8,
@@ -1702,6 +1762,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T19:30:55.837778",
-  "total": 104
+  "updated_at": "2026-07-08T20:50:00.387234",
+  "total": 108
 }
