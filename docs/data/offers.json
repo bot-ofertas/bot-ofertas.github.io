@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Notebook Gamer Predator Helios Neo / Phn16-72-74vx / Intel® Core I7-14700hx De 14ªgeração / 16gb / 512ssd / Windows 11 Home / Nvidia Geforce Rtx 4070 Gddr6 / Tela 16",
+      "preco": 9213.0,
+      "preco_original": 19999.0,
+      "desconto_pct": 53.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_693605-MLA95657512408_102025-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-08T01:49:12.943295",
+      "cupom": "Cupom R$400 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-predator-helios-neo-phn16-72-74vx-intel-core-i7-14700hx-de-14geraco-16gb-512ssd-windows-11-home-nvidia-geforce-rtx-4070-gddr6-tela-16/p/MLB43497024?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 9213.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision I15m Com Minitela, Intel Core 3, 8gb De Ram, Ssd De 256gb E Tela De 15,6  Full Hd Ips Antirreflexo Preto",
+      "preco": 2402.0,
+      "preco_original": 3570.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_817115-MLA99156919548_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 82,
+      "enviado_em": "2026-07-08T01:49:05.416093",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-i15m-com-minitela-intel-core-3-8gb-de-ram-ssd-de-256gb-e-tela-de-156-full-hd-ips-antirreflexo/p/MLB56961557?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2402.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Multi Ultra Celeron N4020c 4gb 128gb W11 14'' Cinza",
+      "preco": 1579.0,
+      "preco_original": 2064.0,
+      "desconto_pct": 23.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_898360-MLA99980257507_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 72,
+      "enviado_em": "2026-07-08T01:48:58.616859",
+      "link": "https://www.mercadolivre.com.br/notebook-multi-ultra-celeron-n4020c-4gb-128gb-w11-14-cinza/p/MLB32101651?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1579.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Asus Vivobook Go 15, Intel Celeron Dual Core N4500, 4gb Ram, 128gb Emmc, Windows 11 Home, Tela 15,60' Led, Rosa - E510ka-br833ws",
+      "preco": 2099.0,
+      "preco_original": 2669.0,
+      "desconto_pct": 21.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_909668-MLA108565979497_032026-AB.webp",
+      "categoria": "notebooks",
+      "score": 71,
+      "enviado_em": "2026-07-08T01:48:51.752482",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-intel-celeron-dual-core-n4500-4gb-ram-128gb-emmc-windows-11-home-tela-1560-led-rosa-e510ka-br833ws/p/MLB41152234?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2099.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Gamer Lenovo Loq 15irx9 Intel Core I5-13450hx 16gb 512gb Ssd Rtx 3050 Windows 11 - 83kh0006br Luna Grey",
       "preco": 5900.0,
       "preco_original": 9999.0,
@@ -1173,10 +1234,10 @@
   },
   "stats": {
     "notebooks": {
-      "total": 8,
-      "score_medio": 83,
+      "total": 12,
+      "score_medio": 82,
       "desconto_medio": 34,
-      "maior_desconto": 49
+      "maior_desconto": 53
     },
     "livros": {
       "total": 8,
@@ -1263,6 +1324,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T01:12:13.716285",
-  "total": 76
+  "updated_at": "2026-07-08T01:52:09.150333",
+  "total": 80
 }
