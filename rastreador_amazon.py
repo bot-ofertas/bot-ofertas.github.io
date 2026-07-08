@@ -168,17 +168,52 @@ async def rodar_uma_vez() -> None:
     log(f"Amazon: {publicados} cupom(s) publicado(s)")
 
 
+def _outra_instancia_amazon() -> bool:
+    """Evita duplicata: True se já há outro rastreador_amazon em loop."""
+    try:
+        import psutil  # noqa: PLC0415
+        meu = os.getpid()
+        for p in psutil.process_iter(["pid", "name", "cmdline"]):
+            try:
+                if p.info["pid"] == meu:
+                    continue
+                cmd = " ".join(p.info.get("cmdline") or [])
+                nome = (p.info.get("name") or "").lower()
+                if "rastreador_amazon.py" in cmd and "python" in nome and \
+                   ("--loop" in cmd or "--random" in cmd):
+                    return True
+            except Exception:
+                continue
+    except ImportError:
+        pass
+    return False
+
+
 def main() -> None:
+    import random  # noqa: PLC0415
     parser = argparse.ArgumentParser(description="Rastreador de cupons Amazon Brasil")
     parser.add_argument("--loop", type=int, metavar="MINUTOS")
+    parser.add_argument("--random", action="store_true",
+                        help="Usa intervalo aleatório entre --loop-min e --loop-max")
+    parser.add_argument("--loop-min", type=int, default=45,
+                        help="Intervalo mínimo aleatório (padrão: 45 min)")
+    parser.add_argument("--loop-max", type=int, default=75,
+                        help="Intervalo máximo aleatório (padrão: 75 min)")
     args = parser.parse_args()
 
-    if args.loop:
-        log(f"Modo contínuo: a cada {args.loop} min. Ctrl+C para parar.")
+    if args.loop or args.random:
+        if _outra_instancia_amazon():
+            log("⛔ Outro rastreador_amazon já está rodando. Encerrando.")
+            return
+        modo = f"aleatório {args.loop_min}-{args.loop_max}min" if args.random \
+               else f"a cada {args.loop} min"
+        log(f"Modo contínuo: {modo}. Ctrl+C para parar.")
         while True:
             asyncio.run(rodar_uma_vez())
-            log(f"\n⏳ Próxima rodada em {args.loop} minuto(s)...")
-            time.sleep(args.loop * 60)
+            proximo = (random.randint(args.loop_min, args.loop_max)
+                       if args.random else args.loop)
+            log(f"\n⏳ Próxima rodada Amazon em {proximo} minuto(s)...")
+            time.sleep(proximo * 60)
     else:
         asyncio.run(rodar_uma_vez())
 

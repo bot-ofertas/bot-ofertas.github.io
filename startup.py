@@ -116,35 +116,75 @@ def etapa_3_healthcheck() -> None:
         log.warning("[3/4] Watchdog WhatsApp Desktop não subiu: %s", e)
 
 
-def etapa_4_iniciar_rastreador() -> subprocess.Popen:
-    log.info("[4/4] Iniciando rastreador (intervalo aleatório 30-45 min)…")
-    cmd = [
+def etapa_4_iniciar_rastreador() -> tuple:
+    """Sobe rastreadores ML e Amazon em paralelo (intervalos aleatórios)."""
+    # ML — 30–45 min
+    log.info("[4/4] Iniciando rastreador ML (intervalo aleatório 30-45 min)…")
+    cmd_ml = [
         sys.executable, os.path.join(BASE, "rastreador.py"),
         "--random", "--loop-min", "30", "--loop-max", "45",
     ]
-    log_f = open(LOG_PATH, "a", encoding="utf-8")
-    proc = subprocess.Popen(cmd, stdout=log_f, stderr=log_f, cwd=BASE)
+    log_ml = open(LOG_PATH, "a", encoding="utf-8")
+    proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE)
     with open(PID_PATH, "w") as f:
-        f.write(str(proc.pid))
-    log.info("[4/4] Rastreador PID=%d — log em %s", proc.pid, LOG_PATH)
-    return proc
+        f.write(str(proc_ml.pid))
+    log.info("[4/4] Rastreador ML PID=%d", proc_ml.pid)
+
+    # Amazon — 45–75 min (menos frequente, cupons mudam mais devagar)
+    log.info("[4/4] Iniciando rastreador Amazon (intervalo 45-75 min)…")
+    amazon_log_path = os.path.join(BASE, "data", "rastreador_amazon.log")
+    cmd_az = [
+        sys.executable, os.path.join(BASE, "rastreador_amazon.py"),
+        "--random", "--loop-min", "45", "--loop-max", "75",
+    ]
+    log_az = open(amazon_log_path, "a", encoding="utf-8")
+    proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE)
+    with open(os.path.join(BASE, "data", "rastreador_amazon.pid"), "w") as f:
+        f.write(str(proc_az.pid))
+    log.info("[4/4] Rastreador Amazon PID=%d", proc_az.pid)
+
+    return proc_ml, proc_az
 
 
-def monitorar(proc: subprocess.Popen) -> None:
-    """Reinicia o rastreador com backoff se ele cair."""
-    log.info("Sistema em produção — rastreador + healthcheck ativos.")
-    falhas = 0
+def monitorar(procs) -> None:
+    """Reinicia rastreadores que caírem, mantendo os outros vivos."""
+    # procs pode ser um único Popen (legacy) ou tupla (ml, amazon)
+    if isinstance(procs, tuple):
+        proc_ml, proc_az = procs
+    else:
+        proc_ml, proc_az = procs, None
+
+    log.info("Sistema em produção — rastreadores + healthcheck ativos.")
+    falhas_ml = falhas_az = 0
     while True:
-        code = proc.wait()
-        log.warning("Rastreador encerrou com código %s.", code)
-        falhas += 1
-        if falhas > 3:
-            log.error("Rastreador falhou %d vezes seguidas — encerrando startup.", falhas)
+        # Polling não-bloqueante: verifica se algum caiu
+        time.sleep(60)
+        if proc_ml.poll() is not None:
+            falhas_ml += 1
+            log.warning("Rastreador ML caiu (código %s, falha %d/3)",
+                        proc_ml.returncode, falhas_ml)
+            if falhas_ml <= 3:
+                espera = min(30 * (2 ** (falhas_ml - 1)), 300)
+                log.info("Reiniciando ML em %ds…", espera)
+                time.sleep(espera)
+                procs_novo = etapa_4_iniciar_rastreador()
+                if isinstance(procs_novo, tuple):
+                    proc_ml, proc_az_novo = procs_novo
+                    if proc_az is None:
+                        proc_az = proc_az_novo
+            else:
+                log.error("ML falhou 3x — desistindo dele")
+                proc_ml = None
+        if proc_az and proc_az.poll() is not None:
+            falhas_az += 1
+            log.warning("Rastreador Amazon caiu (código %s, falha %d/3)",
+                        proc_az.returncode, falhas_az)
+            if falhas_az > 3:
+                log.error("Amazon falhou 3x — desistindo dele")
+                proc_az = None
+        if proc_ml is None and proc_az is None:
+            log.error("Todos rastreadores mortos — encerrando startup")
             break
-        espera = min(30 * (2 ** (falhas - 1)), 300)
-        log.info("Reiniciando rastreador em %ds (tentativa %d)…", espera, falhas)
-        time.sleep(espera)
-        proc = etapa_4_iniciar_rastreador()
 
 
 def main() -> None:

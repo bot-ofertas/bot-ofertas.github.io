@@ -166,8 +166,93 @@ class _Handler(BaseHTTPRequestHandler):
             except Exception as e:
                 self._resp(500, {"error": str(e)})
             return
+        if self.path == "/metrics":
+            # Formato Prometheus para Grafana/n8n
+            try:
+                from core.metrics import formato_prometheus  # noqa: PLC0415
+                body = formato_prometheus().encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "text/plain; version=0.0.4")
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(body)
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
+        if self.path == "/cache":
+            # Estatísticas do cache de fotos
+            try:
+                from core.foto_cache import stats  # noqa: PLC0415
+                self._resp(200, stats())
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
         self._resp(404, {"error": "not found",
-                         "endpoints": ["/health", "/errors", "/stats"]})
+                         "endpoints": ["/health", "/errors", "/stats",
+                                       "/metrics", "/cache", "POST /oferta"]})
+
+    def do_POST(self):
+        """POST /oferta — recebe oferta manual via n8n/webhook para postar."""
+        if self.path != "/oferta":
+            self._resp(404, {"error": "not found"})
+            return
+        try:
+            tamanho = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(tamanho).decode("utf-8"))
+            # Validação mínima
+            campos_req = ("titulo", "preco", "link")
+            faltando = [c for c in campos_req if not body.get(c)]
+            if faltando:
+                self._resp(400, {"error": "faltam campos", "campos": faltando})
+                return
+            # Publica assíncrono
+            import threading  # noqa: PLC0415
+            threading.Thread(
+                target=_publicar_webhook, args=(body,), daemon=True
+            ).start()
+            try:
+                from core.metrics import inc  # noqa: PLC0415
+                inc("webhook_ofertas_recebidas")
+            except Exception:
+                pass
+            self._resp(202, {"status": "aceito", "titulo": body.get("titulo")})
+        except Exception as e:
+            self._resp(500, {"error": str(e)})
+
+
+def _publicar_webhook(produto: dict) -> None:
+    """Publica oferta recebida via webhook nos canais configurados."""
+    import asyncio
+    import os
+    async def _fluxo():
+        from dotenv import load_dotenv  # noqa: PLC0415
+        load_dotenv()
+        from telegram import Bot  # noqa: PLC0415
+        from integrations.telegram_bot import publicar  # noqa: PLC0415
+        from integrations.whatsapp_sender import enviar_para_grupo  # noqa: PLC0415
+        # Defaults
+        produto.setdefault("categoria", "webhook")
+        produto.setdefault("fonte", "webhook")
+        canais = {"geral": os.getenv("CANAL_GERAL", "")}
+        token = os.getenv("TOKEN_TELEGRAM", "")
+        try:
+            async with Bot(token=token) as bot:
+                await publicar(bot, produto, canais)
+                try:
+                    from core.metrics import inc  # noqa: PLC0415
+                    inc("posts_telegram_total")
+                except Exception:
+                    pass
+        except Exception as e:
+            log.warning("webhook telegram: %s", e)
+        try:
+            if await enviar_para_grupo(produto):
+                from core.metrics import inc  # noqa: PLC0415
+                inc("posts_whatsapp_total")
+        except Exception as e:
+            log.warning("webhook whatsapp: %s", e)
+    asyncio.run(_fluxo())
 
 
 def _servir():
