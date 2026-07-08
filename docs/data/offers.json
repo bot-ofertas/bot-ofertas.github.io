@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Ar Condicionado 12k Elgin Eco Inverter Iii Wi-fi Q/f Branco 220v",
+      "preco": 1799.0,
+      "preco_original": 3109.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_904023-MLA108088284350_032026-AB.webp",
+      "categoria": "bebes",
+      "score": 90,
+      "enviado_em": "2026-07-08T14:13:03.539791",
+      "link": "https://www.mercadolivre.com.br/ar-condicionado-12k-elgin-eco-inverter-iii-wi-fi-qf-branco/p/MLB66732166?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1799.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Air Fryer Oven Philco Paf15b 15l Dupla Resistência 1800w Preto 127v",
+      "preco": 671.32,
+      "preco_original": 993.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_918520-MLA98386259896_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 74,
+      "enviado_em": "2026-07-08T14:12:56.636601",
+      "link": "https://www.mercadolivre.com.br/air-fryer-oven-philco-paf15b-15l-dupla-resistncia-1800w/p/MLB62320813?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 671.32,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Máquina De Acabamento Corta Cabelo Profissional Kemei 2299 P Preto 127/220v",
+      "preco": 75.19,
+      "preco_original": 159.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921106-MLB111066859744_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-07-08T14:12:49.753116",
+      "link": "https://www.mercadolivre.com.br/maquina-de-acabamento-corta-cabelo-profissional-kemei-2299-p/up/MLBU3555982525?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 75.19,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Frigobar Philco Pfg50p Preto 220v",
+      "preco": 659.9,
+      "preco_original": 999.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_631682-MLA99570822670_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 71,
+      "enviado_em": "2026-07-08T14:12:42.930988",
+      "link": "https://www.mercadolivre.com.br/frigobar-philco-pfg50p-preto/p/MLB17474538?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 659.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smartphone Motorola Edge 60 5g - 512gb 24gb (12gb Ram+12gb Ram Boost) Tela Quad-curve Moto Ai 50mp Sony Camera Ultrarresistencia Militar Ip68 + Ip69 - Verde",
       "preco": 1999.0,
       "preco_original": 2499.0,
@@ -1359,6 +1419,12 @@
       "desconto_medio": 34,
       "maior_desconto": 53
     },
+    "bebes": {
+      "total": 12,
+      "score_medio": 79,
+      "desconto_medio": 41,
+      "maior_desconto": 56
+    },
     "livros": {
       "total": 8,
       "score_medio": 73,
@@ -1370,12 +1436,6 @@
       "score_medio": 74,
       "desconto_medio": 34,
       "maior_desconto": 46
-    },
-    "bebes": {
-      "total": 8,
-      "score_medio": 79,
-      "desconto_medio": 42,
-      "maior_desconto": 56
     },
     "redes": {
       "total": 7,
@@ -1456,6 +1516,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T11:50:43.342749",
-  "total": 88
+  "updated_at": "2026-07-08T14:15:57.707760",
+  "total": 92
 }
