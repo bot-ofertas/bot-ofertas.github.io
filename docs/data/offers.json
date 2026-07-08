@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Ring Light Iluminador Led Profissional 26cm Tripé 2,10m Luz Branco Frio Quente Neutro 127/220v Preto 3 Cores",
+      "preco": 42.23,
+      "preco_original": 99.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691904-MLA111125430926_052026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 72,
+      "enviado_em": "2026-07-08T05:01:11.242860",
+      "link": "https://www.mercadolivre.com.br/ring-light-iluminador-led-profissional-26cm-tripe-210m-luz-branco-frio-quente-neutro/p/MLB57684391?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 42.23,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Luxceo W140 Rgb 140 Lâmpadas Preto Dimerizável Luz De Bolso Led Kits Video Led 2500k-9000k 3v Coral-claro",
+      "preco": 82.01,
+      "preco_original": 262.0,
+      "desconto_pct": 68.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_716662-MLA111662672623_052026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-07-08T05:01:04.506735",
+      "link": "https://www.mercadolivre.com.br/luxceo-w140-rgb-140-lmpadas-preto-dimerizavel-luz-de-bolso-led-kits-video-led-2500k-9000k/p/MLB69646014?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 82.01,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Sem Fio Duplo Armer Ax802m G2 Profissional Digital Preto Com Bateria Recarregável Para Shows, Igrejas, Eventos, Palestras E Karaokê, Som Claro, Alta Performance E Praticidade Profissional.",
+      "preco": 1584.0,
+      "preco_original": 1999.0,
+      "desconto_pct": 20.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_799400-MLA104456393066_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 66,
+      "enviado_em": "2026-07-08T05:00:57.830473",
+      "link": "https://www.mercadolivre.com.br/microfone-sem-fio-duplo-armer-ax802m-g2-profissional-digital-preto-com-bateria-recarregavel-para-shows-igrejas-eventos-palestras-e-karaok-som-claro-alta-performance-e-praticidade-profissional/p/MLB22387583?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1584.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark A1 Duo Combo Duplo Para 2 Pessoas Usb-c, Lightning Preto",
+      "preco": 386.61,
+      "preco_original": 799.0,
+      "desconto_pct": 51.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_928791-MLA105582102043_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 86,
+      "enviado_em": "2026-07-08T05:00:51.197770",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-duo-combo-duplo-para-2-pessoas-usb-c-lightning-preto/p/MLB64851983?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 386.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Gamer Predator Helios Neo / Phn16-72-74vx / Intel® Core I7-14700hx De 14ªgeração / 16gb / 512ssd / Windows 11 Home / Nvidia Geforce Rtx 4070 Gddr6 / Tela 16",
       "preco": 9213.0,
       "preco_original": 19999.0,
@@ -1287,6 +1347,12 @@
       "desconto_medio": 34,
       "maior_desconto": 41
     },
+    "ferramentas": {
+      "total": 4,
+      "score_medio": 72,
+      "desconto_medio": 49,
+      "maior_desconto": 68
+    },
     "esportes": {
       "total": 4,
       "score_medio": 74,
@@ -1324,6 +1390,6 @@
       "maior_desconto": 55
     }
   },
-  "updated_at": "2026-07-08T01:52:09.150333",
-  "total": 80
+  "updated_at": "2026-07-08T05:03:38.019758",
+  "total": 84
 }
