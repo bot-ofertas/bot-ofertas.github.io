@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Torquímetro De Estalo Click Para Soquete 1/2 Pol 28-210 Nm 2.8 A 21kg Reversível Ajustável Com Estojo The Black Tools",
+      "preco": 147.9,
+      "preco_original": 309.0,
+      "desconto_pct": 52.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_896529-MLA99991829051_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 76,
+      "enviado_em": "2026-07-09T06:10:03.300228",
+      "link": "https://www.mercadolivre.com.br/torquimetro-de-estalo-click-para-soquete-12-pol-28-210-nm-28-a-21kg-reversivel-ajustavel-com-estojo-the-black-tools/p/MLB53190169?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 147.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo Panelas Indução Cerâmica Viena 5 Peças Casambiente",
+      "preco": 427.4,
+      "preco_original": 699.0,
+      "desconto_pct": 38.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_715950-MLA96109896729_102025-AB.webp",
+      "categoria": "cameras",
+      "score": 78,
+      "enviado_em": "2026-07-09T06:09:56.630984",
+      "link": "https://www.mercadolivre.com.br/jogo-panelas-induco-cermica-viena-5-pecas-casambiente/p/MLB47066210?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 427.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Furadeira Parafusadeira De Impacto 2 Baterias 21v + 46 Peças Amarelo 110v/220v 60hz",
+      "preco": 187.05,
+      "preco_original": 338.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_907250-MLB113052966039_062026-AB.webp",
+      "categoria": "cameras",
+      "score": 76,
+      "enviado_em": "2026-07-09T06:09:49.995033",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://www.mercadolivre.com.br/furadeira-parafusadeira-de-impacto-2-baterias-21v--46-pecas/up/MLBU3472399363?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 187.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A36 5g 256gb 8gb Ram Branco",
+      "preco": 1758.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 38.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697102-MLA99477666220_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 88,
+      "enviado_em": "2026-07-09T06:09:43.134819",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a36-5g-256gb-8gb-ram-branco/p/MLB47106610?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1758.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Mini Compressor De Ar Digital Para Pneus Carro Moto Bike 150psi Recarregável 4000mah",
       "preco": 62.97,
       "preco_original": 157.0,
@@ -1439,6 +1500,12 @@
       "desconto_medio": 46,
       "maior_desconto": 68
     },
+    "cameras": {
+      "total": 8,
+      "score_medio": 78,
+      "desconto_medio": 44,
+      "maior_desconto": 63
+    },
     "tablets": {
       "total": 6,
       "score_medio": 66,
@@ -1481,12 +1548,6 @@
       "desconto_medio": 54,
       "maior_desconto": 61
     },
-    "cameras": {
-      "total": 4,
-      "score_medio": 76,
-      "desconto_medio": 44,
-      "maior_desconto": 63
-    },
     "brinquedos": {
       "total": 4,
       "score_medio": 86,
@@ -1512,6 +1573,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T02:03:17.616999",
-  "total": 92
+  "updated_at": "2026-07-09T06:12:29.104078",
+  "total": 96
 }
