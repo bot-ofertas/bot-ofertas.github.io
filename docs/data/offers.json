@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Samsung 43 Ls43f6000fgxzd Full Hd Led 110v/220v",
+      "preco": 1529.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 38.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_850374-MLA103344560695_012026-AB.webp",
+      "categoria": "tvs",
+      "score": 88,
+      "enviado_em": "2026-07-09T22:54:26.211595",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-43-ls43f6000fgxzd-full-hd-led-110v220v/p/MLB63777677?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1529.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV LG 43\"Full HD, Processador A5 Ger6, AI, Alexa e webOS 23 - 43LR6700PSA",
+      "preco": 1529.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 33.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_741946-MLA107875422514_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 83,
+      "enviado_em": "2026-07-09T22:54:19.556023",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-43full-hd-processador-a5-ger6-ai-alexa-e-webos-23-43lr6700psa/p/MLB39205913?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1529.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb",
+      "preco": 879.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 41.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636675-MLA107807100101_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-09T22:54:12.853421",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 879.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 40'' Full Hd Roku Tv Hdr10 Dolby Áudio P40cra",
+      "preco": 1159.0,
+      "preco_original": 1799.0,
+      "desconto_pct": 35.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_907784-MLA107805950479_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 85,
+      "enviado_em": "2026-07-09T22:54:05.992298",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-full-hd-roku-tv-hdr10-dolby-audio-p40cra/p/MLB66055369?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1159.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
       "preco": 44.67,
       "preco_original": 99.0,
@@ -754,7 +814,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-profissional-lg-43-full-hd-processador-a5-ger6-ai-alexa-integrada-webos-23-43lr671c-b/p/MLB41106126?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1499.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1592,7 +1652,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1399.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1723,17 +1783,17 @@
       "desconto_medio": 41,
       "maior_desconto": 56
     },
+    "tvs": {
+      "total": 12,
+      "score_medio": 85,
+      "desconto_medio": 37,
+      "maior_desconto": 44
+    },
     "notebooks": {
       "total": 12,
       "score_medio": 82,
       "desconto_medio": 34,
       "maior_desconto": 53
-    },
-    "tvs": {
-      "total": 8,
-      "score_medio": 85,
-      "desconto_medio": 37,
-      "maior_desconto": 44
     },
     "redes": {
       "total": 8,
@@ -1832,6 +1892,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T21:40:02.540817",
-  "total": 112
+  "updated_at": "2026-07-09T22:56:26.043289",
+  "total": 116
 }
