@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Suporte Para Starlink Mini Antena Com 4 Ventosas + Cabo 3m Branco",
+      "preco": 77.86,
+      "preco_original": 229.0,
+      "desconto_pct": 66.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_624231-MLB111743458940_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 61,
+      "enviado_em": "2026-07-09T15:46:29.192459",
+      "link": "https://www.mercadolivre.com.br/suporte-para-starlink-mini-antena-com-4-ventosas--cabo-3m/up/MLBU3704031979?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 77.86,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bolsa Caçamba Fiat Toro Ranch 450 Lts Reforçada Premium",
+      "preco": 398.92,
+      "preco_original": 586.0,
+      "desconto_pct": 31.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_775700-MLB91045439165_082025-AB.webp",
+      "categoria": "automotivo",
+      "score": 65,
+      "enviado_em": "2026-07-09T15:46:21.237420",
+      "link": "https://www.mercadolivre.com.br/bolsa-cacamba-fiat-toro-ranch-450-lts-reforcada-premium/up/MLBU764377246?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 398.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Carro Infantil Max360 Isofix 36kgs Maxi Baby - Preto",
+      "preco": 719.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 44.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_788401-MLU78410200759_082024-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-09T15:46:14.434834",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-max360-isofix-36kgs-maxi-baby-preto/p/MLB26415897?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 719.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Carro Infantil 0 a 36Kg Elite 4 em 1 - Maxi Baby - Preto",
+      "preco": 379.9,
+      "preco_original": 670.0,
+      "desconto_pct": 43.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_786782-MLA99523938502_122025-AB.webp",
+      "categoria": "automotivo",
+      "score": 78,
+      "enviado_em": "2026-07-09T15:46:07.596551",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-0-a-36kg-elite-4-em-1-maxi-baby-preto/p/MLB29756545?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 379.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Torquímetro De Estalo Click Para Soquete 1/2 Pol 28-210 Nm 2.8 A 21kg Reversível Ajustável Com Estojo The Black Tools",
       "preco": 147.9,
       "preco_original": 309.0,
@@ -1560,6 +1620,12 @@
       "desconto_medio": 44,
       "maior_desconto": 52
     },
+    "automotivo": {
+      "total": 4,
+      "score_medio": 73,
+      "desconto_medio": 46,
+      "maior_desconto": 66
+    },
     "armazenamento": {
       "total": 4,
       "score_medio": 73,
@@ -1573,6 +1639,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T06:12:29.104078",
-  "total": 96
+  "updated_at": "2026-07-09T15:49:24.006076",
+  "total": 100
 }
