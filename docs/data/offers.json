@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Mini Compressor De Ar Digital Para Pneus Carro Moto Bike 150psi Recarregável 4000mah",
+      "preco": 62.97,
+      "preco_original": 157.0,
+      "desconto_pct": 59.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_902309-MLA112019884613_052026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 73,
+      "enviado_em": "2026-07-09T02:00:51.445651",
+      "link": "https://www.mercadolivre.com.br/mini-compressor-de-ar-digital-para-pneus-carro-moto-bike-150psi-recarregavel-4000mah/p/MLB61382511?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 62.97,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Banho Dobrável Higiênica Rodas Sanitária Idoso",
+      "preco": 168.99,
+      "preco_original": 590.0,
+      "desconto_pct": 71.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632122-MLB83016099212_032025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 74,
+      "enviado_em": "2026-07-09T02:00:44.667142",
+      "cupom": "Cupom R$10 OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-banho-dobravel-higienica-rodas-sanitaria-idoso/up/MLBU3089775174?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 168.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Panela De Pressão Indução 4,4l Antiaderente Cerâmico - Oikos Bege",
+      "preco": 189.9,
+      "preco_original": 499.0,
+      "desconto_pct": 61.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_993655-MLA97120231597_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 70,
+      "enviado_em": "2026-07-09T02:00:37.922119",
+      "link": "https://www.mercadolivre.com.br/panela-de-presso-induco-44l-antiaderente-cermico-oikos-bege/p/MLB61430454?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 189.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Feminino La Nuit Trésor Lancôme EDP 100ml",
+      "preco": 503.19,
+      "preco_original": 1299.0,
+      "desconto_pct": 61.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_898999-MLA90258686910_082025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 73,
+      "enviado_em": "2026-07-09T02:00:31.289482",
+      "link": "https://www.mercadolivre.com.br/perfume-feminino-la-nuit-tresor-lancme-edp-100ml/p/MLB6280903?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 503.19,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Guarda-roupa Casal 6 Portas 2 Gavetas França Wt Espresso Móveis",
       "preco": 664.99,
       "preco_original": 987.0,
@@ -121,7 +182,7 @@
       "link": "https://www.mercadolivre.com.br/omega-plus-240-caps-dark-lab/p/MLB66597831?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 179.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -301,7 +362,7 @@
       "link": "https://www.mercadolivre.com.br/cama-elastica-pula-pula-infantil-trampolim-14-metros-atentu/p/MLB28717101?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 189.91,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -346,7 +407,7 @@
       "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-ultragear-27-ips-180hz-1ms-gtg-nvidia-g-sync-amd-freesync-hdr10-srgb-99-27gs60f-b/p/MLB44317631?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 899.1,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1438,6 +1499,12 @@
       "desconto_medio": 44,
       "maior_desconto": 52
     },
+    "armazenamento": {
+      "total": 4,
+      "score_medio": 73,
+      "desconto_medio": 64,
+      "maior_desconto": 71
+    },
     "saude": {
       "total": 1,
       "score_medio": 74,
@@ -1445,6 +1512,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T01:17:26.271225",
-  "total": 88
+  "updated_at": "2026-07-09T02:03:17.616999",
+  "total": 92
 }
