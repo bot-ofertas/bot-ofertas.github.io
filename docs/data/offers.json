@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A56 5g 256gb 8gb Ram Cinza",
+      "preco": 2398.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_927393-MLA100014745899_122025-AB.webp",
+      "categoria": "redes",
+      "score": 85,
+      "enviado_em": "2026-07-09T17:58:27.451145",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a56-5g-256gb-8gb-ram-cinza/p/MLB47114363?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2398.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Panela De Pressão Inox 5 Litros Fundo Triplo Cor Prateado Prateado",
+      "preco": 282.62,
+      "preco_original": 425.0,
+      "desconto_pct": 33.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_877813-MLB114190080083_072026-AB.webp",
+      "categoria": "redes",
+      "score": 68,
+      "enviado_em": "2026-07-09T17:58:20.788657",
+      "link": "https://www.mercadolivre.com.br/panela-de-pressao-inox-5-litros-fundo-triplo-cor-prateado/up/MLBU3706208206?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 282.62,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
+      "preco": 829.99,
+      "preco_original": 2167.0,
+      "desconto_pct": 61.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
+      "categoria": "redes",
+      "score": 78,
+      "enviado_em": "2026-07-09T17:58:14.105289",
+      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 829.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Principia Kit Essencial Gl-03 + Ch + Vc + Ps Sensível Dia/noite",
+      "preco": 145.99,
+      "preco_original": 211.0,
+      "desconto_pct": 30.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_792011-MLA96077651979_102025-AB.webp",
+      "categoria": "redes",
+      "score": 62,
+      "enviado_em": "2026-07-09T17:58:07.400916",
+      "link": "https://www.mercadolivre.com.br/principia-kit-essencial-gl-03-ch-vc-ps-sensivel-dianoite/p/MLB60968045?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 145.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Suporte Para Starlink Mini Antena Com 4 Ventosas + Cabo 3m Branco",
       "preco": 77.86,
       "preco_original": 229.0,
@@ -1578,6 +1638,12 @@
       "desconto_medio": 48,
       "maior_desconto": 66
     },
+    "redes": {
+      "total": 4,
+      "score_medio": 73,
+      "desconto_medio": 42,
+      "maior_desconto": 61
+    },
     "informatica": {
       "total": 4,
       "score_medio": 79,
@@ -1639,6 +1705,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T15:49:24.006076",
-  "total": 100
+  "updated_at": "2026-07-09T18:01:20.892665",
+  "total": 104
 }
