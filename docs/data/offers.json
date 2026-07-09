@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
+      "preco": 44.67,
+      "preco_original": 99.0,
+      "desconto_pct": 54.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753073-MLA110946060098_052026-AB.webp",
+      "categoria": "redes",
+      "score": 72,
+      "enviado_em": "2026-07-09T21:37:07.352505",
+      "link": "https://www.mercadolivre.com.br/kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto/p/MLB57490176?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 44.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora multifuncional cor Epson EcoTank L3250",
+      "preco": 1015.0,
+      "preco_original": 1356.0,
+      "desconto_pct": 25.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_867179-MLA99966959445_112025-AB.webp",
+      "categoria": "redes",
+      "score": 63,
+      "enviado_em": "2026-07-09T21:37:00.522570",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-cor-epson-ecotank-l3250/p/MLB26986602?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 1015.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Batedeira Planetaria Britania 900w Bbp900a",
+      "preco": 249.29,
+      "preco_original": 444.0,
+      "desconto_pct": 43.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_776493-MLA107898660242_032026-AB.webp",
+      "categoria": "redes",
+      "score": 72,
+      "enviado_em": "2026-07-09T21:36:53.242012",
+      "link": "https://www.mercadolivre.com.br/batedeira-planetaria-britania-900w-bbp900a/p/MLB66584656?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 249.29,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa Amplificada Connect Power Plus CM-550 Preto Mondial",
+      "preco": 416.13,
+      "preco_original": 929.0,
+      "desconto_pct": 55.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
+      "categoria": "redes",
+      "score": 90,
+      "enviado_em": "2026-07-09T21:36:46.401722",
+      "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 416.13,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Samsung Galaxy A06 5g Dual Sim 128gb preto",
       "preco": 642.16,
       "preco_original": 989.0,
@@ -1641,17 +1702,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Microfone Hollyland Lark M2 Duo Combo Duplo Para 2 Pessoas USB-C, Lightning e Camera preto",
-    "preco": 634.0,
-    "preco_original": 1280.0,
-    "desconto_pct": 50.5,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_974504-MLA99991742439_112025-AB.webp",
-    "categoria": "ferramentas",
+    "titulo": "Caixa Amplificada Connect Power Plus CM-550 Preto Mondial",
+    "preco": 416.13,
+    "preco_original": 929.0,
+    "desconto_pct": 55.2,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
+    "categoria": "redes",
     "score": 90,
-    "enviado_em": "2026-07-08T22:09:05.572390",
-    "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-m2-duo-combo-duplo-para-2-pessoas-usb-c-lightning-e-camera-preto/p/MLB34016199?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-09T21:36:46.401722",
+    "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 634.0,
+    "menor_preco_30d": 416.13,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1673,6 +1734,12 @@
       "score_medio": 85,
       "desconto_medio": 37,
       "maior_desconto": 44
+    },
+    "redes": {
+      "total": 8,
+      "score_medio": 74,
+      "desconto_medio": 43,
+      "maior_desconto": 61
     },
     "ferramentas": {
       "total": 8,
@@ -1697,12 +1764,6 @@
       "score_medio": 81,
       "desconto_medio": 48,
       "maior_desconto": 66
-    },
-    "redes": {
-      "total": 4,
-      "score_medio": 73,
-      "desconto_medio": 42,
-      "maior_desconto": 61
     },
     "monitores": {
       "total": 4,
@@ -1771,6 +1832,6 @@
       "maior_desconto": 32
     }
   },
-  "updated_at": "2026-07-09T20:01:37.862130",
-  "total": 108
+  "updated_at": "2026-07-09T21:40:02.540817",
+  "total": 112
 }
