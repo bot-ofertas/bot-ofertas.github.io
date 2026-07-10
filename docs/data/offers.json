@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "preco": 105.52,
+      "preco_original": 214.0,
+      "desconto_pct": 50.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_616706-MLB95602323080_102025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 74,
+      "enviado_em": "2026-07-10T18:51:27.931763",
+      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3507022583?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 105.52,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Extratora Britânia Bex20a Preto E Azul",
+      "preco": 399.0,
+      "preco_original": 804.0,
+      "desconto_pct": 50.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_933184-MLA99163259024_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 81,
+      "enviado_em": "2026-07-10T18:51:20.732846",
+      "link": "https://www.mercadolivre.com.br/extratora-britnia-bex20a-preto-e-azul/p/MLB62581189?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Panela De Pressão Philco Ppp02pi Inox Multifuncional 5l Cor Preto",
+      "preco": 355.9,
+      "preco_original": 614.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_978946-MLA99943167109_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 80,
+      "enviado_em": "2026-07-10T18:51:14.054199",
+      "link": "https://www.mercadolivre.com.br/panela-de-presso-philco-ppp02pi-inox-multifuncional-5l-cor-preto/p/MLB16162795?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 355.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Elétrica Air Fryer 8 em 1 Wap Barbecue Heat Digital Wc Ab1030",
+      "preco": 629.01,
+      "preco_original": 999.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_668373-MLA111751070303_052026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 81,
+      "enviado_em": "2026-07-10T18:51:07.340215",
+      "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-air-fryer-8-em-1-wap-barbecue-heat-digital-wc-ab1030/p/MLB56416399?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 629.01,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Mochila Tática Militar 50l Masculina Reforçada Impermeável Viagem Camping Pesca Com Patch Bandeira Brasil Bagear",
       "preco": 91.99,
       "preco_original": 199.0,
@@ -1567,6 +1627,12 @@
       "desconto_medio": 40,
       "maior_desconto": 52
     },
+    "armazenamento": {
+      "total": 8,
+      "score_medio": 76,
+      "desconto_medio": 54,
+      "maior_desconto": 71
+    },
     "casa": {
       "total": 6,
       "score_medio": 77,
@@ -1621,12 +1687,6 @@
       "desconto_medio": 59,
       "maior_desconto": 71
     },
-    "armazenamento": {
-      "total": 4,
-      "score_medio": 73,
-      "desconto_medio": 64,
-      "maior_desconto": 71
-    },
     "tablets": {
       "total": 3,
       "score_medio": 63,
@@ -1634,6 +1694,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-10T17:17:48.511390",
-  "total": 100
+  "updated_at": "2026-07-10T18:54:21.159092",
+  "total": 104
 }
