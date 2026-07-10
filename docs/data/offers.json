@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Samsung Led 50 Lh50befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
+      "preco": 2212.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798903-MLA95579597211_102025-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-10T06:05:50.286102",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-led-50-lh50befh4ggxzd-led-crystal-processor-4k-uhd-tizen-110v220v/p/MLB58372375?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2212.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Roku Tv 50 7045 4k Uhd Aoc Bivolt",
+      "preco": 1880.0,
+      "preco_original": 3799.0,
+      "desconto_pct": 50.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_648316-MLA99473453820_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 85,
+      "enviado_em": "2026-07-10T06:05:43.263080",
+      "link": "https://www.mercadolivre.com.br/smart-tv-roku-tv-50-7045-4k-uhd-aoc-bivolt/p/MLB51202548?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1880.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV Profissional 4K 50\" LG UHD 50AU801 Processador α7 AI Ger8 Super Upscaling Google Cast Alexa Integrado Controle AI Smart Magic WebOS 25",
+      "preco": 2099.0,
+      "preco_original": 3054.0,
+      "desconto_pct": 31.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_731891-MLA101888831643_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 81,
+      "enviado_em": "2026-07-10T06:05:36.380687",
+      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-50-lg-uhd-50au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB61517857?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2099.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1399.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-10T06:05:29.562513",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Jogo De Panelas 17 Peças Teflon Antiaderente Indução Bege",
       "preco": 349.0,
       "preco_original": 999.0,
@@ -134,7 +194,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-samsung-43-ls43f6000fgxzd-full-hd-led-110v220v/p/MLB63777677?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1529.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -149,7 +209,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-lg-43full-hd-processador-a5-ger6-ai-alexa-e-webos-23-43lr6700psa/p/MLB39205913?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1529.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -164,7 +224,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 879.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -179,7 +239,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-full-hd-roku-tv-hdr10-dolby-audio-p40cra/p/MLB66055369?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1159.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -951,7 +1011,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-h5000f-hd-32-polegadas-2025-preto-samsung-bivolt/p/MLB48954912?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 967.12,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1291,10 +1351,10 @@
   },
   "stats": {
     "tvs": {
-      "total": 8,
+      "total": 12,
       "score_medio": 85,
-      "desconto_medio": 36,
-      "maior_desconto": 41
+      "desconto_medio": 38,
+      "maior_desconto": 50
     },
     "redes": {
       "total": 8,
@@ -1387,6 +1447,6 @@
       "maior_desconto": 65
     }
   },
-  "updated_at": "2026-07-10T02:01:54.707981",
-  "total": 84
+  "updated_at": "2026-07-10T06:08:45.126111",
+  "total": 88
 }
