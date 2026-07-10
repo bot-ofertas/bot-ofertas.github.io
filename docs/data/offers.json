@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Monitor LG UltraGear 27G411A-B 27\",FHD, 144Hz, 1ms (MBR), NVIDIA G-SYNC, AMD FreeSync, HDR10",
+      "preco": 799.0,
+      "preco_original": 1098.0,
+      "desconto_pct": 27.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_629075-MLA104879398469_012026-AB.webp",
+      "categoria": "livros",
+      "score": 68,
+      "enviado_em": "2026-07-10T20:25:19.857641",
+      "link": "https://www.mercadolivre.com.br/monitor-lg-ultragear-27g411a-b-27fhd-144hz-1ms-mbr-nvidia-g-sync-amd-freesync-hdr10/p/MLB64311324?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 739.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "PlayStation 5 Slim Cor Branco 1 TB Versão Mídia Física",
+      "preco": 4197.0,
+      "preco_original": 5399.0,
+      "desconto_pct": 22.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_846325-MLA99503539342_112025-AB.webp",
+      "categoria": "livros",
+      "score": 72,
+      "enviado_em": "2026-07-10T20:25:13.133220",
+      "link": "https://www.mercadolivre.com.br/playstation-5-slim-cor-branco-1-tb-verso-midia-fisica/p/MLB31067313?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4197.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto g35 5G - 256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI NFC Tela 6.7\" com Superbrilho - Cinza",
+      "preco": 899.1,
+      "preco_original": 1899.0,
+      "desconto_pct": 52.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743327-MLA99452274448_112025-AB.webp",
+      "categoria": "livros",
+      "score": 90,
+      "enviado_em": "2026-07-10T20:25:06.302610",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g35-5g-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-nfc-tela-67-com-superbrilho-cinza/p/MLB41998152?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 899.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora De Etiquetas Elgin L42 Pro Full Usb Serial Preto",
+      "preco": 1195.0,
+      "preco_original": 1799.0,
+      "desconto_pct": 33.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_943376-MLA99990560947_112025-AB.webp",
+      "categoria": "livros",
+      "score": 83,
+      "enviado_em": "2026-07-10T20:24:59.497109",
+      "link": "https://www.mercadolivre.com.br/impressora-de-etiquetas-elgin-l42-pro-full-usb-serial-preto/p/MLB27731610?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1195.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
       "preco": 105.52,
       "preco_original": 214.0,
@@ -1663,6 +1723,12 @@
       "desconto_medio": 54,
       "maior_desconto": 69
     },
+    "livros": {
+      "total": 4,
+      "score_medio": 78,
+      "desconto_medio": 34,
+      "maior_desconto": 52
+    },
     "informatica": {
       "total": 4,
       "score_medio": 79,
@@ -1694,6 +1760,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-10T18:54:21.159092",
-  "total": 104
+  "updated_at": "2026-07-10T20:27:46.999945",
+  "total": 108
 }
