@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Cadeira Studio 150kg Gamer Minimalista Mesh Alta Densidade Preto Luxo Assento Largo Função Relax Apoio Cabeça Conforto Respirável Mesh Tela Encosto Assento",
+      "preco": 368.59,
+      "preco_original": 811.0,
+      "desconto_pct": 54.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_640672-MLB110798186918_052026-AB.webp",
+      "categoria": "casa",
+      "score": 92,
+      "enviado_em": "2026-07-10T15:19:08.993782",
+      "cupom": "Cupom 50% OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-studio-150kg-gamer-minimalista-mesh-alta-densidade/up/MLBU3978085768?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 368.59,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
+      "preco": 509.9,
+      "preco_original": 894.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "categoria": "casa",
+      "score": 90,
+      "enviado_em": "2026-07-10T15:19:01.557586",
+      "link": "https://www.mercadolivre.com.br/vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco/p/MLB24273671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 509.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Prateleira De Aço 5 Bandejas 40x92cm Preta Coluna Triparti Preto",
+      "preco": 370.5,
+      "preco_original": 507.0,
+      "desconto_pct": 26.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_945071-MLB108870872879_032026-AB.webp",
+      "categoria": "casa",
+      "score": 66,
+      "enviado_em": "2026-07-10T15:18:54.790522",
+      "link": "https://www.mercadolivre.com.br/prateleira-de-aco-5-bandejas-40x92cm-preta-coluna-triparti/up/MLBU3789583187?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 370.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo Frigideira 2 Pçs Antiaderente Cerâmica Alumínio Oikos Cor Preto",
+      "preco": 67.0,
+      "preco_original": 168.0,
+      "desconto_pct": 60.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_872866-MLA95524967195_102025-AB.webp",
+      "categoria": "casa",
+      "score": 67,
+      "enviado_em": "2026-07-10T15:18:47.619722",
+      "link": "https://www.mercadolivre.com.br/jogo-frigideira-2-pcs-antiaderente-cermica-aluminio-oikos-cor-preto/p/MLB50461358?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 67.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
       "preco": 39.9,
       "preco_original": 64.0,
@@ -1395,18 +1456,19 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
-    "preco": 549.9,
-    "preco_original": 1094.0,
-    "desconto_pct": 49.7,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
-    "categoria": "esportes",
+    "titulo": "Cadeira Studio 150kg Gamer Minimalista Mesh Alta Densidade Preto Luxo Assento Largo Função Relax Apoio Cabeça Conforto Respirável Mesh Tela Encosto Assento",
+    "preco": 368.59,
+    "preco_original": 811.0,
+    "desconto_pct": 54.6,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_640672-MLB110798186918_052026-AB.webp",
+    "categoria": "casa",
     "score": 92,
-    "enviado_em": "2026-07-10T12:26:45.023086",
-    "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-10T15:19:08.993782",
+    "cupom": "Cupom 50% OFF",
+    "link": "https://www.mercadolivre.com.br/cadeira-studio-150kg-gamer-minimalista-mesh-alta-densidade/up/MLBU3978085768?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 549.9,
-    "menor_periodo": true,
+    "menor_preco_30d": 368.59,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
@@ -1445,6 +1507,12 @@
       "score_medio": 76,
       "desconto_medio": 40,
       "maior_desconto": 52
+    },
+    "casa": {
+      "total": 6,
+      "score_medio": 77,
+      "desconto_medio": 47,
+      "maior_desconto": 65
     },
     "automotivo": {
       "total": 6,
@@ -1499,14 +1567,8 @@
       "score_medio": 63,
       "desconto_medio": 39,
       "maior_desconto": 46
-    },
-    "casa": {
-      "total": 2,
-      "score_medio": 74,
-      "desconto_medio": 47,
-      "maior_desconto": 65
     }
   },
-  "updated_at": "2026-07-10T12:29:45.088401",
-  "total": 92
+  "updated_at": "2026-07-10T15:22:03.538439",
+  "total": 96
 }
