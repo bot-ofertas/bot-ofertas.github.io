@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cadeira Gamer Tgt Heron Tc2, Preto, Tgt-hrtc-bl03",
+      "preco": 390.15,
+      "preco_original": 705.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_903029-MLA107184098937_022026-AB.webp",
+      "categoria": "games",
+      "score": 77,
+      "enviado_em": "2026-07-10T21:40:18.752849",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-tgt-heron-tc2-preto-tgt-hrtc-bl03/p/MLB41514567?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 390.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fone De Ouvido Headphone Dapon H02D Bluetooth 5.1 Over-ear 22h Preto",
+      "preco": 74.2,
+      "preco_original": 149.0,
+      "desconto_pct": 50.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871158-MLA99870084511_112025-AB.webp",
+      "categoria": "games",
+      "score": 72,
+      "enviado_em": "2026-07-10T21:40:11.830555",
+      "link": "https://www.mercadolivre.com.br/fone-de-ouvido-headphone-dapon-h02d-bluetooth-51-over-ear-22h-preto/p/MLB24117280?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 74.2,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "PlayStation VR 2 PS5 headset de realidade virtual branco",
+      "preco": 2085.0,
+      "preco_original": 3660.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_794174-MLA95713016164_102025-AB.webp",
+      "categoria": "games",
+      "score": 90,
+      "enviado_em": "2026-07-10T21:40:05.034281",
+      "link": "https://www.mercadolivre.com.br/playstation-vr-2-ps5-headset-de-realidade-virtual-branco/p/MLB37262251?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2085.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 Marca Redfin",
+      "preco": 54.88,
+      "preco_original": 89.0,
+      "desconto_pct": 38.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762912-MLA105696431793_012026-AB.webp",
+      "categoria": "games",
+      "score": 69,
+      "enviado_em": "2026-07-10T21:39:58.021218",
+      "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 54.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Monitor LG UltraGear 27G411A-B 27\",FHD, 144Hz, 1ms (MBR), NVIDIA G-SYNC, AMD FreeSync, HDR10",
       "preco": 799.0,
       "preco_original": 1098.0,
@@ -1735,6 +1795,12 @@
       "desconto_medio": 33,
       "maior_desconto": 39
     },
+    "games": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 44,
+      "maior_desconto": 50
+    },
     "celulares": {
       "total": 4,
       "score_medio": 84,
@@ -1760,6 +1826,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-10T20:27:46.999945",
-  "total": 108
+  "updated_at": "2026-07-10T21:41:44.971839",
+  "total": 112
 }
