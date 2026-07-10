@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Mochila Tática Militar 50l Masculina Reforçada Impermeável Viagem Camping Pesca Com Patch Bandeira Brasil Bagear",
+      "preco": 91.99,
+      "preco_original": 199.0,
+      "desconto_pct": 53.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_624492-MLA112760465816_062026-AB.webp",
+      "categoria": "moda",
+      "score": 86,
+      "enviado_em": "2026-07-10T17:14:53.452419",
+      "link": "https://www.mercadolivre.com.br/mochila-tatica-militar-50l-masculina-reforcada-impermeavel-viagem-camping-pesca-com-patch-bandeira-brasil-bagear/p/MLB51958382?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 91.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mala Viagem Samsonite Quartz Média Azul Lisa",
+      "preco": 664.99,
+      "preco_original": 1300.0,
+      "desconto_pct": 48.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_813994-MLA84692826015_052025-AB.webp",
+      "categoria": "moda",
+      "score": 97,
+      "enviado_em": "2026-07-10T17:14:46.595733",
+      "link": "https://www.mercadolivre.com.br/mala-viagem-samsonite-quartz-media/up/MLBU3955410092?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 664.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bolsa Nike Brasilia 9.5 Unissex Preto",
+      "preco": 189.99,
+      "preco_original": 349.0,
+      "desconto_pct": 45.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_802846-MLB100510774936_122025-AB.webp",
+      "categoria": "moda",
+      "score": 83,
+      "enviado_em": "2026-07-10T17:14:39.772574",
+      "link": "https://www.mercadolivre.com.br/bolsa-nike-brasilia-95-unissex/up/MLBU1720846008?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 189.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mochila jiesipote À Prova D'água Reforçada Expansível Cor Preto",
+      "preco": 89.9,
+      "preco_original": 297.0,
+      "desconto_pct": 69.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_974980-MLA112776013576_062026-AB.webp",
+      "categoria": "moda",
+      "score": 78,
+      "enviado_em": "2026-07-10T17:14:32.909890",
+      "link": "https://www.mercadolivre.com.br/mochila-jiesipote-prova-dagua-reforcada-expansivel-cor-preto/p/MLB74678961?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira Studio 150kg Gamer Minimalista Mesh Alta Densidade Preto Luxo Assento Largo Função Relax Apoio Cabeça Conforto Respirável Mesh Tela Encosto Assento",
       "preco": 368.59,
       "preco_original": 811.0,
@@ -1456,18 +1516,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira Studio 150kg Gamer Minimalista Mesh Alta Densidade Preto Luxo Assento Largo Função Relax Apoio Cabeça Conforto Respirável Mesh Tela Encosto Assento",
-    "preco": 368.59,
-    "preco_original": 811.0,
-    "desconto_pct": 54.6,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_640672-MLB110798186918_052026-AB.webp",
-    "categoria": "casa",
-    "score": 92,
-    "enviado_em": "2026-07-10T15:19:08.993782",
-    "cupom": "Cupom 50% OFF",
-    "link": "https://www.mercadolivre.com.br/cadeira-studio-150kg-gamer-minimalista-mesh-alta-densidade/up/MLBU3978085768?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Mala Viagem Samsonite Quartz Média Azul Lisa",
+    "preco": 664.99,
+    "preco_original": 1300.0,
+    "desconto_pct": 48.8,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_813994-MLA84692826015_052025-AB.webp",
+    "categoria": "moda",
+    "score": 97,
+    "enviado_em": "2026-07-10T17:14:46.595733",
+    "link": "https://www.mercadolivre.com.br/mala-viagem-samsonite-quartz-media/up/MLBU3955410092?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 368.59,
+    "menor_preco_30d": 664.99,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1532,6 +1591,12 @@
       "desconto_medio": 36,
       "maior_desconto": 48
     },
+    "moda": {
+      "total": 4,
+      "score_medio": 86,
+      "desconto_medio": 54,
+      "maior_desconto": 69
+    },
     "informatica": {
       "total": 4,
       "score_medio": 79,
@@ -1569,6 +1634,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-10T15:22:03.538439",
-  "total": 96
+  "updated_at": "2026-07-10T17:17:48.511390",
+  "total": 100
 }
