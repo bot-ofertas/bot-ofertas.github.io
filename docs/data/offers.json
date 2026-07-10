@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Câmera Veicular Ddpai N2 Dual 2k+1080p App 1,9'' Tela Wifi N2 Dual+sd Card 128g",
+      "preco": 613.0,
+      "preco_original": 1199.0,
+      "desconto_pct": 48.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_903165-MLB110868376322_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-10T00:07:19.395428",
+      "cupom": "Cupom R$30 OFF",
+      "link": "https://www.mercadolivre.com.br/camera-veicular-ddpai-n2-dual-2k1080p-app-19-tela-wifi/up/MLBU3440773077?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 613.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Suporte De Painel Starlink Mini Com Ventosas Antimulta Preto",
+      "preco": 101.47,
+      "preco_original": 200.0,
+      "desconto_pct": 49.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_671262-MLB110898134206_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 70,
+      "enviado_em": "2026-07-10T00:07:12.241822",
+      "link": "https://www.mercadolivre.com.br/suporte-de-painel-starlink-mini-com-ventosas-antimulta/up/MLBU3752695733?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 101.47,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de pó robô PAS26P mop antiqueda Philco cor preto",
+      "preco": 499.0,
+      "preco_original": 1099.0,
+      "desconto_pct": 54.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628863-MLA99488777070_112025-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-10T00:06:38.575210",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-rob-pas26p-mop-antiqueda-philco-cor-preto/p/MLB27244505?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 499.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera de segurança IP externa Tp Link Tapo C320ws WiFi com alarme e controle de voz com resolução de 2k",
+      "preco": 231.92,
+      "preco_original": 329.0,
+      "desconto_pct": 29.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_639043-MLU77118398374_062024-AB.webp",
+      "categoria": "saude",
+      "score": 62,
+      "enviado_em": "2026-07-10T00:06:31.740552",
+      "cupom": "Cupom 25% OFF",
+      "link": "https://www.mercadolivre.com.br/cmera-de-seguranca-ip-externa-tp-link-tapo-c320ws-wifi-com-alarme-e-controle-de-voz-com-resoluco-de-2k/p/MLB19693785?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 231.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Samsung 43 Ls43f6000fgxzd Full Hd Led 110v/220v",
       "preco": 1529.0,
       "preco_original": 2499.0,
@@ -72,7 +134,7 @@
       "link": "https://www.mercadolivre.com.br/kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto/p/MLB57490176?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 44.67,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -88,7 +150,7 @@
       "link": "https://www.mercadolivre.com.br/impressora-multifuncional-cor-epson-ecotank-l3250/p/MLB26986602?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 1015.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -103,7 +165,7 @@
       "link": "https://www.mercadolivre.com.br/batedeira-planetaria-britania-900w-bbp900a/p/MLB66584656?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 249.29,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -118,7 +180,7 @@
       "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 416.13,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -133,7 +195,7 @@
       "link": "https://www.mercadolivre.com.br/samsung-galaxy-a06-5g-dual-sim-128gb-preto/p/MLB48946861?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 642.16,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -163,7 +225,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-tcl-55-polegadas-qled-4k-p8k-wifi-bluetooth-google-tv-144hz-hdr10-dolby-atmos-vision-55p8k/p/MLB48946085?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 2469.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -178,7 +240,7 @@
       "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1296.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -193,7 +255,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a56-5g-256gb-8gb-ram-cinza/p/MLB47114363?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 2398.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -223,7 +285,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 829.99,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -238,7 +300,7 @@
       "link": "https://www.mercadolivre.com.br/principia-kit-essencial-gl-03-ch-vc-ps-sensivel-dianoite/p/MLB60968045?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 145.99,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -283,7 +345,7 @@
       "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-max360-isofix-36kgs-maxi-baby-preto/p/MLB26415897?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 719.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -298,7 +360,7 @@
       "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-0-a-36kg-elite-4-em-1-maxi-baby-preto/p/MLB29756545?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 379.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -313,7 +375,7 @@
       "link": "https://www.mercadolivre.com.br/torquimetro-de-estalo-click-para-soquete-12-pol-28-210-nm-28-a-21kg-reversivel-ajustavel-com-estojo-the-black-tools/p/MLB53190169?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 147.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -328,7 +390,7 @@
       "link": "https://www.mercadolivre.com.br/jogo-panelas-induco-cermica-viena-5-pecas-casambiente/p/MLB47066210?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 427.4,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -344,7 +406,7 @@
       "link": "https://www.mercadolivre.com.br/furadeira-parafusadeira-de-impacto-2-baterias-21v--46-pecas/up/MLBU3472399363?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 187.05,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -359,7 +421,7 @@
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a36-5g-256gb-8gb-ram-branco/p/MLB47106610?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1758.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -374,7 +436,7 @@
       "link": "https://www.mercadolivre.com.br/mini-compressor-de-ar-digital-para-pneus-carro-moto-bike-150psi-recarregavel-4000mah/p/MLB61382511?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 62.97,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1150,615 +1212,6 @@
       "menor_preco_30d": 2943.0,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Fogão 5 Bocas Dako Supreme Black Glass Com Mesa De Vidro Tripla Chama E Timer Digital Bivolt Preto 127/220v",
-      "preco": 1546.0,
-      "preco_original": 2879.0,
-      "desconto_pct": 46.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651893-MLA84413356184_052025-AB.webp",
-      "categoria": "eletrodomesticos",
-      "score": 90,
-      "enviado_em": "2026-07-07T23:34:50.045987",
-      "cupom": "Cupom R$80 OFF",
-      "link": "https://www.mercadolivre.com.br/fogo-5-bocas-dako-supreme-black-glass-com-mesa-de-vidro-tripla-chama-e-timer-digital-bivolt/p/MLB49999007?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1546.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas Electrolux De Bancada Branco Com Função Tira Odor E Manter Aquecido 34l Meo44 127v",
-      "preco": 598.5,
-      "preco_original": 799.0,
-      "desconto_pct": 25.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889684-MLA99475706302_112025-AB.webp",
-      "categoria": "eletrodomesticos",
-      "score": 63,
-      "enviado_em": "2026-07-07T23:34:43.310544",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-de-bancada-branco-com-funco-tira-odor-e-manter-aquecido-34l-meo44/p/MLB8742310?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 598.5,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas 33l Philco Espelhado/branco 1400w 220v Pmo38e",
-      "preco": 532.0,
-      "preco_original": 799.0,
-      "desconto_pct": 33.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921991-MLA99504374070_112025-AB.webp",
-      "categoria": "eletrodomesticos",
-      "score": 73,
-      "enviado_em": "2026-07-07T23:34:36.713777",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-espelhadobranco-1400w-220v-pmo38e/p/MLB38429792?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 532.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas 33l Philco Espelhado/branco 1400w 127v Pmo38e",
-      "preco": 516.04,
-      "preco_original": 799.0,
-      "desconto_pct": 35.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687815-MLA99957156929_112025-AB.webp",
-      "categoria": "eletrodomesticos",
-      "score": 76,
-      "enviado_em": "2026-07-07T23:34:30.102453",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-33l-philco-espelhadobranco-1400w-127v-pmo38e/p/MLB38279894?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 516.04,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Elétrica Afon-12l-bg Forno Oven 12 Litros Preto Mondial 127v",
-      "preco": 393.3,
-      "preco_original": 899.0,
-      "desconto_pct": 56.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900387-MLA109507200694_042026-AB.webp",
-      "categoria": "bebes",
-      "score": 90,
-      "enviado_em": "2026-07-07T22:34:20.491338",
-      "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-afon-12l-bg-forno-oven-12-litros-preto-mondial/p/MLB45070708?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 393.3,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
-      "preco": 399.0,
-      "preco_original": 623.0,
-      "desconto_pct": 36.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_862713-MLA111337700549_052026-AB.webp",
-      "categoria": "bebes",
-      "score": 73,
-      "enviado_em": "2026-07-07T22:34:13.908416",
-      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto/p/MLB66787599?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 399.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Cafeteira Espresso Lov Preta V - Tres 3 Corações Preto 127v",
-      "preco": 284.05,
-      "preco_original": 630.0,
-      "desconto_pct": 54.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_810727-MLA99451825776_112025-AB.webp",
-      "categoria": "bebes",
-      "score": 83,
-      "enviado_em": "2026-07-07T22:34:07.347087",
-      "cupom": "Cupom R$30 OFF",
-      "link": "https://www.mercadolivre.com.br/cafeteira-espresso-lov-preta-v-tres-3-coracoes-preto/p/MLB24527144?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 284.05,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 127v",
-      "preco": 399.0,
-      "preco_original": 623.0,
-      "desconto_pct": 36.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
-      "categoria": "bebes",
-      "score": 73,
-      "enviado_em": "2026-07-07T22:34:00.514754",
-      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 399.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit Com 10 Cuecas Boxer Masculina Microfibra Original",
-      "preco": 69.99,
-      "preco_original": 138.0,
-      "desconto_pct": 49.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882952-MLB106804965837_022026-AB-kit-com-10-cuecas-boxer-masculina-microfibra-original.webp",
-      "categoria": "moda",
-      "score": 84,
-      "enviado_em": "2026-07-07T21:10:53.559565",
-      "cupom": "Cupom 10% OFF",
-      "link": "https://produto.mercadolivre.com.br/MLB-1837525408-kit-com-10-cuecas-boxer-masculina-microfibra-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 69.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Jaqueta Masculina Puffer Bobojaco Nylon Frio Inverno Luxo",
-      "preco": 80.99,
-      "preco_original": 139.0,
-      "desconto_pct": 42.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798904-MLB106758143336_022026-AB-jaqueta-masculina-puffer-bobojaco-nylon-frio-inverno-luxo.webp",
-      "categoria": "moda",
-      "score": 84,
-      "enviado_em": "2026-07-07T21:10:46.846246",
-      "cupom": "Cupom 10% OFF",
-      "link": "https://produto.mercadolivre.com.br/MLB-6225077892-jaqueta-masculina-puffer-bobojaco-nylon-frio-inverno-luxo-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 80.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Tenis Fila Speedzone  Promoçao Relampago",
-      "preco": 368.67,
-      "preco_original": 549.0,
-      "desconto_pct": 32.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_857212-MLB112869015368_072026-AB-tenis-fila-speedzone-promocao-relampago.webp",
-      "categoria": "moda",
-      "score": 76,
-      "enviado_em": "2026-07-07T21:10:40.140830",
-      "link": "https://produto.mercadolivre.com.br/MLB-6086948770-tenis-fila-speedzone-promocao-relampago-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 368.67,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Tênis Masculino Feminino Kappa Park 2.0 Original",
-      "preco": 79.7,
-      "preco_original": 169.0,
-      "desconto_pct": 53.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636204-MLB92283366432_092025-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
-      "categoria": "moda",
-      "score": 80,
-      "enviado_em": "2026-07-07T21:10:33.501512",
-      "cupom": "Cupom 5% OFF",
-      "link": "https://produto.mercadolivre.com.br/MLB-4049279695-tnis-masculino-feminino-kappa-park-20-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 79.7,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 10 Cuecas Boxer Lupo Algodão Confortável Box Original",
-      "preco": 169.99,
-      "preco_original": 499.0,
-      "desconto_pct": 66.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753249-MLB84466321970_052025-AB-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
-      "categoria": "moda",
-      "score": 83,
-      "enviado_em": "2026-07-07T19:25:35.405808",
-      "link": "https://produto.mercadolivre.com.br/MLB-1473758753-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 169.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "4000 Peça 5cmx2,5cm Etiqueta Térmica Adesiva Envio Full Sku Cor Branco",
-      "preco": 40.0,
-      "preco_original": 69.0,
-      "desconto_pct": 42.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861704-MLA105355792463_012026-AB.webp",
-      "categoria": "tablets",
-      "score": 71,
-      "enviado_em": "2026-07-07T19:25:26.384340",
-      "link": "https://www.mercadolivre.com.br/4000-peca-5cmx25cm-etiqueta-termica-adesiva-envio-full-sku-cor-branco/p/MLB27159626?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 40.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Papel Térmico A4 150 Folhas Térmico Impressora Peripage Xprinter Aiyin A4l Aiyin A40s Processo Lista Branco Impressoras Processo Lista 150 Folhas Papel Térmico A4 150 Folhasalta Qualidade",
-      "preco": 53.94,
-      "preco_original": 87.0,
-      "desconto_pct": 38.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871485-MLA100868634664_122025-AB.webp",
-      "categoria": "tablets",
-      "score": 69,
-      "enviado_em": "2026-07-07T19:25:18.682493",
-      "link": "https://www.mercadolivre.com.br/papel-termico-a4-150-folhas-termico-impressora-peripage-xprinter-aiyin-a4l-aiyin-a40s-processo-lista-branco-impressoras-processo-lista-150-folhas-papel-termico-a4-150-folhasalta-qualidade/p/MLB63096110?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 53.94,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Papel Sulfite A4 Suzano Premium Report 75g Caixa C/10 Resmas Branco",
-      "preco": 297.0,
-      "preco_original": 449.0,
-      "desconto_pct": 33.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_845127-MLB110657281477_042026-AB.webp",
-      "categoria": "tablets",
-      "score": 69,
-      "enviado_em": "2026-07-07T19:25:11.751543",
-      "link": "https://www.mercadolivre.com.br/papel-sulfite-a4-suzano-premium-report-75g-caixa-c10-resmas/up/MLBU3917331638?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 297.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Aparelho De Jantar E Chá Ryo Maresia 20 Peças Branco E Marrom Oxford",
-      "preco": 271.9,
-      "preco_original": 599.0,
-      "desconto_pct": 54.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619198-MLA96107579199_102025-AB.webp",
-      "categoria": "casa",
-      "score": 88,
-      "enviado_em": "2026-07-07T17:36:32.050540",
-      "link": "https://www.mercadolivre.com.br/aparelho-de-jantar-e-cha-ryo-maresia-20-pecas-branco-e-marrom-oxford/p/MLB33630217?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 271.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Jogo De Jantar E Chá 20 Peças Unni Brisa Oxford Aw20-5903 Bege",
-      "preco": 191.8,
-      "preco_original": 499.0,
-      "desconto_pct": 61.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_771183-MLA95712551934_102025-AB.webp",
-      "categoria": "casa",
-      "score": 75,
-      "enviado_em": "2026-07-07T17:36:25.400472",
-      "link": "https://www.mercadolivre.com.br/jogo-de-jantar-e-cha-20-pecas-unni-brisa-oxford-aw20-5903/p/MLB33795714?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 191.8,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Vaso Sanitário Tubrax Monobloco Vab0002 Caixa Acoplada Completo Privada Cor Branco",
-      "preco": 485.9,
-      "preco_original": 894.0,
-      "desconto_pct": 45.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
-      "categoria": "casa",
-      "score": 91,
-      "enviado_em": "2026-07-07T17:36:18.754015",
-      "link": "https://www.mercadolivre.com.br/vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco/p/MLB24273671?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 485.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
-      "preco": 499.9,
-      "preco_original": 1099.0,
-      "desconto_pct": 54.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
-      "categoria": "casa",
-      "score": 95,
-      "enviado_em": "2026-07-07T17:36:11.977602",
-      "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 499.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Purificador Consul Cpb33 Água Gelada E Natural Cor Cinza 127/220v",
-      "preco": 541.87,
-      "preco_original": 899.0,
-      "desconto_pct": 39.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_621897-MLA99985256073_112025-AB.webp",
-      "categoria": "bebes",
-      "score": 83,
-      "enviado_em": "2026-07-07T15:34:23.351285",
-      "link": "https://www.mercadolivre.com.br/purificador-consul-cpb33-agua-gelada-e-natural-cor-cinza/p/MLB23745094?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 541.87,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Cafeteira Nescafé Dolce Gusto Mini Me Preta 110v Preto 127v",
-      "preco": 350.1,
-      "preco_original": 579.0,
-      "desconto_pct": 39.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_760107-MLA99937163685_112025-AB.webp",
-      "categoria": "bebes",
-      "score": 78,
-      "enviado_em": "2026-07-07T15:34:16.488073",
-      "link": "https://www.mercadolivre.com.br/cafeteira-nescafe-dolce-gusto-mini-me-preta-110v/p/MLB15154779?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 350.1,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas Philco Pmo23eb Limpa Fácil 20l Potência De 1100w Cor Branco 127v",
-      "preco": 421.95,
-      "preco_original": 679.0,
-      "desconto_pct": 37.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_784423-MLA99929513333_112025-AB.webp",
-      "categoria": "bebes",
-      "score": 77,
-      "enviado_em": "2026-07-07T15:34:09.552658",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20l-potncia-de-1100w-cor-branco/p/MLB17484024?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 421.95,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas Philco Pmo23eb Limpa Fácil 20 Litros Potência De 1100w Cor Branco 220v",
-      "preco": 421.95,
-      "preco_original": 679.0,
-      "desconto_pct": 37.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_672560-MLA99502210056_112025-AB.webp",
-      "categoria": "bebes",
-      "score": 77,
-      "enviado_em": "2026-07-07T15:34:02.548329",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20-litros-potncia-de-1100w-cor-branco/p/MLB17484025?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 421.95,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "O Boticário Floratta Red Passion Eau De Parfum 75ml",
-      "preco": 156.8,
-      "preco_original": 259.0,
-      "desconto_pct": 39.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_665552-MLA110462403349_042026-AB.webp",
-      "categoria": "beleza",
-      "score": 88,
-      "enviado_em": "2026-07-07T12:28:53.099630",
-      "link": "https://www.mercadolivre.com.br/o-boticario-floratta-red-passion-eau-de-parfum-75ml/p/MLB45991710?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 156.8,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Loção Hidratante Corporal Sem Perfume, Com Ceramidas Essenciais E Ácido Hialurônico, Textura Fluida Cerave 473ml Sem Fragrância",
-      "preco": 79.9,
-      "preco_original": 141.0,
-      "desconto_pct": 43.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841667-MLA110746696146_052026-AB.webp",
-      "categoria": "beleza",
-      "score": 87,
-      "enviado_em": "2026-07-07T12:28:46.220372",
-      "link": "https://www.mercadolivre.com.br/loco-hidratante-corporal-sem-perfume-com-ceramidas-essenciais-e-acido-hialurnico-textura-fluida-cerave-473ml/p/MLB21361292?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 79.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Creme Multirreparador Calmante, Cicaplast Baume B5+ La Roche-posay, 40ml Todo Tipo De Pele Dia/noite",
-      "preco": 61.7,
-      "preco_original": 106.0,
-      "desconto_pct": 42.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_630919-MLA114210163571_072026-AB.webp",
-      "categoria": "beleza",
-      "score": 86,
-      "enviado_em": "2026-07-07T12:28:39.288201",
-      "link": "https://www.mercadolivre.com.br/creme-multirreparador-calmante-cicaplast-baume-b5-la-roche-posay-40ml/p/MLB24529498?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 61.7,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Floratta Flores Secretas Fragrância Delicada Floral Frutal O Boticário 75ml",
-      "preco": 83.92,
-      "preco_original": 174.0,
-      "desconto_pct": 52.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_999191-MLA105259973416_012026-AB.webp",
-      "categoria": "beleza",
-      "score": 88,
-      "enviado_em": "2026-07-07T12:28:32.418894",
-      "link": "https://www.mercadolivre.com.br/floratta-flores-secretas-fragrncia-delicada-floral-frutal-o-boticario-75ml/p/MLB62200454?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 83.92,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Asus Vivobook Go 15 Amd Ryzen 5 7520u 16gb 512ssd Mixed Black Preto",
-      "preco": 3381.0,
-      "preco_original": 4299.0,
-      "desconto_pct": 21.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_722728-MLA110061030541_042026-AB.webp",
-      "categoria": "notebooks",
-      "score": 71,
-      "enviado_em": "2026-07-07T06:20:11.261327",
-      "cupom": "Cupom R$200 OFF",
-      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-amd-ryzen-5-7520u-16gb-512ssd-mixed-black/p/MLB43417665?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 3381.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Positivo Vision R15m Amd Ryzen 5-5625u Linux 8gb Ram 256gb Ssd Wi-fi 6 Tela 15 Full Hd Ips Antirreflexo - Minitela - Permite Upgrade De Memória Ram E Ssd - Preto",
-      "preco": 2726.0,
-      "preco_original": 3855.0,
-      "desconto_pct": 29.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_733885-MLA101679394133_122025-AB.webp",
-      "categoria": "notebooks",
-      "score": 79,
-      "enviado_em": "2026-07-07T06:20:04.479299",
-      "cupom": "Cupom R$200 OFF",
-      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-r15m-amd-ryzen-5-5625u-linux-8gb-ram-256gb-ssd-wi-fi-6-tela-15-full-hd-ips-antirreflexo-minitela-permite-upgrade-de-memoria-ram-e-ssd-preto/p/MLB53471779?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 2726.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Acer Aspire 5 A515-45-r2a3 Amd Ryzen 5 Windows 11 Home 8gb 512gb Ssd 15,6' Full Hd Gamut",
-      "preco": 3239.0,
-      "preco_original": 5609.0,
-      "desconto_pct": 42.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759351-MLU77118311686_062024-AB.webp",
-      "categoria": "notebooks",
-      "score": 90,
-      "enviado_em": "2026-07-07T06:19:57.703990",
-      "cupom": "Cupom R$200 OFF",
-      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 3239.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Acer Gamer Nitro V15 Ryzen 7 7735hs 16gb Rtx4050 1tb Ssd Linux Tela 165hz Full Hd 15.6 Anv15-41-r8zp Preto",
-      "preco": 6303.0,
-      "preco_original": 12499.0,
-      "desconto_pct": 49.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826075-MLA109766539988_042026-AB.webp",
-      "categoria": "notebooks",
-      "score": 90,
-      "enviado_em": "2026-07-07T06:19:50.893826",
-      "cupom": "Cupom R$400 OFF",
-      "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 6303.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
-      "preco": 1399.0,
-      "preco_original": 2499.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
-      "categoria": "tvs",
-      "score": 90,
-      "enviado_em": "2026-07-07T02:08:01.237535",
-      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1399.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv Profissional 4k 55  LG Uhd 55au801 Processador 7 Ai Ger8 Super Upscaling Google Cast Alexa Integrado Controle Ai Smart Magic Webos 25",
-      "preco": 2349.0,
-      "preco_original": 4199.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_997328-MLA101890264991_122025-AB.webp",
-      "categoria": "tvs",
-      "score": 90,
-      "enviado_em": "2026-07-07T02:07:54.489598",
-      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-55-lg-uhd-55au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB58587883?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 2349.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv Profissional 4k 50  LG Uhd 50au801 Processador 7 Ai Ger8 Super Upscaling Google Cast Alexa Integrado Controle Ai Smart Magic Webos 25",
-      "preco": 1979.0,
-      "preco_original": 2999.0,
-      "desconto_pct": 34.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_731891-MLA101888831643_122025-AB.webp",
-      "categoria": "tvs",
-      "score": 84,
-      "enviado_em": "2026-07-07T02:07:47.753833",
-      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-50-lg-uhd-50au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB61517857?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 1979.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Samsung Vision Ai Tv 50  Qled Ultra 4k Q7f 2025",
-      "preco": 2409.0,
-      "preco_original": 3919.0,
-      "desconto_pct": 38.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_758712-MLA109595558676_042026-AB.webp",
-      "categoria": "tvs",
-      "score": 83,
-      "enviado_em": "2026-07-07T02:07:41.010799",
-      "link": "https://www.mercadolivre.com.br/samsung-vision-ai-tv-50-qled-ultra-4k-q7f-2025/p/MLB48954926?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 2409.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Testo Essencial - Fórmula Exclusiva Com Feno Grego + Boro + Arginina + Zma + Vitamina B6 - Precursor Da Testosterona - 60 Cápsulas Sem Sabor",
-      "preco": 51.08,
-      "preco_original": 91.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619852-MLA112741838660_062026-AB.webp",
-      "categoria": "cameras",
-      "score": 71,
-      "enviado_em": "2026-07-07T01:22:07.628762",
-      "link": "https://www.mercadolivre.com.br/testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-vitamina-b6-precursor-da-testosterona-60-capsulas/p/MLB58582424?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 51.08,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 2 Pneus 175/65r14 Goodyear Kelly Edge Touring 2 86h H",
-      "preco": 545.85,
-      "preco_original": 784.0,
-      "desconto_pct": 30.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_955165-MLA99449832358_112025-AB.webp",
-      "categoria": "cameras",
-      "score": 69,
-      "enviado_em": "2026-07-07T01:22:00.991697",
-      "link": "https://www.mercadolivre.com.br/kit-2-pneus-17565r14-goodyear-kelly-edge-touring-2-86h/p/MLB34197272?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 545.85,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Celular Samsung Galaxy A56 5g 256gb 8gb Ram Rosa",
-      "preco": 2398.0,
-      "preco_original": 3999.0,
-      "desconto_pct": 40.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_685573-MLA99583115040_122025-AB.webp",
-      "categoria": "cameras",
-      "score": 85,
-      "enviado_em": "2026-07-07T01:21:53.265129",
-      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a56-5g-256gb-8gb-ram-rosa/p/MLB47112282?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 2398.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Colchão Emma Original Casal - Tecnologia Alemã Cor Branco/cinza",
-      "preco": 1946.0,
-      "preco_original": 5369.0,
-      "desconto_pct": 63.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_622005-MLA107431320527_022026-AB.webp",
-      "categoria": "cameras",
-      "score": 78,
-      "enviado_em": "2026-07-07T01:21:46.644864",
-      "link": "https://www.mercadolivre.com.br/colcho-emma-original-casal-tecnologia-alem-cor-brancocinza/p/MLB18724648?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 1946.0,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
@@ -1773,27 +1226,15 @@
     "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
     "menor_preco_30d": 416.13,
-    "menor_periodo": false,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
-    "bebes": {
-      "total": 16,
-      "score_medio": 77,
-      "desconto_medio": 41,
-      "maior_desconto": 56
-    },
     "tvs": {
-      "total": 12,
+      "total": 8,
       "score_medio": 85,
-      "desconto_medio": 37,
-      "maior_desconto": 44
-    },
-    "notebooks": {
-      "total": 12,
-      "score_medio": 82,
-      "desconto_medio": 34,
-      "maior_desconto": 53
+      "desconto_medio": 36,
+      "maior_desconto": 41
     },
     "redes": {
       "total": 8,
@@ -1801,28 +1242,28 @@
       "desconto_medio": 43,
       "maior_desconto": 61
     },
+    "notebooks": {
+      "total": 8,
+      "score_medio": 81,
+      "desconto_medio": 33,
+      "maior_desconto": 53
+    },
     "ferramentas": {
       "total": 8,
       "score_medio": 78,
       "desconto_medio": 46,
       "maior_desconto": 68
     },
-    "cameras": {
+    "bebes": {
       "total": 8,
-      "score_medio": 78,
-      "desconto_medio": 44,
-      "maior_desconto": 63
+      "score_medio": 76,
+      "desconto_medio": 40,
+      "maior_desconto": 52
     },
-    "tablets": {
+    "automotivo": {
       "total": 6,
-      "score_medio": 66,
-      "desconto_medio": 38,
-      "maior_desconto": 46
-    },
-    "moda": {
-      "total": 5,
-      "score_medio": 81,
-      "desconto_medio": 48,
+      "score_medio": 75,
+      "desconto_medio": 47,
       "maior_desconto": 66
     },
     "monitores": {
@@ -1843,23 +1284,17 @@
       "desconto_medio": 62,
       "maior_desconto": 74
     },
-    "eletrodomesticos": {
-      "total": 4,
-      "score_medio": 76,
-      "desconto_medio": 35,
-      "maior_desconto": 46
-    },
     "celulares": {
       "total": 4,
       "score_medio": 84,
       "desconto_medio": 37,
       "maior_desconto": 50
     },
-    "casa": {
+    "cameras": {
       "total": 4,
-      "score_medio": 87,
-      "desconto_medio": 54,
-      "maior_desconto": 61
+      "score_medio": 80,
+      "desconto_medio": 44,
+      "maior_desconto": 52
     },
     "brinquedos": {
       "total": 4,
@@ -1867,31 +1302,25 @@
       "desconto_medio": 59,
       "maior_desconto": 71
     },
-    "beleza": {
-      "total": 4,
-      "score_medio": 87,
-      "desconto_medio": 44,
-      "maior_desconto": 52
-    },
-    "automotivo": {
-      "total": 4,
-      "score_medio": 73,
-      "desconto_medio": 46,
-      "maior_desconto": 66
-    },
     "armazenamento": {
       "total": 4,
       "score_medio": 73,
       "desconto_medio": 64,
       "maior_desconto": 71
     },
+    "tablets": {
+      "total": 3,
+      "score_medio": 63,
+      "desconto_medio": 39,
+      "maior_desconto": 46
+    },
     "saude": {
-      "total": 1,
-      "score_medio": 74,
-      "desconto_medio": 33,
-      "maior_desconto": 32
+      "total": 3,
+      "score_medio": 75,
+      "desconto_medio": 39,
+      "maior_desconto": 54
     }
   },
-  "updated_at": "2026-07-09T22:56:26.043289",
-  "total": 116
+  "updated_at": "2026-07-10T00:09:13.452261",
+  "total": 80
 }
