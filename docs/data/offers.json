@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
+      "preco": 1399.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 38.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 90,
+      "enviado_em": "2026-07-10T22:41:38.343759",
+      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Esteira Elétrica Ergométrica Dobrável 12km C/tela Led Bivolt Preto 127/220v",
+      "preco": 1379.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_829313-MLB105024766633_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 92,
+      "enviado_em": "2026-07-10T22:41:31.447231",
+      "link": "https://www.mercadolivre.com.br/esteira-eletrica-ergometrica-dobravel-12km-ctela-led-bivolt/up/MLBU3640141455?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1379.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mesa Dobrável Vira Maleta Com Alça Portátil 1.80m Para Camping Pesca Jardim Área Externa Tft1800 The Black Tools",
+      "preco": 249.9,
+      "preco_original": 423.0,
+      "desconto_pct": 40.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_827202-MLA106099013113_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 78,
+      "enviado_em": "2026-07-10T22:41:24.587890",
+      "link": "https://www.mercadolivre.com.br/mesa-dobravel-vira-maleta-com-alca-portatil-180m-para-camping-pesca-jardim-area-externa-tft1800-the-black-tools/p/MLB65053370?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 249.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Spinning Profissional Inércia 15kg App",
+      "preco": 670.29,
+      "preco_original": 889.0,
+      "desconto_pct": 24.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705668-MLA108607870865_032026-AB.webp",
+      "categoria": "esportes",
+      "score": 64,
+      "enviado_em": "2026-07-10T22:41:17.769649",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-spinning-profissional-inercia-15kg-app/p/MLB66517451?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 670.29,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira Gamer Tgt Heron Tc2, Preto, Tgt-hrtc-bl03",
       "preco": 390.15,
       "preco_original": 705.0,
@@ -1024,7 +1084,7 @@
       "link": "https://www.mercadolivre.com.br/50-folhas-de-acetato-pet-transparente-a4-21x30cmx020mm-espessura/p/MLB74786251?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 34.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1717,6 +1777,12 @@
       "desconto_medio": 38,
       "maior_desconto": 50
     },
+    "esportes": {
+      "total": 12,
+      "score_medio": 76,
+      "desconto_medio": 48,
+      "maior_desconto": 74
+    },
     "redes": {
       "total": 8,
       "score_medio": 74,
@@ -1734,12 +1800,6 @@
       "score_medio": 78,
       "desconto_medio": 46,
       "maior_desconto": 68
-    },
-    "esportes": {
-      "total": 8,
-      "score_medio": 73,
-      "desconto_medio": 52,
-      "maior_desconto": 74
     },
     "bebes": {
       "total": 8,
@@ -1826,6 +1886,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-10T21:41:44.971839",
-  "total": 112
+  "updated_at": "2026-07-10T22:43:32.701830",
+  "total": 116
 }
