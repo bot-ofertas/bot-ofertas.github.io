@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
+      "preco": 39.9,
+      "preco_original": 64.0,
+      "desconto_pct": 37.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 69,
+      "enviado_em": "2026-07-10T12:26:51.762503",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+      "preco": 549.9,
+      "preco_original": 1094.0,
+      "desconto_pct": 49.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+      "categoria": "esportes",
+      "score": 92,
+      "enviado_em": "2026-07-10T12:26:45.023086",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 549.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor em Pó",
+      "preco": 72.9,
+      "preco_original": 104.0,
+      "desconto_pct": 29.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "categoria": "esportes",
+      "score": 62,
+      "enviado_em": "2026-07-10T12:26:38.340404",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 72.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 500g Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 38.86,
+      "preco_original": 78.0,
+      "desconto_pct": 50.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_858065-MLA112585347120_062026-AB.webp",
+      "categoria": "esportes",
+      "score": 73,
+      "enviado_em": "2026-07-10T12:26:31.670283",
+      "link": "https://www.mercadolivre.com.br/creatina-500g-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725308?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 38.86,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Samsung Led 50 Lh50befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
       "preco": 2212.0,
       "preco_original": 3999.0,
@@ -710,7 +770,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 69.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1335,17 +1395,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Caixa Amplificada Connect Power Plus CM-550 Preto Mondial",
-    "preco": 416.13,
-    "preco_original": 929.0,
-    "desconto_pct": 55.2,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849860-MLA99587833526_122025-AB.webp",
-    "categoria": "redes",
-    "score": 90,
-    "enviado_em": "2026-07-09T21:36:46.401722",
-    "link": "https://www.mercadolivre.com.br/caixa-amplificada-connect-power-plus-cm-550-preto-mondial/p/MLB18536264?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+    "preco": 549.9,
+    "preco_original": 1094.0,
+    "desconto_pct": 49.7,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+    "categoria": "esportes",
+    "score": 92,
+    "enviado_em": "2026-07-10T12:26:45.023086",
+    "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-fitness-para-cardio-e-musculaco-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 416.13,
+    "menor_preco_30d": 549.9,
     "menor_periodo": true,
     "verificada": true
   },
@@ -1373,6 +1433,12 @@
       "score_medio": 78,
       "desconto_medio": 46,
       "maior_desconto": 68
+    },
+    "esportes": {
+      "total": 8,
+      "score_medio": 73,
+      "desconto_medio": 52,
+      "maior_desconto": 74
     },
     "bebes": {
       "total": 8,
@@ -1403,12 +1469,6 @@
       "score_medio": 79,
       "desconto_medio": 33,
       "maior_desconto": 39
-    },
-    "esportes": {
-      "total": 4,
-      "score_medio": 72,
-      "desconto_medio": 62,
-      "maior_desconto": 74
     },
     "celulares": {
       "total": 4,
@@ -1447,6 +1507,6 @@
       "maior_desconto": 65
     }
   },
-  "updated_at": "2026-07-10T06:08:45.126111",
-  "total": 88
+  "updated_at": "2026-07-10T12:29:45.088401",
+  "total": 92
 }
