@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "O Boticário Lily Kit Presente(4 Itens)",
+      "preco": 238.56,
+      "preco_original": 397.0,
+      "desconto_pct": 39.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_822131-MLB108947978367_032026-AB.webp",
+      "categoria": "livros",
+      "score": 70,
+      "enviado_em": "2026-07-11T17:26:32.029176",
+      "link": "https://www.mercadolivre.com.br/o-boticario-lily-kit-presente4-itens/up/MLBU3855036100?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 238.56,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai E Night Vision Bateria De 5200 Mah Tela Fhd+ 6.7 Com Superbrilho Nfc - Grafite",
+      "preco": 890.1,
+      "preco_original": 1389.0,
+      "desconto_pct": 35.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650904-MLA100002714503_112025-AB.webp",
+      "categoria": "livros",
+      "score": 84,
+      "enviado_em": "2026-07-11T17:26:25.161552",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-bateria-de-5200-mah-tela-fhd-67-com-superbrilho-nfc-grafite/p/MLB44665473?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 890.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Purificador de água Consul Branco refrigerado com proteção antibactérias CPB34ASVNA",
+      "preco": 455.01,
+      "preco_original": 639.0,
+      "desconto_pct": 28.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_992196-MLA99984544191_112025-AB.webp",
+      "categoria": "livros",
+      "score": 65,
+      "enviado_em": "2026-07-11T17:26:18.329028",
+      "link": "https://www.mercadolivre.com.br/purificador-de-agua-consul-branco-refrigerado-com-proteco-antibacterias-cpb34asvna/p/MLB23463576?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 455.01,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 420 Figurinhas Do Álbum Copa Do Mundo 2026- 60 Envelopes",
+      "preco": 324.0,
+      "preco_original": 600.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968152-MLB110800709621_042026-AB.webp",
+      "categoria": "livros",
+      "score": 81,
+      "enviado_em": "2026-07-11T17:26:11.544179",
+      "link": "https://www.mercadolivre.com.br/kit-420-figurinhas-do-album-copa-do-mundo-2026-60-envelopes/up/MLBU3923332394?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 324.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart TV LG UHD AI UA75 50 polegadas HDR10 Pro Processador α7 AI Ger8 webOS 25",
       "preco": 2051.0,
       "preco_original": 2999.0,
@@ -1574,18 +1634,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Mala Viagem Samsonite Quartz Média Azul Lisa",
-    "preco": 664.99,
-    "preco_original": 1300.0,
-    "desconto_pct": 48.8,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_813994-MLA84692826015_052025-AB.webp",
-    "categoria": "moda",
-    "score": 97,
-    "enviado_em": "2026-07-10T17:14:46.595733",
-    "link": "https://www.mercadolivre.com.br/mala-viagem-samsonite-quartz-media/up/MLBU3955410092?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Esteira Elétrica Ergométrica Dobrável 12km C/tela Led Bivolt Preto 127/220v",
+    "preco": 1379.0,
+    "preco_original": 2999.0,
+    "desconto_pct": 54.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_829313-MLB105024766633_012026-AB.webp",
+    "categoria": "esportes",
+    "score": 92,
+    "enviado_em": "2026-07-10T22:41:31.447231",
+    "link": "https://www.mercadolivre.com.br/esteira-eletrica-ergometrica-dobravel-12km-ctela-led-bivolt/up/MLBU3640141455?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 664.99,
-    "menor_periodo": false,
+    "menor_preco_30d": 1379.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -1618,6 +1678,12 @@
       "score_medio": 74,
       "desconto_medio": 43,
       "maior_desconto": 61
+    },
+    "livros": {
+      "total": 8,
+      "score_medio": 77,
+      "desconto_medio": 36,
+      "maior_desconto": 52
     },
     "cameras": {
       "total": 8,
@@ -1655,12 +1721,6 @@
       "desconto_medio": 54,
       "maior_desconto": 69
     },
-    "livros": {
-      "total": 4,
-      "score_medio": 78,
-      "desconto_medio": 34,
-      "maior_desconto": 52
-    },
     "games": {
       "total": 4,
       "score_medio": 77,
@@ -1680,6 +1740,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T16:16:13.969212",
-  "total": 104
+  "updated_at": "2026-07-11T17:29:27.016695",
+  "total": 108
 }
