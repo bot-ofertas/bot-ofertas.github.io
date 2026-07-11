@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cama Elástica Pula Pula Infantil Trampolim 1,4 Metros Atentu",
+      "preco": 226.11,
+      "preco_original": 659.0,
+      "desconto_pct": 65.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_917104-MLA96155675715_102025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 80,
+      "enviado_em": "2026-07-11T21:52:07.052000",
+      "link": "https://www.mercadolivre.com.br/cama-elastica-pula-pula-infantil-trampolim-14-metros-atentu/p/MLB28717101?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 189.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Infantil Aro 12 Nathor Flower Rosa Menina 2-5 Anos Rosa",
+      "preco": 199.9,
+      "preco_original": 295.0,
+      "desconto_pct": 32.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_987210-MLB98448808759_112025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 70,
+      "enviado_em": "2026-07-11T21:52:00.280645",
+      "link": "https://www.mercadolivre.com.br/bicicleta-infantil-aro-12-nathor-flower-rosa-menina-25-anos/up/MLBU2863067117?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 199.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit C/ 100 Envelopes 3o Lote (700 Cromos) Copa Do Mundo 2026",
+      "preco": 514.17,
+      "preco_original": 979.0,
+      "desconto_pct": 47.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636637-MLB110126862915_042026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 93,
+      "enviado_em": "2026-07-11T21:51:53.566960",
+      "link": "https://www.mercadolivre.com.br/kit-c-100-envelopes-3o-lote-700-cromos-copa-do-mundo-2026/up/MLBU3881305329?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 514.17,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit De Atualização 120 Figurinhas Album Fifa World Cup 2026 Kit De Atualização 120 Figurinhas Copa 2026",
+      "preco": 139.9,
+      "preco_original": 397.0,
+      "desconto_pct": 64.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_673349-MLA113147621933_062026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 73,
+      "enviado_em": "2026-07-11T21:51:46.837262",
+      "link": "https://www.mercadolivre.com.br/kit-de-atualizacao-120-figurinhas-album-fifa-world-cup-2026/up/MLBU4082559813?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 139.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 2 Controles Para Ps4 Sem Fio Bluetooth Videogame Tv Smart Pc Gamer Celular Dual Shock Joystick Manete - Crowley",
       "preco": 106.9,
       "preco_original": 159.0,
@@ -1816,18 +1876,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Esteira Elétrica Ergométrica Dobrável 12km C/tela Led Bivolt Preto 127/220v",
-    "preco": 1379.0,
-    "preco_original": 2999.0,
-    "desconto_pct": 54.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_829313-MLB105024766633_012026-AB.webp",
-    "categoria": "esportes",
-    "score": 92,
-    "enviado_em": "2026-07-10T22:41:31.447231",
-    "link": "https://www.mercadolivre.com.br/esteira-eletrica-ergometrica-dobravel-12km-ctela-led-bivolt/up/MLBU3640141455?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Kit C/ 100 Envelopes 3o Lote (700 Cromos) Copa Do Mundo 2026",
+    "preco": 514.17,
+    "preco_original": 979.0,
+    "desconto_pct": 47.5,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636637-MLB110126862915_042026-AB.webp",
+    "categoria": "brinquedos",
+    "score": 93,
+    "enviado_em": "2026-07-11T21:51:53.566960",
+    "link": "https://www.mercadolivre.com.br/kit-c-100-envelopes-3o-lote-700-cromos-copa-do-mundo-2026/up/MLBU3881305329?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1379.0,
-    "menor_periodo": true,
+    "menor_preco_30d": 514.17,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
@@ -1915,6 +1975,12 @@
       "desconto_medio": 39,
       "maior_desconto": 57
     },
+    "brinquedos": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 53,
+      "maior_desconto": 65
+    },
     "tablets": {
       "total": 3,
       "score_medio": 63,
@@ -1928,6 +1994,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-11T20:54:12.812831",
-  "total": 120
+  "updated_at": "2026-07-11T21:54:33.290526",
+  "total": 124
 }
