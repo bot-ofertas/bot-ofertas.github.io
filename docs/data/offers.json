@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Plantadeira E Adubadeira Manual Empurrar Agricolas 14 Bicos",
+      "preco": 725.67,
+      "preco_original": 1699.0,
+      "desconto_pct": 57.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_872363-MLB110067327945_042026-AB.webp",
+      "categoria": "pet",
+      "score": 90,
+      "enviado_em": "2026-07-11T11:07:35.707194",
+      "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-empurrar-agricolas-14-bicos/up/MLBU3762198795?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 725.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira Adubadeira Manual 14 Bicos Uso Agrícola",
+      "preco": 797.34,
+      "preco_original": 1588.0,
+      "desconto_pct": 49.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755067-MLB110934402119_042026-AB.webp",
+      "categoria": "pet",
+      "score": 90,
+      "enviado_em": "2026-07-11T11:07:27.860960",
+      "link": "https://www.mercadolivre.com.br/plantadeira-adubadeira-manual-14-bicos-uso-agricola/up/MLBU3931003724?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 797.34,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Semeadeira Manual 12 Bicos De Aço Inoxidável Plantadeira Adubadeira De Empurrar Agrícola Para Milho Soja Feijão Amendoim",
+      "preco": 577.76,
+      "preco_original": 1399.0,
+      "desconto_pct": 58.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_843343-MLA112553145941_062026-AB.webp",
+      "categoria": "pet",
+      "score": 90,
+      "enviado_em": "2026-07-11T11:07:21.134043",
+      "link": "https://www.mercadolivre.com.br/semeadeira-manual-12-bicos-de-aco-inoxidavel-plantadeira-adubadeira-de-empurrar-agricola-para-milho-soja-feijo-amendoim/p/MLB67488173?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 577.76,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira E Adubadeira Manual Empurrar Agricolas 14 Bicos",
+      "preco": 757.61,
+      "preco_original": 1198.0,
+      "desconto_pct": 36.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_924661-MLB109924097164_042026-AB.webp",
+      "categoria": "pet",
+      "score": 83,
+      "enviado_em": "2026-07-11T11:07:14.425970",
+      "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-empurrar-agricolas-14-bicos/up/MLBU3715043775?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 757.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem sabor",
       "preco": 69.9,
       "preco_original": 159.0,
@@ -1329,6 +1389,12 @@
       "desconto_medio": 47,
       "maior_desconto": 61
     },
+    "pet": {
+      "total": 4,
+      "score_medio": 88,
+      "desconto_medio": 51,
+      "maior_desconto": 58
+    },
     "monitores": {
       "total": 4,
       "score_medio": 81,
@@ -1366,6 +1432,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T04:59:01.225999",
-  "total": 84
+  "updated_at": "2026-07-11T11:09:59.400887",
+  "total": 88
 }
