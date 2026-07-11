@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Kit 2 Controles Para Ps4 Sem Fio Bluetooth Videogame Tv Smart Pc Gamer Celular Dual Shock Joystick Manete - Crowley",
+      "preco": 106.9,
+      "preco_original": 159.0,
+      "desconto_pct": 32.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_613135-MLA110467313620_052026-AB.webp",
+      "categoria": "games",
+      "score": 64,
+      "enviado_em": "2026-07-11T20:51:17.607842",
+      "link": "https://www.mercadolivre.com.br/kit-2-controles-para-ps4-sem-fio-bluetooth-videogame-tv-smart-pc-gamer-celular-dual-shock-joystick-manete-crowley/p/MLB69284011?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 106.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Gamer E Escritório X-ray Fit Com Led Rgb Ergonômica Cor Preta Material Do Estofamento Couro Sintético",
+      "preco": 513.21,
+      "preco_original": 999.0,
+      "desconto_pct": 48.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971024-MLA99364905992_112025-AB.webp",
+      "categoria": "games",
+      "score": 89,
+      "enviado_em": "2026-07-11T20:51:10.690751",
+      "cupom": "Cupom R$40 OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-e-escritorio-x-ray-fit-com-led-rgb-ergonmica-cor-preta-material-do-estofamento-couro-sintetico/p/MLB43950252?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 513.21,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Xbox Wireless Series X|s Carbon black",
+      "preco": 376.75,
+      "preco_original": 599.0,
+      "desconto_pct": 37.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658374-MLA99957214369_112025-AB.webp",
+      "categoria": "games",
+      "score": 70,
+      "enviado_em": "2026-07-11T20:51:03.476319",
+      "link": "https://www.mercadolivre.com.br/controle-xbox-wireless-series-xs-carbon-black/p/MLB16268160?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 376.75,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Console Nintendo Switch 2, Modelo Nacional de Tomada",
+      "preco": 4226.0,
+      "preco_original": 5909.0,
+      "desconto_pct": 28.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_785396-MLA99867558581_112025-AB.webp",
+      "categoria": "games",
+      "score": 78,
+      "enviado_em": "2026-07-11T20:50:56.563137",
+      "link": "https://www.mercadolivre.com.br/console-nintendo-switch-2-modelo-nacional-de-tomada/p/MLB49200061?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4226.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tripé Bastão De Selfi Retrátil Com Controle Remoto Bluetooth com Controle , 1.84m, Remoto sem Fio, Portátil, Leve e Extensível, Compatível com ios e Android,Cor preto",
       "preco": 142.23,
       "preco_original": 295.0,
@@ -783,7 +844,7 @@
       "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 54.88,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1812,6 +1873,12 @@
       "desconto_medio": 36,
       "maior_desconto": 52
     },
+    "games": {
+      "total": 8,
+      "score_medio": 76,
+      "desconto_medio": 40,
+      "maior_desconto": 50
+    },
     "moda": {
       "total": 6,
       "score_medio": 85,
@@ -1842,12 +1909,6 @@
       "desconto_medio": 36,
       "maior_desconto": 48
     },
-    "games": {
-      "total": 4,
-      "score_medio": 77,
-      "desconto_medio": 44,
-      "maior_desconto": 50
-    },
     "eletronicos": {
       "total": 4,
       "score_medio": 77,
@@ -1867,6 +1928,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-11T19:53:43.898804",
-  "total": 116
+  "updated_at": "2026-07-11T20:54:12.812831",
+  "total": 120
 }
