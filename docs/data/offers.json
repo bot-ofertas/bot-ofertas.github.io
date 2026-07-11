@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Máquina Singer Facilita Pro 4423 Zig Zag 23 Pontos Decorativos Portatil",
+      "preco": 1329.0,
+      "preco_original": 1799.0,
+      "desconto_pct": 26.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_644742-MLA99455776856_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 79,
+      "enviado_em": "2026-07-11T22:51:27.831582",
+      "link": "https://www.mercadolivre.com.br/maquina-singer-facilita-pro-4423-zig-zag-23-pontos-decorativos-portatil/p/MLB16323394?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1329.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Balança Digital Eletrônica Comercial 40kg Precisão Mercado Azul Hold On.",
+      "preco": 183.23,
+      "preco_original": 299.0,
+      "desconto_pct": 38.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_673061-MLA99575322668_122025-AB.webp",
+      "categoria": "moveis",
+      "score": 77,
+      "enviado_em": "2026-07-11T22:51:20.311246",
+      "link": "https://www.mercadolivre.com.br/balanca-digital-eletrnica-comercial-40kg-preciso-mercado-azul-hold-on/p/MLB58504778?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 183.23,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+      "preco": 497.9,
+      "preco_original": 906.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 91,
+      "enviado_em": "2026-07-11T22:51:13.502472",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 497.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Escritório Presidente Ergonômica NR17 Marqs Home Arcanis Cinza com Apoio Lombar e Encosto Mesh Premium",
+      "preco": 388.0,
+      "preco_original": 799.0,
+      "desconto_pct": 51.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_976225-MLA109323074350_042026-AB.webp",
+      "categoria": "moveis",
+      "score": 91,
+      "enviado_em": "2026-07-11T22:51:06.582930",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-presidente-ergonmica-nr17-marqs-home-arcanis-cinza-com-apoio-lombar-e-encosto-mesh-premium/p/MLB52893115?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 388.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cama Elástica Pula Pula Infantil Trampolim 1,4 Metros Atentu",
       "preco": 226.11,
       "preco_original": 659.0,
@@ -1963,6 +2023,12 @@
       "desconto_medio": 51,
       "maior_desconto": 58
     },
+    "moveis": {
+      "total": 4,
+      "score_medio": 85,
+      "desconto_medio": 40,
+      "maior_desconto": 51
+    },
     "monitores": {
       "total": 4,
       "score_medio": 81,
@@ -1994,6 +2060,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-11T21:54:33.290526",
-  "total": 124
+  "updated_at": "2026-07-11T22:53:58.521053",
+  "total": 128
 }
