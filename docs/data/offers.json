@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Tapete Automotivo Bandeja Borracha Byd Dolphin 3 Peças Ekap Preta",
+      "preco": 556.5,
+      "preco_original": 999.0,
+      "desconto_pct": 44.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_854889-MLB82472941749_022025-AB.webp",
+      "categoria": "automotivo",
+      "score": 84,
+      "enviado_em": "2026-07-11T01:47:43.499781",
+      "link": "https://www.mercadolivre.com.br/tapete-automotivo-bandeja-borracha-byd-dolphin-3-pecas-ekap/up/MLBU3018144742?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 556.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Alargador Do Alojamento Do Comando Do Power",
+      "preco": 1730.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 24.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_952663-MLB113817201535_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 66,
+      "enviado_em": "2026-07-11T01:47:35.934634",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/alargador-do-alojamento-do-comando-do-power/up/MLBU1982071730?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1730.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Reparo Pneu + Maleta Remendo Manômetro Moto Ecarro 15pcs",
+      "preco": 74.75,
+      "preco_original": 299.0,
+      "desconto_pct": 75.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_725004-MLB111692210582_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 63,
+      "enviado_em": "2026-07-11T01:47:28.763505",
+      "link": "https://www.mercadolivre.com.br/kit-reparo-pneu--maleta-remendo-manometro-moto-ecarro-15pcs/up/MLBU3779534319?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 74.75,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Para Automóvel 9 A 36kg Grafite E Preto Styll Baby",
+      "preco": 255.11,
+      "preco_original": 369.0,
+      "desconto_pct": 30.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675866-MLA98888771613_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 61,
+      "enviado_em": "2026-07-11T01:47:21.869769",
+      "link": "https://www.mercadolivre.com.br/cadeira-para-automovel-9-a-36kg-grafite-e-preto-styll-baby/p/MLB19885359?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 255.11,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "TESTO ESSENCIAL - Fórmula Exclusiva com Feno Grego + Boro + Arginina + ZMA + Vitamina B6 - Precursor da Testosterona - 60 cápsulas",
       "preco": 51.08,
       "preco_original": 91.0,
@@ -629,7 +690,7 @@
       "link": "https://www.mercadolivre.com.br/suporte-de-painel-starlink-mini-com-ventosas-antimulta/up/MLBU3752695733?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 101.47,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1170,6 +1231,12 @@
       "desconto_medio": 43,
       "maior_desconto": 61
     },
+    "automotivo": {
+      "total": 10,
+      "score_medio": 72,
+      "desconto_medio": 46,
+      "maior_desconto": 75
+    },
     "armazenamento": {
       "total": 10,
       "score_medio": 77,
@@ -1193,12 +1260,6 @@
       "score_medio": 77,
       "desconto_medio": 47,
       "maior_desconto": 65
-    },
-    "automotivo": {
-      "total": 6,
-      "score_medio": 75,
-      "desconto_medio": 47,
-      "maior_desconto": 66
     },
     "saude": {
       "total": 5,
@@ -1243,6 +1304,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T00:02:10.205330",
-  "total": 76
+  "updated_at": "2026-07-11T01:50:38.918053",
+  "total": 80
 }
