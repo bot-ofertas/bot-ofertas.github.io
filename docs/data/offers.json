@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart TV LG UHD AI UA75 50 polegadas HDR10 Pro Processador α7 AI Ger8 webOS 25",
+      "preco": 2051.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 31.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_884169-MLA106908124660_022026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 81,
+      "enviado_em": "2026-07-11T16:13:50.252343",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-50-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53201474?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2051.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Galaxy Buds Core Preto",
+      "preco": 211.49,
+      "preco_original": 499.0,
+      "desconto_pct": 57.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650858-MLA97317826023_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 76,
+      "enviado_em": "2026-07-11T16:13:41.549359",
+      "link": "https://www.mercadolivre.com.br/galaxy-buds-core-preto/p/MLB58315694?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 211.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43'' Philco Full Hd Roku Tv Hdr10 Dolby P43cra",
+      "preco": 1379.0,
+      "preco_original": 2199.0,
+      "desconto_pct": 37.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900047-MLA108489153159_032026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 87,
+      "enviado_em": "2026-07-11T16:13:34.838219",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-full-hd-roku-tv-hdr10-dolby-p43cra/p/MLB66418417?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1379.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Roku Streaming Stick 2025 Para Tv Hd/fhd Controle Por Voz Preto De Voz 3ª geração 3840BR",
+      "preco": 239.9,
+      "preco_original": 341.0,
+      "desconto_pct": 29.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_947612-MLA99369632726_112025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 63,
+      "enviado_em": "2026-07-11T16:13:27.758951",
+      "link": "https://www.mercadolivre.com.br/roku-streaming-stick-2025-para-tv-hdfhd-controle-por-voz-preto-de-voz-3-geraco-3840br/p/MLB54014512?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 239.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
       "preco": 103.99,
       "preco_original": 230.0,
@@ -873,7 +933,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-roku-tv-50-7045-4k-uhd-aoc-bivolt/p/MLB51202548?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1880.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1251,7 +1311,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 829.99,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1607,6 +1667,12 @@
       "desconto_medio": 44,
       "maior_desconto": 50
     },
+    "eletronicos": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 39,
+      "maior_desconto": 57
+    },
     "tablets": {
       "total": 3,
       "score_medio": 63,
@@ -1614,6 +1680,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T15:07:33.222780",
-  "total": 100
+  "updated_at": "2026-07-11T16:16:13.969212",
+  "total": 104
 }
