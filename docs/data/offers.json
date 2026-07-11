@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv H5000f Hd 32 Polegadas 2025 Preto Samsung Bivolt",
+      "preco": 967.12,
+      "preco_original": 1395.0,
+      "desconto_pct": 30.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_973138-MLA99968160801_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 77,
+      "enviado_em": "2026-07-11T13:58:32.347717",
+      "link": "https://www.mercadolivre.com.br/smart-tv-h5000f-hd-32-polegadas-2025-preto-samsung-bivolt/p/MLB48954912?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 967.12,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV Profissional LG 43\" Full HD Processador a5 Ger6 AI Alexa Integrada webOS 23 – 43LR671C-B",
+      "preco": 1499.0,
+      "preco_original": 2284.0,
+      "desconto_pct": 34.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_929244-MLA104540336039_012026-AB.webp",
+      "categoria": "tvs",
+      "score": 84,
+      "enviado_em": "2026-07-11T13:58:25.689618",
+      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-lg-43-full-hd-processador-a5-ger6-ai-alexa-integrada-webos-23-43lr671c-b/p/MLB41106126?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1499.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV LG UHD AI UA75 65 polegadas HDR10 Pro Processador α7 AI Ger8 webOS 25",
+      "preco": 3249.0,
+      "preco_original": 4445.0,
+      "desconto_pct": 26.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_966485-MLA106907952364_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 76,
+      "enviado_em": "2026-07-11T13:58:19.016028",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-65-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53610161?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3249.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 928.31,
+      "preco_original": 1499.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 88,
+      "enviado_em": "2026-07-11T13:58:12.310184",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 928.31,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Coenzima Q10 200mg Pura Alta Concentração 60 Cápsulas - Forged Nutrition",
       "preco": 69.9,
       "preco_original": 139.0,
@@ -768,7 +828,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-50-lg-uhd-50au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB61517857?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 2099.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1415,6 +1475,12 @@
       "desconto_medio": 47,
       "maior_desconto": 74
     },
+    "tvs": {
+      "total": 12,
+      "score_medio": 85,
+      "desconto_medio": 37,
+      "maior_desconto": 50
+    },
     "automotivo": {
       "total": 10,
       "score_medio": 72,
@@ -1426,12 +1492,6 @@
       "score_medio": 77,
       "desconto_medio": 51,
       "maior_desconto": 71
-    },
-    "tvs": {
-      "total": 8,
-      "score_medio": 87,
-      "desconto_medio": 40,
-      "maior_desconto": 50
     },
     "redes": {
       "total": 8,
@@ -1494,6 +1554,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T12:12:07.033795",
-  "total": 92
+  "updated_at": "2026-07-11T14:00:58.276166",
+  "total": 96
 }
