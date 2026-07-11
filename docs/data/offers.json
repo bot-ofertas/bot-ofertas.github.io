@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Tripé Bastão De Selfi Retrátil Com Controle Remoto Bluetooth com Controle , 1.84m, Remoto sem Fio, Portátil, Leve e Extensível, Compatível com ios e Android,Cor preto",
+      "preco": 142.23,
+      "preco_original": 295.0,
+      "desconto_pct": 51.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_794308-MLA99424549624_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 76,
+      "enviado_em": "2026-07-11T19:50:49.452623",
+      "link": "https://www.mercadolivre.com.br/tripe-basto-de-selfi-retratil-com-controle-remoto-bluetooth-com-controle-184m-remoto-sem-fio-portatil-leve-e-extensivel-compativel-com-ios-e-androidcor-preto/p/MLB56461697?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 142.23,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark A1 Duo Combo Duplo Para 2 Pessoas Usb-c, Lightning Preto",
+      "preco": 400.2,
+      "preco_original": 799.0,
+      "desconto_pct": 49.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_928791-MLA105582102043_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 85,
+      "enviado_em": "2026-07-11T19:50:42.587162",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-duo-combo-duplo-para-2-pessoas-usb-c-lightning-preto/p/MLB64851983?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 400.2,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creme Hidratante Corporal e facial para Pele Seca a Extra Seca Sem Perfume 454g CeraVe",
+      "preco": 73.71,
+      "preco_original": 141.0,
+      "desconto_pct": 47.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_806507-MLA92874967013_092025-AB.webp",
+      "categoria": "cameras",
+      "score": 72,
+      "enviado_em": "2026-07-11T19:50:33.055825",
+      "link": "https://www.mercadolivre.com.br/creme-hidratante-corporal-e-facial-para-pele-seca-a-extra-seca-sem-perfume-454g-cerave/p/MLB19309318?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Baú Bauleto Aluminio 65 Litros Moto 2 Capacetes Universal Preto",
+      "preco": 610.51,
+      "preco_original": 968.0,
+      "desconto_pct": 36.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_879761-MLB99296367936_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 80,
+      "enviado_em": "2026-07-11T19:50:26.094725",
+      "link": "https://www.mercadolivre.com.br/bau-bauleto-aluminio-65-litros-moto-2-capacetes-universal/up/MLBU3266671532?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 610.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Capa Banco Carro Couro Sob Medida Acolchoada Ajuste Perfeito Preto Gol G8 2021 Á 2023",
       "preco": 326.07,
       "preco_original": 599.0,
@@ -1099,7 +1159,7 @@
       "link": "https://www.mercadolivre.com.br/jogo-de-panelas-17-pecas-teflon-antiaderente-inducao/up/MLBU4011781749?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 349.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1728,6 +1788,12 @@
       "desconto_medio": 47,
       "maior_desconto": 75
     },
+    "cameras": {
+      "total": 10,
+      "score_medio": 76,
+      "desconto_medio": 46,
+      "maior_desconto": 55
+    },
     "armazenamento": {
       "total": 10,
       "score_medio": 77,
@@ -1745,12 +1811,6 @@
       "score_medio": 77,
       "desconto_medio": 36,
       "maior_desconto": 52
-    },
-    "cameras": {
-      "total": 8,
-      "score_medio": 77,
-      "desconto_medio": 47,
-      "maior_desconto": 55
     },
     "moda": {
       "total": 6,
@@ -1799,8 +1859,14 @@
       "score_medio": 63,
       "desconto_medio": 39,
       "maior_desconto": 46
+    },
+    "ferramentas": {
+      "total": 2,
+      "score_medio": 81,
+      "desconto_medio": 51,
+      "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-11T18:36:33.186853",
-  "total": 112
+  "updated_at": "2026-07-11T19:53:43.898804",
+  "total": 116
 }
