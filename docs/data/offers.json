@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem sabor",
+      "preco": 69.9,
+      "preco_original": 159.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 75,
+      "enviado_em": "2026-07-11T04:56:06.339291",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Isolate Protein Fuse Refil 900g - Dark Lab Sabor Creme de avelã",
+      "preco": 78.9,
+      "preco_original": 138.0,
+      "desconto_pct": 42.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_606777-MLA99576476456_122025-AB.webp",
+      "categoria": "esportes",
+      "score": 74,
+      "enviado_em": "2026-07-11T04:55:59.352937",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/whey-isolate-protein-fuse-refil-900g-dark-lab-sabor-creme-de-avel/p/MLB19481866?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 78.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 1kg Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 74.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-11T04:55:52.393032",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "NAC 600mg - Fórmula Exclusiva com Máxima Concentração e Pureza - N-Acetil L-Cisteína - 60 Cápsulas",
+      "preco": 46.77,
+      "preco_original": 89.0,
+      "desconto_pct": 47.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628799-MLA105714524195_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 73,
+      "enviado_em": "2026-07-11T04:55:45.598987",
+      "link": "https://www.mercadolivre.com.br/nac-600mg-formula-exclusiva-com-maxima-concentraco-e-pureza-n-acetil-l-cisteina-60-capsulas/p/MLB58579835?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 46.77,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tapete Automotivo Bandeja Borracha Byd Dolphin 3 Peças Ekap Preta",
       "preco": 556.5,
       "preco_original": 999.0,
@@ -1226,10 +1288,10 @@
   },
   "stats": {
     "esportes": {
-      "total": 10,
-      "score_medio": 77,
-      "desconto_medio": 43,
-      "maior_desconto": 61
+      "total": 14,
+      "score_medio": 76,
+      "desconto_medio": 47,
+      "maior_desconto": 74
     },
     "automotivo": {
       "total": 10,
@@ -1304,6 +1366,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T01:50:38.918053",
-  "total": 80
+  "updated_at": "2026-07-11T04:59:01.225999",
+  "total": 84
 }
