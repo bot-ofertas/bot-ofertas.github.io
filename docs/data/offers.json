@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Coenzima Q10 200mg Pura Alta Concentração 60 Cápsulas - Forged Nutrition",
+      "preco": 69.9,
+      "preco_original": 139.0,
+      "desconto_pct": 49.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_637238-MLA107348538091_022026-AB.webp",
+      "categoria": "esportes",
+      "score": 74,
+      "enviado_em": "2026-07-11T12:09:13.246120",
+      "link": "https://www.mercadolivre.com.br/coenzima-q10-200mg-pura-alta-concentraco-60-capsulas-forged-nutrition/p/MLB30465601?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Feminino Nyx Olympikus Cinza Lisa 37",
+      "preco": 116.99,
+      "preco_original": 199.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_923950-MLB89804623670_082025-AB.webp",
+      "categoria": "esportes",
+      "score": 70,
+      "enviado_em": "2026-07-11T12:09:06.443308",
+      "cupom": "Cupom R$25 OFF",
+      "link": "https://www.mercadolivre.com.br/tenis-feminino-nyx-olympikus/up/MLBU3291310755?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 116.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Keranat 300mg 90 Cáp Fortalecimento Capilar",
+      "preco": 174.64,
+      "preco_original": 399.0,
+      "desconto_pct": 56.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_749257-MLB106568497285_022026-AB.webp",
+      "categoria": "esportes",
+      "score": 75,
+      "enviado_em": "2026-07-11T12:08:59.590196",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/keranat-300mg-90-cap-fortalecimento-capilar/up/MLBU1450300765?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 174.64,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lanterna Tática Mais Forte Do Mundo T9 Potente Recarregável Preto",
+      "preco": 50.42,
+      "preco_original": 84.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_815995-MLB100305922994_122025-AB.webp",
+      "categoria": "esportes",
+      "score": 72,
+      "enviado_em": "2026-07-11T12:08:52.774155",
+      "link": "https://www.mercadolivre.com.br/lanterna-tatica-mais-forte-do-mundo-t9-potente-recarregavel/up/MLBU3668983470?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 50.42,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Plantadeira E Adubadeira Manual Empurrar Agricolas 14 Bicos",
       "preco": 725.67,
       "preco_original": 1699.0,
@@ -1348,8 +1410,8 @@
   },
   "stats": {
     "esportes": {
-      "total": 14,
-      "score_medio": 76,
+      "total": 18,
+      "score_medio": 75,
       "desconto_medio": 47,
       "maior_desconto": 74
     },
@@ -1432,6 +1494,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T11:09:59.400887",
-  "total": 88
+  "updated_at": "2026-07-11T12:12:07.033795",
+  "total": 92
 }
