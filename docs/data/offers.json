@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "preco": 103.99,
+      "preco_original": 230.0,
+      "desconto_pct": 54.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB.webp",
+      "categoria": "cameras",
+      "score": 75,
+      "enviado_em": "2026-07-11T15:04:39.966729",
+      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 103.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera De Segurança Wifi Icsee Externa Mini Dome Full Hd Infravermelho Prova D'água Kateluo",
+      "preco": 76.57,
+      "preco_original": 151.0,
+      "desconto_pct": 49.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_938149-MLA107304329494_032026-AB.webp",
+      "categoria": "cameras",
+      "score": 72,
+      "enviado_em": "2026-07-11T15:04:33.261039",
+      "link": "https://www.mercadolivre.com.br/cmera-de-seguranca-wifi-icsee-externa-mini-dome-full-hd-infravermelho-prova-dagua-kateluo/p/MLB66141391?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 76.57,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tira Manchas Vanish Líquido Multiuso para Roupas Coloridas Pro Line 5L",
+      "preco": 49.99,
+      "preco_original": 112.0,
+      "desconto_pct": 55.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_646685-MLA99448817018_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 72,
+      "enviado_em": "2026-07-11T15:04:26.544742",
+      "link": "https://www.mercadolivre.com.br/tira-manchas-vanish-liquido-multiuso-para-roupas-coloridas-pro-line-5l/p/MLB19465892?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 49.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa de som Amplificada Bluetooth Rádio Fm 250w Rms Tws Led Rgb Portatil Sem Fio Usb Tcs300 Cor Preto The Black Tools",
+      "preco": 178.9,
+      "preco_original": 309.0,
+      "desconto_pct": 42.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_761569-MLA99976843717_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 75,
+      "enviado_em": "2026-07-11T15:04:19.802301",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-amplificada-bluetooth-radio-fm-250w-rms-tws-led-rgb-portatil-sem-fio-usb-tcs300-cor-preto-the-black-tools/p/MLB61060326?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 178.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv H5000f Hd 32 Polegadas 2025 Preto Samsung Bivolt",
       "preco": 967.12,
       "preco_original": 1395.0,
@@ -1499,6 +1559,12 @@
       "desconto_medio": 43,
       "maior_desconto": 61
     },
+    "cameras": {
+      "total": 8,
+      "score_medio": 77,
+      "desconto_medio": 47,
+      "maior_desconto": 55
+    },
     "casa": {
       "total": 6,
       "score_medio": 77,
@@ -1541,12 +1607,6 @@
       "desconto_medio": 44,
       "maior_desconto": 50
     },
-    "cameras": {
-      "total": 4,
-      "score_medio": 80,
-      "desconto_medio": 44,
-      "maior_desconto": 52
-    },
     "tablets": {
       "total": 3,
       "score_medio": 63,
@@ -1554,6 +1614,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T14:00:58.276166",
-  "total": 96
+  "updated_at": "2026-07-11T15:07:33.222780",
+  "total": 100
 }
