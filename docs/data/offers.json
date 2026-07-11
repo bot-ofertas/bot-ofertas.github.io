@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Capa Banco Carro Couro Sob Medida Acolchoada Ajuste Perfeito Preto Gol G8 2021 Á 2023",
+      "preco": 326.07,
+      "preco_original": 599.0,
+      "desconto_pct": 45.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_617316-MLB100254638759_122025-AB.webp",
+      "categoria": "automotivo",
+      "score": 77,
+      "enviado_em": "2026-07-11T18:33:38.716762",
+      "link": "https://www.mercadolivre.com.br/capa-banco-carro-couro-sob-medida-acolchoada-ajuste-perfeito/up/MLBU3487765939?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 326.07,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Veicular 4k Hdr 3 Canais 70mai T800e-1 Gps 24h App T800e-1 Com Sd 128g",
+      "preco": 1381.0,
+      "preco_original": 3348.0,
+      "desconto_pct": 58.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_856642-MLB113328449495_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 87,
+      "enviado_em": "2026-07-11T18:33:31.908419",
+      "link": "https://www.mercadolivre.com.br/camera-veicular-4k-hdr-3-canais-70mai-t800e1-gps-24h-app/up/MLBU3938269526?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1381.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Feminino Grand Court 3.0 adidas Ftwwht/cblack/ftwwht Lisa 38 Br",
+      "preco": 181.83,
+      "preco_original": 399.0,
+      "desconto_pct": 54.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_773930-MLB108881258477_032026-AB.webp",
+      "categoria": "moda",
+      "score": 90,
+      "enviado_em": "2026-07-11T18:33:22.191349",
+      "cupom": "Cupom R$25 OFF",
+      "link": "https://www.mercadolivre.com.br/tenis-feminino-grand-court-30-adidas/up/MLBU3652981790?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 181.83,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mochila À Prova D'água Reforçada Expansível Para Viagens Diá Preto",
+      "preco": 85.4,
+      "preco_original": 289.0,
+      "desconto_pct": 70.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_842378-MLB112840987547_062026-AB.webp",
+      "categoria": "moda",
+      "score": 78,
+      "enviado_em": "2026-07-11T18:33:14.755759",
+      "link": "https://www.mercadolivre.com.br/mochila-a-prova-dagua-reforcada-expansivel-para-viagens-dia/up/MLBU3951542930?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 85.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "O Boticário Lily Kit Presente(4 Itens)",
       "preco": 238.56,
       "preco_original": 397.0,
@@ -842,7 +903,7 @@
       "link": "https://www.mercadolivre.com.br/mochila-jiesipote-prova-dagua-reforcada-expansivel-cor-preto/p/MLB74678961?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 89.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1662,9 +1723,9 @@
       "maior_desconto": 50
     },
     "automotivo": {
-      "total": 10,
-      "score_medio": 72,
-      "desconto_medio": 46,
+      "total": 12,
+      "score_medio": 74,
+      "desconto_medio": 47,
       "maior_desconto": 75
     },
     "armazenamento": {
@@ -1691,6 +1752,12 @@
       "desconto_medio": 47,
       "maior_desconto": 55
     },
+    "moda": {
+      "total": 6,
+      "score_medio": 85,
+      "desconto_medio": 57,
+      "maior_desconto": 70
+    },
     "casa": {
       "total": 6,
       "score_medio": 77,
@@ -1715,12 +1782,6 @@
       "desconto_medio": 36,
       "maior_desconto": 48
     },
-    "moda": {
-      "total": 4,
-      "score_medio": 86,
-      "desconto_medio": 54,
-      "maior_desconto": 69
-    },
     "games": {
       "total": 4,
       "score_medio": 77,
@@ -1740,6 +1801,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-11T17:29:27.016695",
-  "total": 108
+  "updated_at": "2026-07-11T18:36:33.186853",
+  "total": 112
 }
