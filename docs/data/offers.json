@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit Kemei Máquina de Corte KM-2299 e Acabamento KM-1102 Bivolt",
+      "preco": 123.99,
+      "preco_original": 299.0,
+      "desconto_pct": 58.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_654722-MLA100162412939_122025-AB.webp",
+      "categoria": "beleza",
+      "score": 92,
+      "enviado_em": "2026-07-12T20:52:14.514045",
+      "link": "https://www.mercadolivre.com.br/kit-kemei-maquina-de-corte-km-2299-e-acabamento-km-1102-bivolt/p/MLB54245381?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 123.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Hidratante Facial Epidrat Acqua 50ml Mantecorp Skincare Todo Tipo De Pele Dia/noite",
+      "preco": 59.9,
+      "preco_original": 104.0,
+      "desconto_pct": 42.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_719503-MLU75980721377_042024-AB.webp",
+      "categoria": "beleza",
+      "score": 86,
+      "enviado_em": "2026-07-12T20:52:07.683818",
+      "link": "https://www.mercadolivre.com.br/hidratante-facial-epidrat-acqua-50ml-mantecorp-skincare-todo-tipo-de-pele-dianoite/p/MLB19870720?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mantecorp Hidratante Corporal Hydraporin AI 450g",
+      "preco": 107.91,
+      "preco_original": 194.0,
+      "desconto_pct": 44.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_846334-MLA81664120850_012025-AB.webp",
+      "categoria": "beleza",
+      "score": 83,
+      "enviado_em": "2026-07-12T20:52:00.664053",
+      "link": "https://www.mercadolivre.com.br/mantecorp-hidratante-corporal-hydraporin-ai-450g/p/MLB18390642?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 107.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mantecorp Protetor Solar Facial Episol Fps 70 Tom 2 Claro",
+      "preco": 62.9,
+      "preco_original": 99.0,
+      "desconto_pct": 36.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604484-MLA99833162607_112025-AB.webp",
+      "categoria": "beleza",
+      "score": 82,
+      "enviado_em": "2026-07-12T20:51:53.777713",
+      "link": "https://www.mercadolivre.com.br/mantecorp-protetor-solar-facial-episol-fps-70-tom-2-claro/p/MLB19782244?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 62.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Patinete Scooter Elétrico Com Velocidade Até 30 Km Bluetooth Preto",
       "preco": 1143.0,
       "preco_original": 1899.0,
@@ -2227,6 +2287,12 @@
       "desconto_medio": 30,
       "maior_desconto": 33
     },
+    "beleza": {
+      "total": 4,
+      "score_medio": 86,
+      "desconto_medio": 45,
+      "maior_desconto": 58
+    },
     "celulares": {
       "total": 3,
       "score_medio": 84,
@@ -2240,6 +2306,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-12T19:50:49.491915",
-  "total": 140
+  "updated_at": "2026-07-12T20:54:46.451453",
+  "total": 144
 }
