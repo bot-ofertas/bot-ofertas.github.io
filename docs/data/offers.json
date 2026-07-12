@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Suporte De Painel  Starlink Mini Com Ventosas Preto",
+      "preco": 100.0,
+      "preco_original": 149.0,
+      "desconto_pct": 32.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743988-MLB112108416523_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 60,
+      "enviado_em": "2026-07-12T23:57:06.900314",
+      "link": "https://www.mercadolivre.com.br/suporte-de-painel--starlink-mini-com-ventosas/up/MLBU3744939341?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 100.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Carro Infantil 0 a 36Kg Elite 4 em 1 - Maxi Baby - Preto",
+      "preco": 379.9,
+      "preco_original": 670.0,
+      "desconto_pct": 43.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_786782-MLA99523938502_122025-AB.webp",
+      "categoria": "automotivo",
+      "score": 78,
+      "enviado_em": "2026-07-12T23:57:00.258419",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-0-a-36kg-elite-4-em-1-maxi-baby-preto/p/MLB29756545?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 379.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Bolsa Esportiva Feminina Fundamental Extra Small Sports Puma Cor Preto Liso",
+      "preco": 170.99,
+      "preco_original": 249.0,
+      "desconto_pct": 31.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_695586-MLA95397550430_102025-AB.webp",
+      "categoria": "moda",
+      "score": 76,
+      "enviado_em": "2026-07-12T23:56:48.635840",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://www.mercadolivre.com.br/bolsa-esportiva-feminina-fundamental-extra-small-sports-puma-cor-preto-liso/p/MLB58251014?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 170.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jaqueta Feminina Puffer Capuz Removível Bobojaco Impermeável Preto M (38/40)",
+      "preco": 73.85,
+      "preco_original": 215.0,
+      "desconto_pct": 65.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_771369-MLB110952924093_042026-AB.webp",
+      "categoria": "moda",
+      "score": 75,
+      "enviado_em": "2026-07-12T23:56:41.854308",
+      "link": "https://www.mercadolivre.com.br/jaqueta-feminina-puffer-capuz-removivel-bobojaco-impermeavel/up/MLBU3332199181?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.85,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Celular Samsung Galaxy A17 Com Ia, 256gb, 8gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Cinza",
       "preco": 1088.0,
       "preco_original": 1597.0,
@@ -1459,8 +1520,8 @@
       "enviado_em": "2026-07-11T11:07:35.707194",
       "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-empurrar-agricolas-14-bicos/up/MLBU3762198795?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 725.67,
-      "menor_periodo": false,
+      "menor_preco_30d": 717.75,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1475,7 +1536,7 @@
       "link": "https://www.mercadolivre.com.br/plantadeira-adubadeira-manual-14-bicos-uso-agricola/up/MLBU3931003724?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 797.34,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1490,7 +1551,7 @@
       "link": "https://www.mercadolivre.com.br/semeadeira-manual-12-bicos-de-aco-inoxidavel-plantadeira-adubadeira-de-empurrar-agricola-para-milho-soja-feijo-amendoim/p/MLB67488173?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 577.76,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1505,7 +1566,7 @@
       "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-empurrar-agricolas-14-bicos/up/MLBU3715043775?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 757.61,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2335,6 +2396,18 @@
       "desconto_medio": 38,
       "maior_desconto": 50
     },
+    "moda": {
+      "total": 10,
+      "score_medio": 82,
+      "desconto_medio": 55,
+      "maior_desconto": 70
+    },
+    "automotivo": {
+      "total": 10,
+      "score_medio": 73,
+      "desconto_medio": 45,
+      "maior_desconto": 75
+    },
     "armazenamento": {
       "total": 10,
       "score_medio": 79,
@@ -2346,12 +2419,6 @@
       "score_medio": 83,
       "desconto_medio": 41,
       "maior_desconto": 51
-    },
-    "moda": {
-      "total": 8,
-      "score_medio": 84,
-      "desconto_medio": 56,
-      "maior_desconto": 70
     },
     "informatica": {
       "total": 8,
@@ -2370,12 +2437,6 @@
       "score_medio": 85,
       "desconto_medio": 50,
       "maior_desconto": 65
-    },
-    "automotivo": {
-      "total": 8,
-      "score_medio": 74,
-      "desconto_medio": 47,
-      "maior_desconto": 75
     },
     "saude": {
       "total": 7,
@@ -2426,6 +2487,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-12T22:54:54.246628",
-  "total": 152
+  "updated_at": "2026-07-12T23:59:59.038637",
+  "total": 156
 }
