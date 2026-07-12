@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Tablet Hancdon S12 Android 15 12GB RAM 512GB Memória 11,6\" Dual SIM Wi-Fi Kit Completo Com Teclado Mouse e Caneta Cor Cinza",
+      "preco": 949.63,
+      "preco_original": 1436.0,
+      "desconto_pct": 33.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687505-MLA113181442665_062026-AB.webp",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-07-12T21:53:50.030804",
+      "link": "https://www.mercadolivre.com.br/tablet-hancdon-s12-android-15-12gb-ram-512gb-memoria-116-dual-sim-wi-fi-kit-completo-com-teclado-mouse-e-caneta-cor-cinza/p/MLB66361933?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 949.63,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional HP DeskJet Ink Advantage 2975 Colorida 1 USB 2.0 de alta velocidade Wi-Fi de banda dupla - 100 a 240 VCA - AJ4Y4A#AK4",
+      "preco": 430.61,
+      "preco_original": 719.0,
+      "desconto_pct": 40.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641445-MLA107256158981_022026-AB.webp",
+      "categoria": "informatica",
+      "score": 81,
+      "enviado_em": "2026-07-12T21:53:43.085356",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-deskjet-ink-advantage-2975-colorida-1-usb-20-de-alta-velocidade-wi-fi-de-banda-dupla-100-a-240-vca-aj4y4aak4/p/MLB62998911?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 430.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor Portátil Duplo 15.6 Full Hdcom Bolsa Telas Dobráveis Preto 127/220v",
+      "preco": 999.0,
+      "preco_original": 1498.0,
+      "desconto_pct": 33.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_714235-MLB111319228551_052026-AB.webp",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-07-12T21:53:35.646025",
+      "link": "https://www.mercadolivre.com.br/monitor-portatil-duplo-156-full-hdcom-bolsa-telas-dobraveis/up/MLBU3951824932?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fonte Msi Mag 650w 80 Plus Bronze Pfc Ativo A650bnl Preto",
+      "preco": 286.84,
+      "preco_original": 599.0,
+      "desconto_pct": 52.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_620355-MLA99033065284_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-07-12T21:53:28.420563",
+      "link": "https://www.mercadolivre.com.br/fonte-msi-mag-650w-80-plus-bronze-pfc-ativo-a650bnl-preto/p/MLB62535762?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 286.84,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Kemei Máquina de Corte KM-2299 e Acabamento KM-1102 Bivolt",
       "preco": 123.99,
       "preco_original": 299.0,
@@ -2233,6 +2293,12 @@
       "desconto_medio": 56,
       "maior_desconto": 70
     },
+    "informatica": {
+      "total": 8,
+      "score_medio": 81,
+      "desconto_medio": 35,
+      "maior_desconto": 52
+    },
     "eletronicos": {
       "total": 8,
       "score_medio": 80,
@@ -2281,12 +2347,6 @@
       "desconto_medio": 36,
       "maior_desconto": 49
     },
-    "informatica": {
-      "total": 4,
-      "score_medio": 80,
-      "desconto_medio": 30,
-      "maior_desconto": 33
-    },
     "beleza": {
       "total": 4,
       "score_medio": 86,
@@ -2306,6 +2366,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-12T20:54:46.451453",
-  "total": 144
+  "updated_at": "2026-07-12T21:56:17.142483",
+  "total": 148
 }
