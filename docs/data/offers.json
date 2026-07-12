@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Patinete Scooter Elétrico Com Velocidade Até 30 Km Bluetooth Preto",
+      "preco": 1143.0,
+      "preco_original": 1899.0,
+      "desconto_pct": 39.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871319-MLB109033947499_032026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 94,
+      "enviado_em": "2026-07-12T19:48:23.688724",
+      "link": "https://www.mercadolivre.com.br/patinete-scooter-eletrico-com-velocidade-ate-30-km-bluetooth/up/MLBU3628991905?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1143.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+      "preco": 497.51,
+      "preco_original": 1299.0,
+      "desconto_pct": 61.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 83,
+      "enviado_em": "2026-07-12T19:48:16.997968",
+      "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 497.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Patinete Triciclo Infantil Drift Elétrico Led 90kg 15km Violeta",
+      "preco": 869.0,
+      "preco_original": 1399.0,
+      "desconto_pct": 37.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_757869-MLA108862240775_032026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 92,
+      "enviado_em": "2026-07-12T19:48:10.257208",
+      "link": "https://www.mercadolivre.com.br/patinete-triciclo-infantil-drift-eletrico-led-90kg-15km-violeta/p/MLB66731421?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 869.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Com 100 Envelopes Lacrados Para Colecionar Figurinhas da Copa Do Mundo FIFA 2026 Panini",
+      "preco": 498.51,
+      "preco_original": 979.0,
+      "desconto_pct": 49.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_739465-MLA112642089041_062026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 94,
+      "enviado_em": "2026-07-12T19:48:03.625467",
+      "link": "https://www.mercadolivre.com.br/kit-com-100-envelopes-lacrados-para-colecionar-figurinhas-da-copa-do-mundo-fifa-2026-panini/p/MLB67922755?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 498.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Relógio Smartband Samsung Gal.fit 3 Sm-r390 Grafite Grafite Liso Grafit Cinza-escuro",
       "preco": 222.0,
       "preco_original": 365.0,
@@ -676,7 +736,7 @@
       "link": "https://www.mercadolivre.com.br/cama-elastica-pula-pula-infantil-trampolim-14-metros-atentu/p/MLB28717101?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 226.11,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2056,17 +2116,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Kit C/ 100 Envelopes 3o Lote (700 Cromos) Copa Do Mundo 2026",
-    "preco": 514.17,
+    "titulo": "Kit Com 100 Envelopes Lacrados Para Colecionar Figurinhas da Copa Do Mundo FIFA 2026 Panini",
+    "preco": 498.51,
     "preco_original": 979.0,
-    "desconto_pct": 47.5,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636637-MLB110126862915_042026-AB.webp",
+    "desconto_pct": 49.1,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_739465-MLA112642089041_062026-AB.webp",
     "categoria": "brinquedos",
-    "score": 93,
-    "enviado_em": "2026-07-11T21:51:53.566960",
-    "link": "https://www.mercadolivre.com.br/kit-c-100-envelopes-3o-lote-700-cromos-copa-do-mundo-2026/up/MLBU3881305329?matt_tool=47114387&matt_source=bot_telegram",
+    "score": 94,
+    "enviado_em": "2026-07-12T19:48:03.625467",
+    "link": "https://www.mercadolivre.com.br/kit-com-100-envelopes-lacrados-para-colecionar-figurinhas-da-copa-do-mundo-fifa-2026-panini/p/MLB67922755?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 514.17,
+    "menor_preco_30d": 498.51,
     "menor_periodo": false,
     "verificada": true
   },
@@ -2119,6 +2179,12 @@
       "desconto_medio": 38,
       "maior_desconto": 57
     },
+    "brinquedos": {
+      "total": 8,
+      "score_medio": 85,
+      "desconto_medio": 50,
+      "maior_desconto": 65
+    },
     "automotivo": {
       "total": 8,
       "score_medio": 74,
@@ -2161,12 +2227,6 @@
       "desconto_medio": 30,
       "maior_desconto": 33
     },
-    "brinquedos": {
-      "total": 4,
-      "score_medio": 79,
-      "desconto_medio": 53,
-      "maior_desconto": 65
-    },
     "celulares": {
       "total": 3,
       "score_medio": 84,
@@ -2180,6 +2240,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-12T18:36:56.822535",
-  "total": 136
+  "updated_at": "2026-07-12T19:50:49.491915",
+  "total": 140
 }
