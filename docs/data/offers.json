@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Whey Protein Concentrado 1kg Dark Lab Sabor Baunilha",
+      "preco": 169.9,
+      "preco_original": 349.0,
+      "desconto_pct": 51.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_999968-MLA99990200369_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 77,
+      "enviado_em": "2026-07-12T12:10:24.656979",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-dark-lab-sabor-baunilha/p/MLB40367709?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 169.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Esmerilhadeira lixadeira angular 750w 4.1/2 pol 115mm 11000rpm com maleta e discos bta780d The Black Tools",
+      "preco": 149.9,
+      "preco_original": 261.0,
+      "desconto_pct": 42.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_667265-MLA99507126902_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 74,
+      "enviado_em": "2026-07-12T12:10:17.421012",
+      "link": "https://www.mercadolivre.com.br/esmerilhadeira-lixadeira-angular-750w-412-pol-115mm-11000rpm-com-maleta-e-discos-bta780d-the-black-tools/p/MLB45645912?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 149.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
+      "preco": 89.9,
+      "preco_original": 297.0,
+      "desconto_pct": 69.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_741399-MLB112035982759_052026-AB.webp",
+      "categoria": "armazenamento",
+      "score": 66,
+      "enviado_em": "2026-07-12T12:10:10.774461",
+      "link": "https://www.mercadolivre.com.br/mochila-dos-homens-com-faixa-impermeavel-para-expansao/up/MLBU3454994034?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Roçadeira Lateral A Gasolina 4 Em 1 52cc Capacidade de 1200ml 9500 Rpm Com Acessórios The Black Tools",
+      "preco": 597.91,
+      "preco_original": 1075.0,
+      "desconto_pct": 44.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_926335-MLA99491802638_112025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 89,
+      "enviado_em": "2026-07-12T12:10:04.157986",
+      "link": "https://www.mercadolivre.com.br/rocadeira-lateral-a-gasolina-4-em-1-52cc-capacidade-de-1200ml-9500-rpm-com-acessorios-the-black-tools/p/MLB32396130?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 597.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Controle Gamepad GameSir X5 Lite USB-C Android iPhone 15/16 Mobile Hall Effect Turbo Leve Preto",
       "preco": 169.0,
       "preco_original": 249.0,
@@ -1719,6 +1780,12 @@
       "desconto_medio": 38,
       "maior_desconto": 50
     },
+    "armazenamento": {
+      "total": 10,
+      "score_medio": 79,
+      "desconto_medio": 46,
+      "maior_desconto": 69
+    },
     "tvs": {
       "total": 8,
       "score_medio": 84,
@@ -1767,12 +1834,6 @@
       "desconto_medio": 48,
       "maior_desconto": 55
     },
-    "armazenamento": {
-      "total": 6,
-      "score_medio": 80,
-      "desconto_medio": 43,
-      "maior_desconto": 50
-    },
     "pet": {
       "total": 4,
       "score_medio": 88,
@@ -1810,6 +1871,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-12T11:15:24.630989",
-  "total": 112
+  "updated_at": "2026-07-12T12:13:17.858805",
+  "total": 116
 }
