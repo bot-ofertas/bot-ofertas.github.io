@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Samsung Led 65 Lh65befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
+      "preco": 3599.0,
+      "preco_original": 5999.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_712967-MLA96969981644_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-12T13:59:55.169889",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-led-65-lh65befh4ggxzd-led-crystal-processor-4k-uhd-tizen-110v220v/p/MLB58375066?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 50 P50vik 4k Uhd Led Roku Dolby Audio Wi-fi Hdr10 110/220v",
+      "preco": 2089.0,
+      "preco_original": 3499.0,
+      "desconto_pct": 40.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753324-MLA108743670040_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 90,
+      "enviado_em": "2026-07-12T13:59:48.501373",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-50-p50vik-4k-uhd-led-roku-dolby-audio-wi-fi-hdr10-110220v/p/MLB67267597?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2089.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
+      "preco": 869.13,
+      "preco_original": 1299.0,
+      "desconto_pct": 33.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 80,
+      "enviado_em": "2026-07-12T13:59:41.848266",
+      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 829.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1299.0,
+      "preco_original": 2099.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 88,
+      "enviado_em": "2026-07-12T13:59:35.172604",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB67270079?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1299.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Whey Protein Concentrado 1kg Dark Lab Sabor Baunilha",
       "preco": 169.9,
       "preco_original": 349.0,
@@ -705,7 +765,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-full-hd-roku-tv-hdr10-dolby-p43cra/p/MLB66418417?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1379.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -825,7 +885,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-lg-uhd-ai-ua75-65-polegadas-hdr10-pro-processador-7-ai-ger8-webos-25/p/MLB53610161?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 3249.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1610,8 +1670,8 @@
       "enviado_em": "2026-07-10T06:05:36.380687",
       "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-50-lg-uhd-50au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB61517857?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
-      "menor_preco_30d": 2099.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 2089.0,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1774,6 +1834,12 @@
       "desconto_medio": 47,
       "maior_desconto": 74
     },
+    "tvs": {
+      "total": 12,
+      "score_medio": 85,
+      "desconto_medio": 38,
+      "maior_desconto": 50
+    },
     "games": {
       "total": 12,
       "score_medio": 73,
@@ -1785,12 +1851,6 @@
       "score_medio": 79,
       "desconto_medio": 46,
       "maior_desconto": 69
-    },
-    "tvs": {
-      "total": 8,
-      "score_medio": 84,
-      "desconto_medio": 38,
-      "maior_desconto": 50
     },
     "livros": {
       "total": 8,
@@ -1871,6 +1931,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-12T12:13:17.858805",
-  "total": 116
+  "updated_at": "2026-07-12T14:01:47.490798",
+  "total": 120
 }
