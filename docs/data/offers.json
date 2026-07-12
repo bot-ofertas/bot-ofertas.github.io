@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Cadeira de escritório Diretor com Encosto de Cabeça Flink Healer",
+      "preco": 265.9,
+      "preco_original": 459.0,
+      "desconto_pct": 42.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_939618-MLA106586686863_022026-AB.webp",
+      "categoria": "moveis",
+      "score": 82,
+      "enviado_em": "2026-07-12T16:16:12.445016",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-diretor-com-encosto-de-cabeca-flink-healer/p/MLB36614854?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 265.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Escritório Ergonômica Giratória com Apoio Lombar da Python Fly",
+      "preco": 379.87,
+      "preco_original": 749.0,
+      "desconto_pct": 49.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767880-MLA99418713376_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 89,
+      "enviado_em": "2026-07-12T16:16:05.693752",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-giratoria-com-apoio-lombar-da-python-fly/p/MLB54575876?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 379.87,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Escritório Ergonômica Mônaco Bt07 Luvinco Malha Respirável Com Suporte Lombar Adaptável Apoio Para Pés Retrátil Encosto Ajustável Seis Posições Cor Preta Suporta 200kg",
+      "preco": 1099.0,
+      "preco_original": 1624.0,
+      "desconto_pct": 32.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_746934-MLA96570636272_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 87,
+      "enviado_em": "2026-07-12T16:15:59.055171",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-ergonmica-mnaco-bt07-luvinco-malha-respiravel-com-suporte-lombar-adaptavel-apoio-para-pes-retratil-encosto-ajustavel-seis-posicoes-cor-preta-suporta-200kg/p/MLB47163373?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1099.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Oxímetro LED G-TECH",
+      "preco": 59.9,
+      "preco_original": 99.0,
+      "desconto_pct": 39.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_750658-MLU69496467865_052023-AB.webp",
+      "categoria": "moveis",
+      "score": 65,
+      "enviado_em": "2026-07-12T16:15:52.399962",
+      "link": "https://www.mercadolivre.com.br/oximetro-led-g-tech/p/MLB18432178?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Rabane 1 Million Eau de Toilette 200 ml masculino",
       "preco": 560.0,
       "preco_original": 1028.0,
@@ -434,7 +495,7 @@
       "link": "https://www.mercadolivre.com.br/maquina-singer-facilita-pro-4423-zig-zag-23-pontos-decorativos-portatil/p/MLB16323394?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1329.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -449,7 +510,7 @@
       "link": "https://www.mercadolivre.com.br/balanca-digital-eletrnica-comercial-40kg-preciso-mercado-azul-hold-on/p/MLB58504778?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 183.23,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -464,7 +525,7 @@
       "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 497.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -479,7 +540,7 @@
       "link": "https://www.mercadolivre.com.br/cadeira-escritorio-presidente-ergonmica-nr17-marqs-home-arcanis-cinza-com-apoio-lombar-e-encosto-mesh-premium/p/MLB52893115?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 388.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1919,6 +1980,12 @@
       "desconto_medio": 46,
       "maior_desconto": 69
     },
+    "moveis": {
+      "total": 8,
+      "score_medio": 83,
+      "desconto_medio": 41,
+      "maior_desconto": 51
+    },
     "eletronicos": {
       "total": 8,
       "score_medio": 80,
@@ -1967,12 +2034,6 @@
       "desconto_medio": 36,
       "maior_desconto": 49
     },
-    "moveis": {
-      "total": 4,
-      "score_medio": 85,
-      "desconto_medio": 40,
-      "maior_desconto": 51
-    },
     "brinquedos": {
       "total": 4,
       "score_medio": 79,
@@ -1992,6 +2053,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-12T15:10:34.973835",
-  "total": 124
+  "updated_at": "2026-07-12T16:19:05.946027",
+  "total": 128
 }
