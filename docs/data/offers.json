@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Relógio Smartband Samsung Gal.fit 3 Sm-r390 Grafite Grafite Liso Grafit Cinza-escuro",
+      "preco": 222.0,
+      "preco_original": 365.0,
+      "desconto_pct": 39.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767723-MLB89453758235_082025-AB.webp",
+      "categoria": "celulares",
+      "score": 74,
+      "enviado_em": "2026-07-12T18:34:01.928282",
+      "link": "https://www.mercadolivre.com.br/relogio-smartband-samsung-galfit-3-smr390-grafite/up/MLBU2773881856?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 222.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A36 5g 256gb 8gb Ram Branco",
+      "preco": 1759.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 38.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697102-MLA99477666220_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 88,
+      "enviado_em": "2026-07-12T18:33:55.122174",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a36-5g-256gb-8gb-ram-branco/p/MLB47106610?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1758.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jaqueta Masculina Puffer Corta Vento Bobojaco Blusa De Frio Preto G",
+      "preco": 73.72,
+      "preco_original": 200.0,
+      "desconto_pct": 63.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641434-MLB110943962716_052026-AB.webp",
+      "categoria": "moda",
+      "score": 75,
+      "enviado_em": "2026-07-12T18:33:45.818895",
+      "link": "https://www.mercadolivre.com.br/jaqueta-masculina-puffer-corta-vento-bobojaco-blusa-de-frio/up/MLBU3949921795?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.72,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Olympikus Masculino Delta/122 Preto/vermelho Lisa 40 Br",
+      "preco": 125.39,
+      "preco_original": 229.0,
+      "desconto_pct": 45.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_694909-MLB111544465845_052026-AB.webp",
+      "categoria": "moda",
+      "score": 86,
+      "enviado_em": "2026-07-12T18:33:38.972143",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://www.mercadolivre.com.br/tenis-olympikus-masculino-delta122/up/MLBU3996945185?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 125.39,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Placa De Video MSI GeForce RTX 5060 Ti Ventus 2X OC Black Plus 16gb",
       "preco": 3999.0,
       "preco_original": 5999.0,
@@ -2046,6 +2107,12 @@
       "desconto_medio": 41,
       "maior_desconto": 51
     },
+    "moda": {
+      "total": 8,
+      "score_medio": 84,
+      "desconto_medio": 56,
+      "maior_desconto": 70
+    },
     "eletronicos": {
       "total": 8,
       "score_medio": 80,
@@ -2063,12 +2130,6 @@
       "score_medio": 74,
       "desconto_medio": 47,
       "maior_desconto": 61
-    },
-    "moda": {
-      "total": 6,
-      "score_medio": 85,
-      "desconto_medio": 57,
-      "maior_desconto": 70
     },
     "casa": {
       "total": 6,
@@ -2106,19 +2167,19 @@
       "desconto_medio": 53,
       "maior_desconto": 65
     },
+    "celulares": {
+      "total": 3,
+      "score_medio": 84,
+      "desconto_medio": 41,
+      "maior_desconto": 46
+    },
     "ferramentas": {
       "total": 2,
       "score_medio": 81,
       "desconto_medio": 51,
       "maior_desconto": 51
-    },
-    "celulares": {
-      "total": 1,
-      "score_medio": 90,
-      "desconto_medio": 47,
-      "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-12T17:32:33.239046",
-  "total": 132
+  "updated_at": "2026-07-12T18:36:56.822535",
+  "total": 136
 }
