@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 256gb, 8gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Cinza",
+      "preco": 1088.0,
+      "preco_original": 1597.0,
+      "desconto_pct": 31.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_617918-MLA96431049734_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 81,
+      "enviado_em": "2026-07-12T22:52:00.779662",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-256gb-8gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-cinza/p/MLB54984333?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1088.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G56 5g - 256gb 16gb (8gb Ram+8gb Ram Boost) Camera 50mp Sony Lytia 600 certificado de Ultrarresistencia Militar e Ip68 + Ip69 - Verde",
+      "preco": 1439.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 46.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_919734-MLA99464900322_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-12T22:51:54.146690",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-16gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-certificado-de-ultrarresistencia-militar-e-ip68-ip69-verde/p/MLB50302985?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1439.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone OPPO A6t 128gb, 12gb Ram (4gb + 8gb Virtual Ram), Bateria Gigante de 6500mAh, Processador Snapdragon, Tela 120Hz, AI Câmera, IP64 - Violeta",
+      "preco": 759.05,
+      "preco_original": 1299.0,
+      "desconto_pct": 41.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628260-MLA108253189104_032026-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-12T22:51:47.521573",
+      "link": "https://www.mercadolivre.com.br/smartphone-oppo-a6t-128gb-12gb-ram-4gb-8gb-virtual-ram-bateria-gigante-de-6500mah-processador-snapdragon-tela-120hz-ai-cmera-ip64-violeta/p/MLB66130734?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 759.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Violeta",
+      "preco": 1327.0,
+      "preco_original": 2538.0,
+      "desconto_pct": 47.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925275-MLA99995733515_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-12T22:51:40.770813",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-violeta/p/MLB47113437?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1327.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tablet Hancdon S12 Android 15 12GB RAM 512GB Memória 11,6\" Dual SIM Wi-Fi Kit Completo Com Teclado Mouse e Caneta Cor Cinza",
       "preco": 949.63,
       "preco_original": 1436.0,
@@ -1613,7 +1673,7 @@
       "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g06-128gb-12gb-4gb-ram-8gb-ram-boost-e-camera-50mp-com-ai-bateria-de-52-ah-tela-69/p/MLB61381499?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 664.05,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -2323,6 +2383,12 @@
       "desconto_medio": 47,
       "maior_desconto": 61
     },
+    "celulares": {
+      "total": 7,
+      "score_medio": 86,
+      "desconto_medio": 42,
+      "maior_desconto": 47
+    },
     "casa": {
       "total": 6,
       "score_medio": 77,
@@ -2353,12 +2419,6 @@
       "desconto_medio": 45,
       "maior_desconto": 58
     },
-    "celulares": {
-      "total": 3,
-      "score_medio": 84,
-      "desconto_medio": 41,
-      "maior_desconto": 46
-    },
     "ferramentas": {
       "total": 2,
       "score_medio": 81,
@@ -2366,6 +2426,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-12T21:56:17.142483",
-  "total": 148
+  "updated_at": "2026-07-12T22:54:54.246628",
+  "total": 152
 }
