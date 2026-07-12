@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Placa De Video MSI GeForce RTX 5060 Ti Ventus 2X OC Black Plus 16gb",
+      "preco": 3999.0,
+      "preco_original": 5999.0,
+      "desconto_pct": 33.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_689278-MLA99780392414_122025-AB.webp",
+      "categoria": "informatica",
+      "score": 83,
+      "enviado_em": "2026-07-12T17:30:05.580613",
+      "link": "https://www.mercadolivre.com.br/placa-de-video-msi-geforce-rtx-5060-ti-ventus-2x-oc-black-plus-16gb/p/MLB62806338?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Processador AMD Ryzen 7 5700X 100-100000926WOF de 8 núcleos e 4.6GHz",
+      "preco": 1253.0,
+      "preco_original": 1799.0,
+      "desconto_pct": 30.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925077-MLA100026670783_122025-AB.webp",
+      "categoria": "informatica",
+      "score": 80,
+      "enviado_em": "2026-07-12T17:29:58.746378",
+      "link": "https://www.mercadolivre.com.br/processador-amd-ryzen-7-5700x-100-100000926wof-de-8-nucleos-e-46ghz/p/MLB19159879?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1253.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook VAIO FE16 AMD Ryzen 5-5625U Windows 11 Home 12GB RAM 512GB SSD Tela 16\" IPS WUXGA Antirreflexo - VJFE69F11X-B1221H - Cinza Grafite",
+      "preco": 3548.0,
+      "preco_original": 4718.0,
+      "desconto_pct": 24.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_823272-MLA99554371418_122025-AB.webp",
+      "categoria": "informatica",
+      "score": 74,
+      "enviado_em": "2026-07-12T17:29:51.965502",
+      "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-5-5625u-windows-11-home-12gb-ram-512gb-ssd-tela-16-ips-wuxga-antirreflexo-vjfe69f11x-b1221h-cinza-grafite/p/MLB48919057?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3548.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Placa de Vídeo MSI GeForce RTX 5060 Shadow 2X OC 8GB GDDR7 128-bit",
+      "preco": 2279.0,
+      "preco_original": 3399.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_901198-MLA99972929477_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-07-12T17:29:45.165534",
+      "link": "https://www.mercadolivre.com.br/placa-de-video-msi-geforce-rtx-5060-shadow-2x-oc-8gb-gddr7-128-bit/p/MLB51032833?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2279.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira de escritório Diretor com Encosto de Cabeça Flink Healer",
       "preco": 265.9,
       "preco_original": 459.0,
@@ -480,7 +540,7 @@
       "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 6304.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2034,6 +2094,12 @@
       "desconto_medio": 36,
       "maior_desconto": 49
     },
+    "informatica": {
+      "total": 4,
+      "score_medio": 80,
+      "desconto_medio": 30,
+      "maior_desconto": 33
+    },
     "brinquedos": {
       "total": 4,
       "score_medio": 79,
@@ -2053,6 +2119,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-12T16:19:05.946027",
-  "total": 128
+  "updated_at": "2026-07-12T17:32:33.239046",
+  "total": 132
 }
