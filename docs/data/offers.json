@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Multi Ultra Celeron N4020c 4gb 128gb W11 14'' Cinza",
+      "preco": 1579.0,
+      "preco_original": 2064.0,
+      "desconto_pct": 23.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_898360-MLA99980257507_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 72,
+      "enviado_em": "2026-07-11T23:57:13.697500",
+      "link": "https://www.mercadolivre.com.br/notebook-multi-ultra-celeron-n4020c-4gb-128gb-w11-14-cinza/p/MLB32101651?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1579.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision C15M para Produtividade com Intel Celeron, 8GB RAM e SSD de 128GB",
+      "preco": 2059.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 27.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_969413-MLA99631778927_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 77,
+      "enviado_em": "2026-07-11T23:57:07.070092",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-c15m-para-produtividade-com-intel-celeron-8gb-ram-e-ssd-de-128gb/p/MLB54096680?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2059.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Aspire 5 A515-45-R2A3 AMD Ryzen 5 Windows 11 Home 8GB 512GB SSD 15,6' Full HD",
+      "preco": 3305.0,
+      "preco_original": 5609.0,
+      "desconto_pct": 41.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759351-MLU77118311686_062024-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-11T23:57:00.441654",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3305.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Gamer Nitro V15 Ryzen 7 7735hs 16gb Rtx4050 1tb Ssd Linux Tela 165hz Full Hd 15.6 Anv15-41-r8zp",
+      "preco": 6304.0,
+      "preco_original": 12499.0,
+      "desconto_pct": 49.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826075-MLA109766539988_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-11T23:56:53.765440",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 6304.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Máquina Singer Facilita Pro 4423 Zig Zag 23 Pontos Decorativos Portatil",
       "preco": 1329.0,
       "preco_original": 1799.0,
@@ -2023,6 +2083,12 @@
       "desconto_medio": 51,
       "maior_desconto": 58
     },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 82,
+      "desconto_medio": 36,
+      "maior_desconto": 49
+    },
     "moveis": {
       "total": 4,
       "score_medio": 85,
@@ -2060,6 +2126,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-11T22:53:58.521053",
-  "total": 128
+  "updated_at": "2026-07-12T00:00:07.414319",
+  "total": 132
 }
