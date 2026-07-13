@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Fogão 5 Bocas Dako Magister Style Com Frente Espelhada Mesa de Vidro e Tripla Chama Bivolt",
+      "preco": 1620.0,
+      "preco_original": 2979.0,
+      "desconto_pct": 45.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_972752-MLA92393532348_092025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 90,
+      "enviado_em": "2026-07-13T05:28:18.929127",
+      "link": "https://www.mercadolivre.com.br/fogo-5-bocas-dako-magister-style-com-frente-espelhada-mesa-de-vidro-e-tripla-chama-bivolt/p/MLB18636583?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1620.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop de Indução 4 Bocas Dako Supreme Preto com Trava de Segurança 220V",
+      "preco": 1075.0,
+      "preco_original": 1540.0,
+      "desconto_pct": 30.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_652323-MLU77315319959_062024-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 78,
+      "enviado_em": "2026-07-13T05:28:12.318789",
+      "link": "https://www.mercadolivre.com.br/cooktop-de-induco-4-bocas-dako-supreme-preto-com-trava-de-seguranca-220v/p/MLB19481428?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1075.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas 25l Philco Função Tira Odor 1100w Pm27",
+      "preco": 459.12,
+      "preco_original": 631.0,
+      "desconto_pct": 27.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_852329-MLA99938052657_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 63,
+      "enviado_em": "2026-07-13T05:28:05.687372",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-25l-philco-funco-tira-odor-1100w-pm27/p/MLB44897595?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 459.12,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux de bancada Branco com Função Tira Odor e Manter Aquecido 34L MEO44",
+      "preco": 598.5,
+      "preco_original": 799.0,
+      "desconto_pct": 25.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889684-MLA99475706302_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 63,
+      "enviado_em": "2026-07-13T05:27:59.069814",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-de-bancada-branco-com-funco-tira-odor-e-manter-aquecido-34l-meo44/p/MLB8742310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 598.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart TV 43\" Full HD F6000F 2025 Samsung Bivolt",
       "preco": 1529.0,
       "preco_original": 2499.0,
@@ -1883,6 +1943,12 @@
       "desconto_medio": 36,
       "maior_desconto": 49
     },
+    "eletrodomesticos": {
+      "total": 4,
+      "score_medio": 74,
+      "desconto_medio": 32,
+      "maior_desconto": 45
+    },
     "beleza": {
       "total": 4,
       "score_medio": 86,
@@ -1908,6 +1974,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-13T01:55:12.244783",
-  "total": 118
+  "updated_at": "2026-07-13T05:30:44.731437",
+  "total": 122
 }
