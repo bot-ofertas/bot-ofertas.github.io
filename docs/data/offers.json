@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Samsung Led 50 Lh50befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
+      "preco": 2212.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798903-MLA95579597211_102025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-13T23:33:00.290512",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-led-50-lh50befh4ggxzd-led-crystal-processor-4k-uhd-tizen-110v220v/p/MLB58372375?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2212.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
+      "preco": 187.12,
+      "preco_original": 279.0,
+      "desconto_pct": 32.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 65,
+      "enviado_em": "2026-07-13T23:32:53.638437",
+      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 187.12,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Stick V10 4k Android 10 Wifi 5g 3 Geração Copa 2026 Preto",
+      "preco": 359.9,
+      "preco_original": 789.0,
+      "desconto_pct": 54.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_792163-MLB114419881577_072026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 87,
+      "enviado_em": "2026-07-13T23:32:46.973310",
+      "link": "https://www.mercadolivre.com.br/smart-tv-stick-v10-4k-android-10-wifi-5g-3-geracao-copa-2026/up/MLBU4295469286?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 359.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV 4K 86\" LG QNED73 Portal de Games Processador AI α7 Ger8 4K Super Upscaling Google Cast Integrado Controle AI Magic WebOS 25 Modo Esportes Alerta de Esportes",
+      "preco": 6721.0,
+      "preco_original": 9449.0,
+      "desconto_pct": 28.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_608335-MLA107763044190_032026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 78,
+      "enviado_em": "2026-07-13T23:32:40.296968",
+      "link": "https://www.mercadolivre.com.br/smart-tv-4k-86-lg-qned73-portal-de-games-processador-ai-7-ger8-4k-super-upscaling-google-cast-integrado-controle-ai-magic-webos-25-modo-esportes-alerta-de-esportes/p/MLB65918252?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 6721.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
       "preco": 823.0,
       "preco_original": 1399.0,
@@ -2226,6 +2286,12 @@
       "desconto_medio": 37,
       "maior_desconto": 50
     },
+    "eletronicos": {
+      "total": 12,
+      "score_medio": 80,
+      "desconto_medio": 39,
+      "maior_desconto": 57
+    },
     "celulares": {
       "total": 11,
       "score_medio": 85,
@@ -2261,12 +2327,6 @@
       "score_medio": 81,
       "desconto_medio": 35,
       "maior_desconto": 52
-    },
-    "eletronicos": {
-      "total": 8,
-      "score_medio": 80,
-      "desconto_medio": 38,
-      "maior_desconto": 57
     },
     "eletrodomesticos": {
       "total": 8,
@@ -2341,6 +2401,6 @@
       "maior_desconto": 48
     }
   },
-  "updated_at": "2026-07-13T22:36:03.720306",
-  "total": 146
+  "updated_at": "2026-07-13T23:34:23.926907",
+  "total": 150
 }
