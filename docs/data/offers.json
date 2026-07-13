@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cooktop Itatiaia Essencial 5 Bocas Preto",
+      "preco": 389.0,
+      "preco_original": 645.0,
+      "desconto_pct": 39.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_832398-MLU77315369389_062024-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 74,
+      "enviado_em": "2026-07-13T21:34:05.819560",
+      "link": "https://www.mercadolivre.com.br/cooktop-itatiaia-essencial-5-bocas-preto/p/MLB23997577?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 389.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop Itatiaia Essencial 4 Bocas cor Preto",
+      "preco": 347.91,
+      "preco_original": 629.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_744038-MLA112582906036_062026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 76,
+      "enviado_em": "2026-07-13T21:33:58.998152",
+      "link": "https://www.mercadolivre.com.br/cooktop-itatiaia-essencial-4-bocas-cor-preto/p/MLB11998125?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 347.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas Atlas Agile Up Mesa Vidro Mega Chama Bivolt",
+      "preco": 324.42,
+      "preco_original": 483.0,
+      "desconto_pct": 32.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662369-MLA99422748970_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 68,
+      "enviado_em": "2026-07-13T21:33:52.169032",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-atlas-agile-up-mesa-vidro-mega-chama-bivolt/p/MLB46671029?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 324.42,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 5 Bocas A Gás Atlas Agile Up Mega Chama Preto",
+      "preco": 386.91,
+      "preco_original": 602.0,
+      "desconto_pct": 35.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861641-MLA100053796807_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 73,
+      "enviado_em": "2026-07-13T21:33:45.357174",
+      "link": "https://www.mercadolivre.com.br/cooktop-5-bocas-a-gas-atlas-agile-up-mega-chama-preto/p/MLB50829128?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 386.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Monitor LG UltraGear 27G411A-B 27\",FHD, 144Hz, 1ms (MBR), NVIDIA G-SYNC, AMD FreeSync, HDR10",
       "preco": 719.1,
       "preco_original": 1098.0,
@@ -2085,17 +2145,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Kit Kemei Máquina de Corte KM-2299 e Acabamento KM-1102 Bivolt",
-    "preco": 123.99,
-    "preco_original": 299.0,
-    "desconto_pct": 58.5,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_654722-MLA100162412939_122025-AB.webp",
-    "categoria": "beleza",
-    "score": 92,
-    "enviado_em": "2026-07-12T20:52:14.514045",
-    "link": "https://www.mercadolivre.com.br/kit-kemei-maquina-de-corte-km-2299-e-acabamento-km-1102-bivolt/p/MLB54245381?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Violeta",
+    "preco": 1327.0,
+    "preco_original": 2538.0,
+    "desconto_pct": 47.7,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925275-MLA99995733515_112025-AB.webp",
+    "categoria": "celulares",
+    "score": 90,
+    "enviado_em": "2026-07-12T22:51:40.770813",
+    "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-violeta/p/MLB47113437?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 123.99,
+    "menor_preco_30d": 1327.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -2141,6 +2201,12 @@
       "score_medio": 80,
       "desconto_medio": 38,
       "maior_desconto": 57
+    },
+    "eletrodomesticos": {
+      "total": 8,
+      "score_medio": 73,
+      "desconto_medio": 35,
+      "maior_desconto": 45
     },
     "brinquedos": {
       "total": 8,
@@ -2202,12 +2268,6 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
-    "eletrodomesticos": {
-      "total": 4,
-      "score_medio": 74,
-      "desconto_medio": 32,
-      "maior_desconto": 45
-    },
     "beleza": {
       "total": 4,
       "score_medio": 86,
@@ -2221,6 +2281,6 @@
       "maior_desconto": 48
     }
   },
-  "updated_at": "2026-07-13T20:39:51.124675",
-  "total": 138
+  "updated_at": "2026-07-13T21:37:00.966949",
+  "total": 142
 }
