@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 823.0,
+      "preco_original": 1399.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-13T22:34:37.371012",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cm-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 798.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto g35 5G - 256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI NFC Tela 6.7\" com Superbrilho - Cinza",
+      "preco": 899.1,
+      "preco_original": 1899.0,
+      "desconto_pct": 52.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743327-MLA99452274448_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-13T22:34:30.545479",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g35-5g-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-nfc-tela-67-com-superbrilho-cinza/p/MLB41998152?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 899.1,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Carregador Fonte iPhone Original 20w Apple Tipo C Turbo Branco",
+      "preco": 86.96,
+      "preco_original": 248.0,
+      "desconto_pct": 64.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_957192-MLB95132377251_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 64,
+      "enviado_em": "2026-07-13T22:34:23.714650",
+      "link": "https://www.mercadolivre.com.br/carregador-fonte-iphone-original-20w-apple-tipo-c-turbo/up/MLBU3487989699?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 86.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
+      "preco": 1292.0,
+      "preco_original": 2212.0,
+      "desconto_pct": 41.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705075-MLA99943632917_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 90,
+      "enviado_em": "2026-07-13T22:34:16.522830",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1292.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cooktop Itatiaia Essencial 5 Bocas Preto",
       "preco": 389.0,
       "preco_original": 645.0,
@@ -2145,18 +2205,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Violeta",
-    "preco": 1327.0,
-    "preco_original": 2538.0,
-    "desconto_pct": 47.7,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925275-MLA99995733515_112025-AB.webp",
+    "titulo": "Smartphone Motorola Moto g35 5G - 256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI NFC Tela 6.7\" com Superbrilho - Cinza",
+    "preco": 899.1,
+    "preco_original": 1899.0,
+    "desconto_pct": 52.7,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743327-MLA99452274448_112025-AB.webp",
     "categoria": "celulares",
     "score": 90,
-    "enviado_em": "2026-07-12T22:51:40.770813",
-    "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-violeta/p/MLB47113437?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-13T22:34:30.545479",
+    "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g35-5g-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-nfc-tela-67-com-superbrilho-cinza/p/MLB41998152?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1327.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 899.1,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -2165,6 +2225,12 @@
       "score_medio": 84,
       "desconto_medio": 37,
       "maior_desconto": 50
+    },
+    "celulares": {
+      "total": 11,
+      "score_medio": 85,
+      "desconto_medio": 45,
+      "maior_desconto": 64
     },
     "games": {
       "total": 10,
@@ -2226,12 +2292,6 @@
       "desconto_medio": 43,
       "maior_desconto": 69
     },
-    "celulares": {
-      "total": 7,
-      "score_medio": 86,
-      "desconto_medio": 42,
-      "maior_desconto": 47
-    },
     "pet": {
       "total": 6,
       "score_medio": 80,
@@ -2281,6 +2341,6 @@
       "maior_desconto": 48
     }
   },
-  "updated_at": "2026-07-13T21:37:00.966949",
-  "total": 142
+  "updated_at": "2026-07-13T22:36:03.720306",
+  "total": 146
 }
