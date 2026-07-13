@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Creatina Monohidratada Creatine Vitafor 300g Sem Sabor",
+      "preco": 59.5,
+      "preco_original": 109.0,
+      "desconto_pct": 45.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_973855-MLA112156964231_052026-AB.webp",
+      "categoria": "impressoras",
+      "score": 71,
+      "enviado_em": "2026-07-13T12:33:32.907614",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-creatine-vitafor-300g-sem-sabor/p/MLB19548531?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Colchão Emma Original Casal - Tecnologia Alemã Cor Branco/Cinza",
+      "preco": 2049.0,
+      "preco_original": 5369.0,
+      "desconto_pct": 61.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_622005-MLA107431320527_022026-AB.webp",
+      "categoria": "impressoras",
+      "score": 78,
+      "enviado_em": "2026-07-13T12:33:26.287283",
+      "link": "https://www.mercadolivre.com.br/colcho-emma-original-casal-tecnologia-alem-cor-brancocinza/p/MLB18724648?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2049.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tapete Higiênico para Cachorro 50 Unidades 60x55cm com Gel Absorvente Fralda Manta Pet Cão",
+      "preco": 48.0,
+      "preco_original": 69.0,
+      "desconto_pct": 30.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675085-MLA110471471788_052026-AB.webp",
+      "categoria": "impressoras",
+      "score": 60,
+      "enviado_em": "2026-07-13T12:33:19.537271",
+      "link": "https://www.mercadolivre.com.br/tapete-higinico-para-cachorro-50-unidades-60x55cm-com-gel-absorvente-fralda-manta-pet-co/p/MLB28131416?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 48.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
+      "preco": 34.9,
+      "preco_original": 64.0,
+      "desconto_pct": 45.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 71,
+      "enviado_em": "2026-07-13T12:33:12.829819",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 34.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Fogão 5 Bocas Dako Magister Style Com Frente Espelhada Mesa de Vidro e Tripla Chama Bivolt",
       "preco": 1620.0,
       "preco_original": 2979.0,
@@ -207,8 +267,8 @@
       "enviado_em": "2026-07-12T22:51:54.146690",
       "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-16gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-certificado-de-ultrarresistencia-militar-e-ip68-ip69-verde/p/MLB50302985?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 1439.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 1438.0,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1943,6 +2003,12 @@
       "desconto_medio": 36,
       "maior_desconto": 49
     },
+    "impressoras": {
+      "total": 4,
+      "score_medio": 70,
+      "desconto_medio": 46,
+      "maior_desconto": 61
+    },
     "eletrodomesticos": {
       "total": 4,
       "score_medio": 74,
@@ -1974,6 +2040,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-13T05:30:44.731437",
-  "total": 122
+  "updated_at": "2026-07-13T12:35:58.778822",
+  "total": 126
 }
