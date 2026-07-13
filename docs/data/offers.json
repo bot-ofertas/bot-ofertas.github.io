@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Tripé Universal Profissional 1,2m Amarelo The Black Tools Amarelo E Preto",
+      "preco": 56.9,
+      "preco_original": 107.0,
+      "desconto_pct": 46.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_765852-MLA96869420928_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 72,
+      "enviado_em": "2026-07-13T15:33:50.191597",
+      "link": "https://www.mercadolivre.com.br/tripe-universal-profissional-12m-amarelo-the-black-tools-amarelo-e-preto/p/MLB61701497?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 56.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bastão Led Rgb Colorido Profissional Recarregável Portatil + Tripe De 2.10 Metros Completo Ring Light Iluminação Maquiagem Gravações Vídeo Foto Luxside P400",
+      "preco": 97.0,
+      "preco_original": 149.0,
+      "desconto_pct": 34.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_820182-MLA97580719877_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 66,
+      "enviado_em": "2026-07-13T15:33:43.528443",
+      "link": "https://www.mercadolivre.com.br/basto-led-rgb-colorido-profissional-recarregavel-portatil-tripe-de-210-metros-completo-ring-light-iluminaco-maquiagem-gravacoes-video-foto-luxside-p400/p/MLB61855102?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 97.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Basike Tripé Magnético Portátil 1.8m, tripé Celular profissional Rotação 360° + Inclinação de 270° com Controle Remoto Bluetooth Recarregável,suporte de selfie Para Celular GoPro Câmera e iphone",
+      "preco": 174.58,
+      "preco_original": 290.0,
+      "desconto_pct": 39.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_792576-MLA109084595885_032026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 73,
+      "enviado_em": "2026-07-13T15:33:36.663217",
+      "link": "https://www.mercadolivre.com.br/basike-tripe-magnetico-portatil-18m-tripe-celular-profissional-rotaco-360-inclinaco-de-270-com-controle-remoto-bluetooth-recarregavelsuporte-de-selfie-para-celular-gopro-cmera-e-iphone/p/MLB66843697?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 174.58,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark A1 Mini Usb-c Preto",
+      "preco": 337.08,
+      "preco_original": 589.0,
+      "desconto_pct": 42.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_836376-MLA99418800236_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 75,
+      "enviado_em": "2026-07-13T15:33:29.797375",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-mini-usb-c-preto/p/MLB51857731?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 337.08,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina Monohidratada Creatine Vitafor 300g Sem Sabor",
       "preco": 59.5,
       "preco_original": 109.0,
@@ -1293,7 +1353,7 @@
       "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-duo-combo-duplo-para-2-pessoas-usb-c-lightning-preto/p/MLB64851983?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 400.2,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1985,6 +2045,12 @@
       "desconto_medio": 55,
       "maior_desconto": 70
     },
+    "ferramentas": {
+      "total": 6,
+      "score_medio": 75,
+      "desconto_medio": 44,
+      "maior_desconto": 51
+    },
     "cameras": {
       "total": 6,
       "score_medio": 74,
@@ -2032,14 +2098,8 @@
       "score_medio": 78,
       "desconto_medio": 42,
       "maior_desconto": 48
-    },
-    "ferramentas": {
-      "total": 2,
-      "score_medio": 81,
-      "desconto_medio": 51,
-      "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-13T12:35:58.778822",
-  "total": 126
+  "updated_at": "2026-07-13T15:34:43.345961",
+  "total": 130
 }
