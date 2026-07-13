@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Sony PlayStation DualSense CFI-ZCT1W Controle Sem Fio Sterling Silver Cor Cinza",
+      "preco": 400.0,
+      "preco_original": 699.0,
+      "desconto_pct": 42.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_715920-MLA96137773555_102025-AB.webp",
+      "categoria": "games",
+      "score": 81,
+      "enviado_em": "2026-07-13T19:03:24.114209",
+      "link": "https://www.mercadolivre.com.br/sony-playstation-dualsense-cfi-zct1w-controle-sem-fio-sterling-silver-cor-cinza/p/MLB31472572?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 400.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Joystick Sem Fio Sony PlayStation 5 DualSense Midnight Black",
+      "preco": 364.53,
+      "preco_original": 499.0,
+      "desconto_pct": 26.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_886577-MLA84549540358_052025-AB.webp",
+      "categoria": "games",
+      "score": 61,
+      "enviado_em": "2026-07-13T19:03:16.910407",
+      "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-5-dualsense-midnight-black/p/MLB18010993?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 364.53,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira De Mudas Manual Inox Sistema Abertura Tripartido",
+      "preco": 331.36,
+      "preco_original": 499.0,
+      "desconto_pct": 33.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_834008-MLB81797571493_012025-AB.webp",
+      "categoria": "pet",
+      "score": 69,
+      "enviado_em": "2026-07-13T19:03:06.293169",
+      "link": "https://www.mercadolivre.com.br/plantadeira-de-mudas-manual-inox-sistema-abertura-tripartido/up/MLBU2927440917?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 331.36,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira Adubadeira Manual Empurrar 14 Bicos Diversas Sementes Epam14 Evald",
+      "preco": 749.0,
+      "preco_original": 968.0,
+      "desconto_pct": 22.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_943923-MLA99336290916_112025-AB.webp",
+      "categoria": "pet",
+      "score": 60,
+      "enviado_em": "2026-07-13T19:02:58.496288",
+      "link": "https://www.mercadolivre.com.br/plantadeira-adubadeira-manual-empurrar-14-bicos-diversas-sementes-epam14-evald/p/MLB61258757?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 749.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tripé Universal Profissional 1,2m Amarelo The Black Tools Amarelo E Preto",
       "preco": 56.9,
       "preco_original": 107.0,
@@ -932,7 +992,7 @@
       "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-dualsense-branco/p/MLB33997846?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 364.53,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1985,6 +2045,12 @@
       "desconto_medio": 37,
       "maior_desconto": 50
     },
+    "games": {
+      "total": 10,
+      "score_medio": 71,
+      "desconto_medio": 34,
+      "maior_desconto": 48
+    },
     "esportes": {
       "total": 10,
       "score_medio": 73,
@@ -2008,12 +2074,6 @@
       "score_medio": 81,
       "desconto_medio": 35,
       "maior_desconto": 52
-    },
-    "games": {
-      "total": 8,
-      "score_medio": 71,
-      "desconto_medio": 34,
-      "maior_desconto": 48
     },
     "eletronicos": {
       "total": 8,
@@ -2039,6 +2099,12 @@
       "desconto_medio": 42,
       "maior_desconto": 47
     },
+    "pet": {
+      "total": 6,
+      "score_medio": 80,
+      "desconto_medio": 43,
+      "maior_desconto": 58
+    },
     "moda": {
       "total": 6,
       "score_medio": 80,
@@ -2056,12 +2122,6 @@
       "score_medio": 74,
       "desconto_medio": 48,
       "maior_desconto": 55
-    },
-    "pet": {
-      "total": 4,
-      "score_medio": 88,
-      "desconto_medio": 51,
-      "maior_desconto": 58
     },
     "notebooks": {
       "total": 4,
@@ -2100,6 +2160,6 @@
       "maior_desconto": 48
     }
   },
-  "updated_at": "2026-07-13T15:34:43.345961",
-  "total": 130
+  "updated_at": "2026-07-13T19:06:18.370014",
+  "total": 134
 }
