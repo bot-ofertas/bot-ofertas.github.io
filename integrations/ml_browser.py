@@ -149,7 +149,7 @@ def _normalizar_dom(raw: list) -> list[dict]:
     """Normaliza resultado bruto do script DOM para formato padrão de produto."""
     produtos = []
     for item in raw or []:
-        titulo = item.get("titulo", "").strip()
+        titulo = item.get("titulo", "").replace("�", "").strip()
         link = item.get("link", "").strip()
         if not titulo or not link or "mercadolivre.com.br/ofertas" in link:
             continue
@@ -275,6 +275,7 @@ def _extrair_produtos_json(html: str) -> list[dict]:
                                             return r
                         return ""
                     titulo = _buscar_titulo(obj)
+                titulo = (titulo or "").replace("�", "").strip()
 
                 foto = None
                 pics = obj.get("pictures") or obj.get("picture") or {}

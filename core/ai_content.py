@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 from typing import Optional
 
 from dotenv import load_dotenv
@@ -24,9 +25,11 @@ log = logging.getLogger(__name__)
 _MODELO = "claude-sonnet-4-6"
 _MAX_TOKENS = 600
 _TIMEOUT = 8.0
+_COOLDOWN_S = 1800  # 30 min — evita martelar a API quando sem crédito/billing
 
 _cache: dict[str, dict] = {}
 _client = None
+_bloqueado_ate = 0.0
 
 
 def _get_client():
@@ -63,11 +66,15 @@ def gerar_conteudo(produto: dict) -> dict:
           "ia_usada": bool
         }
     """
+    global _bloqueado_ate
     chave = _chave_cache(produto)
     if chave and chave in _cache:
         return _cache[chave]
 
     resultado = _fallback(produto)
+
+    if time.time() < _bloqueado_ate:
+        return resultado
 
     client = _get_client()
     if client is None:
@@ -157,7 +164,15 @@ Regras:
             log.info("IA gerou conteúdo para: %s", titulo[:50])
 
     except Exception as e:
-        log.warning("IA falhou para '%s': %s", titulo[:40], e)
+        msg = str(e)
+        if "credit balance" in msg.lower() or "insufficient_quota" in msg.lower():
+            _bloqueado_ate = time.time() + _COOLDOWN_S
+            log.warning(
+                "IA sem crédito — pausando chamadas por %d min (fallback ativo): %s",
+                _COOLDOWN_S // 60, msg[:150],
+            )
+        else:
+            log.warning("IA falhou para '%s': %s", titulo[:40], e)
 
     return resultado
 

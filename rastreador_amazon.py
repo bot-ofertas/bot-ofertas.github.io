@@ -13,7 +13,8 @@ Como usar:
     python rastreador_amazon.py --loop 120 → a cada 2 horas
 """
 import sys
-sys.stdout.reconfigure(encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import argparse
 import asyncio
@@ -81,9 +82,15 @@ async def rodar_uma_vez() -> None:
     log("\n" + "=" * 55)
     log("Rastreador Amazon Cupons iniciado")
 
-    produtos = await buscar_cupons_amazon_async(
-        desconto_min=DESCONTO_MIN, limite=20
-    )
+    try:
+        produtos = await buscar_cupons_amazon_async(
+            desconto_min=DESCONTO_MIN, limite=20
+        )
+    except Exception as e:
+        from core.error_logger import log_erro  # noqa: PLC0415
+        log_erro("amazon.busca_falhou", e, {})
+        log(f"  ⚠️  Busca Amazon falhou nesta rodada: {e}")
+        produtos = []
     log(f"  {len(produtos)} produto(s) encontrado(s) na Amazon Brasil")
 
     com_cupom = sum(1 for p in produtos if p.get("cupom"))
@@ -151,9 +158,14 @@ async def rodar_uma_vez() -> None:
                 # WhatsApp simultâneo
                 if wa_ativo():
                     try:
-                        wa_ok = await enviar_para_grupo(item, mensagem_override=conteudo_ia.get("mensagem_whatsapp"))
+                        wa_ok = await asyncio.wait_for(
+                            enviar_para_grupo(item, mensagem_override=conteudo_ia.get("mensagem_whatsapp")),
+                            timeout=90.0,
+                        )
                         log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
                     except Exception as _e_wa:
+                        from core.error_logger import log_erro  # noqa: PLC0415
+                        log_erro("amazon.wa.envio_falha", _e_wa, {"produto_id": produto_id})
                         log(f"     ⚠️  WhatsApp: {_e_wa}")
 
                 try:

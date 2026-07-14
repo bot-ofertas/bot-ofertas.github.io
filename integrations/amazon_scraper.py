@@ -14,8 +14,11 @@ Integração com rastreador_amazon.py:
 """
 from __future__ import annotations
 
+import logging
 import os
 import re
+
+log = logging.getLogger("amazon_scraper")
 
 try:
     from dotenv import load_dotenv
@@ -145,7 +148,7 @@ def _normalizar(raw: list, categoria: str) -> list[dict]:
     produtos: list[dict] = []
 
     for item in raw or []:
-        titulo = item.get("titulo", "").strip()
+        titulo = item.get("titulo", "").replace("�", "").strip()
         link = item.get("link", "").strip()
         if not titulo or not link:
             continue
@@ -246,8 +249,12 @@ async def buscar_cupons_amazon_async(
                                 or p.get("cupom")]  # cupom sempre passa
 
                 todos.extend(produtos)
-            except Exception:
-                pass
+            except Exception as e:
+                try:
+                    from core.error_logger import log_erro  # noqa: PLC0415
+                    log_erro("amazon_scraper.categoria", e, {"categoria": categoria, "url": url})
+                except Exception:
+                    log.warning("amazon scraper falhou em %s (%s): %s", categoria, url, e)
             finally:
                 await page.close()
 

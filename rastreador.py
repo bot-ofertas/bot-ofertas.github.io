@@ -13,7 +13,8 @@ Como usar:
     python rastreador.py --loop 60   → roda a cada 60 minutos continuamente
 """
 import sys
-sys.stdout.reconfigure(encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import argparse
 import asyncio

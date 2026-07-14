@@ -54,6 +54,28 @@ services:
     ports:
       - "8724:8724"  # healthcheck para n8n
 
+  rastreador_amazon:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: bot_rastreador_amazon
+    restart: always
+    command: ["python", "-u", "rastreador_amazon.py", "--random", "--loop-min", "45", "--loop-max", "75"]
+    depends_on:
+      evolution:
+        condition: service_healthy
+    environment:
+      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
+      CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
+      AMAZON_AFFILIATE_TAG: ${AMAZON_AFFILIATE_TAG:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      WHATSAPP_WEBHOOK_URL: http://evolution:8080
+      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
+      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
+      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
+    volumes:
+      - rastreador_data:/app/data
+
 volumes:
   evolution_data:
   evolution_store:
