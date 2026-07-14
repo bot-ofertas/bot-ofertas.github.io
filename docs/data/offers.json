@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Impressora Multifuncional HP Smart Tank 584 - Preta",
+      "preco": 731.0,
+      "preco_original": 1250.0,
+      "desconto_pct": 41.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_847584-MLA113137412934_072026-AB.webp",
+      "categoria": "cameras",
+      "score": 90,
+      "enviado_em": "2026-07-14T16:17:25.318102",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-smart-tank-584-preta/p/MLB34801962?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 731.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Growth Supplements - Milkshake de Chocolate",
+      "preco": 179.9,
+      "preco_original": 279.0,
+      "desconto_pct": 35.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_803453-MLA98778415369_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 68,
+      "enviado_em": "2026-07-14T16:17:18.390041",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-growth-supplements-milkshake-de-chocolate/p/MLB19049048?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Purificador de Água Gelada Fria e Natural Eletrônico Placa Compacto Electrolux PE12G com Filtro Carvão 6 meses ou 3000L Painel Touch Cinza",
+      "preco": 599.0,
+      "preco_original": 1150.0,
+      "desconto_pct": 47.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619844-MLA99938311049_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 90,
+      "enviado_em": "2026-07-14T16:17:11.339489",
+      "link": "https://www.mercadolivre.com.br/purificador-de-agua-gelada-fria-e-natural-eletrnico-placa-compacto-electrolux-pe12g-com-filtro-carvo-6-meses-ou-3000l-painel-touch-cinza/p/MLB24804661?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 927.36,
+      "preco_original": 1499.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "cameras",
+      "score": 88,
+      "enviado_em": "2026-07-14T16:17:04.486602",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 927.36,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Semeadeira Elétrica Costal 25l Para Sementes E Fertilizantes",
       "preco": 354.05,
       "preco_original": 799.0,
@@ -1622,7 +1682,7 @@
       "enviado_em": "2026-07-12T05:18:33.912287",
       "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 879.0,
+      "menor_preco_30d": 868.63,
       "menor_periodo": true,
       "verificada": true
     },
@@ -1793,6 +1853,12 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
+    "cameras": {
+      "total": 4,
+      "score_medio": 84,
+      "desconto_medio": 41,
+      "maior_desconto": 47
+    },
     "brinquedos": {
       "total": 4,
       "score_medio": 91,
@@ -1812,6 +1878,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T14:55:56.593527",
-  "total": 112
+  "updated_at": "2026-07-14T16:18:20.474982",
+  "total": 116
 }
