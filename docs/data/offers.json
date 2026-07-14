@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cadeira Escritório Presidente Ergonômica NR17 Marqs Home Arcanis Cinza com Apoio Lombar e Encosto Mesh Premium",
+      "preco": 388.0,
+      "preco_original": 799.0,
+      "desconto_pct": 51.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_976225-MLA109323074350_042026-AB.webp",
+      "categoria": "casa",
+      "score": 91,
+      "enviado_em": "2026-07-14T21:18:43.103199",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-presidente-ergonmica-nr17-marqs-home-arcanis-cinza-com-apoio-lombar-e-encosto-mesh-premium/p/MLB52893115?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 388.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 1kg Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 74.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "livros",
+      "score": 65,
+      "enviado_em": "2026-07-14T21:18:30.317520",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa De Som Boombox Aiwa Aws-bbs-01b 200w Rms Bluetooth Res Cor Preto",
+      "preco": 1234.0,
+      "preco_original": 1799.0,
+      "desconto_pct": 31.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632103-MLA82938269632_032025-AB.webp",
+      "categoria": "livros",
+      "score": 81,
+      "enviado_em": "2026-07-14T21:18:23.334327",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-boombox-aiwa-aws-bbs-01b-200w-rms-bluetooth-res-cor-preto/p/MLB47311388?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1234.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "2 Pneus Itaro Aro 14 Mh01 175/65r14 86t Xl",
+      "preco": 444.42,
+      "preco_original": 669.0,
+      "desconto_pct": 33.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745357-MLA99420376428_112025-AB.webp",
+      "categoria": "livros",
+      "score": 66,
+      "enviado_em": "2026-07-14T21:18:16.634519",
+      "link": "https://www.mercadolivre.com.br/2-pneus-itaro-aro-14-mh01-17565r14-86t-xl/p/MLB27952035?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 444.42,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 Marca Redfin",
       "preco": 54.88,
       "preco_original": 89.0,
@@ -1501,8 +1561,8 @@
       "enviado_em": "2026-07-12T17:29:45.165534",
       "link": "https://www.mercadolivre.com.br/placa-de-video-msi-geforce-rtx-5060-shadow-2x-oc-8gb-gddr7-128-bit/p/MLB51032833?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
-      "menor_preco_30d": 2279.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 2159.0,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2005,6 +2065,12 @@
       "desconto_medio": 43,
       "maior_desconto": 69
     },
+    "livros": {
+      "total": 7,
+      "score_medio": 79,
+      "desconto_medio": 47,
+      "maior_desconto": 74
+    },
     "pet": {
       "total": 6,
       "score_medio": 80,
@@ -2035,12 +2101,6 @@
       "desconto_medio": 51,
       "maior_desconto": 65
     },
-    "livros": {
-      "total": 4,
-      "score_medio": 85,
-      "desconto_medio": 47,
-      "maior_desconto": 51
-    },
     "impressoras": {
       "total": 4,
       "score_medio": 70,
@@ -2064,8 +2124,14 @@
       "score_medio": 69,
       "desconto_medio": 38,
       "maior_desconto": 43
+    },
+    "casa": {
+      "total": 1,
+      "score_medio": 91,
+      "desconto_medio": 51,
+      "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-14T20:14:51.016631",
-  "total": 128
+  "updated_at": "2026-07-14T21:20:06.840987",
+  "total": 132
 }
