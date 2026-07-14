@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cama Elastica Trampolim Infantil 3,05 m Orbitoys Para Brincar com Rede e Escada",
+      "preco": 1084.0,
+      "preco_original": 2500.0,
+      "desconto_pct": 56.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_990791-MLA104962849227_012026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 95,
+      "enviado_em": "2026-07-14T22:27:22.556869",
+      "link": "https://www.mercadolivre.com.br/cama-elastica-trampolim-infantil-305-m-orbitoys-para-brincar-com-rede-e-escada/p/MLB46220628?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1084.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Copa Do Mundo Panini Kit 700 Figurinhas 2026 100 Envelopes Copa Do Mundo 2026 100",
+      "preco": 497.51,
+      "preco_original": 999.0,
+      "desconto_pct": 50.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_914116-MLB110513884496_052026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 95,
+      "enviado_em": "2026-07-14T22:27:15.638499",
+      "link": "https://www.mercadolivre.com.br/copa-do-mundo-panini-kit-700-figurinhas-2026-100-envelopes/up/MLBU3961295990?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 497.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ar Condicionado 12k Elgin Eco Inverter Iii Wi-fi Q/f Branco",
+      "preco": 1659.0,
+      "preco_original": 3109.0,
+      "desconto_pct": 46.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_904023-MLA108088284350_032026-AB.webp",
+      "categoria": "redes",
+      "score": 90,
+      "enviado_em": "2026-07-14T22:27:05.516200",
+      "link": "https://www.mercadolivre.com.br/ar-condicionado-12k-elgin-eco-inverter-iii-wi-fi-qf-branco/p/MLB66732166?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1659.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa de Som JBL Boombox 3, Bluetooth, Portátil, Cor Squad Verde",
+      "preco": 1663.0,
+      "preco_original": 2986.0,
+      "desconto_pct": 44.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_812377-MLU75149352915_032024-AB.webp",
+      "categoria": "redes",
+      "score": 90,
+      "enviado_em": "2026-07-14T22:26:58.666093",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-jbl-boombox-3-bluetooth-portatil-cor-squad-verde/p/MLB44709436?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1663.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira Escritório Presidente Ergonômica NR17 Marqs Home Arcanis Cinza com Apoio Lombar e Encosto Mesh Premium",
       "preco": 388.0,
       "preco_original": 799.0,
@@ -1411,7 +1471,7 @@
       "link": "https://www.mercadolivre.com.br/copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas/up/MLBU3940349724?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 497.51,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1425,8 +1485,8 @@
       "enviado_em": "2026-07-12T19:48:10.257208",
       "link": "https://www.mercadolivre.com.br/patinete-triciclo-infantil-drift-eletrico-led-90kg-15km-violeta/p/MLB66731421?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 869.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 842.93,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1441,7 +1501,7 @@
       "link": "https://www.mercadolivre.com.br/kit-com-100-envelopes-lacrados-para-colecionar-figurinhas-da-copa-do-mundo-fifa-2026-panini/p/MLB67922755?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 498.51,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -2077,6 +2137,12 @@
       "desconto_medio": 43,
       "maior_desconto": 58
     },
+    "brinquedos": {
+      "total": 6,
+      "score_medio": 92,
+      "desconto_medio": 49,
+      "maior_desconto": 61
+    },
     "notebooks": {
       "total": 4,
       "score_medio": 84,
@@ -2107,17 +2173,17 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
-    "brinquedos": {
-      "total": 4,
-      "score_medio": 91,
-      "desconto_medio": 47,
-      "maior_desconto": 61
-    },
     "saude": {
       "total": 3,
       "score_medio": 78,
       "desconto_medio": 42,
       "maior_desconto": 48
+    },
+    "redes": {
+      "total": 2,
+      "score_medio": 90,
+      "desconto_medio": 45,
+      "maior_desconto": 46
     },
     "automotivo": {
       "total": 2,
@@ -2132,6 +2198,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-14T21:20:06.840987",
-  "total": 132
+  "updated_at": "2026-07-14T22:27:49.094606",
+  "total": 136
 }
