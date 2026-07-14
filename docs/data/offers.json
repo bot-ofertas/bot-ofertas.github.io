@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Carro Buggy Controle Remoto Conquer 4x4 Verde para Alta Velocidade de 50 km/h",
+      "preco": 379.05,
+      "preco_original": 490.0,
+      "desconto_pct": 22.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_949773-MLA99990539591_112025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 61,
+      "enviado_em": "2026-07-14T23:31:20.086214",
+      "link": "https://www.mercadolivre.com.br/carro-buggy-controle-remoto-conquer-4x4-verde-para-alta-velocidade-de-50-kmh/p/MLB44255881?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 379.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fichário Álbum Para Cartas Pokémon - 360 Cartas Pasta Otug Preto",
+      "preco": 58.19,
+      "preco_original": 99.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_895261-MLB107259255978_032026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 76,
+      "enviado_em": "2026-07-14T23:31:12.662733",
+      "link": "https://www.mercadolivre.com.br/fichario-album-para-cartas-pokemon--360-cartas-pasta-otug/up/MLBU3825136618?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 58.19,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Maleta 48 Carrinhos Tapete Pista Brinquedo Presente Menino Azul",
+      "preco": 82.54,
+      "preco_original": 157.0,
+      "desconto_pct": 47.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894858-MLA108648402701_032026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 77,
+      "enviado_em": "2026-07-14T23:31:05.792151",
+      "link": "https://www.mercadolivre.com.br/maleta-48-carrinhos-tapete-pista-brinquedo-presente-menino-azul/p/MLB66562944?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 82.54,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Brastoy Blocos De Construção Magnéticos 65 pecas educação infantil",
+      "preco": 118.75,
+      "preco_original": 168.0,
+      "desconto_pct": 29.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_758334-MLA99379466886_112025-AB.webp",
+      "categoria": "brinquedos",
+      "score": 65,
+      "enviado_em": "2026-07-14T23:30:58.890897",
+      "link": "https://www.mercadolivre.com.br/brastoy-blocos-de-construco-magneticos-65-pecas-educaco-infantil/p/MLB19824979?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 118.75,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cama Elastica Trampolim Infantil 3,05 m Orbitoys Para Brincar com Rede e Escada",
       "preco": 1084.0,
       "preco_original": 2500.0,
@@ -2077,6 +2137,12 @@
       "desconto_medio": 35,
       "maior_desconto": 48
     },
+    "brinquedos": {
+      "total": 10,
+      "score_medio": 83,
+      "desconto_medio": 44,
+      "maior_desconto": 61
+    },
     "tvs": {
       "total": 8,
       "score_medio": 86,
@@ -2137,12 +2203,6 @@
       "desconto_medio": 43,
       "maior_desconto": 58
     },
-    "brinquedos": {
-      "total": 6,
-      "score_medio": 92,
-      "desconto_medio": 49,
-      "maior_desconto": 61
-    },
     "notebooks": {
       "total": 4,
       "score_medio": 84,
@@ -2198,6 +2258,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-14T22:27:49.094606",
-  "total": 136
+  "updated_at": "2026-07-14T23:34:14.665070",
+  "total": 140
 }
