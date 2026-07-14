@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "preco": 105.52,
+      "preco_original": 214.0,
+      "desconto_pct": 50.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_616706-MLB95602323080_102025-AB.webp",
+      "categoria": "cameras",
+      "score": 74,
+      "enviado_em": "2026-07-14T18:46:59.690978",
+      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3507022583?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 105.52,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philips 50 4k 50pug7300 Comando De Voz Bluetooth",
+      "preco": 1929.0,
+      "preco_original": 3099.0,
+      "desconto_pct": 37.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_603690-MLA93305557455_092025-AB.webp",
+      "categoria": "cameras",
+      "score": 87,
+      "enviado_em": "2026-07-14T18:46:52.463505",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philips-50-4k-50pug7300-comando-de-voz-bluetooth/p/MLB57723340?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1929.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Panela De Pressão Elétrica Philco Ppp01p 6L",
+      "preco": 367.0,
+      "preco_original": 549.0,
+      "desconto_pct": 33.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_835498-MLA99535706272_122025-AB.webp",
+      "categoria": "cameras",
+      "score": 65,
+      "enviado_em": "2026-07-14T18:46:45.693151",
+      "link": "https://www.mercadolivre.com.br/panela-de-presso-eletrica-philco-ppp01p-6l/p/MLB16141678?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 367.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fogão 5 Bocas Atlas Atenas Glass A Gás com Mesa de Vidro e Mega Chama Preto Bivolt",
+      "preco": 990.0,
+      "preco_original": 1859.0,
+      "desconto_pct": 46.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604920-MLA109320873306_042026-AB.webp",
+      "categoria": "cameras",
+      "score": 90,
+      "enviado_em": "2026-07-14T18:46:38.902054",
+      "link": "https://www.mercadolivre.com.br/fogo-5-bocas-atlas-atenas-glass-a-gas-com-mesa-de-vidro-e-mega-chama-preto-bivolt/p/MLB18612048?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 990.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Câmera Ip A8 App Icsee Infravermelho Prova D'água Externa Wifi Hd Cor Branco",
       "preco": 79.41,
       "preco_original": 175.0,
@@ -1860,6 +1920,12 @@
       "desconto_medio": 35,
       "maior_desconto": 45
     },
+    "cameras": {
+      "total": 8,
+      "score_medio": 82,
+      "desconto_medio": 41,
+      "maior_desconto": 50
+    },
     "beleza": {
       "total": 8,
       "score_medio": 89,
@@ -1920,12 +1986,6 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
-    "cameras": {
-      "total": 4,
-      "score_medio": 84,
-      "desconto_medio": 41,
-      "maior_desconto": 47
-    },
     "brinquedos": {
       "total": 4,
       "score_medio": 91,
@@ -1945,6 +2005,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T17:38:41.851594",
-  "total": 120
+  "updated_at": "2026-07-14T18:48:57.077361",
+  "total": 124
 }
