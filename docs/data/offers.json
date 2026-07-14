@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cartão Micro SD 128gb 64tbw Intelbras",
+      "preco": 198.85,
+      "preco_original": 499.0,
+      "desconto_pct": 60.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_771079-MLA99986815051_112025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-07-14T04:33:55.408451",
+      "link": "https://www.mercadolivre.com.br/carto-micro-sd-128gb-64tbw-intelbras/p/MLB19766720?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 198.85,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cartão Memória Micro Sd Tf 64gb Original P/ Câmera Segurança",
+      "preco": 115.43,
+      "preco_original": 170.0,
+      "desconto_pct": 32.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605172-MLB107812452667_022026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 64,
+      "enviado_em": "2026-07-14T04:33:48.509414",
+      "link": "https://www.mercadolivre.com.br/cartao-memoria-micro-sd-tf-64gb-original-p-camera-seguranca/up/MLBU3811090283?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 115.43,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cartão Micro Sd 32gb 16tbw Western Digital Purple",
+      "preco": 94.9,
+      "preco_original": 144.0,
+      "desconto_pct": 34.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_763509-MLA109754029485_032026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 60,
+      "enviado_em": "2026-07-14T04:33:41.843177",
+      "link": "https://www.mercadolivre.com.br/carto-micro-sd-32gb-16tbw-western-digital-purple/p/MLB13586527?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 94.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark A1 Duo Combo Duplo Para 2 Pessoas Usb-c, Lightning Preto",
+      "preco": 400.2,
+      "preco_original": 799.0,
+      "desconto_pct": 49.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_928791-MLA105582102043_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 85,
+      "enviado_em": "2026-07-14T04:33:35.138409",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-duo-combo-duplo-para-2-pessoas-usb-c-lightning-preto/p/MLB64851983?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 400.2,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Smartphone Motorola Edge 60 Neo 5G - 256GB 24GB (12GB RAM + 12GB Ram Boost) 50MP Sony Camera Moto AI e tela 1.5K Super HD - Latte",
       "preco": 1799.0,
       "preco_original": 3999.0,
@@ -1481,6 +1541,12 @@
       "desconto_medio": 35,
       "maior_desconto": 52
     },
+    "ferramentas": {
+      "total": 8,
+      "score_medio": 70,
+      "desconto_medio": 43,
+      "maior_desconto": 60
+    },
     "eletronicos": {
       "total": 8,
       "score_medio": 82,
@@ -1529,12 +1595,6 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
-    "ferramentas": {
-      "total": 4,
-      "score_medio": 72,
-      "desconto_medio": 41,
-      "maior_desconto": 46
-    },
     "brinquedos": {
       "total": 4,
       "score_medio": 91,
@@ -1566,6 +1626,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T01:03:54.626648",
-  "total": 96
+  "updated_at": "2026-07-14T04:36:17.779150",
+  "total": 100
 }
