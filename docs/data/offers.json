@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Câmera Ip A8 App Icsee Infravermelho Prova D'água Externa Wifi Hd Cor Branco",
+      "preco": 79.41,
+      "preco_original": 175.0,
+      "desconto_pct": 54.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921837-MLA99700943906_122025-AB.webp",
+      "categoria": "monitores",
+      "score": 73,
+      "enviado_em": "2026-07-14T17:37:46.913130",
+      "link": "https://www.mercadolivre.com.br/cmera-ip-a8-app-icsee-infravermelho-prova-dagua-externa-wifi-hd-cor-branco/p/MLB25474028?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 79.41,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor em Pó",
+      "preco": 72.9,
+      "preco_original": 104.0,
+      "desconto_pct": 29.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "categoria": "monitores",
+      "score": 60,
+      "enviado_em": "2026-07-14T17:37:40.261282",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 72.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43'' Philco Full Hd Roku Tv Hdr10 Dolby P43cra",
+      "preco": 1349.0,
+      "preco_original": 2199.0,
+      "desconto_pct": 38.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900047-MLA108489153159_032026-AB.webp",
+      "categoria": "monitores",
+      "score": 88,
+      "enviado_em": "2026-07-14T17:37:33.208387",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-full-hd-roku-tv-hdr10-dolby-p43cra/p/MLB66418417?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1349.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem sabor",
+      "preco": 69.9,
+      "preco_original": 159.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "monitores",
+      "score": 73,
+      "enviado_em": "2026-07-14T17:37:26.343086",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Impressora Multifuncional HP Smart Tank 584 - Preta",
       "preco": 731.0,
       "preco_original": 1250.0,
@@ -1728,7 +1789,7 @@
       "link": "https://www.mercadolivre.com.br/kit-700-figurinha-do-album-copa-do-mundo-2026-100-envelopes/up/MLBU3911772235?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 520.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1835,6 +1896,12 @@
       "desconto_medio": 41,
       "maior_desconto": 49
     },
+    "monitores": {
+      "total": 4,
+      "score_medio": 74,
+      "desconto_medio": 45,
+      "maior_desconto": 56
+    },
     "moda": {
       "total": 4,
       "score_medio": 78,
@@ -1878,6 +1945,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T16:18:20.474982",
-  "total": 116
+  "updated_at": "2026-07-14T17:38:41.851594",
+  "total": 120
 }
