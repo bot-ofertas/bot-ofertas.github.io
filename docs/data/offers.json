@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 Marca Redfin",
+      "preco": 54.88,
+      "preco_original": 89.0,
+      "desconto_pct": 38.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762912-MLA105696431793_012026-AB.webp",
+      "categoria": "games",
+      "score": 69,
+      "enviado_em": "2026-07-14T20:13:54.276864",
+      "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 54.88,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Gamer E Escritório X-ray Fit Com Led Rgb Ergonômica Cor Preta Material Do Estofamento Couro Sintético",
+      "preco": 513.21,
+      "preco_original": 999.0,
+      "desconto_pct": 48.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971024-MLA99364905992_112025-AB.webp",
+      "categoria": "games",
+      "score": 89,
+      "enviado_em": "2026-07-14T20:13:47.430037",
+      "cupom": "Cupom R$40 OFF",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-e-escritorio-x-ray-fit-com-led-rgb-ergonmica-cor-preta-material-do-estofamento-couro-sintetico/p/MLB43950252?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 513.21,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Assassins Creed Black Flag Resynced Ps5 Fisico - 4o Lote",
+      "preco": 294.36,
+      "preco_original": 405.0,
+      "desconto_pct": 27.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_962876-MLB111852803827_052026-AB.webp",
+      "categoria": "games",
+      "score": 61,
+      "enviado_em": "2026-07-14T20:13:40.410892",
+      "link": "https://www.mercadolivre.com.br/assassins-creed-black-flag-resynced-ps5-fisico--4o-lote/up/MLBU3982957338?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 294.36,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle de joystick sem fio Dualsense Ps5 azul cobalto",
+      "preco": 399.99,
+      "preco_original": 699.0,
+      "desconto_pct": 42.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_934470-MLA99513531000_112025-AB.webp",
+      "categoria": "games",
+      "score": 81,
+      "enviado_em": "2026-07-14T20:13:33.557372",
+      "link": "https://www.mercadolivre.com.br/controle-de-joystick-sem-fio-dualsense-ps5-azul-cobalto/p/MLB28083897?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 399.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
       "preco": 105.52,
       "preco_original": 214.0,
@@ -734,7 +795,7 @@
       "link": "https://www.mercadolivre.com.br/sony-playstation-dualsense-cfi-zct1w-controle-sem-fio-sterling-silver-cor-cinza/p/MLB31472572?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 400.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1890,6 +1951,12 @@
       "desconto_medio": 44,
       "maior_desconto": 64
     },
+    "games": {
+      "total": 10,
+      "score_medio": 71,
+      "desconto_medio": 35,
+      "maior_desconto": 48
+    },
     "tvs": {
       "total": 8,
       "score_medio": 86,
@@ -1943,12 +2010,6 @@
       "score_medio": 80,
       "desconto_medio": 43,
       "maior_desconto": 58
-    },
-    "games": {
-      "total": 6,
-      "score_medio": 68,
-      "desconto_medio": 33,
-      "maior_desconto": 42
     },
     "notebooks": {
       "total": 4,
@@ -2005,6 +2066,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T18:48:57.077361",
-  "total": 124
+  "updated_at": "2026-07-14T20:14:51.016631",
+  "total": 128
 }
