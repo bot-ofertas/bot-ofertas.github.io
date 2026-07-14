@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Positivo Vision i15M com Minitela, Intel Core 3, 8GB de RAM, SSD de 256GB e Tela de 15,6\" Full HD IPS Antirreflexo",
+      "preco": 2429.0,
+      "preco_original": 3570.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_817115-MLA99156919548_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 81,
+      "enviado_em": "2026-07-14T12:52:16.876209",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-i15m-com-minitela-intel-core-3-8gb-de-ram-ssd-de-256gb-e-tela-de-156-full-hd-ips-antirreflexo/p/MLB56961557?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2429.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Gamer Nitro V15 Ryzen 7 7735hs 16gb Rtx4050 1tb Ssd Linux Tela 165hz Full Hd 15.6 Anv15-41-r8zp",
+      "preco": 6303.0,
+      "preco_original": 12499.0,
+      "desconto_pct": 49.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_826075-MLA109766539988_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-14T12:52:10.241372",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-gamer-nitro-v15-ryzen-7-7735hs-16gb-rtx4050-1tb-ssd-linux-tela-165hz-full-hd-156-anv15-41-r8zp/p/MLB68344553?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 6303.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Asus Vivobook 15 X1504va Intel Core I5 1334u 8gb Ram 512gb Ssd Intel Iris Xe Windows 11 Home Tela 15,6 Fhd Silver - Nj1740w",
+      "preco": 3599.0,
+      "preco_original": 4699.0,
+      "desconto_pct": 23.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_704459-MLA99979883783_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 73,
+      "enviado_em": "2026-07-14T12:52:03.489172",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-15-x1504va-intel-core-i5-1334u-8gb-ram-512gb-ssd-intel-iris-xe-windows-11-home-tela-156-fhd-silver-nj1740w/p/MLB48549236?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Acer Aspire 5 A515-45-R2A3 AMD Ryzen 5 Windows 11 Home 8GB 512GB SSD 15,6' Full HD",
+      "preco": 3239.0,
+      "preco_original": 5609.0,
+      "desconto_pct": 42.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759351-MLU77118311686_062024-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-14T12:51:56.858018",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r2a3-amd-ryzen-5-windows-11-home-8gb-512gb-ssd-156-full-hd/p/MLB22246671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3239.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creme Hidratante Corporal e facial para Pele Seca a Extra Seca Sem Perfume 454g CeraVe",
       "preco": 81.9,
       "preco_original": 141.0,
@@ -1637,6 +1697,12 @@
       "desconto_medio": 33,
       "maior_desconto": 42
     },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 84,
+      "desconto_medio": 37,
+      "maior_desconto": 49
+    },
     "moveis": {
       "total": 4,
       "score_medio": 81,
@@ -1686,6 +1752,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T11:27:54.220790",
-  "total": 104
+  "updated_at": "2026-07-14T12:53:10.078236",
+  "total": 108
 }
