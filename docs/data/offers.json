@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Creme Hidratante Corporal e facial para Pele Seca a Extra Seca Sem Perfume 454g CeraVe",
+      "preco": 81.9,
+      "preco_original": 141.0,
+      "desconto_pct": 41.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_806507-MLA92874967013_092025-AB.webp",
+      "categoria": "beleza",
+      "score": 87,
+      "enviado_em": "2026-07-14T11:26:59.941781",
+      "link": "https://www.mercadolivre.com.br/creme-hidratante-corporal-e-facial-para-pele-seca-a-extra-seca-sem-perfume-454g-cerave/p/MLB19309318?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 73.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Body Splash Masculino Barbarius + Enigma + Midtown 200ml",
+      "preco": 79.13,
+      "preco_original": 140.0,
+      "desconto_pct": 43.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_997574-MLA109633443994_042026-AB.webp",
+      "categoria": "beleza",
+      "score": 87,
+      "enviado_em": "2026-07-14T11:26:53.136849",
+      "link": "https://www.mercadolivre.com.br/kit-body-splash-masculino-barbarius-enigma-midtown-200ml/p/MLB68104527?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 79.13,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Masculino Emporio Armani Stronger With You Edt 100ml",
+      "preco": 399.99,
+      "preco_original": 699.0,
+      "desconto_pct": 42.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_733398-MLA114453273457_072026-AB.webp",
+      "categoria": "beleza",
+      "score": 96,
+      "enviado_em": "2026-07-14T11:26:46.318193",
+      "link": "https://www.mercadolivre.com.br/perfume-masculino-emporio-armani-stronger-with-you-edt-100ml/p/MLB17460955?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 399.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Armani Beauty Perfume Masculino Stronger With You Intensely Eau De Parfum 50ml",
+      "preco": 349.99,
+      "preco_original": 649.0,
+      "desconto_pct": 46.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633404-MLA100740729967_122025-AB.webp",
+      "categoria": "beleza",
+      "score": 96,
+      "enviado_em": "2026-07-14T11:26:39.411907",
+      "link": "https://www.mercadolivre.com.br/armani-beauty-perfume-masculino-stronger-with-you-intensely-eau-de-parfum-50ml/p/MLB19312693?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 349.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cartão Micro SD 128gb 64tbw Intelbras",
       "preco": 198.85,
       "preco_original": 499.0,
@@ -1508,17 +1568,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Motorola Edge 60 Neo 5G - 256GB 24GB (12GB RAM + 12GB Ram Boost) 50MP Sony Camera Moto AI e tela 1.5K Super HD - Latte",
-    "preco": 1799.0,
-    "preco_original": 3999.0,
-    "desconto_pct": 55.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_837167-MLA99987235485_112025-AB.webp",
-    "categoria": "celulares",
-    "score": 90,
-    "enviado_em": "2026-07-14T01:02:01.216263",
-    "link": "https://www.mercadolivre.com.br/smartphone-motorola-edge-60-neo-5g-256gb-24gb-12gb-ram-12gb-ram-boost-50mp-sony-camera-moto-ai-e-tela-15k-super-hd-latte/p/MLB58684606?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Armani Beauty Perfume Masculino Stronger With You Intensely Eau De Parfum 50ml",
+    "preco": 349.99,
+    "preco_original": 649.0,
+    "desconto_pct": 46.1,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633404-MLA100740729967_122025-AB.webp",
+    "categoria": "beleza",
+    "score": 96,
+    "enviado_em": "2026-07-14T11:26:39.411907",
+    "link": "https://www.mercadolivre.com.br/armani-beauty-perfume-masculino-stronger-with-you-intensely-eau-de-parfum-50ml/p/MLB19312693?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1799.0,
+    "menor_preco_30d": 349.99,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1558,6 +1618,12 @@
       "score_medio": 73,
       "desconto_medio": 35,
       "maior_desconto": 45
+    },
+    "beleza": {
+      "total": 8,
+      "score_medio": 89,
+      "desconto_medio": 45,
+      "maior_desconto": 58
     },
     "armazenamento": {
       "total": 8,
@@ -1601,12 +1667,6 @@
       "desconto_medio": 47,
       "maior_desconto": 61
     },
-    "beleza": {
-      "total": 4,
-      "score_medio": 86,
-      "desconto_medio": 45,
-      "maior_desconto": 58
-    },
     "saude": {
       "total": 3,
       "score_medio": 78,
@@ -1626,6 +1686,6 @@
       "maior_desconto": 43
     }
   },
-  "updated_at": "2026-07-14T04:36:17.779150",
-  "total": 100
+  "updated_at": "2026-07-14T11:27:54.220790",
+  "total": 104
 }
