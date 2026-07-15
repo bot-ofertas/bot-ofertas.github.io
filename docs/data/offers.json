@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit 12 Envelopes com 84 figurinhas - Copa do Mundo 2026",
+      "preco": 59.37,
+      "preco_original": 84.0,
+      "desconto_pct": 29.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_903022-MLA109894312615_032026-AB.webp",
+      "categoria": "impressoras",
+      "score": 69,
+      "enviado_em": "2026-07-15T12:46:13.797093",
+      "link": "https://www.mercadolivre.com.br/kit-12-envelopes-com-84-figurinhas-copa-do-mundo-2026/p/MLB66864521?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.37,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo De Ferramentas Soquetes Encaixe 1/4 E 1/2 Pol. Catraca Reversível Aço Crv 94 Peças Com Maleta Tkf94 The Black Tools",
+      "preco": 189.91,
+      "preco_original": 454.0,
+      "desconto_pct": 58.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_671666-MLA99870769883_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 85,
+      "enviado_em": "2026-07-15T12:46:07.252680",
+      "link": "https://www.mercadolivre.com.br/jogo-de-ferramentas-soquetes-encaixe-14-e-12-pol-catraca-reversivel-aco-crv-94-pecas-com-maleta-tkf94-the-black-tools/p/MLB58503383?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 189.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Sabor Chocolate Belga Soldiers Nutrition Rico em Proteína Treino",
+      "preco": 129.9,
+      "preco_original": 429.0,
+      "desconto_pct": 69.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_859018-MLA100008028659_122025-AB.webp",
+      "categoria": "impressoras",
+      "score": 74,
+      "enviado_em": "2026-07-15T12:46:00.552523",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-sabor-chocolate-belga-soldiers-nutrition-rico-em-proteina-treino/p/MLB18953097?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 129.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional HP DeskJet Ink Advantage 2975 Colorida 1 USB 2.0 de alta velocidade Wi-Fi de banda dupla - 100 a 240 VCA - AJ4Y4A#AK4",
+      "preco": 449.0,
+      "preco_original": 719.0,
+      "desconto_pct": 37.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641445-MLA107256158981_022026-AB.webp",
+      "categoria": "impressoras",
+      "score": 82,
+      "enviado_em": "2026-07-15T12:45:54.020697",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-deskjet-ink-advantage-2975-colorida-1-usb-20-de-alta-velocidade-wi-fi-de-banda-dupla-100-a-240-vca-aj4y4aak4/p/MLB62998911?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 449.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Positivo Duo Master 2 Em 1 Celeron 4gb Ram 128gb Cinza-escuro",
       "preco": 1599.0,
       "preco_original": 2499.0,
@@ -1718,17 +1778,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Armani Beauty Perfume Masculino Stronger With You Intensely Eau De Parfum 50ml",
-    "preco": 349.99,
-    "preco_original": 649.0,
-    "desconto_pct": 46.1,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_633404-MLA100740729967_122025-AB.webp",
-    "categoria": "beleza",
-    "score": 96,
-    "enviado_em": "2026-07-14T11:26:39.411907",
-    "link": "https://www.mercadolivre.com.br/armani-beauty-perfume-masculino-stronger-with-you-intensely-eau-de-parfum-50ml/p/MLB19312693?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Cama Elastica Trampolim Infantil 3,05 m Orbitoys Para Brincar com Rede e Escada",
+    "preco": 1084.0,
+    "preco_original": 2500.0,
+    "desconto_pct": 56.6,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_990791-MLA104962849227_012026-AB.webp",
+    "categoria": "brinquedos",
+    "score": 95,
+    "enviado_em": "2026-07-14T22:27:22.556869",
+    "link": "https://www.mercadolivre.com.br/cama-elastica-trampolim-infantil-305-m-orbitoys-para-brincar-com-rede-e-escada/p/MLB46220628?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 349.99,
+    "menor_preco_30d": 1084.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1744,6 +1804,12 @@
       "score_medio": 85,
       "desconto_medio": 34,
       "maior_desconto": 49
+    },
+    "impressoras": {
+      "total": 8,
+      "score_medio": 74,
+      "desconto_medio": 47,
+      "maior_desconto": 69
     },
     "ferramentas": {
       "total": 8,
@@ -1805,12 +1871,6 @@
       "desconto_medio": 45,
       "maior_desconto": 56
     },
-    "impressoras": {
-      "total": 4,
-      "score_medio": 70,
-      "desconto_medio": 46,
-      "maior_desconto": 61
-    },
     "esportes": {
       "total": 4,
       "score_medio": 77,
@@ -1866,6 +1926,6 @@
       "maior_desconto": 25
     }
   },
-  "updated_at": "2026-07-15T11:15:35.224293",
-  "total": 114
+  "updated_at": "2026-07-15T12:47:39.036467",
+  "total": 118
 }
