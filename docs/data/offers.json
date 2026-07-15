@@ -1,6 +1,112 @@
 {
   "products": [
     {
+      "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
+      "preco": 99.0,
+      "preco_original": 159.9,
+      "desconto_pct": 38.1,
+      "foto": "https://m.media-amazon.com/images/I/51UxR8FHe-L._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 75,
+      "enviado_em": "2026-07-15T09:26:39.042458",
+      "link": "https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 99.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Electrolux Kit 12 Potes Herméticos de Plástico Retangulares, Multiuso, Vedação Silicone, BPA Free, Porta Mantimentos",
+      "preco": 88.1,
+      "preco_original": 129.9,
+      "desconto_pct": 32.2,
+      "foto": "https://m.media-amazon.com/images/I/51uccv-jBiL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 73,
+      "enviado_em": "2026-07-15T09:26:30.037507",
+      "link": "https://www.amazon.com.br/dp/B09XJL4B9H?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 88.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Filtro/Refil Original de Água Acqua Pure para Purificador Electrolux PE12A/PE12B/PE12G/PE12V/PE12P",
+      "preco": 61.9,
+      "preco_original": 80.99,
+      "desconto_pct": 23.6,
+      "foto": "https://m.media-amazon.com/images/I/61Wa-avvnwL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 63,
+      "enviado_em": "2026-07-15T09:26:21.144551",
+      "link": "https://www.amazon.com.br/dp/B0F256HPZJ?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 61.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV LG 43\"Full HD, Processador A5 Ger6, AI, Alexa e webOS 23 - 43LR6700PSA",
+      "preco": 1529.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 33.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_741946-MLA107875422514_032026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 93,
+      "enviado_em": "2026-07-15T09:25:25.811149",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-43full-hd-processador-a5-ger6-ai-alexa-e-webos-23-43lr6700psa/p/MLB39205913?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1529.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "LG XBOOM XG9S Caixa de som Bluetooth portátil - IP67 e 24 horas de bateria",
+      "preco": 958.5,
+      "preco_original": 2099.0,
+      "desconto_pct": 54.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_850547-MLA95560485257_102025-AB.webp",
+      "categoria": "eletronicos",
+      "score": 95,
+      "enviado_em": "2026-07-15T09:25:19.058608",
+      "link": "https://www.mercadolivre.com.br/lg-xboom-xg9s-caixa-de-som-bluetooth-portatil-ip67-e-24-horas-de-bateria/p/MLB47329866?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 958.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Semp Smart 4k 43 S62 Google Tv Wi-fi Bt Hdmi 2.1 Hdr10",
+      "preco": 1519.0,
+      "preco_original": 1999.0,
+      "desconto_pct": 24.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_897466-MLA114005600181_072026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 78,
+      "enviado_em": "2026-07-15T09:25:12.357307",
+      "link": "https://www.mercadolivre.com.br/semp-smart-4k-43-s62-google-tv-wi-fi-bt-hdmi-21-hdr10/p/MLB54075534?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1519.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Fotográfico Glossy A4 115g 200 Folhas Maxprint Branco",
+      "preco": 49.28,
+      "preco_original": 66.0,
+      "desconto_pct": 25.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821039-MLB114533706201_072026-AB.webp",
+      "categoria": "tablets",
+      "score": 60,
+      "enviado_em": "2026-07-15T09:25:03.128911",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/papel-fotografico-glossy-a4-115g-200-folhas-maxprint/up/MLBU3446872788?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 49.28,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tablet Samsung Galaxy Tab S10 FE, Cinza, 128GB, 8GB RAM, Tela Imersiva de 10.9\" 90Hz, Camera Traseira de 13MP, Câmera Frontal de 12MP Ultra Wide, Wifi 6, IP68, Android 15",
       "preco": 2832.68,
       "preco_original": 4199.0,
@@ -706,7 +812,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 927.36,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1597,6 +1703,12 @@
       "desconto_medio": 41,
       "maior_desconto": 50
     },
+    "eletronicos": {
+      "total": 7,
+      "score_medio": 84,
+      "desconto_medio": 39,
+      "maior_desconto": 54
+    },
     "pet": {
       "total": 6,
       "score_medio": 80,
@@ -1645,11 +1757,11 @@
       "desconto_medio": 49,
       "maior_desconto": 70
     },
-    "eletronicos": {
+    "casa": {
       "total": 4,
-      "score_medio": 80,
-      "desconto_medio": 40,
-      "maior_desconto": 54
+      "score_medio": 76,
+      "desconto_medio": 36,
+      "maior_desconto": 51
     },
     "beleza": {
       "total": 4,
@@ -1687,13 +1799,13 @@
       "desconto_medio": 45,
       "maior_desconto": 46
     },
-    "casa": {
+    "tablets": {
       "total": 1,
-      "score_medio": 91,
-      "desconto_medio": 51,
-      "maior_desconto": 51
+      "score_medio": 60,
+      "desconto_medio": 25,
+      "maior_desconto": 25
     }
   },
-  "updated_at": "2026-07-15T07:19:22.838717",
-  "total": 103
+  "updated_at": "2026-07-15T09:26:48.141187",
+  "total": 110
 }
