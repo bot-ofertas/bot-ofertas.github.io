@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Positivo Duo Master 2 Em 1 Celeron 4gb Ram 128gb Cinza-escuro",
+      "preco": 1599.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_827033-MLA112396381438_062026-AB.webp",
+      "categoria": "notebooks",
+      "score": 91,
+      "enviado_em": "2026-07-15T11:14:39.003936",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-duo-master-2-em-1-celeron-4gb-ram-128gb-cinza-escuro/p/MLB74244599?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1599.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Gamer Acer Nitro V15 com Intel Core i5-13420H, 8GB RAM e RTX 4050 de 6GB, SSD 512GB e Tela de 15.6\" Full HD 165Hz",
+      "preco": 5539.0,
+      "preco_original": 8558.0,
+      "desconto_pct": 35.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_938266-MLA109640296973_032026-AB.webp",
+      "categoria": "notebooks",
+      "score": 90,
+      "enviado_em": "2026-07-15T11:14:32.412511",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-acer-nitro-v15-com-intel-core-i5-13420h-8gb-ram-e-rtx-4050-de-6gb-ssd-512gb-e-tela-de-156-full-hd-165hz/p/MLB67323478?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 5539.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision R15M Com AMD Ryzen 5, 8GB de RAM e SSD de 256GB",
+      "preco": 2729.0,
+      "preco_original": 3855.0,
+      "desconto_pct": 29.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_733885-MLA101679394133_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 84,
+      "enviado_em": "2026-07-15T11:14:25.825388",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-r15m-com-amd-ryzen-5-8gb-de-ram-e-ssd-de-256gb/p/MLB53471779?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2729.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision C15M para Produtividade com Intel Celeron, 8GB RAM e SSD de 128GB",
+      "preco": 2059.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 27.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_969413-MLA99631778927_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 82,
+      "enviado_em": "2026-07-15T11:14:18.986304",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-c15m-para-produtividade-com-intel-celeron-8gb-ram-e-ssd-de-128gb/p/MLB54096680?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2059.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
       "preco": 99.0,
       "preco_original": 159.9,
@@ -1679,6 +1739,12 @@
       "desconto_medio": 45,
       "maior_desconto": 61
     },
+    "notebooks": {
+      "total": 8,
+      "score_medio": 85,
+      "desconto_medio": 34,
+      "maior_desconto": 49
+    },
     "ferramentas": {
       "total": 8,
       "score_medio": 70,
@@ -1732,12 +1798,6 @@
       "score_medio": 81,
       "desconto_medio": 36,
       "maior_desconto": 42
-    },
-    "notebooks": {
-      "total": 4,
-      "score_medio": 84,
-      "desconto_medio": 37,
-      "maior_desconto": 49
     },
     "monitores": {
       "total": 4,
@@ -1806,6 +1866,6 @@
       "maior_desconto": 25
     }
   },
-  "updated_at": "2026-07-15T09:26:48.141187",
-  "total": 110
+  "updated_at": "2026-07-15T11:15:35.224293",
+  "total": 114
 }
