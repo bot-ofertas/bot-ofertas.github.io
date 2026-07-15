@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Omega Plus 240 Caps Dark Lab",
+      "preco": 179.9,
+      "preco_original": 599.0,
+      "desconto_pct": 70.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_767057-MLA108660577007_032026-AB.webp",
+      "categoria": "esportes",
+      "score": 71,
+      "enviado_em": "2026-07-15T01:25:50.022241",
+      "cupom": "Cupom R$80 OFF",
+      "link": "https://www.mercadolivre.com.br/omega-plus-240-caps-dark-lab/p/MLB66597831?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Growth Supplements - Chocolate",
+      "preco": 179.9,
+      "preco_original": 299.0,
+      "desconto_pct": 39.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_810392-MLA98296434364_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 75,
+      "enviado_em": "2026-07-15T01:25:42.651340",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-growth-supplements-chocolate/p/MLB19049038?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Growth Supplements - Leite em Pó",
+      "preco": 179.9,
+      "preco_original": 279.0,
+      "desconto_pct": 35.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_696746-MLA98296977552_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 70,
+      "enviado_em": "2026-07-15T01:25:35.959626",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-growth-supplements-leite-em-po/p/MLB19140327?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Meta Parts Spinning X11 Cor Preto/Vermelho",
+      "preco": 446.89,
+      "preco_original": 921.0,
+      "desconto_pct": 51.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_936974-MLA99394285476_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 90,
+      "enviado_em": "2026-07-15T01:25:29.297103",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-meta-parts-spinning-x11-cor-pretovermelho/p/MLB28263665?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 446.89,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tcl Smartphone 60 Se 4g, Octa Core, 512gb 18gb Ram (8+10), 6.7 Hd+ 90hz, Nfc, Dual Sim, 50mp",
       "preco": 855.0,
       "preco_original": 1349.0,
@@ -207,7 +268,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 59.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -388,7 +449,7 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 72.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -1412,6 +1473,12 @@
       "desconto_medio": 46,
       "maior_desconto": 61
     },
+    "esportes": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 49,
+      "maior_desconto": 70
+    },
     "eletronicos": {
       "total": 4,
       "score_medio": 80,
@@ -1449,6 +1516,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-15T00:59:59.703715",
-  "total": 88
+  "updated_at": "2026-07-15T01:26:43.784130",
+  "total": 92
 }
