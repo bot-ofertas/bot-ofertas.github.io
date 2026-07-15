@@ -2,9 +2,10 @@ name: Bot Ofertas ML
 
 on:
   schedule:
-    # A cada 20 minutos das 07h às 23h40 (Brasília = UTC-3)
-    - cron: '0,20,40 10-23 * * *'   # 07:00-20:40 BRT
-    - cron: '0,20,40 0,1,2 * * *'   # 21:00-23:40 BRT
+    # Só roda enquanto o PC local fica desligado (01:55-08:45 BRT = 04:55-11:45 UTC).
+    # Evita duplicar publicações com o bot local, que cobre o resto do dia
+    # (ver agendar_shutdown.ps1). Fora dessa janela, quem publica é o PC local.
+    - cron: '0,20,40 5-11 * * *'   # ~02:00-08:40 BRT
   workflow_dispatch:  # permite rodar manualmente no GitHub
 
 permissions:

@@ -69,10 +69,12 @@ _DOM_SCRIPT = r"""
             if (!linkEl) continue;
             let link = linkEl.href || '';
             if (!link.includes('amazon.com.br')) continue;
-            // Limpa para URL de produto
-            const dpMatch = link.match(/(https:\/\/www\.amazon\.com\.br\/(dp|gp\/product)\/[A-Z0-9]+)/);
-            if (!dpMatch) continue;
-            link = dpMatch[1];
+            // Extrai o ASIN de qualquer posição da URL — a Amazon hoje inclui o
+            // slug do nome do produto antes de /dp/ (ex: amazon.com.br/kindle-x/dp/ASIN),
+            // então não dá pra exigir /dp/ logo após o domínio.
+            const asinMatch = link.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
+            if (!asinMatch) continue;
+            link = `https://www.amazon.com.br/dp/${asinMatch[1]}`;
 
             // Título
             const tituloEl = card.querySelector(
@@ -256,9 +258,16 @@ async def buscar_cupons_amazon_async(
                 except Exception:
                     log.warning("amazon scraper falhou em %s (%s): %s", categoria, url, e)
             finally:
-                await page.close()
+                try:
+                    await page.close()
+                except Exception:
+                    pass  # página pode já ter crashado — nada a fechar
 
-        await browser.close()
+        try:
+            await browser.close()
+        except Exception:
+            pass  # browser pode ter morrido junto com uma página crashada;
+                   # não pode derrubar os produtos já coletados nas categorias anteriores
 
     if priorizar_cupom:
         com_cupom = [p for p in todos if p.get("cupom")]

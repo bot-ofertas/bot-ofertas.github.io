@@ -151,6 +151,7 @@ async def rodar_uma_vez() -> None:
                 item["adicionado_em"] = __import__("datetime").datetime.now().isoformat()
                 item["affiliate_link"] = item.get("link", "")
                 db.inserir_produto(item)
+                db.atualizar_afiliado(produto_id, "amazon", item["affiliate_link"], "ok")
                 db.marcar_enviado(produto_id)
                 publicados += 1
                 log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
