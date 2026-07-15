@@ -27,7 +27,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from telegram import Bot
 
-from core.scorer import calcular_score
+from core.scorer import score_inteligente
 from core.validador import validar
 from core.scheduler import e_bom_momento, resumo_horario
 import core.database as db
@@ -155,7 +155,7 @@ async def processar_categoria(
             continue
 
         # ── 3. Score ──────────────────────────────────────────────────────────
-        score = calcular_score(item)
+        score = score_inteligente(item)
         item["score"] = score
 
         if score < SCORE_MINIMO:
@@ -242,6 +242,23 @@ async def processar_categoria(
             contadores["publicados"] += 1
             log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
 
+            # Métricas — Telegram e Mercado Livre (best-effort, não pode quebrar o fluxo)
+            try:
+                from core.metrics import inc
+                inc("posts_telegram_total")
+                inc("posts_ml_total")
+            except Exception:
+                pass
+
+            # Blog — gera landing/index/sitemap em background (best-effort,
+            # NUNCA pode derrubar a publicação já concluída no Telegram)
+            try:
+                from core.blog_generator import gerar_tudo
+                gerar_tudo(item)
+            except Exception as _e_blog:
+                from core.error_logger import log_erro
+                log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
+
             # WhatsApp em segundo plano — ISOLADO do Telegram (best-effort).
             # Se WhatsApp travar/falhar por qualquer motivo, o Telegram continua.
             # Timeout de 90s por envio evita bloquear a rodada inteira.
@@ -252,6 +269,12 @@ async def processar_categoria(
                         timeout=90.0,
                     )
                     log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
+                    if wa_ok:
+                        try:
+                            from core.metrics import inc
+                            inc("posts_whatsapp_total")
+                        except Exception:
+                            pass
                 except asyncio.TimeoutError as _e:
                     from core.error_logger import log_erro
                     log_erro("wa.timeout_90s", _e,
@@ -341,6 +364,13 @@ async def rodar_uma_vez() -> None:
         duplicatas=contadores["duplicatas"],
         erros=contadores["erros"],
     )
+
+    # Métrica — uma rodada completa (incondicional, best-effort)
+    try:
+        from core.metrics import inc
+        inc("rodadas_completadas")
+    except Exception:
+        pass
 
     log(f"\n{'=' * 55}")
     log(

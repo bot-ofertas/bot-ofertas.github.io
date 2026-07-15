@@ -26,7 +26,7 @@ from dotenv import load_dotenv
 from telegram import Bot
 
 import core.database as db
-from core.scorer import calcular_score
+from core.scorer import score_inteligente
 from core.validador import validar
 from integrations.amazon_scraper import buscar_cupons_amazon_async, amazon_ativo
 from integrations.telegram_bot import publicar_alerta_cupom
@@ -123,7 +123,7 @@ async def rodar_uma_vez() -> None:
                     continue
 
             # Score
-            score = calcular_score(item)
+            score = score_inteligente(item)
             # Bônus por ter cupom
             if item.get("cupom"):
                 score = min(100, score + 15)
@@ -155,6 +155,21 @@ async def rodar_uma_vez() -> None:
                 publicados += 1
                 log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
 
+                try:
+                    from core.metrics import inc  # noqa: PLC0415
+                    inc("posts_telegram_total")
+                    inc("posts_amazon_total")
+                except Exception:
+                    pass
+
+                # Blog: gera landing page + atualiza index/sitemap (best-effort, nunca derruba a publicação)
+                try:
+                    from core.blog_generator import gerar_tudo  # noqa: PLC0415
+                    gerar_tudo(item)
+                except Exception as _e_blog:
+                    from core.error_logger import log_erro  # noqa: PLC0415
+                    log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
+
                 # WhatsApp simultâneo
                 if wa_ativo():
                     try:
@@ -163,6 +178,12 @@ async def rodar_uma_vez() -> None:
                             timeout=90.0,
                         )
                         log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
+                        if wa_ok:
+                            try:
+                                from core.metrics import inc  # noqa: PLC0415
+                                inc("posts_whatsapp_total")
+                            except Exception:
+                                pass
                     except Exception as _e_wa:
                         from core.error_logger import log_erro  # noqa: PLC0415
                         log_erro("amazon.wa.envio_falha", _e_wa, {"produto_id": produto_id})
@@ -178,6 +199,12 @@ async def rodar_uma_vez() -> None:
 
     log(f"\n{'=' * 55}")
     log(f"Amazon: {publicados} cupom(s) publicado(s)")
+
+    try:
+        from core.metrics import inc  # noqa: PLC0415
+        inc("rodadas_completadas")
+    except Exception:
+        pass
 
 
 def _outra_instancia_amazon() -> bool:
