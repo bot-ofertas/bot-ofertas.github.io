@@ -1,6 +1,112 @@
 {
   "products": [
     {
+      "titulo": "Tablet Samsung Galaxy Tab S10 FE, Cinza, 128GB, 8GB RAM, Tela Imersiva de 10.9\" 90Hz, Camera Traseira de 13MP, Câmera Frontal de 12MP Ultra Wide, Wifi 6, IP68, Android 15",
+      "preco": 2832.68,
+      "preco_original": 4199.0,
+      "desconto_pct": 32.5,
+      "foto": "https://m.media-amazon.com/images/I/51nStwLekjL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 87,
+      "enviado_em": "2026-07-15T07:19:14.091087",
+      "link": "https://www.amazon.com.br/dp/B0F3LTWYS5?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 2832.68,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Galaxy Tab S10 Lite, 128GB, Tela 10.9\", WIFI, Cinza",
+      "preco": 2218.62,
+      "preco_original": 3149.0,
+      "desconto_pct": 29.5,
+      "foto": "https://m.media-amazon.com/images/I/51UFm7dGUuL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 84,
+      "enviado_em": "2026-07-15T07:19:05.309442",
+      "link": "https://www.amazon.com.br/dp/B0FMFRFNWG?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 2218.62,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
+      "preco": 1048.0,
+      "preco_original": 1379.0,
+      "desconto_pct": 24.0,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 72,
+      "enviado_em": "2026-07-15T07:18:56.653533",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1048.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ventosas Orbitx Starlink Mini Para Painel Alta Sucção Preto",
+      "preco": 98.6,
+      "preco_original": 298.0,
+      "desconto_pct": 66.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_914768-MLB113970204591_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 67,
+      "enviado_em": "2026-07-15T07:17:28.471907",
+      "link": "https://www.mercadolivre.com.br/ventosas-orbitx-starlink-mini-para-painel-alta-succao/up/MLBU3752712871?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 98.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Veicular Ddpai N2 Dual 2k+1080p App 1,9'' Tela Wifi N2 Dual+sd Card 128g",
+      "preco": 613.0,
+      "preco_original": 1199.0,
+      "desconto_pct": 48.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_903165-MLB110868376322_052026-AB.webp",
+      "categoria": "automotivo",
+      "score": 92,
+      "enviado_em": "2026-07-15T07:17:21.920393",
+      "cupom": "Cupom R$30 OFF",
+      "link": "https://www.mercadolivre.com.br/camera-veicular-ddpai-n2-dual-2k1080p-app-19-tela-wifi/up/MLBU3440773077?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 613.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeirinha Infantil Para Carro 9-36kg Passeio Com Segurança Cadeirinha Infantil Preto",
+      "preco": 398.9,
+      "preco_original": 616.0,
+      "desconto_pct": 35.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_920911-MLA98813793822_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 75,
+      "enviado_em": "2026-07-15T07:17:15.150086",
+      "link": "https://www.mercadolivre.com.br/cadeirinha-infantil-para-carro-9-36kg-passeio-com-seguranca-cadeirinha-infantil-preto/p/MLB62469792?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 398.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Carro Infantil 0 a 36Kg Elite 4 em 1 - Maxi Baby - Preto",
+      "preco": 379.9,
+      "preco_original": 670.0,
+      "desconto_pct": 43.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_786782-MLA99523938502_122025-AB.webp",
+      "categoria": "automotivo",
+      "score": 83,
+      "enviado_em": "2026-07-15T07:17:08.586117",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-0-a-36kg-elite-4-em-1-maxi-baby-preto/p/MLB29756545?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 379.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Com 100 Envelopes Lacrados Para Colecionar Figurinhas da Copa Do Mundo FIFA 2026 Panini",
       "preco": 498.51,
       "preco_original": 979.0,
@@ -1551,6 +1657,12 @@
       "desconto_medio": 44,
       "maior_desconto": 46
     },
+    "automotivo": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 49,
+      "maior_desconto": 66
+    },
     "armazenamento": {
       "total": 4,
       "score_medio": 72,
@@ -1562,6 +1674,12 @@
       "score_medio": 71,
       "desconto_medio": 47,
       "maior_desconto": 74
+    },
+    "informatica": {
+      "total": 3,
+      "score_medio": 81,
+      "desconto_medio": 29,
+      "maior_desconto": 32
     },
     "redes": {
       "total": 2,
@@ -1576,6 +1694,6 @@
       "maior_desconto": 51
     }
   },
-  "updated_at": "2026-07-15T04:35:25.604005",
-  "total": 96
+  "updated_at": "2026-07-15T07:19:22.838717",
+  "total": 103
 }
