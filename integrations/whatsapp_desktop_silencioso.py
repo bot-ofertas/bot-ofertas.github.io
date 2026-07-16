@@ -61,6 +61,23 @@ def _copiar_texto(texto: str) -> bool:
         return False
 
 
+def _janela_esta_ativa(janela) -> bool:
+    """Confirma que a janela ATIVA de verdade é o WhatsApp (por título), não
+    outra coisa que roubou o foco (ex: automação de navegador rodando junto).
+    Sem essa checagem, os comandos de teclado/colar podem ir parar em
+    qualquer janela que esteja em foco no momento — inclusive postando a
+    oferta em outro app/página por engano."""
+    try:
+        import pygetwindow as gw  # noqa: PLC0415
+        ativa = gw.getActiveWindow()
+        if ativa is None:
+            return False
+        titulo = (ativa.title or "").lower()
+        return "whatsapp" in titulo and "chrome" not in titulo and "edge" not in titulo
+    except Exception:
+        return False
+
+
 def _achar_janela_wa():
     """Retorna janela do WhatsApp Desktop (aceita minimizada). None se não achou."""
     try:
@@ -113,6 +130,21 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
                 pass
         time.sleep(0.5)
 
+        # Confirma que o foco realmente ficou no WhatsApp — tenta reativar
+        # mais 2x antes de desistir (evita digitar em outra janela por engano)
+        for _tentativa in range(3):
+            if _janela_esta_ativa(janela):
+                break
+            try:
+                janela.activate()
+            except Exception:
+                pass
+            time.sleep(0.4)
+        else:
+            log.warning("WhatsApp não ganhou foco — abortando envio (evita postar em janela errada)")
+            _devolver_foco(janela, janela_anterior)
+            return False
+
         # 2. LIMPA estado residual: fecha qualquer preview aberto
         pyautogui.press("escape")
         time.sleep(0.15)
@@ -130,6 +162,14 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
         time.sleep(1.0)
         pyautogui.press("enter")
         time.sleep(1.3)
+
+        # Reconfirma foco antes de colar/enviar de verdade — é o ponto mais
+        # sensível (várias ações e ~2s se passaram desde a 1ª checagem, tempo
+        # de sobra pra outra automação/o usuário roubar o foco no meio)
+        if not _janela_esta_ativa(janela):
+            log.warning("Foco mudou antes de colar — abortando envio (evita postar em janela errada)")
+            _devolver_foco(janela, janela_anterior)
+            return False
 
         # 4. Foto + legenda
         if caminho_foto and os.path.exists(caminho_foto):

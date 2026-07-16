@@ -288,6 +288,19 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
             return False
         time.sleep(0.8)
 
+        # Confirma que o foco realmente ficou no WhatsApp antes de digitar —
+        # sem isso, outra automação/janela pode roubar o foco e a oferta
+        # acaba sendo colada no lugar errado
+        try:
+            import pygetwindow as _gw  # noqa: PLC0415
+            _ativa = _gw.getActiveWindow()
+            _titulo = (_ativa.title or "").lower() if _ativa else ""
+            if "whatsapp" not in _titulo:
+                log.warning("WhatsApp não ganhou foco — abortando (evita postar em janela errada)")
+                return False
+        except Exception:
+            pass
+
         # 2. Ctrl+F → busca conversa
         pyautogui.hotkey("ctrl", "f")
         time.sleep(0.6)
