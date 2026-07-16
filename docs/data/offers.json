@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
+      "preco": 969.0,
+      "preco_original": 1289.0,
+      "desconto_pct": 24.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 71,
+      "enviado_em": "2026-07-16T09:38:08.997951",
+      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 969.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1299.0,
+      "preco_original": 2099.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 93,
+      "enviado_em": "2026-07-16T09:38:02.276363",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB67270079?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1299.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV Profissional LG 43\" Full HD Processador a5 Ger6 AI Alexa Integrada webOS 23 – 43LR671C-B",
+      "preco": 1499.0,
+      "preco_original": 2284.0,
+      "desconto_pct": 34.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_929244-MLA104540336039_012026-AB.webp",
+      "categoria": "tvs",
+      "score": 89,
+      "enviado_em": "2026-07-16T09:37:55.647898",
+      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-lg-43-full-hd-processador-a5-ger6-ai-alexa-integrada-webos-23-43lr671c-b/p/MLB41106126?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1499.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1399.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-16T09:37:48.978266",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "NAC 600mg - Fórmula Exclusiva com Máxima Concentração e Pureza - N-Acetil L-Cisteína - 60 Cápsulas",
       "preco": 46.77,
       "preco_original": 89.0,
@@ -237,7 +297,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-lg-43full-hd-processador-a5-ger6-ai-alexa-e-webos-23-43lr6700psa/p/MLB39205913?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1529.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -570,7 +630,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 868.63,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -841,7 +901,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-philips-50-4k-50pug7300-comando-de-voz-bluetooth/p/MLB57723340?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1929.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -916,7 +976,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-full-hd-roku-tv-hdr10-dolby-p43cra/p/MLB66418417?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1349.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -1297,17 +1357,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "LG XBOOM XG9S Caixa de som Bluetooth portátil - IP67 e 24 horas de bateria",
-    "preco": 958.5,
-    "preco_original": 2099.0,
-    "desconto_pct": 54.3,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_850547-MLA95560485257_102025-AB.webp",
-    "categoria": "eletronicos",
+    "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+    "preco": 1399.0,
+    "preco_original": 2499.0,
+    "desconto_pct": 44.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+    "categoria": "tvs",
     "score": 95,
-    "enviado_em": "2026-07-15T09:25:19.058608",
-    "link": "https://www.mercadolivre.com.br/lg-xboom-xg9s-caixa-de-som-bluetooth-portatil-ip67-e-24-horas-de-bateria/p/MLB47329866?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-16T09:37:48.978266",
+    "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 958.5,
+    "menor_preco_30d": 1399.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -1335,6 +1395,12 @@
       "score_medio": 82,
       "desconto_medio": 41,
       "maior_desconto": 50
+    },
+    "tvs": {
+      "total": 4,
+      "score_medio": 87,
+      "desconto_medio": 35,
+      "maior_desconto": 44
     },
     "saude": {
       "total": 4,
@@ -1427,6 +1493,6 @@
       "maior_desconto": 25
     }
   },
-  "updated_at": "2026-07-16T07:24:29.418318",
-  "total": 86
+  "updated_at": "2026-07-16T09:40:02.378389",
+  "total": 90
 }
