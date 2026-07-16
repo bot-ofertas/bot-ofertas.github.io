@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Esteira Elétrica Ergométrica Dobrável 12km C/tela Led Bivolt Preto 127/220v",
+      "preco": 1338.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 55.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_829313-MLB105024766633_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 97,
+      "enviado_em": "2026-07-16T13:06:46.302315",
+      "link": "https://www.mercadolivre.com.br/esteira-eletrica-ergometrica-dobravel-12km-ctela-led-bivolt/up/MLBU3640141455?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1338.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
+      "preco": 1346.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 97,
+      "enviado_em": "2026-07-16T13:06:39.403342",
+      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1346.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
+      "preco": 39.9,
+      "preco_original": 64.0,
+      "desconto_pct": 37.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 79,
+      "enviado_em": "2026-07-16T13:06:32.859629",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Chocolate",
+      "preco": 78.9,
+      "preco_original": 129.0,
+      "desconto_pct": 38.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_859161-MLA99962428017_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 77,
+      "enviado_em": "2026-07-16T13:06:26.278213",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/whey-isolate-protein-fuse-900g-dark-lab-sabor-chocolate/p/MLB19381117?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 78.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Carregador Portátil Power Bank Turbo 20000mah 22.5w Universal Para iPhone Samsung Motorlola Xiaomi Com Display Digital Preto ou Branco- Hardline",
       "preco": 64.0,
       "preco_original": 129.0,
@@ -1432,6 +1493,12 @@
     "verificada": true
   },
   "stats": {
+    "esportes": {
+      "total": 12,
+      "score_medio": 81,
+      "desconto_medio": 45,
+      "maior_desconto": 70
+    },
     "brinquedos": {
       "total": 10,
       "score_medio": 83,
@@ -1443,12 +1510,6 @@
       "score_medio": 85,
       "desconto_medio": 34,
       "maior_desconto": 49
-    },
-    "esportes": {
-      "total": 8,
-      "score_medio": 77,
-      "desconto_medio": 46,
-      "maior_desconto": 70
     },
     "celulares": {
       "total": 8,
@@ -1553,6 +1614,6 @@
       "maior_desconto": 25
     }
   },
-  "updated_at": "2026-07-16T11:23:47.391113",
-  "total": 94
+  "updated_at": "2026-07-16T13:08:10.262364",
+  "total": 98
 }
