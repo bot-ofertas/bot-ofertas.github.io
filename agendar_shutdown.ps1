@@ -35,8 +35,10 @@ $triggerShut = New-ScheduledTaskTrigger -Daily -At "01:55"
 $settingsShut = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
-    -StartWhenAvailable `
     -MultipleInstances IgnoreNew
+    # SEM -StartWhenAvailable: essa flag faz o Windows "recuperar" o gatilho
+    # perdido assim que o PC liga de novo, desligando fora de hora (bug real
+    # encontrado em 2026-07-16 — PC desligava logo após ser ligado manualmente).
 
 $principalShut = New-ScheduledTaskPrincipal `
     -UserId $env:USERNAME -LogonType Interactive
@@ -63,11 +65,11 @@ $actionWake = New-ScheduledTaskAction `
 $triggerWake = New-ScheduledTaskTrigger -Daily -At "08:45"
 
 # WakeToRun = tira o PC do sleep/hibernate no horário
+# SEM -StartWhenAvailable (mesmo motivo do shutdown — evita disparo fora de hora)
 $settingsWake = New-ScheduledTaskSettingsSet `
     -WakeToRun `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
-    -StartWhenAvailable `
     -MultipleInstances IgnoreNew `
     -ExecutionTimeLimit (New-TimeSpan -Hours 0)
 
