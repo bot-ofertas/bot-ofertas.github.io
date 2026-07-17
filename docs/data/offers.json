@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 Pronta Entrega",
+      "preco": 49.97,
+      "preco_original": 100.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_876614-MLB110800889269_042026-AB.webp",
+      "categoria": "livros",
+      "score": 77,
+      "enviado_em": "2026-07-17T09:24:27.446953",
+      "link": "https://www.mercadolivre.com.br/kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega/up/MLBU3923294598?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 49.97,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
+      "preco": 66.0,
+      "preco_original": 140.0,
+      "desconto_pct": 52.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
+      "categoria": "livros",
+      "score": 77,
+      "enviado_em": "2026-07-17T09:24:20.737732",
+      "link": "https://www.mercadolivre.com.br/kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon/p/MLB66060206?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 66.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Fotográfico A4 Glossy 135g 200 Folhas Branco Brilhante Para Impressora Jato de Tinta",
+      "preco": 42.98,
+      "preco_original": 68.0,
+      "desconto_pct": 36.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632418-MLA112307348760_062026-AB.webp",
+      "categoria": "tablets",
+      "score": 72,
+      "enviado_em": "2026-07-17T09:24:11.508492",
+      "link": "https://www.mercadolivre.com.br/papel-fotografico-a4-glossy-135g-200-folhas-branco-brilhante-para-impressora-jato-de-tinta/p/MLB73957008?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 42.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Fotográfico A4 Glossy 180g Dupla Face 100 Folhas Brilhante Para Impressão Frente E Verso",
+      "preco": 39.6,
+      "preco_original": 53.0,
+      "desconto_pct": 25.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_740992-MLA110896065418_052026-AB.webp",
+      "categoria": "tablets",
+      "score": 60,
+      "enviado_em": "2026-07-17T09:24:04.964585",
+      "link": "https://www.mercadolivre.com.br/papel-fotografico-a4-glossy-180g-dupla-face-100-folhas-brilhante-para-impresso-frente-e-verso/p/MLB67651256?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 39.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Apple iPhone 17 de 256 GB — Preto",
       "preco": 5598.99,
       "preco_original": 7999.0,
@@ -358,8 +418,8 @@
       "enviado_em": "2026-07-15T12:46:13.797093",
       "link": "https://www.mercadolivre.com.br/kit-12-envelopes-com-84-figurinhas-copa-do-mundo-2026/p/MLB66864521?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
-      "menor_preco_30d": 59.37,
-      "menor_periodo": false,
+      "menor_preco_30d": 56.4,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -931,6 +991,12 @@
       "desconto_medio": 49,
       "maior_desconto": 66
     },
+    "tablets": {
+      "total": 3,
+      "score_medio": 64,
+      "desconto_medio": 29,
+      "maior_desconto": 36
+    },
     "informatica": {
       "total": 3,
       "score_medio": 81,
@@ -943,13 +1009,13 @@
       "desconto_medio": 31,
       "maior_desconto": 38
     },
-    "tablets": {
-      "total": 1,
-      "score_medio": 60,
-      "desconto_medio": 25,
-      "maior_desconto": 25
+    "livros": {
+      "total": 2,
+      "score_medio": 77,
+      "desconto_medio": 51,
+      "maior_desconto": 52
     }
   },
-  "updated_at": "2026-07-17T07:18:19.107846",
-  "total": 57
+  "updated_at": "2026-07-17T09:26:20.179228",
+  "total": 61
 }
