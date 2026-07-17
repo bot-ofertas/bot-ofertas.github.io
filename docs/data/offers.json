@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "MONITOR GAMER LG 22MP410 - TELA VA DE 21.5\", FHD (1920X1080), 75HZ, 5MS (GTG), HDMI, FREESYNC",
+      "preco": 399.99,
+      "preco_original": 749.0,
+      "desconto_pct": 46.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_890876-MLA99938471091_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 88,
+      "enviado_em": "2026-07-17T12:39:09.510857",
+      "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-22mp410-tela-va-de-215-fhd-1920x1080-75hz-5ms-gtg-hdmi-freesync/p/MLB19812882?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 399.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Samsung 32'' Hd Tizen Hdr Wi-fi Hdmi Monitor Bivolt Preta Preto",
+      "preco": 891.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 40.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_924175-MLA99993108321_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 95,
+      "enviado_em": "2026-07-17T12:39:02.992980",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-32-hd-tizen-hdr-wi-fi-hdmi-monitor-bivolt-preta-preto/p/MLB52027456?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 891.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional HP Smart Tank 584 - Preta",
+      "preco": 804.31,
+      "preco_original": 1363.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_847584-MLA113137412934_072026-AB.webp",
+      "categoria": "informatica",
+      "score": 95,
+      "enviado_em": "2026-07-17T12:38:56.456651",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-smart-tank-584-preta/p/MLB34801962?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 804.31,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
+      "preco": 179.98,
+      "preco_original": 349.0,
+      "desconto_pct": 48.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB.webp",
+      "categoria": "informatica",
+      "score": 81,
+      "enviado_em": "2026-07-17T12:38:49.934455",
+      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Roku Streaming Stick HD 2025 | Dispositivo de streaming para TV HD/FHD com controle remoto por comando de voz compatível com Alexa, Siri e Google",
       "preco": 221.0,
       "preco_original": 289.9,
@@ -1027,17 +1087,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
-    "preco": 1292.0,
-    "preco_original": 2212.0,
-    "desconto_pct": 41.6,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705075-MLA99943632917_112025-AB.webp",
-    "categoria": "celulares",
-    "score": 100,
-    "enviado_em": "2026-07-16T11:22:14.501185",
-    "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+    "preco": 928.31,
+    "preco_original": 1499.0,
+    "desconto_pct": 38.1,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+    "categoria": "tvs",
+    "score": 98,
+    "enviado_em": "2026-07-17T11:09:28.971987",
+    "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1292.0,
+    "menor_preco_30d": 928.31,
     "menor_periodo": true,
     "verificada": true
   },
@@ -1065,6 +1125,12 @@
       "score_medio": 79,
       "desconto_medio": 48,
       "maior_desconto": 69
+    },
+    "informatica": {
+      "total": 7,
+      "score_medio": 86,
+      "desconto_medio": 38,
+      "maior_desconto": 48
     },
     "saude": {
       "total": 4,
@@ -1102,12 +1168,6 @@
       "desconto_medio": 29,
       "maior_desconto": 36
     },
-    "informatica": {
-      "total": 3,
-      "score_medio": 81,
-      "desconto_medio": 29,
-      "maior_desconto": 32
-    },
     "casa": {
       "total": 3,
       "score_medio": 70,
@@ -1121,6 +1181,6 @@
       "maior_desconto": 52
     }
   },
-  "updated_at": "2026-07-17T11:12:39.582825",
-  "total": 68
+  "updated_at": "2026-07-17T12:40:04.679213",
+  "total": 72
 }
