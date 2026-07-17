@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Roku Streaming Stick HD 2025 | Dispositivo de streaming para TV HD/FHD com controle remoto por comando de voz compatível com Alexa, Siri e Google",
+      "preco": 221.0,
+      "preco_original": 289.9,
+      "desconto_pct": 23.8,
+      "foto": "https://m.media-amazon.com/images/I/71NIAAVDxML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 60,
+      "enviado_em": "2026-07-17T11:12:30.406402",
+      "link": "https://www.amazon.com.br/dp/B0FH7LY3R4?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 221.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "JBL, Caixa de Som, Boombox 4, Bluetooth, Som JBL Pro, AI Sound Boost, Graves Personalizáveis, Bateria de até 34h, IP68, Áudio Lossless – Preta",
+      "preco": 2398.0,
+      "preco_original": 3199.0,
+      "desconto_pct": 25.0,
+      "foto": "https://m.media-amazon.com/images/I/71FPDlwePVL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 80,
+      "enviado_em": "2026-07-17T11:12:21.558749",
+      "link": "https://www.amazon.com.br/dp/B0FK1NJLXB?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 2398.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 16e de 128 GB — Preto",
+      "preco": 3599.1,
+      "preco_original": 5799.0,
+      "desconto_pct": 37.9,
+      "foto": "https://m.media-amazon.com/images/I/412RWxKFt8L._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 87,
+      "enviado_em": "2026-07-17T11:12:12.585330",
+      "link": "https://www.amazon.com.br/dp/B0DXR7GNWJ?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 3599.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43s5155/78g",
+      "preco": 1489.0,
+      "preco_original": 1919.0,
+      "desconto_pct": 22.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935991-MLA99489146286_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 74,
+      "enviado_em": "2026-07-17T11:09:49.094526",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-aoc-led-roku-full-hd-wi-fi-60hz-hdmi-usb-43s515578g/p/MLB59090080?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1489.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Samsung Led 50 Lh50befh4ggxzd Led Crystal Processor 4k Uhd Tizen 110v/220v",
+      "preco": 2212.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 44.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_798903-MLA95579597211_102025-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-17T11:09:42.402147",
+      "link": "https://www.mercadolivre.com.br/smart-tv-samsung-led-50-lh50befh4ggxzd-led-crystal-processor-4k-uhd-tizen-110v220v/p/MLB58372375?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2212.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philips 50 4k 50pug7300 Comando De Voz Bluetooth",
+      "preco": 2079.0,
+      "preco_original": 3089.0,
+      "desconto_pct": 32.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_603690-MLA93305557455_092025-AB.webp",
+      "categoria": "tvs",
+      "score": 87,
+      "enviado_em": "2026-07-17T11:09:35.674865",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philips-50-4k-50pug7300-comando-de-voz-bluetooth/p/MLB57723340?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1929.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 928.31,
+      "preco_original": 1499.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 98,
+      "enviado_em": "2026-07-17T11:09:28.971987",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 928.31,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 Pronta Entrega",
       "preco": 49.97,
       "preco_original": 100.0,
@@ -344,7 +449,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1399.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -943,23 +1048,23 @@
       "desconto_medio": 45,
       "maior_desconto": 70
     },
+    "eletronicos": {
+      "total": 9,
+      "score_medio": 84,
+      "desconto_medio": 35,
+      "maior_desconto": 54
+    },
+    "tvs": {
+      "total": 8,
+      "score_medio": 88,
+      "desconto_medio": 35,
+      "maior_desconto": 44
+    },
     "impressoras": {
       "total": 8,
       "score_medio": 79,
       "desconto_medio": 48,
       "maior_desconto": 69
-    },
-    "eletronicos": {
-      "total": 6,
-      "score_medio": 89,
-      "desconto_medio": 39,
-      "maior_desconto": 54
-    },
-    "tvs": {
-      "total": 4,
-      "score_medio": 87,
-      "desconto_medio": 35,
-      "maior_desconto": 44
     },
     "saude": {
       "total": 4,
@@ -1016,6 +1121,6 @@
       "maior_desconto": 52
     }
   },
-  "updated_at": "2026-07-17T09:26:20.179228",
-  "total": 61
+  "updated_at": "2026-07-17T11:12:39.582825",
+  "total": 68
 }
