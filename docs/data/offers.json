@@ -1,6 +1,113 @@
 {
   "products": [
     {
+      "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
+      "preco": 94.91,
+      "preco_original": 159.9,
+      "desconto_pct": 40.6,
+      "foto": "https://m.media-amazon.com/images/I/51UxR8FHe-L._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 77,
+      "enviado_em": "2026-07-18T12:36:16.672483",
+      "link": "https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 94.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Electrolux Kit 12 Potes Herméticos de Plástico Retangulares, Multiuso, Vedação Silicone, BPA Free, Porta Mantimentos",
+      "preco": 92.91,
+      "preco_original": 129.9,
+      "desconto_pct": 28.5,
+      "foto": "https://m.media-amazon.com/images/I/51uccv-jBiL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 69,
+      "enviado_em": "2026-07-18T12:36:07.979756",
+      "link": "https://www.amazon.com.br/dp/B09XJL4B9H?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 92.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Filtro/Refil Original de Água Acqua Pure para Purificador Electrolux PE12A/PE12B/PE12G/PE12V/PE12P",
+      "preco": 68.9,
+      "preco_original": 80.99,
+      "desconto_pct": 14.9,
+      "foto": "https://m.media-amazon.com/images/I/61Wa-avvnwL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 47,
+      "enviado_em": "2026-07-18T12:35:59.365209",
+      "link": "https://www.amazon.com.br/dp/B0F256HPZJ?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 68.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Gamer Predator Helios Neo 16 Phn16-73-76TF Com IA Intel® Core Ultra 7 255HX 16GB 512SSD RTX5070 WQXGA 16",
+      "preco": 10499.0,
+      "preco_original": 13999.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_902132-MLA100689338352_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 80,
+      "enviado_em": "2026-07-18T12:34:33.389543",
+      "cupom": "Cupom R$600 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-predator-helios-neo-16-phn16-73-76tf-com-ia-intel-core-ultra-7-255hx-16gb-512ssd-rtx5070-wqxga-16/p/MLB63112463?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 10499.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision R15M Com AMD Ryzen 5, 8GB de RAM e SSD de 256GB",
+      "preco": 2729.0,
+      "preco_original": 3855.0,
+      "desconto_pct": 29.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_733885-MLA101679394133_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 84,
+      "enviado_em": "2026-07-18T12:34:26.661196",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-r15m-com-amd-ryzen-5-8gb-de-ram-e-ssd-de-256gb/p/MLB53471779?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2729.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Gamer Rog Strix G16 G615jpr Nvidia Rtx 5070 Intel Core I9 14900hx 32gb Ram 1tb Ssd Windows 11 Home Tela 16 240hz Led Cinza - S5001w",
+      "preco": 12879.0,
+      "preco_original": 16999.0,
+      "desconto_pct": 24.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662607-MLA100012354161_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 79,
+      "enviado_em": "2026-07-18T12:34:20.155293",
+      "cupom": "Cupom R$600 OFF",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-rog-strix-g16-g615jpr-nvidia-rtx-5070-intel-core-i9-14900hx-32gb-ram-1tb-ssd-windows-11-home-tela-16-240hz-led-cinza-s5001w/p/MLB51764304?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 12879.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook ASUS Vivobook Go 15 E1504, AMD RYZEN 5 7520U 2,8 GHz, 8GB Ram, 256GB SSD, Windows 11 Home, Tela 15,6\" FHD, Black - E1504FA-NJ825W",
+      "preco": 3134.0,
+      "preco_original": 3990.0,
+      "desconto_pct": 21.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874571-MLA99984971829_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 76,
+      "enviado_em": "2026-07-18T12:34:13.433853",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-e1504-amd-ryzen-5-7520u-28-ghz-8gb-ram-256gb-ssd-windows-11-home-tela-156-fhd-black-e1504fa-nj825w/p/MLB29126536?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3134.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
       "preco": 497.9,
       "preco_original": 906.0,
@@ -900,6 +1007,12 @@
       "desconto_medio": 43,
       "maior_desconto": 55
     },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 80,
+      "desconto_medio": 25,
+      "maior_desconto": 29
+    },
     "informatica": {
       "total": 4,
       "score_medio": 90,
@@ -930,6 +1043,12 @@
       "desconto_medio": 49,
       "maior_desconto": 61
     },
+    "casa": {
+      "total": 3,
+      "score_medio": 64,
+      "desconto_medio": 28,
+      "maior_desconto": 40
+    },
     "tablets": {
       "total": 2,
       "score_medio": 66,
@@ -949,6 +1068,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-18T11:28:22.107842",
-  "total": 57
+  "updated_at": "2026-07-18T12:36:25.224290",
+  "total": 64
 }
