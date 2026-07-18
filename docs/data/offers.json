@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Perfume Carolina Herrera 212 VIP Black Eau de Parfum 200 ml masculino",
+      "preco": 518.49,
+      "preco_original": 1048.0,
+      "desconto_pct": 50.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_849828-MLA93387691711_092025-AB.webp",
+      "categoria": "monitores",
+      "score": 95,
+      "enviado_em": "2026-07-18T10:18:49.275146",
+      "link": "https://www.mercadolivre.com.br/perfume-carolina-herrera-212-vip-black-eau-de-parfum-200-ml-masculino/p/MLB9033853?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 518.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Elétrica Air Fryer 8 em 1 Wap Barbecue Heat Digital Wc Ab1030",
+      "preco": 587.95,
+      "preco_original": 999.0,
+      "desconto_pct": 41.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_668373-MLA111751070303_052026-AB.webp",
+      "categoria": "monitores",
+      "score": 91,
+      "enviado_em": "2026-07-18T10:18:42.576906",
+      "link": "https://www.mercadolivre.com.br/fritadeira-eletrica-air-fryer-8-em-1-wap-barbecue-heat-digital-wc-ab1030/p/MLB56416399?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 587.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Inteligente Intelbras Ime 360 3mp Visão 360 Wi-fi Cor Branco",
+      "preco": 180.96,
+      "preco_original": 287.0,
+      "desconto_pct": 36.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_913608-MLA99464199898_112025-AB.webp",
+      "categoria": "monitores",
+      "score": 75,
+      "enviado_em": "2026-07-18T10:18:35.867456",
+      "cupom": "Cupom 40% OFF",
+      "link": "https://www.mercadolivre.com.br/cmera-inteligente-intelbras-ime-360-3mp-viso-360-wi-fi-cor-branco/p/MLB53403093?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 180.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Amaciante Downy Concentrado Perfume Collection Místico 3L",
+      "preco": 39.9,
+      "preco_original": 66.0,
+      "desconto_pct": 39.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_674711-MLA99925292679_112025-AB.webp",
+      "categoria": "monitores",
+      "score": 75,
+      "enviado_em": "2026-07-18T10:18:28.864781",
+      "link": "https://www.mercadolivre.com.br/amaciante-downy-concentrado-perfume-collection-mistico-3l/p/MLB18409183?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 2 Controles Para Ps4 Sem Fio Bluetooth Videogame Tv Smart Pc Gamer Celular Dual Shock Joystick Manete - Crowley",
       "preco": 106.9,
       "preco_original": 159.0,
@@ -767,17 +828,17 @@
       "desconto_medio": 35,
       "maior_desconto": 44
     },
+    "monitores": {
+      "total": 8,
+      "score_medio": 85,
+      "desconto_medio": 40,
+      "maior_desconto": 50
+    },
     "esportes": {
       "total": 8,
       "score_medio": 83,
       "desconto_medio": 43,
       "maior_desconto": 55
-    },
-    "monitores": {
-      "total": 4,
-      "score_medio": 86,
-      "desconto_medio": 38,
-      "maior_desconto": 45
     },
     "informatica": {
       "total": 4,
@@ -816,6 +877,6 @@
       "maior_desconto": 52
     }
   },
-  "updated_at": "2026-07-18T08:56:23.069915",
-  "total": 49
+  "updated_at": "2026-07-18T10:20:14.052460",
+  "total": 53
 }
