@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+      "preco": 497.9,
+      "preco_original": 906.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 96,
+      "enviado_em": "2026-07-18T11:27:28.660793",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 497.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira Adubadeira Manual 14 Bicos Uso Agrícola",
+      "preco": 789.94,
+      "preco_original": 1588.0,
+      "desconto_pct": 50.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755067-MLB110934402119_042026-AB.webp",
+      "categoria": "pet",
+      "score": 95,
+      "enviado_em": "2026-07-18T11:27:19.777274",
+      "link": "https://www.mercadolivre.com.br/plantadeira-adubadeira-manual-14-bicos-uso-agricola/up/MLBU3931003724?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 789.94,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira E Adubadeira Manual Empurrar Agricolas 14 Bicos",
+      "preco": 757.61,
+      "preco_original": 1198.0,
+      "desconto_pct": 36.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_924661-MLB109924097164_042026-AB.webp",
+      "categoria": "pet",
+      "score": 88,
+      "enviado_em": "2026-07-18T11:27:13.249325",
+      "link": "https://www.mercadolivre.com.br/plantadeira-e-adubadeira-manual-empurrar-agricolas-14-bicos/up/MLBU3715043775?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 757.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Plantadeira Manual Agricolas 12 Bicos Para Diversas Sementes",
+      "preco": 579.5,
+      "preco_original": 1499.0,
+      "desconto_pct": 61.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_652069-MLB113428264366_072026-AB.webp",
+      "categoria": "pet",
+      "score": 83,
+      "enviado_em": "2026-07-18T11:27:06.663090",
+      "link": "https://www.mercadolivre.com.br/plantadeira-manual-agricolas-12-bicos-para-diversas-sementes/up/MLBU3723849522?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 579.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Perfume Carolina Herrera 212 VIP Black Eau de Parfum 200 ml masculino",
       "preco": 518.49,
       "preco_original": 1048.0,
@@ -801,18 +861,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
-    "preco": 928.31,
-    "preco_original": 1499.0,
-    "desconto_pct": 38.1,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
-    "categoria": "tvs",
-    "score": 98,
-    "enviado_em": "2026-07-17T11:09:28.971987",
-    "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+    "preco": 497.9,
+    "preco_original": 906.0,
+    "desconto_pct": 45.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+    "categoria": "moveis",
+    "score": 96,
+    "enviado_em": "2026-07-18T11:27:28.660793",
+    "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 928.31,
-    "menor_periodo": true,
+    "menor_preco_30d": 497.9,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
@@ -864,6 +924,12 @@
       "desconto_medio": 43,
       "maior_desconto": 50
     },
+    "pet": {
+      "total": 3,
+      "score_medio": 89,
+      "desconto_medio": 49,
+      "maior_desconto": 61
+    },
     "tablets": {
       "total": 2,
       "score_medio": 66,
@@ -875,8 +941,14 @@
       "score_medio": 77,
       "desconto_medio": 51,
       "maior_desconto": 52
+    },
+    "moveis": {
+      "total": 1,
+      "score_medio": 96,
+      "desconto_medio": 45,
+      "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-18T10:20:14.052460",
-  "total": 53
+  "updated_at": "2026-07-18T11:28:22.107842",
+  "total": 57
 }
