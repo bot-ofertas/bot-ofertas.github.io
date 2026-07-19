@@ -1,6 +1,68 @@
 {
   "products": [
     {
+      "titulo": "Tripé De 180 Cm Para Bastão De Selfie De Celular Portátil Preto",
+      "preco": 84.14,
+      "preco_original": 186.0,
+      "desconto_pct": 54.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_901195-MLB82928052551_032025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 79,
+      "enviado_em": "2026-07-19T09:31:24.492453",
+      "link": "https://www.mercadolivre.com.br/tripe-de-180-cm-para-bastao-de-selfie-de-celular-portatil/up/MLBU2876802793?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 84.14,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cartão Memória Micro Sd Tf 64gb Original P/ Câmera Segurança",
+      "preco": 113.76,
+      "preco_original": 170.0,
+      "desconto_pct": 33.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605172-MLB107812452667_022026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 70,
+      "enviado_em": "2026-07-19T09:31:17.971329",
+      "link": "https://www.mercadolivre.com.br/cartao-memoria-micro-sd-tf-64gb-original-p-camera-seguranca/up/MLBU3811090283?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 113.76,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Fotográfico A4 115g 50 Folhas Maxprint Branco",
+      "preco": 20.06,
+      "preco_original": 33.0,
+      "desconto_pct": 39.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_606067-MLB113288420826_072026-AB.webp",
+      "categoria": "tablets",
+      "score": 64,
+      "enviado_em": "2026-07-19T09:31:09.348532",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/papel-fotografico-a4-115g-50-folhas-maxprint/up/MLBU3328087801?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 20.06,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Fotográfico Glossy A4 115g 200 Folhas Maxprint Branco",
+      "preco": 49.28,
+      "preco_original": 66.0,
+      "desconto_pct": 25.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_821039-MLB114533706201_072026-AB.webp",
+      "categoria": "tablets",
+      "score": 60,
+      "enviado_em": "2026-07-19T09:31:02.536902",
+      "cupom": "Cupom 5% OFF",
+      "link": "https://www.mercadolivre.com.br/papel-fotografico-glossy-a4-115g-200-folhas-maxprint/up/MLBU3446872788?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 49.28,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Celular Samsung Galaxy A17, 128GB, 4GB, 50MP Tela 6.7\", IP54 - Preto",
       "preco": 891.95,
       "preco_original": 1599.0,
@@ -871,6 +933,12 @@
       "desconto_medio": 34,
       "maior_desconto": 44
     },
+    "tablets": {
+      "total": 4,
+      "score_medio": 64,
+      "desconto_medio": 32,
+      "maior_desconto": 39
+    },
     "notebooks": {
       "total": 4,
       "score_medio": 80,
@@ -901,17 +969,17 @@
       "desconto_medio": 49,
       "maior_desconto": 61
     },
-    "tablets": {
-      "total": 2,
-      "score_medio": 66,
-      "desconto_medio": 31,
-      "maior_desconto": 36
-    },
     "livros": {
       "total": 2,
       "score_medio": 77,
       "desconto_medio": 51,
       "maior_desconto": 52
+    },
+    "ferramentas": {
+      "total": 2,
+      "score_medio": 75,
+      "desconto_medio": 44,
+      "maior_desconto": 54
     },
     "moveis": {
       "total": 1,
@@ -920,6 +988,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-19T07:30:28.817616",
-  "total": 55
+  "updated_at": "2026-07-19T09:33:46.292322",
+  "total": 59
 }
