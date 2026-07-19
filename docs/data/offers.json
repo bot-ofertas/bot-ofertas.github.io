@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A17, 128GB, 4GB, 50MP Tela 6.7\", IP54 - Preto",
+      "preco": 891.95,
+      "preco_original": 1599.0,
+      "desconto_pct": 44.2,
+      "foto": "https://m.media-amazon.com/images/I/51kT5SgPhNL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 95,
+      "enviado_em": "2026-07-19T07:30:20.100914",
+      "link": "https://www.amazon.com.br/dp/B0FPYV6K68?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 891.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV 40\" Philco Roku TV HDR10 Dolby Áudio P40CRA",
+      "preco": 1060.8,
+      "preco_original": 1499.0,
+      "desconto_pct": 29.2,
+      "foto": "https://m.media-amazon.com/images/I/81tK4J0OG-L._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 81,
+      "enviado_em": "2026-07-19T07:30:11.393866",
+      "link": "https://www.amazon.com.br/dp/B0GJTCF75W?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1060.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy S25 Ultra 5G, 256GB, 12GB RAM, Câmera Quádrupla de 200+50+10+50, Tela Grande de 6.9\", Titânio Preto",
+      "preco": 5998.78,
+      "preco_original": 6665.32,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/41uS5ZSX9yL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 60,
+      "enviado_em": "2026-07-19T07:30:02.678457",
+      "link": "https://www.amazon.com.br/dp/B0DSYJCY45?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 5998.78,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
+      "preco": 509.9,
+      "preco_original": 894.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "categoria": "casa",
+      "score": 95,
+      "enviado_em": "2026-07-19T07:27:34.342649",
+      "link": "https://www.mercadolivre.com.br/vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco/p/MLB24273671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 509.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cobertor Casal Manta Cereja Habitat Poá Bolinha Soft Macia Cereja Cerejas",
+      "preco": 65.0,
+      "preco_original": 94.0,
+      "desconto_pct": 30.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_875625-MLB108966240299_032026-AB.webp",
+      "categoria": "casa",
+      "score": 71,
+      "enviado_em": "2026-07-19T07:27:27.684157",
+      "link": "https://www.mercadolivre.com.br/cobertor-casal-manta-cereja-habitat-poa-bolinha-soft-macia/up/MLBU3650024874?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 65.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 10 Potes Herméticos Vidro 640ml Starhouse Marmita Forno Micro-ondas Airfryer com 4 travas de super vedação",
+      "preco": 94.9,
+      "preco_original": 149.0,
+      "desconto_pct": 36.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_942823-MLA113526261849_062026-AB.webp",
+      "categoria": "casa",
+      "score": 78,
+      "enviado_em": "2026-07-19T07:27:20.832357",
+      "link": "https://www.mercadolivre.com.br/kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedaco/p/MLB53222689?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 94.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Inteligente Intelbras iM5SC con Wi-Fi Full HD color Branca",
+      "preco": 254.91,
+      "preco_original": 413.0,
+      "desconto_pct": 38.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_956317-MLA99482016644_112025-AB.webp",
+      "categoria": "casa",
+      "score": 84,
+      "enviado_em": "2026-07-19T07:27:14.235604",
+      "link": "https://www.mercadolivre.com.br/cmera-inteligente-intelbras-im5sc-con-wi-fi-full-hd-color-branca/p/MLB27705742?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 254.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
       "preco": 94.91,
       "preco_original": 159.9,
@@ -315,7 +420,7 @@
       "link": "https://www.amazon.com.br/dp/B0GH34KFLR?tag=silver1230c-20&linkCode=as2",
       "classe": "media",
       "menor_preco_30d": 883.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -481,7 +586,7 @@
       "link": "https://www.amazon.com.br/dp/B0FK1NJLXB?tag=silver1230c-20&linkCode=as2",
       "classe": "boa",
       "menor_preco_30d": 2329.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -541,7 +646,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-philips-50-4k-50pug7300-comando-de-voz-bluetooth/p/MLB57723340?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 2079.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -556,7 +661,7 @@
       "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 928.31,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -586,7 +691,7 @@
       "link": "https://www.mercadolivre.com.br/kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon/p/MLB66060206?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 66.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -724,247 +829,6 @@
       "menor_preco_30d": 279.9,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Esteira Elétrica Ergométrica Dobrável 12km C/tela Led Bivolt Preto 127/220v",
-      "preco": 1338.0,
-      "preco_original": 2999.0,
-      "desconto_pct": 55.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_829313-MLB105024766633_012026-AB.webp",
-      "categoria": "esportes",
-      "score": 97,
-      "enviado_em": "2026-07-16T13:06:46.302315",
-      "link": "https://www.mercadolivre.com.br/esteira-eletrica-ergometrica-dobravel-12km-ctela-led-bivolt/up/MLBU3640141455?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1338.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
-      "preco": 1346.0,
-      "preco_original": 2290.0,
-      "desconto_pct": 41.2,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
-      "categoria": "esportes",
-      "score": 97,
-      "enviado_em": "2026-07-16T13:06:39.403342",
-      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1346.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
-      "preco": 39.9,
-      "preco_original": 64.0,
-      "desconto_pct": 37.7,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
-      "categoria": "esportes",
-      "score": 79,
-      "enviado_em": "2026-07-16T13:06:32.859629",
-      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 39.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Chocolate",
-      "preco": 78.9,
-      "preco_original": 129.0,
-      "desconto_pct": 38.8,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_859161-MLA99962428017_112025-AB.webp",
-      "categoria": "esportes",
-      "score": 77,
-      "enviado_em": "2026-07-16T13:06:26.278213",
-      "cupom": "Cupom R$20 OFF",
-      "link": "https://www.mercadolivre.com.br/whey-isolate-protein-fuse-900g-dark-lab-sabor-chocolate/p/MLB19381117?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 78.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Carregador Portátil Power Bank Turbo 20000mah 22.5w Universal Para iPhone Samsung Motorlola Xiaomi Com Display Digital Preto ou Branco- Hardline",
-      "preco": 64.0,
-      "preco_original": 129.0,
-      "desconto_pct": 50.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753409-MLA110029138996_042026-AB.webp",
-      "categoria": "celulares",
-      "score": 77,
-      "enviado_em": "2026-07-16T11:22:21.391983",
-      "link": "https://www.mercadolivre.com.br/carregador-portatil-power-bank-turbo-20000mah-225w-universal-para-iphone-samsung-motorlola-xiaomi-com-display-digital-preto-ou-branco-hardline/p/MLB65588451?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 64.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
-      "preco": 1292.0,
-      "preco_original": 2212.0,
-      "desconto_pct": 41.6,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705075-MLA99943632917_112025-AB.webp",
-      "categoria": "celulares",
-      "score": 100,
-      "enviado_em": "2026-07-16T11:22:14.501185",
-      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-cmera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1292.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Celular Samsung Galaxy A36 5g 256gb 8gb Ram Branco",
-      "preco": 1758.0,
-      "preco_original": 2855.0,
-      "desconto_pct": 38.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697102-MLA99477666220_112025-AB.webp",
-      "categoria": "celulares",
-      "score": 98,
-      "enviado_em": "2026-07-16T11:22:07.901929",
-      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a36-5g-256gb-8gb-ram-branco/p/MLB47106610?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1758.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smartphone Motorola Moto G15 - 128gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai E Night Vision Bateria De 5200 Mah Tela Fhd+ 6.7 Com Superbrilho Nfc Azul Claro",
-      "preco": 629.1,
-      "preco_original": 1099.0,
-      "desconto_pct": 42.8,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_970543-MLA100008320341_122025-AB.webp",
-      "categoria": "celulares",
-      "score": 93,
-      "enviado_em": "2026-07-16T11:22:01.313018",
-      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-128gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-bateria-de-5200-mah-tela-fhd-67-com-superbrilho-nfc-azul-claro/p/MLB46056585?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 629.1,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
-      "preco": 969.0,
-      "preco_original": 1289.0,
-      "desconto_pct": 24.8,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
-      "categoria": "tvs",
-      "score": 71,
-      "enviado_em": "2026-07-16T09:38:08.997951",
-      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 969.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
-      "preco": 1299.0,
-      "preco_original": 2099.0,
-      "desconto_pct": 38.1,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
-      "categoria": "tvs",
-      "score": 93,
-      "enviado_em": "2026-07-16T09:38:02.276363",
-      "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB67270079?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1299.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart TV Profissional LG 43\" Full HD Processador a5 Ger6 AI Alexa Integrada webOS 23 – 43LR671C-B",
-      "preco": 1499.0,
-      "preco_original": 2284.0,
-      "desconto_pct": 34.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_929244-MLA104540336039_012026-AB.webp",
-      "categoria": "tvs",
-      "score": 89,
-      "enviado_em": "2026-07-16T09:37:55.647898",
-      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-lg-43-full-hd-processador-a5-ger6-ai-alexa-integrada-webos-23-43lr671c-b/p/MLB41106126?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1499.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
-      "preco": 1399.0,
-      "preco_original": 2499.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
-      "categoria": "tvs",
-      "score": 95,
-      "enviado_em": "2026-07-16T09:37:48.978266",
-      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1399.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "NAC 600mg - Fórmula Exclusiva com Máxima Concentração e Pureza - N-Acetil L-Cisteína - 60 Cápsulas",
-      "preco": 46.77,
-      "preco_original": 89.0,
-      "desconto_pct": 47.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_628799-MLA105714524195_012026-AB.webp",
-      "categoria": "esportes",
-      "score": 78,
-      "enviado_em": "2026-07-16T07:23:04.554986",
-      "link": "https://www.mercadolivre.com.br/nac-600mg-formula-exclusiva-com-maxima-concentraco-e-pureza-n-acetil-l-cisteina-60-capsulas/p/MLB58579835?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 46.77,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "PENTA MAGNÉSIO - Bisglicinato + Dimalato + Citrato + Taurato + Óxido de Magnésio - A Combinação Perfeita de 5 Magnésios com Máxima Pureza e Biodisponibilidade - 60 Cápsulas",
-      "preco": 53.93,
-      "preco_original": 94.0,
-      "desconto_pct": 42.6,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_871438-MLA112831456570_072026-AB.webp",
-      "categoria": "esportes",
-      "score": 78,
-      "enviado_em": "2026-07-16T07:22:57.822821",
-      "link": "https://www.mercadolivre.com.br/penta-magnesio-bisglicinato-dimalato-citrato-taurato-oxido-de-magnesio-a-combinaco-perfeita-de-5-magnesios-com-maxima-pureza-e-biodisponibilidade-60-capsulas/p/MLB61669343?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 53.93,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "TESTO ESSENCIAL - Fórmula Exclusiva com Feno Grego + Boro + Arginina + ZMA + Vitamina B6 - Precursor da Testosterona - 60 cápsulas",
-      "preco": 51.08,
-      "preco_original": 91.0,
-      "desconto_pct": 43.9,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_619852-MLA112741838660_062026-AB.webp",
-      "categoria": "esportes",
-      "score": 78,
-      "enviado_em": "2026-07-16T07:22:51.156386",
-      "link": "https://www.mercadolivre.com.br/testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-vitamina-b6-precursor-da-testosterona-60-capsulas/p/MLB58582424?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 51.08,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Suplemento Em Pó Whey Pro Max Titanium 1kg Sabor Cookies Cookies",
-      "preco": 70.9,
-      "preco_original": 119.0,
-      "desconto_pct": 40.4,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894088-MLA112982935527_062026-AB.webp",
-      "categoria": "esportes",
-      "score": 78,
-      "enviado_em": "2026-07-16T07:22:44.408226",
-      "link": "https://www.mercadolivre.com.br/suplemento-em-po-whey-pro-max-titanium-1kg-sabor-cookies-cookies/p/MLB72991388?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 70.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
@@ -984,16 +848,10 @@
   },
   "stats": {
     "eletronicos": {
-      "total": 9,
+      "total": 12,
       "score_medio": 78,
-      "desconto_medio": 31,
+      "desconto_medio": 30,
       "maior_desconto": 46
-    },
-    "tvs": {
-      "total": 8,
-      "score_medio": 88,
-      "desconto_medio": 35,
-      "maior_desconto": 44
     },
     "monitores": {
       "total": 8,
@@ -1001,11 +859,17 @@
       "desconto_medio": 40,
       "maior_desconto": 50
     },
-    "esportes": {
-      "total": 8,
-      "score_medio": 83,
-      "desconto_medio": 43,
-      "maior_desconto": 55
+    "casa": {
+      "total": 7,
+      "score_medio": 74,
+      "desconto_medio": 33,
+      "maior_desconto": 43
+    },
+    "tvs": {
+      "total": 4,
+      "score_medio": 89,
+      "desconto_medio": 34,
+      "maior_desconto": 44
     },
     "notebooks": {
       "total": 4,
@@ -1031,23 +895,11 @@
       "desconto_medio": 40,
       "maior_desconto": 50
     },
-    "celulares": {
-      "total": 4,
-      "score_medio": 92,
-      "desconto_medio": 43,
-      "maior_desconto": 50
-    },
     "pet": {
       "total": 3,
       "score_medio": 89,
       "desconto_medio": 49,
       "maior_desconto": 61
-    },
-    "casa": {
-      "total": 3,
-      "score_medio": 64,
-      "desconto_medio": 28,
-      "maior_desconto": 40
     },
     "tablets": {
       "total": 2,
@@ -1068,6 +920,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-18T12:36:25.224290",
-  "total": 64
+  "updated_at": "2026-07-19T07:30:28.817616",
+  "total": 55
 }
