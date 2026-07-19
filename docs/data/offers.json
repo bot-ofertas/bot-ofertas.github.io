@@ -1,6 +1,113 @@
 {
   "products": [
     {
+      "titulo": "Multifuncional Epson EcoTank L4360, imprime frente e verso automático, Wi-Fi",
+      "preco": 1399.0,
+      "preco_original": 1879.0,
+      "desconto_pct": 25.5,
+      "foto": "https://m.media-amazon.com/images/I/51SHpx83VNL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 79,
+      "enviado_em": "2026-07-19T12:07:38.005915",
+      "link": "https://www.amazon.com.br/dp/B0GJ7H8WLW?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tablet Samsung Galaxy TAB A11+, 128GB, 6GB RAM, WiFi",
+      "preco": 1414.54,
+      "preco_original": 1799.0,
+      "desconto_pct": 21.4,
+      "foto": "https://m.media-amazon.com/images/I/51TU36U5C1L._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 71,
+      "enviado_em": "2026-07-19T12:07:28.963527",
+      "link": "https://www.amazon.com.br/dp/B0G4SLJNFF?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1414.54,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tablet Samsung Galaxy Tab S10 FE, Cinza, 128GB, 8GB RAM, Tela Imersiva de 10.9\" 90Hz, Camera Traseira de 13MP, Câmera Frontal de 12MP Ultra Wide, Wifi 6, IP68, Android 15",
+      "preco": 3049.0,
+      "preco_original": 4199.0,
+      "desconto_pct": 27.4,
+      "foto": "https://m.media-amazon.com/images/I/51nStwLekjL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-07-19T12:07:20.094068",
+      "link": "https://www.amazon.com.br/dp/B0F3LTWYS5?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 3049.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Hipercalórico Anabolic Mass 28500 3kg Profit Labs Cookies And Cream",
+      "preco": 56.82,
+      "preco_original": 74.0,
+      "desconto_pct": 23.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_603643-MLA110079058796_042026-AB.webp",
+      "categoria": "esportes",
+      "score": 60,
+      "enviado_em": "2026-07-19T12:04:24.659541",
+      "link": "https://www.mercadolivre.com.br/hipercalorico-anabolic-mass-28500-3kg-profit-labs-cookies-and-cream/p/MLB23824445?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 56.82,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem sabor",
+      "preco": 69.9,
+      "preco_original": 159.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 80,
+      "enviado_em": "2026-07-19T12:04:17.948648",
+      "cupom": "Cupom R$20 OFF",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor/p/MLB25929487?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 69.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "TESTO ESSENCIAL - Fórmula Exclusiva com Feno Grego + Boro + Arginina + ZMA + Vitamina B6 - Precursor da Testosterona - 60 cápsulas",
+      "preco": 51.08,
+      "preco_original": 91.0,
+      "desconto_pct": 43.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_949131-MLA114764498645_072026-AB.webp",
+      "categoria": "esportes",
+      "score": 78,
+      "enviado_em": "2026-07-19T12:04:10.917348",
+      "link": "https://www.mercadolivre.com.br/testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-vitamina-b6-precursor-da-testosterona-60-capsulas/p/MLB58582424?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 51.08,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Olympikus Masculino Delta/122 Preto/vermelho Lisa 42 Br",
+      "preco": 127.29,
+      "preco_original": 229.0,
+      "desconto_pct": 44.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_783136-MLB111543752117_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 81,
+      "enviado_em": "2026-07-19T12:04:04.210205",
+      "cupom": "Cupom 10% OFF",
+      "link": "https://www.mercadolivre.com.br/tenis-olympikus-masculino-delta122/up/MLBU3996947813?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 127.29,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "BLACK+DECKER Vaporizador, Ferro de Passar Roupa, Compacto e Portátil, Função Passar a Seco, 3 em 1, modelo BDV3000, Bivolt",
       "preco": 229.0,
       "preco_original": 329.0,
@@ -1032,6 +1139,18 @@
       "desconto_medio": 40,
       "maior_desconto": 50
     },
+    "esportes": {
+      "total": 8,
+      "score_medio": 76,
+      "desconto_medio": 44,
+      "maior_desconto": 74
+    },
+    "informatica": {
+      "total": 7,
+      "score_medio": 84,
+      "desconto_medio": 36,
+      "maior_desconto": 48
+    },
     "tvs": {
       "total": 4,
       "score_medio": 89,
@@ -1050,12 +1169,6 @@
       "desconto_medio": 25,
       "maior_desconto": 29
     },
-    "informatica": {
-      "total": 4,
-      "score_medio": 90,
-      "desconto_medio": 44,
-      "maior_desconto": 48
-    },
     "impressoras": {
       "total": 4,
       "score_medio": 81,
@@ -1067,12 +1180,6 @@
       "score_medio": 79,
       "desconto_medio": 40,
       "maior_desconto": 50
-    },
-    "esportes": {
-      "total": 4,
-      "score_medio": 78,
-      "desconto_medio": 46,
-      "maior_desconto": 74
     },
     "pet": {
       "total": 3,
@@ -1099,6 +1206,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-19T11:01:54.642799",
-  "total": 66
+  "updated_at": "2026-07-19T12:07:47.161233",
+  "total": 73
 }
