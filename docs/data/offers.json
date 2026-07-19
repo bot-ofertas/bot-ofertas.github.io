@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "BLACK+DECKER Vaporizador, Ferro de Passar Roupa, Compacto e Portátil, Função Passar a Seco, 3 em 1, modelo BDV3000, Bivolt",
+      "preco": 229.0,
+      "preco_original": 329.0,
+      "desconto_pct": 30.4,
+      "foto": "https://m.media-amazon.com/images/I/61RNxwH7zyL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 74,
+      "enviado_em": "2026-07-19T11:01:46.112681",
+      "link": "https://www.amazon.com.br/dp/B08B6DLFYD?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 229.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "MONDIAL Liquidificador Turbo Power, Preto, 550W, 220V - L-99 FB",
+      "preco": 93.99,
+      "preco_original": 159.9,
+      "desconto_pct": 41.2,
+      "foto": "https://m.media-amazon.com/images/I/71KFAoTV+hL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 82,
+      "enviado_em": "2026-07-19T11:01:37.509439",
+      "link": "https://www.amazon.com.br/dp/B07QK91PTZ?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 93.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Mixer Vertical Turbo Chef Elgin 3 em 1 200W Preto 110v",
+      "preco": 119.9,
+      "preco_original": 199.9,
+      "desconto_pct": 40.0,
+      "foto": "https://m.media-amazon.com/images/I/51yYe4QlyQL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 83,
+      "enviado_em": "2026-07-19T11:01:28.821424",
+      "link": "https://www.amazon.com.br/dp/B09VQ39F41?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 119.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 250g Growth Supplements - Sem sabor em Pó",
+      "preco": 39.9,
+      "preco_original": 64.0,
+      "desconto_pct": 37.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 74,
+      "enviado_em": "2026-07-19T11:00:02.391829",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
+      "preco": 1315.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 42.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+      "categoria": "esportes",
+      "score": 97,
+      "enviado_em": "2026-07-19T10:59:55.867634",
+      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1315.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor em Pó",
+      "preco": 72.9,
+      "preco_original": 104.0,
+      "desconto_pct": 29.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "categoria": "esportes",
+      "score": 67,
+      "enviado_em": "2026-07-19T10:59:49.356908",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 72.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 1kg Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 74.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "esportes",
+      "score": 72,
+      "enviado_em": "2026-07-19T10:59:42.832211",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tripé De 180 Cm Para Bastão De Selfie De Celular Portátil Preto",
       "preco": 84.14,
       "preco_original": 186.0,
@@ -179,7 +284,7 @@
       "link": "https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=silver1230c-20&linkCode=as2",
       "classe": "boa",
       "menor_preco_30d": 94.91,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -194,7 +299,7 @@
       "link": "https://www.amazon.com.br/dp/B09XJL4B9H?tag=silver1230c-20&linkCode=as2",
       "classe": "boa",
       "menor_preco_30d": 92.91,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -209,7 +314,7 @@
       "link": "https://www.amazon.com.br/dp/B0F256HPZJ?tag=silver1230c-20&linkCode=as2",
       "classe": "media",
       "menor_preco_30d": 68.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -894,17 +999,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
-    "preco": 497.9,
-    "preco_original": 906.0,
-    "desconto_pct": 45.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
-    "categoria": "moveis",
-    "score": 96,
-    "enviado_em": "2026-07-18T11:27:28.660793",
-    "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
+    "preco": 1315.0,
+    "preco_original": 2290.0,
+    "desconto_pct": 42.6,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+    "categoria": "esportes",
+    "score": 97,
+    "enviado_em": "2026-07-19T10:59:55.867634",
+    "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 497.9,
+    "menor_preco_30d": 1315.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -915,17 +1020,17 @@
       "desconto_medio": 30,
       "maior_desconto": 46
     },
+    "casa": {
+      "total": 10,
+      "score_medio": 76,
+      "desconto_medio": 34,
+      "maior_desconto": 43
+    },
     "monitores": {
       "total": 8,
       "score_medio": 85,
       "desconto_medio": 40,
       "maior_desconto": 50
-    },
-    "casa": {
-      "total": 7,
-      "score_medio": 74,
-      "desconto_medio": 33,
-      "maior_desconto": 43
     },
     "tvs": {
       "total": 4,
@@ -963,6 +1068,12 @@
       "desconto_medio": 40,
       "maior_desconto": 50
     },
+    "esportes": {
+      "total": 4,
+      "score_medio": 78,
+      "desconto_medio": 46,
+      "maior_desconto": 74
+    },
     "pet": {
       "total": 3,
       "score_medio": 89,
@@ -988,6 +1099,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-19T09:33:46.292322",
-  "total": 59
+  "updated_at": "2026-07-19T11:01:54.642799",
+  "total": 66
 }
