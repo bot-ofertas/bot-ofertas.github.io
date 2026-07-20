@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1399.0,
+      "preco_original": 2499.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-20T13:20:33.287136",
+      "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV Profissional LG 43\" Full HD Processador a5 Ger6 AI Alexa Integrada webOS 23 – 43LR671C-B",
+      "preco": 1529.0,
+      "preco_original": 2190.0,
+      "desconto_pct": 30.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_929244-MLA104540336039_012026-AB.webp",
+      "categoria": "tvs",
+      "score": 85,
+      "enviado_em": "2026-07-20T13:20:26.730637",
+      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-lg-43-full-hd-processador-a5-ger6-ai-alexa-integrada-webos-23-43lr671c-b/p/MLB41106126?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1529.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV LG 43\"Full HD, Processador A5 Ger6, AI, Alexa e webOS 23 - 43LR6700PSA",
+      "preco": 1529.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 33.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_741946-MLA107875422514_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 88,
+      "enviado_em": "2026-07-20T13:20:20.194515",
+      "link": "https://www.mercadolivre.com.br/smart-tv-lg-43full-hd-processador-a5-ger6-ai-alexa-e-webos-23-43lr6700psa/p/MLB39205913?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1529.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb",
+      "preco": 870.32,
+      "preco_original": 1499.0,
+      "desconto_pct": 41.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636675-MLA107807100101_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-20T13:20:13.633631",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 870.32,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Protetor De Lente Tela Case Kit Premium Para Insta360 X5 Nfe",
       "preco": 268.11,
       "preco_original": 449.0,
@@ -895,18 +955,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
-    "preco": 66.0,
-    "preco_original": 140.0,
-    "desconto_pct": 52.9,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
-    "categoria": "casa",
-    "score": 87,
-    "enviado_em": "2026-07-20T07:58:39.241569",
-    "link": "https://www.mercadolivre.com.br/kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon/p/MLB66060206?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+    "preco": 1399.0,
+    "preco_original": 2499.0,
+    "desconto_pct": 44.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
+    "categoria": "tvs",
+    "score": 95,
+    "enviado_em": "2026-07-20T13:20:33.287136",
+    "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 66.0,
-    "menor_periodo": true,
+    "menor_preco_30d": 1399.0,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
@@ -938,6 +998,12 @@
       "total": 6,
       "score_medio": 75,
       "desconto_medio": 25,
+      "maior_desconto": 44
+    },
+    "tvs": {
+      "total": 4,
+      "score_medio": 91,
+      "desconto_medio": 37,
       "maior_desconto": 44
     },
     "notebooks": {
@@ -977,6 +1043,6 @@
       "maior_desconto": 45
     }
   },
-  "updated_at": "2026-07-20T11:10:10.499060",
-  "total": 59
+  "updated_at": "2026-07-20T13:21:28.835306",
+  "total": 63
 }
