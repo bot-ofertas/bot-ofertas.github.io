@@ -24,10 +24,12 @@ if ($Parar) {
     Get-CimInstance Win32_Process | Where-Object {
         $_.CommandLine -like "*rastreador.py*" -or $_.CommandLine -like "*startup.py*"
     } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-    # Remove tarefas do Task Scheduler
-    Get-ScheduledTask -TaskName "BotOfertas-*" -ErrorAction SilentlyContinue |
+    # Remove só as tarefas de POSTAGEM em horário fixo — "BotOfertas-*" sozinho
+    # também apagaria BotOfertas-AutoStart/Shutdown/WakeUp, desligando o
+    # auto-início no login e o desligar/ligar programado do PC sem avisar.
+    Get-ScheduledTask -TaskName "BotOfertas-Post-*" -ErrorAction SilentlyContinue |
         Unregister-ScheduledTask -Confirm:$false
-    Write-Host "OK. Bot e agendamentos removidos." -ForegroundColor Green
+    Write-Host "OK. Postagens paradas (auto-início e desligar/ligar programado NÃO foram alterados)." -ForegroundColor Green
     exit 0
 }
 
@@ -41,7 +43,13 @@ if ($Silencioso) {
 if ($Horarios) {
     Write-Host "Programando horários fixos: $Horarios" -ForegroundColor Yellow
 
-    # Primeiro remove tarefas anteriores
+    # Para o loop contínuo (--random), se estiver rodando — senão os dois
+    # modos ficam ativos ao mesmo tempo e publicam ofertas duplicadas de verdade
+    Get-CimInstance Win32_Process | Where-Object {
+        $_.CommandLine -like "*rastreador.py*--random*" -or $_.CommandLine -like "*startup.py*"
+    } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+
+    # Remove tarefas de horário fixo anteriores
     Get-ScheduledTask -TaskName "BotOfertas-Post-*" -ErrorAction SilentlyContinue |
         Unregister-ScheduledTask -Confirm:$false
 
@@ -78,6 +86,12 @@ if ($MinMin -gt $MaxMin) {
 }
 
 Write-Host "Intervalo: $MinMin a $MaxMin minutos (aleatório)" -ForegroundColor Yellow
+
+# Remove tarefas de horário fixo deixadas por uma configuração -Horarios
+# anterior — senão elas continuam disparando postagens extras nos horários
+# antigos, duplicadas com o loop contínuo que vamos iniciar agora
+Get-ScheduledTask -TaskName "BotOfertas-Post-*" -ErrorAction SilentlyContinue |
+    Unregister-ScheduledTask -Confirm:$false
 
 # Para instância atual se existir
 Get-CimInstance Win32_Process | Where-Object {

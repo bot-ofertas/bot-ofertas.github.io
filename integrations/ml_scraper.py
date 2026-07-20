@@ -54,7 +54,7 @@ def _gerar_link_afiliado(url_produto: str) -> str:
     separador = "&" if "?" in url_produto else "?"
     return (
         f"{url_produto}{separador}"
-        f"matt_tool_id={_AFFILIATE_TOOL_ID}"
+        f"matt_tool={_AFFILIATE_TOOL_ID}"
         f"&matt_word=oferta&matt_source=bot_telegram"
     )
 

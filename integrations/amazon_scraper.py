@@ -232,8 +232,13 @@ async def buscar_cupons_amazon_async(
         for categoria, url in _URLS_AMAZON:
             if len(todos) >= limite * 2:
                 break
-            page = await ctx.new_page()
+            page = None
             try:
+                # new_page() também pode falhar se o browser morreu numa
+                # categoria anterior (página crashada) — precisa estar DENTRO
+                # do try, senão a exceção escapa do for inteiro e descarta
+                # os produtos já coletados nas categorias anteriores
+                page = await ctx.new_page()
                 try:
                     await page.goto(url, wait_until="networkidle", timeout=30000)
                 except PWT:
@@ -258,10 +263,11 @@ async def buscar_cupons_amazon_async(
                 except Exception:
                     log.warning("amazon scraper falhou em %s (%s): %s", categoria, url, e)
             finally:
-                try:
-                    await page.close()
-                except Exception:
-                    pass  # página pode já ter crashado — nada a fechar
+                if page is not None:
+                    try:
+                        await page.close()
+                    except Exception:
+                        pass  # página pode já ter crashado — nada a fechar
 
         try:
             await browser.close()

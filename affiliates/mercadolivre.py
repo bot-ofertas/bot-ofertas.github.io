@@ -57,7 +57,11 @@ _SELETORES_BOTAO = [
 
 class MLAffiliateProvider(AffiliateProvider):
     name = "mercadolivre"
-    _TOOL_ID = os.getenv("ML_AFFILIATE_TOOL_ID", "47114387")
+    # "or" (não default do getenv) cobre tanto var ausente quanto var vazia —
+    # um secret configurado como string vazia (ex: GitHub Secret removido)
+    # não pode resultar num matt_tool= vazio no link publicado.
+    _TOOL_ID = os.getenv("ML_AFFILIATE_TOOL_ID") or "47114387"
+    _TOOL_ID_ESPERADO = "47114387"  # valor fixo p/ validação — nunca confia em _TOOL_ID sozinho
 
     # ── Contrato público ───────────────────────────────────────────────────────
 
@@ -67,7 +71,11 @@ class MLAffiliateProvider(AffiliateProvider):
     def validate_affiliate_link(self, link: str) -> bool:
         if not link:
             return False
-        return "meli.la/" in link or f"matt_tool={self._TOOL_ID}" in link
+        # Valida contra o ID esperado FIXO, não contra self._TOOL_ID — se o
+        # env var vier corrompido/vazio por algum motivo, a validação não
+        # pode "se enganar sozinha" comparando o link contra o próprio valor
+        # quebrado e deixando passar um link sem o afiliado de verdade.
+        return "meli.la/" in link or f"matt_tool={self._TOOL_ID_ESPERADO}" in link
 
     def health_check(self) -> bool:
         return os.path.exists(_MARKER_FILE)

@@ -116,9 +116,9 @@ def etapa_3_healthcheck() -> None:
         log.warning("[3/4] Watchdog WhatsApp Desktop não subiu: %s", e)
 
 
-def etapa_4_iniciar_rastreador() -> tuple:
-    """Sobe rastreadores ML e Amazon em paralelo (intervalos aleatórios)."""
-    # ML — 30–45 min
+def _iniciar_ml():
+    """Sobe só o rastreador ML — usado no start inicial e em reinícios isolados
+    (um crash do ML não pode gerar um processo Amazon extra desnecessário)."""
     log.info("[4/4] Iniciando rastreador ML (intervalo aleatório 30-45 min)…")
     cmd_ml = [
         sys.executable, os.path.join(BASE, "rastreador.py"),
@@ -129,8 +129,11 @@ def etapa_4_iniciar_rastreador() -> tuple:
     with open(PID_PATH, "w") as f:
         f.write(str(proc_ml.pid))
     log.info("[4/4] Rastreador ML PID=%d", proc_ml.pid)
+    return proc_ml
 
-    # Amazon — 45–75 min (menos frequente, cupons mudam mais devagar)
+
+def _iniciar_amazon():
+    """Sobe só o rastreador Amazon — mesma lógica de isolamento do _iniciar_ml."""
     log.info("[4/4] Iniciando rastreador Amazon (intervalo 45-75 min)…")
     amazon_log_path = os.path.join(BASE, "data", "rastreador_amazon.log")
     cmd_az = [
@@ -142,7 +145,13 @@ def etapa_4_iniciar_rastreador() -> tuple:
     with open(os.path.join(BASE, "data", "rastreador_amazon.pid"), "w") as f:
         f.write(str(proc_az.pid))
     log.info("[4/4] Rastreador Amazon PID=%d", proc_az.pid)
+    return proc_az
 
+
+def etapa_4_iniciar_rastreador() -> tuple:
+    """Sobe rastreadores ML e Amazon em paralelo (intervalos aleatórios)."""
+    proc_ml = _iniciar_ml()
+    proc_az = _iniciar_amazon()
     return proc_ml, proc_az
 
 
@@ -159,7 +168,7 @@ def monitorar(procs) -> None:
     while True:
         # Polling não-bloqueante: verifica se algum caiu
         time.sleep(60)
-        if proc_ml.poll() is not None:
+        if proc_ml and proc_ml.poll() is not None:
             falhas_ml += 1
             log.warning("Rastreador ML caiu (código %s, falha %d/3)",
                         proc_ml.returncode, falhas_ml)
@@ -167,11 +176,11 @@ def monitorar(procs) -> None:
                 espera = min(30 * (2 ** (falhas_ml - 1)), 300)
                 log.info("Reiniciando ML em %ds…", espera)
                 time.sleep(espera)
-                procs_novo = etapa_4_iniciar_rastreador()
-                if isinstance(procs_novo, tuple):
-                    proc_ml, proc_az_novo = procs_novo
-                    if proc_az is None:
-                        proc_az = proc_az_novo
+                # Só reinicia o ML — reiniciar os dois junto (via
+                # etapa_4_iniciar_rastreador) gera um Amazon extra
+                # desnecessário toda vez que só o ML cai, e sobrescreve
+                # data/rastreador_amazon.pid com o PID desse processo órfão.
+                proc_ml = _iniciar_ml()
             else:
                 log.error("ML falhou 3x — desistindo dele")
                 proc_ml = None
@@ -179,7 +188,15 @@ def monitorar(procs) -> None:
             falhas_az += 1
             log.warning("Rastreador Amazon caiu (código %s, falha %d/3)",
                         proc_az.returncode, falhas_az)
-            if falhas_az > 3:
+            if falhas_az <= 3:
+                # Faltava o reinício de verdade aqui — só contava a falha e
+                # nunca chamava _iniciar_amazon(), então o Amazon ficava
+                # morto indefinidamente até bater 3 falhas e desistir.
+                espera = min(30 * (2 ** (falhas_az - 1)), 300)
+                log.info("Reiniciando Amazon em %ds…", espera)
+                time.sleep(espera)
+                proc_az = _iniciar_amazon()
+            else:
                 log.error("Amazon falhou 3x — desistindo dele")
                 proc_az = None
         if proc_ml is None and proc_az is None:

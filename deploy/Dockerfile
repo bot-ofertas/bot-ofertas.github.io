@@ -25,4 +25,4 @@ RUN mkdir -p /app/data
 # Healthcheck endpoint em :8724
 EXPOSE 8724
 
-CMD ["python", "-u", "deploy/entrypoint.py", "--random", "--loop-min", "30", "--loop-max", "45"]
+CMD ["python", "-u", "deploy/entrypoint.py"]

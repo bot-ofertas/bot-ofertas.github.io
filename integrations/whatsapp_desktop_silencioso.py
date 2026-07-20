@@ -94,8 +94,61 @@ def _achar_janela_wa():
     return None
 
 
+_MUTEX_NOME = "Global\\BotOfertas_WhatsAppDesktop_Lock"
+
+
+def _adquirir_lock_whatsapp(timeout_s: float = 40.0):
+    """Trava exclusiva entre processos (ML e Amazon rodam separados e podem
+    tentar usar a MESMA janela do WhatsApp Desktop + MESMO clipboard do
+    Windows ao mesmo tempo — sem essa trava, um processo pode colar a foto/
+    legenda do OUTRO por cima, misturando ofertas na mensagem real enviada
+    aos inscritos). Retorna o handle do mutex se conseguiu a trava, None se
+    não (timeout — outro processo está usando)."""
+    try:
+        import win32event  # noqa: PLC0415
+        handle = win32event.CreateMutex(None, False, _MUTEX_NOME)
+        resultado = win32event.WaitForSingleObject(handle, int(timeout_s * 1000))
+        if resultado in (win32event.WAIT_OBJECT_0, win32event.WAIT_ABANDONED):
+            return handle
+        try:
+            import win32api  # noqa: PLC0415
+            win32api.CloseHandle(handle)
+        except Exception:
+            pass
+        return None
+    except Exception as e:
+        log.warning("lock WhatsApp indisponível (pywin32?): %s", e)
+        return None
+
+
+def _liberar_lock_whatsapp(handle) -> None:
+    if handle is None:
+        return
+    try:
+        import win32event  # noqa: PLC0415
+        import win32api  # noqa: PLC0415
+        win32event.ReleaseMutex(handle)
+        win32api.CloseHandle(handle)
+    except Exception:
+        pass
+
+
 def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
-    """Envia foto+legenda ao grupo. Retorna True se enviou (com verificação)."""
+    """Envia foto+legenda ao grupo. Retorna True se enviou (com verificação).
+
+    Serializa entre processos (ML/Amazon) via mutex nomeado — ver
+    _adquirir_lock_whatsapp."""
+    lock = _adquirir_lock_whatsapp()
+    if lock is None:
+        log.warning("Não consegui a trava do WhatsApp (outro processo usando há >40s) — pulando envio")
+        return False
+    try:
+        return _enviar_silencioso_impl(nome_grupo, mensagem, caminho_foto)
+    finally:
+        _liberar_lock_whatsapp(lock)
+
+
+def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
     try:
         import pyautogui       # noqa: PLC0415
         import pygetwindow as gw  # noqa: PLC0415
@@ -178,6 +231,15 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
                 return False
             pyautogui.hotkey("ctrl", "v")
             time.sleep(2.5)   # aguarda preview montar
+
+            # Recheca foco: 2.5s é tempo de sobra pra outro processo/automação
+            # roubar o foco no meio — sem isso a legenda poderia ser colada
+            # em outro lugar (mesmo gap identificado na auditoria completa)
+            if not _janela_esta_ativa(janela):
+                log.warning("Foco mudou durante o preview — abortando antes de colar legenda")
+                pyautogui.press("escape"); pyautogui.press("escape")
+                _devolver_foco(janela, janela_anterior)
+                return False
 
             # Legenda: cola direto (preview já foca a caixa)
             if _copiar_texto(mensagem):

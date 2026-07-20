@@ -36,7 +36,11 @@ services:
     restart: always
     depends_on:
       evolution:
-        condition: service_healthy
+        # service_started, não service_healthy: Telegram nunca pode depender
+        # do WhatsApp. Se o Evolution falhar/demorar no healthcheck, o
+        # container que posta no Telegram precisa subir do mesmo jeito — o
+        # código Python já trata WhatsApp como best-effort (timeout 90s).
+        condition: service_started
     environment:
       TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
       CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
@@ -63,7 +67,11 @@ services:
     command: ["python", "-u", "rastreador_amazon.py", "--random", "--loop-min", "45", "--loop-max", "75"]
     depends_on:
       evolution:
-        condition: service_healthy
+        # service_started, não service_healthy: Telegram nunca pode depender
+        # do WhatsApp. Se o Evolution falhar/demorar no healthcheck, o
+        # container que posta no Telegram precisa subir do mesmo jeito — o
+        # código Python já trata WhatsApp como best-effort (timeout 90s).
+        condition: service_started
     environment:
       TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
       CANAL_GERAL: ${CANAL_GERAL:?defina no .env}

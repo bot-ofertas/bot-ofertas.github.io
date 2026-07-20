@@ -5,6 +5,7 @@ Verifica saude do sistema e envia alertas via Telegram.
 
 import os
 import json
+import logging
 import sqlite3
 import subprocess
 import datetime
@@ -12,6 +13,8 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
+
+log = logging.getLogger("monitor")
 
 _ultimo_alerta_em: dict = {}
 
@@ -82,55 +85,53 @@ def verificar_saude() -> dict:
     # Consulta banco SQLite para ultima_execucao, erros_recentes e affiliate_taxa
     if os.path.exists(db_path):
         try:
-            conn = sqlite3.connect(db_path)
-            cursor = conn.cursor()
+            with sqlite3.connect(db_path) as conn:
+                cursor = conn.cursor()
 
-            # Ultima execucao do bot (tabela: execucoes, campo: iniciado_em)
-            try:
-                cursor.execute(
-                    "SELECT MAX(iniciado_em) FROM execucoes"
-                )
-                linha = cursor.fetchone()
-                resultado["ultima_execucao"] = linha[0] if linha and linha[0] else ""
-            except sqlite3.OperationalError:
-                resultado["ultima_execucao"] = ""
+                # Ultima execucao do bot (tabela: execucoes, campo: iniciado_em)
+                try:
+                    cursor.execute(
+                        "SELECT MAX(iniciado_em) FROM execucoes"
+                    )
+                    linha = cursor.fetchone()
+                    resultado["ultima_execucao"] = linha[0] if linha and linha[0] else ""
+                except sqlite3.OperationalError:
+                    resultado["ultima_execucao"] = ""
 
-            # Erros nas ultimas 2 horas (tabela: erros_log, campo: ocorrido_em)
-            try:
-                duas_horas_atras_str = (
-                    datetime.datetime.now() - datetime.timedelta(hours=2)
-                ).isoformat()
-                cursor.execute(
-                    "SELECT COUNT(*) FROM erros_log WHERE ocorrido_em >= ?",
-                    (duas_horas_atras_str,),
-                )
-                linha = cursor.fetchone()
-                resultado["erros_recentes"] = int(linha[0]) if linha and linha[0] else 0
-            except sqlite3.OperationalError:
-                resultado["erros_recentes"] = 0
+                # Erros nas ultimas 2 horas (tabela: erros_log, campo: ocorrido_em)
+                try:
+                    duas_horas_atras_str = (
+                        datetime.datetime.now() - datetime.timedelta(hours=2)
+                    ).isoformat()
+                    cursor.execute(
+                        "SELECT COUNT(*) FROM erros_log WHERE ocorrido_em >= ?",
+                        (duas_horas_atras_str,),
+                    )
+                    linha = cursor.fetchone()
+                    resultado["erros_recentes"] = int(linha[0]) if linha and linha[0] else 0
+                except sqlite3.OperationalError:
+                    resultado["erros_recentes"] = 0
 
-            # Taxa de sucesso de links de afiliado (tabela: produtos, campo: affiliate_status)
-            try:
-                cursor.execute(
-                    "SELECT COUNT(*) FROM produtos WHERE affiliate_status='ok'"
-                )
-                linha_sucesso = cursor.fetchone()
-                cursor.execute(
-                    "SELECT COUNT(*) FROM produtos WHERE affiliate_status IN ('ok','erro')"
-                )
-                linha_total = cursor.fetchone()
-                total = int(linha_total[0]) if linha_total and linha_total[0] else 0
-                sucesso = int(linha_sucesso[0]) if linha_sucesso and linha_sucesso[0] else 0
-                if total > 0:
-                    resultado["affiliate_taxa"] = round((sucesso / total) * 100, 2)
-                else:
+                # Taxa de sucesso de links de afiliado (tabela: produtos, campo: affiliate_status)
+                try:
+                    cursor.execute(
+                        "SELECT COUNT(*) FROM produtos WHERE affiliate_status='ok'"
+                    )
+                    linha_sucesso = cursor.fetchone()
+                    cursor.execute(
+                        "SELECT COUNT(*) FROM produtos WHERE affiliate_status IN ('ok','erro')"
+                    )
+                    linha_total = cursor.fetchone()
+                    total = int(linha_total[0]) if linha_total and linha_total[0] else 0
+                    sucesso = int(linha_sucesso[0]) if linha_sucesso and linha_sucesso[0] else 0
+                    if total > 0:
+                        resultado["affiliate_taxa"] = round((sucesso / total) * 100, 2)
+                    else:
+                        resultado["affiliate_taxa"] = 100.0
+                except sqlite3.OperationalError:
                     resultado["affiliate_taxa"] = 100.0
-            except sqlite3.OperationalError:
-                resultado["affiliate_taxa"] = 100.0
-
-            conn.close()
-        except Exception:
-            pass
+        except Exception as e:
+            log.warning("verificar_saude: falha ao consultar %s: %s", db_path, e)
 
     return resultado
 

@@ -191,7 +191,16 @@ def listar_todos(limite: int = 200) -> list[dict]:
 
 
 def link_ja_existe(link: str) -> bool:
-    """Verifica se um link (ou URL base sem parâmetros) já está no banco."""
+    """Verifica se um link (ou URL base sem parâmetros) já está no banco.
+
+    OBSOLETO para deduplicação — usa LIKE contra affiliate_link, que só
+    funciona quando o link salvo é o fallback direto (contém a URL original).
+    Quando o portal oficial de afiliados ML está logado, o link salvo vira
+    um encurtado meli.la/XXXXX sem nenhuma relação textual com a URL
+    original, e essa checagem nunca encontra o produto — permitindo posts
+    duplicados reais. Use produto_id_existe(id) para deduplicação; mantido
+    só por compatibilidade com chamadores antigos que ainda não migraram.
+    """
     url_base = link.split("?")[0].rstrip("/")
     with _conn() as con:
         row = con.execute("""
@@ -199,6 +208,17 @@ def link_ja_existe(link: str) -> bool:
             WHERE affiliate_link LIKE ? OR affiliate_link LIKE ?
             LIMIT 1
         """, (f"{url_base}%", f"%{url_base}%")).fetchone()
+    return row is not None
+
+
+def produto_id_existe(produto_id: str) -> bool:
+    """Verifica deduplicação pelo ID estável do produto (slug da URL antes
+    de virar link de afiliado) — correto independente do formato do link
+    de afiliado salvo (direto com matt_tool= ou encurtado meli.la/XXXXX)."""
+    with _conn() as con:
+        row = con.execute(
+            "SELECT 1 FROM produtos WHERE id = ? LIMIT 1", (produto_id,)
+        ).fetchone()
     return row is not None
 
 

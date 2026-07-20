@@ -95,8 +95,11 @@ def _id_produto(item: dict) -> str:
 
 
 def _e_duplicata(item: dict) -> bool:
-    url_base = item.get("link", "").split("?")[0].rstrip("/")
-    return db.link_ja_existe(url_base)
+    # Usa o ID estável (slug da URL, já setado em item["id"] antes de chamar
+    # isto) em vez do link — o link pode virar meli.la/XXXXX depois do
+    # afiliado oficial, sem nenhuma relação textual com a URL original.
+    produto_id = item.get("id") or _id_produto(item)
+    return db.produto_id_existe(produto_id)
 
 
 # ── Processamento de cada categoria ──────────────────────────────────────────

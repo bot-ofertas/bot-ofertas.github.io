@@ -108,9 +108,9 @@ async def rodar_uma_vez() -> None:
             # Registra histórico de preço
             db.registrar_preco(produto_id, item.get("preco"))
 
-            # Deduplicação
-            url_base = item.get("link", "").split("?")[0]
-            if db.link_ja_existe(url_base):
+            # Deduplicação — pelo ID estável, não pelo link (que já vem
+            # tagueado com ?tag=..., sem relação garantida com registros antigos)
+            if db.produto_id_existe(produto_id):
                 log(f"  ↩️  Duplicata: {item['titulo'][:50]}")
                 continue
 

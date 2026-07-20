@@ -130,7 +130,7 @@ def _gerar_link_afiliado(url: str) -> str:
     url_limpa = url.split("?")[0]
     return (
         f"{url_limpa}"
-        f"?matt_tool_id={_AFFILIATE_TOOL_ID}"
+        f"?matt_tool={_AFFILIATE_TOOL_ID}"
         f"&matt_word=oferta&matt_source=bot_telegram"
     )
 
@@ -347,28 +347,35 @@ async def buscar_ofertas_browser_async(nicho: str, desconto_min: int = 10, limit
             locale="pt-BR", user_agent=_UA,
             viewport={"width": 1280, "height": 1024},
         )
-        page = await ctx.new_page()
-
         try:
-            await page.goto(url_pagina, wait_until="networkidle", timeout=40000)
-        except PlaywrightTimeout:
-            await page.goto(url_pagina, wait_until="domcontentloaded", timeout=20000)
+            page = await ctx.new_page()
 
-        try:
-            await page.wait_for_selector(
-                ".andes-card.poly-card, [class*='poly-card--grid']", timeout=10000
-            )
-        except PlaywrightTimeout:
-            pass
+            try:
+                await page.goto(url_pagina, wait_until="networkidle", timeout=40000)
+            except PlaywrightTimeout:
+                await page.goto(url_pagina, wait_until="domcontentloaded", timeout=20000)
 
-        html = await page.content()
-        produtos = _extrair_produtos_json(html)
+            try:
+                await page.wait_for_selector(
+                    ".andes-card.poly-card, [class*='poly-card--grid']", timeout=10000
+                )
+            except PlaywrightTimeout:
+                pass
 
-        if not produtos:
-            raw = await page.evaluate(_DOM_SCRIPT)
-            produtos = _normalizar_dom(raw)
+            html = await page.content()
+            produtos = _extrair_produtos_json(html)
 
-        await browser.close()
+            if not produtos:
+                raw = await page.evaluate(_DOM_SCRIPT)
+                produtos = _normalizar_dom(raw)
+        finally:
+            # Garante que o Chromium fecha mesmo se page.goto/evaluate lançar
+            # algo não coberto acima (página crashada, bloqueio anti-bot) —
+            # sem isso o processo chromium.exe vaza, rodando 24/7.
+            try:
+                await browser.close()
+            except Exception:
+                pass
 
     return _filtrar_e_afiliar(produtos, nicho, desconto_min, limite)
 
@@ -389,27 +396,31 @@ def buscar_ofertas_browser(nicho: str, desconto_min: int = 10, limite: int = 20)
             locale="pt-BR", user_agent=_UA,
             viewport={"width": 1280, "height": 1024},
         )
-        page = ctx.new_page()
-
         try:
-            page.goto(url_pagina, wait_until="networkidle", timeout=40000)
-        except PlaywrightTimeout:
-            page.goto(url_pagina, wait_until="domcontentloaded", timeout=20000)
+            page = ctx.new_page()
 
-        try:
-            page.wait_for_selector(
-                ".andes-card.poly-card, [class*='poly-card--grid']", timeout=10000
-            )
-        except PlaywrightTimeout:
-            pass
+            try:
+                page.goto(url_pagina, wait_until="networkidle", timeout=40000)
+            except PlaywrightTimeout:
+                page.goto(url_pagina, wait_until="domcontentloaded", timeout=20000)
 
-        html = page.content()
-        produtos = _extrair_produtos_json(html)
+            try:
+                page.wait_for_selector(
+                    ".andes-card.poly-card, [class*='poly-card--grid']", timeout=10000
+                )
+            except PlaywrightTimeout:
+                pass
 
-        if not produtos:
-            raw = page.evaluate(_DOM_SCRIPT)
-            produtos = _normalizar_dom(raw)
+            html = page.content()
+            produtos = _extrair_produtos_json(html)
 
-        browser.close()
+            if not produtos:
+                raw = page.evaluate(_DOM_SCRIPT)
+                produtos = _normalizar_dom(raw)
+        finally:
+            try:
+                browser.close()
+            except Exception:
+                pass
 
     return _filtrar_e_afiliar(produtos, nicho, desconto_min, limite)
