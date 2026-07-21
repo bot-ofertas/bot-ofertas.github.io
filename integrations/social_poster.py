@@ -228,6 +228,34 @@ async def publicar_instagram_story(produto: dict, link_bio: str = "") -> bool:
                 pass
 
 
+def montar_caption_instagram(produto: dict) -> str:
+    """Legenda usada tanto pelo post automático quanto por qualquer post
+    manual preparado pra colar no app — mesma lógica, uma fonte só."""
+    titulo = produto.get("titulo") or "Oferta"
+    preco: float | None = produto.get("preco")
+    preco_original: float | None = produto.get("preco_original")
+    cupom: str | None = produto.get("cupom")
+    categoria: str = produto.get("categoria") or "oferta"
+
+    pct = ""
+    if preco and preco_original and preco_original > preco:
+        p = int(round((1 - preco / preco_original) * 100))
+        pct = f"-{p}% OFF"
+
+    # Agrupado em blocos separados por "\n\n" — usar filter(None, [...]) numa
+    # lista linha-a-linha (como era antes) descarta as próprias strings vazias
+    # que deveriam virar quebra de linha, e a legenda sai toda colada.
+    linha_preco = f"💰 R$ {preco:.2f} {pct}".strip() if preco else ""
+    linha_cupom = f"🏷️ Cupom: {cupom}" if cupom else ""
+    blocos = [
+        f"🔥 {titulo}",
+        "\n".join(filter(None, [linha_preco, linha_cupom])),
+        "🛡️ Oferta verificada · link na bio!",
+        f"#{categoria} #oferta #desconto #mercadolivre #amazon #publicidade",
+    ]
+    return "\n\n".join(filter(None, blocos))
+
+
 async def publicar_instagram(produto: dict) -> bool:
     if not (_IG_USER and _IG_PASS):
         return False
@@ -236,27 +264,7 @@ async def publicar_instagram(produto: dict) -> bool:
         if cl is None:
             return False
         titulo = produto.get("titulo") or "Oferta"
-        preco: float | None = produto.get("preco")
-        preco_original: float | None = produto.get("preco_original")
-        link: str = produto.get("link") or produto.get("affiliate_link") or ""
-        cupom: str | None = produto.get("cupom")
-        categoria: str = produto.get("categoria") or "oferta"
-
-        pct = ""
-        if preco and preco_original and preco_original > preco:
-            p = int(round((1 - preco / preco_original) * 100))
-            pct = f"-{p}% OFF"
-
-        caption = "\n".join(filter(None, [
-            f"🔥 {titulo}",
-            "",
-            f"💰 R$ {preco:.2f} {pct}" if preco else "",
-            f"🏷️ Cupom: {cupom}" if cupom else "",
-            "",
-            "🛡️ Oferta verificada · link na bio!",
-            "",
-            f"#{categoria} #oferta #desconto #mercadolivre #amazon #publicidade",
-        ]))
+        caption = montar_caption_instagram(produto)
 
         foto_url = produto.get("foto")
         if not foto_url:
