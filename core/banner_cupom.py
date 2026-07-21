@@ -15,6 +15,11 @@ import os
 _ASSETS = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets")
 BANNER_PATH = os.path.join(_ASSETS, "banner_cupom.png")
 
+# Logo da marca — se o arquivo existir, é aplicado como marca d'água no
+# canto inferior direito do banner. Se não existir ainda, o banner é gerado
+# normalmente sem logo (não é erro).
+LOGO_PATH = os.path.join(_ASSETS, "branding", "logo_ofertas_de_tudo.png")
+
 # Cores do design
 _BG      = (13,  17,  23)   # fundo escuro azul-noite
 _ORANGE  = (255, 107,   0)  # laranja principal
@@ -119,9 +124,29 @@ def gerar_banner_cupom(output_path: str | None = None) -> str:
     _draw_text_center(draw, W, 348, "Bot-Ofertas  •  Mercado Livre", f22, _GRAY)
     _draw_text_center(draw, W, 378, "Ofertas verificadas | Link oficial de afiliado", f22, _DARK_G)
 
+    _aplicar_logo(img, W, H)
+
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     img.save(output_path, "PNG", optimize=True)
     return output_path
+
+
+def _aplicar_logo(img, W: int, H: int) -> None:
+    """Cola o logo da marca no canto inferior direito, se o arquivo existir.
+    Fica entre a barra de acento direita (x=792) e o badge/branding (y<=395),
+    então não precisa reajustar nenhum outro elemento do layout."""
+    if not os.path.exists(LOGO_PATH):
+        return
+    try:
+        from PIL import Image
+        logo = Image.open(LOGO_PATH).convert("RGBA")
+        logo.thumbnail((64, 64))
+        margem = 20
+        x = W - logo.width - margem
+        y = H - logo.height - margem
+        img.paste(logo, (x, y), logo)
+    except Exception:
+        pass  # marca d'água é cosmética — nunca deve quebrar a geração do banner
 
 
 def banner_bytes() -> bytes:

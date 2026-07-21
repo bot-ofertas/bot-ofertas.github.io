@@ -587,6 +587,22 @@ async def publicar_alerta_cupom(
         return False
 
 
+# ── Administração do canal (ação pontual, não faz parte do fluxo de publicação) ─
+
+async def definir_foto_canal(bot: Bot, chat_id: str | int, caminho_imagem: str) -> bool:
+    """Troca a foto do canal/grupo. Requer que o bot seja admin com permissão
+    de 'Alterar informações do grupo' (can_change_info) — chame só uma vez,
+    manualmente, não faz parte do loop automático de postagem."""
+    try:
+        with open(caminho_imagem, "rb") as f:
+            await bot.set_chat_photo(chat_id=chat_id, photo=f)
+        log.info("Foto do canal %s atualizada com %s", chat_id, caminho_imagem)
+        return True
+    except Exception as e:
+        log.error("Erro ao definir foto do canal %s: %s", chat_id, e)
+        return False
+
+
 # ── Criação da aplicação ──────────────────────────────────────────────────────
 
 def criar_aplicacao(token: str):

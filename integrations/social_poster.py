@@ -154,6 +154,23 @@ def configurar_bio_link(url: str) -> bool:
         return False
 
 
+def configurar_foto_perfil(caminho_imagem: str) -> bool:
+    """Troca a foto de perfil do Instagram — chamada única, manual, não faz
+    parte do fluxo automático de publicação."""
+    cl = _get_ig_client()
+    if cl is None:
+        log.warning("Instagram não configurado — não é possível atualizar a foto de perfil")
+        return False
+    try:
+        import pathlib
+        cl.account_change_picture(pathlib.Path(caminho_imagem))
+        log.info("Foto de perfil do Instagram atualizada com %s", caminho_imagem)
+        return True
+    except Exception as e:
+        log.warning("Falha ao atualizar foto de perfil do Instagram: %s", e)
+        return False
+
+
 async def publicar_instagram_story(produto: dict, link_bio: str = "") -> bool:
     """Publica a oferta como Story (além do post normal). O Instagram só
     libera o sticker de link clicável em Stories a partir de uma certa
