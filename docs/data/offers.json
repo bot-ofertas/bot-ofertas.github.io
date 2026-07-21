@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
+      "preco": 1004.0,
+      "preco_original": 1379.0,
+      "desconto_pct": 27.2,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 82,
+      "enviado_em": "2026-07-21T10:11:15.596748",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1004.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 16 (512 GB) – Preto",
+      "preco": 5399.1,
+      "preco_original": 10099.0,
+      "desconto_pct": 46.5,
+      "foto": "https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 95,
+      "enviado_em": "2026-07-21T10:11:06.590430",
+      "link": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 5399.1,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 256GB 5G 8GB RAM Violeta 6,7\" Câm. Tripla + Selfie 12MP",
+      "preco": 1887.78,
+      "preco_original": 2999.0,
+      "desconto_pct": 37.1,
+      "foto": "https://m.media-amazon.com/images/I/61MuhIMNhcL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 97,
+      "enviado_em": "2026-07-21T10:10:57.640041",
+      "link": "https://www.amazon.com.br/dp/B0DYVMS335?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 1887.78,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Gamer X-ray Com Led Reclinável Ergonômica Cor Preta Material Do Estofamento Couro Sintético",
+      "preco": 557.0,
+      "preco_original": 1315.0,
+      "desconto_pct": 57.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_929964-MLA109633387762_042026-AB.webp",
+      "categoria": "games",
+      "score": 95,
+      "enviado_em": "2026-07-21T10:08:01.899227",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-x-ray-com-led-reclinavel-ergonmica-cor-preta-material-do-estofamento-couro-sintetico/p/MLB54251679?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 557.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Gamepad GameSir X5 Lite USB-C Android iPhone 15/16 Mobile Hall Effect Turbo Leve Preto",
+      "preco": 149.0,
+      "preco_original": 249.0,
+      "desconto_pct": 40.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_877627-MLA99998011217_112025-AB.webp",
+      "categoria": "games",
+      "score": 79,
+      "enviado_em": "2026-07-21T10:07:55.194609",
+      "link": "https://www.mercadolivre.com.br/controle-gamepad-gamesir-x5-lite-usb-c-android-iphone-1516-mobile-hall-effect-turbo-leve-preto/p/MLB50567982?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 149.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Console Nintendo Switch 2, Modelo Nacional de Tomada",
+      "preco": 4299.0,
+      "preco_original": 5382.0,
+      "desconto_pct": 20.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_785396-MLA99867558581_112025-AB.webp",
+      "categoria": "games",
+      "score": 75,
+      "enviado_em": "2026-07-21T10:07:48.493463",
+      "link": "https://www.mercadolivre.com.br/console-nintendo-switch-2-modelo-nacional-de-tomada/p/MLB49200061?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4299.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Sem Fio Joystick Bluetooth Para Ps4 Videogame Tv Samsung Pc P4 Ps 4 Dual Shock Manete Pc Gamer Tv Smart Controle Bluetooth Celular Headset Sem Fio Com P2 Marca Redfin",
+      "preco": 54.88,
+      "preco_original": 89.0,
+      "desconto_pct": 38.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762912-MLA105696431793_012026-AB.webp",
+      "categoria": "games",
+      "score": 74,
+      "enviado_em": "2026-07-21T10:07:41.783050",
+      "link": "https://www.mercadolivre.com.br/controle-sem-fio-joystick-bluetooth-para-ps4-videogame-tv-samsung-pc-p4-ps-4-dual-shock-manete-pc-gamer-tv-smart-controle-bluetooth-celular-headset-sem-fio-com-p2-marca-redfin/p/MLB39960346?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 54.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Fritadeira Air Fryer Philco PAF16A 4 Em 1 Painel Digital 16l",
       "preco": 532.18,
       "preco_original": 887.0,
@@ -622,18 +727,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smart Tv 43 Philco P43vik Roku Led Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
-    "preco": 1399.0,
-    "preco_original": 2499.0,
-    "desconto_pct": 44.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_697288-MLA100482486016_122025-AB.webp",
-    "categoria": "tvs",
-    "score": 95,
-    "enviado_em": "2026-07-20T13:20:33.287136",
-    "link": "https://www.mercadolivre.com.br/smart-tv-43-philco-p43vik-roku-led-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB63040715?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smartphone Samsung Galaxy A36 256GB 5G 8GB RAM Violeta 6,7\" Câm. Tripla + Selfie 12MP",
+    "preco": 1887.78,
+    "preco_original": 2999.0,
+    "desconto_pct": 37.1,
+    "foto": "https://m.media-amazon.com/images/I/61MuhIMNhcL._AC_UL320_.jpg",
+    "categoria": "eletronicos",
+    "score": 97,
+    "enviado_em": "2026-07-21T10:10:57.640041",
+    "link": "https://www.amazon.com.br/dp/B0DYVMS335?tag=silver1230c-20&linkCode=as2",
     "classe": "excelente",
-    "menor_preco_30d": 1399.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 1887.78,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -655,11 +760,23 @@
       "desconto_medio": 44,
       "maior_desconto": 54
     },
+    "eletronicos": {
+      "total": 6,
+      "score_medio": 85,
+      "desconto_medio": 32,
+      "maior_desconto": 46
+    },
     "tvs": {
       "total": 4,
       "score_medio": 91,
       "desconto_medio": 37,
       "maior_desconto": 44
+    },
+    "games": {
+      "total": 4,
+      "score_medio": 81,
+      "desconto_medio": 39,
+      "maior_desconto": 57
     },
     "bebes": {
       "total": 4,
@@ -673,12 +790,6 @@
       "desconto_medio": 25,
       "maior_desconto": 27
     },
-    "eletronicos": {
-      "total": 3,
-      "score_medio": 79,
-      "desconto_medio": 28,
-      "maior_desconto": 44
-    },
     "tablets": {
       "total": 2,
       "score_medio": 62,
@@ -686,6 +797,6 @@
       "maior_desconto": 39
     }
   },
-  "updated_at": "2026-07-21T07:34:21.878105",
-  "total": 41
+  "updated_at": "2026-07-21T10:11:24.747157",
+  "total": 48
 }
