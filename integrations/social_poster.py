@@ -37,6 +37,10 @@ import logging
 import os
 import urllib.parse
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 log = logging.getLogger(__name__)
 
 _IG_USER   = os.getenv("INSTAGRAM_USERNAME", "")
