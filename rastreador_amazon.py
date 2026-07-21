@@ -136,6 +136,16 @@ async def rodar_uma_vez() -> None:
             cupom_info = f" [cupom: {item['cupom']}]" if item.get("cupom") else ""
             log(f"  ✅ {item['titulo'][:50]} | {item.get('desconto_pct', 0):.0f}% OFF{cupom_info}")
 
+            # PA-API oficial (se configurada): valida/enriquece com dados
+            # reais da Amazon antes de publicar. Best-effort — sem
+            # credenciais ou se falhar, segue com os dados do scraper.
+            try:
+                from integrations.amazon_paapi import enriquecer_produto, paapi_ativa  # noqa: PLC0415
+                if paapi_ativa():
+                    item = enriquecer_produto(item)
+            except Exception:
+                pass
+
             # Gera conteúdo IA para WhatsApp
             conteudo_ia = {}
             try:

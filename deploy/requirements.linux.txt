@@ -7,3 +7,4 @@ psutil
 anthropic>=0.40.0
 tweepy>=4.14.0
 instagrapi
+python-amazon-paapi>=6.3.0

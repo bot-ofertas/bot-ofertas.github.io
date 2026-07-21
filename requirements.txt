@@ -13,3 +13,4 @@ instagrapi
 psutil
 telethon>=1.44.0
 pywinauto
+python-amazon-paapi>=6.3.0
