@@ -113,6 +113,14 @@ def _get_ig_client():
 
     from instagrapi import Client  # noqa: PLC0415
     cl = Client()
+    # Perfil de dispositivo/localização consistente com o Brasil — reduz a
+    # chance do Instagram rejeitar o login automatizado (bad_password/
+    # device flag) por parecer um cliente genérico sem contexto geográfico
+    # real, mesmo com a senha correta.
+    cl.set_locale("pt_BR")
+    cl.set_country("BR")
+    cl.set_country_code(55)
+    cl.set_timezone_offset(-3 * 3600)
     if os.path.exists(_IG_SESSION_PATH):
         try:
             cl.load_settings(_IG_SESSION_PATH)
