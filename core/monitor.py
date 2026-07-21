@@ -7,7 +7,6 @@ import os
 import json
 import logging
 import sqlite3
-import subprocess
 import datetime
 import requests
 from dotenv import load_dotenv
@@ -44,25 +43,27 @@ def verificar_saude() -> dict:
         "affiliate_taxa": 0.0,
     }
 
-    # Verifica se ha processo python rastreador.py em execucao
+    # Verifica se ha processo rastreador.py/rastreador_amazon.py em execucao.
+    # ANTES usava "tasklist /FI IMAGENAME eq python.exe" + wmic — mas o Python
+    # instalado via Microsoft Store roda como "python3.13.exe" (não
+    # "python.exe" — esse é só um stub/alias), então o filtro NUNCA
+    # encontrava o processo real e bot_rodando ficava sempre False, mesmo
+    # com o bot publicando normalmente. Isso podia inclusive disparar
+    # alertas falsos de "bot não está em execução" via verificar_e_alertar().
     try:
-        saida = subprocess.check_output(
-            ["tasklist", "/FI", "IMAGENAME eq python.exe", "/FO", "CSV"],
-            stderr=subprocess.DEVNULL,
-            timeout=5,
-        ).decode("utf-8", errors="ignore")
-        # Tenta tambem listar argumentos via wmic para confirmar rastreador.py
-        try:
-            wmic_saida = subprocess.check_output(
-                ["wmic", "process", "where", "name='python.exe'", "get", "CommandLine", "/FORMAT:CSV"],
-                stderr=subprocess.DEVNULL,
-                timeout=5,
-            ).decode("utf-8", errors="ignore")
-            resultado["bot_rodando"] = "rastreador.py" in wmic_saida
-        except Exception:
-            # Fallback: se python.exe esta rodando, assume que pode ser o bot
-            resultado["bot_rodando"] = "python.exe" in saida.lower()
-    except Exception:
+        import psutil  # noqa: PLC0415
+        encontrado = False
+        for p in psutil.process_iter(["cmdline"]):
+            try:
+                cmd = " ".join(p.info.get("cmdline") or [])
+            except Exception:
+                continue
+            if "rastreador.py" in cmd or "rastreador_amazon.py" in cmd:
+                encontrado = True
+                break
+        resultado["bot_rodando"] = encontrado
+    except Exception as e:
+        log.warning("verificar_saude: falha ao checar processos: %s", e)
         resultado["bot_rodando"] = False
 
     # Verifica se o dashboard responde
