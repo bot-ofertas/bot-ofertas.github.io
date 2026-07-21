@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Perfume Jean Paul Gaultier Le Male Le Parfum Eau de Parfum Intense 200 ml Masculino",
+      "preco": 807.72,
+      "preco_original": 1158.0,
+      "desconto_pct": 30.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_862275-MLA104274378661_012026-AB.webp",
+      "categoria": "beleza",
+      "score": 94,
+      "enviado_em": "2026-07-21T12:03:15.695509",
+      "link": "https://www.mercadolivre.com.br/perfume-jean-paul-gaultier-le-male-le-parfum-eau-de-parfum-intense-200-ml-masculino/p/MLB17512828?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 807.72,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Prancha Lizze Profissional 480 Extreme",
+      "preco": 349.6,
+      "preco_original": 459.0,
+      "desconto_pct": 23.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_818555-MLA99479472410_112025-AB.webp",
+      "categoria": "beleza",
+      "score": 72,
+      "enviado_em": "2026-07-21T12:03:09.153443",
+      "link": "https://www.mercadolivre.com.br/prancha-lizze-profissional-480-extreme/p/MLB24086423?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 349.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creme Hidratante Corporal e facial para Pele Seca a Extra Seca Sem Perfume 454g CeraVe",
+      "preco": 81.9,
+      "preco_original": 141.0,
+      "desconto_pct": 41.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_806507-MLA92874967013_092025-AB.webp",
+      "categoria": "beleza",
+      "score": 92,
+      "enviado_em": "2026-07-21T12:03:02.656256",
+      "link": "https://www.mercadolivre.com.br/creme-hidratante-corporal-e-facial-para-pele-seca-a-extra-seca-sem-perfume-454g-cerave/p/MLB19309318?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 81.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "preco": 102.4,
+      "preco_original": 230.0,
+      "desconto_pct": 55.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB.webp",
+      "categoria": "beleza",
+      "score": 95,
+      "enviado_em": "2026-07-21T12:02:56.127657",
+      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 102.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
       "preco": 1004.0,
       "preco_original": 1379.0,
@@ -778,6 +838,12 @@
       "desconto_medio": 39,
       "maior_desconto": 57
     },
+    "beleza": {
+      "total": 4,
+      "score_medio": 88,
+      "desconto_medio": 38,
+      "maior_desconto": 55
+    },
     "bebes": {
       "total": 4,
       "score_medio": 83,
@@ -797,6 +863,6 @@
       "maior_desconto": 39
     }
   },
-  "updated_at": "2026-07-21T10:11:24.747157",
-  "total": 48
+  "updated_at": "2026-07-21T12:03:48.710684",
+  "total": 52
 }
