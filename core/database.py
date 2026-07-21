@@ -313,6 +313,24 @@ def finalizar_execucao(exec_id: int, **kwargs) -> None:
         )
 
 
+def execucao_em_andamento(minutos_max: int = 20) -> bool:
+    """True se existe uma execução iniciada e ainda não concluída dentro dos
+    últimos `minutos_max` minutos — usado pelo desligamento agendado pra não
+    matar o PC no meio de um ciclo de scraping/postagem. O corte por tempo
+    existe porque iniciar_execucao()/finalizar_execucao() não são pareados
+    via try/finally em rastreador.py — uma execução que crashou no meio fica
+    com concluido_em NULL pra sempre, e sem o corte isso bloquearia o
+    desligamento indefinidamente."""
+    from datetime import timedelta
+    corte = (datetime.now() - timedelta(minutes=minutos_max)).isoformat()
+    with _conn() as con:
+        row = con.execute(
+            "SELECT 1 FROM execucoes WHERE concluido_em IS NULL AND iniciado_em >= ? LIMIT 1",
+            (corte,),
+        ).fetchone()
+    return row is not None
+
+
 def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
     now = datetime.now().isoformat()
     with _conn() as con:
