@@ -320,28 +320,49 @@ async def publicar_facebook(produto: dict) -> bool:
 
 
 async def publicar_todas_redes(produto: dict) -> dict[str, bool]:
-    """Publica em todas as redes sociais configuradas (exceto Telegram e WhatsApp, já feitos pelo rastreador)."""
+    """Publica em todas as redes sociais configuradas (exceto Telegram e WhatsApp,
+    que continuam saindo em tempo real pelo rastreador — nunca passam pelo gate
+    abaixo). Instagram/Twitter/Facebook passam por core/posting_schedule.py:
+    postar fora de hora ou rápido demais faz os próprios posts competirem entre
+    si nos algoritmos dessas redes, em vez de somar alcance."""
+    from core.posting_schedule import pode_postar, registrar_post
+
     resultados: dict[str, bool] = {}
 
     tasks = []
-    nomes = []
+    nomes = []  # [(nome_resultado, chave_schedule), ...]
 
     if _IG_USER and _IG_PASS:
-        tasks.append(publicar_instagram(produto))
-        nomes.append("instagram")
-        tasks.append(publicar_instagram_story(produto, link_bio=_LINK_BIO))
-        nomes.append("instagram_story")
+        if pode_postar("instagram_feed"):
+            tasks.append(publicar_instagram(produto))
+            nomes.append(("instagram", "instagram_feed"))
+        else:
+            resultados["instagram"] = False
+        if pode_postar("instagram_story"):
+            tasks.append(publicar_instagram_story(produto, link_bio=_LINK_BIO))
+            nomes.append(("instagram_story", "instagram_story"))
+        else:
+            resultados["instagram_story"] = False
     if _TW_KEY and _TW_TOKEN:
-        tasks.append(publicar_twitter(produto))
-        nomes.append("twitter")
+        if pode_postar("twitter"):
+            tasks.append(publicar_twitter(produto))
+            nomes.append(("twitter", "twitter"))
+        else:
+            resultados["twitter"] = False
     if _FB_TOKEN and _FB_PAGE:
-        tasks.append(publicar_facebook(produto))
-        nomes.append("facebook")
+        if pode_postar("facebook"):
+            tasks.append(publicar_facebook(produto))
+            nomes.append(("facebook", "facebook"))
+        else:
+            resultados["facebook"] = False
 
     if tasks:
         resultados_async = await asyncio.gather(*tasks, return_exceptions=True)
-        for nome, res in zip(nomes, resultados_async):
-            resultados[nome] = res is True
+        for (nome, chave_schedule), res in zip(nomes, resultados_async):
+            ok = res is True
+            resultados[nome] = ok
+            if ok:
+                registrar_post(chave_schedule)
 
     return resultados
 

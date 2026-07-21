@@ -76,10 +76,17 @@ CREATE TABLE IF NOT EXISTS precos_historico (
     visto_em    TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS social_posts_log (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    plataforma  TEXT NOT NULL,
+    postado_em  TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_produtos_status ON produtos(status);
 CREATE INDEX IF NOT EXISTS idx_produtos_adicionado ON produtos(adicionado_em);
 CREATE INDEX IF NOT EXISTS idx_produtos_affiliate ON produtos(affiliate_status);
 CREATE INDEX IF NOT EXISTS idx_precos_produto ON precos_historico(produto_id);
+CREATE INDEX IF NOT EXISTS idx_social_posts_plataforma ON social_posts_log(plataforma, postado_em);
 """
 
 
@@ -370,3 +377,36 @@ def historico_preco(produto_id: str, dias: int = 30) -> dict:
         "e_menor_periodo": atual <= menor + 0.01 and len(precos) >= 2,
         "dias":            dias,
     }
+
+
+# ── Horário de postagem em redes sociais ────────────────────────────────────
+# rastreador.py e rastreador_amazon.py rodam como processos separados e não
+# compartilham memória — por isso o controle de "último post"/"posts hoje"
+# fica aqui no SQLite compartilhado (visto por ambos via WAL), em vez de um
+# dict em módulo que só veria a metade dos posts reais. Usado por
+# core/posting_schedule.py.
+
+def registrar_post_social(plataforma: str) -> None:
+    with _conn() as con:
+        con.execute(
+            "INSERT INTO social_posts_log (plataforma, postado_em) VALUES (?, ?)",
+            (plataforma, datetime.now().isoformat()),
+        )
+
+
+def ultimo_post_social(plataforma: str) -> str | None:
+    with _conn() as con:
+        row = con.execute(
+            "SELECT MAX(postado_em) FROM social_posts_log WHERE plataforma = ?",
+            (plataforma,),
+        ).fetchone()
+        return row[0] if row and row[0] else None
+
+
+def contar_posts_social_desde(plataforma: str, desde_iso: str) -> int:
+    with _conn() as con:
+        row = con.execute(
+            "SELECT COUNT(*) FROM social_posts_log WHERE plataforma = ? AND postado_em >= ?",
+            (plataforma, desde_iso),
+        ).fetchone()
+        return int(row[0]) if row and row[0] else 0
