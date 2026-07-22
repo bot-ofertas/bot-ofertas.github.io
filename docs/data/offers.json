@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Creatina 500g Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 38.9,
+      "preco_original": 78.0,
+      "desconto_pct": 50.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_858065-MLA112585347120_062026-AB.webp",
+      "categoria": "monitores",
+      "score": 76,
+      "enviado_em": "2026-07-22T12:08:29.779152",
+      "link": "https://www.mercadolivre.com.br/creatina-500g-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725308?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 38.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Parafusadeira Furadeira De Impacto The Black Tools Profissional TB-21PX 2 Baterias Com Maleta 60Hz Amarelo",
+      "preco": 159.9,
+      "preco_original": 319.0,
+      "desconto_pct": 49.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_865332-MLA96868279679_102025-AB.webp",
+      "categoria": "monitores",
+      "score": 81,
+      "enviado_em": "2026-07-22T12:08:22.552051",
+      "link": "https://www.mercadolivre.com.br/parafusadeira-furadeira-de-impacto-the-black-tools-profissional-tb-21px-2-baterias-com-maleta-60hz-amarelo/p/MLB30144703?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 159.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Com 10 Envelopes 3o Lote 70 Cromos Copa Do Mundo Fifa 26",
+      "preco": 45.22,
+      "preco_original": 128.0,
+      "desconto_pct": 64.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_653831-MLB110126921171_042026-AB--kit-com-10-envelopes-3o-lote-70-cromos-copa-do-mundo-fifa-26.webp",
+      "categoria": "monitores",
+      "score": 66,
+      "enviado_em": "2026-07-22T12:08:15.821428",
+      "link": "https://www.mercadolivre.com.br/kit-com-10-envelopes-3o-lote-70-cromos-copa-do-mundo-fifa-26/up/MLBU3892342728?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 45.22,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto",
+      "preco": 1346.0,
+      "preco_original": 2290.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+      "categoria": "monitores",
+      "score": 95,
+      "enviado_em": "2026-07-22T12:08:09.108571",
+      "link": "https://www.mercadolivre.com.br/bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto/p/MLB34219371?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1346.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart TV LG UHD AI UA75 50 polegadas HDR10 Pro Processador α7 AI Ger8 webOS 25",
       "preco": 2179.0,
       "preco_original": 5000.0,
@@ -82,8 +142,14 @@
       "score_medio": 92,
       "desconto_medio": 42,
       "maior_desconto": 56
+    },
+    "monitores": {
+      "total": 4,
+      "score_medio": 80,
+      "desconto_medio": 51,
+      "maior_desconto": 64
     }
   },
-  "updated_at": "2026-07-22T10:07:22.784315",
-  "total": 4
+  "updated_at": "2026-07-22T12:10:24.385274",
+  "total": 8
 }
