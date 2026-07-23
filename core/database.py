@@ -87,6 +87,13 @@ CREATE INDEX IF NOT EXISTS idx_produtos_adicionado ON produtos(adicionado_em);
 CREATE INDEX IF NOT EXISTS idx_produtos_affiliate ON produtos(affiliate_status);
 CREATE INDEX IF NOT EXISTS idx_precos_produto ON precos_historico(produto_id);
 CREATE INDEX IF NOT EXISTS idx_social_posts_plataforma ON social_posts_log(plataforma, postado_em);
+
+-- limpar_antigos() roda a cada ciclo (2 processos, a cada 30-75min) e
+-- filtra exatamente por essas 3 colunas — sem índice, cada DELETE é um
+-- full table scan repetido para sempre.
+CREATE INDEX IF NOT EXISTS idx_erros_ocorrido ON erros_log(ocorrido_em);
+CREATE INDEX IF NOT EXISTS idx_precos_visto ON precos_historico(visto_em);
+CREATE INDEX IF NOT EXISTS idx_execucoes_iniciado ON execucoes(iniciado_em);
 """
 
 
@@ -118,13 +125,19 @@ def inicializar():
 
 # ── Produtos ──────────────────────────────────────────────────────────────────
 
+_cupom_col_checked = False  # evita repetir PRAGMA table_info a cada inserir_produto()
+
+
 def inserir_produto(p: dict) -> None:
+    global _cupom_col_checked
     now = datetime.now().isoformat()
     with _conn() as con:
-        # Adiciona coluna cupom se não existir (migração automática)
-        cols = {r[1] for r in con.execute("PRAGMA table_info(produtos)").fetchall()}
-        if "cupom" not in cols:
-            con.execute("ALTER TABLE produtos ADD COLUMN cupom TEXT")
+        # Adiciona coluna cupom se não existir (migração automática, 1x por processo)
+        if not _cupom_col_checked:
+            cols = {r[1] for r in con.execute("PRAGMA table_info(produtos)").fetchall()}
+            if "cupom" not in cols:
+                con.execute("ALTER TABLE produtos ADD COLUMN cupom TEXT")
+            _cupom_col_checked = True
         con.execute("""
             INSERT OR IGNORE INTO produtos
                 (id, titulo, preco, preco_original, desconto_pct, foto,
