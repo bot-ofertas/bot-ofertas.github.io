@@ -69,9 +69,27 @@ def _copiar_texto(texto: str) -> bool:
         return False
 
 
+def _janela_e_processo_whatsapp(w) -> bool:
+    """Confirma que a janela pertence de verdade ao processo nativo do
+    WhatsApp Desktop (whatsapp.exe/WhatsApp.Root.exe), resolvendo o dono
+    real via GetWindowThreadProcessId — em vez de excluir por substring de
+    nome de navegador ("chrome"/"edge" no título), que deixa passar
+    Firefox/Brave/Opera/Vivaldi/Arc com uma aba titulada 'WhatsApp' e faz o
+    bot colar a oferta na janela errada."""
+    try:
+        import win32process  # noqa: PLC0415
+        import psutil  # noqa: PLC0415
+        _, pid = win32process.GetWindowThreadProcessId(w._hWnd)
+        nome = psutil.Process(pid).name().lower()
+        return nome in ("whatsapp.exe", "whatsapp.root.exe")
+    except Exception:
+        return False
+
+
 def _janela_esta_ativa(janela) -> bool:
-    """Confirma que a janela ATIVA de verdade é o WhatsApp (por título), não
-    outra coisa que roubou o foco (ex: automação de navegador rodando junto).
+    """Confirma que a janela ATIVA de verdade é o WhatsApp (por título e
+    processo dono), não outra coisa que roubou o foco (ex: automação de
+    navegador rodando junto, ou uma aba de navegador titulada 'WhatsApp').
     Sem essa checagem, os comandos de teclado/colar podem ir parar em
     qualquer janela que esteja em foco no momento — inclusive postando a
     oferta em outro app/página por engano."""
@@ -81,7 +99,7 @@ def _janela_esta_ativa(janela) -> bool:
         if ativa is None:
             return False
         titulo = (ativa.title or "").lower()
-        return "whatsapp" in titulo and "chrome" not in titulo and "edge" not in titulo
+        return "whatsapp" in titulo and _janela_e_processo_whatsapp(ativa)
     except Exception:
         return False
 
@@ -95,7 +113,7 @@ def _achar_janela_wa():
             if not t:
                 continue
             low = t.lower()
-            if "whatsapp" in low and "chrome" not in low and "edge" not in low:
+            if "whatsapp" in low and _janela_e_processo_whatsapp(w):
                 return w
     except Exception:
         pass

@@ -28,6 +28,23 @@ from typing import Optional
 log = logging.getLogger("whatsapp_desktop")
 
 
+def _janela_e_processo_whatsapp(w) -> bool:
+    """Confirma que a janela pertence de verdade ao processo nativo do
+    WhatsApp Desktop (whatsapp.exe/WhatsApp.Root.exe), resolvendo o dono
+    real via GetWindowThreadProcessId — em vez de excluir por substring de
+    nome de navegador ("chrome"/"edge" no título), que deixa passar
+    Firefox/Brave/Opera/Vivaldi/Arc com uma aba titulada 'WhatsApp' e faz o
+    bot colar a oferta na janela errada."""
+    try:
+        import win32process  # noqa: PLC0415
+        import psutil  # noqa: PLC0415
+        _, pid = win32process.GetWindowThreadProcessId(w._hWnd)
+        nome = psutil.Process(pid).name().lower()
+        return nome in ("whatsapp.exe", "whatsapp.root.exe")
+    except Exception:
+        return False
+
+
 def _janela_whatsapp():
     """Retorna a janela do WhatsApp Desktop APENAS se estiver LOGADO.
 
@@ -66,8 +83,11 @@ def _janela_whatsapp():
             continue
         low = t.lower()
         # Título nativo: "WhatsApp" ou "(N) WhatsApp".
-        # Exclui abas de navegador (têm "chrome" ou "edge" no título).
-        if "whatsapp" in low and "chrome" not in low and "edge" not in low:
+        if "whatsapp" not in low:
+            continue
+        # Confirma o processo dono de verdade — não só exclui "chrome"/"edge"
+        # do título, que deixa passar qualquer outro navegador.
+        if _janela_e_processo_whatsapp(w):
             return w
     return None
 
