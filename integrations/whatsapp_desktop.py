@@ -278,8 +278,15 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
     tem_foto = bool(caminho_foto and os.path.exists(caminho_foto))
 
     # ── MODO SILENCIOSO (pywinauto UIA) — NÃO ATIVA A JANELA ────────────────
-    # PADRÃO: só usa este modo. Não cai mais para pyautogui automaticamente
-    # (pyautogui rouba o foco e atrapalha o usuário).
+    # Único caminho de envio. O antigo fallback pyautogui direto (atrás de
+    # WHATSAPP_MODO_ATRAPALHA=1, nunca configurado em nenhum .env deste
+    # projeto) foi removido: era uma segunda implementação completa do
+    # mesmo envio que NUNCA adquiria o mutex Global\BotOfertas_WhatsAppDesktop_Lock
+    # nem rechecava o foco antes do segundo Ctrl+V — exatamente a race
+    # condition que esse mutex foi criado pra eliminar no caminho
+    # silencioso, só que nunca propagada pra cá. Duplicar a correção em vez
+    # de remover o caminho morto arriscava a mesma desatualização de novo
+    # no futuro.
     try:
         from integrations.whatsapp_desktop_silencioso import (  # noqa: PLC0415
             enviar_silencioso,
@@ -291,104 +298,4 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
     except Exception as e:
         log.info("Modo silencioso indisponível: %s", e)
 
-    # Fallback pyautogui: SÓ se o usuário explicitamente autorizar via
-    # WHATSAPP_MODO_ATRAPALHA=1 no .env. Caso contrário, retorna False e
-    # deixa o Telegram continuar (isolamento).
-    if os.getenv("WHATSAPP_MODO_ATRAPALHA", "0") != "1":
-        log.info("WhatsApp: pulando envio (pyautogui desativado — não atrapalha o PC).")
-        return False
-
-    pyautogui.FAILSAFE = True
-    pyautogui.PAUSE = 0.25
-
-    # Salva janela ativa atual para restaurar no fim (não rouba foco permanentemente)
-    try:
-        import pygetwindow as gw  # noqa: PLC0415
-        janela_anterior = gw.getActiveWindow()
-    except Exception:
-        janela_anterior = None
-
-    try:
-        # 1. Ativa WhatsApp Desktop
-        if not _ativar_janela(janela):
-            log.warning("Não consegui ativar a janela do WhatsApp Desktop.")
-            return False
-        time.sleep(0.8)
-
-        # Confirma que o foco realmente ficou no WhatsApp antes de digitar —
-        # sem isso, outra automação/janela pode roubar o foco e a oferta
-        # acaba sendo colada no lugar errado
-        try:
-            import pygetwindow as _gw  # noqa: PLC0415
-            _ativa = _gw.getActiveWindow()
-            _titulo = (_ativa.title or "").lower() if _ativa else ""
-            if "whatsapp" not in _titulo:
-                log.warning("WhatsApp não ganhou foco — abortando (evita postar em janela errada)")
-                return False
-        except Exception:
-            pass
-
-        # 2. Ctrl+F → busca conversa
-        pyautogui.hotkey("ctrl", "f")
-        time.sleep(0.6)
-        pyautogui.typewrite("", interval=0)  # limpa
-        pyautogui.hotkey("ctrl", "a")
-        pyautogui.press("delete")
-        pyautogui.typewrite(nome_grupo, interval=0.04)
-        time.sleep(1.2)
-        pyautogui.press("enter")
-        time.sleep(1.5)
-
-        # 3. Coloca foto no clipboard + Ctrl+V → abre preview
-        if tem_foto and _copiar_foto_clipboard(caminho_foto):
-            pyautogui.hotkey("ctrl", "v")
-            time.sleep(3.0)  # aguarda preview montar
-
-            # 4. Cola legenda (copiada como texto)
-            if _copiar_texto_clipboard(mensagem):
-                pyautogui.hotkey("ctrl", "v")
-                time.sleep(0.5)
-            else:
-                pyautogui.typewrite(mensagem, interval=0.005)
-                time.sleep(0.5)
-
-            # 5. Enter para enviar
-            pyautogui.press("enter")
-            time.sleep(1.5)
-            _limpar_fotos_antigas()
-            log.info("✅ WhatsApp Desktop enviado COM FOTO para '%s'", nome_grupo)
-            resultado = True
-        else:
-            # Sem foto: envia só texto
-            if _copiar_texto_clipboard(mensagem):
-                pyautogui.hotkey("ctrl", "v")
-                time.sleep(0.5)
-            else:
-                pyautogui.typewrite(mensagem, interval=0.005)
-                time.sleep(0.5)
-            pyautogui.press("enter")
-            time.sleep(0.8)
-            log.info("✅ WhatsApp Desktop enviado (texto) para '%s'", nome_grupo)
-            resultado = True
-
-        # 6. Devolve foco (minimiza WhatsApp)
-        try:
-            janela.minimize()
-        except Exception:
-            pass
-        try:
-            if janela_anterior:
-                janela_anterior.activate()
-        except Exception:
-            pass
-
-        return resultado
-    except Exception as e:
-        log_erro("wa_desktop.envio_pyautogui", e,
-                 {"grupo": nome_grupo, "tem_foto": tem_foto,
-                  "mensagem_len": len(mensagem)})
-        try:
-            janela.minimize()
-        except Exception:
-            pass
-        return False
+    return False
