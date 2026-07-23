@@ -90,54 +90,72 @@ class MLAffiliateProvider(AffiliateProvider):
         if not self.health_check():
             return self._link_direto_com_afiliado(url)
         from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+        link = None
         with sync_playwright() as p:
             ctx = p.chromium.launch_persistent_context(
                 _PROFILE_DIR, headless=True, locale="pt-BR", user_agent=_UA,
             )
-            page = ctx.pages[0] if ctx.pages else ctx.new_page()
-            link = self._gerar_link_pagina(page, url)
-            ctx.close()
+            try:
+                page = ctx.pages[0] if ctx.pages else ctx.new_page()
+                link = self._gerar_link_pagina(page, url)
+            finally:
+                # Sem isso, qualquer exceção na página (fill/click/timeout)
+                # pula o close() e vaza o chromium.exe travando o profile
+                # persistente compartilhado — todo link de afiliado ML
+                # subsequente falha até alguém matar o processo manualmente.
+                try:
+                    ctx.close()
+                except Exception:
+                    pass
         return link or self._link_direto_com_afiliado(url)
 
     async def generate_affiliate_link_async(self, url: str) -> str | None:
         if not self.health_check():
             return self._link_direto_com_afiliado(url)
         from playwright.async_api import async_playwright, TimeoutError as PWTimeout
+        link = None
         async with async_playwright() as p:
             ctx = await p.chromium.launch_persistent_context(
                 _PROFILE_DIR, headless=True, locale="pt-BR", user_agent=_UA,
             )
-            page = ctx.pages[0] if ctx.pages else await ctx.new_page()
-
-            links_api: list[str] = []
-
-            async def on_response(resp):
-                if resp.status == 200 and any(k in resp.url for k in ("link", "short", "afiliado")):
-                    try:
-                        body = await resp.json()
-                        found = self._extrair_melila_json(body)
-                        if found:
-                            links_api.append(found)
-                    except Exception:
-                        pass
-
-            page.on("response", on_response)
-
             try:
-                await page.goto(_PORTAL_GERADOR, wait_until="networkidle", timeout=30000)
-            except PWTimeout:
-                await page.goto(_PORTAL_GERADOR, wait_until="domcontentloaded", timeout=20000)
+                page = ctx.pages[0] if ctx.pages else await ctx.new_page()
 
-            if "login" in page.url or "lgz" in page.url:
-                await ctx.close()
-                # Sessão expirou — limpa marker para forçar novo setup
-                if os.path.exists(_MARKER_FILE):
-                    os.remove(_MARKER_FILE)
-                print("  ⚠️  Sessão ML expirada — usando link direto (execute setup novamente)")
-                return self._link_direto_com_afiliado(url)
+                links_api: list[str] = []
 
-            link = await self._preencher_e_gerar_async(page, url, links_api)
-            await ctx.close()
+                async def on_response(resp):
+                    if resp.status == 200 and any(k in resp.url for k in ("link", "short", "afiliado")):
+                        try:
+                            body = await resp.json()
+                            found = self._extrair_melila_json(body)
+                            if found:
+                                links_api.append(found)
+                        except Exception:
+                            pass
+
+                page.on("response", on_response)
+
+                try:
+                    await page.goto(_PORTAL_GERADOR, wait_until="networkidle", timeout=30000)
+                except PWTimeout:
+                    await page.goto(_PORTAL_GERADOR, wait_until="domcontentloaded", timeout=20000)
+
+                if "login" in page.url or "lgz" in page.url:
+                    # Sessão expirou — limpa marker para forçar novo setup.
+                    # ctx.close() acontece no finally abaixo, não aqui.
+                    if os.path.exists(_MARKER_FILE):
+                        os.remove(_MARKER_FILE)
+                    print("  ⚠️  Sessão ML expirada — usando link direto (execute setup novamente)")
+                    return self._link_direto_com_afiliado(url)
+
+                link = await self._preencher_e_gerar_async(page, url, links_api)
+            finally:
+                # Mesma proteção contra vazamento do chromium.exe do profile
+                # persistente compartilhado — ver comentário na versão síncrona.
+                try:
+                    await ctx.close()
+                except Exception:
+                    pass
 
         return link or self._link_direto_com_afiliado(url)
 
