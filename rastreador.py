@@ -38,12 +38,11 @@ from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
 
 try:
-    from core.ai_content import gerar_conteudo, ia_ativa
+    from core.ai_content import gerar_conteudo
     _AI_OK = True
 except ImportError:
     _AI_OK = False
     def gerar_conteudo(p): return {"titulo_telegram": None, "descricao_telegram": None, "mensagem_whatsapp": None, "ia_usada": False}  # noqa: E731
-    def ia_ativa(): return False  # noqa: E731
 
 load_dotenv()
 
@@ -128,8 +127,12 @@ async def processar_categoria(
     contadores["encontrados"] += len(itens)
     log(f"  {len(itens)} produto(s) com desconto ≥{DESCONTO_MINIMO}%")
 
+    postados_categoria = 0  # respeita MAX_POR_CATEGORIA — antes essa constante existia mas nunca era checada
+
     for item in itens:
         if publicados[0] >= MAX_POR_EXECUCAO:
+            break
+        if postados_categoria >= MAX_POR_CATEGORIA:
             break
 
         titulo = (item.get("titulo") or "")
@@ -141,165 +144,175 @@ async def processar_categoria(
         produto_id = _id_produto(item)
         item["id"] = produto_id
 
-        # ── 0. Histórico de preço (registra mesmo se for duplicata) ───────────
-        db.registrar_preco(produto_id, item.get("preco"))
-
-        # ── 1. Duplicata ──────────────────────────────────────────────────────
-        if _e_duplicata(item):
-            log(f"  ↩️  Duplicata: {titulo_curto}")
-            contadores["duplicatas"] += 1
-            continue
-
-        # ── 2. Validação anti-golpe ───────────────────────────────────────────
-        aprovado, motivo = validar(item, reputacao={})
-        if not aprovado:
-            log(f"  ⚠️  Rejeitado [{motivo}]: {titulo_curto}")
-            contadores["erros"] += 1
-            continue
-
-        # ── 3. Score ──────────────────────────────────────────────────────────
-        score = score_inteligente(item)
-        item["score"] = score
-
-        if score < SCORE_MINIMO:
-            log(f"  📊 Score {score} < {SCORE_MINIMO}: {titulo_curto}")
-            continue
-
-        log(f"  📊 {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF | score {score}")
-
-        # ── 4. Gerar link de afiliado ─────────────────────────────────────────
-        url_original = item.get("link", "").split("?")[0]
-        provider = get_provider(url_original)
-
-        if provider is None:
-            log(f"  ❌ Nenhum provedor para {url_original[:60]}")
-            db.registrar_erro("affiliate", f"sem provedor para {url_original}", produto_id)
-            contadores["links_falharam"] += 1
-            continue
-
-        log(f"     🔗 Gerando link de afiliado ({provider.name})...")
         try:
-            link_afiliado = await provider.generate_affiliate_link_async(url_original)
-        except Exception as e:
-            link_afiliado = None
-            log(f"     ❌ Erro ao gerar link: {e}")
-            db.registrar_erro("affiliate", str(e), produto_id)
+            # ── 0. Histórico de preço (registra mesmo se for duplicata) ───────────
+            db.registrar_preco(produto_id, item.get("preco"))
 
-        if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
-            log(f"     ❌ Falha total ao gerar link — pulando {titulo_curto}")
-            item["status"] = "pendente"
-            item["adicionado_em"] = datetime.now().isoformat()
-            db.inserir_produto(item)
-            db.atualizar_afiliado(produto_id, provider.name, "", "erro")
-            contadores["links_falharam"] += 1
-            continue
+            # ── 1. Duplicata ──────────────────────────────────────────────────────
+            if _e_duplicata(item):
+                log(f"  ↩️  Duplicata: {titulo_curto}")
+                contadores["duplicatas"] += 1
+                continue
 
-        eh_melila = "meli.la/" in link_afiliado
-        tipo_link = "meli.la oficial" if eh_melila else "link direto c/ afiliado"
-        log(f"     ✅ {tipo_link}: {link_afiliado[:80]}")
-        contadores["links_gerados"] += 1
-        item["link"] = link_afiliado
+            # ── 2. Validação anti-golpe ───────────────────────────────────────────
+            aprovado, motivo = validar(item, reputacao={})
+            if not aprovado:
+                log(f"  ⚠️  Rejeitado [{motivo}]: {titulo_curto}")
+                contadores["erros"] += 1
+                continue
 
-        # Sinal de confiança: menor preço no período (se houver histórico)
-        try:
-            hist = db.historico_preco(produto_id, dias=30)
-            item["hist_preco"] = hist
-            if hist.get("e_menor_periodo"):
-                log(f"     📉 Menor preço em {hist['dias']} dias!")
-        except Exception:
-            pass
+            # ── 3. Score ──────────────────────────────────────────────────────────
+            score = score_inteligente(item)
+            item["score"] = score
 
-        # ── 5. Geração de conteúdo com IA ────────────────────────────────────
-        conteudo_ia = {"titulo_telegram": None, "descricao_telegram": None,
-                       "mensagem_whatsapp": None, "ia_usada": False}
-        if _AI_OK:
+            if score < SCORE_MINIMO:
+                log(f"  📊 Score {score} < {SCORE_MINIMO}: {titulo_curto}")
+                continue
+
+            log(f"  📊 {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF | score {score}")
+
+            # ── 4. Gerar link de afiliado ─────────────────────────────────────────
+            url_original = item.get("link", "").split("?")[0]
+            provider = get_provider(url_original)
+
+            if provider is None:
+                log(f"  ❌ Nenhum provedor para {url_original[:60]}")
+                db.registrar_erro("affiliate", f"sem provedor para {url_original}", produto_id)
+                contadores["links_falharam"] += 1
+                continue
+
+            log(f"     🔗 Gerando link de afiliado ({provider.name})...")
             try:
-                conteudo_ia = gerar_conteudo(item)
-                if conteudo_ia.get("ia_usada"):
-                    log(f"     🤖 IA: {conteudo_ia['titulo_telegram'][:55]}")
-                else:
-                    log("     ℹ️  IA indisponível — usando conteúdo padrão")
-            except Exception as _e_ia:
-                log(f"     ⚠️  IA: {_e_ia}")
+                link_afiliado = await provider.generate_affiliate_link_async(url_original)
+            except Exception as e:
+                link_afiliado = None
+                log(f"     ❌ Erro ao gerar link: {e}")
+                db.registrar_erro("affiliate", str(e), produto_id)
 
-        titulo_ia = conteudo_ia.get("titulo_telegram")
-        descricao_ia = conteudo_ia.get("descricao_telegram")
-        texto_wa = conteudo_ia.get("mensagem_whatsapp")
+            if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
+                log(f"     ❌ Falha total ao gerar link — pulando {titulo_curto}")
+                item["status"] = "pendente"
+                item["adicionado_em"] = datetime.now().isoformat()
+                db.inserir_produto(item)
+                db.atualizar_afiliado(produto_id, provider.name, "", "erro")
+                contadores["links_falharam"] += 1
+                continue
 
-        # ── 6. Publicar Telegram + WhatsApp simultaneamente ───────────────────
-        tem_cupom = bool(item.get("cupom"))
-        if tem_cupom:
-            log(f"     🏷️  Cupom detectado: {item['cupom']} — enviando ALERTA CUPOM")
-            sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
-        else:
-            sucesso = await publicar(bot, item, CANAIS,
-                                     titulo_reescrito=titulo_ia,
-                                     descricao_reescrita=descricao_ia)
-        if sucesso:
-            item["status"] = "enviado"
-            item["adicionado_em"] = datetime.now().isoformat()
-            db.inserir_produto(item)
-            db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
-            db.marcar_enviado(produto_id)
-            publicados[0] += 1
-            contadores["publicados"] += 1
-            log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
+            eh_melila = "meli.la/" in link_afiliado
+            tipo_link = "meli.la oficial" if eh_melila else "link direto c/ afiliado"
+            log(f"     ✅ {tipo_link}: {link_afiliado[:80]}")
+            contadores["links_gerados"] += 1
+            item["link"] = link_afiliado
 
-            # Métricas — Telegram e Mercado Livre (best-effort, não pode quebrar o fluxo)
+            # Sinal de confiança: menor preço no período (se houver histórico)
             try:
-                from core.metrics import inc
-                inc("posts_telegram_total")
-                inc("posts_ml_total")
+                hist = db.historico_preco(produto_id, dias=30)
+                item["hist_preco"] = hist
+                if hist.get("e_menor_periodo"):
+                    log(f"     📉 Menor preço em {hist['dias']} dias!")
             except Exception:
                 pass
 
-            # Blog — gera landing/index/sitemap em background (best-effort,
-            # NUNCA pode derrubar a publicação já concluída no Telegram)
-            try:
-                from core.blog_generator import gerar_tudo
-                gerar_tudo(item)
-            except Exception as _e_blog:
-                from core.error_logger import log_erro
-                log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
-
-            # WhatsApp em segundo plano — ISOLADO do Telegram (best-effort).
-            # Se WhatsApp travar/falhar por qualquer motivo, o Telegram continua.
-            # Timeout de 90s por envio evita bloquear a rodada inteira.
-            if wa_ativo():
+            # ── 5. Geração de conteúdo com IA ────────────────────────────────────
+            conteudo_ia = {"titulo_telegram": None, "descricao_telegram": None,
+                           "mensagem_whatsapp": None, "ia_usada": False}
+            if _AI_OK:
                 try:
-                    wa_ok = await asyncio.wait_for(
-                        enviar_para_grupo(item, mensagem_override=texto_wa),
-                        timeout=90.0,
-                    )
-                    log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
-                    if wa_ok:
-                        try:
-                            from core.metrics import inc
-                            inc("posts_whatsapp_total")
-                        except Exception:
-                            pass
-                except asyncio.TimeoutError as _e:
-                    from core.error_logger import log_erro
-                    log_erro("wa.timeout_90s", _e,
-                             {"produto_id": produto_id, "titulo": titulo_curto})
-                    log("     ⏱️  WhatsApp: timeout 90s (Chrome ocupado ou caído)")
-                except Exception as _e_wa:
-                    from core.error_logger import log_erro
-                    log_erro("wa.envio_falha", _e_wa,
-                             {"produto_id": produto_id, "titulo": titulo_curto})
-                    log(f"     ⚠️  WhatsApp: {_e_wa}")
+                    conteudo_ia = gerar_conteudo(item)
+                    if conteudo_ia.get("ia_usada"):
+                        log(f"     🤖 IA: {conteudo_ia['titulo_telegram'][:55]}")
+                    else:
+                        log("     ℹ️  IA indisponível — usando conteúdo padrão")
+                except Exception as _e_ia:
+                    log(f"     ⚠️  IA: {_e_ia}")
 
-            # Demais redes (Instagram, Twitter…)
-            try:
-                redes = await publicar_todas_redes(item)
-                if redes:
-                    log(f"     🌐 Redes: {resumo_redes(redes)}")
-            except Exception as _e_social:
-                log(f"     ⚠️  Social: {_e_social}")
-            await asyncio.sleep(PAUSA_ENTRE_POSTS)
-        else:
-            db.registrar_erro("telegram", "falha ao publicar", produto_id)
+            titulo_ia = conteudo_ia.get("titulo_telegram")
+            descricao_ia = conteudo_ia.get("descricao_telegram")
+            texto_wa = conteudo_ia.get("mensagem_whatsapp")
+
+            # ── 6. Publicar Telegram + WhatsApp simultaneamente ───────────────────
+            tem_cupom = bool(item.get("cupom"))
+            if tem_cupom:
+                log(f"     🏷️  Cupom detectado: {item['cupom']} — enviando ALERTA CUPOM")
+                sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
+            else:
+                sucesso = await publicar(bot, item, CANAIS,
+                                         titulo_reescrito=titulo_ia,
+                                         descricao_reescrita=descricao_ia)
+            if sucesso:
+                item["status"] = "enviado"
+                item["adicionado_em"] = datetime.now().isoformat()
+                db.inserir_produto(item)
+                db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
+                db.marcar_enviado(produto_id)
+                publicados[0] += 1
+                postados_categoria += 1
+                contadores["publicados"] += 1
+                log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
+
+                # Métricas — Telegram e Mercado Livre (best-effort, não pode quebrar o fluxo)
+                try:
+                    from core.metrics import inc
+                    inc("posts_telegram_total")
+                    inc("posts_ml_total")
+                except Exception:
+                    pass
+
+                # Blog — gera landing/index/sitemap em background (best-effort,
+                # NUNCA pode derrubar a publicação já concluída no Telegram)
+                try:
+                    from core.blog_generator import gerar_tudo
+                    gerar_tudo(item)
+                except Exception as _e_blog:
+                    from core.error_logger import log_erro
+                    log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
+
+                # WhatsApp em segundo plano — ISOLADO do Telegram (best-effort).
+                # Se WhatsApp travar/falhar por qualquer motivo, o Telegram continua.
+                # Timeout de 90s por envio evita bloquear a rodada inteira.
+                if wa_ativo():
+                    try:
+                        wa_ok = await asyncio.wait_for(
+                            enviar_para_grupo(item, mensagem_override=texto_wa),
+                            timeout=90.0,
+                        )
+                        log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
+                        if wa_ok:
+                            try:
+                                from core.metrics import inc
+                                inc("posts_whatsapp_total")
+                            except Exception:
+                                pass
+                    except asyncio.TimeoutError as _e:
+                        from core.error_logger import log_erro
+                        log_erro("wa.timeout_90s", _e,
+                                 {"produto_id": produto_id, "titulo": titulo_curto})
+                        log("     ⏱️  WhatsApp: timeout 90s (Chrome ocupado ou caído)")
+                    except Exception as _e_wa:
+                        from core.error_logger import log_erro
+                        log_erro("wa.envio_falha", _e_wa,
+                                 {"produto_id": produto_id, "titulo": titulo_curto})
+                        log(f"     ⚠️  WhatsApp: {_e_wa}")
+
+                # Demais redes (Instagram, Twitter…)
+                try:
+                    redes = await publicar_todas_redes(item)
+                    if redes:
+                        log(f"     🌐 Redes: {resumo_redes(redes)}")
+                except Exception as _e_social:
+                    log(f"     ⚠️  Social: {_e_social}")
+                await asyncio.sleep(PAUSA_ENTRE_POSTS)
+            else:
+                db.registrar_erro("telegram", "falha ao publicar", produto_id)
+                contadores["erros"] += 1
+        except Exception as e_item:
+            # Um item malformado (campo inesperado, exceção não prevista em
+            # validar/score/publicar) não pode derrubar a categoria inteira —
+            # loga e segue para o próximo item.
+            log(f"  ⚠️  Erro inesperado processando '{titulo_curto}': {e_item}")
+            db.registrar_erro("item_falhou", str(e_item), produto_id)
             contadores["erros"] += 1
+            continue
 
 
 # ── Execução principal ────────────────────────────────────────────────────────
@@ -452,7 +465,11 @@ def main() -> None:
         else:
             log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
         while True:
-            asyncio.run(rodar_uma_vez())
+            try:
+                asyncio.run(rodar_uma_vez())
+            except Exception as e:
+                log(f"⚠️  Rodada falhou inesperadamente: {e}")
+                db.registrar_erro("rodada_falhou", str(e))
             if args.random:
                 proximo = random.randint(args.loop_min, args.loop_max)
             else:
