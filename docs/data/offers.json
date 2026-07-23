@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Apple iPhone 16 (512 GB) – Preto",
+      "preco": 5399.1,
+      "preco_original": 10099.0,
+      "desconto_pct": 46.5,
+      "foto": "https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-23T07:35:54.350739",
+      "link": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 5399.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
+      "preco": 1075.6,
+      "preco_original": 1379.0,
+      "desconto_pct": 22.0,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 69,
+      "enviado_em": "2026-07-23T07:35:45.589491",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1075.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Amazon Fire TV Stick HD (modelo mais recente), Controle Remoto por Voz com Alexa, alimentado pela TV, com configuração simples e Acesso Antecipado à Alexa+",
+      "preco": 341.1,
+      "preco_original": 379.0,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/614YeT6MRAL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 40,
+      "enviado_em": "2026-07-23T07:35:36.739979",
+      "link": "https://www.amazon.com.br/dp/B0DVK166SV?tag=silver1230c-20&linkCode=as2",
+      "classe": "ruim",
+      "menor_preco_30d": 341.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional HP Smart Tank 584 - Preta",
+      "preco": 797.88,
+      "preco_original": 1363.0,
+      "desconto_pct": 41.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_847584-MLA113137412934_072026-AB.webp",
+      "categoria": "impressoras",
+      "score": 95,
+      "enviado_em": "2026-07-23T07:33:09.485755",
+      "link": "https://www.mercadolivre.com.br/impressora-multifuncional-hp-smart-tank-584-preta/p/MLB34801962?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 797.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV Profissional 4K 43\" LG UHD 43AU801 Processador α7 AI Ger8 Super Upscaling Google Cast Alexa Integrado Controle AI Smart Magic WebOS 25",
+      "preco": 1559.0,
+      "preco_original": 2669.0,
+      "desconto_pct": 41.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_916032-MLA113622765244_072026-AB.webp",
+      "categoria": "impressoras",
+      "score": 95,
+      "enviado_em": "2026-07-23T07:33:02.920129",
+      "link": "https://www.mercadolivre.com.br/smart-tv-profissional-4k-43-lg-uhd-43au801-processador-7-ai-ger8-super-upscaling-google-cast-alexa-integrado-controle-ai-smart-magic-webos-25/p/MLB60390574?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1559.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A56 5g 256gb 8gb Ram Cinza",
+      "preco": 2298.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 42.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_927393-MLA100014745899_122025-AB.webp",
+      "categoria": "impressoras",
+      "score": 90,
+      "enviado_em": "2026-07-23T07:32:56.404983",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a56-5g-256gb-8gb-ram-cinza/p/MLB47114363?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2298.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Relógio Casio Masculino G-shock Digital Preto Dw-5600bb-1dr Preto",
+      "preco": 282.0,
+      "preco_original": 499.0,
+      "desconto_pct": 43.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_613661-MLB79368247808_092024-AB--relogio-casio-masculino-gshock-digital-preto-dw5600bb1dr.webp",
+      "categoria": "impressoras",
+      "score": 83,
+      "enviado_em": "2026-07-23T07:32:49.878719",
+      "link": "https://www.mercadolivre.com.br/relogio-casio-masculino-gshock-digital-preto-dw5600bb1dr/up/MLBU1431955641?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 282.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Creatina 500g Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
       "preco": 38.9,
       "preco_original": 78.0,
@@ -148,8 +253,20 @@
       "score_medio": 80,
       "desconto_medio": 51,
       "maior_desconto": 64
+    },
+    "impressoras": {
+      "total": 4,
+      "score_medio": 91,
+      "desconto_medio": 42,
+      "maior_desconto": 43
+    },
+    "eletronicos": {
+      "total": 3,
+      "score_medio": 66,
+      "desconto_medio": 26,
+      "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-22T12:10:24.385274",
-  "total": 8
+  "updated_at": "2026-07-23T07:36:02.845042",
+  "total": 15
 }
