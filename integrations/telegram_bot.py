@@ -219,11 +219,15 @@ async def publicar(
 ) -> bool:
     """Publica uma oferta no canal Telegram correspondente."""
     canal_nome = produto.get("canal") or "geral"
-    chat_id = canais.get(canal_nome) or next(iter(canais.values()))
-    mensagem = _montar_mensagem(produto, titulo_reescrito, descricao_reescrita)
-    teclado = _montar_teclado(produto)
 
     try:
+        # chat_id: next(iter(canais.values())) levanta StopIteration se
+        # `canais` vier vazio — precisa estar dentro do try junto com o
+        # resto, senão escapa sem cair no except abaixo.
+        chat_id = canais.get(canal_nome) or next(iter(canais.values()))
+        mensagem = _montar_mensagem(produto, titulo_reescrito, descricao_reescrita)
+        teclado = _montar_teclado(produto)
+
         if produto.get("foto"):
             await bot.send_photo(
                 chat_id=chat_id,
@@ -280,11 +284,12 @@ async def publicar_com_ia(
         log.warning("Reescrita IA falhou para '%s': %s — publicando sem IA.", produto.get("titulo"), e)
 
     canal_nome = produto.get("canal") or "geral"
-    chat_id = canais.get(canal_nome) or next(iter(canais.values()))
-    mensagem = _montar_mensagem(produto, titulo_reescrito, descricao_reescrita)
-    teclado = _montar_teclado(produto)
 
     try:
+        chat_id = canais.get(canal_nome) or next(iter(canais.values()))
+        mensagem = _montar_mensagem(produto, titulo_reescrito, descricao_reescrita)
+        teclado = _montar_teclado(produto)
+
         if produto.get("foto"):
             await bot.send_photo(
                 chat_id=chat_id,
@@ -466,7 +471,7 @@ async def _responder_faq(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     )
     await update.message.reply_text(
         "Não identifiquei sua dúvida. Posso ajudar com temas como:\n"
-        "frete, garantia, prazo, devolução, pagamento, rastreio, cancelamento, cupom e mais.\n\n"
+        f"{tópicos} e mais.\n\n"
         "Tente reformular sua pergunta! 😊"
     )
 
@@ -483,7 +488,15 @@ async def publicar_alerta_cupom(
     Prioridade de imagem: banner estático → foto do produto → texto puro.
     """
     canal_nome = produto.get("canal") or "geral"
-    chat_id = canais.get(canal_nome) or next(iter(canais.values()))
+    try:
+        # Precondição pras 3 tentativas em cascata abaixo (banner → foto do
+        # produto → texto puro) — se `canais` vier vazio, next(iter(...))
+        # levanta StopIteration; sem isso ficava fora de qualquer try e
+        # quebrava a função inteira antes mesmo da primeira tentativa.
+        chat_id = canais.get(canal_nome) or next(iter(canais.values()))
+    except StopIteration:
+        log.error("publicar_alerta_cupom: nenhum canal configurado em `canais`")
+        return False
 
     titulo = html.escape(produto.get("titulo") or "Produto em oferta")
     preco: float | None = produto.get("preco")
