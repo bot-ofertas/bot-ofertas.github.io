@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Cadeira Gamer Jogos Escritório Ergonômica Giratória 360 Luxo Cor Preto",
+      "preco": 318.98,
+      "preco_original": 699.0,
+      "desconto_pct": 54.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_657610-MLA101793373664_122025-AB.webp",
+      "categoria": "moveis",
+      "score": 95,
+      "enviado_em": "2026-07-23T12:05:55.099060",
+      "cupom": "R$303,03 com Cupom",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-jogos-escritorio-ergonomica-giratoria-360-luxo-cor-preto/p/MLB57526141?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 318.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Escritório Presidente Ergonômica Python Fly Couro Sintético Encosto Ajustável Com Trava E Apoio Para Pés Cor Preta",
+      "preco": 475.96,
+      "preco_original": 1248.0,
+      "desconto_pct": 61.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_879494-MLA108910206785_032026-AB.webp",
+      "categoria": "moveis",
+      "score": 88,
+      "enviado_em": "2026-07-23T12:05:48.379700",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-presidente-ergonmica-python-fly-couro-sintetico-encosto-ajustavel-com-trava-e-apoio-para-pes-cor-preta/p/MLB62936011?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 475.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+      "preco": 497.9,
+      "preco_original": 906.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "categoria": "moveis",
+      "score": 96,
+      "enviado_em": "2026-07-23T12:05:41.844993",
+      "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 497.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Escritório Giratória HomeNow Columbus Presidente Preta com Tela Mesh",
+      "preco": 283.95,
+      "preco_original": 494.0,
+      "desconto_pct": 42.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651752-MLA95643261450_102025-AB.webp",
+      "categoria": "moveis",
+      "score": 88,
+      "enviado_em": "2026-07-23T12:05:35.309709",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh/p/MLB57032440?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 283.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Prancha Lizze Profissional 480 Extreme",
       "preco": 339.11,
       "preco_original": 459.0,
@@ -78,6 +139,12 @@
     "verificada": true
   },
   "stats": {
+    "moveis": {
+      "total": 4,
+      "score_medio": 92,
+      "desconto_medio": 51,
+      "maior_desconto": 61
+    },
     "beleza": {
       "total": 4,
       "score_medio": 81,
@@ -85,6 +152,6 @@
       "maior_desconto": 71
     }
   },
-  "updated_at": "2026-07-23T10:05:31.962975",
-  "total": 4
+  "updated_at": "2026-07-23T12:06:50.791512",
+  "total": 8
 }
