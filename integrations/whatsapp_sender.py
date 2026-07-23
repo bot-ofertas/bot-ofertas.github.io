@@ -224,9 +224,14 @@ def _copiar_arquivo_clipboard(caminho: str) -> bool:
         buf = dropfiles + lista
 
         win32clipboard.OpenClipboard()
-        win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardData(win32con.CF_HDROP, buf)
-        win32clipboard.CloseClipboard()
+        try:
+            win32clipboard.EmptyClipboard()
+            win32clipboard.SetClipboardData(win32con.CF_HDROP, buf)
+        finally:
+            # Sem isso, uma exceção entre Open/Set deixa o clipboard do
+            # Windows travado pro processo inteiro (copiar/colar do próprio
+            # usuário para de funcionar, e envios seguintes falham em cascata).
+            win32clipboard.CloseClipboard()
         return True
     except Exception as e:
         log.warning("Falha ao copiar arquivo para clipboard: %s", e)

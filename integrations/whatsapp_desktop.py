@@ -84,9 +84,14 @@ def _copiar_foto_clipboard(caminho: str) -> bool:
         dropfiles = struct.pack("<LllII", offset, 0, 0, 0, 1)
         buf = dropfiles + lista
         win32clipboard.OpenClipboard()
-        win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardData(win32con.CF_HDROP, buf)
-        win32clipboard.CloseClipboard()
+        try:
+            win32clipboard.EmptyClipboard()
+            win32clipboard.SetClipboardData(win32con.CF_HDROP, buf)
+        finally:
+            # Sem isso, uma exceção entre Open/Set deixa o clipboard do
+            # Windows travado pro processo inteiro (copiar/colar do próprio
+            # usuário para de funcionar, e envios seguintes falham em cascata).
+            win32clipboard.CloseClipboard()
         return True
     except Exception as e:
         log.warning("clipboard: %s", e)
@@ -99,9 +104,11 @@ def _copiar_texto_clipboard(texto: str) -> bool:
         import win32clipboard  # noqa: PLC0415
         import win32con        # noqa: PLC0415
         win32clipboard.OpenClipboard()
-        win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, texto)
-        win32clipboard.CloseClipboard()
+        try:
+            win32clipboard.EmptyClipboard()
+            win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, texto)
+        finally:
+            win32clipboard.CloseClipboard()
         return True
     except Exception as e:
         log.warning("clipboard texto: %s", e)
