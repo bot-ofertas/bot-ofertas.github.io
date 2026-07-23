@@ -183,17 +183,21 @@ def configurar_foto_perfil(caminho_imagem: str) -> bool:
         return False
 
 
-async def publicar_instagram_story(produto: dict, link_bio: str = "") -> bool:
+async def publicar_instagram_story(produto: dict, link_bio: str = "", foto_bytes: bytes | None = None) -> bool:
     """Publica a oferta como Story (além do post normal). O Instagram só
     libera o sticker de link clicável em Stories a partir de uma certa
     maturidade/tamanho de conta — se não estiver disponível ainda, a foto
-    é publicada mesmo assim, só sem o link."""
+    é publicada mesmo assim, só sem o link.
+
+    foto_bytes: se já baixada por quem chamou (publicar_todas_redes baixa
+    1x e reaproveita aqui e em publicar_instagram, já que os dois publicam
+    a mesma foto do mesmo produto), evita baixar a imagem de novo pela rede."""
     cl = _get_ig_client()
     if cl is None:
         return False
 
     foto_url = produto.get("foto")
-    if not foto_url:
+    if not foto_bytes and not foto_url:
         return False
 
     import pathlib
@@ -204,10 +208,12 @@ async def publicar_instagram_story(produto: dict, link_bio: str = "") -> bool:
     try:
         from instagrapi.types import StoryLink  # noqa: PLC0415
 
-        r = req.get(foto_url, timeout=10)
-        r.raise_for_status()
+        if foto_bytes is None:
+            r = req.get(foto_url, timeout=10)
+            r.raise_for_status()
+            foto_bytes = r.content
         with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
-            f.write(r.content)
+            f.write(foto_bytes)
             tmp_path = f.name
 
         links = [StoryLink(webUri=link_bio)] if link_bio else []
@@ -256,7 +262,9 @@ def montar_caption_instagram(produto: dict) -> str:
     return "\n\n".join(filter(None, blocos))
 
 
-async def publicar_instagram(produto: dict) -> bool:
+async def publicar_instagram(produto: dict, foto_bytes: bytes | None = None) -> bool:
+    """foto_bytes: ver docstring de publicar_instagram_story — evita baixar
+    a mesma foto do produto duas vezes quando feed post e story saem juntos."""
     if not (_IG_USER and _IG_PASS):
         return False
     try:
@@ -267,7 +275,7 @@ async def publicar_instagram(produto: dict) -> bool:
         caption = montar_caption_instagram(produto)
 
         foto_url = produto.get("foto")
-        if not foto_url:
+        if not foto_bytes and not foto_url:
             log.info("Instagram: sem foto para %s, pulando", titulo)
             return False
 
@@ -275,10 +283,12 @@ async def publicar_instagram(produto: dict) -> bool:
         import requests as req  # noqa: PLC0415
         tmp_path = None
         try:
-            r = req.get(foto_url, timeout=10)
-            r.raise_for_status()
+            if foto_bytes is None:
+                r = req.get(foto_url, timeout=10)
+                r.raise_for_status()
+                foto_bytes = r.content
             with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
-                f.write(r.content)
+                f.write(foto_bytes)
                 tmp_path = f.name
             cl.photo_upload(tmp_path, caption=caption)
         finally:
@@ -370,13 +380,30 @@ async def publicar_todas_redes(produto: dict) -> dict[str, bool]:
     nomes = []  # [(nome_resultado, chave_schedule), ...]
 
     if _IG_USER and _IG_PASS:
-        if pode_postar("instagram_feed"):
-            tasks.append(publicar_instagram(produto))
+        feed_agendado = pode_postar("instagram_feed")
+        story_agendado = pode_postar("instagram_story")
+
+        # Quando feed e story saem juntos (caso normal), baixa a foto do
+        # produto 1x aqui e reaproveita nos dois — antes cada função baixava
+        # a mesma imagem por conta própria, dobrando banda/latência/exposição
+        # a falha do host de imagem sem nenhum ganho.
+        foto_bytes = None
+        if feed_agendado and story_agendado and produto.get("foto"):
+            try:
+                import requests as _req  # noqa: PLC0415
+                _r = _req.get(produto["foto"], timeout=10)
+                _r.raise_for_status()
+                foto_bytes = _r.content
+            except Exception:
+                foto_bytes = None  # cada função cai no próprio fallback (baixa sozinha)
+
+        if feed_agendado:
+            tasks.append(publicar_instagram(produto, foto_bytes=foto_bytes))
             nomes.append(("instagram", "instagram_feed"))
         else:
             resultados["instagram"] = False
-        if pode_postar("instagram_story"):
-            tasks.append(publicar_instagram_story(produto, link_bio=_LINK_BIO))
+        if story_agendado:
+            tasks.append(publicar_instagram_story(produto, link_bio=_LINK_BIO, foto_bytes=foto_bytes))
             nomes.append(("instagram_story", "instagram_story"))
         else:
             resultados["instagram_story"] = False
@@ -396,6 +423,11 @@ async def publicar_todas_redes(produto: dict) -> dict[str, bool]:
     if tasks:
         resultados_async = await asyncio.gather(*tasks, return_exceptions=True)
         for (nome, chave_schedule), res in zip(nomes, resultados_async):
+            if isinstance(res, Exception):
+                # Sem isso, um bug de verdade (ex: _get_ig_client() levantando
+                # por sessão inválida) ficava indistinguível de uma falha
+                # normal tipo "❌ instagram" — nenhum rastro no log.
+                log.warning("%s falhou com exceção não tratada: %s", nome, res, exc_info=res)
             ok = res is True
             resultados[nome] = ok
             if ok:
