@@ -59,7 +59,15 @@ def setup_logging(nivel: int = logging.INFO) -> None:
     fmt = logging.Formatter(
         "%(asctime)s [%(name)s] %(levelname)s [%(filename)s:%(lineno)d] %(message)s"
     )
-    # Console
+    # Console — força UTF-8 no stdout antes de anexar o handler. Sem isso,
+    # qualquer log com emoji/acento fora do codepage do console do Windows
+    # (cp1252/cp437, dependendo do terminal) falha silenciosamente: a
+    # exceção não derruba o processo, mas a mensagem de log é perdida e um
+    # traceback "--- Logging error ---" polui o stderr no lugar dela.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     ch = logging.StreamHandler(sys.stdout)
     ch.setFormatter(fmt)
     root.addHandler(ch)

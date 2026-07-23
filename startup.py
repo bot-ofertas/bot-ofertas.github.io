@@ -156,50 +156,90 @@ def etapa_4_iniciar_rastreador() -> tuple:
 
 
 def monitorar(procs) -> None:
-    """Reinicia rastreadores que caírem, mantendo os outros vivos."""
+    """Reinicia rastreadores que caírem, mantendo os outros vivos.
+
+    Duas correções sobre a versão anterior:
+    1. O reinício usava time.sleep(espera) inline (até 300s) ANTES de
+       reiniciar — isso bloqueava o loop inteiro, então se o Amazon caísse
+       durante a espera do ML (ou vice-versa), a queda nem era detectada até
+       o sleep do outro terminar. Agora cada um tem seu próprio "retry
+       agendado" (timestamp), checado em polls curtos de 8s — uma espera
+       nunca bloqueia a detecção/reinício do outro.
+    2. falhas_ml/falhas_az nunca resetavam — falhas esporádicas e não
+       relacionadas ao longo de semanas de uptime acumulavam até bater 3 e
+       desistir permanentemente de um tracker saudável. Agora reseta o
+       contador depois de um tempo estável sem quedas.
+    """
     # procs pode ser um único Popen (legacy) ou tupla (ml, amazon)
     if isinstance(procs, tuple):
         proc_ml, proc_az = procs
     else:
         proc_ml, proc_az = procs, None
 
+    RESET_APOS_SEGUNDOS = 2 * 60 * 60  # 2h estável reseta o contador de falhas
+
     log.info("Sistema em produção — rastreadores + healthcheck ativos.")
     falhas_ml = falhas_az = 0
+    proximo_retry_ml = proximo_retry_az = None
+    ultima_falha_ml = ultima_falha_az = None  # time.monotonic() da última queda
+    desistiu_ml = proc_ml is None
+    desistiu_az = proc_az is None
+
     while True:
-        # Polling não-bloqueante: verifica se algum caiu
-        time.sleep(60)
+        time.sleep(8)  # poll curto — uma espera de retry nunca bloqueia o outro
+        agora = time.monotonic()
+
         if proc_ml and proc_ml.poll() is not None:
             falhas_ml += 1
+            ultima_falha_ml = agora
             log.warning("Rastreador ML caiu (código %s, falha %d/3)",
                         proc_ml.returncode, falhas_ml)
+            proc_ml = None  # marca "caído, aguardando retry" — evita recontar no próximo poll
             if falhas_ml <= 3:
                 espera = min(30 * (2 ** (falhas_ml - 1)), 300)
+                proximo_retry_ml = agora + espera
                 log.info("Reiniciando ML em %ds…", espera)
-                time.sleep(espera)
-                # Só reinicia o ML — reiniciar os dois junto (via
-                # etapa_4_iniciar_rastreador) gera um Amazon extra
-                # desnecessário toda vez que só o ML cai, e sobrescreve
-                # data/rastreador_amazon.pid com o PID desse processo órfão.
-                proc_ml = _iniciar_ml()
             else:
                 log.error("ML falhou 3x — desistindo dele")
-                proc_ml = None
+                desistiu_ml = True
+        elif proximo_retry_ml and agora >= proximo_retry_ml:
+            # Só reinicia o ML — reiniciar os dois junto (via
+            # etapa_4_iniciar_rastreador) gera um Amazon extra
+            # desnecessário toda vez que só o ML cai, e sobrescreve
+            # data/rastreador_amazon.pid com o PID desse processo órfão.
+            proc_ml = _iniciar_ml()
+            proximo_retry_ml = None
+        elif proc_ml and falhas_ml > 0 and ultima_falha_ml is not None \
+                and (agora - ultima_falha_ml) > RESET_APOS_SEGUNDOS:
+            log.info("ML estável há %.0fh — resetando contador de falhas (%d → 0)",
+                      RESET_APOS_SEGUNDOS / 3600, falhas_ml)
+            falhas_ml = 0
+            ultima_falha_ml = None
+
         if proc_az and proc_az.poll() is not None:
             falhas_az += 1
+            ultima_falha_az = agora
             log.warning("Rastreador Amazon caiu (código %s, falha %d/3)",
                         proc_az.returncode, falhas_az)
+            proc_az = None
             if falhas_az <= 3:
-                # Faltava o reinício de verdade aqui — só contava a falha e
-                # nunca chamava _iniciar_amazon(), então o Amazon ficava
-                # morto indefinidamente até bater 3 falhas e desistir.
                 espera = min(30 * (2 ** (falhas_az - 1)), 300)
+                proximo_retry_az = agora + espera
                 log.info("Reiniciando Amazon em %ds…", espera)
-                time.sleep(espera)
-                proc_az = _iniciar_amazon()
             else:
                 log.error("Amazon falhou 3x — desistindo dele")
-                proc_az = None
-        if proc_ml is None and proc_az is None:
+                desistiu_az = True
+        elif proximo_retry_az and agora >= proximo_retry_az:
+            proc_az = _iniciar_amazon()
+            proximo_retry_az = None
+        elif proc_az and falhas_az > 0 and ultima_falha_az is not None \
+                and (agora - ultima_falha_az) > RESET_APOS_SEGUNDOS:
+            log.info("Amazon estável há %.0fh — resetando contador de falhas (%d → 0)",
+                      RESET_APOS_SEGUNDOS / 3600, falhas_az)
+            falhas_az = 0
+            ultima_falha_az = None
+
+        if desistiu_ml and desistiu_az:
             log.error("Todos rastreadores mortos — encerrando startup")
             break
 
