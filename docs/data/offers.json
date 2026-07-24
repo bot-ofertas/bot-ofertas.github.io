@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Gabinete Gamer Megabyte GB100 Mid-Tower de Vidro Temperado Preto",
+      "preco": 104.93,
+      "preco_original": 225.0,
+      "desconto_pct": 53.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_813924-MLA110669105489_042026-AB.webp",
+      "categoria": "informatica",
+      "score": 79,
+      "enviado_em": "2026-07-24T10:00:11.303840",
+      "link": "https://www.mercadolivre.com.br/gabinete-gamer-megabyte-gb100-mid-tower-de-vidro-temperado-preto/p/MLB65992677?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 104.93,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Processador AMD Ryzen 7 5700X 100-100000926WOF de 8 núcleos e 4.6GHz",
+      "preco": 1103.0,
+      "preco_original": 1442.0,
+      "desconto_pct": 23.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_925077-MLA100026670783_122025-AB.webp",
+      "categoria": "informatica",
+      "score": 71,
+      "enviado_em": "2026-07-24T10:00:04.672423",
+      "link": "https://www.mercadolivre.com.br/processador-amd-ryzen-7-5700x-100-100000926wof-de-8-nucleos-e-46ghz/p/MLB19159879?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1103.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor Gamer LG UltraGear Curvo 34G600A-B 34\" QuadHD 2K, UltraWide 1800R, 160Hz, 1ms (MBR), AMD FreeSync Premium, HDR10, MaxxAudio",
+      "preco": 1931.0,
+      "preco_original": 2515.0,
+      "desconto_pct": 23.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_790527-MLA105314750110_012026-AB.webp",
+      "categoria": "informatica",
+      "score": 78,
+      "enviado_em": "2026-07-24T09:59:58.020856",
+      "link": "https://www.mercadolivre.com.br/monitor-gamer-lg-ultragear-curvo-34g600a-b-34-quadhd-2k-ultrawide-1800r-160hz-1ms-mbr-amd-freesync-premium-hdr10-maxxaudio/p/MLB62870034?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1931.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
+      "preco": 3680.0,
+      "preco_original": 6199.0,
+      "desconto_pct": 40.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
+      "categoria": "informatica",
+      "score": 95,
+      "enviado_em": "2026-07-24T09:59:51.399359",
+      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3680.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Celular Samsung Galaxy A07 256gb, 8gb, Câmera 50mp, Tela 6.7 , Proteção Ip54, Processador 6nm - Preto",
       "preco": 754.61,
       "preco_original": 1499.0,
@@ -205,6 +265,12 @@
       "desconto_medio": 51,
       "maior_desconto": 61
     },
+    "informatica": {
+      "total": 4,
+      "score_medio": 81,
+      "desconto_medio": 35,
+      "maior_desconto": 53
+    },
     "celulares": {
       "total": 4,
       "score_medio": 89,
@@ -218,6 +284,6 @@
       "maior_desconto": 71
     }
   },
-  "updated_at": "2026-07-24T07:32:29.480359",
-  "total": 12
+  "updated_at": "2026-07-24T10:01:10.119574",
+  "total": 16
 }
