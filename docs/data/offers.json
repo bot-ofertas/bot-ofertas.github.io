@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Shampoo Redutor de Grisalhos Grecin Control GX Para Todas os Tons Cabelo 118ml",
+      "preco": 73.41,
+      "preco_original": 111.0,
+      "desconto_pct": 33.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_631595-MLA99350047876_112025-AB.webp",
+      "categoria": "beleza",
+      "score": 84,
+      "enviado_em": "2026-07-24T11:50:30.775437",
+      "link": "https://www.mercadolivre.com.br/shampoo-redutor-de-grisalhos-grecin-control-gx-para-todas-os-tons-cabelo-118ml/p/MLB25708528?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.41,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Máquina De Acabamento Corta Cabelo Profissional Kemei 2299 P Preto 127/220v",
+      "preco": 79.92,
+      "preco_original": 159.0,
+      "desconto_pct": 49.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_921106-MLB111066859744_052026-AB--maquina-de-acabamento-corta-cabelo-profissional-kemei-2299-p.webp",
+      "categoria": "beleza",
+      "score": 93,
+      "enviado_em": "2026-07-24T11:50:24.052176",
+      "link": "https://www.mercadolivre.com.br/maquina-de-acabamento-corta-cabelo-profissional-kemei-2299-p/up/MLBU3555982525?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 79.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Maquina Acabamento Cortar Cabelo Barba E Pelos Kemei 032 Prateado 127/220v",
+      "preco": 30.08,
+      "preco_original": 78.0,
+      "desconto_pct": 61.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809090-MLB112050371271_052026-AB--maquina-acabamento-cortar-cabelo-barba-e-pelos-kemei-032.webp",
+      "categoria": "beleza",
+      "score": 79,
+      "enviado_em": "2026-07-24T11:50:17.049995",
+      "link": "https://www.mercadolivre.com.br/maquina-acabamento-cortar-cabelo-barba-e-pelos-kemei-032/up/MLBU3256334594?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 30.08,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "preco": 110.4,
+      "preco_original": 230.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB--perfume-sedutor-arabe-sabah-100ml-original-feminino.webp",
+      "categoria": "beleza",
+      "score": 94,
+      "enviado_em": "2026-07-24T11:50:10.354790",
+      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 110.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Gabinete Gamer Megabyte GB100 Mid-Tower de Vidro Temperado Preto",
       "preco": 104.93,
       "preco_original": 225.0,
@@ -193,7 +253,7 @@
       "link": "https://www.mercadolivre.com.br/prancha-lizze-profissional-480-extreme/p/MLB24086423?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 339.11,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -223,7 +283,7 @@
       "link": "https://www.mercadolivre.com.br/barbeador-e-aparador-eletrico-philips-oneblade-com-pente-5-em-1-sem-fio-e-prova-dagua-qp142510/p/MLB51986596?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 146.93,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -244,21 +304,27 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Modelador De Cachos Pente Dear Quente Íons Negativosportátil Preto 127/220v",
-    "preco": 170.97,
-    "preco_original": 399.0,
-    "desconto_pct": 57.2,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_762368-MLB109046981119_032026-AB--modelador-de-cachos-pente-dear-quente-ions-negativosportatil.webp",
-    "categoria": "beleza",
-    "score": 99,
-    "enviado_em": "2026-07-23T10:04:32.049163",
-    "link": "https://www.mercadolivre.com.br/modelador-de-cachos-pente-dear-quente-ions-negativosportatil/up/MLBU3848711799?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+    "preco": 497.9,
+    "preco_original": 906.0,
+    "desconto_pct": 45.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+    "categoria": "moveis",
+    "score": 96,
+    "enviado_em": "2026-07-23T12:05:41.844993",
+    "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 170.97,
+    "menor_preco_30d": 497.9,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "beleza": {
+      "total": 8,
+      "score_medio": 84,
+      "desconto_medio": 48,
+      "maior_desconto": 71
+    },
     "moveis": {
       "total": 4,
       "score_medio": 92,
@@ -276,14 +342,8 @@
       "score_medio": 89,
       "desconto_medio": 55,
       "maior_desconto": 64
-    },
-    "beleza": {
-      "total": 4,
-      "score_medio": 81,
-      "desconto_medio": 46,
-      "maior_desconto": 71
     }
   },
-  "updated_at": "2026-07-24T10:01:10.119574",
-  "total": 16
+  "updated_at": "2026-07-24T11:51:55.478113",
+  "total": 20
 }
