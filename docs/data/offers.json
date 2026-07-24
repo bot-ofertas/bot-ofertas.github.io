@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Celular Samsung Galaxy A07 256gb, 8gb, Câmera 50mp, Tela 6.7 , Proteção Ip54, Processador 6nm - Preto",
+      "preco": 754.61,
+      "preco_original": 1499.0,
+      "desconto_pct": 49.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_895724-MLA91526198522_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-24T07:31:05.312845",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-256gb-8gb-camera-50mp-tela-67-protecao-ip54-processador-6nm-preto/p/MLB54961556?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 754.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G56 5g - 256gb 16gb (8gb Ram+8gb Ram Boost) Camera 50mp Sony Lytia 600 certificado de Ultrarresistencia Militar e Ip68 + Ip69 - Verde",
+      "preco": 1360.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 49.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_919734-MLA99464900322_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-24T07:30:58.596979",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-16gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-certificado-de-ultrarresistencia-militar-e-ip68-ip69-verde/p/MLB50302985?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1360.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Carregador Fonte iPhone Original 20w Apple Tipo C Turbo Branco",
+      "preco": 87.49,
+      "preco_original": 248.0,
+      "desconto_pct": 64.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_666260-MLB113576451712_072026-AB--carregador-fonte-iphone-original-20w-apple-tipo-c-turbo.webp",
+      "categoria": "celulares",
+      "score": 69,
+      "enviado_em": "2026-07-24T07:30:51.870590",
+      "link": "https://www.mercadolivre.com.br/carregador-fonte-iphone-original-20w-apple-tipo-c-turbo/up/MLBU3487989699?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 87.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 806.65,
+      "preco_original": 1855.0,
+      "desconto_pct": 56.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-24T07:30:45.179154",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 806.65,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cadeira Gamer Jogos Escritório Ergonômica Giratória 360 Luxo Cor Preto",
       "preco": 318.98,
       "preco_original": 699.0,
@@ -145,6 +205,12 @@
       "desconto_medio": 51,
       "maior_desconto": 61
     },
+    "celulares": {
+      "total": 4,
+      "score_medio": 89,
+      "desconto_medio": 55,
+      "maior_desconto": 64
+    },
     "beleza": {
       "total": 4,
       "score_medio": 81,
@@ -152,6 +218,6 @@
       "maior_desconto": 71
     }
   },
-  "updated_at": "2026-07-23T12:06:50.791512",
-  "total": 8
+  "updated_at": "2026-07-24T07:32:29.480359",
+  "total": 12
 }
