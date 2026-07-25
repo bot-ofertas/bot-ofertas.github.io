@@ -1,6 +1,67 @@
 {
   "products": [
     {
+      "titulo": "Notebook Vaio Fe16 Amd Ryzen 7-5825u Linux 16gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo Cinza Grafite Vjfe69f11xb0121h - Permite upgrade de memória RAM e SSD",
+      "preco": 3999.0,
+      "preco_original": 5699.0,
+      "desconto_pct": 29.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_954850-MLA99514927694_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 84,
+      "enviado_em": "2026-07-25T09:15:36.500871",
+      "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-7-5825u-linux-16gb-ram-512gb-ssd-wi-fi-6-tela-16-ips-wuxga-antirreflexo-cinza-grafite-vjfe69f11xb0121h-permite-upgrade-de-memoria-ram-e-ssd/p/MLB46470846?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Asus Vivobook Go 15 Amd Ryzen 5 7520u 16gb 512ssd Mixed Black",
+      "preco": 3403.0,
+      "preco_original": 4299.0,
+      "desconto_pct": 20.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_722728-MLA110061030541_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 75,
+      "enviado_em": "2026-07-25T09:15:29.700042",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-amd-ryzen-5-7520u-16gb-512ssd-mixed-black/p/MLB43417665?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3403.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision C15M Intel® Celeron® N4500 Linux 8GB RAM 256GB eMMC 15.6\" Full HD IPS – Minitela - Cinza",
+      "preco": 2057.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_969413-MLA99631778927_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 82,
+      "enviado_em": "2026-07-25T09:15:22.678975",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-c15m-intel-celeron-n4500-linux-8gb-ram-256gb-emmc-156-full-hd-ips-minitela-cinza/p/MLB54096680?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2057.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook ASUS Vivobook 15 M1502, AMD Ryzen 7, 8 GB RAM, 512 GB SSD, KeepOS Linux, Cool Silver - M1502YA-NJ611",
+      "preco": 3173.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 20.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_995527-MLA99554953104_122025-AB.webp",
+      "categoria": "notebooks",
+      "score": 75,
+      "enviado_em": "2026-07-25T09:15:15.956087",
+      "cupom": "R$2.989,08 com Cupom",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-15-m1502-amd-ryzen-7-8-gb-ram-512-gb-ssd-keepos-linux-cool-silver-m1502ya-nj611/p/MLB49089309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3173.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Microondas Panasonic Nn-st66nbru Black Glass 34L Dupla Refeição",
       "preco": 587.16,
       "preco_original": 949.0,
@@ -364,17 +425,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
-    "preco": 806.65,
-    "preco_original": 1855.0,
-    "desconto_pct": 56.5,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
-    "categoria": "celulares",
+    "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
+    "preco": 3680.0,
+    "preco_original": 6199.0,
+    "desconto_pct": 40.6,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
+    "categoria": "informatica",
     "score": 95,
-    "enviado_em": "2026-07-24T07:30:45.179154",
-    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-24T09:59:51.399359",
+    "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 806.65,
+    "menor_preco_30d": 3680.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -384,6 +445,12 @@
       "score_medio": 84,
       "desconto_medio": 48,
       "maior_desconto": 71
+    },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 25,
+      "maior_desconto": 29
     },
     "moveis": {
       "total": 4,
@@ -410,6 +477,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-25T07:16:05.158157",
-  "total": 24
+  "updated_at": "2026-07-25T09:17:00.727574",
+  "total": 28
 }
