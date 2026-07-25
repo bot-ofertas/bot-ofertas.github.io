@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Micro-ondas Philco PMO23EB Limpa Fácil 20 Litros Potência de 1100W Cor Branco",
+      "preco": 454.93,
+      "preco_original": 679.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_672560-MLA99502210056_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 75,
+      "enviado_em": "2026-07-25T10:47:49.831229",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20-litros-potencia-de-1100w-cor-branco/p/MLB17484025?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 454.93,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas Atlas Agile Up Mesa Vidro Mega Chama Bivolt",
+      "preco": 331.45,
+      "preco_original": 483.0,
+      "desconto_pct": 31.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_662369-MLA99422748970_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 72,
+      "enviado_em": "2026-07-25T10:47:42.460535",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-atlas-agile-up-mesa-vidro-mega-chama-bivolt/p/MLB46671029?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 331.45,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Electrolux 36L cor Inox Efficient com Descongelamento Assistido ME36S",
+      "preco": 711.55,
+      "preco_original": 989.0,
+      "desconto_pct": 28.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_864516-MLA99700643378_122025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 74,
+      "enviado_em": "2026-07-25T10:47:34.791459",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-electrolux-36l-cor-inox-efficient-com-descongelamento-assistido-me36s/p/MLB19750516?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 711.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Philco PMO23EB Limpa Fácil 20L Potência de 1100W Cor Branco",
+      "preco": 454.93,
+      "preco_original": 679.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_784423-MLA99929513333_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 75,
+      "enviado_em": "2026-07-25T10:47:28.070022",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-pmo23eb-limpa-facil-20l-potencia-de-1100w-cor-branco/p/MLB17484024?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 454.93,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Vaio Fe16 Amd Ryzen 7-5825u Linux 16gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo Cinza Grafite Vjfe69f11xb0121h - Permite upgrade de memória RAM e SSD",
       "preco": 3999.0,
       "preco_original": 5699.0,
@@ -425,17 +485,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
-    "preco": 3680.0,
-    "preco_original": 6199.0,
-    "desconto_pct": 40.6,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
-    "categoria": "informatica",
-    "score": 95,
-    "enviado_em": "2026-07-24T09:59:51.399359",
-    "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+    "preco": 110.4,
+    "preco_original": 230.0,
+    "desconto_pct": 52.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB--perfume-sedutor-arabe-sabah-100ml-original-feminino.webp",
+    "categoria": "beleza",
+    "score": 94,
+    "enviado_em": "2026-07-24T11:50:10.354790",
+    "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 3680.0,
+    "menor_preco_30d": 110.4,
     "menor_periodo": false,
     "verificada": true
   },
@@ -464,6 +524,12 @@
       "desconto_medio": 35,
       "maior_desconto": 53
     },
+    "eletrodomesticos": {
+      "total": 4,
+      "score_medio": 74,
+      "desconto_medio": 31,
+      "maior_desconto": 33
+    },
     "celulares": {
       "total": 4,
       "score_medio": 89,
@@ -477,6 +543,6 @@
       "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-25T09:17:00.727574",
-  "total": 28
+  "updated_at": "2026-07-25T10:48:44.411193",
+  "total": 32
 }
