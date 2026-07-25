@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Microondas Panasonic Nn-st66nbru Black Glass 34L Dupla Refeição",
+      "preco": 587.16,
+      "preco_original": 949.0,
+      "desconto_pct": 38.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721450-MLA99469504130_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 87,
+      "enviado_em": "2026-07-25T07:15:38.551550",
+      "link": "https://www.mercadolivre.com.br/microondas-panasonic-nn-st66nbru-black-glass-34l-dupla-refeicao/p/MLB22491295?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 587.16,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de Pó e Água WAP GTW 10 1400W de Potência com Bocal de Sopro",
+      "preco": 209.02,
+      "preco_original": 485.0,
+      "desconto_pct": 56.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_985627-MLA100060225801_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 86,
+      "enviado_em": "2026-07-25T07:15:31.589171",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-wap-gtw-10-1400w-de-potencia-com-bocal-de-sopro/p/MLB8923631?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 209.02,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador De Pó e Água Wap Gtw 10 Compacto 1400w 10 Litros Amarelo",
+      "preco": 209.02,
+      "preco_original": 399.0,
+      "desconto_pct": 47.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_944970-MLA99949674111_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 82,
+      "enviado_em": "2026-07-25T07:15:24.994401",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-wap-gtw-10-compacto-1400w-10-litros-amarelo/p/MLB8923630?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 209.02,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Extratora e Higienizadora Portátil WAP Spot Cleaner W2 1600W - Pulveriza, Esfrega e Extrai",
+      "preco": 548.32,
+      "preco_original": 927.0,
+      "desconto_pct": 40.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_603572-MLA99545946946_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 90,
+      "enviado_em": "2026-07-25T07:15:18.239827",
+      "link": "https://www.mercadolivre.com.br/extratora-e-higienizadora-portatil-wap-spot-cleaner-w2-1600w-pulveriza-esfrega-e-extrai/p/MLB22511802?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 548.32,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Shampoo Redutor de Grisalhos Grecin Control GX Para Todas os Tons Cabelo 118ml",
       "preco": 73.41,
       "preco_original": 111.0,
@@ -268,7 +328,7 @@
       "link": "https://www.mercadolivre.com.br/modelador-de-cachos-pente-dear-quente-ions-negativosportatil/up/MLBU3848711799?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 170.97,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -304,17 +364,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
-    "preco": 497.9,
-    "preco_original": 906.0,
-    "desconto_pct": 45.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
-    "categoria": "moveis",
-    "score": 96,
-    "enviado_em": "2026-07-23T12:05:41.844993",
-    "link": "https://www.mercadolivre.com.br/cadeira-escritorio-ergonmica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh/p/MLB46220740?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+    "preco": 806.65,
+    "preco_original": 1855.0,
+    "desconto_pct": 56.5,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+    "categoria": "celulares",
+    "score": 95,
+    "enviado_em": "2026-07-24T07:30:45.179154",
+    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 497.9,
+    "menor_preco_30d": 806.65,
     "menor_periodo": false,
     "verificada": true
   },
@@ -342,8 +402,14 @@
       "score_medio": 89,
       "desconto_medio": 55,
       "maior_desconto": 64
+    },
+    "bebes": {
+      "total": 4,
+      "score_medio": 86,
+      "desconto_medio": 46,
+      "maior_desconto": 56
     }
   },
-  "updated_at": "2026-07-24T11:51:55.478113",
-  "total": 20
+  "updated_at": "2026-07-25T07:16:05.158157",
+  "total": 24
 }
