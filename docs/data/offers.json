@@ -1,6 +1,112 @@
 {
   "products": [
     {
+      "titulo": "Smart TV 40\" Philco Roku TV HDR10 Dolby Áudio P40CRA",
+      "preco": 1349.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/81tK4J0OG-L._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 46,
+      "enviado_em": "2026-07-25T12:06:05.661221",
+      "link": "https://www.amazon.com.br/dp/B0GJTCF75W?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 1349.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 16 (512 GB) – Preto",
+      "preco": 5399.1,
+      "preco_original": 10099.0,
+      "desconto_pct": 46.5,
+      "foto": "https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-25T12:05:56.988806",
+      "link": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 5399.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
+      "preco": 1030.88,
+      "preco_original": 1379.0,
+      "desconto_pct": 25.2,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 73,
+      "enviado_em": "2026-07-25T12:05:48.164570",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1030.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5g 128gb 6gb Ram Câmera Tripla De Até 50mp Selfie De 12mp Ip67 Super Amoled 6.7'' Nfc Recursos Ai Android E Segurança Snapdragon - Preto",
+      "preco": 1292.0,
+      "preco_original": 2212.0,
+      "desconto_pct": 41.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705075-MLA99943632917_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-25T12:02:53.939897",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-camera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-preto/p/MLB47115842?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1292.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A07 128gb, 4gb, Câmera 50mp, Tela 6.7 , Proteção Ip54, Processador 6nm - Violeta",
+      "preco": 765.96,
+      "preco_original": 1049.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_765861-MLA95532186080_102025-AB.webp",
+      "categoria": "celulares",
+      "score": 72,
+      "enviado_em": "2026-07-25T12:02:47.415670",
+      "cupom": "R$689,36 com Cupom",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a07-128gb-4gb-camera-50mp-tela-67-protecao-ip54-processador-6nm-violeta/p/MLB57767498?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 765.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G15 256gb 12gb 4GB RAM 8GB RAM Boost Camera 50mp Verde",
+      "preco": 798.48,
+      "preco_original": 1599.0,
+      "desconto_pct": 50.1,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675715-MLA99963700693_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-25T12:02:40.688808",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram-8gb-ram-boost-camera-50mp-verde/p/MLB44665542?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 798.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G15 - 256gb 12gb (4gb Ram+8gb Ram Boost) E Camera 50mp Com Ai E Night Vision Bateria De 5200 Mah Tela Fhd+ 6.7 Com Superbrilho Nfc - Grafite",
+      "preco": 890.1,
+      "preco_original": 1389.0,
+      "desconto_pct": 35.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_650904-MLA100002714503_112025-AB.webp",
+      "categoria": "celulares",
+      "score": 89,
+      "enviado_em": "2026-07-25T12:02:34.140799",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-bateria-de-5200-mah-tela-fhd-67-com-superbrilho-nfc-grafite/p/MLB44665473?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 890.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-ondas Philco PMO23EB Limpa Fácil 20 Litros Potência de 1100W Cor Branco",
       "preco": 454.93,
       "preco_original": 679.0,
@@ -328,7 +434,7 @@
       "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-16gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-certificado-de-ultrarresistencia-militar-e-ip68-ip69-verde/p/MLB50302985?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
       "menor_preco_30d": 1360.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -485,21 +591,27 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
-    "preco": 110.4,
-    "preco_original": 230.0,
-    "desconto_pct": 52.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB--perfume-sedutor-arabe-sabah-100ml-original-feminino.webp",
-    "categoria": "beleza",
-    "score": 94,
-    "enviado_em": "2026-07-24T11:50:10.354790",
-    "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smartphone Motorola Moto G15 256gb 12gb 4GB RAM 8GB RAM Boost Camera 50mp Verde",
+    "preco": 798.48,
+    "preco_original": 1599.0,
+    "desconto_pct": 50.1,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_675715-MLA99963700693_112025-AB.webp",
+    "categoria": "celulares",
+    "score": 95,
+    "enviado_em": "2026-07-25T12:02:40.688808",
+    "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g15-256gb-12gb-4gb-ram-8gb-ram-boost-camera-50mp-verde/p/MLB44665542?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 110.4,
+    "menor_preco_30d": 798.48,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "celulares": {
+      "total": 8,
+      "score_medio": 88,
+      "desconto_medio": 47,
+      "maior_desconto": 64
+    },
     "beleza": {
       "total": 8,
       "score_medio": 84,
@@ -530,19 +642,19 @@
       "desconto_medio": 31,
       "maior_desconto": 33
     },
-    "celulares": {
-      "total": 4,
-      "score_medio": 89,
-      "desconto_medio": 55,
-      "maior_desconto": 64
-    },
     "bebes": {
       "total": 4,
       "score_medio": 86,
       "desconto_medio": 46,
       "maior_desconto": 56
+    },
+    "eletronicos": {
+      "total": 3,
+      "score_medio": 70,
+      "desconto_medio": 27,
+      "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-25T10:48:44.411193",
-  "total": 32
+  "updated_at": "2026-07-25T12:06:14.236203",
+  "total": 39
 }
