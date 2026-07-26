@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
+      "preco": 794.58,
+      "preco_original": 1289.0,
+      "desconto_pct": 38.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 92,
+      "enviado_em": "2026-07-26T12:19:32.237765",
+      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 794.58,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Hd Aoc Tv 32s5045/78g Hdmi 1 Usb Wifi Roku",
+      "preco": 854.9,
+      "preco_original": 1093.0,
+      "desconto_pct": 21.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_847052-MLA99450901188_112025-AB.webp",
+      "categoria": "tvs",
+      "score": 65,
+      "enviado_em": "2026-07-26T12:19:25.496554",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-hd-aoc-tv-32s504578g-hdmi-1-usb-wifi-roku/p/MLB40359906?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 854.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "preco": 1199.0,
+      "preco_original": 2099.0,
+      "desconto_pct": 42.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-26T12:19:18.751743",
+      "link": "https://www.mercadolivre.com.br/smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v/p/MLB67270079?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1199.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb",
+      "preco": 879.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 41.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636675-MLA107807100101_022026-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-07-26T12:19:11.943043",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 879.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
       "preco": 509.9,
       "preco_original": 894.0,
@@ -242,6 +302,12 @@
     "verificada": true
   },
   "stats": {
+    "tvs": {
+      "total": 4,
+      "score_medio": 87,
+      "desconto_medio": 36,
+      "maior_desconto": 42
+    },
     "saude": {
       "total": 4,
       "score_medio": 79,
@@ -267,6 +333,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-26T11:10:41.494098",
-  "total": 15
+  "updated_at": "2026-07-26T12:20:26.318839",
+  "total": 19
 }
