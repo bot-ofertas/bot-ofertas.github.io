@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Smart TV 40\" Philco Roku TV HDR10 Dolby Áudio P40CRA",
+      "preco": 1281.55,
+      "preco_original": 1499.0,
+      "desconto_pct": 14.5,
+      "foto": "https://m.media-amazon.com/images/I/81tK4J0OG-L._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 50,
+      "enviado_em": "2026-07-26T09:41:03.861164",
+      "link": "https://www.amazon.com.br/dp/B0GJTCF75W?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 1281.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 16 (512 GB) – Preto",
+      "preco": 5399.1,
+      "preco_original": 10099.0,
+      "desconto_pct": 46.5,
+      "foto": "https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 90,
+      "enviado_em": "2026-07-26T09:40:55.220113",
+      "link": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=silver1230c-20&linkCode=as2",
+      "classe": "excelente",
+      "menor_preco_30d": 5399.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Impressora Multifuncional Epson Ecotank L3250 Jato de Tinta Colorida Wi-Fi Bivolt",
+      "preco": 999.0,
+      "preco_original": 1379.0,
+      "desconto_pct": 27.6,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 77,
+      "enviado_em": "2026-07-26T09:40:46.635008",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 808.24,
+      "preco_original": 1855.0,
+      "desconto_pct": 56.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "impressoras",
+      "score": 95,
+      "enviado_em": "2026-07-26T09:38:18.931945",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 808.24,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Aro 29 Gts Dexter 24 Marchas Freio A Disco Cor Grafite Com Preto Tamanho Do Quadro 21",
+      "preco": 809.6,
+      "preco_original": 1413.0,
+      "desconto_pct": 42.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861212-MLA99932433553_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 95,
+      "enviado_em": "2026-07-26T09:38:12.433842",
+      "link": "https://www.mercadolivre.com.br/bicicleta-aro-29-gts-dexter-24-marchas-freio-a-disco-cor-grafite-com-preto-tamanho-do-quadro-21/p/MLB37800447?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 809.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Inteligente Intelbras iM5SC con Wi-Fi Full HD color Branca",
+      "preco": 299.9,
+      "preco_original": 413.0,
+      "desconto_pct": 27.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_956317-MLA99482016644_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 66,
+      "enviado_em": "2026-07-26T09:38:04.681723",
+      "link": "https://www.mercadolivre.com.br/camera-inteligente-intelbras-im5sc-con-wi-fi-full-hd-color-branca/p/MLB27705742?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 299.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Escritório Até 150kg Executiva Presidente Office Preto - Luxo Premium Assento E Encosto Em Tela Mesh,",
+      "preco": 297.5,
+      "preco_original": 811.0,
+      "desconto_pct": 63.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_647531-MLB93712182063_092025-AB--cadeira-de-escritorio-ate-150kg-executiva-presidente-office.webp",
+      "categoria": "impressoras",
+      "score": 83,
+      "enviado_em": "2026-07-26T09:37:58.155738",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-ate-150kg-executiva-presidente-office/up/MLBU2865683703?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 297.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Jogo Calota Fiat Nova Strada Freedom Grafite Esportiva Aro15 Grafite",
       "preco": 99.45,
       "preco_original": 142.0,
@@ -62,28 +167,40 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Suporte De Painel Starlink Mini Com Ventosas Antimulta Preto",
-    "preco": 95.82,
-    "preco_original": 200.0,
-    "desconto_pct": 52.1,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_671262-MLB110898134206_052026-AB--suporte-de-painel-starlink-mini-com-ventosas-antimulta.webp",
-    "categoria": "automotivo",
-    "score": 76,
-    "enviado_em": "2026-07-26T07:34:47.726618",
-    "link": "https://www.mercadolivre.com.br/suporte-de-painel-starlink-mini-com-ventosas-antimulta/up/MLBU3752695733?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 95.82,
+    "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+    "preco": 808.24,
+    "preco_original": 1855.0,
+    "desconto_pct": 56.4,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+    "categoria": "impressoras",
+    "score": 95,
+    "enviado_em": "2026-07-26T09:38:18.931945",
+    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 808.24,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "impressoras": {
+      "total": 4,
+      "score_medio": 85,
+      "desconto_medio": 47,
+      "maior_desconto": 63
+    },
     "automotivo": {
       "total": 4,
       "score_medio": 71,
       "desconto_medio": 40,
       "maior_desconto": 52
+    },
+    "eletronicos": {
+      "total": 3,
+      "score_medio": 72,
+      "desconto_medio": 30,
+      "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-26T07:35:35.312036",
-  "total": 4
+  "updated_at": "2026-07-26T09:41:12.486809",
+  "total": 11
 }
