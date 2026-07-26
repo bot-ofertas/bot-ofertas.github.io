@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
+      "preco": 509.9,
+      "preco_original": 894.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "categoria": "saude",
+      "score": 90,
+      "enviado_em": "2026-07-26T11:08:46.777336",
+      "link": "https://www.mercadolivre.com.br/vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco/p/MLB24273671?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 509.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 Pronta Entrega",
+      "preco": 50.44,
+      "preco_original": 100.0,
+      "desconto_pct": 49.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_876614-MLB110800889269_042026-AB--kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega.webp",
+      "categoria": "saude",
+      "score": 76,
+      "enviado_em": "2026-07-26T11:08:40.102099",
+      "link": "https://www.mercadolivre.com.br/kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega/up/MLBU3923294598?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 50.44,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina 1kg Suplemento Monohidratada em pó 100% Pura - Soldiers Nutrition",
+      "preco": 59.9,
+      "preco_original": 239.0,
+      "desconto_pct": 74.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "categoria": "saude",
+      "score": 70,
+      "enviado_em": "2026-07-26T11:08:33.435801",
+      "link": "https://www.mercadolivre.com.br/creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition/p/MLB18725310?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Interruptor Touch Inteligente 3 Teclas Eiw 1003 Intelbras Branco",
+      "preco": 89.91,
+      "preco_original": 165.0,
+      "desconto_pct": 45.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900653-MLA104904122038_012026-AB.webp",
+      "categoria": "saude",
+      "score": 78,
+      "enviado_em": "2026-07-26T11:08:26.750283",
+      "link": "https://www.mercadolivre.com.br/interruptor-touch-inteligente-3-teclas-eiw-1003-intelbras-branco/p/MLB64675857?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.91,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart TV 40\" Philco Roku TV HDR10 Dolby Áudio P40CRA",
       "preco": 1281.55,
       "preco_original": 1499.0,
@@ -182,6 +242,12 @@
     "verificada": true
   },
   "stats": {
+    "saude": {
+      "total": 4,
+      "score_medio": 79,
+      "desconto_medio": 53,
+      "maior_desconto": 74
+    },
     "impressoras": {
       "total": 4,
       "score_medio": 85,
@@ -201,6 +267,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-26T09:41:12.486809",
-  "total": 11
+  "updated_at": "2026-07-26T11:10:41.494098",
+  "total": 15
 }
