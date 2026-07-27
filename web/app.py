@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import subprocess
 from datetime import datetime
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, redirect, render_template
 
 import core.database as db
 from affiliates.registry import health_report
@@ -59,6 +59,30 @@ def api_monitor():
     except Exception:
         saude = {"status": "ok", "db_ok": True, "bot_rodando": True}
     return jsonify(saude)
+
+
+@app.route("/r/<produto_id>")
+def redirecionar_clique(produto_id):
+    """Registra o clique e redireciona pro link de afiliado real.
+
+    IMPORTANTE: esta rota só existe pra ficar pronta — nenhum link postado
+    no Telegram/WhatsApp aponta pra cá ainda. Enquanto este servidor só
+    roda em localhost (sem exposição pública/VPS), um link assim postado
+    pra fora chegaria morto no celular de quem clicasse. Ativar de verdade
+    depende de resolver o acesso público (VPS pendente ou túnel).
+    """
+    db.inicializar()
+    link = db.registrar_clique(produto_id)
+    if not link:
+        return jsonify({"erro": "produto não encontrado"}), 404
+    return redirect(link, code=302)
+
+
+@app.route("/api/cliques")
+def api_cliques():
+    """Relatório dos produtos mais clicados (rastreamento local)."""
+    db.inicializar()
+    return jsonify(db.top_clicados(limite=50))
 
 
 @app.route("/api/erros")

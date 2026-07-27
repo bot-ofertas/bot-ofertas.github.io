@@ -441,3 +441,39 @@ def contar_posts_social_desde(plataforma: str, desde_iso: str) -> int:
             (plataforma, desde_iso),
         ).fetchone()
         return int(row[0]) if row and row[0] else 0
+
+
+# ── Rastreamento de cliques ──────────────────────────────────────────────────
+# A coluna `clicks` já existia no schema (marcada "Rastreamento (futuro)") mas
+# nunca foi escrita por nenhum código — essas duas funções são o primeiro uso
+# real dela, via web/app.py:/r/<produto_id>.
+
+def registrar_clique(produto_id: str) -> str | None:
+    """Incrementa o contador de cliques do produto e retorna o affiliate_link
+    real pra redirecionar. None se o produto não existe."""
+    with _conn() as con:
+        con.execute(
+            "UPDATE produtos SET clicks = clicks + 1 WHERE id = ?",
+            (produto_id,),
+        )
+        row = con.execute(
+            "SELECT affiliate_link FROM produtos WHERE id = ?",
+            (produto_id,),
+        ).fetchone()
+        return row[0] if row and row[0] else None
+
+
+def top_clicados(limite: int = 20) -> list[dict]:
+    """Produtos mais clicados, para relatório."""
+    with _conn() as con:
+        rows = con.execute(
+            """
+            SELECT id, titulo, categoria, affiliate_provider, clicks, enviado_em
+            FROM produtos
+            WHERE clicks > 0
+            ORDER BY clicks DESC
+            LIMIT ?
+            """,
+            (limite,),
+        ).fetchall()
+        return [dict(r) for r in rows]
