@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Tablet Samsung Galaxy TAB A11+, 128GB, 6GB RAM, WiFi",
+      "preco": 1529.1,
+      "preco_original": 1799.0,
+      "desconto_pct": 15.0,
+      "foto": "https://m.media-amazon.com/images/I/51TU36U5C1L._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 55,
+      "enviado_em": "2026-07-27T08:32:09.066008",
+      "link": "https://www.amazon.com.br/dp/B0G4SLJNFF?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 1529.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Multifuncional Epson EcoTank L4360, imprime frente e verso automático, Wi-Fi",
+      "preco": 1316.0,
+      "preco_original": 1879.0,
+      "desconto_pct": 30.0,
+      "foto": "https://m.media-amazon.com/images/I/51SHpx83VNL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 84,
+      "enviado_em": "2026-07-27T08:32:00.024778",
+      "link": "https://www.amazon.com.br/dp/B0GJ7H8WLW?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 1316.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Galaxy Tab S10 Lite, 128GB, Tela 10.9\", WIFI, Cinza",
+      "preco": 2321.27,
+      "preco_original": 3149.0,
+      "desconto_pct": 26.3,
+      "foto": "https://m.media-amazon.com/images/I/51UFm7dGUuL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 81,
+      "enviado_em": "2026-07-27T08:31:51.056895",
+      "link": "https://www.amazon.com.br/dp/B0FMFRFNWG?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 2321.27,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Parafusadeira Furadeira 36v S/ Fio Profissional + 2 Baterias Amarelo 127/220v 60",
+      "preco": 99.99,
+      "preco_original": 190.0,
+      "desconto_pct": 47.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_830401-MLB111530047206_062026-AB--parafusadeira-furadeira-36v-s-fio-profissional--2-baterias.webp",
+      "categoria": "cameras",
+      "score": 78,
+      "enviado_em": "2026-07-27T08:30:54.843924",
+      "link": "https://www.mercadolivre.com.br/parafusadeira-furadeira-36v-s-fio-profissional--2-baterias/up/MLBU4044408576?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 99.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Densifique Masque Densité Máscara 200ml | Kérastase",
+      "preco": 238.99,
+      "preco_original": 429.0,
+      "desconto_pct": 44.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_639620-MLA99443952024_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 82,
+      "enviado_em": "2026-07-27T08:30:48.149453",
+      "link": "https://www.mercadolivre.com.br/densifique-masque-densite-mascara-200ml-kerastase/p/MLB19769630?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 238.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de Pó Vertical e Portátil WAP High Speed Plus 1350W 3 em 1",
+      "preco": 134.0,
+      "preco_original": 207.0,
+      "desconto_pct": 35.3,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_887734-MLA99375017938_112025-AB.webp",
+      "categoria": "cameras",
+      "score": 72,
+      "enviado_em": "2026-07-27T08:30:41.452446",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-vertical-e-portatil-wap-high-speed-plus-1350w-3-em-1/p/MLB22511808?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 134.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor em Pó",
+      "preco": 59.9,
+      "preco_original": 104.0,
+      "desconto_pct": 42.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "categoria": "cameras",
+      "score": 76,
+      "enviado_em": "2026-07-27T08:30:34.716861",
+      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po/p/MLB66637233?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 59.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
       "preco": 794.58,
       "preco_original": 1289.0,
@@ -162,7 +267,7 @@
       "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
       "classe": "boa",
       "menor_preco_30d": 999.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -320,11 +425,23 @@
       "desconto_medio": 47,
       "maior_desconto": 63
     },
+    "cameras": {
+      "total": 4,
+      "score_medio": 77,
+      "desconto_medio": 42,
+      "maior_desconto": 47
+    },
     "automotivo": {
       "total": 4,
       "score_medio": 71,
       "desconto_medio": 40,
       "maior_desconto": 52
+    },
+    "informatica": {
+      "total": 3,
+      "score_medio": 73,
+      "desconto_medio": 24,
+      "maior_desconto": 30
     },
     "eletronicos": {
       "total": 3,
@@ -333,6 +450,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-26T12:20:26.318839",
-  "total": 19
+  "updated_at": "2026-07-27T08:32:18.041942",
+  "total": 26
 }
