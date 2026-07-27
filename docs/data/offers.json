@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Gamer Lenovo LOQ 15irx9 Intel Core i5-13450HX 16gb 512gb SSD RTX 3050 Windows 11 - 83kh0006br Luna Grey",
+      "preco": 5310.0,
+      "preco_original": 9999.0,
+      "desconto_pct": 46.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_915579-MLA88464035164_072025-AB.webp",
+      "categoria": "notebooks",
+      "score": 95,
+      "enviado_em": "2026-07-27T11:57:00.402488",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-lenovo-loq-15irx9-intel-core-i5-13450hx-16gb-512gb-ssd-rtx-3050-windows-11-83kh0006br-luna-grey/p/MLB46010329?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 5310.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision C15M Intel® Celeron® N4500 Linux 8GB RAM 256GB eMMC 15.6\" Full HD IPS – Minitela - Cinza",
+      "preco": 2071.0,
+      "preco_original": 2855.0,
+      "desconto_pct": 27.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_969413-MLA99631778927_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 82,
+      "enviado_em": "2026-07-27T11:56:53.661397",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-c15m-intel-celeron-n4500-linux-8gb-ram-256gb-emmc-156-full-hd-ips-minitela-cinza/p/MLB54096680?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2071.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Positivo Vision C14 8gb 128gb 14 Hd Windows 11 Cinza",
+      "preco": 1899.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 36.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_873770-MLA109216030780_042026-AB.webp",
+      "categoria": "notebooks",
+      "score": 91,
+      "enviado_em": "2026-07-27T11:56:47.124318",
+      "link": "https://www.mercadolivre.com.br/notebook-positivo-vision-c14-8gb-128gb-14-hd-windows-11-cinza/p/MLB56724643?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1899.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Vaio Fe16 Amd Ryzen 7-5825u Linux 16gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo Cinza Grafite Vjfe69f11xb0121h - Permite upgrade de memória RAM e SSD",
+      "preco": 3999.0,
+      "preco_original": 5699.0,
+      "desconto_pct": 29.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_954850-MLA99514927694_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 84,
+      "enviado_em": "2026-07-27T11:56:40.585731",
+      "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-7-5825u-linux-16gb-ram-512gb-ssd-wi-fi-6-tela-16-ips-wuxga-antirreflexo-cinza-grafite-vjfe69f11xb0121h-permite-upgrade-de-memoria-ram-e-ssd/p/MLB46470846?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Tablet Samsung Galaxy TAB A11+, 128GB, 6GB RAM, WiFi",
       "preco": 1529.1,
       "preco_original": 1799.0,
@@ -392,17 +452,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
-    "preco": 808.24,
-    "preco_original": 1855.0,
-    "desconto_pct": 56.4,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
-    "categoria": "impressoras",
+    "titulo": "Notebook Gamer Lenovo LOQ 15irx9 Intel Core i5-13450HX 16gb 512gb SSD RTX 3050 Windows 11 - 83kh0006br Luna Grey",
+    "preco": 5310.0,
+    "preco_original": 9999.0,
+    "desconto_pct": 46.9,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_915579-MLA88464035164_072025-AB.webp",
+    "categoria": "notebooks",
     "score": 95,
-    "enviado_em": "2026-07-26T09:38:18.931945",
-    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-27T11:57:00.402488",
+    "link": "https://www.mercadolivre.com.br/notebook-gamer-lenovo-loq-15irx9-intel-core-i5-13450hx-16gb-512gb-ssd-rtx-3050-windows-11-83kh0006br-luna-grey/p/MLB46010329?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 808.24,
+    "menor_preco_30d": 5310.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -418,6 +478,12 @@
       "score_medio": 79,
       "desconto_medio": 53,
       "maior_desconto": 74
+    },
+    "notebooks": {
+      "total": 4,
+      "score_medio": 88,
+      "desconto_medio": 35,
+      "maior_desconto": 46
     },
     "impressoras": {
       "total": 4,
@@ -450,6 +516,6 @@
       "maior_desconto": 46
     }
   },
-  "updated_at": "2026-07-27T08:32:18.041942",
-  "total": 26
+  "updated_at": "2026-07-27T11:57:23.508389",
+  "total": 30
 }
