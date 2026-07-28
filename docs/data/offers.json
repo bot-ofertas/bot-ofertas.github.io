@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Impressora 3x1 Multifuncional Epson Ecotank L3250 Wifi Bivol Preto",
+      "preco": 1045.0,
+      "preco_original": 1449.0,
+      "desconto_pct": 27.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_687160-MLA99453726600_112025-AB.webp",
+      "categoria": "redes",
+      "score": 78,
+      "enviado_em": "2026-07-28T12:17:30.824306",
+      "link": "https://www.mercadolivre.com.br/impressora-3x1-multifuncional-epson-ecotank-l3250-wifi-bivol-preto/p/MLB53866444?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1045.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv H5000f Hd 32 Polegadas 2025 Preto Samsung Bivolt",
+      "preco": 959.4,
+      "preco_original": 1395.0,
+      "desconto_pct": 31.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_973138-MLA99968160801_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 83,
+      "enviado_em": "2026-07-28T12:17:21.337104",
+      "link": "https://www.mercadolivre.com.br/smart-tv-h5000f-hd-32-polegadas-2025-preto-samsung-bivolt/p/MLB48954912?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 959.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de Pó e Água WAP GTW 10 1400W de Potência com Bocal de Sopro",
+      "preco": 234.51,
+      "preco_original": 485.0,
+      "desconto_pct": 51.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_985627-MLA100060225801_122025-AB.webp",
+      "categoria": "bebes",
+      "score": 85,
+      "enviado_em": "2026-07-28T12:17:12.226195",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-wap-gtw-10-1400w-de-potencia-com-bocal-de-sopro/p/MLB8923631?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 234.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Dualsense Cfi-zct1 Sem Fio Ps5 Galactic Purple",
+      "preco": 378.1,
+      "preco_original": 529.0,
+      "desconto_pct": 28.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_988275-MLA99995954413_112025-AB.webp",
+      "categoria": "games",
+      "score": 69,
+      "enviado_em": "2026-07-28T12:17:03.337558",
+      "link": "https://www.mercadolivre.com.br/controle-dualsense-cfi-zct1-sem-fio-ps5-galactic-purple/p/MLB18917848?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 378.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Cama Box Baú Casal Colchão Gazin Molas Flora Bege 138x188x63cm",
       "preco": 999.0,
       "preco_original": 1554.0,
@@ -618,32 +678,33 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Notebook Gamer Lenovo LOQ 15irx9 Intel Core i5-13450HX 16gb 512gb SSD RTX 3050 Windows 11 - 83kh0006br Luna Grey",
-    "preco": 5310.0,
-    "preco_original": 9999.0,
-    "desconto_pct": 46.9,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_915579-MLA88464035164_072025-AB.webp",
-    "categoria": "notebooks",
+    "titulo": "Smartphone Motorola Moto G06 - 256gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com Ai Bateria De 5200 Mah Tela 6.9 - Bege",
+    "preco": 789.69,
+    "preco_original": 1349.0,
+    "desconto_pct": 41.5,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_793349-MLA91806774304_092025-AB.webp",
+    "categoria": "celulares",
     "score": 95,
-    "enviado_em": "2026-07-27T11:57:00.402488",
-    "link": "https://www.mercadolivre.com.br/notebook-gamer-lenovo-loq-15irx9-intel-core-i5-13450hx-16gb-512gb-ssd-rtx-3050-windows-11-83kh0006br-luna-grey/p/MLB46010329?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-07-28T07:37:56.369465",
+    "cupom": "R$710,72 com Cupom",
+    "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g06-256gb-12gb-4gb-ram-8gb-ram-boost-e-camera-50mp-com-ai-bateria-de-5200-mah-tela-69-bege/p/MLB55762063?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 5310.0,
+    "menor_preco_30d": 789.69,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "impressoras": {
+      "total": 6,
+      "score_medio": 82,
+      "desconto_medio": 42,
+      "maior_desconto": 63
+    },
     "eletronicos": {
       "total": 6,
       "score_medio": 73,
       "desconto_medio": 28,
       "maior_desconto": 46
-    },
-    "impressoras": {
-      "total": 5,
-      "score_medio": 82,
-      "desconto_medio": 44,
-      "maior_desconto": 63
     },
     "tvs": {
       "total": 4,
@@ -681,6 +742,24 @@
       "desconto_medio": 24,
       "maior_desconto": 30
     },
+    "bebes": {
+      "total": 2,
+      "score_medio": 83,
+      "desconto_medio": 46,
+      "maior_desconto": 51
+    },
+    "redes": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 28,
+      "maior_desconto": 27
+    },
+    "games": {
+      "total": 1,
+      "score_medio": 69,
+      "desconto_medio": 29,
+      "maior_desconto": 28
+    },
     "esportes": {
       "total": 1,
       "score_medio": 77,
@@ -711,12 +790,6 @@
       "desconto_medio": 33,
       "maior_desconto": 32
     },
-    "bebes": {
-      "total": 1,
-      "score_medio": 81,
-      "desconto_medio": 41,
-      "maior_desconto": 41
-    },
     "armazenamento": {
       "total": 1,
       "score_medio": 75,
@@ -724,6 +797,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-07-28T10:16:24.861546",
-  "total": 41
+  "updated_at": "2026-07-28T12:18:53.544819",
+  "total": 45
 }
