@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Cama Box Baú Casal Colchão Gazin Molas Flora Bege 138x188x63cm",
+      "preco": 999.0,
+      "preco_original": 1554.0,
+      "desconto_pct": 35.7,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679611-MLA98381525248_112025-AB.webp",
+      "categoria": "casa",
+      "score": 95,
+      "enviado_em": "2026-07-28T10:15:30.283040",
+      "link": "https://www.mercadolivre.com.br/cama-box-bau-casal-colchao-gazin-molas-flora-bege-138x188x63cm/p/MLB26886277?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador De Pó e Água Wap Gtw 10 Compacto 1400w 10 Litros Amarelo",
+      "preco": 234.51,
+      "preco_original": 399.0,
+      "desconto_pct": 41.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_944970-MLA99949674111_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 81,
+      "enviado_em": "2026-07-28T10:15:08.760625",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-wap-gtw-10-compacto-1400w-10-litros-amarelo/p/MLB8923630?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 234.51,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit De Atualização 120 Figurinhas Album Fifa World Cup 2026 Kit De Atualização 120 Figurinhas Copa 2026",
+      "preco": 124.9,
+      "preco_original": 397.0,
+      "desconto_pct": 68.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_673349-MLA113147621933_062026-AB--kit-de-atualizacao-120-figurinhas-album-fifa-world-cup-2026.webp",
+      "categoria": "brinquedos",
+      "score": 78,
+      "enviado_em": "2026-07-28T10:14:59.150351",
+      "link": "https://www.mercadolivre.com.br/kit-de-atualizacao-120-figurinhas-album-fifa-world-cup-2026/up/MLBU4082559813?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 124.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Growth Supplements - Leite em Pó",
+      "preco": 189.9,
+      "preco_original": 279.0,
+      "desconto_pct": 31.9,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_696746-MLA98296977552_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 69,
+      "enviado_em": "2026-07-28T10:14:49.931137",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-growth-supplements-leite-em-po/p/MLB19140327?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 189.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Apple iPhone 17 de 256 GB — Preto",
       "preco": 5489.1,
       "preco_original": 7999.0,
@@ -579,6 +639,12 @@
       "desconto_medio": 28,
       "maior_desconto": 46
     },
+    "impressoras": {
+      "total": 5,
+      "score_medio": 82,
+      "desconto_medio": 44,
+      "maior_desconto": 63
+    },
     "tvs": {
       "total": 4,
       "score_medio": 87,
@@ -596,12 +662,6 @@
       "score_medio": 88,
       "desconto_medio": 35,
       "maior_desconto": 46
-    },
-    "impressoras": {
-      "total": 4,
-      "score_medio": 85,
-      "desconto_medio": 47,
-      "maior_desconto": 63
     },
     "cameras": {
       "total": 4,
@@ -633,11 +693,29 @@
       "desconto_medio": 42,
       "maior_desconto": 41
     },
+    "casa": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 36,
+      "maior_desconto": 35
+    },
+    "brinquedos": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 69,
+      "maior_desconto": 68
+    },
     "beleza": {
       "total": 1,
       "score_medio": 84,
       "desconto_medio": 33,
       "maior_desconto": 32
+    },
+    "bebes": {
+      "total": 1,
+      "score_medio": 81,
+      "desconto_medio": 41,
+      "maior_desconto": 41
     },
     "armazenamento": {
       "total": 1,
@@ -646,6 +724,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-07-28T07:41:07.047709",
-  "total": 37
+  "updated_at": "2026-07-28T10:16:24.861546",
+  "total": 41
 }
