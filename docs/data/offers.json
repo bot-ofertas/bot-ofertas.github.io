@@ -1,6 +1,112 @@
 {
   "products": [
     {
+      "titulo": "Apple iPhone 17 de 256 GB — Preto",
+      "preco": 5489.1,
+      "preco_original": 7999.0,
+      "desconto_pct": 31.4,
+      "foto": "https://m.media-amazon.com/images/I/41HPi5vrxSL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 81,
+      "enviado_em": "2026-07-28T07:40:58.068926",
+      "link": "https://www.amazon.com.br/dp/B0GQW2J4SK?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 5489.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Roku Streaming Stick HD 2025 | Dispositivo de streaming para TV HD/FHD com controle remoto por comando de voz compatível com Alexa, Siri e Google",
+      "preco": 220.99,
+      "preco_original": 289.9,
+      "desconto_pct": 23.8,
+      "foto": "https://m.media-amazon.com/images/I/71NIAAVDxML._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 60,
+      "enviado_em": "2026-07-28T07:40:49.205592",
+      "link": "https://www.amazon.com.br/dp/B0FH7LY3R4?tag=silver1230c-20&linkCode=as2",
+      "classe": "media",
+      "menor_preco_30d": 220.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 256GB 5G 8GB RAM Violeta 6,7\" Câm. Tripla + Selfie 12MP",
+      "preco": 2200.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 26.6,
+      "foto": "https://m.media-amazon.com/images/I/61MuhIMNhcL._AC_UL320_.jpg",
+      "categoria": "eletronicos",
+      "score": 81,
+      "enviado_em": "2026-07-28T07:40:40.357092",
+      "link": "https://www.amazon.com.br/dp/B0DYVMS335?tag=silver1230c-20&linkCode=as2",
+      "classe": "boa",
+      "menor_preco_30d": 2200.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Wd40 Spray Multiusos Desengripa Lubrifica 300ml Azul",
+      "preco": 32.85,
+      "preco_original": 57.0,
+      "desconto_pct": 42.4,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_617617-MLB79044878885_092024-AB--wd40-spray-multiusos-desengripa-lubrifica-300ml.webp",
+      "categoria": "armazenamento",
+      "score": 75,
+      "enviado_em": "2026-07-28T07:38:14.859645",
+      "link": "https://www.mercadolivre.com.br/wd40-spray-multiusos-desengripa-lubrifica-300ml/up/MLBU951970922?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 32.85,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Barbeador e Aparador Elétrico Philips OneBlade com Pente 5 em 1, Sem Fio e À Prova D'Água - QP1425/10",
+      "preco": 142.9,
+      "preco_original": 212.0,
+      "desconto_pct": 32.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_783146-MLA111544883867_052026-AB.webp",
+      "categoria": "beleza",
+      "score": 84,
+      "enviado_em": "2026-07-28T07:38:05.472354",
+      "link": "https://www.mercadolivre.com.br/barbeador-e-aparador-eletrico-philips-oneblade-com-pente-5-em-1-sem-fio-e-prova-dagua-qp142510/p/MLB51986596?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 142.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G06 - 256gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com Ai Bateria De 5200 Mah Tela 6.9 - Bege",
+      "preco": 789.69,
+      "preco_original": 1349.0,
+      "desconto_pct": 41.5,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_793349-MLA91806774304_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-07-28T07:37:56.369465",
+      "cupom": "R$710,72 com Cupom",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g06-256gb-12gb-4gb-ram-8gb-ram-boost-e-camera-50mp-com-ai-bateria-de-5200-mah-tela-69-bege/p/MLB55762063?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 789.69,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Whey Protein Concentrado 1kg Growth Supplements - Capuccino",
+      "preco": 178.0,
+      "preco_original": 279.0,
+      "desconto_pct": 36.2,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_955359-MLA98408972330_112025-AB.webp",
+      "categoria": "esportes",
+      "score": 77,
+      "enviado_em": "2026-07-28T07:37:46.464063",
+      "link": "https://www.mercadolivre.com.br/whey-protein-concentrado-1kg-growth-supplements-capuccino/p/MLB19049041?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 178.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Gamer Lenovo LOQ 15irx9 Intel Core i5-13450HX 16gb 512gb SSD RTX 3050 Windows 11 - 83kh0006br Luna Grey",
       "preco": 5310.0,
       "preco_original": 9999.0,
@@ -296,8 +402,8 @@
       "enviado_em": "2026-07-26T09:41:03.861164",
       "link": "https://www.amazon.com.br/dp/B0GJTCF75W?tag=silver1230c-20&linkCode=as2",
       "classe": "media",
-      "menor_preco_30d": 1281.55,
-      "menor_periodo": false,
+      "menor_preco_30d": 1060.8,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -312,7 +418,7 @@
       "link": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=silver1230c-20&linkCode=as2",
       "classe": "excelente",
       "menor_preco_30d": 5399.1,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -327,7 +433,7 @@
       "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2",
       "classe": "boa",
       "menor_preco_30d": 999.0,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -341,8 +447,8 @@
       "enviado_em": "2026-07-26T09:38:18.931945",
       "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 808.24,
-      "menor_periodo": false,
+      "menor_preco_30d": 806.65,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -467,6 +573,12 @@
     "verificada": true
   },
   "stats": {
+    "eletronicos": {
+      "total": 6,
+      "score_medio": 73,
+      "desconto_medio": 28,
+      "maior_desconto": 46
+    },
     "tvs": {
       "total": 4,
       "score_medio": 87,
@@ -509,13 +621,31 @@
       "desconto_medio": 24,
       "maior_desconto": 30
     },
-    "eletronicos": {
-      "total": 3,
-      "score_medio": 72,
-      "desconto_medio": 30,
-      "maior_desconto": 46
+    "esportes": {
+      "total": 1,
+      "score_medio": 77,
+      "desconto_medio": 36,
+      "maior_desconto": 36
+    },
+    "celulares": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 42,
+      "maior_desconto": 41
+    },
+    "beleza": {
+      "total": 1,
+      "score_medio": 84,
+      "desconto_medio": 33,
+      "maior_desconto": 32
+    },
+    "armazenamento": {
+      "total": 1,
+      "score_medio": 75,
+      "desconto_medio": 42,
+      "maior_desconto": 42
     }
   },
-  "updated_at": "2026-07-27T11:57:23.508389",
-  "total": 30
+  "updated_at": "2026-07-28T07:41:07.047709",
+  "total": 37
 }
