@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv Aoc Dled 32 Wi-fi Roku Tv Quad Core 32s5155/78g",
+      "preco": 778.5,
+      "preco_original": 1289.0,
+      "desconto_pct": 39.6,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_604677-MLA99856413557_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 94,
+      "enviado_em": "2026-07-29T10:38:40.860949",
+      "link": "https://www.mercadolivre.com.br/smart-tv-aoc-dled-32-wi-fi-roku-tv-quad-core-32s515578g/p/MLB60728265?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 778.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jipe Infantil Elétrico 12v Carrinho Controle Remoto Música Cor Preto Voltagem Do Carregador 110/220",
+      "preco": 696.92,
+      "preco_original": 2100.0,
+      "desconto_pct": 66.8,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807320-MLA104914105730_012026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 88,
+      "enviado_em": "2026-07-29T10:38:31.426026",
+      "link": "https://www.mercadolivre.com.br/jipe-infantil-eletrico-12v-carrinho-controle-remoto-musica-cor-preto-voltagem-do-carregador-110220/p/MLB64747262?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 696.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microondas Panasonic Nn-st66nbru Black Glass 34L Dupla Refeição",
+      "preco": 664.05,
+      "preco_original": 949.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721450-MLA99469504130_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 76,
+      "enviado_em": "2026-07-29T10:38:22.498686",
+      "link": "https://www.mercadolivre.com.br/microondas-panasonic-nn-st66nbru-black-glass-34l-dupla-refeicao/p/MLB22491295?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 664.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Microfone Hollyland Lark A1 Duo Combo Duplo Para 2 Pessoas Usb-c, Lightning Preto",
+      "preco": 386.61,
+      "preco_original": 899.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_928791-MLA105582102043_012026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 95,
+      "enviado_em": "2026-07-29T10:38:13.970571",
+      "link": "https://www.mercadolivre.com.br/microfone-hollyland-lark-a1-duo-combo-duplo-para-2-pessoas-usb-c-lightning-preto/p/MLB64851983?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 386.61,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Electrolux Kit 12 Potes Herméticos de Plástico Retangulares, Multiuso, Vedação Silicone, BPA Free, Porta Mantimentos",
       "preco": 92.91,
       "preco_original": 129.9,
@@ -207,7 +267,7 @@
       "link": "https://www.mercadolivre.com.br/kit-de-atualizacao-120-figurinhas-album-fifa-world-cup-2026/up/MLBU4082559813?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 124.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -537,17 +597,23 @@
       "desconto_medio": 24,
       "maior_desconto": 30
     },
+    "impressoras": {
+      "total": 3,
+      "score_medio": 82,
+      "desconto_medio": 34,
+      "maior_desconto": 39
+    },
     "eletronicos": {
       "total": 3,
       "score_medio": 74,
       "desconto_medio": 27,
       "maior_desconto": 31
     },
-    "impressoras": {
+    "brinquedos": {
       "total": 2,
-      "score_medio": 76,
-      "desconto_medio": 32,
-      "maior_desconto": 31
+      "score_medio": 83,
+      "desconto_medio": 68,
+      "maior_desconto": 68
     },
     "bebes": {
       "total": 2,
@@ -579,23 +645,29 @@
       "desconto_medio": 29,
       "maior_desconto": 28
     },
+    "ferramentas": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 57,
+      "maior_desconto": 57
+    },
     "esportes": {
       "total": 1,
       "score_medio": 77,
       "desconto_medio": 36,
       "maior_desconto": 36
     },
+    "eletrodomesticos": {
+      "total": 1,
+      "score_medio": 76,
+      "desconto_medio": 30,
+      "maior_desconto": 30
+    },
     "celulares": {
       "total": 1,
       "score_medio": 95,
       "desconto_medio": 42,
       "maior_desconto": 41
-    },
-    "brinquedos": {
-      "total": 1,
-      "score_medio": 78,
-      "desconto_medio": 69,
-      "maior_desconto": 68
     },
     "beleza": {
       "total": 1,
@@ -610,6 +682,6 @@
       "maior_desconto": 42
     }
   },
-  "updated_at": "2026-07-29T07:45:30.571268",
-  "total": 33
+  "updated_at": "2026-07-29T10:40:33.940522",
+  "total": 37
 }
