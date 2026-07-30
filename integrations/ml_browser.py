@@ -56,10 +56,15 @@ _FILTROS_CATEGORIA: dict[str, str] = {
 
     # ── Veículos e Ferramentas ──────────────────────────────────────────────
     "automotivo":       "https://www.mercadolivre.com.br/ofertas?category=MLB1747",
-    "ferramentas":      "https://www.mercadolivre.com.br/ofertas?category=MLB1039",
+    # MLB1039 foi reatribuído pelo ML (passou a retornar Câmeras e
+    # Acessórios, não Ferramentas — confirmado ao vivo em 2026-07-30).
+    # ML migrou pra um esquema de URL novo (/c/<slug>, sem ID numérico).
+    "ferramentas":      "https://www.mercadolivre.com.br/c/ferramentas",
 
     # ── Animais ─────────────────────────────────────────────────────────────
-    "pet":              "https://www.mercadolivre.com.br/ofertas?category=MLB1514",
+    # MLB1514 também foi reatribuído (retornava Plantadeira/Adubadeira,
+    # produtos agrícolas — confirmado ao vivo em 2026-07-30).
+    "pet":              "https://www.mercadolivre.com.br/c/animais",
 }
 
 _UA = (
