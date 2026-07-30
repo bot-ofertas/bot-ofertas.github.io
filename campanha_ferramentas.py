@@ -135,6 +135,11 @@ async def rodar_uma_vez() -> int:
         log("❌ TOKEN_TELEGRAM não definido no .env")
         return 0
 
+    # Registrado na mesma tabela `execucoes` do rastreador.py/rastreador_amazon.py
+    # — é o que core.database.execucao_em_andamento() consulta pro desligamento
+    # noturno saber que a campanha está no meio de uma rodada e esperar.
+    exec_id = db.iniciar_execucao()
+
     log("\n" + "=" * 55)
     log(f"Campanha Ferramentas — {datetime.now().strftime('%H:%M:%S')}")
 
@@ -254,6 +259,12 @@ async def rodar_uma_vez() -> int:
             "  ℹ️  Estoque de ofertas de ferramenta com desconto real disponível agora "
             "é menor que a meta — publicou o que havia sem repetir nem forçar itens fracos."
         )
+
+    db.finalizar_execucao(
+        exec_id,
+        produtos_encontrados=len(unicos),
+        publicados=publicados,
+    )
     return publicados
 
 
