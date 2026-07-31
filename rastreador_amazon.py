@@ -29,7 +29,7 @@ import core.database as db
 from core.scorer import score_inteligente
 from core.validador import validar
 from integrations.amazon_scraper import buscar_cupons_amazon_async, amazon_ativo
-from integrations.telegram_bot import publicar_alerta_cupom
+from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
 
@@ -155,7 +155,15 @@ async def rodar_uma_vez() -> None:
                 except Exception:
                     pass
 
-                sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
+                # Só usa o formato "ALERTA DE CUPOM" (banner genérico estático
+                # em vez da foto real do produto) quando há cupom de verdade —
+                # antes era chamado sempre, então TODO produto Amazon mostrava
+                # o mesmo banner genérico em vez da própria foto, diferente do
+                # ML (que já fazia essa distinção corretamente).
+                if item.get("cupom"):
+                    sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
+                else:
+                    sucesso = await publicar(bot, item, CANAIS)
                 if sucesso:
                     item["status"] = "enviado"
                     item["adicionado_em"] = __import__("datetime").datetime.now().isoformat()
