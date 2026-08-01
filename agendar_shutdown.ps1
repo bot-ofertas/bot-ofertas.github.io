@@ -14,7 +14,7 @@ $ErrorActionPreference = "Stop"
 $BASE = $PSScriptRoot
 
 # ─── Remove agendamentos existentes ───────────────────────────────────────
-Get-ScheduledTask -TaskName "BotOfertas-Shutdown","BotOfertas-WakeUp" `
+Get-ScheduledTask -TaskName "BotOfertas-Shutdown","BotOfertas-WakeUp","BotOfertas-VerificacaoDiaria" `
     -ErrorAction SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 
 if ($Remover) {
@@ -24,8 +24,38 @@ if ($Remover) {
     exit 0
 }
 
-# ─── 1. TAREFA DE DESLIGAMENTO — 02:00 diariamente (aguarda se ocupado) ──
-Write-Host "[1/3] Agendando shutdown diário às 02:00 (aguarda até 35min se ocupado)..." -ForegroundColor Yellow
+# ─── 1. TAREFA DE VERIFICAÇÃO DIÁRIA — 01:00 (antes do shutdown) ─────────
+Write-Host "[1/4] Agendando verificação diária às 01:00..." -ForegroundColor Yellow
+
+$pythonVerif = (Get-Command python).Source
+$scriptVerif = Join-Path $BASE "verificacao_diaria.py"
+
+$actionVerif = New-ScheduledTaskAction `
+    -Execute $pythonVerif `
+    -Argument "-u ""$scriptVerif""" `
+    -WorkingDirectory $BASE
+
+$triggerVerif = New-ScheduledTaskTrigger -Daily -At "01:00"
+
+$settingsVerif = New-ScheduledTaskSettingsSet `
+    -AllowStartIfOnBatteries `
+    -DontStopIfGoingOnBatteries `
+    -MultipleInstances IgnoreNew
+    # SEM -StartWhenAvailable — mesmo motivo do shutdown/wake (ver comentário abaixo).
+
+$principalVerif = New-ScheduledTaskPrincipal `
+    -UserId $env:USERNAME -LogonType Interactive
+
+Register-ScheduledTask -TaskName "BotOfertas-VerificacaoDiaria" `
+    -Action $actionVerif -Trigger $triggerVerif `
+    -Settings $settingsVerif -Principal $principalVerif `
+    -Description "Verifica saude do sistema e envia relatorio por Telegram as 01:00, antes do shutdown (Bot Ofertas)" `
+    -Force | Out-Null
+
+Write-Host "  OK: verificação diária agendada para 01:00" -ForegroundColor Green
+
+# ─── 2. TAREFA DE DESLIGAMENTO — 02:00 diariamente (aguarda se ocupado) ──
+Write-Host "[2/4] Agendando shutdown diário às 02:00 (aguarda até 35min se ocupado)..." -ForegroundColor Yellow
 
 $scriptAguardar = Join-Path $BASE "aguardar_e_desligar.ps1"
 
@@ -55,8 +85,8 @@ Register-ScheduledTask -TaskName "BotOfertas-Shutdown" `
 
 Write-Host "  OK: shutdown agendado para 02:00 (aguarda até 35min se ocupado)" -ForegroundColor Green
 
-# ─── 2. TAREFA DE WAKE UP — 08:45 diariamente ────────────────────────────
-Write-Host "[2/3] Agendando wake/inicio do bot às 08:45..." -ForegroundColor Yellow
+# ─── 3. TAREFA DE WAKE UP — 08:45 diariamente ────────────────────────────
+Write-Host "[3/4] Agendando wake/inicio do bot às 08:45..." -ForegroundColor Yellow
 
 $python = (Get-Command python).Source
 $scriptStart = Join-Path $BASE "startup.py"
@@ -88,8 +118,8 @@ Register-ScheduledTask -TaskName "BotOfertas-WakeUp" `
 
 Write-Host "  OK: wake/inicio agendado para 08:45" -ForegroundColor Green
 
-# ─── 3. Habilitar wake timers no Windows ─────────────────────────────────
-Write-Host "[3/3] Habilitando wake timers do Windows..." -ForegroundColor Yellow
+# ─── 4. Habilitar wake timers no Windows ─────────────────────────────────
+Write-Host "[4/4] Habilitando wake timers do Windows..." -ForegroundColor Yellow
 powercfg -change -standby-timeout-ac 0 2>&1 | Out-Null
 powercfg -setacvalueindex SCHEME_CURRENT SUB_SLEEP RTCWAKE 1 2>&1 | Out-Null
 powercfg -setdcvalueindex SCHEME_CURRENT SUB_SLEEP RTCWAKE 1 2>&1 | Out-Null
@@ -102,6 +132,7 @@ Write-Host "==============================================" -ForegroundColor Cya
 Write-Host "  AGENDAMENTO ATIVO" -ForegroundColor Green
 Write-Host "==============================================" -ForegroundColor Cyan
 Write-Host ""
+Write-Host "  01:00 → Verificação diária (relatório de saúde por Telegram)" -ForegroundColor White
 Write-Host "  02:00 → Desliga o PC (aguarda até 35min se o bot estiver ocupado)" -ForegroundColor White
 Write-Host "  08:45 → Liga o PC + inicia o bot" -ForegroundColor White
 Write-Host ""
