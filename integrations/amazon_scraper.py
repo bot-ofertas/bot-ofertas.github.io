@@ -34,13 +34,29 @@ _UA = (
     "Chrome/125.0.0.0 Safari/537.36"
 )
 
-# Páginas da Amazon Brasil que agregam promoções e cupons
+# Páginas da Amazon Brasil que agregam promoções e cupons.
+# Ampliado em 2026-08-01: só 3 departamentos (eletronicos/informatica/casa)
+# + 2 agregadores esgotavam rápido (quase 100% duplicata em rodadas
+# consecutivas — catálogo de ofertas da Amazon nesses departamentos é
+# pequeno e roda devagar). Os 10 departamentos abaixo foram validados ao
+# vivo com o mesmo filtro rh=p_n_deal_type já usado, retornando produtos
+# nunca vistos pelo bot.
 _URLS_AMAZON: list[tuple[str, str]] = [
-    ("cupons",      "https://www.amazon.com.br/coupons"),
-    ("ofertas_dia", "https://www.amazon.com.br/deals"),
-    ("eletronicos", "https://www.amazon.com.br/s?i=electronics&rh=p_n_deal_type%3A23566064011"),
-    ("informatica", "https://www.amazon.com.br/s?i=computers&rh=p_n_deal_type%3A23566064011"),
-    ("casa",        "https://www.amazon.com.br/s?i=kitchen&rh=p_n_deal_type%3A23566064011"),
+    ("cupons",           "https://www.amazon.com.br/coupons"),
+    ("ofertas_dia",      "https://www.amazon.com.br/deals"),
+    ("eletronicos",      "https://www.amazon.com.br/s?i=electronics&rh=p_n_deal_type%3A23566064011"),
+    ("informatica",      "https://www.amazon.com.br/s?i=computers&rh=p_n_deal_type%3A23566064011"),
+    ("casa",             "https://www.amazon.com.br/s?i=kitchen&rh=p_n_deal_type%3A23566064011"),
+    ("moda",             "https://www.amazon.com.br/s?i=fashion&rh=p_n_deal_type%3A23566064011"),
+    ("brinquedos",       "https://www.amazon.com.br/s?i=toys&rh=p_n_deal_type%3A23566064011"),
+    ("esportes",         "https://www.amazon.com.br/s?i=sporting&rh=p_n_deal_type%3A23566064011"),
+    ("beleza",           "https://www.amazon.com.br/s?i=beauty&rh=p_n_deal_type%3A23566064011"),
+    ("ferramentas",      "https://www.amazon.com.br/s?i=hi&rh=p_n_deal_type%3A23566064011"),
+    ("games",            "https://www.amazon.com.br/s?i=videogames&rh=p_n_deal_type%3A23566064011"),
+    ("automotivo",       "https://www.amazon.com.br/s?i=automotive&rh=p_n_deal_type%3A23566064011"),
+    ("pet",              "https://www.amazon.com.br/s?i=pets&rh=p_n_deal_type%3A23566064011"),
+    ("bebes",            "https://www.amazon.com.br/s?i=baby&rh=p_n_deal_type%3A23566064011"),
+    ("eletrodomesticos", "https://www.amazon.com.br/s?i=appliances&rh=p_n_deal_type%3A23566064011"),
 ]
 
 _DOM_SCRIPT = r"""
@@ -216,64 +232,76 @@ async def buscar_cupons_amazon_async(
     if not _AFFILIATE_TAG:
         return []
 
+    import random  # noqa: PLC0415
     from playwright.async_api import async_playwright, TimeoutError as PWT
     from dotenv import load_dotenv
     load_dotenv()
 
     todos: list[dict] = []
 
+    # Ordem embaralhada a cada chamada (sem mutar a lista do módulo — evita
+    # problema de concorrência entre chamadas simultâneas). Com 15 URLs e o
+    # corte antecipado de limite*2, sempre escanear na mesma ordem faria as
+    # categorias do fim da lista quase nunca serem alcançadas.
+    ordem = random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
+
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
-        ctx = await browser.new_context(
-            locale="pt-BR", user_agent=_UA,
-            viewport={"width": 1280, "height": 1024},
-        )
-
-        for categoria, url in _URLS_AMAZON:
-            if len(todos) >= limite * 2:
-                break
-            page = None
-            try:
-                # new_page() também pode falhar se o browser morreu numa
-                # categoria anterior (página crashada) — precisa estar DENTRO
-                # do try, senão a exceção escapa do for inteiro e descarta
-                # os produtos já coletados nas categorias anteriores
-                page = await ctx.new_page()
-                try:
-                    await page.goto(url, wait_until="networkidle", timeout=30000)
-                except PWT:
-                    await page.goto(url, wait_until="domcontentloaded", timeout=15000)
-
-                # Aguarda lazy-load dos cards
-                await page.wait_for_timeout(2500)
-
-                raw = await page.evaluate(_DOM_SCRIPT)
-                produtos = _normalizar(raw, categoria)
-
-                # Filtra por desconto mínimo
-                if desconto_min > 0:
-                    produtos = [p for p in produtos if (p.get("desconto_pct") or 0) >= desconto_min
-                                or p.get("cupom")]  # cupom sempre passa
-
-                todos.extend(produtos)
-            except Exception as e:
-                try:
-                    from core.error_logger import log_erro  # noqa: PLC0415
-                    log_erro("amazon_scraper.categoria", e, {"categoria": categoria, "url": url})
-                except Exception:
-                    log.warning("amazon scraper falhou em %s (%s): %s", categoria, url, e)
-            finally:
-                if page is not None:
-                    try:
-                        await page.close()
-                    except Exception:
-                        pass  # página pode já ter crashado — nada a fechar
-
         try:
-            await browser.close()
-        except Exception:
-            pass  # browser pode ter morrido junto com uma página crashada;
-                   # não pode derrubar os produtos já coletados nas categorias anteriores
+            # new_context() também precisa estar DENTRO do try — se falhar
+            # (timeout, subprocesso do chromium crashado, exaustão de
+            # recursos), o finally abaixo ainda fecha o browser já lançado,
+            # em vez de vazar um chromium.exe órfão.
+            ctx = await browser.new_context(
+                locale="pt-BR", user_agent=_UA,
+                viewport={"width": 1280, "height": 1024},
+            )
+
+            for categoria, url in ordem:
+                if len(todos) >= limite * 2:
+                    break
+                page = None
+                try:
+                    # new_page() também pode falhar se o browser morreu numa
+                    # categoria anterior (página crashada) — precisa estar DENTRO
+                    # do try, senão a exceção escapa do for inteiro e descarta
+                    # os produtos já coletados nas categorias anteriores
+                    page = await ctx.new_page()
+                    try:
+                        await page.goto(url, wait_until="networkidle", timeout=30000)
+                    except PWT:
+                        await page.goto(url, wait_until="domcontentloaded", timeout=15000)
+
+                    # Aguarda lazy-load dos cards
+                    await page.wait_for_timeout(2500)
+
+                    raw = await page.evaluate(_DOM_SCRIPT)
+                    produtos = _normalizar(raw, categoria)
+
+                    # Filtra por desconto mínimo
+                    if desconto_min > 0:
+                        produtos = [p for p in produtos if (p.get("desconto_pct") or 0) >= desconto_min
+                                    or p.get("cupom")]  # cupom sempre passa
+
+                    todos.extend(produtos)
+                except Exception as e:
+                    try:
+                        from core.error_logger import log_erro  # noqa: PLC0415
+                        log_erro("amazon_scraper.categoria", e, {"categoria": categoria, "url": url})
+                    except Exception:
+                        log.warning("amazon scraper falhou em %s (%s): %s", categoria, url, e)
+                finally:
+                    if page is not None:
+                        try:
+                            await page.close()
+                        except Exception:
+                            pass  # página pode já ter crashado — nada a fechar
+        finally:
+            try:
+                await browser.close()
+            except Exception:
+                pass  # browser pode ter morrido junto com uma página crashada;
+                       # não pode derrubar os produtos já coletados nas categorias anteriores
 
     if priorizar_cupom:
         com_cupom = [p for p in todos if p.get("cupom")]

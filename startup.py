@@ -39,13 +39,26 @@ log = logging.getLogger("startup")
 
 
 def _rastreador_ja_rodando() -> bool:
+    """True se QUALQUER UM dos 3 processos (ML, Amazon, Ferramentas) já
+    estiver rodando em modo loop.
+
+    Antes só verificava rastreador.py — se startup.py fosse chamado 2x num
+    momento em que só o ML estivesse fora do ar (crash/restart), o guard
+    dizia "nada rodando" e main() subia um Amazon/Ferramentas duplicados ao
+    lado dos originais ainda vivos (double-posting)."""
     try:
         import psutil  # noqa: PLC0415
         for p in psutil.process_iter(["name", "cmdline"]):
             try:
                 cl = " ".join(p.info.get("cmdline") or [])
                 nome = (p.info.get("name") or "").lower()
-                if "rastreador.py" in cl and "--loop" in cl and "python" in nome:
+                if "python" not in nome:
+                    continue
+                if "rastreador_amazon.py" in cl:
+                    return True
+                if "rastreador.py" in cl and "--loop" in cl:
+                    return True
+                if "campanha_ferramentas.py" in cl and "--loop" in cl:
                     return True
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
@@ -224,19 +237,36 @@ def monitorar(procs) -> None:
                 log.warning("%s caiu (código %s, falha %d/3)",
                             t.nome, t.proc.returncode, t.falhas)
                 t.proc = None  # marca "caído, aguardando retry" — evita recontar no próximo poll
-                if t.falhas <= 3:
+                if t.falhas < 3:
                     espera = min(30 * (2 ** (t.falhas - 1)), 300)
                     t.proximo_retry = agora + espera
                     log.info("Reiniciando %s em %ds…", t.nome, espera)
                 else:
-                    log.error("%s falhou 3x — desistindo dele", t.nome)
+                    log.error("%s falhou %dx — desistindo dele", t.nome, t.falhas)
                     t.desistiu = True
             elif t.proximo_retry and agora >= t.proximo_retry:
                 # Só reinicia ESTE processo — reiniciar todos juntos geraria
                 # instâncias extras desnecessárias dos outros a cada queda
                 # isolada, e sobrescreveria os .pid deles com PIDs órfãos.
-                t.proc = t.iniciar_fn()
-                t.proximo_retry = None
+                # try/except: se o próprio restart falhar (log travado, disco
+                # cheio, WinError transitório), não pode derrubar o loop
+                # inteiro e tirar supervisão dos OUTROS processos saudáveis —
+                # trata como mais uma falha, reaproveitando o mesmo backoff.
+                try:
+                    t.proc = t.iniciar_fn()
+                    t.proximo_retry = None
+                except Exception as e:
+                    t.falhas += 1
+                    t.ultima_falha = agora
+                    log.error("Falha ao reiniciar %s (tentativa %d/3): %s", t.nome, t.falhas, e)
+                    if t.falhas < 3:
+                        espera = min(30 * (2 ** (t.falhas - 1)), 300)
+                        t.proximo_retry = agora + espera
+                        log.info("Nova tentativa de %s em %ds…", t.nome, espera)
+                    else:
+                        log.error("%s falhou %dx ao reiniciar — desistindo dele", t.nome, t.falhas)
+                        t.desistiu = True
+                        t.proximo_retry = None
             elif t.proc and t.falhas > 0 and t.ultima_falha is not None \
                     and (agora - t.ultima_falha) > RESET_APOS_SEGUNDOS:
                 log.info("%s estável há %.0fh — resetando contador de falhas (%d → 0)",

@@ -287,18 +287,10 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
             log.info("✅ WA: foto+legenda enviada para '%s'", nome_grupo)
             return True
 
-        # 5. Sem foto: só texto
-        if _copiar_texto(mensagem):
-            pyautogui.hotkey("ctrl", "v")
-            time.sleep(0.4)
-        else:
-            pyautogui.typewrite(mensagem, interval=0.003)
-            time.sleep(0.3)
-        pyautogui.press("enter")
-        time.sleep(0.6)
+        # 5. Sem foto: aborta (nunca posta incompleto)
+        log.warning(f"Sem foto disponível para '{nome_grupo}' — envio abortado (nunca posta incompleto)")
         _devolver_foco(janela, janela_anterior)
-        log.info("✅ WA: texto enviado para '%s'", nome_grupo)
-        return True
+        return False
 
     except Exception as e:
         from core.error_logger import log_erro  # noqa: PLC0415

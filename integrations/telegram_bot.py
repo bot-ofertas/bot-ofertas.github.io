@@ -237,13 +237,8 @@ async def publicar(
                 reply_markup=teclado,
             )
         else:
-            await bot.send_message(
-                chat_id=chat_id,
-                text=mensagem,
-                parse_mode=ParseMode.HTML,
-                reply_markup=teclado,
-                disable_web_page_preview=False,
-            )
+            log.error(f"Sem foto — publicação abortada para '{produto.get('titulo')}'")
+            return False
         return True
     except Exception as e:
         log.error("Erro ao publicar '%s': %s", produto.get("titulo"), e)
@@ -299,13 +294,8 @@ async def publicar_com_ia(
                 reply_markup=teclado,
             )
         else:
-            await bot.send_message(
-                chat_id=chat_id,
-                text=mensagem,
-                parse_mode=ParseMode.HTML,
-                reply_markup=teclado,
-                disable_web_page_preview=False,
-            )
+            log.error(f"Sem foto — publicação abortada para '{produto.get('titulo')}'")
+            return False
         return True
     except Exception as e:
         log.error("Erro ao publicar (com IA) '%s': %s", produto.get("titulo"), e)
@@ -485,12 +475,13 @@ async def publicar_alerta_cupom(
 ) -> bool:
     """Publica ALERTA DE CUPOM com banner especial e mensagem formatada.
 
-    Prioridade de imagem: banner estático → foto do produto → texto puro.
+    Prioridade de imagem: banner estático → foto do produto. Se nenhuma
+    imagem puder ser enviada, a publicação é abortada (sem fallback em texto).
     """
     canal_nome = produto.get("canal") or "geral"
     try:
-        # Precondição pras 3 tentativas em cascata abaixo (banner → foto do
-        # produto → texto puro) — se `canais` vier vazio, next(iter(...))
+        # Precondição pras tentativas em cascata abaixo (banner → foto do
+        # produto) — se `canais` vier vazio, next(iter(...))
         # levanta StopIteration; sem isso ficava fora de qualquer try e
         # quebrava a função inteira antes mesmo da primeira tentativa.
         chat_id = canais.get(canal_nome) or next(iter(canais.values()))
@@ -585,19 +576,8 @@ async def publicar_alerta_cupom(
     except Exception:
         pass
 
-    # Fallback final: texto puro
-    try:
-        await bot.send_message(
-            chat_id=chat_id,
-            text=mensagem,
-            parse_mode=ParseMode.HTML,
-            reply_markup=teclado,
-            disable_web_page_preview=False,
-        )
-        return True
-    except Exception as e:
-        log.error("Erro ao publicar alerta cupom '%s': %s", produto.get("titulo"), e)
-        return False
+    log.error(f"Nenhuma imagem disponível (banner nem foto) — publicação abortada para '{produto.get('titulo')}'")
+    return False
 
 
 # ── Administração do canal (ação pontual, não faz parte do fluxo de publicação) ─

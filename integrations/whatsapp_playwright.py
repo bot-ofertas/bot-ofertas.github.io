@@ -269,15 +269,15 @@ async def enviar_whatsapp_bg(nome_grupo: str, mensagem: str, caminho_foto: str =
     if not await _abrir_grupo(page, nome_grupo):
         return False
 
-    if caminho_foto and os.path.exists(caminho_foto):
-        if await _enviar_foto(page, caminho_foto, mensagem):
-            log.info("✅ WhatsApp (bg/CDP) enviado COM FOTO para '%s'", nome_grupo)
-            return True
-        log.info("Foto falhou — enviando como texto.")
+    if not caminho_foto or not os.path.exists(caminho_foto):
+        log.warning("Sem foto disponível — envio abortado (nunca posta incompleto)")
+        return False
 
-    if await _enviar_texto(page, mensagem):
-        log.info("✅ WhatsApp (bg/CDP) enviado (texto) para '%s'", nome_grupo)
+    if await _enviar_foto(page, caminho_foto, mensagem):
+        log.info("✅ WhatsApp (bg/CDP) enviado COM FOTO para '%s'", nome_grupo)
         return True
+
+    log.warning("Foto falhou ao enviar — envio abortado (nunca posta incompleto)")
     return False
 
 

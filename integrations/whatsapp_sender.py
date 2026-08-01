@@ -338,15 +338,8 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
             log.info("✅ WhatsApp enviado COM FOTO (arquivo) para grupo %s", _group_id())
             return True
 
-        # ── Sem foto: só texto ───────────────────────────────────────────────
-        pyperclip.copy(mensagem)
-        pyautogui.hotkey("ctrl", "v")
-        time.sleep(0.5)
-        pyautogui.press("enter")
-        time.sleep(0.5)
-
-        log.info("✅ WhatsApp enviado (texto) para grupo %s", _group_id())
-        return True
+        log.warning("Sem foto disponível — envio abortado (nunca posta incompleto)")
+        return False
     except Exception as e:
         log.warning("pyautogui falhou: %s", e)
         return False

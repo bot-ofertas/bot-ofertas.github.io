@@ -135,8 +135,8 @@ def enviar_foto_legenda(foto_url: str, legenda: str) -> bool:
         return False
     foto_b64 = _baixar_foto_base64(foto_url) if foto_url else None
     if not foto_b64:
-        log.info("WA API: sem foto — enviando como texto.")
-        return enviar_texto(legenda)
+        log.warning("WA API: sem foto disponível — envio abortado (não posta incompleto)")
+        return False
     try:
         import requests  # noqa: PLC0415
         payload = {
@@ -156,8 +156,7 @@ def enviar_foto_legenda(foto_url: str, legenda: str) -> bool:
             log.info("✅ WA API: foto+legenda enviada para %s", c["group_id"])
             return True
         log.warning("WA API sendMedia erro %d: %s", r.status_code, r.text[:250])
-        # Fallback: texto puro
-        return enviar_texto(legenda)
+        return False
     except Exception as e:
         from core.error_logger import log_erro  # noqa: PLC0415
         log_erro("wa_api.envio_foto", e, {"grupo": c["group_id"], "url": foto_url[:80]})

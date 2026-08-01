@@ -81,6 +81,34 @@ def log(msg: str) -> None:
     logging.info(msg)
 
 
+def _ja_existe_outra_instancia() -> bool:
+    """True se já houver outro campanha_ferramentas.py em modo --loop rodando.
+
+    Mesma proteção do rastreador.py (_ja_existe_outra_instancia) — evita
+    instâncias duplicadas que causariam posts repetidos (dedup aqui é
+    check-then-act contra o SQLite, com trabalho lento — geração de link
+    de afiliado + publicação — entre o check e a gravação; duas instâncias
+    correndo juntas podem ambas passar pelo check antes de qualquer uma
+    gravar).
+    """
+    try:
+        import psutil  # noqa: PLC0415
+        meu_pid = os.getpid()
+        for p in psutil.process_iter(["pid", "name", "cmdline"]):
+            try:
+                if p.info["pid"] == meu_pid:
+                    continue
+                cmd = " ".join(p.info.get("cmdline") or [])
+                nome = (p.info.get("name") or "").lower()
+                if "campanha_ferramentas.py" in cmd and "--loop" in cmd and "python" in nome:
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+    except ImportError:
+        pass
+    return False
+
+
 def _id_produto(item: dict) -> str:
     url = item.get("link", "")
     return url.split("?")[0].rstrip("/").split("/")[-1] or url[:60]
@@ -95,15 +123,18 @@ async def _buscar_pagina(url: str) -> list[dict]:
     from playwright.async_api import async_playwright, TimeoutError as PWTimeout
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        ctx = await browser.new_context(
-            locale="pt-BR",
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
-            ),
-            viewport={"width": 1280, "height": 1024},
-        )
         try:
+            # new_context() também precisa estar DENTRO do try — se falhar
+            # (timeout, subprocesso do chromium crashado), o finally abaixo
+            # ainda fecha o browser já lançado, em vez de vazar chromium.exe.
+            ctx = await browser.new_context(
+                locale="pt-BR",
+                user_agent=(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                    "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+                ),
+                viewport={"width": 1280, "height": 1024},
+            )
             page = await ctx.new_page()
             try:
                 await page.goto(url, wait_until="networkidle", timeout=40000)
@@ -131,6 +162,9 @@ async def _buscar_pagina(url: str) -> list[dict]:
 
 async def rodar_uma_vez() -> int:
     db.inicializar()
+    removidos = db.limpar_antigos(dias=2)
+    if removidos:
+        log(f"🧹 Limpeza automática: {removidos} produto(s) antigos removidos do banco")
     if not TOKEN_TELEGRAM:
         log("❌ TOKEN_TELEGRAM não definido no .env")
         return 0
@@ -274,6 +308,9 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.loop:
+        if _ja_existe_outra_instancia():
+            log("⛔ Outro campanha_ferramentas --loop já está rodando. Encerrando para evitar duplicatas.")
+            return
         log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
         while True:
             try:

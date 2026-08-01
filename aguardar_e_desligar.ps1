@@ -36,4 +36,18 @@ while ($decorridoSeg -lt ($LimiteMin * 60)) {
 }
 
 Add-Type -AssemblyName System.Windows.Forms
-[System.Windows.Forms.Application]::SetSuspendState('Suspend', $false, $false) | Out-Null
+# force=$true: com $false, qualquer processo que vete o pedido de suspensão
+# (Windows Update pendente, driver, processo travado) faz a chamada retornar
+# sem suspender e SEM ERRO — o PC fica ligado a noite toda sem log nenhum
+# explicando por quê. Rodando às 2h sem ninguém pra clicar em "ok mesmo assim"
+# num prompt, force=$true é necessário. O terceiro parâmetro ($false =
+# disableWakeEvent) continua False — mantém os Wake Timers habilitados
+# (RTCWAKE=1 em agendar_shutdown.ps1), não mude esse.
+$ok = [System.Windows.Forms.Application]::SetSuspendState('Suspend', $true, $false)
+$logFile = Join-Path $BASE "data\shutdown.log"
+$ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+if ($ok) {
+    Add-Content -Path $logFile -Value "$ts - Suspensao OK"
+} else {
+    Add-Content -Path $logFile -Value "$ts - SetSuspendState retornou FALSE (falhou)"
+}
