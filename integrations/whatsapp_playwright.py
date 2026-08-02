@@ -218,26 +218,45 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
             await asyncio.sleep(0.8)
 
         if caixa_legenda is None:
-            log.warning("Caixa de legenda NÃO encontrada — foto irá sem descrição.")
-        else:
+            log.warning("Caixa de legenda NÃO encontrada — abortando (nunca posta sem descrição)")
             try:
+                await page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return False
+
+        try:
+            await caixa_legenda.click()
+            await asyncio.sleep(0.3)
+            # Cola em vez de digitar (mais rápido e preserva quebras de linha)
+            await page.evaluate("nav => navigator.clipboard.writeText(nav)", legenda)
+            await page.keyboard.press("Control+V")
+            await asyncio.sleep(0.4)
+            # Verifica se digitou
+            texto = await caixa_legenda.inner_text()
+            if not texto.strip():
+                # Fallback: insert_text
                 await caixa_legenda.click()
-                await asyncio.sleep(0.3)
-                # Cola em vez de digitar (mais rápido e preserva quebras de linha)
-                await page.evaluate("nav => navigator.clipboard.writeText(nav)", legenda)
-                await page.keyboard.press("Control+V")
+                await page.keyboard.insert_text(legenda)
                 await asyncio.sleep(0.4)
-                # Verifica se digitou
                 texto = await caixa_legenda.inner_text()
-                if not texto.strip():
-                    # Fallback: insert_text
-                    await caixa_legenda.click()
-                    await page.keyboard.insert_text(legenda)
-                    await asyncio.sleep(0.4)
-                    texto = await caixa_legenda.inner_text()
-                log.info("Legenda digitada (%d chars): %r", len(texto), texto[:50])
-            except Exception as e:
-                log.warning("Falha ao digitar legenda: %s", e)
+        except Exception as e:
+            log.warning("Falha ao digitar legenda: %s — abortando (nunca posta sem descrição)", e)
+            try:
+                await page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return False
+
+        if not texto.strip():
+            log.warning("Legenda ficou vazia após as tentativas — abortando (nunca posta sem descrição)")
+            try:
+                await page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return False
+
+        log.info("Legenda digitada (%d chars): %r", len(texto), texto[:50])
 
         # Clica o botão de enviar correto (nunca Enter — evita virar figurinha)
         enviar = await page.wait_for_selector(_SEND_PREVIEW_SEL, timeout=6000)
@@ -249,12 +268,67 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
         return False
 
 
+_MUTEX_NOME = "Global\\BotOfertas_WhatsAppPlaywright_Lock"
+
+
+def _adquirir_lock(timeout_s: float = 40.0):
+    """Trava exclusiva entre processos. ML/Amazon/Ferramentas rodam como
+    processos separados e TODOS compartilham a MESMA aba do Chrome via CDP
+    (_conectar() reaproveita a aba existente do WhatsApp Web) — sem essa
+    trava, dois processos clicando/digitando na mesma página ao mesmo
+    tempo se atropelavam, raiz real do bug de fotos chegando sem legenda
+    mesmo com o código de digitação correto. Mesmo padrão de
+    integrations/whatsapp_desktop_silencioso.py (_adquirir_lock_whatsapp),
+    nome de mutex diferente pra não competir com aquela trava à toa."""
+    try:
+        import win32event  # noqa: PLC0415
+        handle = win32event.CreateMutex(None, False, _MUTEX_NOME)
+        resultado = win32event.WaitForSingleObject(handle, int(timeout_s * 1000))
+        if resultado in (win32event.WAIT_OBJECT_0, win32event.WAIT_ABANDONED):
+            return handle
+        try:
+            import win32api  # noqa: PLC0415
+            win32api.CloseHandle(handle)
+        except Exception:
+            pass
+        return None
+    except Exception as e:
+        log.warning("Trava do WhatsApp/Playwright indisponível (pywin32?): %s", e)
+        return None
+
+
+def _liberar_lock(handle) -> None:
+    if handle is None:
+        return
+    try:
+        import win32event  # noqa: PLC0415
+        import win32api  # noqa: PLC0415
+        win32event.ReleaseMutex(handle)
+        win32api.CloseHandle(handle)
+    except Exception:
+        pass
+
+
 async def enviar_whatsapp_bg(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
     """Envia uma oferta ao grupo em segundo plano via CDP (sem mexer no PC).
 
     Retorna True se enviou. Se não conectar ao Chrome do bot (porta 9222), ou se
     a sessão não estiver logada, retorna False e registra um aviso.
+
+    Serializa entre processos (ML/Amazon/Ferramentas) via mutex nomeado —
+    ver _adquirir_lock.
     """
+    lock = _adquirir_lock()
+    if lock is None:
+        log.warning("Não consegui a trava do WhatsApp/Playwright (outro processo usando há >40s) — pulando envio")
+        return False
+    try:
+        return await _enviar_whatsapp_bg_impl(nome_grupo, mensagem, caminho_foto)
+    finally:
+        _liberar_lock(lock)
+
+
+async def _enviar_whatsapp_bg_impl(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
     try:
         page = await asyncio.wait_for(_conectar(), timeout=30)
     except Exception as e:
