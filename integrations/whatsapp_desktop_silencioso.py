@@ -256,9 +256,18 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
                 _devolver_foco(janela, janela_anterior)
                 return False
             pyautogui.hotkey("ctrl", "v")
-            time.sleep(2.5)   # aguarda preview montar
+            # 2.5s -> 4s: mais margem pro preview montar. Testei verificar via
+            # UIA (pywinauto) se o preview realmente abriu antes de colar a
+            # legenda — o WhatsApp Desktop renderiza tudo dentro de um
+            # WebView2 (Chromium embutido), então a UIA só enxerga um monte
+            # de "Pane" genéricos e opacos, sem visibilidade nenhuma do DOM
+            # real lá dentro (confirmado ao vivo: 1971 de 1972 elementos
+            # eram "Pane", 0 controles "Edit" mesmo com a janela normal
+            # aberta) — não dá pra confirmar estruturalmente por aí. Ver
+            # [[project_whatsapp_desktop_webview2_uia_opaco]] no histórico.
+            time.sleep(4.0)
 
-            # Recheca foco: 2.5s é tempo de sobra pra outro processo/automação
+            # Recheca foco: tempo de sobra pra outro processo/automação
             # roubar o foco no meio — sem isso a legenda poderia ser colada
             # em outro lugar (mesmo gap identificado na auditoria completa)
             if not _janela_esta_ativa(janela):
@@ -276,8 +285,8 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
             pyautogui.press("enter")
             time.sleep(1.8)
 
-            # VERIFICAÇÃO ANTI-ACÚMULO: se compose ainda mostra caixa de legenda
-            # do preview, envio falhou — Escape para cancelar (não acumular)
+            # Limpa qualquer preview que eventualmente tenha ficado aberto
+            # (envio já disparado acima — isso é só higiene, não acúmulo).
             pyautogui.press("escape")
             time.sleep(0.3)
             pyautogui.press("escape")
