@@ -71,6 +71,19 @@ _PALAVRAS_FERRAMENTA = (
     "kit ferramenta", "caixa de ferramenta", "furadeira de impacto",
     "parafusadeira e furadeira", "makita", "bosch", "dewalt", "vonder",
     "tramontina", "the black tools", "wap",
+    # Ampliado em 2026-08-02: comparando os itens com desconto de
+    # /c/ferramentas e /c/construcao contra o filtro, vários itens
+    # claramente do nicho (lavadora de alta pressão Kärcher, compressor/
+    # calibrador de pneu, máscara de solda, motosserra) só passavam quando
+    # coincidiam com uma marca já listada — o termo genérico do próprio
+    # produto não estava coberto. Termos abaixo capturam esses casos sem
+    # abrir a porta pra itens fora do tema (fechadura, cuba, câmera, EPI
+    # continuam de fora, pois nenhum deles bate com nada aqui).
+    "ferramenta", "lavadora de alta pressao", "lavadora de alta pressão",
+    "kärcher", "karcher", "compressor", "calibrador de pneu", "calibrador de ar",
+    "solda", "soldagem", "soldador", "motosserra", "roçadeira", "rocadeira",
+    "gedore", "irwin", "stanley", "black+decker", "black & decker", "schulz",
+    "worker", "würth", "wurth", "milwaukee", "metabo", "einhell", "toyama",
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")

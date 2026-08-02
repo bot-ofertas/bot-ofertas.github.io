@@ -48,6 +48,10 @@ _IG_PASS   = os.getenv("INSTAGRAM_PASSWORD", "")
 _IG_SESSION_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "ig_session.json"
 )
+_IG_BACKOFF_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "ig_login_backoff.json"
+)
+_IG_BACKOFF_HORAS = 6  # evita martelar login numa conta com falha persistente
 _ig_client = None
 _TW_KEY    = os.getenv("TWITTER_API_KEY", "")
 _TW_SECRET = os.getenv("TWITTER_API_SECRET", "")
@@ -100,6 +104,38 @@ def _montar_texto_social(produto: dict, max_chars: int = 280) -> str:
     return base[:max_chars - 3] + "..."
 
 
+def _ig_backoff_ativo() -> str | None:
+    """Retorna o erro registrado se um login falhou há menos de
+    _IG_BACKOFF_HORAS, senão None. Lido/escrito em arquivo (não só em
+    memória) porque ML/Amazon/Ferramentas rodam como 3 processos separados
+    — sem isso, cada um martelaria o login de uma conta quebrada de forma
+    independente a cada rodada (15-75 min cada), 3x mais chamadas do que
+    o necessário contra um problema que só se resolve com o usuário
+    corrigindo a conta/credencial, nunca sozinho."""
+    import json  # noqa: PLC0415
+    from datetime import datetime, timedelta  # noqa: PLC0415
+    try:
+        with open(_IG_BACKOFF_PATH, encoding="utf-8") as f:
+            dados = json.load(f)
+        falhou_em = datetime.fromisoformat(dados["falhou_em"])
+        if datetime.now() - falhou_em < timedelta(hours=_IG_BACKOFF_HORAS):
+            return dados.get("erro", "falha anterior")
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, ValueError):
+        pass
+    return None
+
+
+def _ig_registrar_falha(erro: Exception) -> None:
+    import json  # noqa: PLC0415
+    from datetime import datetime  # noqa: PLC0415
+    try:
+        os.makedirs(os.path.dirname(_IG_BACKOFF_PATH), exist_ok=True)
+        with open(_IG_BACKOFF_PATH, "w", encoding="utf-8") as f:
+            json.dump({"falhou_em": datetime.now().isoformat(), "erro": str(erro)[:200]}, f)
+    except Exception:
+        pass
+
+
 def _get_ig_client():
     """Cliente Instagram com sessão persistida em disco — login do zero a
     cada post é exatamente o padrão que o Instagram mais associa a bots e
@@ -109,6 +145,11 @@ def _get_ig_client():
     if _ig_client is not None:
         return _ig_client
     if not (_IG_USER and _IG_PASS):
+        return None
+
+    erro_recente = _ig_backoff_ativo()
+    if erro_recente:
+        log.info("Instagram em backoff (falha recente: %s) — pulando tentativa de login", erro_recente)
         return None
 
     from instagrapi import Client  # noqa: PLC0415
@@ -131,7 +172,15 @@ def _get_ig_client():
         except Exception as e:
             log.info("Sessão Instagram salva não é mais válida (%s) — logando de novo", e)
 
-    cl.login(_IG_USER, _IG_PASS)
+    try:
+        cl.login(_IG_USER, _IG_PASS)
+    except Exception as e:
+        log.warning("Login Instagram falhou (%s) — pausando tentativas por %dh. "
+                    "Verifique INSTAGRAM_USERNAME/INSTAGRAM_PASSWORD no .env.",
+                    e, _IG_BACKOFF_HORAS)
+        _ig_registrar_falha(e)
+        return None
+
     os.makedirs(os.path.dirname(_IG_SESSION_PATH), exist_ok=True)
     cl.dump_settings(_IG_SESSION_PATH)
     _ig_client = cl
