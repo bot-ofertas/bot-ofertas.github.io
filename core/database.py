@@ -161,6 +161,76 @@ def inserir_produto(p: dict) -> None:
         })
 
 
+def claim_produto(produto_id: str, titulo: str = "") -> bool:
+    """Reivindica atomicamente um produto_id ANTES do trabalho lento de rede
+    (geração de link de afiliado + publicação) começar. Retorna True se ESTE
+    chamador conseguiu a reivindicação (pode prosseguir); False se outro
+    processo já reivindicou o mesmo id (deve pular).
+
+    Fecha a corrida entre processos que escaneiam a mesma categoria ao mesmo
+    tempo (ex: rastreador.py e campanha_ferramentas.py ambos cobrem
+    "ferramentas") — sem isso, os dois podiam passar por produto_id_existe()
+    como False antes de qualquer um gravar, e publicar o mesmo produto 2x.
+    INSERT OR IGNORE contra a PRIMARY KEY de produtos.id é atômico dentro de
+    uma única transação SQLite — exatamente um chamador concorrente vence.
+
+    Depois de reivindicar, o chamador deve usar atualizar_produto() (não
+    inserir_produto()) para preencher os dados completos, já que a linha
+    já existe."""
+    now = datetime.now().isoformat()
+    with _conn() as con:
+        cur = con.execute(
+            "INSERT OR IGNORE INTO produtos (id, titulo, status, adicionado_em) "
+            "VALUES (?, ?, 'processing', ?)",
+            (produto_id, titulo, now),
+        )
+        return cur.rowcount == 1
+
+
+def liberar_claim(produto_id: str) -> None:
+    """Libera uma reivindicação feita via claim_produto() quando o trabalho
+    subsequente falha (geração de link ou publicação) — remove a linha
+    'processing' pra permitir nova tentativa na próxima rodada, em vez de
+    bloquear o produto pra sempre com uma reivindicação órfã. O guard
+    "AND status='processing'" torna a chamada seguro mesmo como rede de
+    segurança genérica (ex: num handler de exceção) — se o item já foi
+    atualizado pra 'enviado' por outro caminho, isso vira um no-op."""
+    with _conn() as con:
+        con.execute("DELETE FROM produtos WHERE id = ? AND status = 'processing'", (produto_id,))
+
+
+def atualizar_produto(p: dict) -> None:
+    """Preenche os dados completos de um produto já reivindicado via
+    claim_produto() — usa UPDATE (não INSERT OR IGNORE) porque a linha já
+    existe com um registro mínimo gravado no momento da reivindicação."""
+    global _cupom_col_checked
+    with _conn() as con:
+        if not _cupom_col_checked:
+            cols = {r[1] for r in con.execute("PRAGMA table_info(produtos)").fetchall()}
+            if "cupom" not in cols:
+                con.execute("ALTER TABLE produtos ADD COLUMN cupom TEXT")
+            _cupom_col_checked = True
+        con.execute("""
+            UPDATE produtos
+            SET titulo = :titulo, preco = :preco, preco_original = :preco_original,
+                desconto_pct = :desconto_pct, foto = :foto, categoria = :categoria,
+                canal = :canal, status = :status, score = :score, cupom = :cupom
+            WHERE id = :id
+        """, {
+            "id":            p.get("id"),
+            "titulo":        p.get("titulo", ""),
+            "preco":         p.get("preco"),
+            "preco_original": p.get("preco_original"),
+            "desconto_pct":  p.get("desconto_pct", 0),
+            "foto":          p.get("foto"),
+            "categoria":     p.get("categoria", "geral"),
+            "canal":         p.get("canal", "geral"),
+            "status":        p.get("status", "pendente"),
+            "score":         p.get("score", 0),
+            "cupom":         p.get("cupom"),
+        })
+
+
 def atualizar_afiliado(produto_id: str, provider: str, link: str, status: str = "ok") -> None:
     now = datetime.now().isoformat()
     with _conn() as con:

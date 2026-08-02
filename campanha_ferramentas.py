@@ -243,18 +243,31 @@ async def rodar_uma_vez() -> int:
                 if provider is None:
                     continue
 
+                # Reivindicação atômica — fecha a corrida com rastreador.py
+                # (roda como processo separado e escaneia a MESMA categoria
+                # "ferramentas"): sem isso, os dois podiam checar
+                # produto_id_existe() como False antes de qualquer um gravar
+                # no banco, e publicar o mesmo produto 2x no mesmo canal.
+                # Feita bem antes das duas chamadas de rede lentas (geração
+                # de link + publicação) que criam a janela de corrida de
+                # verdade.
+                if not db.claim_produto(produto_id, item.get("titulo", "")):
+                    continue
+
                 try:
                     link_afiliado = await provider.generate_affiliate_link_async(url_original)
                 except Exception as e:
                     log(f"     ❌ Erro ao gerar link: {e}")
                     db.registrar_erro("affiliate", str(e), produto_id)
+                    db.liberar_claim(produto_id)
                     continue
 
                 if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
-                    item["status"] = "pendente"
-                    item["adicionado_em"] = datetime.now().isoformat()
-                    db.inserir_produto(item)
-                    db.atualizar_afiliado(produto_id, provider.name, "", "erro")
+                    # Libera a reivindicação em vez de persistir com
+                    # status='pendente' — essa falha costuma ser transitória
+                    # e não deve congelar o produto por até 2 dias; o erro já
+                    # fica registrado em erros_log via registrar_erro acima.
+                    db.liberar_claim(produto_id)
                     continue
 
                 item["link"] = link_afiliado
@@ -268,11 +281,12 @@ async def rodar_uma_vez() -> int:
 
                 if not sucesso:
                     db.registrar_erro("telegram", "falha ao publicar", produto_id)
+                    db.liberar_claim(produto_id)
                     continue
 
                 item["status"] = "enviado"
                 item["adicionado_em"] = datetime.now().isoformat()
-                db.inserir_produto(item)
+                db.atualizar_produto(item)
                 db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
                 db.marcar_enviado(produto_id)
                 publicados += 1
@@ -298,6 +312,10 @@ async def rodar_uma_vez() -> int:
             except Exception as e_item:
                 log(f"  ⚠️  Erro inesperado em '{titulo_curto}': {e_item}")
                 db.registrar_erro("item_falhou", str(e_item), produto_id)
+                # Rede de segurança: libera a reivindicação se algo explodiu
+                # antes de chegar num estado terminal — vira no-op se já foi
+                # resolvido (liberar_claim só apaga linhas ainda 'processing').
+                db.liberar_claim(produto_id)
                 continue
 
     log(f"\nRodada concluída: {publicados} publicado(s) (meta: {MIN_POR_RODADA})")

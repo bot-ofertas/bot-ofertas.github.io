@@ -181,6 +181,18 @@ async def processar_categoria(
                 contadores["links_falharam"] += 1
                 continue
 
+            # Reivindicação atômica — fecha a corrida com campanha_ferramentas.py
+            # (roda como processo separado e escaneia a MESMA categoria
+            # "ferramentas"): sem isso, os dois podiam checar _e_duplicata()
+            # como False antes de qualquer um gravar no banco, e publicar o
+            # mesmo produto 2x no mesmo canal. Feita bem antes das duas
+            # chamadas de rede lentas (geração de link + publicação) que
+            # criam a janela de corrida de verdade.
+            if not db.claim_produto(produto_id, titulo):
+                log(f"  ↩️  Já reivindicado por outro processo: {titulo_curto}")
+                contadores["duplicatas"] += 1
+                continue
+
             log(f"     🔗 Gerando link de afiliado ({provider.name})...")
             try:
                 link_afiliado = await provider.generate_affiliate_link_async(url_original)
@@ -191,10 +203,11 @@ async def processar_categoria(
 
             if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
                 log(f"     ❌ Falha total ao gerar link — pulando {titulo_curto}")
-                item["status"] = "pendente"
-                item["adicionado_em"] = datetime.now().isoformat()
-                db.inserir_produto(item)
-                db.atualizar_afiliado(produto_id, provider.name, "", "erro")
+                # Libera a reivindicação (não persiste com status='pendente')
+                # pra essa falha — normalmente transitória — não congelar o
+                # produto por até 2 dias (até o limpar_antigos rodar); o erro
+                # já fica registrado em erros_log via registrar_erro acima.
+                db.liberar_claim(produto_id)
                 contadores["links_falharam"] += 1
                 continue
 
@@ -242,7 +255,7 @@ async def processar_categoria(
             if sucesso:
                 item["status"] = "enviado"
                 item["adicionado_em"] = datetime.now().isoformat()
-                db.inserir_produto(item)
+                db.atualizar_produto(item)
                 db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
                 db.marcar_enviado(produto_id)
                 publicados[0] += 1
@@ -304,6 +317,10 @@ async def processar_categoria(
                 await asyncio.sleep(PAUSA_ENTRE_POSTS)
             else:
                 db.registrar_erro("telegram", "falha ao publicar", produto_id)
+                # Mesma lógica: publicação falhou, libera a reivindicação pra
+                # permitir nova tentativa na próxima rodada em vez de travar
+                # o produto pra sempre com status='processing'.
+                db.liberar_claim(produto_id)
                 contadores["erros"] += 1
         except Exception as e_item:
             # Um item malformado (campo inesperado, exceção não prevista em
@@ -311,6 +328,12 @@ async def processar_categoria(
             # loga e segue para o próximo item.
             log(f"  ⚠️  Erro inesperado processando '{titulo_curto}': {e_item}")
             db.registrar_erro("item_falhou", str(e_item), produto_id)
+            # Rede de segurança: se a reivindicação foi feita mas algo
+            # explodiu antes de chegar num estado terminal (sucesso ou uma
+            # das duas falhas tratadas acima), libera pra não travar o
+            # produto pra sempre. Vira no-op se já foi resolvido (o guard
+            # em liberar_claim só apaga linhas ainda com status='processing').
+            db.liberar_claim(produto_id)
             contadores["erros"] += 1
             continue
 
