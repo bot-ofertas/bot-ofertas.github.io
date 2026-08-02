@@ -89,8 +89,17 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
     Ordem de tentativa (mais confiável primeiro):
       1. Evolution API (se configurada) — headless, ideal para servidor.
-      2. WhatsApp Desktop nativo (Windows) — usa app já logado; envia foto real.
-      3. Playwright/CDP (Chrome dedicado) — precisa de QR scan uma vez.
+      2. Playwright/CDP (Chrome dedicado, se WHATSAPP_CHROME_FALLBACK=1) —
+         precisa de QR scan uma vez, mas CONFIRMA de verdade que o preview
+         de foto abriu antes de enviar (page.wait_for_selector no DOM real).
+      3. WhatsApp Desktop nativo (Windows) — usa app já logado, sem precisar
+         de QR, mas SEM confirmação real: testado ao vivo em 2026-08-02 que
+         o app roda dentro de um WebView2 (Chromium embutido) opaco tanto à
+         UI Automation (árvore vira só "Pane" genérico) quanto a screenshot
+         clássico (captura preta — renderização via DirectComposition não
+         passa pelo BitBlt). Por isso vem DEPOIS do Playwright agora: sem
+         QR configurado ainda é a única opção, mas não dá garantia de que
+         a foto realmente anexou antes de enviar a legenda.
       4. pyautogui em WhatsApp Web — só se WHATSAPP_PYAUTOGUI_FALLBACK=1.
     """
     group_id = _group_id()
@@ -118,7 +127,25 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
         return False
 
-    # ── Tentativa 2: WhatsApp Desktop (só Windows) — pula em Linux/VPS ──────
+    # ── Tentativa 2: Playwright/CDP — OPT-IN (WHATSAPP_CHROME_FALLBACK=1) ────
+    # Preferido sobre o Desktop nativo QUANDO configurado: confirma de
+    # verdade (via DOM real do Chromium) que o preview de foto abriu antes
+    # de enviar — ver nota na docstring acima sobre por que o Desktop
+    # nativo não consegue dar essa garantia. Requer QR scan uma vez em
+    # iniciar_whatsapp_bot.bat.
+    if os.getenv("WHATSAPP_CHROME_FALLBACK", "0") == "1":
+        try:
+            from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
+            caminho = _baixar_foto(foto_url) if foto_url else ""
+            ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
+            _limpar_fotos_antigas()
+            if ok:
+                return True
+            log.info("WhatsApp Playwright não enviou; caindo para WhatsApp Desktop.")
+        except Exception as e:
+            log.warning("WhatsApp Playwright falhou: %s", e)
+
+    # ── Tentativa 3: WhatsApp Desktop (só Windows) — pula em Linux/VPS ──────
     import sys  # noqa: PLC0415
     if sys.platform == "win32":
         try:
@@ -129,24 +156,9 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
                 ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
                 if ok:
                     return True
-                log.info("WhatsApp Desktop não enviou; caindo para Playwright.")
+                log.info("WhatsApp Desktop não enviou.")
         except Exception as e:
             log.warning("WhatsApp Desktop falhou: %s", e)
-
-    # ── Tentativa 3: Playwright/CDP — OPT-IN (WHATSAPP_CHROME_FALLBACK=1) ────
-    # Por padrão desligado: usamos exclusivamente WhatsApp Desktop nativo.
-    # Ativar só se o Desktop não puder ser usado por algum motivo.
-    if os.getenv("WHATSAPP_CHROME_FALLBACK", "0") == "1":
-        try:
-            from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
-            caminho = _baixar_foto(foto_url) if foto_url else ""
-            ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
-            _limpar_fotos_antigas()
-            if ok:
-                return True
-            log.info("WhatsApp Playwright não enviou (sessão pode não estar logada).")
-        except Exception as e:
-            log.warning("WhatsApp Playwright falhou: %s", e)
 
     # ── Tentativa 4: pyautogui em Web — só se explicitamente habilitado ──────
     if os.getenv("WHATSAPP_PYAUTOGUI_FALLBACK", "0") == "1":
