@@ -84,6 +84,19 @@ _PALAVRAS_FERRAMENTA = (
     "solda", "soldagem", "soldador", "motosserra", "roçadeira", "rocadeira",
     "gedore", "irwin", "stanley", "black+decker", "black & decker", "schulz",
     "worker", "würth", "wurth", "milwaukee", "metabo", "einhell", "toyama",
+    # Ampliado em 2026-08-03: Daniel pediu reforço específico para ferramentas
+    # elétricas/kits A BATERIA de marcas renomadas (citou DeWalt, Ingco e
+    # Makita como exemplos). DeWalt/Makita já cobertos; "ingco" era lacuna
+    # confirmada. Marcas abaixo checadas uma a uma contra anúncios reais e
+    # ativos no Mercado Livre Brasil, todas linhas de parafusadeira/furadeira
+    # a bateria. Também testei se faltava termo genérico pra "kit/combo a
+    # bateria" — não falta: "ferramenta"/"maleta" já cobrem esses títulos, e
+    # "bateria" sozinha abriria falso-positivo grave (power bank, bateria
+    # automotiva/notebook). "total", "hitachi", "tolsen", "bremen" avaliadas
+    # e descartadas por risco de falso-positivo ou falta de evidência direta
+    # de linha a bateria.
+    "ingco", "skil", "ryobi", "worx", "lynus", "nakasaki", "wesco", "fortg",
+    "hikoki", "kawasaki",
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
