@@ -29,10 +29,22 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
+import re
 
 log = logging.getLogger(__name__)
 
 _CDP_URL = os.getenv("CHROME_CDP_URL", "http://127.0.0.1:9222")
+
+
+def _normalizar_espacos(texto: str) -> str:
+    """Colapsa qualquer sequência de espaços/quebras de linha em um só
+    espaço. innerText de um contenteditable não preserva a mesma contagem
+    de \\n do texto colado (WhatsApp Web renderiza linha em branco como
+    <div><br></div>, que vira \\n\\n\\n em vez de \\n\\n) — comparar direto
+    dava falso-positivo de "legenda não bate" mesmo com o conteúdo
+    idêntico. Ainda pega diferença de CONTEÚDO de verdade (texto de outra
+    oferta misturado, por exemplo), só ignora formatação de espaço."""
+    return re.sub(r"\s+", " ", texto).strip()
 
 _pw = None
 _browser = None
@@ -295,15 +307,38 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
             # testado digitando e conferindo o texto de volta.
             await caixa_legenda.evaluate("el => el.focus()")
             await asyncio.sleep(0.3)
+
+            # LIMPA a caixa antes de colar — achado ao vivo em 2026-08-03,
+            # com evidência real: sem isso, a caixa (que é a MESMA caixa de
+            # compose do rodapé reaproveitada, não uma nova a cada preview)
+            # ACUMULA o texto de tentativas anteriores. Um teste real
+            # colou 1790 caracteres de 5 produtos diferentes concatenados
+            # em vez dos 392 esperados de 1 só — se o WhatsApp corta a
+            # legenda em algum limite de caracteres, é exatamente isso que
+            # fazia o link (e o resto) da oferta atual sumir: o conteúdo
+            # de verdade ficava enterrado atrás de lixo acumulado.
+            await page.keyboard.press("Control+A")
+            await page.keyboard.press("Delete")
+            await asyncio.sleep(0.2)
+
             # Cola em vez de digitar (mais rápido e preserva quebras de linha)
             await page.evaluate("nav => navigator.clipboard.writeText(nav)", legenda)
             await page.keyboard.press("Control+V")
             await asyncio.sleep(0.4)
-            # Verifica se digitou
+            # Verifica se o texto colado bate com o esperado — não só "não
+            # vazio", mas EXATO. Sem essa comparação, a corrupção por
+            # acúmulo (achado ao vivo) passava despercebida: a caixa tinha
+            # texto (não vazio), só que era o texto errado (de rodadas
+            # anteriores misturado).
             texto = await caixa_legenda.inner_text()
-            if not texto.strip():
-                # Fallback: insert_text
+            if _normalizar_espacos(texto) != _normalizar_espacos(legenda):
+                log.warning("Legenda colada não bate com a esperada (%d vs %d chars) — limpando e tentando de novo",
+                            len(texto), len(legenda))
+                # Fallback: limpa de novo e digita via insert_text
                 await caixa_legenda.evaluate("el => el.focus()")
+                await page.keyboard.press("Control+A")
+                await page.keyboard.press("Delete")
+                await asyncio.sleep(0.2)
                 await page.keyboard.insert_text(legenda)
                 await asyncio.sleep(0.4)
                 texto = await caixa_legenda.inner_text()
@@ -315,8 +350,9 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
                 pass
             return False
 
-        if not texto.strip():
-            log.warning("Legenda ficou vazia após as tentativas — abortando (nunca posta sem descrição)")
+        if _normalizar_espacos(texto) != _normalizar_espacos(legenda):
+            log.warning("Legenda ainda não bate com a esperada após nova tentativa (%d vs %d chars) — "
+                        "abortando (nunca posta incompleto/incorreto)", len(texto), len(legenda))
             try:
                 await page.keyboard.press("Escape")
             except Exception:
