@@ -92,14 +92,18 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
       2. Playwright/CDP (Chrome dedicado, se WHATSAPP_CHROME_FALLBACK=1) —
          precisa de QR scan uma vez, mas CONFIRMA de verdade que o preview
          de foto abriu antes de enviar (page.wait_for_selector no DOM real).
-      3. WhatsApp Desktop nativo (Windows) — usa app já logado, sem precisar
-         de QR, mas SEM confirmação real: testado ao vivo em 2026-08-02 que
-         o app roda dentro de um WebView2 (Chromium embutido) opaco tanto à
-         UI Automation (árvore vira só "Pane" genérico) quanto a screenshot
+         Com essa flag ligada, uma falha aqui NÃO cai pro Desktop nativo —
+         só falha esse envio (Telegram nunca depende do WhatsApp) — pra não
+         perder a garantia que o QR scan foi feito justamente pra ter.
+      3. WhatsApp Desktop nativo (Windows) — só usado quando
+         WHATSAPP_CHROME_FALLBACK NÃO está configurado (ninguém fez o QR
+         scan ainda). Usa app já logado, sem precisar de QR, mas SEM
+         confirmação real: testado ao vivo em 2026-08-02 que o app roda
+         dentro de um WebView2 (Chromium embutido) opaco tanto à UI
+         Automation (árvore vira só "Pane" genérico) quanto a screenshot
          clássico (captura preta — renderização via DirectComposition não
-         passa pelo BitBlt). Por isso vem DEPOIS do Playwright agora: sem
-         QR configurado ainda é a única opção, mas não dá garantia de que
-         a foto realmente anexou antes de enviar a legenda.
+         passa pelo BitBlt) — não dá pra confirmar que a foto anexou antes
+         de enviar a legenda.
       4. pyautogui em WhatsApp Web — só se WHATSAPP_PYAUTOGUI_FALLBACK=1.
     """
     group_id = _group_id()
@@ -133,6 +137,15 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     # de enviar — ver nota na docstring acima sobre por que o Desktop
     # nativo não consegue dar essa garantia. Requer QR scan uma vez em
     # iniciar_whatsapp_bot.bat.
+    #
+    # IMPORTANTE: quando essa flag está ligada, NÃO cai mais pro Desktop
+    # nativo se o Playwright falhar. Testado ao vivo em 2026-08-03: isso
+    # causava exatamente o bug que essa flag existe pra evitar — uma falha
+    # transitória (ex: checagem de login demorando mais que o timeout) já
+    # bastava pra cair de volta no caminho sem garantia nenhuma, silenciosamente,
+    # 100% das rodadas. Uma falha aqui agora só significa "sem WhatsApp
+    # pra esse produto desta vez" (Telegram nunca depende do WhatsApp) —
+    # nunca "sem garantia pra esse produto".
     if os.getenv("WHATSAPP_CHROME_FALLBACK", "0") == "1":
         try:
             from integrations.whatsapp_playwright import enviar_whatsapp_bg  # noqa: PLC0415
@@ -141,11 +154,14 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
             _limpar_fotos_antigas()
             if ok:
                 return True
-            log.info("WhatsApp Playwright não enviou; caindo para WhatsApp Desktop.")
+            log.warning("WhatsApp Playwright não enviou — pulando (sem fallback pro Desktop sem garantia).")
         except Exception as e:
-            log.warning("WhatsApp Playwright falhou: %s", e)
+            log.warning("WhatsApp Playwright falhou: %s — pulando (sem fallback pro Desktop sem garantia).", e)
+        return False
 
     # ── Tentativa 3: WhatsApp Desktop (só Windows) — pula em Linux/VPS ──────
+    # Só chega aqui se WHATSAPP_CHROME_FALLBACK não estiver configurado
+    # (ninguém fez o QR scan ainda) — nesse caso é a única opção disponível.
     import sys  # noqa: PLC0415
     if sys.platform == "win32":
         try:

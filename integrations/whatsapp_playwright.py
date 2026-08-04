@@ -81,13 +81,29 @@ async def _conectar():
 
 
 async def _esta_logado(page) -> bool:
-    try:
-        await page.wait_for_selector(
-            '#pane-side, div[aria-label="Lista de conversas"]', timeout=12000
-        )
-        return True
-    except Exception:
-        return False
+    """Confirma que a sessão está logada checando a lista de conversas.
+
+    Testado ao vivo em 2026-08-03: essa checagem estava reportando "não
+    logado" em 100% das rodadas reais (sempre caindo pro WhatsApp Desktop
+    nativo, sem garantia), mesmo com a sessão genuinamente ativa — um
+    teste manual direto contra a mesma página, no mesmo momento, achou os
+    dois seletores instantaneamente. A causa exata (throttling de aba em
+    segundo plano, um estado transitório de reconexão do WhatsApp Web, ou
+    algo na própria checagem) não ficou 100% clara porque a exceção real
+    era engolida em silêncio — por isso agora loga o motivo de verdade e
+    tenta 2x com folga maior antes de desistir, em vez de decidir "não
+    logado" no primeiro tropeço."""
+    for tentativa in (1, 2):
+        try:
+            await page.wait_for_selector(
+                '#pane-side, div[aria-label="Lista de conversas"]', timeout=20000
+            )
+            return True
+        except Exception as e:
+            log.warning("Checagem de login (tentativa %d/2) falhou: %s", tentativa, e)
+            if tentativa == 1:
+                await asyncio.sleep(2)
+    return False
 
 
 # Seletores atuais do WhatsApp Web (jun/2026):
