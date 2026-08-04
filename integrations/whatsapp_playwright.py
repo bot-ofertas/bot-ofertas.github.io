@@ -214,6 +214,13 @@ async def _achar_legenda(page):
       2) qualquer contenteditable VISÍVEL que NÃO esteja no footer da conversa
          (a caixa da conversa está no footer; a de legenda fica no dialog de preview)
       3) role=textbox com data-tab=1 (compatibilidade com versões antigas)
+      4) a própria caixa de compose do rodapé (footer, data-tab=10) —
+         confirmado ao vivo em 2026-08-03: a versão atual do WhatsApp Web
+         reaproveita essa MESMA caixa como legenda quando a foto é anexada
+         via input file (não abre nenhum contenteditable dedicado fora do
+         footer nesse fluxo) — é por isso que a estratégia 2 sempre falhava
+         aqui, retornando None (0 elementos fora do footer) mesmo com o
+         preview genuinamente aberto e funcionando.
     Retorna o ElementHandle ou None.
     """
     handle = await page.evaluate_handle("""() => {
@@ -235,7 +242,11 @@ async def _achar_legenda(page):
         if (eds.length) return eds[0];
 
         // 3) textbox data-tab=1
-        return document.querySelector('[role="textbox"][data-tab="1"]');
+        const tb = document.querySelector('[role="textbox"][data-tab="1"]');
+        if (tb) return tb;
+
+        // 4) fallback: caixa de compose do rodapé reaproveitada como legenda
+        return document.querySelector('footer [contenteditable="true"][data-tab="10"]');
     }""")
     if handle is None:
         return None
@@ -275,7 +286,14 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
             return False
 
         try:
-            await caixa_legenda.click()
+            # .focus() via JS em vez de .click() — confirmado ao vivo em
+            # 2026-08-03: um clique normal (mesmo com force=True, mesmo via
+            # coordenada de mouse crua) fica bloqueado por uma camada que
+            # intercepta o ponteiro nessa caixa específica quando ela é a
+            # do rodapé reaproveitada (ver _achar_legenda estratégia 4);
+            # .focus() direto no elemento funciona de forma confiável e foi
+            # testado digitando e conferindo o texto de volta.
+            await caixa_legenda.evaluate("el => el.focus()")
             await asyncio.sleep(0.3)
             # Cola em vez de digitar (mais rápido e preserva quebras de linha)
             await page.evaluate("nav => navigator.clipboard.writeText(nav)", legenda)
@@ -285,7 +303,7 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
             texto = await caixa_legenda.inner_text()
             if not texto.strip():
                 # Fallback: insert_text
-                await caixa_legenda.click()
+                await caixa_legenda.evaluate("el => el.focus()")
                 await page.keyboard.insert_text(legenda)
                 await asyncio.sleep(0.4)
                 texto = await caixa_legenda.inner_text()
