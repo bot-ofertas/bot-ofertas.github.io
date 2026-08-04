@@ -90,7 +90,7 @@ def log(msg: str) -> None:
 def _id_produto(item: dict) -> str:
     """ID estável baseado na URL limpa do produto."""
     url = item.get("link", "")
-    return url.split("?")[0].rstrip("/").split("/")[-1] or url[:60]
+    return url.split("?")[0].split("#")[0].rstrip("/").split("/")[-1] or url[:60]
 
 
 def _e_duplicata(item: dict) -> bool:

@@ -71,17 +71,32 @@ class MLAffiliateProvider(AffiliateProvider):
     def validate_affiliate_link(self, link: str) -> bool:
         if not link:
             return False
-        # Valida contra o ID esperado FIXO, não contra self._TOOL_ID — se o
-        # env var vier corrompido/vazio por algum motivo, a validação não
-        # pode "se enganar sozinha" comparando o link contra o próprio valor
-        # quebrado e deixando passar um link sem o afiliado de verdade.
-        return "meli.la/" in link or f"matt_tool={self._TOOL_ID_ESPERADO}" in link
+        if "meli.la/" in link:
+            return True
+        # Confere que matt_tool é um parâmetro de QUERY de verdade (depois
+        # do "?", antes de qualquer "#"), não só uma substring solta em
+        # qualquer lugar da string. Achado ao vivo em 2026-08-04: links
+        # raspados de widgets carrossel/item-dinâmico do ML às vezes vêm
+        # com um fragmento de rastreamento próprio já embutido
+        # (#polycard_client=...&...) — _link_direto_com_afiliado só
+        # limpava por "?", então o matt_tool= acrescentado depois caía
+        # DENTRO desse fragmento (inerte, nunca chega no servidor do ML).
+        # A checagem antiga (substring simples) achava "matt_tool=..." lá
+        # dentro e validava como OK mesmo assim — link publicado sem
+        # afiliação de verdade, sem nenhum alarme disparar.
+        from urllib.parse import urlsplit, parse_qs  # noqa: PLC0415
+        query = parse_qs(urlsplit(link).query)
+        return query.get("matt_tool", [None])[0] == self._TOOL_ID_ESPERADO
 
     def health_check(self) -> bool:
         return os.path.exists(_MARKER_FILE)
 
     def _link_direto_com_afiliado(self, url: str) -> str:
-        url_base = url.split("?")[0].rstrip("/")
+        # Remove tanto query string (?...) quanto fragmento (#...) antes de
+        # acrescentar o matt_tool= — ver nota em validate_affiliate_link()
+        # sobre por que só limpar por "?" deixava o matt_tool preso dentro
+        # de um fragmento de rastreamento do próprio ML em alguns links.
+        url_base = url.split("?")[0].split("#")[0].rstrip("/")
         return f"{url_base}?matt_tool={self._TOOL_ID}&matt_source=bot_telegram"
 
     # ── Geração de link ────────────────────────────────────────────────────────

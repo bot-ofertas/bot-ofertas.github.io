@@ -132,7 +132,7 @@ _DOM_SCRIPT = """
 # ── Funções de extração ────────────────────────────────────────────────────────
 
 def _gerar_link_afiliado(url: str) -> str:
-    url_limpa = url.split("?")[0]
+    url_limpa = url.split("?")[0].split("#")[0]
     return (
         f"{url_limpa}"
         f"?matt_tool={_AFFILIATE_TOOL_ID}"
@@ -322,7 +322,7 @@ def _filtrar_e_afiliar(produtos: list[dict], nicho: str, desconto_min: int, limi
     for p in produtos:
         if not p.get("link"):
             continue
-        link_limpo = p["link"].split("?")[0]
+        link_limpo = p["link"].split("?")[0].split("#")[0]
         if link_limpo in vistos:
             continue
         vistos.add(link_limpo)

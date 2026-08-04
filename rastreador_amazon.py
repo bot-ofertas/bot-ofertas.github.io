@@ -59,7 +59,7 @@ def _id_amazon(produto: dict) -> str:
     """ID estável baseado na ASIN (parte /dp/ASIN da URL)."""
     link = produto.get("link", "")
     m = __import__("re").search(r"/dp/([A-Z0-9]{10})", link)
-    return m.group(1) if m else link.split("?")[0][-20:]
+    return m.group(1) if m else link.split("?")[0].split("#")[0][-20:]
 
 
 async def rodar_uma_vez() -> None:
