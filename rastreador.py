@@ -382,27 +382,36 @@ async def rodar_uma_vez() -> None:
 
     categorias_postadas: set[str] = set()
 
-    async with Bot(token=TOKEN_TELEGRAM) as bot:
-        for nicho in ordem:
-            if publicados[0] >= MAX_POR_EXECUCAO:
-                break
-            # Nunca posta a mesma categoria duas vezes no mesmo run
-            if nicho in categorias_postadas:
-                continue
-            antes = publicados[0]
-            await processar_categoria(bot, nicho, publicados, exec_id, contadores)
-            if publicados[0] > antes:
-                categorias_postadas.add(nicho)
-
-    db.finalizar_execucao(
-        exec_id,
-        produtos_encontrados=contadores["encontrados"],
-        links_gerados=contadores["links_gerados"],
-        links_falharam=contadores["links_falharam"],
-        publicados=contadores["publicados"],
-        duplicatas=contadores["duplicatas"],
-        erros=contadores["erros"],
-    )
+    # try/finally: sem isso, uma exceção não capturada em algum ponto do
+    # loop (ex: dentro do "async with Bot" em si, fora do try/except já
+    # existente em processar_categoria) deixava exec_id aberto pra sempre
+    # — confirmado ao vivo em 2026-08-03 (várias linhas "Rodada falhou
+    # inesperadamente: Timed out" com a execução correspondente nunca
+    # finalizada). execucao_em_andamento() conta qualquer execução aberta
+    # há menos de 20min como "sistema ocupado", então uma rodada travada
+    # podia atrasar o desligamento noturno por até 20min à toa.
+    try:
+        async with Bot(token=TOKEN_TELEGRAM) as bot:
+            for nicho in ordem:
+                if publicados[0] >= MAX_POR_EXECUCAO:
+                    break
+                # Nunca posta a mesma categoria duas vezes no mesmo run
+                if nicho in categorias_postadas:
+                    continue
+                antes = publicados[0]
+                await processar_categoria(bot, nicho, publicados, exec_id, contadores)
+                if publicados[0] > antes:
+                    categorias_postadas.add(nicho)
+    finally:
+        db.finalizar_execucao(
+            exec_id,
+            produtos_encontrados=contadores["encontrados"],
+            links_gerados=contadores["links_gerados"],
+            links_falharam=contadores["links_falharam"],
+            publicados=contadores["publicados"],
+            duplicatas=contadores["duplicatas"],
+            erros=contadores["erros"],
+        )
 
     # Métrica — uma rodada completa (incondicional, best-effort)
     try:

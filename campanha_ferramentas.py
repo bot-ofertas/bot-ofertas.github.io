@@ -227,122 +227,129 @@ async def rodar_uma_vez() -> int:
         unicos.append(item)
 
     publicados = 0
-    async with Bot(token=TOKEN_TELEGRAM) as bot:
-        for item in unicos:
-            if publicados >= MIN_POR_RODADA:
-                break
+    # try/finally: sem isso, uma exceção não capturada em algum ponto do
+    # loop deixava exec_id aberto pra sempre — confirmado ao vivo em
+    # 2026-08-03 ("campanha_ferramentas_falhou: Timed out" com a execução
+    # correspondente nunca finalizada). execucao_em_andamento() conta
+    # qualquer execução aberta há menos de 20min como "sistema ocupado",
+    # então uma rodada travada podia atrasar o desligamento noturno à toa.
+    try:
+        async with Bot(token=TOKEN_TELEGRAM) as bot:
+            for item in unicos:
+                if publicados >= MIN_POR_RODADA:
+                    break
 
-            produto_id = _id_produto(item)
-            item["id"] = produto_id
-            titulo_curto = (item.get("titulo") or "")[:55]
-
-            try:
-                db.registrar_preco(produto_id, item.get("preco"))
-
-                if db.produto_id_existe(produto_id):
-                    continue
-
-                aprovado, motivo = validar(item, reputacao={})
-                if not aprovado:
-                    continue
-
-                score = score_inteligente(item)
-                item["score"] = score
-                if score < SCORE_MINIMO:
-                    continue
-
-                url_original = item.get("link", "").split("?")[0]
-                provider = get_provider(url_original)
-                if provider is None:
-                    continue
-
-                # Reivindicação atômica — fecha a corrida com rastreador.py
-                # (roda como processo separado e escaneia a MESMA categoria
-                # "ferramentas"): sem isso, os dois podiam checar
-                # produto_id_existe() como False antes de qualquer um gravar
-                # no banco, e publicar o mesmo produto 2x no mesmo canal.
-                # Feita bem antes das duas chamadas de rede lentas (geração
-                # de link + publicação) que criam a janela de corrida de
-                # verdade.
-                if not db.claim_produto(produto_id, item.get("titulo", "")):
-                    continue
+                produto_id = _id_produto(item)
+                item["id"] = produto_id
+                titulo_curto = (item.get("titulo") or "")[:55]
 
                 try:
-                    link_afiliado = await provider.generate_affiliate_link_async(url_original)
-                except Exception as e:
-                    log(f"     ❌ Erro ao gerar link: {e}")
-                    db.registrar_erro("affiliate", str(e), produto_id)
-                    db.liberar_claim(produto_id)
-                    continue
+                    db.registrar_preco(produto_id, item.get("preco"))
 
-                if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
-                    # Libera a reivindicação em vez de persistir com
-                    # status='pendente' — essa falha costuma ser transitória
-                    # e não deve congelar o produto por até 2 dias; o erro já
-                    # fica registrado em erros_log via registrar_erro acima.
-                    db.liberar_claim(produto_id)
-                    continue
+                    if db.produto_id_existe(produto_id):
+                        continue
 
-                item["link"] = link_afiliado
-                item["categoria"] = "ferramentas"
+                    aprovado, motivo = validar(item, reputacao={})
+                    if not aprovado:
+                        continue
 
-                tem_cupom = bool(item.get("cupom"))
-                if tem_cupom:
-                    sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
-                else:
-                    sucesso = await publicar(bot, item, CANAIS)
+                    score = score_inteligente(item)
+                    item["score"] = score
+                    if score < SCORE_MINIMO:
+                        continue
 
-                if not sucesso:
-                    db.registrar_erro("telegram", "falha ao publicar", produto_id)
-                    db.liberar_claim(produto_id)
-                    continue
+                    url_original = item.get("link", "").split("?")[0]
+                    provider = get_provider(url_original)
+                    if provider is None:
+                        continue
 
-                item["status"] = "enviado"
-                item["adicionado_em"] = datetime.now().isoformat()
-                db.atualizar_produto(item)
-                db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
-                db.marcar_enviado(produto_id)
-                publicados += 1
-                log(f"  ✅ ({publicados}/{MIN_POR_RODADA}) {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF")
+                    # Reivindicação atômica — fecha a corrida com rastreador.py
+                    # (roda como processo separado e escaneia a MESMA categoria
+                    # "ferramentas"): sem isso, os dois podiam checar
+                    # produto_id_existe() como False antes de qualquer um gravar
+                    # no banco, e publicar o mesmo produto 2x no mesmo canal.
+                    # Feita bem antes das duas chamadas de rede lentas (geração
+                    # de link + publicação) que criam a janela de corrida de
+                    # verdade.
+                    if not db.claim_produto(produto_id, item.get("titulo", "")):
+                        continue
 
-                if wa_ativo():
                     try:
-                        wa_ok = await asyncio.wait_for(enviar_para_grupo(item), timeout=90.0)
-                        log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
+                        link_afiliado = await provider.generate_affiliate_link_async(url_original)
                     except Exception as e:
-                        from core.error_logger import log_erro
-                        log_erro("wa.envio_falha", e, {"produto_id": produto_id})
-                        log(f"     ⚠️  WhatsApp: {e}")
+                        log(f"     ❌ Erro ao gerar link: {e}")
+                        db.registrar_erro("affiliate", str(e), produto_id)
+                        db.liberar_claim(produto_id)
+                        continue
 
-                try:
-                    redes = await publicar_todas_redes(item)
-                    if redes:
-                        log(f"     🌐 Redes: {resumo_redes(redes)}")
-                except Exception as e:
-                    log(f"     ⚠️  Social: {e}")
+                    if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
+                        # Libera a reivindicação em vez de persistir com
+                        # status='pendente' — essa falha costuma ser transitória
+                        # e não deve congelar o produto por até 2 dias; o erro já
+                        # fica registrado em erros_log via registrar_erro acima.
+                        db.liberar_claim(produto_id)
+                        continue
 
-                await asyncio.sleep(PAUSA_ENTRE_POSTS)
-            except Exception as e_item:
-                log(f"  ⚠️  Erro inesperado em '{titulo_curto}': {e_item}")
-                db.registrar_erro("item_falhou", str(e_item), produto_id)
-                # Rede de segurança: libera a reivindicação se algo explodiu
-                # antes de chegar num estado terminal — vira no-op se já foi
-                # resolvido (liberar_claim só apaga linhas ainda 'processing').
-                db.liberar_claim(produto_id)
-                continue
+                    item["link"] = link_afiliado
+                    item["categoria"] = "ferramentas"
 
-    log(f"\nRodada concluída: {publicados} publicado(s) (meta: {MIN_POR_RODADA})")
-    if publicados < MIN_POR_RODADA:
-        log(
-            "  ℹ️  Estoque de ofertas de ferramenta com desconto real disponível agora "
-            "é menor que a meta — publicou o que havia sem repetir nem forçar itens fracos."
+                    tem_cupom = bool(item.get("cupom"))
+                    if tem_cupom:
+                        sucesso = await publicar_alerta_cupom(bot, item, CANAIS)
+                    else:
+                        sucesso = await publicar(bot, item, CANAIS)
+
+                    if not sucesso:
+                        db.registrar_erro("telegram", "falha ao publicar", produto_id)
+                        db.liberar_claim(produto_id)
+                        continue
+
+                    item["status"] = "enviado"
+                    item["adicionado_em"] = datetime.now().isoformat()
+                    db.atualizar_produto(item)
+                    db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
+                    db.marcar_enviado(produto_id)
+                    publicados += 1
+                    log(f"  ✅ ({publicados}/{MIN_POR_RODADA}) {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF")
+
+                    if wa_ativo():
+                        try:
+                            wa_ok = await asyncio.wait_for(enviar_para_grupo(item), timeout=90.0)
+                            log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
+                        except Exception as e:
+                            from core.error_logger import log_erro
+                            log_erro("wa.envio_falha", e, {"produto_id": produto_id})
+                            log(f"     ⚠️  WhatsApp: {e}")
+
+                    try:
+                        redes = await publicar_todas_redes(item)
+                        if redes:
+                            log(f"     🌐 Redes: {resumo_redes(redes)}")
+                    except Exception as e:
+                        log(f"     ⚠️  Social: {e}")
+
+                    await asyncio.sleep(PAUSA_ENTRE_POSTS)
+                except Exception as e_item:
+                    log(f"  ⚠️  Erro inesperado em '{titulo_curto}': {e_item}")
+                    db.registrar_erro("item_falhou", str(e_item), produto_id)
+                    # Rede de segurança: libera a reivindicação se algo explodiu
+                    # antes de chegar num estado terminal — vira no-op se já foi
+                    # resolvido (liberar_claim só apaga linhas ainda 'processing').
+                    db.liberar_claim(produto_id)
+                    continue
+
+        log(f"\nRodada concluída: {publicados} publicado(s) (meta: {MIN_POR_RODADA})")
+        if publicados < MIN_POR_RODADA:
+            log(
+                "  ℹ️  Estoque de ofertas de ferramenta com desconto real disponível agora "
+                "é menor que a meta — publicou o que havia sem repetir nem forçar itens fracos."
+            )
+    finally:
+        db.finalizar_execucao(
+            exec_id,
+            produtos_encontrados=len(unicos),
+            publicados=publicados,
         )
-
-    db.finalizar_execucao(
-        exec_id,
-        produtos_encontrados=len(unicos),
-        publicados=publicados,
-    )
     return publicados
 
 
