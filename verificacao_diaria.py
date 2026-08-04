@@ -146,6 +146,15 @@ def main() -> None:
     # Alertas reativos existentes (bot parado, taxa baixa, execução antiga, etc.)
     verificar_e_alertar(token=TOKEN, chat_id=CHAT_ID)
 
+    # Atualiza o arquivo de problemas na área de trabalho (pedido do
+    # Daniel em 2026-08-04) — best-effort, nunca derruba a verificação
+    # diária se a área de trabalho não estiver acessível por algum motivo.
+    try:
+        from gerar_relatorio_problemas import main as gerar_relatorio_desktop
+        gerar_relatorio_desktop()
+    except Exception as e:
+        print(f"Não consegui atualizar o relatório da área de trabalho: {e}")
+
 
 if __name__ == "__main__":
     main()
