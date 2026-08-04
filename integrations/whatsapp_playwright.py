@@ -62,8 +62,38 @@ async def _conectar():
     """
     global _pw, _browser, _page
 
-    if _page is not None and not _page.is_closed():
-        return _page
+    if _page is not None:
+        try:
+            if not _page.is_closed():
+                # Verifica que a conexão realmente responde, não só que o
+                # objeto Python não foi marcado como fechado — achado ao
+                # vivo em 2026-08-04: depois de várias horas com o Chrome
+                # aberto, a conexão CDP em cache morria internamente
+                # (WebSocket caído) mas is_closed() continuava False, e
+                # qualquer ação subsequente falhava com "'NoneType' object
+                # has no attribute 'send'" — derrubando 100% dos envios até
+                # alguém reiniciar tudo na mão. .title() é leve o bastante
+                # pra servir de teste de vida real da conexão.
+                await asyncio.wait_for(_page.title(), timeout=5)
+                return _page
+        except Exception as e:
+            log.warning("Conexão em cache com o Chrome não respondeu (%s) — reconectando do zero", e)
+        # Limpa o cache obsoleto antes de reconectar (best-effort — a
+        # conexão já está quebrada, não pode travar a reconexão esperando
+        # um fechamento "educado" que pode nunca responder)
+        try:
+            if _browser is not None:
+                await asyncio.wait_for(_browser.close(), timeout=5)
+        except Exception:
+            pass
+        try:
+            if _pw is not None:
+                await asyncio.wait_for(_pw.stop(), timeout=5)
+        except Exception:
+            pass
+        _page = None
+        _browser = None
+        _pw = None
 
     # 1) Garante Chrome operante ANTES de conectar (elimina ECONNREFUSED)
     from core.chrome_manager import garantir_chrome_pronto  # noqa: PLC0415
