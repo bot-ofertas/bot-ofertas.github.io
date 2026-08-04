@@ -276,6 +276,20 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
                 _devolver_foco(janela, janela_anterior)
                 return False
 
+            # LIMPA a caixa antes de colar a legenda — achado ao vivo em
+            # 2026-08-04 no caminho Playwright (mesma app, mecanismo
+            # irmão): sem isso, texto de uma tentativa anterior que ficou
+            # na caixa (preview abandonado, envio que falhou no meio)
+            # ACUMULA com a legenda nova, e o WhatsApp corta a legenda em
+            # algum limite de caracteres — o conteúdo de verdade (foto
+            # certa, mas descrição errada/cortada) fica enterrado atrás de
+            # lixo. Mesma correção aplicada aqui por precaução, já que
+            # esse caminho não tem como verificar o texto colado (WebView2
+            # opaco — ver nota acima).
+            pyautogui.hotkey("ctrl", "a")
+            pyautogui.press("delete")
+            time.sleep(0.2)
+
             # Legenda: cola direto (preview já foca a caixa)
             if _copiar_texto(mensagem):
                 pyautogui.hotkey("ctrl", "v")

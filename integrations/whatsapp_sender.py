@@ -90,18 +90,19 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     Ordem de tentativa (mais confiável primeiro):
       1. Evolution API (se configurada) — headless, ideal para servidor.
       2. Playwright/CDP (Chrome dedicado, se WHATSAPP_CHROME_FALLBACK=1) —
-         precisa de QR scan uma vez, mas CONFIRMA de verdade que o preview
-         de foto abriu antes de enviar (page.wait_for_selector no DOM real).
-         Com essa flag ligada, uma falha aqui NÃO cai pro Desktop nativo —
-         só falha esse envio (Telegram nunca depende do WhatsApp) — pra não
-         perder a garantia que o QR scan foi feito justamente pra ter.
-      3. WhatsApp Desktop nativo (Windows) — só usado quando
-         WHATSAPP_CHROME_FALLBACK NÃO está configurado (ninguém fez o QR
-         scan ainda). Usa app já logado, sem precisar de QR, mas SEM
-         confirmação real: testado ao vivo em 2026-08-02 que o app roda
-         dentro de um WebView2 (Chromium embutido) opaco tanto à UI
-         Automation (árvore vira só "Pane" genérico) quanto a screenshot
-         clássico (captura preta — renderização via DirectComposition não
+         DESLIGADO por padrão desde 2026-08-04 a pedido do Daniel: mesmo
+         confirmando de verdade que a foto anexou, exigia manter uma
+         janela do Chrome dedicada aberta na tela (visível, mesmo que sem
+         roubar o foco), e ele preferiu abrir mão dessa garantia extra em
+         troca de usar só o WhatsApp Desktop nativo, que ele já tinha
+         aberto e logado. Só ativa de novo se WHATSAPP_CHROME_FALLBACK=1
+         for setado explicitamente.
+      3. WhatsApp Desktop nativo (Windows) — MÉTODO PRINCIPAL desde
+         2026-08-04. Usa app já logado, sem precisar de QR nem de janela
+         extra visível, mas SEM confirmação real: testado ao vivo em
+         2026-08-02 que o app roda dentro de um WebView2 (Chromium
+         embutido) opaco tanto à UI Automation (árvore vira só "Pane"
+         genérico) quanto a screenshot clássico (captura preta — renderização via DirectComposition não
          passa pelo BitBlt) — não dá pra confirmar que a foto anexou antes
          de enviar a legenda.
       4. pyautogui em WhatsApp Web — só se WHATSAPP_PYAUTOGUI_FALLBACK=1.
