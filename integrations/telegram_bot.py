@@ -189,7 +189,13 @@ def _montar_teclado(produto: dict) -> InlineKeyboardMarkup:
     site = os.environ.get("SITE_URL", "https://bot-ofertas.github.io/")
     similares = site + (f"#{categoria}" if categoria else "")
 
-    tg_share = f"https://t.me/share/url?url={html.escape(link, quote=True)}&text={html.escape(titulo, quote=True)}"
+    # urllib.parse.quote (não html.escape) — html.escape converte "&" pra
+    # "&amp;", que ainda CONTÉM um "&" de verdade (só seguido de "amp;"),
+    # então um link de afiliado com múltiplos parâmetros (?matt_tool=...
+    # &matt_source=...) virava uma URL aninhada malformada. Achado ao vivo
+    # em 2026-08-04: causava "Button_url_invalid" do Telegram, derrubando
+    # o post inteiro por causa só desse botão secundário.
+    tg_share = f"https://t.me/share/url?url={urllib.parse.quote(link, safe='')}&text={urllib.parse.quote(titulo)}"
 
     preco_txt = f" | R${preco:.0f}" if preco else ""
     wa_text = urllib.parse.quote(f"🔥 {titulo}{preco_txt}\n👉 {link}")
@@ -538,8 +544,9 @@ async def publicar_alerta_cupom(
         [
             InlineKeyboardButton(
                 "📤 Telegram",
-                url=f"https://t.me/share/url?url={html.escape(link, quote=True)}"
-                    f"&text={html.escape(f'Cupom {cupom} → {_titulo_raw}', quote=True)}",
+                # urllib.parse.quote, não html.escape — ver nota em _montar_teclado()
+                url=f"https://t.me/share/url?url={urllib.parse.quote(link, safe='')}"
+                    f"&text={urllib.parse.quote(f'Cupom {cupom} → {_titulo_raw}')}",
             ),
             InlineKeyboardButton("💚 WhatsApp", url=f"https://wa.me/?text={_wa_txt}"),
         ],
