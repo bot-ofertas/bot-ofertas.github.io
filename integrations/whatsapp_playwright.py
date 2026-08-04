@@ -114,27 +114,60 @@ _COMPOSE_SEL = ('footer [contenteditable="true"][data-tab="10"], '
                 'footer div[contenteditable="true"]')
 
 
-async def _abrir_grupo(page, nome_grupo: str) -> bool:
+async def _limpar_dialogos_residuais(page) -> None:
+    """Fecha qualquer diálogo de confirmação que tenha ficado aberto de uma
+    tentativa anterior (ex: "Deseja descartar a seleção?", que aparece
+    quando um preview de foto/legenda é abandonado no meio). Achado ao
+    vivo em 2026-08-03: um diálogo desses ficou preso bloqueando TODA
+    interação futura com a página (o clique na caixa de busca esperava os
+    30s inteiros porque o diálogo interceptava os eventos de ponteiro) —
+    até alguém notar e fechar manualmente. Chamado no início de cada envio
+    pra a sessão se auto-recuperar sozinha, sem depender de intervenção
+    manual."""
     try:
-        busca = await page.wait_for_selector(_BUSCA_SEL, timeout=10000)
-        await busca.click()
-        await page.keyboard.press("Control+A")
-        await page.keyboard.press("Delete")
-        await busca.type(nome_grupo, delay=15)
-        await asyncio.sleep(1.5)
-        await page.keyboard.press("Enter")
-        await asyncio.sleep(1.3)
-        # Limpa o campo de busca para não deixar texto residual
+        descartar = page.get_by_role("button", name="Descartar")
+        if await descartar.count() > 0:
+            log.warning("Diálogo residual encontrado ('Deseja descartar a seleção?') — fechando")
+            await descartar.click(timeout=5000)
+            await asyncio.sleep(0.5)
+    except Exception as e:
+        log.info("Limpeza de diálogo residual: %s", e)
+
+
+async def _abrir_grupo(page, nome_grupo: str) -> bool:
+    """Abre a conversa do grupo pela busca.
+
+    Usa page.locator() em vez de wait_for_selector()+ElementHandle
+    guardado — Locator resolve o elemento de novo a cada ação, então uma
+    re-renderização do WhatsApp Web entre "achar" e "clicar" (ex: um
+    badge de não-lida atualizando, ou o app re-montando parte da barra
+    lateral) não deixa a referência "stale". Achado ao vivo em
+    2026-08-03: ElementHandle.click travava os 30s completos esperando um
+    elemento que já não existia mais no DOM. Tenta 2x antes de desistir.
+    """
+    busca = page.locator(_BUSCA_SEL).first
+    for tentativa in (1, 2):
         try:
-            await busca.click()
+            await busca.click(timeout=10000)
             await page.keyboard.press("Control+A")
             await page.keyboard.press("Delete")
-        except Exception:
-            pass
-        return True
-    except Exception as e:
-        log.warning("Não consegui abrir o grupo '%s': %s", nome_grupo, e)
-        return False
+            await page.keyboard.type(nome_grupo, delay=15)
+            await asyncio.sleep(1.5)
+            await page.keyboard.press("Enter")
+            await asyncio.sleep(1.3)
+            # Limpa o campo de busca para não deixar texto residual
+            try:
+                await busca.click(timeout=5000)
+                await page.keyboard.press("Control+A")
+                await page.keyboard.press("Delete")
+            except Exception:
+                pass
+            return True
+        except Exception as e:
+            log.warning("Abrir grupo '%s' (tentativa %d/2) falhou: %s", nome_grupo, tentativa, e)
+            if tentativa == 1:
+                await asyncio.sleep(2)
+    return False
 
 
 async def _limpar_compose(page):
@@ -355,6 +388,8 @@ async def _enviar_whatsapp_bg_impl(nome_grupo: str, mensagem: str, caminho_foto:
     if not await _esta_logado(page):
         log.warning("WhatsApp do bot NÃO está logado. Abra a janela do Chrome do bot e escaneie o QR.")
         return False
+
+    await _limpar_dialogos_residuais(page)
 
     if not await _abrir_grupo(page, nome_grupo):
         return False
