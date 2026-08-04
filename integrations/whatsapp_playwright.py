@@ -363,6 +363,22 @@ async def _enviar_foto(page, caminho_foto: str, legenda: str) -> bool:
 
         # Clica o botão de enviar correto (nunca Enter — evita virar figurinha)
         enviar = await page.wait_for_selector(_SEND_PREVIEW_SEL, timeout=6000)
+
+        # Reconfirma a legenda IMEDIATAMENTE antes de clicar — fecha
+        # qualquer janela de tempo entre a verificação acima e o clique de
+        # verdade (ex: algo re-renderizar a caixa nesse meio-tempo). Só
+        # clica se ainda bater; senão aborta em vez de mandar a foto
+        # sozinha.
+        texto_final = await caixa_legenda.inner_text()
+        if _normalizar_espacos(texto_final) != _normalizar_espacos(legenda):
+            log.warning("Legenda mudou entre a verificação e o envio (%d vs %d chars) — "
+                        "abortando (nunca posta incompleto)", len(texto_final), len(legenda))
+            try:
+                await page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return False
+
         await enviar.click()
         await asyncio.sleep(1.5)
         return True
