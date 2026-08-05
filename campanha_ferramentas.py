@@ -98,7 +98,22 @@ _PALAVRAS_FERRAMENTA = (
     # de linha a bateria.
     "ingco", "skil", "ryobi", "worx", "lynus", "nakasaki", "wesco", "fortg",
     "hikoki", "kawasaki",
+    # Ampliado em 2026-08-04: "aika" (marca brasileira de ferramenta a
+    # bateria, confirmada com anúncios reais e ativos no ML — furadeira/
+    # parafusadeira 20v com maleta + 2 baterias).
+    "aika",
 )
+
+# Marcas renomadas de ferramenta A BATERIA (pediu prioridade específica pra
+# dewalt/makita/aika/ingco "e outras renomadas" — mesmo espírito do pedido
+# original de 2026-08-03). Usado só pra PRIORIZAR ordem de publicação, não
+# pra filtrar — a inclusão continua vindo de _PALAVRAS_FERRAMENTA acima.
+_MARCAS_BATERIA_RENOMADAS = (
+    "dewalt", "makita", "aika", "ingco", "bosch", "milwaukee", "worx",
+    "ryobi", "skil", "stanley", "black+decker", "black & decker",
+    "metabo", "einhell", "hikoki",
+)
+_RE_VOLTAGEM_BATERIA = re.compile(r"\b\d{1,2}\s?v\b", re.IGNORECASE)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
@@ -157,6 +172,20 @@ def _id_produto(item: dict) -> str:
 def _e_ferramenta(item: dict) -> bool:
     titulo = (item.get("titulo") or "").lower()
     return any(p in titulo for p in _PALAVRAS_FERRAMENTA)
+
+
+def _e_kit_bateria_marca_renomada(item: dict) -> bool:
+    """Ferramenta/kit a bateria de marca renomada (dewalt, makita, aika,
+    ingco e afins) — usado só como sinal de PRIORIDADE de publicação.
+
+    Sem isso, o corte de MIN_POR_RODADA (ordenado só por % de desconto)
+    podia deixar de fora um kit a bateria de marca boa que apareceu com
+    desconto menor que itens genéricos, atrasando a postagem por rodadas
+    seguidas em vez de sair na hora que a oferta é detectada."""
+    titulo = (item.get("titulo") or "").lower()
+    tem_marca = any(m in titulo for m in _MARCAS_BATERIA_RENOMADAS)
+    tem_bateria = "bateria" in titulo or bool(_RE_VOLTAGEM_BATERIA.search(titulo))
+    return tem_marca and tem_bateria
 
 
 async def _buscar_pagina(url: str) -> list[dict]:
@@ -230,15 +259,26 @@ async def rodar_uma_vez() -> int:
         log(f"  {nicho}: {len(brutos)} bruto(s) → {len(filtrados)} c/ desconto → {len(relevantes)} de ferramenta")
         candidatos.extend(relevantes)
 
-    # Ordena por desconto (melhores primeiro) e remove duplicatas entre as fontes
+    # Ordena com prioridade pra kit/ferramenta a bateria de marca renomada
+    # (sempre primeiro, garantindo que entre no corte de MIN_POR_RODADA
+    # assim que aparecer) e, dentro de cada grupo, por desconto (melhores
+    # primeiro). Remove duplicatas entre as fontes.
     vistos: set[str] = set()
     unicos = []
-    for item in sorted(candidatos, key=lambda i: i.get("desconto_pct", 0), reverse=True):
+    for item in sorted(
+        candidatos,
+        key=lambda i: (_e_kit_bateria_marca_renomada(i), i.get("desconto_pct", 0)),
+        reverse=True,
+    ):
         pid = _id_produto(item)
         if pid in vistos:
             continue
         vistos.add(pid)
         unicos.append(item)
+
+    n_prioritarios = sum(1 for i in unicos if _e_kit_bateria_marca_renomada(i))
+    if n_prioritarios:
+        log(f"  🔋 {n_prioritarios} kit(s) a bateria de marca renomada nesta rodada (prioridade máxima)")
 
     publicados = 0
     # try/finally: sem isso, uma exceção não capturada em algum ponto do
