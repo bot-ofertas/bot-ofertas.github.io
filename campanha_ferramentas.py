@@ -26,6 +26,7 @@ import argparse
 import asyncio
 import logging
 import os
+import re
 import time
 from datetime import datetime
 
@@ -135,8 +136,21 @@ def _ja_existe_outra_instancia() -> bool:
     return False
 
 
+_RE_MLB_ID = re.compile(r"MLBU?-?\d+", re.IGNORECASE)
+
+
 def _id_produto(item: dict) -> str:
+    """ID estável: prioriza o ID oficial do anúncio (ml_id do scraper, ou
+    MLB/MLBU extraído da própria URL) sobre o slug da URL — o slug muda
+    de raspagem pra raspagem quando a URL carrega fragmento de tracking
+    do carrossel, quebrando a deduplicação mesmo com o item inalterado."""
+    ml_id = item.get("ml_id")
+    if ml_id:
+        return str(ml_id).upper()
     url = item.get("link", "")
+    m = _RE_MLB_ID.search(url)
+    if m:
+        return m.group(0).replace("-", "").upper()
     return url.split("?")[0].split("#")[0].rstrip("/").split("/")[-1] or url[:60]
 
 
@@ -258,7 +272,7 @@ async def rodar_uma_vez() -> int:
                     if score < SCORE_MINIMO:
                         continue
 
-                    url_original = item.get("link", "").split("?")[0]
+                    url_original = item.get("link", "").split("?")[0].split("#")[0]
                     provider = get_provider(url_original)
                     if provider is None:
                         continue

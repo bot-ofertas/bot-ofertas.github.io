@@ -184,9 +184,10 @@ async def rodar_uma_vez() -> None:
                         log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
 
                         try:
-                            from core.metrics import inc  # noqa: PLC0415
+                            from core.metrics import inc, set_gauge  # noqa: PLC0415
                             inc("posts_telegram_total")
                             inc("posts_amazon_total")
+                            set_gauge("ultimo_post_ts", time.time())
                         except Exception:
                             pass
 

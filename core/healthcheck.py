@@ -121,6 +121,25 @@ def _status_sistema() -> dict:
         return {}
 
 
+def _status_erros() -> dict:
+    try:
+        import core.database as db  # noqa: PLC0415
+        return {"ultimos_10min": db.erros_ultima_janela(10)}
+    except Exception:
+        return {}
+
+
+def _status_ultimo_post() -> dict:
+    try:
+        from core.metrics import snapshot  # noqa: PLC0415
+        ts = snapshot()["gauges"].get("ultimo_post_ts", 0)
+        if not ts:
+            return {"ts": None, "idade_s": None}
+        return {"ts": ts, "idade_s": round(time.time() - ts, 1)}
+    except Exception:
+        return {}
+
+
 class _Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return  # silencia log de requests HTTP
@@ -142,6 +161,8 @@ class _Handler(BaseHTTPRequestHandler):
                 "telegram": _status_telegram(),
                 "rastreador": _status_rastreador(),
                 "sistema": _status_sistema(),
+                "erros": _status_erros(),
+                "ultimo_post": _status_ultimo_post(),
             }
             overall_ok = all([
                 payload["chrome"]["ok"] or True,

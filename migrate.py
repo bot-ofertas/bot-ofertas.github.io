@@ -35,7 +35,7 @@ def migrar():
             # Compatibilidade com campo "link" → deriva ID
             if "id" not in p or not p["id"]:
                 url = p.get("link", "")
-                p["id"] = url.split("?")[0].rstrip("/").split("/")[-1] or url[:60]
+                p["id"] = url.split("?")[0].split("#")[0].rstrip("/").split("/")[-1] or url[:60]
             if "adicionado_em" not in p or not p["adicionado_em"]:
                 p["adicionado_em"] = "2025-01-01T00:00:00"
             if "titulo" not in p or not p["titulo"]:
@@ -53,7 +53,7 @@ def migrar():
     for item in historico:
         url = item if isinstance(item, str) else item.get("link", "")
         if url:
-            produto_id = url.split("?")[0].rstrip("/").split("/")[-1] or url[:60]
+            produto_id = url.split("?")[0].split("#")[0].rstrip("/").split("/")[-1] or url[:60]
             try:
                 db.marcar_enviado(produto_id)
             except Exception:

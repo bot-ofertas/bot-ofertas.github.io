@@ -291,7 +291,7 @@ def link_ja_existe(link: str) -> bool:
     duplicados reais. Use produto_id_existe(id) para deduplicação; mantido
     só por compatibilidade com chamadores antigos que ainda não migraram.
     """
-    url_base = link.split("?")[0].rstrip("/")
+    url_base = link.split("?")[0].split("#")[0].rstrip("/")
     with _conn() as con:
         row = con.execute("""
             SELECT id FROM produtos
@@ -342,6 +342,16 @@ def stats() -> dict:
         "top_ofertas":      [dict(r) for r in top],
         "ultimas_execucoes": [dict(r) for r in ultimas],
     }
+
+
+def erros_ultima_janela(minutos: int = 10) -> int:
+    """Conta erros registrados em erros_log nos últimos `minutos` minutos."""
+    with _conn() as con:
+        row = con.execute(
+            "SELECT COUNT(*) FROM erros_log WHERE ocorrido_em >= datetime('now', ?)",
+            (f"-{minutos} minutes",),
+        ).fetchone()
+    return row[0]
 
 
 # ── Limpeza automática ────────────────────────────────────────────────────────

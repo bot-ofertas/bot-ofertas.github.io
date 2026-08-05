@@ -88,3 +88,22 @@ relatório legível em `C:\Users\Daniel\Desktop\problemas de execucao.txt`
 - Nunca digitar/inserir senha ou credencial em lugar nenhum, mesmo se
   fornecida explicitamente.
 - Nunca alterar configuração de sistema/segurança do PC.
+
+## Regra 11 — Limpeza de URL (afiliado + deduplicação)
+
+- Nunca alterar o formato dos links de afiliado sem rodar `py_compile` +
+  import real do módulo, e reconstruir um caso real do banco pra confirmar
+  com `urllib.parse.parse_qs()` (não substring) que o parâmetro chegou como
+  query de verdade.
+- Toda limpeza de URL de produto usa `urllib.parse` ou, no mínimo,
+  `.split("?")[0].split("#")[0]` — nunca só `split("?")`. Um `#fragment` de
+  tracking do ML sobrevivendo quebra tanto o link de afiliado quanto o ID
+  de deduplicação (bug real, 2026-08-04, commits `ed84736`/consequentes —
+  chegou a causar ~26 reenvios duplicados de 2 produtos antes de corrigido).
+- Toda mudança em lógica de deduplicação precisa de teste com URL contendo
+  `?` e `#` simultaneamente, e idealmente usar o ID oficial do anúncio
+  (ex.: `MLBU?-?\d+` do Mercado Livre, ASIN da Amazon) em vez de derivar da
+  URL/slug quando esse ID estiver disponível.
+- Toda integração externa (Mercado Livre, Amazon, Telegram, WhatsApp) deve
+  reportar saúde própria em `/health` (ver `core/healthcheck.py`) e logar
+  falhas via `core/error_logger.py` — nunca falhar silenciosamente.

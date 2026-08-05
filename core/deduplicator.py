@@ -16,7 +16,7 @@ _LIMIAR = 0.80
 
 
 def _hash_link(link: str) -> str:
-    url_base = link.strip().split("?")[0]
+    url_base = link.strip().split("?")[0].split("#")[0]
     return hashlib.md5(url_base.encode()).hexdigest()
 
 

@@ -21,6 +21,7 @@ import asyncio
 import logging
 import os
 import random
+import re
 import time
 from datetime import datetime
 
@@ -87,9 +88,21 @@ def log(msg: str) -> None:
 
 # ── Deduplicação via banco de dados ──────────────────────────────────────────
 
+_RE_MLB_ID = re.compile(r"MLBU?-?\d+", re.IGNORECASE)
+
+
 def _id_produto(item: dict) -> str:
-    """ID estável baseado na URL limpa do produto."""
+    """ID estável: prioriza o ID oficial do anúncio (ml_id do scraper, ou
+    MLB/MLBU extraído da própria URL) sobre o slug da URL — o slug muda
+    de raspagem pra raspagem quando a URL carrega fragmento de tracking
+    do carrossel, quebrando a deduplicação mesmo com o item inalterado."""
+    ml_id = item.get("ml_id")
+    if ml_id:
+        return str(ml_id).upper()
     url = item.get("link", "")
+    m = _RE_MLB_ID.search(url)
+    if m:
+        return m.group(0).replace("-", "").upper()
     return url.split("?")[0].split("#")[0].rstrip("/").split("/")[-1] or url[:60]
 
 
@@ -172,7 +185,7 @@ async def processar_categoria(
             log(f"  📊 {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF | score {score}")
 
             # ── 4. Gerar link de afiliado ─────────────────────────────────────────
-            url_original = item.get("link", "").split("?")[0]
+            url_original = item.get("link", "").split("?")[0].split("#")[0]
             provider = get_provider(url_original)
 
             if provider is None:
@@ -265,9 +278,10 @@ async def processar_categoria(
 
                 # Métricas — Telegram e Mercado Livre (best-effort, não pode quebrar o fluxo)
                 try:
-                    from core.metrics import inc
+                    from core.metrics import inc, set_gauge
                     inc("posts_telegram_total")
                     inc("posts_ml_total")
+                    set_gauge("ultimo_post_ts", time.time())
                 except Exception:
                     pass
 

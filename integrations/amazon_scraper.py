@@ -144,7 +144,7 @@ def _link_afiliado(url: str) -> str:
     """Adiciona tag de afiliado à URL da Amazon."""
     if not _AFFILIATE_TAG:
         return url
-    base = url.split("?")[0]
+    base = url.split("?")[0].split("#")[0]
     return f"{base}?tag={_AFFILIATE_TAG}&linkCode=as2"
 
 

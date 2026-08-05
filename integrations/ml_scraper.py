@@ -101,7 +101,7 @@ def _extrair_produtos_do_html(html: str, nicho: str) -> list[dict]:
     for p in produtos:
         if not p.get("titulo") or not p.get("link"):
             continue
-        p["link"] = _gerar_link_afiliado(p["link"].split("?")[0])
+        p["link"] = _gerar_link_afiliado(p["link"].split("?")[0].split("#")[0])
         p["categoria"] = nicho
         p["canal"] = "geral"
         resultado.append(p)
