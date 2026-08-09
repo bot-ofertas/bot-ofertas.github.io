@@ -92,6 +92,6 @@ jobs:
         run: |
           git config user.name "Bot-Ofertas"
           git config user.email "bot@github.com"
-          git add docs/data/offers.json
+          git add docs/data/offers.json docs/ofertas/ docs/sitemap.xml docs/robots.txt
           git diff --cached --quiet || git commit -m "chore: atualiza ofertas do site [skip ci]"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main

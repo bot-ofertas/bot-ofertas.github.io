@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-BLOG GENERATOR — cada oferta vira uma landing page HTML no /web
+BLOG GENERATOR — cada oferta vira uma landing page HTML dentro de /docs
 
 Objetivo: SEO orgânico. Google indexa as páginas → tráfego passivo perpétuo.
 Cada URL é permanente (nunca muda), gerando backlinks/histórico de indexação.
 
 Como funciona:
   1. Rastreador chama gerar_landing(produto) após publicar em canais
-  2. Cria web/ofertas/{slug}.html com meta tags SEO, schema.org Product
-  3. Atualiza web/index.html com últimas ofertas
-  4. Atualiza web/sitemap.xml
-  5. GitHub Actions publica no GitHub Pages
+  2. Cria docs/ofertas/{slug}.html com meta tags SEO, schema.org Product
+  3. Atualiza docs/sitemap.xml e docs/robots.txt
+  4. GitHub Actions já commita/publica docs/ no GitHub Pages (mesmo
+     mecanismo do export_json.py) — sem infra nova.
+
+NÃO gera docs/index.html — essa é a home real, escrita à mão, que lê
+docs/data/offers.json; sobrescrevê-la aqui apagaria o site publicado.
+(Até 2026-08-09 isto gravava em /web, uma pasta nunca publicada — as
+~1000 páginas ficavam geradas localmente sem nenhum tráfego chegar
+até elas. Migradas uma vez para docs/ofertas/ ao corrigir isto.)
 """
 from __future__ import annotations
 
@@ -23,7 +29,7 @@ from datetime import datetime
 log = logging.getLogger("blog_generator")
 
 _BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WEB_DIR = os.path.join(_BASE, "web")
+WEB_DIR = os.path.join(_BASE, "docs")
 OFERTAS_DIR = os.path.join(WEB_DIR, "ofertas")
 os.makedirs(OFERTAS_DIR, exist_ok=True)
 
@@ -288,7 +294,10 @@ def gerar_sitemap() -> None:
 
 
 def gerar_tudo(produto: dict) -> None:
-    """Gera landing + atualiza index + sitemap. Chamado após cada publicação."""
+    """Gera landing + sitemap. Chamado após cada publicação.
+
+    NÃO chama gerar_index() -- docs/index.html é a home real do site
+    (escrita à mão, lê docs/data/offers.json via export_json.py) e não
+    pode ser sobrescrita pela versão simples deste módulo."""
     gerar_landing(produto)
-    gerar_index()
     gerar_sitemap()
