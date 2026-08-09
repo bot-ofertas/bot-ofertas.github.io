@@ -132,10 +132,10 @@ def etapa_3_healthcheck() -> None:
 def _iniciar_ml():
     """Sobe só o rastreador ML — usado no start inicial e em reinícios isolados
     (um crash do ML não pode gerar um processo Amazon extra desnecessário)."""
-    log.info("[4/4] Iniciando rastreador ML (intervalo aleatório 30-45 min)…")
+    log.info("[4/4] Iniciando rastreador ML (intervalo aleatório ~20 min)…")
     cmd_ml = [
         sys.executable, os.path.join(BASE, "rastreador.py"),
-        "--random", "--loop-min", "30", "--loop-max", "45",
+        "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_ml = open(LOG_PATH, "a", encoding="utf-8")
     proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE)
@@ -147,11 +147,11 @@ def _iniciar_ml():
 
 def _iniciar_amazon():
     """Sobe só o rastreador Amazon — mesma lógica de isolamento do _iniciar_ml."""
-    log.info("[4/4] Iniciando rastreador Amazon (intervalo 45-75 min)…")
+    log.info("[4/4] Iniciando rastreador Amazon (intervalo aleatório ~20 min)…")
     amazon_log_path = os.path.join(BASE, "data", "rastreador_amazon.log")
     cmd_az = [
         sys.executable, os.path.join(BASE, "rastreador_amazon.py"),
-        "--random", "--loop-min", "45", "--loop-max", "75",
+        "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_az = open(amazon_log_path, "a", encoding="utf-8")
     proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE)
