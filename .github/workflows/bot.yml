@@ -5,7 +5,14 @@ on:
     # Só roda enquanto o PC local fica desligado (01:55-08:45 BRT = 04:55-11:45 UTC).
     # Evita duplicar publicações com o bot local, que cobre o resto do dia
     # (ver agendar_shutdown.ps1). Fora dessa janela, quem publica é o PC local.
-    - cron: '0,20,40 5-11 * * *'   # ~02:00-08:40 BRT
+    #
+    # Reduzido de 3x/hora pra 1x/hora em 2026-08-09: a organizacao foi
+    # sinalizada pelo GitHub por atividade automatizada excessiva. A politica
+    # oficial (docs.github.com/en/site-policy/acceptable-use-policies) cita
+    # agendamento de hora em hora como o limiar onde sistemas automatizados
+    # comecam a classificar como "resource abuse" -- rodar a cada 20min
+    # (3x/hora) estava bem dentro dessa zona de risco.
+    - cron: '0 5-11 * * *'   # ~02:00-08:00 BRT, 1x/hora
   workflow_dispatch:  # permite rodar manualmente no GitHub
 
 permissions:
