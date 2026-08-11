@@ -232,12 +232,27 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
         pyautogui.press("escape")
         time.sleep(0.4)
 
-        # 3. Busca conversa: Ctrl+F, escreve, Enter
+        # 3. Busca conversa: Ctrl+F, cola nome (clipboard), Enter
+        #
+        # ACHADO AO VIVO em 2026-08-10: pyautogui.typewrite() só suporta o
+        # mapeamento de teclado ASCII do Windows (pyautogui._pyautogui_win.
+        # keyboardMapping) -- qualquer caractere fora dele (confirmado:
+        # travessão "—", U+2014, usado no nome do Canal "Bot-Ofertas —
+        # Achados do Dia") é descartado SILENCIOSAMENTE, sem exceção. A
+        # busca então digitava um texto sem o "—", não achava a conversa,
+        # e a foto+legenda caía na última conversa aberta (o grupo, de
+        # novo) -- por isso "enviado com sucesso" nos logs mas nada
+        # chegava no canal. Colar via clipboard (mesmo mecanismo já usado
+        # pra legenda) não tem essa limitação e funciona pra qualquer nome
+        # com acento/pontuação especial, não só este caso.
         pyautogui.hotkey("ctrl", "f")
         time.sleep(0.5)
         pyautogui.hotkey("ctrl", "a")
         pyautogui.press("delete")
-        pyautogui.typewrite(nome_grupo, interval=0.03)
+        if _copiar_texto(nome_grupo):
+            pyautogui.hotkey("ctrl", "v")
+        else:
+            pyautogui.typewrite(nome_grupo, interval=0.03)
         time.sleep(1.0)
         pyautogui.press("enter")
         time.sleep(1.3)
