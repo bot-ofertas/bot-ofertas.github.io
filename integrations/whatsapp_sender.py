@@ -32,6 +32,10 @@ def _group_id() -> str:
     return os.getenv("WHATSAPP_GROUP_ID", "")
 
 
+def _canal_nome() -> str:
+    return os.getenv("WHATSAPP_CHANNEL_NAME", "")
+
+
 def wa_ativo() -> bool:
     return bool(_group_id())
 
@@ -171,6 +175,7 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
             )
             if _janela_whatsapp() is not None:
                 ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
+                _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem, foto_url)
                 if ok:
                     return True
                 log.info("WhatsApp Desktop não enviou.")
@@ -183,6 +188,29 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         return _enviar_via_pyautogui(mensagem, foto_url)
 
     return False
+
+
+def _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem: str, foto_url: str) -> None:
+    """Reenvia a mesma oferta pro Canal de transmissão do WhatsApp
+    (WHATSAPP_CHANNEL_NAME), se configurado.
+
+    Best-effort e isolado do envio do grupo: nunca conta pro retorno de
+    enviar_para_grupo() (evitaria dobrar posts_whatsapp_total por engano
+    quando só o canal funciona) e uma falha aqui nunca derruba o envio do
+    grupo, que já rodou antes desta chamada. Reusa a mesma busca por nome
+    (Ctrl+F) já testada pro grupo — não verificado ao vivo ainda se o
+    WhatsApp Desktop inclui Canais na mesma busca global de Chats/Grupos;
+    pedir confirmação ao Daniel após a primeira rodada real."""
+    nome_canal = _canal_nome()
+    if not nome_canal:
+        return
+    try:
+        if enviar_para_grupo_desktop(nome_canal, mensagem, foto_url):
+            log.info("✅ WA: também enviado pro canal '%s'", nome_canal)
+        else:
+            log.info("Canal WhatsApp não enviou (nome '%s' não encontrado na busca?).", nome_canal)
+    except Exception as e:
+        log.warning("Envio pro canal WhatsApp falhou: %s", e)
 
 
 def _baixar_foto(foto_url: str) -> str:
