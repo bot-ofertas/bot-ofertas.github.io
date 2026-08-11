@@ -241,6 +241,13 @@ async def rodar_uma_vez() -> None:
             inc("rodadas_completadas")
         except Exception:
             pass
+
+        if publicados:
+            try:
+                from core.site_publisher import publicar_site  # noqa: PLC0415
+                publicar_site(origem="rastreador-amazon")
+            except Exception:
+                pass
     finally:
         # Sem isso, uma exceção não capturada (ex: dentro do "async with
         # Bot" em si) deixava exec_id aberto pra sempre — mesmo problema

@@ -442,6 +442,15 @@ async def rodar_uma_vez() -> None:
     )
     log(f"⏱️  Tempo total: {time.time() - t_inicio:.1f}s")
 
+    # Publica as paginas SEO novas (docs/ofertas/) geradas nesta rodada —
+    # best-effort, nunca pode derrubar o rastreador (ver core/site_publisher.py)
+    if contadores["publicados"]:
+        try:
+            from core.site_publisher import publicar_site
+            publicar_site(origem="rastreador-ml")
+        except Exception:
+            pass
+
     # Fecha o navegador do WhatsApp (libera o event loop desta rodada)
     try:
         from integrations.whatsapp_playwright import fechar_whatsapp
