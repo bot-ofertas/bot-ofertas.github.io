@@ -247,8 +247,12 @@ def garantir_whatsapp_aberto() -> bool:
     return False
 
 
-def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = "") -> bool:
-    """Envia foto+legenda ao grupo via WhatsApp Desktop (app nativo).
+def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = "", link_convite: str = "") -> bool:
+    """Envia foto+legenda a uma conversa via WhatsApp Desktop (app nativo).
+
+    Se link_convite for passado, abre a conversa direto por ele em vez de
+    buscar por nome (necessário pro Canal de transmissão -- ver
+    integrations/whatsapp_desktop_silencioso.py::_abrir_conversa_por_link).
 
     Retorna True se enviou. Ativa a janela por ~5s, envia e devolve o foco.
     Registra erros estruturados em data/errors.jsonl.
@@ -291,7 +295,7 @@ def enviar_para_grupo_desktop(nome_grupo: str, mensagem: str, foto_url: str = ""
         from integrations.whatsapp_desktop_silencioso import (  # noqa: PLC0415
             enviar_silencioso,
         )
-        if enviar_silencioso(nome_grupo, mensagem, caminho_foto):
+        if enviar_silencioso(nome_grupo, mensagem, caminho_foto, link_convite):
             _limpar_fotos_antigas()
             return True
         log.info("Modo silencioso não conseguiu enviar.")

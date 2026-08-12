@@ -36,6 +36,10 @@ def _canal_nome() -> str:
     return os.getenv("WHATSAPP_CHANNEL_NAME", "")
 
 
+def _canal_link() -> str:
+    return os.getenv("WHATSAPP_CHANNEL_LINK", "")
+
+
 def wa_ativo() -> bool:
     return bool(_group_id())
 
@@ -192,23 +196,29 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
 def _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem: str, foto_url: str) -> None:
     """Reenvia a mesma oferta pro Canal de transmissão do WhatsApp
-    (WHATSAPP_CHANNEL_NAME), se configurado.
+    (WHATSAPP_CHANNEL_LINK), se configurado.
 
     Best-effort e isolado do envio do grupo: nunca conta pro retorno de
     enviar_para_grupo() (evitaria dobrar posts_whatsapp_total por engano
     quando só o canal funciona) e uma falha aqui nunca derruba o envio do
-    grupo, que já rodou antes desta chamada. Reusa a mesma busca por nome
-    (Ctrl+F) já testada pro grupo — não verificado ao vivo ainda se o
-    WhatsApp Desktop inclui Canais na mesma busca global de Chats/Grupos;
-    pedir confirmação ao Daniel após a primeira rodada real."""
-    nome_canal = _canal_nome()
-    if not nome_canal:
+    grupo, que já rodou antes desta chamada.
+
+    Usa link direto (whatsapp://), não busca por nome (Ctrl+F) -- achado
+    ao vivo em 2026-08-11: a busca do WhatsApp Desktop não alcança a aba
+    de Canais/Atualizações (separada de Conversas/Grupos), então a foto+
+    legenda caía na última conversa aberta em vez do canal, sem erro
+    nenhum reportado. Abrir pelo link de convite (protocolo whatsapp://,
+    registrado no Windows por HKCR\\whatsapp) abre a conversa certa direto,
+    sem busca e sem passar por navegador algum (que mostraria um diálogo
+    de confirmação e travaria a automação desatendida)."""
+    link_canal = _canal_link()
+    if not link_canal:
         return
     try:
-        if enviar_para_grupo_desktop(nome_canal, mensagem, foto_url):
-            log.info("✅ WA: também enviado pro canal '%s'", nome_canal)
+        if enviar_para_grupo_desktop("Canal de ofertas", mensagem, foto_url, link_canal):
+            log.info("✅ WA: também enviado pro canal (via link)")
         else:
-            log.info("Canal WhatsApp não enviou (nome '%s' não encontrado na busca?).", nome_canal)
+            log.info("Canal WhatsApp não enviou.")
     except Exception as e:
         log.warning("Envio pro canal WhatsApp falhou: %s", e)
 

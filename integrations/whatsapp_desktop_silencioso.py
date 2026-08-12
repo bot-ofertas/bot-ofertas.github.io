@@ -159,8 +159,14 @@ def _liberar_lock_whatsapp(handle) -> None:
         pass
 
 
-def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
-    """Envia foto+legenda ao grupo. Retorna True se enviou (com verificação).
+def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "", link_convite: str = "") -> bool:
+    """Envia foto+legenda a uma conversa. Retorna True se enviou (com verificação).
+
+    Se link_convite for passado, abre a conversa direto por ele (via
+    protocolo whatsapp:// do Windows) em vez de buscar por nome — ver
+    _abrir_conversa_por_link. Necessário pro Canal de transmissão, que a
+    busca por nome (Ctrl+F) não alcança (vive numa aba separada de
+    Conversas/Grupos, confirmado ao vivo em 2026-08-11).
 
     Serializa entre processos (ML/Amazon) via mutex nomeado — ver
     _adquirir_lock_whatsapp."""
@@ -169,12 +175,34 @@ def enviar_silencioso(nome_grupo: str, mensagem: str, caminho_foto: str = "") ->
         log.warning("Não consegui a trava do WhatsApp (outro processo usando há >40s) — pulando envio")
         return False
     try:
-        return _enviar_silencioso_impl(nome_grupo, mensagem, caminho_foto)
+        return _enviar_silencioso_impl(nome_grupo, mensagem, caminho_foto, link_convite)
     finally:
         _liberar_lock_whatsapp(lock)
 
 
-def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = "") -> bool:
+def _abrir_conversa_por_link(link_convite: str) -> bool:
+    """Abre o WhatsApp Desktop direto numa conversa via link de convite
+    (whatsapp.com/channel/... ou similar), usando o protocolo whatsapp://
+    já registrado pelo app no Windows (confirmado no registro:
+    HKCR\\whatsapp, "URL Protocol").
+
+    Diferente de abrir o link https:// num navegador (que mostra um
+    diálogo do Chrome pedindo confirmação pra abrir o app — trava
+    automação desatendida), os.startfile() num link https:// comum
+    também passaria pelo navegador; por isso é ESSENCIAL vir com o
+    esquema whatsapp:// já no lugar de https://, que o Windows resolve
+    direto pro app registrado, sem navegador e sem diálogo no meio."""
+    try:
+        link_direto = link_convite.replace("https://www.whatsapp.com/", "whatsapp://") \
+                                   .replace("https://whatsapp.com/", "whatsapp://")
+        os.startfile(link_direto)
+        return True
+    except Exception as e:
+        log.warning("Falha ao abrir conversa por link: %s", e)
+        return False
+
+
+def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = "", link_convite: str = "") -> bool:
     try:
         import pyautogui       # noqa: PLC0415
         import pygetwindow as gw  # noqa: PLC0415
@@ -182,12 +210,8 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
         log.info("pyautogui/pygetwindow não instalados")
         return False
 
-    janela = _achar_janela_wa()
-    if janela is None:
-        log.info("WhatsApp Desktop não encontrado")
-        return False
-
-    # Guarda janela ativa atual para devolver foco no fim
+    # Guarda janela ativa atual para devolver foco no fim (busca ANTES de
+    # abrir por link, já que o link pode criar/focar a janela do zero)
     try:
         janela_anterior = gw.getActiveWindow()
     except Exception:
@@ -196,18 +220,36 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
     pyautogui.FAILSAFE = True
     pyautogui.PAUSE = 0.15
 
+    janela = None  # definida cedo -- se uma excecao ocorrer antes de
+    # _achar_janela_wa() rodar, o except abaixo ainda precisa de um valor
+    # valido pra passar a _devolver_foco() sem gerar NameError por cima
+
     try:
-        # 1. Restaura + ativa janela (rápido)
-        try:
-            if janela.isMinimized:
-                janela.restore()
-            janela.activate()
-        except Exception:
+        if link_convite:
+            # Caminho do Canal: abre direto pelo link, sem busca por nome
+            if not _abrir_conversa_por_link(link_convite):
+                _devolver_foco(None, janela_anterior)
+                return False
+            time.sleep(2.0)  # app precisa abrir/carregar a conversa
+
+        janela = _achar_janela_wa()
+        if janela is None:
+            log.info("WhatsApp Desktop não encontrado")
+            _devolver_foco(None, janela_anterior)
+            return False
+
+        # 1. Restaura + ativa janela (rápido) — pula se já veio ativa pelo link
+        if not _janela_esta_ativa(janela):
             try:
-                janela.maximize()
+                if janela.isMinimized:
+                    janela.restore()
+                janela.activate()
             except Exception:
-                pass
-        time.sleep(0.5)
+                try:
+                    janela.maximize()
+                except Exception:
+                    pass
+            time.sleep(0.5)
 
         # Confirma que o foco realmente ficou no WhatsApp — tenta reativar
         # mais 2x antes de desistir (evita digitar em outra janela por engano)
@@ -232,30 +274,33 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
         pyautogui.press("escape")
         time.sleep(0.4)
 
-        # 3. Busca conversa: Ctrl+F, cola nome (clipboard), Enter
+        # 3. Busca conversa por nome (Ctrl+F) — só quando NÃO veio por link
+        # direto (Canal já abriu certo no passo anterior, buscar de novo
+        # aqui arriscaria trocar pra conversa errada).
         #
         # ACHADO AO VIVO em 2026-08-10: pyautogui.typewrite() só suporta o
         # mapeamento de teclado ASCII do Windows (pyautogui._pyautogui_win.
         # keyboardMapping) -- qualquer caractere fora dele (confirmado:
         # travessão "—", U+2014, usado no nome do Canal "Bot-Ofertas —
-        # Achados do Dia") é descartado SILENCIOSAMENTE, sem exceção. A
-        # busca então digitava um texto sem o "—", não achava a conversa,
-        # e a foto+legenda caía na última conversa aberta (o grupo, de
-        # novo) -- por isso "enviado com sucesso" nos logs mas nada
-        # chegava no canal. Colar via clipboard (mesmo mecanismo já usado
-        # pra legenda) não tem essa limitação e funciona pra qualquer nome
-        # com acento/pontuação especial, não só este caso.
-        pyautogui.hotkey("ctrl", "f")
-        time.sleep(0.5)
-        pyautogui.hotkey("ctrl", "a")
-        pyautogui.press("delete")
-        if _copiar_texto(nome_grupo):
-            pyautogui.hotkey("ctrl", "v")
-        else:
-            pyautogui.typewrite(nome_grupo, interval=0.03)
-        time.sleep(1.0)
-        pyautogui.press("enter")
-        time.sleep(1.3)
+        # Achados do Dia") é descartado SILENCIOSAMENTE, sem exceção.
+        # Colar via clipboard (mesmo mecanismo já usado pra legenda) não
+        # tem essa limitação. MAS o problema real do Canal era outro,
+        # confirmado em 2026-08-11: a busca do WhatsApp Desktop (Ctrl+F)
+        # simplesmente não alcança a aba de Canais/Atualizações, separada
+        # de Conversas/Grupos — por isso o Canal usa link direto agora
+        # (ver _abrir_conversa_por_link), não busca por nome nunca mais.
+        if not link_convite:
+            pyautogui.hotkey("ctrl", "f")
+            time.sleep(0.5)
+            pyautogui.hotkey("ctrl", "a")
+            pyautogui.press("delete")
+            if _copiar_texto(nome_grupo):
+                pyautogui.hotkey("ctrl", "v")
+            else:
+                pyautogui.typewrite(nome_grupo, interval=0.03)
+            time.sleep(1.0)
+            pyautogui.press("enter")
+            time.sleep(1.3)
 
         # Reconfirma foco antes de colar/enviar de verdade — é o ponto mais
         # sensível (várias ações e ~2s se passaram desde a 1ª checagem, tempo
