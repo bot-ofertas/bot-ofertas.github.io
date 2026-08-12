@@ -356,12 +356,24 @@ def erros_ultima_janela(minutos: int = 10) -> int:
 
 # ── Limpeza automática ────────────────────────────────────────────────────────
 
-def limpar_antigos(dias: int = 2) -> int:
-    """Remove produtos, erros e histórico de preço com mais de `dias` dias.
+def limpar_antigos(dias: int = 2, dias_precos: int = 35) -> int:
+    """Remove produtos/erros/execuções com mais de `dias` dias, e histórico
+    de preço com mais de `dias_precos` dias (janela separada e maior).
 
     Chamada automaticamente no início de cada execução do rastreador.
     Garante que o mesmo produto com oferta diferente possa ser repostado
     após o período definido, sem acúmulo de dados antigos.
+
+    dias_precos > dias de propósito: core.price_alerts.queda_significativa()
+    verifica queda de preço numa janela de 30 dias (dias=30, seu default),
+    mas precos_historico era limpo junto com produtos em só 2 dias —
+    a janela de 30 dias nunca tinha dado real pra olhar (média real
+    confirmada: 1.77 pontos de histórico por produto, o mínimo pra
+    detectar qualquer queda é 3). registrar_preco() já roda pra todo
+    produto examinado, mesmo duplicata (rastreador.py, "registra mesmo
+    se for duplicata") — o dado seria acumulado com o tempo se não fosse
+    apagado cedo demais. 35 dias dá margem sobre a janela de 30 usada
+    na consulta.
     """
     with _conn() as con:
         con.execute(
@@ -375,7 +387,7 @@ def limpar_antigos(dias: int = 2) -> int:
         )
         con.execute(
             "DELETE FROM precos_historico WHERE visto_em < datetime('now', ?)",
-            (f"-{dias} days",)
+            (f"-{dias_precos} days",)
         )
         con.execute(
             "DELETE FROM execucoes WHERE iniciado_em < datetime('now', ?)",
