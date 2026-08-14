@@ -22,6 +22,7 @@ Como obter o WHATSAPP_GROUP_ID:
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 import urllib.parse
@@ -178,8 +179,28 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
                 enviar_para_grupo_desktop, _janela_whatsapp,
             )
             if _janela_whatsapp() is not None:
-                ok = enviar_para_grupo_desktop(nome_grupo, mensagem, foto_url)
-                _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem, foto_url)
+                # Roda em thread separada com timeout de VERDADE: pyautogui
+                # é síncrono/bloqueante -- chamar direto dentro de uma
+                # corrotina async trava o event loop inteiro pra sempre se
+                # travar (ex: janela que nunca ganha foco), e nenhum
+                # asyncio.wait_for() por fora consegue interromper (só
+                # interrompe em pontos de await, código síncrono não tem
+                # nenhum). Confirmado ao vivo em 2026-08-14: campanha_
+                # ferramentas.py travou quase 2h sem nenhum erro registrado,
+                # apesar do wait_for(timeout=90) que já existia em volta da
+                # chamada inteira em campanha_ferramentas.py/rastreador.py.
+                # asyncio.to_thread() move o bloqueio pra uma thread própria
+                # -- wait_for() aqui consegue desistir de verdade (a thread
+                # órfã continua rodando sozinha, mas não trava mais o resto).
+                try:
+                    ok = await asyncio.wait_for(
+                        asyncio.to_thread(enviar_para_grupo_desktop, nome_grupo, mensagem, foto_url),
+                        timeout=75.0,
+                    )
+                except asyncio.TimeoutError:
+                    log.warning("WhatsApp Desktop travou por >75s — desistindo (thread órfã segue em segundo plano, sem bloquear o resto).")
+                    ok = False
+                await _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem, foto_url)
                 if ok:
                     return True
                 log.info("WhatsApp Desktop não enviou.")
@@ -194,7 +215,7 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     return False
 
 
-def _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem: str, foto_url: str) -> None:
+async def _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem: str, foto_url: str) -> None:
     """Reenvia a mesma oferta pro Canal de transmissão do WhatsApp
     (WHATSAPP_CHANNEL_LINK), se configurado.
 
@@ -215,10 +236,19 @@ def _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem: str, fot
     if not link_canal:
         return
     try:
-        if enviar_para_grupo_desktop("Canal de ofertas", mensagem, foto_url, link_canal):
+        # Mesma proteção de thread+timeout do envio ao grupo -- ver
+        # comentário em enviar_para_grupo() sobre por que isso é essencial
+        # com pyautogui (código síncrono, sem pontos de await internos).
+        ok = await asyncio.wait_for(
+            asyncio.to_thread(enviar_para_grupo_desktop, "Canal de ofertas", mensagem, foto_url, link_canal),
+            timeout=75.0,
+        )
+        if ok:
             log.info("✅ WA: também enviado pro canal (via link)")
         else:
             log.info("Canal WhatsApp não enviou.")
+    except asyncio.TimeoutError:
+        log.warning("Envio pro canal WhatsApp travou por >75s — desistindo (thread órfã segue em segundo plano).")
     except Exception as e:
         log.warning("Envio pro canal WhatsApp falhou: %s", e)
 
