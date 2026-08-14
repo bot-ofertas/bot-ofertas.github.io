@@ -289,6 +289,32 @@ def _extrair_produtos_json(html: str) -> list[dict]:
                 elif isinstance(pics, list) and pics:
                     foto = pics[0].get("url") if isinstance(pics[0], dict) else pics[0]
 
+                # Selo do ML (ex: "MAIS VENDIDO", "OFERTA IMPERDÍVEL") -- dado
+                # real deles, mais confiavel que tentar estimar volume de
+                # vendas por conta propria (o card do carrossel/categoria
+                # nunca traz contagem de vendas nem avaliacao, so esse selo).
+                selo = ""
+                def _buscar_selo(node, d=0):
+                    if d > 8 or not isinstance(node, dict):
+                        return ""
+                    if node.get("id") == "highlight":
+                        h = node.get("highlight", {})
+                        if isinstance(h, dict):
+                            return (h.get("text") or "").replace("{black_friday_icon}", "").strip()
+                    for v in node.values():
+                        if isinstance(v, dict):
+                            r = _buscar_selo(v, d + 1)
+                            if r:
+                                return r
+                        elif isinstance(v, list):
+                            for i in v:
+                                if isinstance(i, dict):
+                                    r = _buscar_selo(i, d + 1)
+                                    if r:
+                                        return r
+                    return ""
+                selo = _buscar_selo(obj)
+
                 if produto_url and (preco_atual or titulo):
                     desc = (
                         round((1 - preco_atual / preco_original) * 100, 1)
@@ -303,6 +329,8 @@ def _extrair_produtos_json(html: str) -> list[dict]:
                         "desconto_pct":   desc,
                         "link":           produto_url,
                         "foto":           foto,
+                        "selo_ml":        selo,
+                        "mais_vendido":   "MAIS VENDIDO" in selo.upper(),
                     })
                 return
 

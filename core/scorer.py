@@ -114,6 +114,13 @@ def calcular_score(produto: dict) -> int:
     score += _score_avaliacao(produto.get("avaliacoes"))
     score += _score_quantidade_vendida(produto.get("quantidade_vendida"))
 
+    # Selo "MAIS VENDIDO" do proprio ML (integrations/ml_browser.py) --
+    # sinal real de demanda quando quantidade_vendida nao esta disponivel
+    # (o card do carrossel/categoria nunca traz contagem numerica de
+    # vendas, so esse selo -- ver achado de 2026-08-12).
+    if produto.get("mais_vendido"):
+        score += 15
+
     if categoria in CATEGORIAS_PREMIUM:
         score += 5
 
