@@ -120,6 +120,24 @@ def _achar_janela_wa():
     return None
 
 
+def _limpar_campo_texto(pyautogui) -> None:
+    """Limpa o campo de texto focado sem usar Ctrl+A ("selecionar tudo").
+
+    Achado ao vivo em 2026-08-14 (relatado pelo Daniel: "fica selecionando
+    várias coisas toda vez que posta"): Ctrl+A só limpa com segurança se o
+    foco estiver de fato numa caixa de texto -- e isso nunca foi
+    confirmável visualmente (WebView2 opaco a screenshot/UIA). Se o foco
+    escorregar pra lista de conversas ou outro elemento no momento do
+    Ctrl+A, o WhatsApp Desktop interpreta como "selecionar tudo" da
+    LISTA (múltiplas conversas/itens), não do texto -- exatamente o
+    sintoma relatado. Backspace repetido não tem esse risco: numa lista
+    de conversas ele simplesmente não faz nada, em vez de selecionar em
+    massa; numa caixa de texto, limpa normalmente.
+    """
+    pyautogui.press("end")
+    pyautogui.press("backspace", presses=250, interval=0.005)
+
+
 _MUTEX_NOME = "Global\\BotOfertas_WhatsAppDesktop_Lock"
 
 
@@ -292,8 +310,7 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
         if not link_convite:
             pyautogui.hotkey("ctrl", "f")
             time.sleep(0.5)
-            pyautogui.hotkey("ctrl", "a")
-            pyautogui.press("delete")
+            _limpar_campo_texto(pyautogui)
             if _copiar_texto(nome_grupo):
                 pyautogui.hotkey("ctrl", "v")
             else:
@@ -346,8 +363,7 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
             # lixo. Mesma correção aplicada aqui por precaução, já que
             # esse caminho não tem como verificar o texto colado (WebView2
             # opaco — ver nota acima).
-            pyautogui.hotkey("ctrl", "a")
-            pyautogui.press("delete")
+            _limpar_campo_texto(pyautogui)
             time.sleep(0.2)
 
             # Legenda: cola direto (preview já foca a caixa)
