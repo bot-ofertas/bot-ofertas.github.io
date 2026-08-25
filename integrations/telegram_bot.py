@@ -235,13 +235,35 @@ async def publicar(
         teclado = _montar_teclado(produto)
 
         if produto.get("foto"):
-            await bot.send_photo(
-                chat_id=chat_id,
-                photo=produto["foto"],
-                caption=mensagem,
-                parse_mode=ParseMode.HTML,
-                reply_markup=teclado,
-            )
+            try:
+                await bot.send_photo(
+                    chat_id=chat_id,
+                    photo=produto["foto"],
+                    caption=mensagem,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=teclado,
+                )
+            except Exception as e_foto:
+                # Telegram às vezes não consegue buscar a URL da foto do lado
+                # dele (bloqueio de hotlink, CDN temporário, etc.) mesmo com
+                # a imagem acessível por fora -- confirmado ao vivo em
+                # 2026-08-25: "Failed to get http url content" / 400 Bad
+                # Request repetido no mesmo produto por dias, invisível até
+                # a correção do logging revelar a mensagem real (antes só
+                # aparecia "falha ao publicar" genérico). Baixamos a imagem
+                # nós mesmos e mandamos os bytes direto, contornando o fetch
+                # do lado do Telegram.
+                log.warning("send_photo direto falhou (%s) — tentando baixar e reenviar bytes...", e_foto)
+                foto_bytes = _baixar_foto_bytes(produto["foto"])
+                if not foto_bytes:
+                    raise
+                await bot.send_photo(
+                    chat_id=chat_id,
+                    photo=foto_bytes,
+                    caption=mensagem,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=teclado,
+                )
         else:
             log.error(f"Sem foto — publicação abortada para '{produto.get('titulo')}'")
             return False
@@ -249,6 +271,24 @@ async def publicar(
     except Exception as e:
         log.error("Erro ao publicar '%s': %s", produto.get("titulo"), e)
         return False
+
+
+def _baixar_foto_bytes(url: str) -> "io.BytesIO | None":
+    """Baixa a foto do produto e retorna como bytes em memória, para upload
+    direto ao Telegram (fallback quando o Telegram não consegue buscar a
+    URL sozinho)."""
+    try:
+        import io  # noqa: PLC0415
+        import requests  # noqa: PLC0415
+        r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code != 200 or not r.content:
+            return None
+        buf = io.BytesIO(r.content)
+        buf.name = "foto.jpg"
+        return buf
+    except Exception as e:
+        log.warning("Falha ao baixar foto para fallback: %s", e)
+        return None
 
 
 async def publicar_com_ia(

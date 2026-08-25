@@ -357,10 +357,21 @@ def stats() -> dict:
 
 
 def erros_ultima_janela(minutos: int = 10) -> int:
-    """Conta erros registrados em erros_log nos últimos `minutos` minutos."""
+    """Conta erros registrados em erros_log nos últimos `minutos` minutos.
+
+    strftime(..., 'localtime', ...) em vez de datetime('now', ...): achado
+    ao vivo em 2026-08-25 -- ocorrido_em é gravado em horário LOCAL
+    (datetime.now().isoformat(), formato "T"), mas datetime('now', ...) do
+    SQLite é UTC e usa separador " " (espaço). "2026-08-25 20:24" (UTC, com
+    espaço) comparado como TEXTO contra "2026-08-25T11:27" (local, com "T")
+    dá True pro ">=" só por causa do espaço ordenar antes do "T" no ASCII
+    -- a janela de "N minutos" na prática pegava o dia inteiro. strftime
+    com formato T + 'localtime' casa exatamente com o que é gravado.
+    """
     with _conn() as con:
         row = con.execute(
-            "SELECT COUNT(*) FROM erros_log WHERE ocorrido_em >= datetime('now', ?)",
+            "SELECT COUNT(*) FROM erros_log WHERE ocorrido_em >= "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{minutos} minutes",),
         ).fetchone()
     return row[0]
@@ -387,22 +398,31 @@ def limpar_antigos(dias: int = 2, dias_precos: int = 35) -> int:
     apagado cedo demais. 35 dias dá margem sobre a janela de 30 usada
     na consulta.
     """
+    # strftime(..., 'localtime', ...) em vez de datetime('now', ...) --
+    # mesmo motivo de erros_ultima_janela() acima (colunas gravadas em
+    # horário local com separador "T", datetime('now') é UTC com espaço).
+    # Pra janelas de DIAS o efeito prático é pequeno (poucas horas de
+    # imprecisão), mas mantém consistência com o resto do arquivo.
     with _conn() as con:
         con.execute(
-            "DELETE FROM produtos WHERE adicionado_em < datetime('now', ?)",
+            "DELETE FROM produtos WHERE adicionado_em < "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{dias} days",)
         )
         removidos = con.execute("SELECT changes()").fetchone()[0]
         con.execute(
-            "DELETE FROM erros_log WHERE ocorrido_em < datetime('now', ?)",
+            "DELETE FROM erros_log WHERE ocorrido_em < "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{dias} days",)
         )
         con.execute(
-            "DELETE FROM precos_historico WHERE visto_em < datetime('now', ?)",
+            "DELETE FROM precos_historico WHERE visto_em < "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{dias_precos} days",)
         )
         con.execute(
-            "DELETE FROM execucoes WHERE iniciado_em < datetime('now', ?)",
+            "DELETE FROM execucoes WHERE iniciado_em < "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{dias} days",)
         )
     return removidos
