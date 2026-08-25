@@ -84,6 +84,52 @@ services:
     volumes:
       - rastreador_data:/app/data
 
+  campanha_ferramentas:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: bot_campanha_ferramentas
+    restart: always
+    command: ["python", "-u", "campanha_ferramentas.py", "--loop", "15"]
+    depends_on:
+      evolution:
+        condition: service_started
+    environment:
+      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
+      CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
+      ML_AFFILIATE_TOOL_ID: ${ML_AFFILIATE_TOOL_ID:-47114387}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      WHATSAPP_WEBHOOK_URL: http://evolution:8080
+      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
+      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
+      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
+    volumes:
+      - rastreador_data:/app/data
+
+  # Fila de envio WhatsApp com intervalo aleatório 30-45min -- desacopla o
+  # WhatsApp do Telegram (que continua imediato). Ver whatsapp_queue_sender.py.
+  # Compartilha o mesmo volume/banco SQLite (WAL) dos outros 3 containers,
+  # que só ENFILEIRAM (escrita local, rápida); este é o único que de fato
+  # consome a fila e fala com o Evolution API.
+  whatsapp_queue:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: bot_whatsapp_queue
+    restart: always
+    command: ["python", "-u", "whatsapp_queue_sender.py"]
+    depends_on:
+      evolution:
+        condition: service_started
+    environment:
+      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
+      WHATSAPP_WEBHOOK_URL: http://evolution:8080
+      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
+      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
+      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
+    volumes:
+      - rastreador_data:/app/data
+
 volumes:
   evolution_data:
   evolution_store:

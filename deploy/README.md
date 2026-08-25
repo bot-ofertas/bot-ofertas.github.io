@@ -49,7 +49,7 @@ nano .env
 - `EVOLUTION_API_KEY` — string aleatória de 32+ caracteres
 - `WHATSAPP_GROUP_ID` — só depois do passo 6
 
-### 5. Sobe tudo (Docker + Evolution API + rastreador)
+### 5. Sobe tudo (Docker + Evolution API + os 4 processos do bot)
 ```bash
 sudo bash deploy/deploy_vps.sh
 ```
@@ -57,7 +57,10 @@ sudo bash deploy/deploy_vps.sh
 O script:
 - Instala Docker se não tiver
 - Sobe container Evolution API na porta 8080
-- Sobe container do rastreador
+- Sobe os 4 containers do bot: `rastreador` (ML), `rastreador_amazon`,
+  `campanha_ferramentas` (ferramentas, a cada 15min) e `whatsapp_queue`
+  (fila do WhatsApp, envia 1 item por vez a cada 30-45min aleatório —
+  desacoplado do Telegram, que continua imediato)
 - Cria a instância `botofertas` no Evolution
 - Mostra QR Code no terminal
 
