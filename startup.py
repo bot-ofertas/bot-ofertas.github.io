@@ -177,12 +177,26 @@ def _iniciar_ferramentas():
     return proc_ferr
 
 
+def _iniciar_fila_whatsapp():
+    """Sobe o consumidor da fila de WhatsApp (intervalo aleatório 30-45min)."""
+    log.info("[4/4] Iniciando fila de envio WhatsApp (intervalo aleatório 30-45min)…")
+    wa_log_path = os.path.join(BASE, "data", "whatsapp_queue_sender.log")
+    cmd_wa = [sys.executable, os.path.join(BASE, "whatsapp_queue_sender.py")]
+    log_wa = open(wa_log_path, "a", encoding="utf-8")
+    proc_wa = subprocess.Popen(cmd_wa, stdout=log_wa, stderr=log_wa, cwd=BASE)
+    with open(os.path.join(BASE, "data", "whatsapp_queue_sender.pid"), "w") as f:
+        f.write(str(proc_wa.pid))
+    log.info("[4/4] Fila de WhatsApp PID=%d", proc_wa.pid)
+    return proc_wa
+
+
 def etapa_4_iniciar_rastreador() -> tuple:
-    """Sobe rastreadores ML, Amazon e a campanha de ferramentas em paralelo."""
+    """Sobe rastreadores ML, Amazon, campanha de ferramentas e fila de WhatsApp em paralelo."""
     proc_ml = _iniciar_ml()
     proc_az = _iniciar_amazon()
     proc_ferr = _iniciar_ferramentas()
-    return proc_ml, proc_az, proc_ferr
+    proc_wa = _iniciar_fila_whatsapp()
+    return proc_ml, proc_az, proc_ferr, proc_wa
 
 
 class _Tracker:
@@ -210,11 +224,11 @@ def monitorar(procs) -> None:
        em vez de acumular falhas esporádicas e não relacionadas ao longo de
        semanas até desistir de um processo saudável.
     """
-    # procs pode ser um Popen único (legacy) ou tupla (ml, amazon, ferramentas)
+    # procs pode ser um Popen único (legacy) ou tupla (ml, amazon, ferramentas, fila_wa)
     if isinstance(procs, tuple):
-        proc_ml, proc_az, proc_ferr = procs
+        proc_ml, proc_az, proc_ferr, proc_wa = procs
     else:
-        proc_ml, proc_az, proc_ferr = procs, None, None
+        proc_ml, proc_az, proc_ferr, proc_wa = procs, None, None, None
 
     RESET_APOS_SEGUNDOS = 2 * 60 * 60  # 2h estável reseta o contador de falhas
 
@@ -222,6 +236,7 @@ def monitorar(procs) -> None:
         _Tracker("ML", _iniciar_ml, proc_ml),
         _Tracker("Amazon", _iniciar_amazon, proc_az),
         _Tracker("Campanha Ferramentas", _iniciar_ferramentas, proc_ferr),
+        _Tracker("Fila WhatsApp", _iniciar_fila_whatsapp, proc_wa),
     ]
 
     log.info("Sistema em produção — rastreadores + healthcheck ativos.")

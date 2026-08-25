@@ -31,6 +31,23 @@ data/bridge.log
 data/rastreador.pid
 data/rastreador_local.log
 
+# Logs, PIDs e bancos locais (gerados em runtime, não fazem parte do código)
+data/*.log
+data/*.log.err
+data/*.pid
+data/*.db
+data/*.jsonl
+data/_*.json
+data/n8n/
+data/n8n_startup.log
+data/site_publisher_last.txt
+data/ig_login_backoff.json
+data/wa_desktop_*.jpg
+data/wa_upload.jpg
+
+# web/ foi substituído por docs/ (o que o GitHub Pages realmente publica)
+web/
+
 # Arquivos temporários
 *.zip
 afiliabot_v3/

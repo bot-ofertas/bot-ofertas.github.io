@@ -25,13 +25,15 @@ import time
 from dotenv import load_dotenv
 from telegram import Bot
 
+from core.error_logger import setup_logging
+setup_logging()
 import core.database as db
 from core.scorer import score_inteligente
 from core.validador import validar
 from integrations.amazon_scraper import buscar_cupons_amazon_async, amazon_ativo
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
-from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
+from integrations.whatsapp_sender import wa_ativo
 
 try:
     from core.ai_content import gerar_conteudo
@@ -199,24 +201,16 @@ async def rodar_uma_vez() -> None:
                             from core.error_logger import log_erro  # noqa: PLC0415
                             log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
 
-                        # WhatsApp simultâneo
+                        # WhatsApp entra na fila (intervalo aleatório 30-45min,
+                        # ver whatsapp_queue_sender.py) em vez de sair junto com
+                        # o Telegram -- mesmo motivo do rastreador.py.
                         if wa_ativo():
-                            try:
-                                wa_ok = await asyncio.wait_for(
-                                    enviar_para_grupo(item, mensagem_override=conteudo_ia.get("mensagem_whatsapp")),
-                                    timeout=90.0,
-                                )
-                                log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
-                                if wa_ok:
-                                    try:
-                                        from core.metrics import inc  # noqa: PLC0415
-                                        inc("posts_whatsapp_total")
-                                    except Exception:
-                                        pass
-                            except Exception as _e_wa:
-                                from core.error_logger import log_erro  # noqa: PLC0415
-                                log_erro("amazon.wa.envio_falha", _e_wa, {"produto_id": produto_id})
-                                log(f"     ⚠️  WhatsApp: {_e_wa}")
+                            item_fila = dict(item)
+                            msg_wa = conteudo_ia.get("mensagem_whatsapp")
+                            if msg_wa:
+                                item_fila["mensagem_override"] = msg_wa
+                            db.enfileirar_whatsapp(item_fila)
+                            log(f"     💚 WhatsApp: na fila ({db.tamanho_fila_whatsapp()} pendente(s))")
 
                         try:
                             redes = await publicar_todas_redes(item)

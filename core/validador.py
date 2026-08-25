@@ -23,6 +23,17 @@ _PALAVRAS_SUSPEITAS = {
     "cópia", "copia", "falso", "pirata",
 }
 
+# A pagina "ofertas" do ML mistura itens completamente fora do tema da
+# categoria (confirmado ao vivo em 2026-08-23: "vaso sanitário" saiu como
+# ferramenta, "kit de figurinhas do álbum da Copa" saiu como informática) --
+# ML confia na própria categorização e ela nem sempre bate. Blocklist
+# genérica (nao por categoria) pega os casos mais óbvios sem precisar de
+# uma allowlist por categoria, que exigiria manutenção por categoria.
+_PALAVRAS_RUIDO_FORA_DE_TEMA = {
+    "vaso sanitário", "vaso sanitario", "caixa acoplada",
+    "kit de figurinhas", "álbum de figurinhas", "album de figurinhas",
+}
+
 _REPUTACOES_RUINS = {"1_red", "2_orange"}
 
 
@@ -61,6 +72,11 @@ def validar(produto: dict, reputacao: dict) -> tuple[bool, str]:
     for palavra in _PALAVRAS_SUSPEITAS:
         if palavra in titulo:
             return False, f"título contém '{palavra}'"
+
+    # Ruído fora de tema que a categorização do ML deixa passar
+    for palavra in _PALAVRAS_RUIDO_FORA_DE_TEMA:
+        if palavra in titulo:
+            return False, f"fora de tema: título contém '{palavra}'"
 
     return True, "ok"
 

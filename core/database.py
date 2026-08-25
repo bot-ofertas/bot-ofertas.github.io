@@ -82,6 +82,18 @@ CREATE TABLE IF NOT EXISTS social_posts_log (
     postado_em  TEXT NOT NULL
 );
 
+-- Fila de envio pro WhatsApp: publicar no Telegram fica imediato (como
+-- sempre foi), mas o WhatsApp passa a esperar na fila e sai num intervalo
+-- aleatório de 30-45min entre um post e outro (pedido do Daniel em
+-- 2026-08-24, pra não parecer um bot postando nos dois lugares ao mesmo
+-- tempo -- ver whatsapp_queue_sender.py).
+CREATE TABLE IF NOT EXISTS fila_whatsapp (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    produto_json TEXT NOT NULL,
+    criado_em    TEXT NOT NULL,
+    enviado_em   TEXT
+);
+
 CREATE INDEX IF NOT EXISTS idx_produtos_status ON produtos(status);
 CREATE INDEX IF NOT EXISTS idx_produtos_adicionado ON produtos(adicionado_em);
 CREATE INDEX IF NOT EXISTS idx_produtos_affiliate ON produtos(affiliate_status);
@@ -443,6 +455,59 @@ def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
             "INSERT INTO erros_log (tipo, mensagem, produto_id, ocorrido_em) VALUES (?,?,?,?)",
             (tipo, mensagem, produto_id, now)
         )
+    # Espelha no bloco de notas do Desktop + errors.jsonl -- sem isso essa
+    # classe de erro (condição de negócio, sem exceção) fica invisível pra
+    # quem só olha o arquivo do Desktop. Best-effort: nunca derruba o
+    # registro no banco acima, que é a fonte de verdade.
+    try:
+        from core.error_logger import registrar_evento
+        ctx = {"produto_id": produto_id} if produto_id else {}
+        registrar_evento(tipo, mensagem, ctx)
+    except Exception:
+        pass
+
+
+# ── Fila de envio WhatsApp (intervalo aleatório 30-45min) ─────────────────────
+
+def enfileirar_whatsapp(item: dict) -> None:
+    """Coloca um produto na fila do WhatsApp, pra ser enviado depois pelo
+    whatsapp_queue_sender.py num intervalo aleatório -- não imediatamente
+    junto com o Telegram."""
+    import json
+    with _conn() as con:
+        con.execute(
+            "INSERT INTO fila_whatsapp (produto_json, criado_em) VALUES (?,?)",
+            (json.dumps(item, ensure_ascii=False), datetime.now().isoformat()),
+        )
+
+
+def proximo_da_fila_whatsapp() -> tuple[int, str, dict] | None:
+    """Retorna (id, criado_em, produto) do item mais antigo ainda não
+    enviado, ou None se a fila estiver vazia."""
+    import json
+    with _conn() as con:
+        row = con.execute(
+            "SELECT id, criado_em, produto_json FROM fila_whatsapp WHERE enviado_em IS NULL "
+            "ORDER BY criado_em ASC LIMIT 1"
+        ).fetchone()
+    if not row:
+        return None
+    return row[0], row[1], json.loads(row[2])
+
+
+def marcar_fila_whatsapp_enviado(fila_id: int) -> None:
+    with _conn() as con:
+        con.execute(
+            "UPDATE fila_whatsapp SET enviado_em = ? WHERE id = ?",
+            (datetime.now().isoformat(), fila_id),
+        )
+
+
+def tamanho_fila_whatsapp() -> int:
+    with _conn() as con:
+        return con.execute(
+            "SELECT COUNT(*) FROM fila_whatsapp WHERE enviado_em IS NULL"
+        ).fetchone()[0]
 
 
 # ── Histórico de preço ────────────────────────────────────────────────────────

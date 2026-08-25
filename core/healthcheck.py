@@ -51,25 +51,34 @@ def _status_telegram() -> dict:
     return {"ok": bool(tok and canal), "canal": bool(canal)}
 
 
+def _fila_whatsapp_pendentes() -> int:
+    try:
+        from core import database as db  # noqa: PLC0415
+        return db.tamanho_fila_whatsapp()
+    except Exception:
+        return -1
+
+
 def _status_whatsapp() -> dict:
     """Retorna o melhor método de envio disponível para WhatsApp."""
+    fila = _fila_whatsapp_pendentes()
     # 1º: Evolution API (headless, mais confiável)
     try:
         from integrations.whatsapp_api import _configurada, esta_conectada  # noqa: PLC0415
         if _configurada():
             if esta_conectada():
-                return {"ok": True, "metodo": "evolution-api"}
-            return {"ok": False, "motivo": "evolution-desconectada"}
+                return {"ok": True, "metodo": "evolution-api", "fila_pendente": fila}
+            return {"ok": False, "motivo": "evolution-desconectada", "fila_pendente": fila}
     except Exception:
         pass
     # 2º: WhatsApp Desktop (nativo)
     try:
         from integrations.whatsapp_desktop import _processo_wa_rodando  # noqa: PLC0415
         if _processo_wa_rodando():
-            return {"ok": True, "metodo": "desktop"}
-        return {"ok": False, "motivo": "desktop-fechado"}
+            return {"ok": True, "metodo": "desktop", "fila_pendente": fila}
+        return {"ok": False, "motivo": "desktop-fechado", "fila_pendente": fila}
     except Exception as e:
-        return {"ok": False, "motivo": str(e)[:80]}
+        return {"ok": False, "motivo": str(e)[:80], "fila_pendente": fila}
 
 
 def _status_rastreador() -> dict:
@@ -279,7 +288,26 @@ class _Handler(BaseHTTPRequestHandler):
                          ]})
 
     def do_POST(self):
-        """POST /oferta — recebe oferta manual via n8n/webhook para postar."""
+        """POST /oferta — recebe oferta manual via n8n/webhook para postar.
+        POST /alerta — recebe um alerta do workflow de monitoramento do n8n
+        e grava no mesmo bloco de notas do Desktop que o resto do sistema
+        já usa (core.error_logger) -- evita precisar de mais um canal de
+        aviso (chat pessoal do Telegram, e-mail etc.) só pra isso."""
+        if self.path == "/alerta":
+            try:
+                tamanho = int(self.headers.get("Content-Length", 0))
+                body = json.loads(self.rfile.read(tamanho).decode("utf-8"))
+                origem = body.get("origem", "n8n")
+                mensagem = body.get("mensagem", "")
+                if not mensagem:
+                    self._resp(400, {"error": "faltando 'mensagem'"})
+                    return
+                from core.error_logger import registrar_evento  # noqa: PLC0415
+                registrar_evento(f"n8n.{origem}", mensagem, body.get("contexto"))
+                self._resp(202, {"status": "registrado"})
+            except Exception as e:
+                self._resp(500, {"error": str(e)})
+            return
         if self.path != "/oferta":
             self._resp(404, {"error": "not found"})
             return

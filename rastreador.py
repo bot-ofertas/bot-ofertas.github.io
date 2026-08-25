@@ -28,6 +28,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from telegram import Bot
 
+from core.error_logger import setup_logging
+setup_logging()
 from core.scorer import score_inteligente
 from core.validador import validar
 from core.scheduler import e_bom_momento, resumo_horario
@@ -36,7 +38,7 @@ from affiliates.registry import get_provider, health_report
 from integrations.ml_browser import buscar_ofertas_browser_async
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
-from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
+from integrations.whatsapp_sender import wa_ativo
 
 try:
     from core.ai_content import gerar_conteudo
@@ -295,31 +297,19 @@ async def processar_categoria(
                     log_erro("blog_generator.falhou", _e_blog, {"produto_id": produto_id})
 
                 # WhatsApp em segundo plano — ISOLADO do Telegram (best-effort).
-                # Se WhatsApp travar/falhar por qualquer motivo, o Telegram continua.
-                # Timeout de 90s por envio evita bloquear a rodada inteira.
+                # WhatsApp não sai mais na hora junto com o Telegram -- entra
+                # na fila e sai sozinho num intervalo aleatório de 30-45min
+                # (ver whatsapp_queue_sender.py). Pedido do Daniel em
+                # 2026-08-24: publicar nos dois lugares quase ao mesmo tempo,
+                # sempre, é um padrão fácil de reconhecer como bot. Telegram
+                # continua sem depender do WhatsApp -- enfileirar_whatsapp()
+                # é só uma escrita local, nunca atrasa nem falha a rodada.
                 if wa_ativo():
-                    try:
-                        wa_ok = await asyncio.wait_for(
-                            enviar_para_grupo(item, mensagem_override=texto_wa),
-                            timeout=90.0,
-                        )
-                        log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou (sessão?)'}")
-                        if wa_ok:
-                            try:
-                                from core.metrics import inc
-                                inc("posts_whatsapp_total")
-                            except Exception:
-                                pass
-                    except asyncio.TimeoutError as _e:
-                        from core.error_logger import log_erro
-                        log_erro("wa.timeout_90s", _e,
-                                 {"produto_id": produto_id, "titulo": titulo_curto})
-                        log("     ⏱️  WhatsApp: timeout 90s (Chrome ocupado ou caído)")
-                    except Exception as _e_wa:
-                        from core.error_logger import log_erro
-                        log_erro("wa.envio_falha", _e_wa,
-                                 {"produto_id": produto_id, "titulo": titulo_curto})
-                        log(f"     ⚠️  WhatsApp: {_e_wa}")
+                    item_fila = dict(item)
+                    if texto_wa:
+                        item_fila["mensagem_override"] = texto_wa
+                    db.enfileirar_whatsapp(item_fila)
+                    log(f"     💚 WhatsApp: na fila ({db.tamanho_fila_whatsapp()} pendente(s))")
 
                 # Demais redes (Instagram, Twitter…)
                 try:

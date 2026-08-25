@@ -133,8 +133,10 @@ def _gravar_desktop_txt(e: dict) -> None:
         f.write("─" * 60 + "\n")
         f.write(f"⏱️  Quando   : {e['ts']}\n")
         f.write(f"⚙️  Operação : {e['operacao']}\n")
-        f.write(f"❌ Erro     : {e['exception']}: {e['mensagem']}\n")
-        f.write(f"📍 Onde     : {e['arquivo']} → função {e['funcao']}(), linha {e['linha']}\n")
+        erro_txt = f"{e['exception']}: {e['mensagem']}" if e['exception'] else e['mensagem']
+        f.write(f"❌ Erro     : {erro_txt}\n")
+        if e.get("arquivo"):
+            f.write(f"📍 Onde     : {e['arquivo']} → função {e['funcao']}(), linha {e['linha']}\n")
         if e.get("contexto"):
             ctx_str = ", ".join(f"{k}={v}" for k, v in e["contexto"].items())
             f.write(f"📝 Contexto : {ctx_str}\n")
@@ -143,6 +145,42 @@ def _gravar_desktop_txt(e: dict) -> None:
             for linha in e["traceback"]:
                 f.write(f"     {linha}\n")
         f.write("\n")
+
+
+def registrar_evento(operacao: str, mensagem: str, contexto: dict | None = None) -> None:
+    """Mesmo destino de log_erro() (JSONL + bloco de notas do Desktop), mas
+    para falhas reportadas como condição de negócio (retorno False), não uma
+    exceção Python capturada -- não força um objeto de exceção falso só pra
+    reusar log_erro().
+
+    Achado ao vivo em 2026-08-24: db.registrar_erro() (usado por ex. em
+    "falha ao publicar" do Telegram) só gravava na tabela erros_log do
+    banco, nunca no bloco de notas do Desktop nem no errors.jsonl que
+    log_erro() alimenta -- dois sistemas de log paralelos, sem se falar.
+    Um surto real de 31 falhas de publicação numa janela de ~21min
+    (2026-08-23 22:36-22:57) ficou invisível no bloco de notas por causa
+    disso. registrar_erro() agora chama esta função também, unificando os
+    dois num só lugar que o usuário realmente olha."""
+    entrada = {
+        "ts": datetime.now().isoformat(timespec="seconds"),
+        "operacao": operacao,
+        "exception": "",
+        "mensagem": str(mensagem)[:500],
+        "arquivo": "",
+        "funcao": "",
+        "linha": 0,
+        "contexto": contexto or {},
+        "traceback": [],
+    }
+    try:
+        with open(JSON_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entrada, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+    try:
+        _gravar_desktop_txt(entrada)
+    except Exception:
+        pass
 
 
 def erros_recentes(limite: int = 50) -> list[dict]:

@@ -33,6 +33,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from telegram import Bot
 
+from core.error_logger import setup_logging
+setup_logging()
 from core.scorer import score_inteligente
 from core.validador import validar
 import core.database as db
@@ -45,7 +47,7 @@ from integrations.ml_browser import (
 )
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
-from integrations.whatsapp_sender import enviar_para_grupo, wa_ativo
+from integrations.whatsapp_sender import wa_ativo
 
 load_dotenv()
 
@@ -366,14 +368,12 @@ async def rodar_uma_vez() -> int:
                     publicados += 1
                     log(f"  ✅ ({publicados}/{MIN_POR_RODADA}) {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF")
 
+                    # WhatsApp entra na fila (intervalo aleatório 30-45min,
+                    # ver whatsapp_queue_sender.py) em vez de sair junto com
+                    # o Telegram -- mesmo motivo do rastreador.py.
                     if wa_ativo():
-                        try:
-                            wa_ok = await asyncio.wait_for(enviar_para_grupo(item), timeout=90.0)
-                            log(f"     💚 WhatsApp: {'enviado' if wa_ok else 'falhou'}")
-                        except Exception as e:
-                            from core.error_logger import log_erro
-                            log_erro("wa.envio_falha", e, {"produto_id": produto_id})
-                            log(f"     ⚠️  WhatsApp: {e}")
+                        db.enfileirar_whatsapp(dict(item))
+                        log(f"     💚 WhatsApp: na fila ({db.tamanho_fila_whatsapp()} pendente(s))")
 
                     try:
                         redes = await publicar_todas_redes(item)

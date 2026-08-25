@@ -24,6 +24,13 @@ _FILTROS_CATEGORIA: dict[str, str] = {
     "notebooks":        "https://www.mercadolivre.com.br/ofertas?category=MLB1652",
     "tablets":          "https://www.mercadolivre.com.br/ofertas?category=MLB1684",
     "informatica":      "https://www.mercadolivre.com.br/ofertas?category=MLB1648",  # periféricos / geral
+    # MLB430235 tambem foi reatribuido pelo ML -- confirmado ao vivo em
+    # 2026-08-21: passou a devolver ofertas genericas sem relacao (bike,
+    # whey protein, ar-condicionado, smartwatch), igual ja tinha acontecido
+    # com "ferramentas" e "pet" (ver notas abaixo). O filtro por
+    # palavra-chave do lado de quem consome isso os descarta com seguranca,
+    # mas a categoria em si nao presta mais pra achar monitor de verdade --
+    # precisa de um slug tipo /c/ novo, igual foi feito pra ferramentas/pet.
     "monitores":        "https://www.mercadolivre.com.br/ofertas?category=MLB430235",
     "impressoras":      "https://www.mercadolivre.com.br/ofertas?category=MLB430237",
     "armazenamento":    "https://www.mercadolivre.com.br/ofertas?category=MLB430233",

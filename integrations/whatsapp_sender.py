@@ -45,6 +45,28 @@ def wa_ativo() -> bool:
     return bool(_group_id())
 
 
+def marcar_link_para_whatsapp(texto: str) -> str:
+    """Troca a marcação de origem (matt_source do ML / ascsubtag da Amazon)
+    de "bot_telegram" pra "bot_whatsapp" em qualquer link embutido no texto.
+
+    Sem isso, Telegram e WhatsApp publicavam literalmente a MESMA URL de
+    afiliado — pedido do Daniel em 2026-08-24 pra cada plataforma ter seu
+    próprio link (mais credibilidade, e dá pra medir clique por canal
+    separado no próprio painel do Mercado Livre/Amazon). Troca de string no
+    texto final da mensagem (não só no campo "link" do produto) pra cobrir
+    também o caminho de mensagem_override da IA/fallback (core/ai_content.py
+    via rastreador.py e rastreador_amazon.py), que monta o texto inteiro
+    (com o link já embutido) ANTES de chegar aqui — passar só produto["link"]
+    não pegaria esse caso. Troca de texto, não gera link novo do zero: evita
+    duplicar a chamada lenta ao portal de afiliados (Playwright) só pra
+    trocar um parâmetro de rastreamento."""
+    if not texto:
+        return texto
+    return (texto
+            .replace("matt_source=bot_telegram", "matt_source=bot_whatsapp")
+            .replace("ascsubtag=bot_telegram", "ascsubtag=bot_whatsapp"))
+
+
 def montar_mensagem_wa(produto: dict) -> str:
     titulo = produto.get("titulo") or "Oferta especial"
     preco: float | None = produto.get("preco")
@@ -120,7 +142,7 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     if not group_id:
         return False
 
-    mensagem = mensagem_override or montar_mensagem_wa(produto)
+    mensagem = marcar_link_para_whatsapp(mensagem_override or montar_mensagem_wa(produto))
     foto_url = produto.get("foto") or produto.get("imagem") or ""
     nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
 
@@ -176,9 +198,20 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     if sys.platform == "win32":
         try:
             from integrations.whatsapp_desktop import (  # noqa: PLC0415
-                enviar_para_grupo_desktop, _janela_whatsapp,
+                enviar_para_grupo_desktop, _processo_wa_rodando,
             )
-            if _janela_whatsapp() is not None:
+            # Checa só o PROCESSO (não a janela) -- checar _janela_whatsapp()
+            # aqui bloqueava o envio inteiro sempre que o app estava rodando
+            # só minimizado na bandeja (processo de pé, sem janela
+            # enumerável), que é justamente o caso que
+            # enviar_para_grupo_desktop() -> garantir_whatsapp_aberto() já
+            # sabe recuperar sozinho (reabre via URI whatsapp:). Com o check
+            # antigo, esse código de auto-recuperação nunca era alcançado —
+            # confirmado ao vivo em 2026-08-24: WhatsApp.Root.exe rodando,
+            # zero janela, e a rotina inteira pulada silenciosamente por ~20
+            # minutos até o restart do bot (nenhum log de wa_silencioso
+            # apareceu no intervalo, só "falhou (sessão?)" repetido).
+            if _processo_wa_rodando():
                 # Roda em thread separada com timeout de VERDADE: pyautogui
                 # é síncrono/bloqueante -- chamar direto dentro de uma
                 # corrotina async trava o event loop inteiro pra sempre se

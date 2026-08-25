@@ -141,11 +141,18 @@ _DOM_SCRIPT = r"""
 
 
 def _link_afiliado(url: str) -> str:
-    """Adiciona tag de afiliado à URL da Amazon."""
+    """Adiciona tag de afiliado à URL da Amazon.
+
+    ascsubtag identifica a origem (telegram por padrão aqui) sem precisar de
+    uma Associate Tag separada por canal — ver marcar_link_para_whatsapp()
+    em integrations/whatsapp_sender.py, que troca esse valor pra "bot_whatsapp"
+    só na mensagem do WhatsApp, pra cada plataforma ter seu próprio link em
+    vez de publicar literalmente a mesma URL nos dois lugares.
+    """
     if not _AFFILIATE_TAG:
         return url
     base = url.split("?")[0].split("#")[0]
-    return f"{base}?tag={_AFFILIATE_TAG}&linkCode=as2"
+    return f"{base}?tag={_AFFILIATE_TAG}&linkCode=as2&ascsubtag=bot_telegram"
 
 
 def _preco(texto: str) -> float | None:
