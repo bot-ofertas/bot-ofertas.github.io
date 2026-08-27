@@ -39,6 +39,9 @@ from integrations.ml_browser import buscar_ofertas_browser_async
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import wa_ativo
+from core import pausa
+from core.net import dns_ok
+from integrations import n8n
 
 try:
     from core.ai_content import gerar_conteudo
@@ -81,6 +84,33 @@ MAX_POR_CATEGORIA = 1   # nunca posta a mesma categoria 2x no mesmo run
 PAUSA_ENTRE_POSTS = 6   # segundos entre posts
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+
+# Timeouts do cliente HTTP do Telegram. O padrão da biblioteca (5s de leitura)
+# é curto demais para `send_photo` com upload de bytes numa conexão doméstica:
+# a rodada morria com um "Timed out" seco -- foi exatamente esse o registro de
+# `rodada_falhou` das 23:20 de 2026-08-25 no relatório de problemas. Subir o
+# read/write timeout custa, no pior caso, alguns segundos a mais numa falha
+# real; o benefício é não perder a rodada inteira por um upload lento.
+TIMEOUT_CONEXAO = float(os.getenv("TELEGRAM_TIMEOUT_CONEXAO", "10"))
+TIMEOUT_LEITURA = float(os.getenv("TELEGRAM_TIMEOUT_LEITURA", "40"))
+
+
+def criar_bot() -> Bot:
+    """Bot do Telegram com timeouts próprios (cai no padrão se a versão da
+    biblioteca não expuser HTTPXRequest)."""
+    try:
+        from telegram.request import HTTPXRequest  # noqa: PLC0415
+        pedido = HTTPXRequest(
+            connect_timeout=TIMEOUT_CONEXAO,
+            read_timeout=TIMEOUT_LEITURA,
+            write_timeout=TIMEOUT_LEITURA,
+            pool_timeout=TIMEOUT_CONEXAO,
+        )
+        return Bot(token=TOKEN_TELEGRAM, request=pedido)
+    except Exception as e:  # noqa: BLE001 — compatibilidade com PTB antigo
+        logging.getLogger("rastreador").warning(
+            "HTTPXRequest indisponível (%s) — usando timeouts padrão do Telegram", e)
+        return Bot(token=TOKEN_TELEGRAM)
 
 
 def log(msg: str) -> None:
@@ -166,6 +196,18 @@ async def processar_categoria(
             # ── 1. Duplicata ──────────────────────────────────────────────────────
             if _e_duplicata(item):
                 log(f"  ↩️  Duplicata: {titulo_curto}")
+                contadores["duplicatas"] += 1
+                continue
+
+            # ── 1b. Quarentena de publicação ──────────────────────────────────────
+            # Produto que já falhou MAX_TENTATIVAS_PUBLICACAO vezes seguidas
+            # fica de fora até a quarentena expirar. Sem isso, o mesmo item
+            # voltava a cada rodada, falhava de novo e ainda consumia uma das
+            # 4 vagas de publicação da rodada -- foi o que aconteceu com o
+            # MLB68674214 (5 tentativas registradas entre 11:27 e 17:25 de
+            # 2026-08-25, nenhuma oferta publicada no lugar dele).
+            if db.em_quarentena(produto_id):
+                log(f"  🚫 Em quarentena (falhas anteriores): {titulo_curto}")
                 contadores["duplicatas"] += 1
                 continue
 
@@ -273,10 +315,26 @@ async def processar_categoria(
                 db.atualizar_produto(item)
                 db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
                 db.marcar_enviado(produto_id)
+                db.limpar_falha_publicacao(produto_id)
                 publicados[0] += 1
                 postados_categoria += 1
                 contadores["publicados"] += 1
                 log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
+
+                # Evento para o n8n — alimenta os workflows de divulgação,
+                # painel e relatório diário. Assíncrono: não atrasa a rodada.
+                n8n.emitir("oferta_publicada", {
+                    "produto_id": produto_id,
+                    "titulo": item.get("titulo"),
+                    "preco": item.get("preco"),
+                    "preco_original": item.get("preco_original"),
+                    "desconto_pct": item.get("desconto_pct"),
+                    "categoria": item.get("categoria") or nicho,
+                    "score": item.get("score"),
+                    "foto": item.get("foto"),
+                    "link": link_afiliado,
+                    "fonte": "mercadolivre",
+                })
 
                 # Métricas — Telegram e Mercado Livre (best-effort, não pode quebrar o fluxo)
                 try:
@@ -321,10 +379,27 @@ async def processar_categoria(
                 await asyncio.sleep(PAUSA_ENTRE_POSTS)
             else:
                 db.registrar_erro("telegram", "falha ao publicar", produto_id)
-                # Mesma lógica: publicação falhou, libera a reivindicação pra
-                # permitir nova tentativa na próxima rodada em vez de travar
-                # o produto pra sempre com status='processing'.
-                db.liberar_claim(produto_id)
+                falha = db.registrar_falha_publicacao(
+                    produto_id, "falha ao publicar no Telegram", titulo,
+                )
+                if falha["quarentena"]:
+                    # Esgotou as tentativas: sai de rotação até a quarentena
+                    # expirar. A linha do produto FICA no banco (status
+                    # 'quarentena') de propósito -- é ela que faz
+                    # _e_duplicata() barrar o item na próxima raspagem, antes
+                    # mesmo de gastar uma chamada de rede com ele.
+                    item["status"] = "quarentena"
+                    db.atualizar_produto(item)
+                    log(f"  🚫 {falha['tentativas']}ª falha — produto em quarentena "
+                        f"até {falha['quarentena_ate'][:16]}: {titulo_curto}")
+                    n8n.emitir("produto_quarentena", falha)
+                else:
+                    # Ainda dentro do limite: libera a reivindicação pra
+                    # permitir nova tentativa na próxima rodada em vez de
+                    # travar o produto com status='processing'.
+                    db.liberar_claim(produto_id)
+                    log(f"  ⚠️  Falha {falha['tentativas']}/{falha['max_tentativas']} "
+                        f"ao publicar: {titulo_curto}")
                 contadores["erros"] += 1
         except Exception as e_item:
             # Um item malformado (campo inesperado, exceção não prevista em
@@ -353,6 +428,26 @@ async def rodar_uma_vez() -> None:
 
     if not TOKEN_TELEGRAM:
         print("❌ TOKEN_TELEGRAM não definido no .env")
+        return
+
+    # Pausa operacional (bandeira em data/pausado.flag, criável pelo n8n via
+    # POST /n8n/comando). Sai antes de abrir execução no banco: uma rodada
+    # pausada não deve aparecer como execução vazia no histórico nem contar
+    # como "sistema ocupado" para o desligamento noturno.
+    if pausa.pausado():
+        info_pausa = pausa.info()
+        log(f"⏸️  Publicação pausada desde {info_pausa.get('pausado_em', '?')} "
+            f"({info_pausa.get('motivo', '')}) — nada a fazer nesta rodada.")
+        return
+
+    # Pré-checagem de DNS. Sem rede, cada passo seguinte gastaria dezenas de
+    # segundos em timeout até a rodada morrer com um "Timed out" genérico
+    # (registro real de 2026-08-25 23:20). Aqui isso vira uma saída em ~3s,
+    # com causa nomeada no log e no relatório de problemas.
+    if not dns_ok():
+        log("🌐 Sem resolução de DNS — pulando a rodada (rede fora do ar).")
+        db.registrar_erro("rede", "DNS indisponível — rodada pulada")
+        n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel"})
         return
 
     exec_id = db.iniciar_execucao()
@@ -395,7 +490,7 @@ async def rodar_uma_vez() -> None:
     # há menos de 20min como "sistema ocupado", então uma rodada travada
     # podia atrasar o desligamento noturno por até 20min à toa.
     try:
-        async with Bot(token=TOKEN_TELEGRAM) as bot:
+        async with criar_bot() as bot:
             for nicho in ordem:
                 if publicados[0] >= MAX_POR_EXECUCAO:
                     break
@@ -431,6 +526,13 @@ async def rodar_uma_vez() -> None:
         f"{contadores['links_falharam']} falha(s) de link."
     )
     log(f"⏱️  Tempo total: {time.time() - t_inicio:.1f}s")
+
+    # Resumo da rodada para o n8n (painel, relatório diário e watchdog).
+    n8n.emitir("rodada_concluida", {
+        "duracao_s": round(time.time() - t_inicio, 1),
+        "fonte": "mercadolivre",
+        **contadores,
+    })
 
     # Publica as paginas SEO novas (docs/ofertas/) geradas nesta rodada —
     # best-effort, nunca pode derrubar o rastreador (ver core/site_publisher.py)
@@ -515,6 +617,9 @@ def main() -> None:
             except Exception as e:
                 log(f"⚠️  Rodada falhou inesperadamente: {e}")
                 db.registrar_erro("rodada_falhou", str(e))
+                n8n.emitir("rodada_falhou", {
+                    "erro": f"{type(e).__name__}: {e}"[:300], "fonte": "mercadolivre",
+                })
             if args.random:
                 proximo = random.randint(args.loop_min, args.loop_max)
             else:

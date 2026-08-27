@@ -211,10 +211,83 @@ def _montar_teclado(produto: dict) -> InlineKeyboardMarkup:
             InlineKeyboardButton("🔎 Mais Ofertas", url=similares),
         ],
     ]
+    # Linha de captação: leva quem chegou por encaminhamento para dentro dos
+    # grupos (pedido do Daniel: "preciso que as pessoas entrem no grupo e
+    # comprem pelo meu link"). Os links levam UTM próprio, então dá pra
+    # separar quem entrou por post de oferta de quem entrou por anúncio.
+    try:
+        from core.divulgacao import GRUPO_WHATSAPP  # noqa: PLC0415
+        from core.tracking import link_utm  # noqa: PLC0415
+        botoes.append([
+            InlineKeyboardButton(
+                "📲 Entrar no grupo do WhatsApp",
+                url=link_utm(GRUPO_WHATSAPP, origem="telegram",
+                             campanha="grupo_ofertas", conteudo="botao_post"),
+            )
+        ])
+    except Exception as e:  # nunca deixa o CTA derrubar a publicação
+        log.debug("CTA de grupo não adicionado: %s", e)
     return InlineKeyboardMarkup(botoes)
 
 
 # ── Publicação ────────────────────────────────────────────────────────────────
+
+def _fallback_sem_foto_ativo() -> bool:
+    """Publicar sem foto anexada é permitido?
+
+    Ligado por padrão (decisão do Daniel em 27/08: "fallback automático para
+    mensagem com link (preview nativo)"). Vale registrar a tensão com a
+    Regra 7 do CLAUDE.md ("não publicar produto sem imagem"): o post NÃO
+    fica sem imagem — o Telegram renderiza o preview da página do produto,
+    que traz a foto oficial do anúncio. O que se evita é o caso real de
+    perder a oferta inteira porque o CDN recusou o download do arquivo.
+    Para voltar ao comportamento estrito: PUBLICAR_SEM_FOTO=0 no .env.
+    """
+    return os.environ.get("PUBLICAR_SEM_FOTO", "1").strip().lower() not in ("0", "false", "nao", "não")
+
+
+async def _publicar_sem_foto(bot: Bot, chat_id, mensagem: str,
+                             teclado: InlineKeyboardMarkup, produto: dict) -> bool:
+    """Último recurso: manda a oferta como texto, deixando o Telegram montar
+    o preview da página do produto (que carrega a foto do anúncio).
+
+    Retorna True se conseguiu publicar. Registra a ocorrência como evento —
+    foto quebrada é sintoma de scraping ruim e precisa ficar visível, mesmo
+    quando o post deu certo.
+    """
+    if not _fallback_sem_foto_ativo():
+        return False
+    try:
+        await bot.send_message(
+            chat_id=chat_id,
+            text=mensagem,
+            parse_mode=ParseMode.HTML,
+            reply_markup=teclado,
+            disable_web_page_preview=False,  # o preview É a imagem, aqui
+        )
+    except Exception as e:
+        log.error("Fallback sem foto também falhou para '%s': %s",
+                  produto.get("titulo"), e)
+        return False
+
+    log.warning("Publicado SEM foto anexada (preview do link): %s",
+                (produto.get("titulo") or "")[:70])
+    try:
+        from core.error_logger import registrar_evento  # noqa: PLC0415
+        registrar_evento(
+            "telegram.publicado_sem_foto",
+            "foto do produto indisponível — publicado com preview do link",
+            {"produto_id": produto.get("id", ""), "foto": (produto.get("foto") or "")[:120]},
+        )
+    except Exception:
+        pass
+    try:
+        from core.metrics import inc  # noqa: PLC0415
+        inc("posts_sem_foto_total")
+    except Exception:
+        pass
+    return True
+
 
 async def publicar(
     bot: Bot,
@@ -235,10 +308,16 @@ async def publicar(
         teclado = _montar_teclado(produto)
 
         if produto.get("foto"):
+            from core.foto_url import alta_resolucao  # noqa: PLC0415
+            # A URL que vem do card de listagem é a miniatura (`-I.jpg`, 1x).
+            # Publicar a miniatura era o motivo de a foto sair pequena/borrada
+            # -- e, quando o CDN já tinha expirado a miniatura, de não sair
+            # foto nenhuma. `alta_resolucao()` aponta para a original.
+            url_foto = alta_resolucao(produto["foto"]) or produto["foto"]
             try:
                 await bot.send_photo(
                     chat_id=chat_id,
-                    photo=produto["foto"],
+                    photo=url_foto,
                     caption=mensagem,
                     parse_mode=ParseMode.HTML,
                     reply_markup=teclado,
@@ -256,16 +335,23 @@ async def publicar(
                 log.warning("send_photo direto falhou (%s) — tentando baixar e reenviar bytes...", e_foto)
                 foto_bytes = _baixar_foto_bytes(produto["foto"])
                 if not foto_bytes:
+                    if await _publicar_sem_foto(bot, chat_id, mensagem, teclado, produto):
+                        return True
                     raise
-                await bot.send_photo(
-                    chat_id=chat_id,
-                    photo=foto_bytes,
-                    caption=mensagem,
-                    parse_mode=ParseMode.HTML,
-                    reply_markup=teclado,
-                )
+                else:
+                    await bot.send_photo(
+                        chat_id=chat_id,
+                        photo=foto_bytes,
+                        caption=mensagem,
+                        parse_mode=ParseMode.HTML,
+                        reply_markup=teclado,
+                    )
         else:
-            log.error(f"Sem foto — publicação abortada para '{produto.get('titulo')}'")
+            log.warning("Sem foto para '%s' — tentando fallback com preview do link",
+                        produto.get("titulo"))
+            if await _publicar_sem_foto(bot, chat_id, mensagem, teclado, produto):
+                return True
+            log.error("Sem foto — publicação abortada para '%s'", produto.get("titulo"))
             return False
         return True
     except Exception as e:
@@ -276,15 +362,26 @@ async def publicar(
 def _baixar_foto_bytes(url: str) -> "io.BytesIO | None":
     """Baixa a foto do produto e retorna como bytes em memória, para upload
     direto ao Telegram (fallback quando o Telegram não consegue buscar a
-    URL sozinho)."""
+    URL sozinho).
+
+    Passou a delegar para `core.foto_url.baixar_melhor`, que:
+      - tenta a variante em ALTA resolução primeiro (`-O.jpg`, `D_NQ_NP_2X_`)
+        e cai para a 1x se ela não existir mais no CDN;
+      - manda cabeçalhos de navegador reais — o `mlstatic` responde 403 ao
+        User-Agent padrão do `requests`, que era exatamente o que a versão
+        anterior enviava ("Mozilla/5.0" pelado, sem Accept nem Referer);
+      - loga o status HTTP da recusa, em vez de devolver None mudo. Era essa
+        falha silenciosa que transformava "foto não carregou" em "falha ao
+        publicar" genérico no relatório do Daniel.
+    """
     try:
         import io  # noqa: PLC0415
-        import requests  # noqa: PLC0415
-        r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-        if r.status_code != 200 or not r.content:
+        from core.foto_url import baixar_melhor  # noqa: PLC0415
+        dados, url_usada = baixar_melhor(url)
+        if not dados:
             return None
-        buf = io.BytesIO(r.content)
-        buf.name = "foto.jpg"
+        buf = io.BytesIO(dados)
+        buf.name = os.path.basename(url_usada.split("?")[0]) or "foto.jpg"
         return buf
     except Exception as e:
         log.warning("Falha ao baixar foto para fallback: %s", e)

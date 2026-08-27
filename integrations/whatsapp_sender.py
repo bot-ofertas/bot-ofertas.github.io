@@ -59,12 +59,36 @@ def marcar_link_para_whatsapp(texto: str) -> str:
     (com o link já embutido) ANTES de chegar aqui — passar só produto["link"]
     não pegaria esse caso. Troca de texto, não gera link novo do zero: evita
     duplicar a chamada lenta ao portal de afiliados (Playwright) só pra
-    trocar um parâmetro de rastreamento."""
+    trocar um parâmetro de rastreamento.
+
+    Correção de 2026-08-27: a troca por `str.replace` só funcionava quando a
+    origem era exatamente "bot_telegram". Link sem `matt_source`, com outro
+    valor, ou vindo do encurtador oficial passava batido e o WhatsApp
+    publicava com a marcação do Telegram — a métrica por canal ficava
+    errada em silêncio. Agora cada URL do texto é reescrita com
+    `core.tracking.marcar_origem`, que usa `urllib.parse` (Regra 11) e
+    preserva `matt_tool`/`tag` intactos (Regras 3 e 4).
+    """
     if not texto:
         return texto
-    return (texto
-            .replace("matt_source=bot_telegram", "matt_source=bot_whatsapp")
-            .replace("ascsubtag=bot_telegram", "ascsubtag=bot_whatsapp"))
+
+    import re  # noqa: PLC0415
+    from core.tracking import marcar_origem  # noqa: PLC0415
+
+    # Pontuação final de frase não faz parte da URL (o ")" fica de fora
+    # também, por causa de links entre parênteses).
+    padrao = re.compile(r"https?://[^\s<>\"']+")
+
+    def _troca(m: "re.Match[str]") -> str:
+        bruta = m.group(0)
+        limpa = bruta.rstrip(".,;:!?)\u201d\"'")
+        sufixo = bruta[len(limpa):]
+        try:
+            return marcar_origem(limpa, "whatsapp") + sufixo
+        except Exception:
+            return bruta  # nunca quebra a mensagem por causa do tracking
+
+    return padrao.sub(_troca, texto)
 
 
 def montar_mensagem_wa(produto: dict) -> str:
@@ -105,6 +129,22 @@ def montar_mensagem_wa(produto: dict) -> str:
     ]
     if categoria:
         linhas.append(f"\n#{categoria} #oferta #desconto #publicidade")
+
+    # CTA do canal do Telegram nas mensagens do WhatsApp (e vice-versa no
+    # Telegram): cada grupo alimenta o outro em vez de os dois crescerem
+    # isolados. Best-effort — problema no módulo de divulgação nunca pode
+    # impedir o envio da oferta.
+    try:
+        from core.divulgacao import GRUPO_TELEGRAM  # noqa: PLC0415
+        from core.tracking import link_utm  # noqa: PLC0415
+        linhas += [
+            "",
+            "📢 Receba antes no Telegram: "
+            + link_utm(GRUPO_TELEGRAM, origem="whatsapp",
+                       campanha="grupo_ofertas", conteudo="cta_mensagem"),
+        ]
+    except Exception:
+        pass
 
     return "\n".join(filter(lambda x: x is not None, linhas))
 

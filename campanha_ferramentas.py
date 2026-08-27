@@ -48,6 +48,7 @@ from integrations.ml_browser import (
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import wa_ativo
+from integrations import n8n
 
 load_dotenv()
 
@@ -327,6 +328,10 @@ async def rodar_uma_vez() -> int:
                     # Feita bem antes das duas chamadas de rede lentas (geração
                     # de link + publicação) que criam a janela de corrida de
                     # verdade.
+                    if db.em_quarentena(produto_id):
+                        log(f"  🚫 Em quarentena (falhas anteriores): {titulo_curto}")
+                        continue
+
                     if not db.claim_produto(produto_id, item.get("titulo", "")):
                         continue
 
@@ -357,7 +362,21 @@ async def rodar_uma_vez() -> int:
 
                     if not sucesso:
                         db.registrar_erro("telegram", "falha ao publicar", produto_id)
-                        db.liberar_claim(produto_id)
+                        falha = db.registrar_falha_publicacao(
+                            produto_id, "falha ao publicar no Telegram",
+                            item.get("titulo", ""),
+                        )
+                        if falha["quarentena"]:
+                            # Mesmo tratamento do rastreador.py: esgotadas as
+                            # tentativas, o produto sai de rotação em vez de
+                            # voltar a cada 15 min consumindo a vaga da rodada.
+                            item["status"] = "quarentena"
+                            db.atualizar_produto(item)
+                            log(f"  🚫 {falha['tentativas']}ª falha — quarentena até "
+                                f"{falha['quarentena_ate'][:16]}: {titulo_curto}")
+                            n8n.emitir("produto_quarentena", falha)
+                        else:
+                            db.liberar_claim(produto_id)
                         continue
 
                     item["status"] = "enviado"
@@ -365,6 +384,17 @@ async def rodar_uma_vez() -> int:
                     db.atualizar_produto(item)
                     db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
                     db.marcar_enviado(produto_id)
+                    db.limpar_falha_publicacao(produto_id)
+                    n8n.emitir("oferta_publicada", {
+                        "produto_id": produto_id,
+                        "titulo": item.get("titulo"),
+                        "preco": item.get("preco"),
+                        "desconto_pct": item.get("desconto_pct"),
+                        "categoria": "ferramentas",
+                        "foto": item.get("foto"),
+                        "link": link_afiliado,
+                        "fonte": "mercadolivre",
+                    })
                     publicados += 1
                     log(f"  ✅ ({publicados}/{MIN_POR_RODADA}) {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF")
 

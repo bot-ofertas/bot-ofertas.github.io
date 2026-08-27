@@ -1,0 +1,302 @@
+{
+  "name": "Bot Ofertas — 01 Ingestão de eventos e watchdog",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bot-ofertas",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "webhook-do-bot",
+      "name": "Webhook do Bot",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -460,
+        0
+      ],
+      "webhookId": "bot-ofertas-webhook",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_HEADER_CRED",
+          "name": "Bot Ofertas — Token do Webhook"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// ⚙️ CONFIGURAÇÃO — edite APENAS os valores abaixo.\n// Não guarde token aqui: o token do Telegram fica na credencial do n8n e o\n// segredo do webhook na credencial de Header Auth.\nconst CONFIG = {\n  // chat_id do Daniel (para receber os alertas). Descubra mandando /start\n  // para o bot e abrindo https://api.telegram.org/bot<TOKEN>/getUpdates\n  admin_chat_id: '',\n  // canal público onde as ofertas são publicadas (ex: '@ofertaseletronics')\n  canal: '@ofertaseletronics',\n  // quantos minutos sem heartbeat até considerar o bot fora do ar\n  limite_heartbeat_min: 30,\n  // quantos erros na mesma janela até alertar\n  limite_erros: 5,\n};\nreturn [{ json: { ...$json, CONFIG } }];\n"
+      },
+      "id": "configuração",
+      "name": "Configuração",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Roteia o evento e prepara a mensagem de alerta (quando houver).\n// Também acumula estatísticas do dia em workflow static data — é o que o\n// relatório diário (workflow 04) e o watchdog abaixo consultam.\nconst e = $json.body ?? $json;\nconst CONFIG = $json.CONFIG ?? {};\nconst store = $getWorkflowStaticData('global');\nconst agora = Date.now();\n\nstore.contadores = store.contadores || {};\nstore.contadores[e.evento] = (store.contadores[e.evento] || 0) + 1;\nstore.ultimo_evento_ts = agora;\n\nlet alerta = '';\nconst d = e.dados || {};\n\nswitch (e.evento) {\n  case 'heartbeat':\n    // O pulso é o que sustenta o watchdog: sem ele, ninguém percebe que o\n    // PC do Daniel desligou/travou — o próprio bot não teria como avisar.\n    store.ultimo_heartbeat_ts = agora;\n    store.ultimo_heartbeat = e.ts;\n    store.heartbeat_dados = d;\n    store.alerta_queda_enviado = false;\n    break;\n\n  case 'oferta_publicada':\n    store.ofertas_hoje = (store.ofertas_hoje || 0) + 1;\n    store.ultimas_ofertas = [{ titulo: d.titulo, preco: d.preco, desconto: d.desconto_pct,\n                               link: d.link, foto: d.foto, ts: e.ts },\n                             ...(store.ultimas_ofertas || [])].slice(0, 20);\n    break;\n\n  case 'produto_quarentena':\n    alerta = `🚫 <b>Produto em quarentena</b>\\n` +\n             `${d.titulo || d.produto_id}\\n` +\n             `Falhou ${d.tentativas}x ao publicar — fora de rotação até ${(d.quarentena_ate||'').slice(0,16)}.\\n` +\n             `Motivo: ${d.mensagem || 'não informado'}`;\n    break;\n\n  case 'rodada_falhou':\n    alerta = `⚠️ <b>Rodada falhou</b> (${d.fonte || '?'})\\n<code>${(d.erro||'').slice(0,300)}</code>`;\n    break;\n\n  case 'rodada_pulada':\n    // Rede fora do ar não é alerta imediato: o watchdog cobre a queda longa.\n    store.ultima_rodada_pulada = e.ts;\n    break;\n\n  case 'rodada_concluida':\n    store.ultima_rodada = { ts: e.ts, ...d };\n    if ((d.erros || 0) >= (CONFIG.limite_erros ?? 5)) {\n      alerta = `⚠️ <b>Rodada com ${d.erros} erro(s)</b>\\n` +\n               `Publicados: ${d.publicados} · Links falhos: ${d.links_falharam}`;\n    }\n    break;\n\n  case 'erro':\n    alerta = `❌ <b>Erro no bot</b>\\n${(d.operacao||'')}: ${(d.mensagem||'').slice(0,300)}`;\n    break;\n}\n\nreturn [{ json: { evento: e.evento, ts: e.ts, host: e.host, dados: d,\n                  alerta, tem_alerta: alerta !== '',\n                  chat_id: CONFIG.admin_chat_id, CONFIG } }];\n"
+      },
+      "id": "rotear-evento",
+      "name": "Rotear evento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.tem_alerta}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "tem-alerta?",
+      "name": "Tem alerta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.alerta}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "avisar-daniel",
+      "name": "Avisar Daniel",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        -100
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "só-registrar",
+      "name": "Só registrar",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        420,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "a-cada-15-min",
+      "name": "A cada 15 min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// WATCHDOG — roda no n8n (nuvem), não no PC do Daniel. Se o bot parar de\n// mandar heartbeat, é este nó que percebe. Um alerta gerado pelo próprio bot\n// nunca chegaria justamente no caso que importa: o bot morto.\nconst store = $getWorkflowStaticData('global');\nconst CONFIG = { admin_chat_id: '' };   // preencha com o mesmo chat_id do nó Configuração\nconst LIMITE_MIN = 30;\nconst agora = Date.now();\nconst ultimo = store.ultimo_heartbeat_ts || 0;\n\nif (!ultimo) {\n  return [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, motivo: 'nenhum heartbeat recebido ainda' } }];\n}\n\nconst idadeMin = Math.round((agora - ultimo) / 60000);\n\n// Só alerta na TRANSIÇÃO para \"fora do ar\". Sem essa trava, o watchdog\n// mandaria a mesma mensagem a cada 15 min durante toda a madrugada, e o\n// alerta viraria ruído que ninguém lê.\nif (idadeMin > LIMITE_MIN && !store.alerta_queda_enviado) {\n  store.alerta_queda_enviado = true;\n  const hb = store.heartbeat_dados || {};\n  return [{ json: {\n    alertar: true,\n    chat_id: CONFIG.admin_chat_id,\n    idade_min: idadeMin,\n    texto: `🔴 <b>Bot Ofertas parou de responder</b>\\n` +\n           `Último sinal há ${idadeMin} min (limite: ${LIMITE_MIN}).\\n` +\n           `Fila WhatsApp: ${hb.fila_whatsapp ?? '?'} · Quarentena: ${hb.quarentena ?? '?'}\\n\\n` +\n           `Verifique o PC: o startup.py pode ter caído ou a máquina desligou.`,\n  } }];\n}\n\nif (idadeMin <= LIMITE_MIN && store.alerta_queda_enviado === true) {\n  store.alerta_queda_enviado = false;\n  return [{ json: { alertar: true, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin,\n                    texto: `🟢 <b>Bot Ofertas voltou</b> — heartbeat normal de novo.` } }];\n}\n\nreturn [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin } }];\n"
+      },
+      "id": "checar-heartbeat",
+      "name": "Checar heartbeat",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.alertar}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "bot-caiu?",
+      "name": "Bot caiu?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.texto}}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "alerta-de-queda",
+      "name": "Alerta de queda",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "tudo-certo",
+      "name": "Tudo certo",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        200,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook do Bot": {
+      "main": [
+        [
+          {
+            "node": "Configuração",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuração": {
+      "main": [
+        [
+          {
+            "node": "Rotear evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rotear evento": {
+      "main": [
+        [
+          {
+            "node": "Tem alerta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem alerta?": {
+      "main": [
+        [
+          {
+            "node": "Avisar Daniel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Só registrar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "A cada 15 min": {
+      "main": [
+        [
+          {
+            "node": "Checar heartbeat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Checar heartbeat": {
+      "main": [
+        [
+          {
+            "node": "Bot caiu?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bot caiu?": {
+      "main": [
+        [
+          {
+            "node": "Alerta de queda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tudo certo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": false,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

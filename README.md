@@ -26,6 +26,11 @@ scraping → histórico de preço → deduplicação → validação anti-fraude
 | Score + classificação | `core/scorer.py` |
 | Link de afiliado | `affiliates/mercadolivre.py` |
 | Publicação Telegram | `integrations/telegram_bot.py` |
+| Foto em alta resolução | `core/foto_url.py` |
+| Origem por canal (matt_source) | `core/tracking.py` |
+| Quarentena de publicação | `core/database.py` (`registrar_falha_publicacao`) |
+| Eventos para o n8n | `integrations/n8n.py` |
+| Anúncios de divulgação | `core/divulgacao.py` |
 | Exportação para o site | `export_json.py` → `docs/data/offers.json` |
 
 ## Sinais de confiança (conversão)
@@ -73,15 +78,66 @@ Admin (restrito por `ADMIN_IDS`): `/status`, `/stats`.
 
 ---
 
+## Grupos e divulgação
+
+- **Telegram:** <https://t.me/ofertaseletronics>
+- **WhatsApp:** <https://chat.whatsapp.com/JyJ9uLoZdE5LboH9GjAooC>
+- **Página ponte:** <https://bot-ofertas.github.io/grupos/> — é para ela que
+  os anúncios apontam. Ela repassa o `utm_source` da campanha para os links
+  dos grupos, então dá para saber qual anúncio trouxe gente de verdade.
+
+Todo post leva o CTA dos grupos, e cada canal publica o link com sua própria
+marcação de origem (`matt_source=bot_telegram`, `bot_whatsapp`, `instagram`,
+`meta_ads`…) — sempre preservando `matt_tool`/`tag`. Para gerar um anúncio
+pronto:
+
+```bash
+python -m core.divulgacao instagram          # anúncio da rodada
+python -m core.divulgacao facebook grupo     # divulgação pura do grupo
+```
+
+## Automação em nuvem (n8n)
+
+Cinco workflows prontos: ingestão de eventos + watchdog, publicação de
+reforço, divulgação dos grupos, relatório diário e comandos remotos.
+
+```bash
+python n8n/setup_n8n.py --testar      # confere a conexão
+python n8n/setup_n8n.py --importar    # cria credenciais, importa e ativa
+```
+
+O bot **empurra** os eventos para o n8n (não precisa abrir porta nem ter IP
+fixo), e o watchdog no n8n avisa quando o heartbeat some — inclusive quando
+o PC desliga. Detalhes, endpoints e solução de problemas: [`n8n/README.md`](n8n/README.md).
+
+## Quando uma oferta falha ao publicar
+
+Depois de 3 falhas seguidas, o produto entra em **quarentena** por 24h e sai
+de rotação, em vez de voltar a cada rodada consumindo uma vaga de
+publicação. Consulta e liberação:
+
+```bash
+curl http://127.0.0.1:8724/quarentena
+curl -X POST http://127.0.0.1:8724/n8n/comando \
+     -d '{"comando":"quarentena_liberar","dados":{"produto_id":"MLB123"}}'
+```
+
+A quarentena ativa aparece no `/health`, no `status.ps1` e no relatório de
+problemas da Área de Trabalho.
+
 ## Testes
 
 ```bash
-python tests/test_qualidade.py        # sem dependências extras
+python tests/test_qualidade.py         # sem dependências extras
+python tests/test_n8n_integracao.py    # idem
 # ou, com pytest instalado:
 python -m pytest tests/ -v
 ```
 
-Cobrem: cálculo de score, classificação, anti-fraude e **preservação do parâmetro de afiliado** (`matt_tool`).
+Cobrem: cálculo de score, classificação, anti-fraude, **preservação do
+parâmetro de afiliado** (`matt_tool`/`tag`) na troca de origem por canal,
+normalização de foto para alta resolução, quarentena de publicação,
+assinatura HMAC dos eventos e integridade dos workflows do n8n.
 
 ---
 

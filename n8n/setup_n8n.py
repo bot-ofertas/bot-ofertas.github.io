@@ -1,0 +1,327 @@
+# -*- coding: utf-8 -*-
+"""
+SETUP N8N — instala e ativa os workflows do Bot Ofertas numa instância n8n.
+
+Faz pela API pública do n8n exatamente o que você faria clicando no
+navegador, e de forma repetível:
+
+  1. cria (uma vez) as credenciais que os workflows usam:
+       • "Bot Ofertas — Telegram"          (token vindo do .env: TOKEN_TELEGRAM)
+       • "Bot Ofertas — Token do Webhook"  (segredo do .env: N8N_TOKEN)
+  2. preenche os campos de CONFIG dentro dos nós Code (chat do admin, canal,
+     URL da API do bot) com os valores do .env;
+  3. cria ou ATUALIZA cada workflow de n8n/workflows/*.json pelo nome;
+  4. ativa os workflows;
+  5. imprime a URL do webhook para colar em N8N_WEBHOOK_URL.
+
+Nenhum segredo é escrito nos arquivos do repositório: os tokens saem do seu
+.env local direto para o cofre de credenciais do n8n. Os ids das credenciais
+criadas ficam em n8n/.n8n_state.json (ignorado pelo git) para que rodar de
+novo não duplique nada.
+
+Uso:
+    python n8n/setup_n8n.py --testar      # só confere conexão e configuração
+    python n8n/setup_n8n.py --importar    # cria/atualiza e ativa tudo
+    python n8n/setup_n8n.py --importar --sem-ativar
+    python n8n/setup_n8n.py --listar      # o que já existe na instância
+
+Variáveis usadas (.env na raiz do projeto):
+    N8N_API_URL=http://localhost:5678     # endereço do seu n8n
+    N8N_API_KEY=...                       # Settings → n8n API → Create API key
+    N8N_TOKEN=...                         # segredo do webhook (você inventa)
+    TOKEN_TELEGRAM=...                    # já usado pelo bot
+    CANAL_GERAL=@ofertaseletronics        # canal onde as ofertas são postadas
+    ADMIN_CHAT_ID=...                     # seu chat pessoal (recebe alertas)
+    BOT_API_URL=                          # opcional: healthcheck acessível de fora
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+from urllib import error, request
+
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DIR_WORKFLOWS = os.path.join(BASE, "n8n", "workflows")
+ESTADO_PATH = os.path.join(BASE, "n8n", ".n8n_state.json")
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(BASE, ".env"))
+except ImportError:  # o script funciona sem python-dotenv, só com env vars
+    pass
+
+
+# ── Cliente HTTP mínimo da API do n8n ────────────────────────────────────────
+
+class N8nErro(RuntimeError):
+    pass
+
+
+def _api_url() -> str:
+    return (os.getenv("N8N_API_URL") or "http://localhost:5678").strip().rstrip("/")
+
+
+def _api_key() -> str:
+    return (os.getenv("N8N_API_KEY") or "").strip()
+
+
+def _chamar(metodo: str, caminho: str, corpo: dict | None = None) -> dict:
+    """Requisição à API do n8n. Usa urllib para não depender de `requests`
+    (este script costuma rodar num Python enxuto, fora do venv do bot)."""
+    url = f"{_api_url()}/api/v1{caminho}"
+    dados = json.dumps(corpo, ensure_ascii=False).encode("utf-8") if corpo is not None else None
+    req = request.Request(url, data=dados, method=metodo)
+    req.add_header("X-N8N-API-KEY", _api_key())
+    req.add_header("Accept", "application/json")
+    if dados:
+        req.add_header("Content-Type", "application/json")
+    try:
+        with request.urlopen(req, timeout=30) as r:
+            texto = r.read().decode("utf-8")
+            return json.loads(texto) if texto.strip() else {}
+    except error.HTTPError as e:
+        detalhe = e.read().decode("utf-8", "replace")[:400]
+        if e.code == 401:
+            raise N8nErro(
+                "401 — API key inválida ou ausente. Gere uma em "
+                "Settings → n8n API e coloque em N8N_API_KEY no .env."
+            ) from e
+        raise N8nErro(f"{metodo} {caminho} → HTTP {e.code}: {detalhe}") from e
+    except error.URLError as e:
+        raise N8nErro(
+            f"Não consegui falar com o n8n em {_api_url()} ({e.reason}). "
+            "O n8n está rodando? A URL está certa?"
+        ) from e
+
+
+# ── Estado local (ids de credencial já criados) ──────────────────────────────
+
+def _ler_estado() -> dict:
+    try:
+        with open(ESTADO_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def _gravar_estado(estado: dict) -> None:
+    with open(ESTADO_PATH, "w", encoding="utf-8") as f:
+        json.dump(estado, f, ensure_ascii=False, indent=2)
+
+
+# ── Credenciais ──────────────────────────────────────────────────────────────
+
+CRED_TELEGRAM = "Bot Ofertas — Telegram"
+CRED_HEADER = "Bot Ofertas — Token do Webhook"
+
+
+def garantir_credenciais(estado: dict) -> dict:
+    """Cria as credenciais que faltam e devolve {nome: id}.
+
+    A API pública do n8n não lista credenciais, então a idempotência vem do
+    arquivo de estado local. Se você apagar as credenciais no n8n, apague
+    também n8n/.n8n_state.json para que sejam recriadas.
+    """
+    ids = dict(estado.get("credenciais", {}))
+
+    token_tg = (os.getenv("TOKEN_TELEGRAM") or "").strip()
+    if CRED_TELEGRAM not in ids:
+        if not token_tg:
+            print(f"  ⚠️  TOKEN_TELEGRAM ausente no .env — credencial "
+                  f"'{CRED_TELEGRAM}' não criada (crie à mão no n8n).")
+        else:
+            criada = _chamar("POST", "/credentials", {
+                "name": CRED_TELEGRAM,
+                "type": "telegramApi",
+                "data": {"accessToken": token_tg},
+            })
+            ids[CRED_TELEGRAM] = criada.get("id", "")
+            print(f"  ✅ Credencial criada: {CRED_TELEGRAM}")
+    else:
+        print(f"  ↩️  Credencial já existente: {CRED_TELEGRAM}")
+
+    segredo = (os.getenv("N8N_TOKEN") or "").strip()
+    if CRED_HEADER not in ids:
+        if not segredo:
+            print(f"  ⚠️  N8N_TOKEN ausente no .env — credencial "
+                  f"'{CRED_HEADER}' não criada. O webhook ficaria SEM "
+                  f"autenticação; defina N8N_TOKEN e rode de novo.")
+        else:
+            criada = _chamar("POST", "/credentials", {
+                "name": CRED_HEADER,
+                "type": "httpHeaderAuth",
+                "data": {"name": "X-Bot-Token", "value": segredo},
+            })
+            ids[CRED_HEADER] = criada.get("id", "")
+            print(f"  ✅ Credencial criada: {CRED_HEADER}")
+    else:
+        print(f"  ↩️  Credencial já existente: {CRED_HEADER}")
+
+    estado["credenciais"] = ids
+    return ids
+
+
+# ── Preenchimento de CONFIG nos nós Code ─────────────────────────────────────
+
+def _valores_config() -> dict[str, str]:
+    """Valores que substituem os placeholders vazios dentro dos nós Code."""
+    admin = (os.getenv("ADMIN_CHAT_ID") or "").strip()
+    if not admin:
+        # ADMIN_IDS já existe no projeto (lista separada por vírgula usada
+        # pelos comandos /status e /stats do bot). O primeiro id serve.
+        admin = (os.getenv("ADMIN_IDS") or "").split(",")[0].strip()
+    return {
+        "admin_chat_id": admin,
+        "canal": (os.getenv("CANAL_GERAL") or "@ofertaseletronics").strip(),
+        "api_bot": (os.getenv("BOT_API_URL") or "").strip(),
+    }
+
+
+def preencher_config(js: str, valores: dict[str, str]) -> str:
+    """Troca `campo: ''` por `campo: 'valor'` nos objetos CONFIG.
+
+    Só mexe em campo com valor VAZIO — assim uma edição feita à mão no n8n
+    e reimportada nunca é sobrescrita por um .env incompleto.
+    """
+    for campo, valor in valores.items():
+        if not valor:
+            continue
+        js = re.sub(
+            rf"({re.escape(campo)}\s*:\s*)''",
+            lambda m, v=valor: f"{m.group(1)}'{v}'",
+            js,
+        )
+    return js
+
+
+def preparar_workflow(wf: dict, cred_ids: dict, valores: dict) -> dict:
+    """Aplica credenciais e CONFIG, e remove campos que a API rejeita."""
+    for node in wf.get("nodes", []):
+        js = node.get("parameters", {}).get("jsCode")
+        if js:
+            node["parameters"]["jsCode"] = preencher_config(js, valores)
+        creds = node.get("credentials") or {}
+        for tipo, ref in creds.items():
+            nome = ref.get("name", "")
+            if nome in cred_ids and cred_ids[nome]:
+                ref["id"] = cred_ids[nome]
+        if creds:
+            node["credentials"] = creds
+    # A API pública aceita só estes campos na criação; `tags`, `active` e
+    # `id` fazem a requisição ser recusada com 400.
+    return {k: wf[k] for k in ("name", "nodes", "connections", "settings") if k in wf}
+
+
+# ── Operações ────────────────────────────────────────────────────────────────
+
+def listar_workflows() -> list[dict]:
+    resposta = _chamar("GET", "/workflows?limit=250")
+    return resposta.get("data", resposta if isinstance(resposta, list) else [])
+
+
+def arquivos_workflow() -> list[str]:
+    if not os.path.isdir(DIR_WORKFLOWS):
+        raise N8nErro(f"pasta não encontrada: {DIR_WORKFLOWS}")
+    return sorted(
+        os.path.join(DIR_WORKFLOWS, f)
+        for f in os.listdir(DIR_WORKFLOWS) if f.endswith(".json")
+    )
+
+
+def importar(ativar: bool = True) -> int:
+    estado = _ler_estado()
+    print(f"\n🔌 n8n em {_api_url()}")
+    existentes = {w["name"]: w for w in listar_workflows()}
+    print(f"   {len(existentes)} workflow(s) já na instância\n")
+
+    print("🔑 Credenciais")
+    cred_ids = garantir_credenciais(estado)
+    valores = _valores_config()
+    if not valores["admin_chat_id"]:
+        print("  ⚠️  ADMIN_CHAT_ID vazio — os alertas não terão para onde ir. "
+              "Descubra o seu id mandando /start pro bot e preencha no .env.")
+
+    print("\n📦 Workflows")
+    falhas = 0
+    for caminho in arquivos_workflow():
+        with open(caminho, encoding="utf-8") as f:
+            wf = json.load(f)
+        nome = wf["name"]
+        corpo = preparar_workflow(wf, cred_ids, valores)
+        try:
+            if nome in existentes:
+                wid = existentes[nome]["id"]
+                _chamar("PUT", f"/workflows/{wid}", corpo)
+                print(f"  ♻️  Atualizado: {nome}")
+            else:
+                criado = _chamar("POST", "/workflows", corpo)
+                wid = criado.get("id", "")
+                print(f"  ✅ Criado:     {nome}")
+            if ativar and wid:
+                try:
+                    _chamar("POST", f"/workflows/{wid}/activate")
+                    print(f"      ▶️  ativado")
+                except N8nErro as e:
+                    # Ativar exige credencial válida em todo nó de trigger —
+                    # a mensagem do n8n diz qual falta, então é repassada.
+                    print(f"      ⚠️  não ativou: {e}")
+        except N8nErro as e:
+            falhas += 1
+            print(f"  ❌ {nome}: {e}")
+
+    _gravar_estado(estado)
+
+    base_webhook = _api_url() + "/webhook/bot-ofertas"
+    print("\n" + "─" * 62)
+    print("Cole no .env do bot (D:\\bot_ofertas\\.env):")
+    print(f"    N8N_WEBHOOK_URL={base_webhook}")
+    print(f"    N8N_TOKEN={'(o mesmo que você já definiu)' if os.getenv('N8N_TOKEN') else '<defina um segredo>'}")
+    print(f"    N8N_ATIVO=1")
+    print("Depois reinicie o bot pelo processo PAI:  python -u startup.py")
+    print("E teste o caminho inteiro com:            python -m integrations.n8n")
+    print("─" * 62)
+    return falhas
+
+
+def testar() -> int:
+    print(f"🔌 API:   {_api_url()}")
+    print(f"🔑 Chave: {'definida' if _api_key() else '❌ AUSENTE (N8N_API_KEY)'}")
+    if not _api_key():
+        return 1
+    workflows = listar_workflows()
+    print(f"✅ Conexão OK — {len(workflows)} workflow(s) na instância.")
+    valores = _valores_config()
+    for campo, valor in valores.items():
+        print(f"   {campo:14} = {valor or '(vazio)'}")
+    print(f"   TOKEN_TELEGRAM = {'definido' if os.getenv('TOKEN_TELEGRAM') else '(vazio)'}")
+    print(f"   N8N_TOKEN      = {'definido' if os.getenv('N8N_TOKEN') else '(vazio)'}")
+    return 0
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description="Instala os workflows do Bot Ofertas no n8n")
+    p.add_argument("--importar", action="store_true", help="cria/atualiza e ativa os workflows")
+    p.add_argument("--sem-ativar", action="store_true", help="importa sem ativar")
+    p.add_argument("--listar", action="store_true", help="lista o que já existe na instância")
+    p.add_argument("--testar", action="store_true", help="só confere conexão e configuração")
+    args = p.parse_args()
+
+    try:
+        if args.listar:
+            for w in listar_workflows():
+                marca = "▶️ " if w.get("active") else "⏸️ "
+                print(f"{marca} {w.get('name')}  (id={w.get('id')})")
+            return 0
+        if args.importar:
+            return 1 if importar(ativar=not args.sem_ativar) else 0
+        return testar()
+    except N8nErro as e:
+        print(f"\n❌ {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

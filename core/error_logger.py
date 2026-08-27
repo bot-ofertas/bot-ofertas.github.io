@@ -118,6 +118,8 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) ->
         operacao, entrada["exception"], entrada["mensagem"],
         entrada["arquivo"], entrada["linha"], entrada["contexto"],
     )
+    # Espelho para o n8n (workflow 01 decide se vira alerta)
+    _espelhar_no_n8n(entrada)
 
 
 def _gravar_desktop_txt(e: dict) -> None:
@@ -181,6 +183,41 @@ def registrar_evento(operacao: str, mensagem: str, contexto: dict | None = None)
         _gravar_desktop_txt(entrada)
     except Exception:
         pass
+    _espelhar_no_n8n(entrada)
+
+
+# ── Espelho para o n8n ───────────────────────────────────────────────────────
+
+# Um surto de erro repetido (31 falhas em 21 min, 2026-08-23) viraria 31
+# mensagens no Telegram. O throttle deixa passar 1 evento por operação a
+# cada _JANELA_S — o suficiente pra saber que está acontecendo, sem
+# transformar o alerta em ruído que ninguém lê. O registro completo continua
+# indo pro errors.jsonl e pro bloco de notas, sem throttle nenhum.
+_JANELA_THROTTLE_S = 300
+_ultimo_evento_n8n: dict[str, float] = {}
+
+
+def _espelhar_no_n8n(entrada: dict) -> None:
+    """Envia o erro ao n8n (best-effort, com throttle por operação)."""
+    import time  # noqa: PLC0415
+
+    operacao = entrada.get("operacao", "")
+    agora = time.time()
+    if agora - _ultimo_evento_n8n.get(operacao, 0.0) < _JANELA_THROTTLE_S:
+        return
+    _ultimo_evento_n8n[operacao] = agora
+    try:
+        from integrations.n8n import emitir  # noqa: PLC0415
+        emitir("erro", {
+            "operacao": operacao,
+            "exception": entrada.get("exception", ""),
+            "mensagem": entrada.get("mensagem", ""),
+            "arquivo": entrada.get("arquivo", ""),
+            "linha": entrada.get("linha", 0),
+            "contexto": entrada.get("contexto", {}),
+        })
+    except Exception:
+        pass  # o n8n nunca pode atrapalhar o registro do erro
 
 
 def erros_recentes(limite: int = 50) -> list[dict]:

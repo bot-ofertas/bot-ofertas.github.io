@@ -1,0 +1,180 @@
+{
+  "name": "Bot Ofertas — 04 Relatório diário e saúde",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 11 * * *"
+            }
+          ]
+        }
+      },
+      "id": "toda-manhã-08h-brt",
+      "name": "Toda manhã 08h BRT",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://bot-ofertas.github.io/data/offers.json",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "id": "ofertas-do-site",
+      "name": "Ofertas do site",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -460,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/bot-ofertas/bot-ofertas.github.io/actions/workflows/bot.yml/runs",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "per_page",
+              "value": "5"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "bot-ofertas-n8n"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "execuções-do-github-actions",
+      "name": "Execuções do GitHub Actions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -460,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Junta o estado do site (offers.json) com o das últimas execuções do\n// GitHub Actions e monta um relatório curto. Roda na nuvem: chega mesmo se\n// o PC estiver desligado — e é justamente aí que o Actions é quem publica.\nconst CONFIG = { admin_chat_id: '' };   // preencha (mesmo do workflow 01)\n\nconst site = $('Ofertas do site').first().json || {};\nconst runs = ($('Execuções do GitHub Actions').first().json || {}).workflow_runs || [];\n\nconst produtos = site.products || [];\nconst atualizado = site.updated_at ? new Date(site.updated_at) : null;\nconst horasParado = atualizado ? Math.round((Date.now() - atualizado.getTime()) / 3600000) : null;\n\nconst ultimas = runs.slice(0, 5);\nconst falhas = ultimas.filter(r => r.conclusion && r.conclusion !== 'success');\nconst brl = v => 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');\n\nconst top = [...produtos]\n  .sort((a, b) => (b.desconto_pct || 0) - (a.desconto_pct || 0))\n  .slice(0, 3)\n  .map(p => `• ${p.titulo.slice(0, 50)} — ${brl(p.preco)} (${Math.round(p.desconto_pct || 0)}% OFF)`)\n  .join('\\n') || '• (nenhuma oferta no site)';\n\n// Sinais de problema viram a PRIMEIRA linha do relatório. Um relatório que\n// começa com números bonitos e esconde a falha lá embaixo não é lido.\nconst problemas = [];\nif (horasParado !== null && horasParado >= 6) {\n  problemas.push(`🔴 Site sem atualizar há ${horasParado}h — pipeline pode estar parado.`);\n}\nif (falhas.length) {\n  problemas.push(`🔴 ${falhas.length} de ${ultimas.length} execuções do GitHub Actions falharam.`);\n}\nif (!produtos.length) problemas.push('🔴 Nenhuma oferta publicada no site.');\n\nconst texto =\n  `📊 <b>Relatório diário — Bot Ofertas</b>\\n` +\n  (problemas.length ? `\\n${problemas.join('\\n')}\\n` : `\\n🟢 Tudo funcionando.\\n`) +\n  `\\n<b>Site</b>: ${produtos.length} oferta(s) publicadas` +\n  (horasParado !== null ? ` · atualizado há ${horasParado}h` : '') +\n  `\\n<b>GitHub Actions</b>: ${ultimas.map(r => r.conclusion === 'success' ? '✅' : '❌').join(' ') || '—'}` +\n  `\\n\\n<b>Melhores ofertas agora</b>\\n${top}` +\n  `\\n\\n🔗 https://bot-ofertas.github.io`;\n\nreturn [{ json: { texto, chat_id: CONFIG.admin_chat_id, problemas: problemas.length } }];\n"
+      },
+      "id": "montar-relatório",
+      "name": "Montar relatório",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.texto}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "enviar-relatório",
+      "name": "Enviar relatório",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        20,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Toda manhã 08h BRT": {
+      "main": [
+        [
+          {
+            "node": "Ofertas do site",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execuções do GitHub Actions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ofertas do site": {
+      "main": [
+        [
+          {
+            "node": "Montar relatório",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execuções do GitHub Actions": {
+      "main": [
+        [
+          {
+            "node": "Montar relatório",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar relatório": {
+      "main": [
+        [
+          {
+            "node": "Enviar relatório",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

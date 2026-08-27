@@ -1,0 +1,201 @@
+{
+  "name": "Bot Ofertas — 03 Divulgação dos grupos",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 13,19,22 * * *"
+            }
+          ]
+        }
+      },
+      "id": "3x-por-dia",
+      "name": "3x por dia",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://bot-ofertas.github.io/data/offers.json",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "id": "ofertas-do-site",
+      "name": "Ofertas do site",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Gera o anúncio de DIVULGAÇÃO DOS GRUPOS para cada rede, a partir das\n// ofertas reais do site. Objetivo declarado pelo Daniel: \"preciso que as\n// pessoas entrem no grupo e comprem pelo meu link de afiliado\".\n//\n// Instagram/TikTok não têm API pública que aceite publicação sem um app de\n// negócios aprovado — então este workflow entrega o post PRONTO no chat do\n// Daniel (texto + foto + link), para publicar em 10 segundos. O que dá pra\n// automatizar de ponta a ponta (Telegram) já sai publicado.\nconst CONFIG = {\n  admin_chat_id: '',                       // preencha (mesmo do workflow 01)\n  canal: '@ofertaseletronics',\n  grupo_whatsapp: 'https://chat.whatsapp.com/JyJ9uLoZdE5LboH9GjAooC',\n  grupo_telegram: 'https://t.me/ofertaseletronics',\n  ponte: 'https://bot-ofertas.github.io/grupos/',\n};\n\nconst REDES = ['instagram', 'tiktok', 'facebook'];\nconst store = $getWorkflowStaticData('global');\nstore.rodada = ((store.rodada || 0) + 1) % REDES.length;\nconst rede = REDES[store.rodada];\n\nconst produtos = ($json.products || [])\n  .filter(p => p.link && p.foto && (p.desconto_pct || 0) >= 25)\n  .sort((a, b) => (b.desconto_pct || 0) - (a.desconto_pct || 0))\n  .slice(0, 3);\n\nconst brl = v => 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');\nconst utm = (url, conteudo) => `${url}${url.includes('?') ? '&' : '?'}utm_source=${rede}` +\n                               `&utm_medium=social&utm_campaign=grupo_ofertas&utm_content=${conteudo}`;\n\nconst HASHTAGS = {\n  instagram: '#ofertas #promoção #achadinhos #descontos #mercadolivre #tecnologia',\n  tiktok: '#ofertas #achadinhos #promocao #tecnologia #fyp',\n  facebook: '#ofertas #promoções #descontos',\n};\n\nlet corpo;\nif (produtos.length) {\n  corpo = `🔥 ${produtos.length} achados de hoje:\\n\\n` + produtos.map((p, i) =>\n    `${i + 1}. ${p.titulo.slice(0, 60)}\\n   ${brl(p.preco)}` +\n    (p.desconto_pct ? ` (${Math.round(p.desconto_pct)}% OFF)` : '')\n  ).join('\\n');\n} else {\n  corpo = '📦 Ofertas de eletrônicos, celulares e informática garimpadas todo dia.\\n' +\n          '✅ Só promoção real: o preço é conferido contra o histórico antes de ir pro grupo.';\n}\n\nconst texto =\n  `${corpo}\\n\\n` +\n  `Quer receber ofertas assim todos os dias?\\n` +\n  `📢 Telegram: ${utm(CONFIG.grupo_telegram, 'post_social')}\\n` +\n  `📲 WhatsApp: ${utm(CONFIG.grupo_whatsapp, 'post_social')}\\n` +\n  `🔗 Ou entre por aqui: ${utm(CONFIG.ponte, 'post_social')}\\n\\n` +\n  (HASHTAGS[rede] || '');\n\nconst aviso =\n  `📣 <b>Post pronto para ${rede.toUpperCase()}</b>\\n` +\n  `Copie o texto abaixo e publique (foto sugerida no próximo envio):\\n\\n` +\n  `<code>${texto.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`;\n\nreturn [{ json: { rede, texto, aviso, chat_id: CONFIG.admin_chat_id,\n                  foto: produtos[0]?.foto || '', tem_foto: !!produtos[0]?.foto } }];\n"
+      },
+      "id": "gerar-anúncio",
+      "name": "Gerar anúncio",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.aviso}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "enviar-post-pronto",
+      "name": "Enviar post pronto",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        -80
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.tem_foto}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "tem-foto?",
+      "name": "Tem foto?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        200,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Gerar anúncio').first().json.chat_id }}",
+        "binaryData": false,
+        "file": "={{ $('Gerar anúncio').first().json.foto }}",
+        "additionalFields": {
+          "caption": "=Foto sugerida para o post de {{ $('Gerar anúncio').first().json.rede }}"
+        }
+      },
+      "id": "enviar-foto-sugerida",
+      "name": "Enviar foto sugerida",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        60
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "sem-foto",
+      "name": "Sem foto",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        420,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "3x por dia": {
+      "main": [
+        [
+          {
+            "node": "Ofertas do site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ofertas do site": {
+      "main": [
+        [
+          {
+            "node": "Gerar anúncio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar anúncio": {
+      "main": [
+        [
+          {
+            "node": "Enviar post pronto",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Tem foto?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem foto?": {
+      "main": [
+        [
+          {
+            "node": "Enviar foto sugerida",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sem foto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

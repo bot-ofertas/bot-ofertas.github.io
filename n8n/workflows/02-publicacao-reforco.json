@@ -1,0 +1,175 @@
+{
+  "name": "Bot Ofertas — 02 Publicação de reforço (nuvem)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 15,23 * * *"
+            }
+          ]
+        }
+      },
+      "id": "2x-por-dia",
+      "name": "2x por dia",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://bot-ofertas.github.io/data/offers.json",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": false
+            }
+          },
+          "timeout": 20000
+        }
+      },
+      "id": "buscar-ofertas-do-site",
+      "name": "Buscar ofertas do site",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Monta o \"TOP 3 de agora\" a partir do offers.json que o próprio bot publica\n// no GitHub Pages. Roda 100% na nuvem: funciona com o PC do Daniel desligado.\n//\n// Este workflow NÃO republica ofertas individuais — isso duplicaria o que o\n// rastreador local e o GitHub Actions já postam. Ele publica um RESUMO, que\n// é conteúdo novo e serve de gancho para o CTA dos grupos.\nconst CONFIG = {\n  canal: '@ofertaseletronics',\n  grupo_whatsapp: 'https://chat.whatsapp.com/JyJ9uLoZdE5LboH9GjAooC',\n  grupo_telegram: 'https://t.me/ofertaseletronics',\n  quantidade: 3,\n  desconto_minimo: 25,\n};\n\nconst dados = $json;\nconst produtos = (dados.products || [])\n  .filter(p => p.link && p.titulo && (p.desconto_pct || 0) >= CONFIG.desconto_minimo);\n\nif (!produtos.length) {\n  return [{ json: { publicar: false, motivo: 'sem ofertas elegíveis no offers.json' } }];\n}\n\n// Não repetir o que já entrou num digest anterior.\nconst store = $getWorkflowStaticData('global');\nstore.ja_usados = store.ja_usados || [];\nconst usados = new Set(store.ja_usados);\n\nconst escolhidos = produtos\n  .filter(p => !usados.has(p.link))\n  .sort((a, b) => (b.desconto_pct || 0) - (a.desconto_pct || 0))\n  .slice(0, CONFIG.quantidade);\n\nif (!escolhidos.length) {\n  return [{ json: { publicar: false, motivo: 'todas as ofertas já foram usadas num digest' } }];\n}\n\nstore.ja_usados = [...escolhidos.map(p => p.link), ...store.ja_usados].slice(0, 300);\nstore.ultimo_digest = new Date().toISOString();\n\nconst brl = v => 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');\n\n// matt_source=n8n: o clique vindo deste post fica separado no painel do ML,\n// então dá pra medir quanto o reforço na nuvem realmente converte.\nconst marcar = (url) => {\n  try {\n    const u = new URL(url);\n    if (/mercadolivre|mercadolibre|meli\\.la/.test(u.hostname)) u.searchParams.set('matt_source', 'n8n');\n    else if (/amazon|amzn/.test(u.hostname)) u.searchParams.set('ascsubtag', 'n8n');\n    else u.searchParams.set('utm_source', 'n8n');\n    return u.toString();\n  } catch (e) { return url; }\n};\n\nconst linhas = escolhidos.map((p, i) =>\n  `${i + 1}️⃣ <b>${p.titulo.slice(0, 70)}</b>\\n` +\n  `    ${brl(p.preco)}` + (p.desconto_pct ? ` — <b>${Math.round(p.desconto_pct)}% OFF</b>` : '') +\n  `\\n    <a href=\"${marcar(p.link)}\">Ver oferta</a>`\n).join('\\n\\n');\n\nconst texto =\n  `🔥 <b>TOP ${escolhidos.length} ofertas de agora</b>\\n\\n` +\n  linhas +\n  `\\n\\n📲 Chame os amigos: <a href=\"${CONFIG.grupo_whatsapp}?utm_source=telegram&utm_campaign=digest\">grupo do WhatsApp</a>` +\n  `\\n⚠️ Preços mudam a qualquer momento.`;\n\nreturn [{ json: { publicar: true, texto, canal: CONFIG.canal,\n                  foto: escolhidos[0].foto || '', total: escolhidos.length } }];\n"
+      },
+      "id": "montar-digest",
+      "name": "Montar digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.publicar}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "tem-o-que-publicar?",
+      "name": "Tem o que publicar?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.canal}}",
+        "text": "={{$json.texto}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": false
+        }
+      },
+      "id": "publicar-no-canal",
+      "name": "Publicar no canal",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        -100
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "nada-a-publicar",
+      "name": "Nada a publicar",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        420,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "2x por dia": {
+      "main": [
+        [
+          {
+            "node": "Buscar ofertas do site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar ofertas do site": {
+      "main": [
+        [
+          {
+            "node": "Montar digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar digest": {
+      "main": [
+        [
+          {
+            "node": "Tem o que publicar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem o que publicar?": {
+      "main": [
+        [
+          {
+            "node": "Publicar no canal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nada a publicar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

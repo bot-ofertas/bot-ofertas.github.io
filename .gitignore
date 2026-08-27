@@ -40,6 +40,9 @@ data/*.jsonl
 data/_*.json
 data/n8n/
 data/n8n_startup.log
+data/n8n_spool.jsonl
+# Fallback do bloco de notas quando não existe Desktop (Linux/CI)
+data/Problemas de execu*.txt
 data/site_publisher_last.txt
 data/ig_login_backoff.json
 data/wa_desktop_*.jpg
@@ -47,6 +50,11 @@ data/wa_upload.jpg
 
 # web/ foi substituído por docs/ (o que o GitHub Pages realmente publica)
 web/
+
+# n8n — segredos e estado local do instalador
+n8n/.env.n8n
+n8n/.n8n_state.json
+data/pausado.flag
 
 # Arquivos temporários
 *.zip
