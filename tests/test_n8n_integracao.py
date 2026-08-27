@@ -351,6 +351,98 @@ def test_post_de_oferta_marca_a_rede_no_link():
     assert "t.me/ofertaseletronics" in texto
 
 
+# ── Token do Mercado Livre ───────────────────────────────────────────────────
+
+def _limpar_env_ml():
+    from core import ml_token
+
+    antes = {k: os.environ.pop(k, None)
+             for k in ("ML_APP_ID", "ML_APP_SECRET", "ML_ACCESS_TOKEN")}
+    ml_token.invalidar()
+    return antes
+
+
+def _restaurar_env_ml(antes: dict):
+    from core import ml_token
+
+    for k, v in antes.items():
+        if v is None:
+            os.environ.pop(k, None)
+        else:
+            os.environ[k] = v
+    ml_token.invalidar()
+
+
+def test_ml_token_sem_credenciais_levanta():
+    from core.ml_token import SemCredenciaisML, token
+
+    antes = _limpar_env_ml()
+    try:
+        try:
+            token()
+        except SemCredenciaisML as e:
+            assert "ML_APP_ID" in str(e)
+        else:
+            raise AssertionError("deveria ter levantado SemCredenciaisML")
+    finally:
+        _restaurar_env_ml(antes)
+
+
+def test_ml_token_usa_token_fixo_quando_nao_ha_app():
+    """Compatibilidade com quem já rodou `python ml_auth.py`."""
+    from core.ml_token import token
+
+    antes = _limpar_env_ml()
+    try:
+        os.environ["ML_ACCESS_TOKEN"] = "TOKEN-FIXO-123"
+        assert token() == "TOKEN-FIXO-123"
+    finally:
+        _restaurar_env_ml(antes)
+
+
+def test_ml_token_reaproveita_cache_valido():
+    """Token em cache e dentro da validade não dispara nova requisição."""
+    import time
+
+    from core import ml_token
+
+    antes = _limpar_env_ml()
+    try:
+        ml_token._cache["token"] = "EM-CACHE"
+        ml_token._cache["expira_em"] = time.time() + 3600
+        assert ml_token.token() == "EM-CACHE"
+        assert ml_token.status()["em_cache"] is True
+        assert ml_token.status()["expira_em_min"] > 50
+    finally:
+        _restaurar_env_ml(antes)
+
+
+def test_ml_token_invalidar_descarta_cache():
+    import time
+
+    from core import ml_token
+
+    antes = _limpar_env_ml()
+    try:
+        ml_token._cache["token"] = "VELHO"
+        ml_token._cache["expira_em"] = time.time() + 3600
+        ml_token.invalidar()
+        assert ml_token.status()["em_cache"] is False
+    finally:
+        _restaurar_env_ml(antes)
+
+
+def test_ml_token_cabecalho_no_formato_bearer():
+    from core.ml_token import cabecalhos
+
+    antes = _limpar_env_ml()
+    try:
+        os.environ["ML_ACCESS_TOKEN"] = "ABC"
+        assert cabecalhos() == {"Authorization": "Bearer ABC"}
+    finally:
+        _restaurar_env_ml(antes)
+
+
 if __name__ == "__main__":
     import traceback
 

@@ -27,6 +27,7 @@ scraping → histórico de preço → deduplicação → validação anti-fraude
 | Link de afiliado | `affiliates/mercadolivre.py` |
 | Publicação Telegram | `integrations/telegram_bot.py` |
 | Foto em alta resolução | `core/foto_url.py` |
+| Token ML com renovação automática | `core/ml_token.py` |
 | Origem por canal (matt_source) | `core/tracking.py` |
 | Quarentena de publicação | `core/database.py` (`registrar_falha_publicacao`) |
 | Eventos para o n8n | `integrations/n8n.py` |

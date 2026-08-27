@@ -51,6 +51,13 @@ jobs:
       - name: Criar diretórios necessários
         run: mkdir -p data assets
 
+      - name: Testes (qualidade, afiliado, quarentena, n8n)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          python tests/test_qualidade.py
+          python tests/test_n8n_integracao.py
+
       - name: Gerar banner ALERTA CUPOM
         run: python -m core.banner_cupom
         continue-on-error: true   # não trava o build se Pillow tiver problema
@@ -62,6 +69,12 @@ jobs:
           ML_AFFILIATE_TOOL_ID: ${{ secrets.ML_AFFILIATE_TOOL_ID }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # n8n: as rodadas da nuvem (janela em que o PC fica desligado)
+          # também empurram eventos, senão o painel e o relatório diário
+          # ficariam cegos justamente na madrugada. Secrets opcionais —
+          # sem eles a integração vira no-op, como no PC.
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_TOKEN: ${{ secrets.N8N_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: python rastreador.py
 
@@ -72,6 +85,8 @@ jobs:
           AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_TOKEN: ${{ secrets.N8N_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: |
           if [ -n "$AMAZON_AFFILIATE_TAG" ]; then

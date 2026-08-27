@@ -75,6 +75,23 @@ async def rodar_uma_vez() -> None:
         print("❌ TOKEN_TELEGRAM não definido.")
         return
 
+    # Mesma pausa e mesma pré-checagem de rede do rastreador ML: a bandeira
+    # em data/pausado.flag vale para TODOS os processos (é por isso que ela
+    # é um arquivo, e não uma variável em memória), e sem DNS a rodada morre
+    # em timeouts encadeados em vez de sair em ~3s com a causa nomeada.
+    from core import pausa  # noqa: PLC0415
+    from core.net import dns_ok  # noqa: PLC0415
+    from integrations import n8n  # noqa: PLC0415
+
+    if pausa.pausado():
+        log(f"⏸️  Publicação pausada ({pausa.info().get('motivo', '')}) — Amazon não roda.")
+        return
+    if not dns_ok("www.amazon.com.br"):
+        log("🌐 Sem resolução de DNS — pulando a rodada Amazon.")
+        db.registrar_erro("rede", "DNS indisponível — rodada Amazon pulada")
+        n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel", "fonte": "amazon"})
+        return
+
     db.inicializar()
     removidos = db.limpar_antigos(dias=2)
     if removidos:

@@ -55,6 +55,16 @@ async def processar_fila_uma_vez() -> bool:
     """Envia o item mais antigo da fila que ainda esteja "fresco" (dentro de
     IDADE_MAX_S), descartando silenciosamente qualquer item mais velho que
     isso pelo caminho. Retorna True se enviou com sucesso."""
+    from core import pausa  # noqa: PLC0415
+
+    # A bandeira global de pausa vale para a fila também: pausar o bot e ver
+    # o WhatsApp continuar publicando sozinho seria o oposto do esperado.
+    # A fila não é descartada — só espera; os itens seguem lá quando voltar.
+    if pausa.pausado():
+        log.info("⏸️  Pausa global ativa (%s) — fila do WhatsApp em espera.",
+                 pausa.info().get("motivo", ""))
+        return False
+
     if not wa_ativo():
         log.info("WhatsApp pausado (wa_ativo=False) — fila continua parada.")
         return False

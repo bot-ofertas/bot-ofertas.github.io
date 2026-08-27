@@ -164,6 +164,19 @@ def _status_n8n() -> dict:
         return {"ativo": False, "erro": str(e)[:120]}
 
 
+def _status_ml_token() -> dict:
+    """Token da API do ML — renovável, em cache e quanto falta pra vencer.
+
+    Sem isto, um token vencido só aparecia como erro 401 espalhado nos logs
+    de scraping, horas depois de ter vencido.
+    """
+    try:
+        from core.ml_token import status  # noqa: PLC0415
+        return status()
+    except Exception as e:
+        return {"erro": str(e)[:120]}
+
+
 def _status_pausa() -> dict:
     try:
         from core import pausa  # noqa: PLC0415
@@ -211,6 +224,7 @@ class _Handler(BaseHTTPRequestHandler):
                 "erros": _status_erros(),
                 "ultimo_post": _status_ultimo_post(),
                 "n8n": _status_n8n(),
+                "ml_token": _status_ml_token(),
                 "pausa": _status_pausa(),
                 "quarentena": _status_quarentena(),
             }

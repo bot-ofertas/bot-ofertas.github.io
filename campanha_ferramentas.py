@@ -49,6 +49,8 @@ from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import wa_ativo
 from integrations import n8n
+from core import pausa
+from core.net import dns_ok
 
 load_dotenv()
 
@@ -239,6 +241,18 @@ async def rodar_uma_vez() -> int:
         log(f"🧹 Limpeza automática: {removidos} produto(s) antigos removidos do banco")
     if not TOKEN_TELEGRAM:
         log("❌ TOKEN_TELEGRAM não definido no .env")
+        return 0
+
+    # Pausa global e pré-checagem de rede — mesma lógica do rastreador.py.
+    # Sai ANTES de db.iniciar_execucao() para não deixar execução vazia no
+    # histórico nem marcar "sistema ocupado" para o desligamento noturno.
+    if pausa.pausado():
+        log(f"⏸️  Publicação pausada ({pausa.info().get('motivo', '')}) — campanha não roda.")
+        return 0
+    if not dns_ok():
+        log("🌐 Sem resolução de DNS — pulando a rodada da campanha.")
+        db.registrar_erro("rede", "DNS indisponível — campanha pulada")
+        n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel", "fonte": "ferramentas"})
         return 0
 
     # Registrado na mesma tabela `execucoes` do rastreador.py/rastreador_amazon.py
