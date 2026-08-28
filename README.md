@@ -103,6 +103,7 @@ Cinco workflows prontos: ingestão de eventos + watchdog, publicação de
 reforço, divulgação dos grupos, relatório diário e comandos remotos.
 
 ```bash
+python n8n/setup_n8n.py --configurar  # monta o .env (gera o segredo, acha seu chat_id)
 python n8n/setup_n8n.py --testar      # confere a conexão
 python n8n/setup_n8n.py --importar    # cria credenciais, importa e ativa
 ```

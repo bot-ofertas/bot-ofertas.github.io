@@ -443,6 +443,112 @@ def test_ml_token_cabecalho_no_formato_bearer():
         _restaurar_env_ml(antes)
 
 
+# ── Configuração assistida do .env ───────────────────────────────────────────
+
+def _setup_module():
+    sys.path.insert(0, os.path.join(BASE, "n8n"))
+    import setup_n8n
+    return setup_n8n
+
+
+def test_gravar_env_preserva_comentarios_e_ordem():
+    """Reescrever o .env inteiro perderia os comentários que explicam cada
+    campo — e é neles que o Daniel se apoia para configurar."""
+    setup = _setup_module()
+    tmp = tempfile.mkdtemp(prefix="env_")
+    caminho = os.path.join(tmp, ".env")
+    with open(caminho, "w", encoding="utf-8") as f:
+        f.write("# Telegram\nTOKEN_TELEGRAM=abc\n\n# n8n\nN8N_TOKEN=\n")
+
+    original = setup.ENV_PATH
+    setup.ENV_PATH = caminho
+    try:
+        setup.gravar_no_env({"N8N_TOKEN": "novo-segredo"})
+        conteudo = open(caminho, encoding="utf-8").read()
+    finally:
+        setup.ENV_PATH = original
+
+    assert "# Telegram" in conteudo and "# n8n" in conteudo
+    assert "TOKEN_TELEGRAM=abc" in conteudo
+    assert "N8N_TOKEN=novo-segredo" in conteudo
+    assert conteudo.count("N8N_TOKEN=") == 1     # substituiu, não duplicou
+
+
+def test_gravar_env_acrescenta_chave_nova_no_fim():
+    setup = _setup_module()
+    tmp = tempfile.mkdtemp(prefix="env_")
+    caminho = os.path.join(tmp, ".env")
+    with open(caminho, "w", encoding="utf-8") as f:
+        f.write("TOKEN_TELEGRAM=abc\n")
+
+    original = setup.ENV_PATH
+    setup.ENV_PATH = caminho
+    try:
+        alterados = setup.gravar_no_env({"ADMIN_CHAT_ID": "555"})
+        conteudo = open(caminho, encoding="utf-8").read()
+    finally:
+        setup.ENV_PATH = original
+
+    assert alterados == ["ADMIN_CHAT_ID"]
+    assert "ADMIN_CHAT_ID=555" in conteudo
+    assert "TOKEN_TELEGRAM=abc" in conteudo
+
+
+def test_gravar_env_nao_toca_em_linha_comentada():
+    """`# N8N_TOKEN=exemplo` é documentação, não configuração."""
+    setup = _setup_module()
+    tmp = tempfile.mkdtemp(prefix="env_")
+    caminho = os.path.join(tmp, ".env")
+    with open(caminho, "w", encoding="utf-8") as f:
+        f.write("# N8N_TOKEN=exemplo-nao-usar\n")
+
+    original = setup.ENV_PATH
+    setup.ENV_PATH = caminho
+    try:
+        setup.gravar_no_env({"N8N_TOKEN": "real"})
+        conteudo = open(caminho, encoding="utf-8").read()
+    finally:
+        setup.ENV_PATH = original
+
+    assert "# N8N_TOKEN=exemplo-nao-usar" in conteudo   # comentário intacto
+    assert "\nN8N_TOKEN=real" in conteudo               # chave real acrescentada
+
+
+def test_descobrir_chat_id_extrai_chats_do_getupdates():
+    """Poupa o passo de caçar `chat.id` no JSON cru do getUpdates."""
+    setup = _setup_module()
+
+    resposta = json.dumps({"ok": True, "result": [
+        {"message": {"chat": {"id": 555000111, "type": "private",
+                              "first_name": "Daniel", "last_name": "Silva"}}},
+        {"message": {"chat": {"id": 555000111, "type": "private",
+                              "first_name": "Daniel"}}},          # repetido
+        {"channel_post": {"chat": {"id": -1002222, "type": "channel",
+                                   "title": "Ofertas Eletronics"}}},
+    ]}).encode()
+
+    class _Resp:
+        def read(self): return resposta
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    original = setup.request.urlopen
+    setup.request.urlopen = lambda *a, **k: _Resp()
+    try:
+        achados = dict(setup.descobrir_chat_id("123:FAKE"))
+    finally:
+        setup.request.urlopen = original
+
+    assert len(achados) == 2                       # deduplicado
+    assert "Daniel Silva" in achados["555000111"]
+    assert "Ofertas Eletronics" in achados["-1002222"]
+
+
+def test_descobrir_chat_id_sem_token_nao_chama_rede():
+    setup = _setup_module()
+    assert setup.descobrir_chat_id("") == []
+
+
 if __name__ == "__main__":
     import traceback
 

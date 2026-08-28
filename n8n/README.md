@@ -56,6 +56,20 @@ No n8n: **Settings → n8n API → Create an API key**. Copie a chave.
 
 ### 3. Preencha o `.env` do bot
 
+Deixe o próprio instalador montar o que der:
+
+```bash
+python n8n/setup_n8n.py --configurar
+```
+
+Ele **gera** o `N8N_TOKEN` (32 bytes aleatórios), **descobre** o seu
+`ADMIN_CHAT_ID` perguntando ao Telegram quem já falou com o bot, e escreve
+tudo no `.env` sem apagar seus comentários nem o que já estava preenchido.
+Sobra um único campo manual — a API key, que só existe depois de você criá-la
+na interface.
+
+Se preferir à mão:
+
 ```ini
 N8N_API_URL=http://localhost:5678          # ou https://SEU-ESPACO.app.n8n.cloud
 N8N_API_KEY=cole-a-chave-aqui

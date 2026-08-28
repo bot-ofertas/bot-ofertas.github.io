@@ -20,6 +20,8 @@ criadas ficam em n8n/.n8n_state.json (ignorado pelo git) para que rodar de
 novo não duplique nada.
 
 Uso:
+    python n8n/setup_n8n.py --configurar  # monta o .env: gera o segredo do
+                                          # webhook e DESCOBRE seu chat_id
     python n8n/setup_n8n.py --testar      # só confere conexão e configuração
     python n8n/setup_n8n.py --importar    # cria/atualiza e ativa tudo
     python n8n/setup_n8n.py --importar --sem-ativar
@@ -215,6 +217,154 @@ def preparar_workflow(wf: dict, cred_ids: dict, valores: dict) -> dict:
     return {k: wf[k] for k in ("name", "nodes", "connections", "settings") if k in wf}
 
 
+# ── Configuração assistida do .env ───────────────────────────────────────────
+
+ENV_PATH = os.path.join(BASE, ".env")
+
+
+def _ler_env_bruto() -> list[str]:
+    try:
+        with open(ENV_PATH, encoding="utf-8") as f:
+            return f.readlines()
+    except FileNotFoundError:
+        return []
+
+
+def gravar_no_env(valores: dict[str, str]) -> list[str]:
+    """Grava/atualiza chaves no .env preservando comentários e ordem.
+
+    Reescrever o arquivo inteiro a partir das variáveis de ambiente perderia
+    os comentários (que explicam cada campo) e reordenaria tudo. Aqui só as
+    linhas das chaves passadas mudam; o que não existir é acrescentado no fim.
+    """
+    linhas = _ler_env_bruto()
+    restantes = dict(valores)
+    saida, alterados = [], []
+
+    for linha in linhas:
+        crua = linha.rstrip("\n")
+        if "=" in crua and not crua.lstrip().startswith("#"):
+            chave = crua.split("=", 1)[0].strip()
+            if chave in restantes:
+                saida.append(f"{chave}={restantes.pop(chave)}\n")
+                alterados.append(chave)
+                continue
+        saida.append(linha)
+
+    if restantes:
+        if saida and not saida[-1].endswith("\n"):
+            saida.append("\n")
+        saida.append("\n# ── Adicionado por n8n/setup_n8n.py --configurar ──────────\n")
+        for chave, valor in restantes.items():
+            saida.append(f"{chave}={valor}\n")
+            alterados.append(chave)
+
+    with open(ENV_PATH, "w", encoding="utf-8") as f:
+        f.writelines(saida)
+    return alterados
+
+
+def descobrir_chat_id(token_telegram: str) -> list[tuple[str, str]]:
+    """Descobre chats que já falaram com o bot, via getUpdates.
+
+    Evita o passo manual de abrir a URL do getUpdates no navegador e caçar o
+    `chat.id` no meio do JSON — que é onde essa configuração costuma travar.
+    Só enxerga quem mandou mensagem recentemente: se a lista vier vazia, é
+    porque ninguém falou com o bot (mande /start para ele e rode de novo).
+    """
+    if not token_telegram:
+        return []
+    url = f"https://api.telegram.org/bot{token_telegram}/getUpdates"
+    try:
+        req = request.Request(url, method="GET")
+        with request.urlopen(req, timeout=20) as r:
+            dados = json.loads(r.read().decode("utf-8"))
+    except Exception as e:
+        print(f"  ⚠️  Não consegui consultar o Telegram: {e}")
+        return []
+    if not dados.get("ok"):
+        print(f"  ⚠️  Telegram recusou: {str(dados.get('description'))[:120]}")
+        return []
+
+    achados: dict[str, str] = {}
+    for upd in dados.get("result", []):
+        msg = upd.get("message") or upd.get("channel_post") or {}
+        chat = msg.get("chat") or {}
+        cid = chat.get("id")
+        if cid is None:
+            continue
+        nome = (chat.get("title") or
+                " ".join(filter(None, [chat.get("first_name"), chat.get("last_name")])) or
+                chat.get("username") or "sem nome")
+        rotulo = f"{nome} ({chat.get('type', '?')})"
+        # O mesmo chat aparece em vários updates, e nem todos trazem o nome
+        # completo (um update com só `first_name` chegando depois de um com
+        # nome e sobrenome sobrescreveria o rótulo melhor). Fica o mais
+        # informativo, para o Daniel reconhecer qual chat é o dele.
+        anterior = achados.get(str(cid), "")
+        if len(rotulo) > len(anterior):
+            achados[str(cid)] = rotulo
+    return list(achados.items())
+
+
+def configurar() -> int:
+    """Preenche o que falta no .env, sem sobrescrever o que já existe."""
+    import secrets  # noqa: PLC0415
+
+    print(f"\n📝 Configurando {ENV_PATH}\n")
+    novos: dict[str, str] = {}
+
+    if not (os.getenv("N8N_API_URL") or "").strip():
+        novos["N8N_API_URL"] = "http://localhost:5678"
+        print("  N8N_API_URL    → http://localhost:5678 (padrão do n8n local)")
+    else:
+        print(f"  N8N_API_URL    já definido: {_api_url()}")
+
+    if not (os.getenv("N8N_TOKEN") or "").strip():
+        novos["N8N_TOKEN"] = secrets.token_urlsafe(32)
+        print("  N8N_TOKEN      → gerado (32 bytes aleatórios; não vai aparecer aqui)")
+    else:
+        print("  N8N_TOKEN      já definido")
+
+    admin = (os.getenv("ADMIN_CHAT_ID") or "").strip() or \
+            (os.getenv("ADMIN_IDS") or "").split(",")[0].strip()
+    if admin:
+        print(f"  ADMIN_CHAT_ID  já definido: {admin}")
+    else:
+        print("  ADMIN_CHAT_ID  ausente — perguntando ao Telegram quem falou com o bot…")
+        chats = descobrir_chat_id((os.getenv("TOKEN_TELEGRAM") or "").strip())
+        if len(chats) == 1:
+            cid, nome = chats[0]
+            novos["ADMIN_CHAT_ID"] = cid
+            print(f"                 → {cid}  ({nome})")
+        elif len(chats) > 1:
+            print("                 vários chats encontrados:")
+            for cid, nome in chats:
+                print(f"                   {cid}  {nome}")
+            print("                 escolha o SEU e coloque em ADMIN_CHAT_ID no .env")
+        else:
+            print("                 nenhum chat encontrado. Mande /start para o seu")
+            print("                 bot no Telegram e rode este comando de novo.")
+
+    if not _api_key():
+        print("\n  N8N_API_KEY    ausente — este é o único que não dá para gerar daqui.")
+        print("                 Abra o n8n → Settings → n8n API → Create an API key,")
+        print("                 e cole o valor em N8N_API_KEY no .env.")
+
+    if novos:
+        alterados = gravar_no_env(novos)
+        print(f"\n✅ .env atualizado: {', '.join(alterados)}")
+    else:
+        print("\n✅ Nada a mudar no .env.")
+
+    faltando = [c for c in ("N8N_API_KEY", "TOKEN_TELEGRAM") if not (os.getenv(c) or "").strip()]
+    if faltando:
+        print(f"⚠️  Ainda falta preencher: {', '.join(faltando)}")
+        return 1
+    print("\nPróximo passo:  python n8n/setup_n8n.py --importar")
+    return 0
+
+
 # ── Operações ────────────────────────────────────────────────────────────────
 
 def listar_workflows() -> list[dict]:
@@ -307,9 +457,13 @@ def main() -> int:
     p.add_argument("--sem-ativar", action="store_true", help="importa sem ativar")
     p.add_argument("--listar", action="store_true", help="lista o que já existe na instância")
     p.add_argument("--testar", action="store_true", help="só confere conexão e configuração")
+    p.add_argument("--configurar", action="store_true",
+                   help="preenche o .env (gera N8N_TOKEN, descobre ADMIN_CHAT_ID)")
     args = p.parse_args()
 
     try:
+        if args.configurar:
+            return configurar()
         if args.listar:
             for w in listar_workflows():
                 marca = "▶️ " if w.get("active") else "⏸️ "
