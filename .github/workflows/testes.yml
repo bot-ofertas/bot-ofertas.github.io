@@ -99,6 +99,29 @@ jobs:
           PY
           node /tmp/check_nodes.js
 
+      - name: Validar sintaxe dos scripts PowerShell
+        # O runner do GitHub já traz o pwsh. Existe porque um erro de sintaxe
+        # no status.ps1 passou despercebido por dias: nada no projeto abria
+        # esses arquivos, e o único jeito de descobrir era rodar no Windows.
+        shell: pwsh
+        run: |
+          $falhas = 0
+          Get-ChildItem -Path . -Filter *.ps1 -Recurse -File | Sort-Object Name | ForEach-Object {
+              $erros = $null; $tokens = $null
+              [System.Management.Automation.Language.Parser]::ParseFile(
+                  $_.FullName, [ref]$tokens, [ref]$erros) | Out-Null
+              if ($erros -and $erros.Count -gt 0) {
+                  $falhas++
+                  Write-Host ("ERRO {0}" -f $_.Name)
+                  foreach ($e in $erros) {
+                      Write-Host ("     linha {0}: {1}" -f $e.Extent.StartLineNumber, $e.Message)
+                  }
+              }
+              else { Write-Host ("ok   {0}" -f $_.Name) }
+          }
+          if ($falhas -gt 0) { exit 1 }
+          Write-Host "Todos os scripts PowerShell com sintaxe valida"
+
       - name: Conferir que nenhum segredo entrou nos arquivos versionados
         run: |
           python - <<'PY'

@@ -10,7 +10,18 @@ Write-Host "==============================================" -ForegroundColor Cya
 # anterior chamava Get-CimInstance 3x (uma por processo procurado) — em
 # máquina carregada isso deixava o status visivelmente lento, e ainda assim
 # só mostrava 1 dos 4 processos que o startup.py sobe.
-$procs = @(Get-CimInstance Win32_Process -Filter "Name LIKE 'python%'" -ErrorAction SilentlyContinue)
+# Get-CimInstance só existe no Windows. `-ErrorAction SilentlyContinue` NÃO
+# silencia "termo não reconhecido" (isso é erro de resolução de comando, não
+# do cmdlet), então rodar este script fora do Windows — pelo VS Code no WSL,
+# por exemplo — despejava dois blocos vermelhos antes de mostrar qualquer
+# coisa. $IsWindows não existe no Windows PowerShell 5.1: ali ele é $null, e
+# nesse caso estamos necessariamente no Windows.
+$ehWindows = ($null -eq $IsWindows) -or $IsWindows
+
+$procs = @()
+if ($ehWindows) {
+    $procs = @(Get-CimInstance Win32_Process -Filter "Name LIKE 'python%'" -ErrorAction SilentlyContinue)
+}
 
 function Get-BotProc($padrao) {
     return @($procs | Where-Object { $_.CommandLine -like $padrao })
@@ -44,9 +55,13 @@ foreach ($nome in $monitorados.Keys) {
     }
 }
 
-$wa = @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
-        Where-Object { $_.Name -in "WhatsApp.exe", "WhatsApp.Root.exe" })
+$wa = @()
+if ($ehWindows) {
+    $wa = @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -in "WhatsApp.exe", "WhatsApp.Root.exe" })
+}
 if ($wa) { Write-Host "  WhatsApp Desktop      RODANDO" -ForegroundColor Green }
+elseif (-not $ehWindows) { Write-Host "  WhatsApp Desktop      (nao verificavel fora do Windows)" -ForegroundColor DarkGray }
 else { Write-Host "  WhatsApp Desktop      NAO ENCONTRADO" -ForegroundColor Red }
 
 # ── Healthcheck ──────────────────────────────────────────────────────────────
@@ -89,7 +104,14 @@ if ($null -ne $h) {
     Write-Host "  Telegram:   $($h.telegram.ok)" -ForegroundColor $(if ($h.telegram.ok) { "Green" } else { "Red" })
     Write-Host "  WhatsApp:   $waStatus" -ForegroundColor $(if ($h.whatsapp.ok) { "Green" } else { "Red" })
     Write-Host "  Rastreador: $($h.rastreador.ok)" -ForegroundColor $(if ($h.rastreador.ok) { "Green" } else { "Red" })
-    Write-Host "  CPU: $($h.sistema.cpu)% | RAM: $($h.sistema.ram_pct)%"
+    $cpu = if ($null -ne $h.sistema.cpu) { "$($h.sistema.cpu)%" } else { "n/d" }
+    $ram = if ($null -ne $h.sistema.ram_pct) { "$($h.sistema.ram_pct)%" } else { "n/d" }
+    Write-Host "  CPU: $cpu | RAM: $ram"
+    if ($cpu -eq "n/d") {
+        # O bloco `sistema` vem vazio quando o psutil não importa dentro da
+        # thread do healthcheck — vale dizer isso em vez de mostrar "%".
+        Write-Host "  (sem CPU/RAM: psutil indisponivel no processo do bot)" -ForegroundColor DarkGray
+    }
 
     if ($h.criticos_com_falha -and $h.criticos_com_falha.Count -gt 0) {
         Write-Host "  Componentes criticos com falha: $($h.criticos_com_falha -join ', ')" -ForegroundColor Red
