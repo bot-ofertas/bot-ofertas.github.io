@@ -129,11 +129,18 @@ problemas da Área de Trabalho.
 ## Testes
 
 ```bash
-python tests/test_qualidade.py         # sem dependências extras
-python tests/test_n8n_integracao.py    # idem
+python tests/test_qualidade.py          # score, anti-fraude, afiliado
+python tests/test_n8n_integracao.py     # n8n, quarentena, foto, tracking
+python tests/test_sistema_completo.py   # bot + n8n montados (precisa do Node)
 # ou, com pytest instalado:
 python -m pytest tests/ -v
 ```
+
+O último sobe o healthcheck e um "n8n" local que **executa os Code nodes
+reais** dos workflows (com a static data persistida entre chamadas, como no
+n8n de verdade) e percorre o caminho inteiro: evento assinado → n8n → alerta,
+e comando do Telegram → n8n → API do bot. Tudo isso roda a cada pull request
+pelo workflow `.github/workflows/testes.yml`.
 
 Cobrem: cálculo de score, classificação, anti-fraude, **preservação do
 parâmetro de afiliado** (`matt_tool`/`tag`) na troca de origem por canal,
