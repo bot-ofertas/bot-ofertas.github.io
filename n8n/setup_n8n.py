@@ -222,10 +222,27 @@ def preparar_workflow(wf: dict, cred_ids: dict, valores: dict) -> dict:
 ENV_PATH = os.path.join(BASE, ".env")
 
 
+ENV_EXEMPLO_PATH = os.path.join(BASE, ".env.example")
+
+
 def _ler_env_bruto() -> list[str]:
+    """Linhas do .env. Num projeto recém-clonado ele não existe ainda.
+
+    Nesse caso partimos do .env.example em vez de um arquivo vazio: gravar
+    só as chaves geradas produziria um .env de 4 linhas, sem TOKEN_TELEGRAM
+    nem CANAL_GERAL e sem nenhum dos comentários que explicam cada campo —
+    ou seja, um bot que nem sobe, com a documentação perdida. É o mesmo que
+    o `cp .env.example .env` do README, feito automaticamente.
+    """
     try:
         with open(ENV_PATH, encoding="utf-8") as f:
             return f.readlines()
+    except FileNotFoundError:
+        pass
+    try:
+        with open(ENV_EXEMPLO_PATH, encoding="utf-8") as f:
+            linhas = f.readlines()
+        return linhas
     except FileNotFoundError:
         return []
 
@@ -311,7 +328,11 @@ def configurar() -> int:
     """Preenche o que falta no .env, sem sobrescrever o que já existe."""
     import secrets  # noqa: PLC0415
 
-    print(f"\n📝 Configurando {ENV_PATH}\n")
+    print(f"\n📝 Configurando {ENV_PATH}")
+    if not os.path.exists(ENV_PATH):
+        print(f"   (não existe ainda — partindo de {os.path.basename(ENV_EXEMPLO_PATH)},")
+        print("    para não perder os comentários nem os outros campos)")
+    print()
     novos: dict[str, str] = {}
 
     if not (os.getenv("N8N_API_URL") or "").strip():

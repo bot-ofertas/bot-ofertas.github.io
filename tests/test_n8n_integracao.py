@@ -514,6 +514,30 @@ def test_gravar_env_nao_toca_em_linha_comentada():
     assert "\nN8N_TOKEN=real" in conteudo               # chave real acrescentada
 
 
+def test_env_ausente_parte_do_exemplo():
+    """Sem .env, gravar só as chaves geradas produziria um arquivo de 4
+    linhas — sem TOKEN_TELEGRAM e sem os comentários. O bot nem subiria."""
+    setup = _setup_module()
+    tmp = tempfile.mkdtemp(prefix="env_")
+    exemplo = os.path.join(tmp, ".env.example")
+    with open(exemplo, "w", encoding="utf-8") as f:
+        f.write("# Telegram\nTOKEN_TELEGRAM=cole_aqui\n# n8n\nN8N_TOKEN=\n")
+
+    orig_env, orig_ex = setup.ENV_PATH, setup.ENV_EXEMPLO_PATH
+    setup.ENV_PATH = os.path.join(tmp, ".env")
+    setup.ENV_EXEMPLO_PATH = exemplo
+    try:
+        setup.gravar_no_env({"N8N_TOKEN": "gerado"})
+        conteudo = open(setup.ENV_PATH, encoding="utf-8").read()
+    finally:
+        setup.ENV_PATH, setup.ENV_EXEMPLO_PATH = orig_env, orig_ex
+
+    assert "TOKEN_TELEGRAM=cole_aqui" in conteudo   # campo do exemplo veio junto
+    assert "# Telegram" in conteudo                 # comentário preservado
+    assert "N8N_TOKEN=gerado" in conteudo
+    assert conteudo.count("N8N_TOKEN=") == 1
+
+
 def test_descobrir_chat_id_extrai_chats_do_getupdates():
     """Poupa o passo de caçar `chat.id` no JSON cru do getUpdates."""
     setup = _setup_module()
