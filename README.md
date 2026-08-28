@@ -97,6 +97,37 @@ python -m core.divulgacao instagram          # anúncio da rodada
 python -m core.divulgacao facebook grupo     # divulgação pura do grupo
 ```
 
+## Ciclo diário: desliga e religa sozinho
+
+```powershell
+.\agendar_shutdown.ps1            # registra o ciclo
+.\agendar_shutdown.ps1 -Status    # confere se está funcionando
+.\agendar_shutdown.ps1 -Remover   # cancela
+```
+
+| Horário | O que acontece |
+|---|---|
+| 01:00 | Verificação diária — relatório de saúde no Telegram |
+| 02:00 | Suspende o PC, **esperando até 35 min** se o bot estiver no meio de uma rodada (`core.database.execucao_em_andamento()`) |
+| 02:00–08:45 | Quem publica é o GitHub Actions (`bot.yml`), 1x/hora |
+| 08:45 | Wake timer acorda o PC, registra o despertar e sobe o `startup.py` |
+
+**Suspensão (S3), não desligamento completo.** O Wake Timer do Windows não
+acorda de um desligamento total (S5) sem "Wake on RTC" habilitado na BIOS —
+acesso físico, fora do alcance de qualquer automação. Hibernação teria o
+mesmo consumo do desligar, mas habilitá-la exige prompt de administrador que
+esta automação não tem. Em S3 o consumo é de poucos watts durante a
+madrugada, e o despertar é confiável.
+
+Se quiser desligamento **completo**, habilite `Wake on RTC` / `RTC Alarm` na
+BIOS e troque `SetSuspendState` por `shutdown /s` em `aguardar_e_desligar.ps1`.
+
+O `-Status` mostra as três tarefas com `LastRunTime` e o código de resultado
+traduzido, os wake timers ativos, o motivo do último despertar
+(`powercfg -lastwake`) e as últimas linhas de `data/shutdown.log`. É o que
+faltava quando o ciclo falhou em silêncio em 31/07/2026 — nem o desligamento
+nem o despertar rodaram, e o único sintoma foi o PC ligado de manhã.
+
 ## Automação em nuvem (n8n)
 
 Cinco workflows prontos: ingestão de eventos + watchdog, publicação de
