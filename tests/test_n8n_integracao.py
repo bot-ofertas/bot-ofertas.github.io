@@ -817,6 +817,80 @@ def test_configurar_nao_conta_placeholder_como_preenchido():
         "a checagem de placeholder sumiu de configurar()")
 
 
+# ── Spool: a promessa de nao perder evento em queda de rede ─────────────────
+
+def _n8n_com_spool_temporario():
+    """Importa o cliente do n8n apontando o spool para um arquivo descartavel.
+
+    Nunca usar o caminho de producao aqui: um teste que reescreve
+    `data/n8n_spool.jsonl` apagaria eventos reais que ainda nao sairam.
+    """
+    os.environ["N8N_WEBHOOK_URL"] = "https://exemplo.invalid/webhook/teste"
+    os.environ["N8N_ATIVO"] = "1"
+    from integrations import n8n
+
+    n8n.SPOOL_PATH = os.path.join(tempfile.mkdtemp(prefix="n8n_spool_"), "spool.jsonl")
+    return n8n
+
+
+def test_flush_nao_apaga_evento_que_chegou_durante_o_envio():
+    """O spool existe para NAO perder evento em queda de rede — e era
+    justamente durante a rede lenta que ele perdia.
+
+    `flush_spool()` lia a lista de eventos, gastava segundos no POST e depois
+    reescrevia o arquivo com `linhas[enviados:]` — calculado sobre a lista
+    VELHA. Um evento que falhasse nesse meio-tempo (cada `emitir()` roda na
+    sua thread) era acrescentado ao arquivo e apagado pela reescrita.
+    """
+    n8n = _n8n_com_spool_temporario()
+    original = n8n._postar
+    try:
+        n8n._guardar_no_spool({"evento": "antigo"})
+
+        def postar_e_receber_outro(payload):
+            # Enquanto o POST acontece, outro evento falha e entra no spool.
+            n8n._guardar_no_spool({"evento": "novo_que_falhou"})
+            return True
+
+        n8n._postar = postar_e_receber_outro
+        n8n.flush_spool()
+
+        with open(n8n.SPOOL_PATH, encoding="utf-8") as f:
+            sobraram = [json.loads(linha)["evento"] for linha in f if linha.strip()]
+        assert sobraram == ["novo_que_falhou"], sobraram
+    finally:
+        n8n._postar = original
+
+
+def test_dois_flushes_simultaneos_nao_reenviam_o_mesmo_evento():
+    """Cada `emitir()` que da certo chama `flush_spool()`. Dois eventos
+    terminando juntos liam o mesmo spool e reenviavam os mesmos eventos —
+    o outro lado recebia alerta (e publicacao de reforco) em duplicata."""
+    import threading
+    import time
+
+    n8n = _n8n_com_spool_temporario()
+    original = n8n._postar
+    try:
+        n8n._guardar_no_spool({"evento": "oferta_publicada"})
+        enviados = []
+
+        def postar_lento(payload):
+            time.sleep(0.15)  # a janela em que o segundo flush entrava
+            enviados.append(payload["evento"])
+            return True
+
+        n8n._postar = postar_lento
+        threads = [threading.Thread(target=n8n.flush_spool) for _ in range(2)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        assert enviados == ["oferta_publicada"], enviados
+    finally:
+        n8n._postar = original
+
+
 if __name__ == "__main__":
     import traceback
 

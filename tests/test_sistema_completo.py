@@ -325,6 +325,45 @@ def post_cmd(corpo, headers):
 st, _ = post_cmd({"comando": "status"}, {"X-Bot-Token": "errado"})
 checar("comando com token errado -> 401", st == 401)
 
+
+def post_rota(rota, corpo, headers):
+    dados = json.dumps(corpo).encode()
+    req = urllib.request.Request(BASE_API + rota, data=dados, method="POST")
+    for k, v in headers.items():
+        req.add_header(k, v)
+    try:
+        with urllib.request.urlopen(req, timeout=8) as r:
+            return r.status, json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, json.loads(e.read().decode())
+        except Exception:
+            return e.code, {}
+
+
+# `/oferta` publica no canal do Telegram e no grupo do WhatsApp. Enquanto só
+# `/n8n/comando` exigia segredo, quem alcançasse a porta postava o link que
+# quisesse em nome do Daniel — e o n8n/README manda abrir
+# HEALTHCHECK_BIND=0.0.0.0 dizendo que o N8N_TOKEN protege.
+oferta = {"titulo": "Produto de teste", "preco": "R$ 1,00",
+          "link": "https://exemplo.invalid/x"}
+st, _ = post_rota("/oferta", oferta, {})
+checar("POST /oferta sem credencial -> 401 (nao publica nos grupos)", st == 401, str(st))
+st, _ = post_rota("/oferta", oferta, {"X-Bot-Token": "errado"})
+checar("POST /oferta com token errado -> 401", st == 401, str(st))
+st, _ = post_rota("/alerta", {"mensagem": "teste"}, {})
+checar("POST /alerta sem credencial -> 401", st == 401, str(st))
+st, r = post_rota("/alerta", {"mensagem": "alerta autenticado do teste"},
+                  {"X-Bot-Token": TOKEN})
+checar("POST /alerta com o token certo continua funcionando", st == 202, f"{st} {r}")
+
+# Liberar a quarentena inteira precisa ser explícito: um comando com o campo
+# faltando apagava a rede de segurança da Regra 12 sem querer.
+st, r = post_cmd({"comando": "quarentena_liberar", "dados": {}},
+                 {"X-Bot-Token": TOKEN})
+checar("quarentena_liberar sem produto_id -> recusado", st == 400 and r["ok"] is False,
+       f"{st} {r}")
+
 # ── 9. n8n -> bot: o W5 traduz o comando do Telegram e chama a API ──────────
 print("\n[9] Comando do Telegram atravessa o W5 e chega no bot")
 mensagem = {"message": {"text": "/status", "chat": {"id": 555000111}}}

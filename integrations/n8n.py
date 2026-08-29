@@ -57,6 +57,11 @@ TIMEOUT_S = 8
 TENTATIVAS = 2
 
 _lock = threading.Lock()
+# Um flush de cada vez. Cada `emitir()` roda numa thread propria e chama
+# `flush_spool()` quando o POST da certo; duas threads terminando juntas
+# liam a MESMA lista do spool e reenviavam os mesmos eventos — o outro lado
+# recebia alerta e publicacao de reforco em duplicata.
+_flush_lock = threading.Lock()
 _ultimo_envio: dict = {"ts": None, "evento": None, "ok": None, "erro": ""}
 
 
@@ -192,37 +197,60 @@ def flush_spool(limite: int = 50) -> int:
     """
     if not ativo():
         return 0
+    if not _flush_lock.acquire(blocking=False):
+        # Ja tem um flush em andamento: o segundo nao tem o que fazer alem
+        # de reenviar o que o primeiro esta enviando agora.
+        return 0
     try:
-        with _lock:
-            with open(SPOOL_PATH, encoding="utf-8") as f:
-                linhas = [linha for linha in f if linha.strip()]
-    except FileNotFoundError:
-        return 0
-    except Exception:
-        return 0
-
-    enviados = 0
-    for linha in linhas[:limite]:
-        try:
-            payload = json.loads(linha)
-        except json.JSONDecodeError:
-            enviados += 1  # linha corrompida: descarta junto com as enviadas
-            continue
-        if not _postar(payload):
-            break
-        enviados += 1
-
-    if enviados:
-        restantes = linhas[enviados:]
         try:
             with _lock:
+                with open(SPOOL_PATH, encoding="utf-8") as f:
+                    linhas = [linha for linha in f if linha.strip()]
+        except FileNotFoundError:
+            return 0
+        except Exception:
+            return 0
+
+        enviados = 0
+        for linha in linhas[:limite]:
+            try:
+                payload = json.loads(linha)
+            except json.JSONDecodeError:
+                enviados += 1  # linha corrompida: descarta junto com as enviadas
+                continue
+            if not _postar(payload):
+                break
+            enviados += 1
+
+        if not enviados:
+            return 0
+
+        restantes: list[str] = []
+        try:
+            with _lock:
+                # Reler o arquivo antes de reescrever. Entre a leitura la
+                # em cima e este ponto passaram segundos de rede, e uma
+                # thread de `emitir()` pode ter acrescentado um evento que
+                # acabou de falhar. Reescrever `linhas[enviados:]`, montado
+                # sobre a lista velha, apagaria esse evento novo — perder
+                # evento em queda de rede e exatamente o que o spool existe
+                # para impedir. Descartar as `enviados` primeiras linhas do
+                # arquivo ATUAL e seguro porque toda gravacao e append.
+                try:
+                    with open(SPOOL_PATH, encoding="utf-8") as f:
+                        atuais = [linha for linha in f if linha.strip()]
+                except FileNotFoundError:
+                    atuais = []
+                restantes = atuais[enviados:]
                 with open(SPOOL_PATH, "w", encoding="utf-8") as f:
                     f.writelines(restantes)
         except Exception as e:
             log.debug("Falha ao reescrever spool: %s", e)
         log.info("n8n: %d evento(s) do spool reenviados, %d restante(s)",
                  enviados, len(restantes))
-    return enviados
+        return enviados
+    finally:
+        _flush_lock.release()
 
 
 # ── API pública ──────────────────────────────────────────────────────────────

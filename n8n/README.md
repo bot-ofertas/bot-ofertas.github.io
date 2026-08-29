@@ -239,13 +239,15 @@ conferir também o corpo.
 | `GET /quarentena` | produtos fora de rotação |
 | `GET /divulgacao?rede=instagram&tipo=auto` | texto do anúncio pronto |
 | `GET /metrics` | formato Prometheus |
-| `POST /oferta` | publicar uma oferta avulsa |
-| `POST /alerta` | registrar um alerta vindo do n8n |
+| `POST /oferta` | publicar uma oferta avulsa (autenticado) |
+| `POST /alerta` | registrar um alerta vindo do n8n (autenticado) |
 | `POST /n8n/comando` | executar comando (autenticado) |
 
-`POST /n8n/comando` aceita `X-Bot-Token` **ou** `X-Bot-Assinatura`. Sem
-`N8N_TOKEN` definido, só aceita chamada de `127.0.0.1` — um endpoint que
-pausa a operação não pode ficar aberto na rede local sem segredo.
+**Os três POST** aceitam `X-Bot-Token` **ou** `X-Bot-Assinatura` (HMAC do
+corpo). Sem `N8N_TOKEN` definido, só aceitam chamada de `127.0.0.1`. Vale
+para `/oferta` tanto quanto para `/n8n/comando`: um pausa a operação, o
+outro publica no canal do Telegram e no grupo do WhatsApp — deixar o
+segundo aberto seria pior, porque sai como se fosse o Daniel postando.
 
 Comandos: `status`, `quarentena_listar`, `quarentena_liberar`, `pausar`,
 `retomar`, `divulgacao`, `erros`, `flush_spool`, `ping`.
@@ -274,7 +276,9 @@ porque `POST /n8n/comando` pausa a operação do bot. Duas opções:
   http://127.0.0.1:8724`) e `BOT_API_URL` apontando para a URL do túnel.
 
 Em qualquer um dos dois, **defina `N8N_TOKEN` antes**: mudar o bind sem
-segredo deixa `/n8n/comando` aberto.
+segredo libera os três POST (`/n8n/comando`, `/oferta` e `/alerta`) para
+qualquer um que alcance a porta — a regra "sem token, só `127.0.0.1`" é o
+que segura enquanto o bind é o padrão.
 
 ---
 

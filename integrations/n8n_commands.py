@@ -45,7 +45,18 @@ def _cmd_quarentena_listar(dados: dict) -> dict:
 def _cmd_quarentena_liberar(dados: dict) -> dict:
     import core.database as db  # noqa: PLC0415
     produto_id = str(dados.get("produto_id", "")).strip()
-    liberados = db.liberar_quarentena(produto_id)
+    todos = bool(dados.get("todos")) or produto_id in ("*", "todos")
+    if not produto_id and not todos:
+        # `db.liberar_quarentena("")` apaga a quarentena INTEIRA. Sem esta
+        # guarda, um comando com o campo faltando ou escrito errado
+        # ("produtoId") virava "libera tudo" — e os produtos que já
+        # falharam 3x voltavam a queimar as 4 vagas de publicação da rodada,
+        # que é exatamente o loop que a Regra 12 existe para fechar.
+        # Desarmar a rede de segurança tem de ser explícito.
+        raise ValueError(
+            "informe produto_id, ou todos=true para liberar a quarentena inteira"
+        )
+    liberados = db.liberar_quarentena("" if todos else produto_id)
     log.info("Quarentena liberada via n8n: %s (%d)", produto_id or "TODOS", liberados)
     return {"liberados": liberados, "produto_id": produto_id or "*"}
 

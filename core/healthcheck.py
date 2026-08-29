@@ -405,8 +405,9 @@ class _Handler(BaseHTTPRequestHandler):
 
         Sem `N8N_TOKEN` configurado, só o próprio computador pode mandar
         comando. Isso importa porque `/n8n/comando` altera estado (pausa,
-        quarentena): deixá-lo aberto sem segredo transformaria qualquer
-        acesso à rede local num botão de desligar o bot.
+        quarentena) e `/oferta` publica nos grupos: deixá-los abertos sem
+        segredo transformaria qualquer acesso à rede local num botão de
+        desligar o bot — ou, pior, de postar no canal em nome dele.
         """
         from integrations import n8n  # noqa: PLC0415
         token = (os.getenv("N8N_TOKEN") or "").strip()
@@ -417,7 +418,78 @@ class _Handler(BaseHTTPRequestHandler):
             return True
         return n8n.conferir_assinatura(corpo, self.headers.get("X-Bot-Assinatura") or "")
 
-    def _comando_n8n(self) -> None:
+    def _comando_n8n(self, corpo: bytes) -> None:
+        try:
+            body = json.loads(corpo.decode("utf-8") or "{}")
+        except json.JSONDecodeError as e:
+            self._resp(400, {"error": f"JSON inválido: {e}"})
+            return
+        from integrations.n8n_commands import executar  # noqa: PLC0415
+        resultado = executar(body.get("comando", ""), body.get("dados") or {})
+        self._resp(200 if resultado.get("ok") else 400, resultado)
+
+    def _oferta_avulsa(self, corpo: bytes) -> None:
+        try:
+            body = json.loads(corpo.decode("utf-8") or "{}")
+        except json.JSONDecodeError as e:
+            self._resp(400, {"error": f"JSON inválido: {e}"})
+            return
+        campos_req = ("titulo", "preco", "link")
+        faltando = [c for c in campos_req if not body.get(c)]
+        if faltando:
+            self._resp(400, {"error": "faltam campos", "campos": faltando})
+            return
+        try:
+            import threading  # noqa: PLC0415
+            threading.Thread(target=_publicar_webhook, args=(body,), daemon=True).start()
+            try:
+                from core.metrics import inc  # noqa: PLC0415
+                inc("webhook_ofertas_recebidas")
+            except Exception:
+                pass
+            self._resp(202, {"status": "aceito", "titulo": body.get("titulo")})
+        except Exception as e:
+            self._resp(500, {"error": str(e)})
+
+    def _alerta(self, corpo: bytes) -> None:
+        try:
+            body = json.loads(corpo.decode("utf-8") or "{}")
+            mensagem = body.get("mensagem", "")
+            if not mensagem:
+                self._resp(400, {"error": "faltando 'mensagem'"})
+                return
+            from core.error_logger import registrar_evento  # noqa: PLC0415
+            registrar_evento(f"n8n.{body.get('origem', 'n8n')}", mensagem,
+                             body.get("contexto"))
+            self._resp(202, {"status": "registrado"})
+        except Exception as e:
+            self._resp(500, {"error": str(e)})
+
+    def do_POST(self):
+        """POST /oferta — recebe oferta manual via n8n/webhook para postar.
+        POST /alerta — recebe um alerta do workflow de monitoramento do n8n
+        e grava no mesmo bloco de notas do Desktop que o resto do sistema
+        já usa (core.error_logger) -- evita precisar de mais um canal de
+        aviso (chat pessoal do Telegram, e-mail etc.) só pra isso.
+        POST /n8n/comando — ver `integrations/n8n_commands.py`.
+
+        Os três passam pela MESMA porta de autenticação (`_autorizado`).
+        Antes só `/n8n/comando` exigia segredo, e `/oferta` — que publica no
+        canal do Telegram e no grupo do WhatsApp — ficava aberto: quem
+        alcançasse a porta postava o link que quisesse como se fosse do
+        Daniel. Pior, o n8n/README manda abrir `HEALTHCHECK_BIND=0.0.0.0`
+        para o n8n em contêiner "protegendo com N8N_TOKEN" — proteção que
+        não existia justamente no endpoint que fala com os grupos.
+        """
+        rotas = {
+            "/n8n/comando": self._comando_n8n,
+            "/oferta": self._oferta_avulsa,
+            "/alerta": self._alerta,
+        }
+        handler = rotas.get(self.path)
+        if handler is None:
+            self._resp(404, {"error": "not found"})
+            return
         try:
             tamanho = int(self.headers.get("Content-Length", 0))
             corpo = self.rfile.read(tamanho) if tamanho else b"{}"
@@ -428,64 +500,7 @@ class _Handler(BaseHTTPRequestHandler):
             self._resp(401, {"error": "nao autorizado",
                              "dica": "envie X-Bot-Assinatura (HMAC) ou X-Bot-Token"})
             return
-        try:
-            body = json.loads(corpo.decode("utf-8") or "{}")
-        except json.JSONDecodeError as e:
-            self._resp(400, {"error": f"JSON inválido: {e}"})
-            return
-        from integrations.n8n_commands import executar  # noqa: PLC0415
-        resultado = executar(body.get("comando", ""), body.get("dados") or {})
-        self._resp(200 if resultado.get("ok") else 400, resultado)
-
-    def do_POST(self):
-        """POST /oferta — recebe oferta manual via n8n/webhook para postar.
-        POST /alerta — recebe um alerta do workflow de monitoramento do n8n
-        e grava no mesmo bloco de notas do Desktop que o resto do sistema
-        já usa (core.error_logger) -- evita precisar de mais um canal de
-        aviso (chat pessoal do Telegram, e-mail etc.) só pra isso."""
-        if self.path == "/n8n/comando":
-            self._comando_n8n()
-            return
-        if self.path == "/alerta":
-            try:
-                tamanho = int(self.headers.get("Content-Length", 0))
-                body = json.loads(self.rfile.read(tamanho).decode("utf-8"))
-                origem = body.get("origem", "n8n")
-                mensagem = body.get("mensagem", "")
-                if not mensagem:
-                    self._resp(400, {"error": "faltando 'mensagem'"})
-                    return
-                from core.error_logger import registrar_evento  # noqa: PLC0415
-                registrar_evento(f"n8n.{origem}", mensagem, body.get("contexto"))
-                self._resp(202, {"status": "registrado"})
-            except Exception as e:
-                self._resp(500, {"error": str(e)})
-            return
-        if self.path != "/oferta":
-            self._resp(404, {"error": "not found"})
-            return
-        try:
-            tamanho = int(self.headers.get("Content-Length", 0))
-            body = json.loads(self.rfile.read(tamanho).decode("utf-8"))
-            # Validação mínima
-            campos_req = ("titulo", "preco", "link")
-            faltando = [c for c in campos_req if not body.get(c)]
-            if faltando:
-                self._resp(400, {"error": "faltam campos", "campos": faltando})
-                return
-            # Publica assíncrono
-            import threading  # noqa: PLC0415
-            threading.Thread(
-                target=_publicar_webhook, args=(body,), daemon=True
-            ).start()
-            try:
-                from core.metrics import inc  # noqa: PLC0415
-                inc("webhook_ofertas_recebidas")
-            except Exception:
-                pass
-            self._resp(202, {"status": "aceito", "titulo": body.get("titulo")})
-        except Exception as e:
-            self._resp(500, {"error": str(e)})
+        handler(corpo)
 
 
 def _publicar_webhook(produto: dict) -> None:

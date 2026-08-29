@@ -30,6 +30,7 @@ from __future__ import annotations
 import logging
 import random
 import socket
+import threading
 import time
 from typing import Iterable
 
@@ -64,19 +65,40 @@ def dns_ok(host: str = "api.mercadolibre.com", timeout: float = 3.0) -> bool:
     """True se o DNS resolve `host` agora.
 
     Usado como pré-checagem barata antes de uma rodada inteira: sem rede,
-    é melhor registrar "sem DNS" e sair em 3s do que gastar minutos em
-    timeouts encadeados e terminar com um genérico "Timed out".
+    é melhor registrar "sem DNS" e sair em `timeout` segundos do que gastar
+    minutos em timeouts encadeados e terminar com um genérico "Timed out".
+
+    A resolução roda numa thread própria porque `getaddrinfo` é uma chamada
+    bloqueante do sistema: ela NÃO obedece `socket.setdefaulttimeout()` (que
+    só vale para sockets criados depois). A versão anterior usava justamente
+    isso — o limite de 3s não existia na prática (um DNS que não responde
+    segurava a rodada pelo timeout do resolvedor do sistema, tipicamente
+    ~40s) e, de quebra, mexia num ajuste GLOBAL do processo, valendo para as
+    threads do healthcheck e dos rastreadores durante a janela.
     """
-    original = socket.getdefaulttimeout()
-    try:
-        socket.setdefaulttimeout(timeout)
-        socket.getaddrinfo(host, 443)
-        return True
-    except OSError as e:
-        log.warning("DNS indisponível para %s: %s", host, e)
+    resultado: dict = {}
+
+    def _resolver() -> None:
+        try:
+            socket.getaddrinfo(host, 443)
+            resultado["ok"] = True
+        except OSError as e:
+            resultado["ok"] = False
+            resultado["erro"] = e
+
+    # daemon: se o resolvedor do sistema travar de vez, a thread pendurada
+    # não pode impedir o bot de encerrar.
+    t = threading.Thread(target=_resolver, name="dns-check", daemon=True)
+    t.start()
+    t.join(timeout)
+
+    if "ok" not in resultado:
+        log.warning("DNS não respondeu para %s em %.1fs", host, timeout)
         return False
-    finally:
-        socket.setdefaulttimeout(original)
+    if not resultado["ok"]:
+        log.warning("DNS indisponível para %s: %s", host, resultado.get("erro"))
+        return False
+    return True
 
 
 def _espera(tentativa: int, base: float) -> float:
