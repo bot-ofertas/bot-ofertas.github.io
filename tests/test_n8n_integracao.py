@@ -613,6 +613,74 @@ def test_configurar_avisa_que_falta_admin_chat_id():
     assert r.returncode != 0, saida
 
 
+def test_preparar_credenciais_bate_com_o_header_que_o_bot_envia():
+    """O nome do header é o ponto onde a instalação manual mais erra.
+
+    Se a credencial de Header Auth for criada com qualquer coisa diferente
+    de `X-Bot-Token`, o nó Webhook recusa TODO evento com 403 e o n8n não
+    diz por quê — o bot fica publicando normalmente e o histórico na nuvem
+    fica vazio. Este teste amarra o gerador de credenciais ao valor que o
+    `integrations/n8n.py` realmente manda, para os dois não se separarem.
+    """
+    import tempfile  # noqa: PLC0415
+
+    setup = _setup_module()
+    guardado = {k: os.environ.get(k) for k in ("TOKEN_TELEGRAM", "N8N_TOKEN")}
+    os.environ["TOKEN_TELEGRAM"] = "123456:FAKE"
+    os.environ["N8N_TOKEN"] = "segredo-do-webhook"
+    try:
+        with tempfile.TemporaryDirectory(prefix="bot_cred_") as d:
+            destino = os.path.join(d, "cred.json")
+            assert setup.preparar_credenciais(destino) == 0
+            with open(destino, encoding="utf-8") as f:
+                creds = json.load(f)
+
+        por_tipo = {c["type"]: c for c in creds}
+        assert set(por_tipo) == {"telegramApi", "httpHeaderAuth"}, por_tipo
+
+        header = por_tipo["httpHeaderAuth"]
+        assert header["data"]["name"] == "X-Bot-Token"
+        assert header["data"]["value"] == "segredo-do-webhook"
+        assert por_tipo["telegramApi"]["data"]["accessToken"] == "123456:FAKE"
+
+        # E o nome do header tem que ser o mesmo que o cliente envia.
+        raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(raiz, "integrations", "n8n.py"), encoding="utf-8") as f:
+            cliente = f.read()
+        assert '"X-Bot-Token"' in cliente, (
+            "o cliente parou de mandar X-Bot-Token; a credencial gerada ficou orfa")
+
+        # Os nomes precisam bater com os que os workflows referenciam.
+        assert creds[0]["name"] == setup.CRED_TELEGRAM
+        assert creds[1]["name"] == setup.CRED_HEADER
+    finally:
+        for k, v in guardado.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
+def test_preparar_credenciais_recusa_sem_segredos():
+    """Gerar um arquivo de credenciais vazio seria pior que falhar: ele
+    importaria sem erro e deixaria o webhook sem autenticação."""
+    import tempfile  # noqa: PLC0415
+
+    setup = _setup_module()
+    guardado = {k: os.environ.get(k) for k in ("TOKEN_TELEGRAM", "N8N_TOKEN")}
+    os.environ.pop("TOKEN_TELEGRAM", None)
+    os.environ.pop("N8N_TOKEN", None)
+    try:
+        with tempfile.TemporaryDirectory(prefix="bot_cred_") as d:
+            destino = os.path.join(d, "cred.json")
+            assert setup.preparar_credenciais(destino) == 1
+            assert not os.path.exists(destino), "nao pode deixar arquivo pela metade"
+    finally:
+        for k, v in guardado.items():
+            if v is not None:
+                os.environ[k] = v
+
+
 def test_preparar_grava_workflows_prontos_sem_rede():
     """`--preparar` é o caminho de instalação que não precisa de API key.
 

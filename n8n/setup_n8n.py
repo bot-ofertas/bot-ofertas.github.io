@@ -549,6 +549,55 @@ def testar() -> int:
     return 0
 
 
+def preparar_credenciais(destino: str) -> int:
+    """Gera o arquivo que a CLI do n8n importa como credenciais.
+
+    Sem isso sobra a parte mais chata da instalação manual: abrir o n8n,
+    criar "Bot Ofertas — Telegram", colar o token, criar outra credencial de
+    Header Auth, acertar o nome do header exatamente como `X-Bot-Token` —
+    e um erro de digitação aí devolve 403 no webhook sem dizer por quê.
+
+    O arquivo sai com os segredos EM CLARO, porque é assim que o
+    `n8n import:credentials` os recebe (ele cifra na hora de gravar, com a
+    chave da própria instância). Por isso ele nasce numa pasta temporária e
+    quem chama tem obrigação de apagá-lo logo depois — nunca no repositório,
+    nunca perto do git.
+    """
+    token_tg = (os.getenv("TOKEN_TELEGRAM") or "").strip()
+    segredo = (os.getenv("N8N_TOKEN") or "").strip()
+
+    faltam = [n for n, v in (("TOKEN_TELEGRAM", token_tg), ("N8N_TOKEN", segredo)) if not v]
+    if faltam:
+        print(f"❌ Não dá para gerar as credenciais sem {', '.join(faltam)} no .env.",
+              file=sys.stderr)
+        return 1
+
+    creds = [
+        {"name": CRED_TELEGRAM, "type": "telegramApi",
+         "data": {"accessToken": token_tg}},
+        # O nome do header tem que bater com o que `integrations/n8n.py`
+        # envia. É literal nos dois lados de propósito: um valor derivado
+        # de variável aqui seria mais uma coisa para sair de sincronia.
+        {"name": CRED_HEADER, "type": "httpHeaderAuth",
+         "data": {"name": "X-Bot-Token", "value": segredo}},
+    ]
+
+    os.makedirs(os.path.dirname(os.path.abspath(destino)) or ".", exist_ok=True)
+    with open(destino, "w", encoding="utf-8") as f:
+        json.dump(creds, f, ensure_ascii=False, indent=2)
+    try:
+        os.chmod(destino, 0o600)
+    except OSError:
+        # Windows ignora o modo POSIX; o arquivo já nasce numa pasta
+        # temporária do usuário e é apagado em seguida.
+        pass
+
+    print(f"✅ Credenciais geradas em {destino} ({len(creds)} itens).")
+    print("   Contém segredos em claro — apague depois de importar:")
+    print(f'   n8n import:credentials --input="{destino}"')
+    return 0
+
+
 def preparar_para_importar(destino: str = "") -> int:
     """Grava os workflows já preenchidos numa pasta, sem tocar na rede.
 
@@ -614,11 +663,16 @@ def main() -> int:
     p.add_argument("--preparar", nargs="?", const="", metavar="PASTA",
                    help="grava os workflows preenchidos numa pasta, para importar "
                         "sem API key (n8n import:workflow ou Import from File)")
+    p.add_argument("--preparar-credenciais", metavar="ARQUIVO",
+                   help="gera o JSON de credenciais para `n8n import:credentials` "
+                        "(contem segredos em claro: apague depois de importar)")
     args = p.parse_args()
 
     try:
         if args.configurar:
             return configurar()
+        if args.preparar_credenciais:
+            return preparar_credenciais(args.preparar_credenciais)
         if args.preparar is not None:
             return preparar_para_importar(args.preparar)
         if args.listar:

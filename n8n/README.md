@@ -101,13 +101,25 @@ com `admin_chat_id`, canal e a janela de operação já preenchidos — sem
 tocar na rede. Daí:
 
 ```bash
-n8n import:workflow --separate --input=n8n/prontos   # a CLI do próprio n8n
+# as credenciais também saem do .env, sem digitar nada na interface
+python n8n/setup_n8n.py --preparar-credenciais /tmp/cred.json
+n8n import:credentials --input=/tmp/cred.json && rm /tmp/cred.json
+n8n import:workflow --separate --input=n8n/prontos
+n8n list:workflow                        # pega os ids dos "Bot Ofertas — ..."
+n8n update:workflow --id=<ID> --active=true
 ```
 
-ou, pela interface, **Workflows → ⋯ → Import from File**, um por vez. Nos
-dois casos sobram duas coisas para fazer à mão, que só a API faz sozinha:
-criar as credenciais (**Bot Ofertas — Telegram** e **Bot Ofertas — Token do
-Webhook**, Header Auth com header `X-Bot-Token`) e ativar cada workflow.
+> O arquivo de credenciais tem os segredos **em claro** — é o formato que o
+> `import:credentials` recebe (ele cifra ao gravar). Gere numa pasta
+> temporária e apague logo depois, como no comando acima.
+
+Ou, pela interface, **Workflows → ⋯ → Import from File**, um por vez — aí
+as credenciais e a ativação ficam manuais.
+
+**Depois de importar pela CLI, reinicie o n8n.** A CLI escreve direto no
+banco; a instância que já está rodando registrou os gatilhos na
+inicialização e não relê sozinha — sem o restart o webhook simplesmente não
+responde, sem mensagem de erro nenhuma.
 
 ### Atalho: um comando para tudo
 

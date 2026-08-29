@@ -112,18 +112,116 @@ if (-not $importado) {
     $prontos = Join-Path $BASE "n8n\prontos"
     & $python (Join-Path $BASE "n8n\setup_n8n.py") --preparar $prontos | Out-Null
 
-    # O n8n instalado localmente importa por linha de comando, sem API key.
-    # É o caminho mais rápido quando a chave não existe — e ele existe na
-    # máquina justamente porque o n8n roda nela.
-    $n8nCli = (Get-Command n8n -ErrorAction SilentlyContinue).Source
-    if ($n8nCli) {
-        Write-Host "  CLI do n8n encontrada — importando os 5 de uma vez." -ForegroundColor Green
-        & $n8nCli import:workflow --separate --input="$prontos" 2>&1 |
-            ForEach-Object { Write-Host "  $_" -ForegroundColor DarkGray }
-        if ($LASTEXITCODE -eq 0) {
-            $importado = $true
-            $feitos.Add("5 workflows importados pela CLI do n8n")
-            $pendencias.Add("ATIVE os 5 workflows no n8n (botao Active) e crie as 2 credenciais — a CLI importa, mas nao ativa nem cria credencial")
+    # A CLI do n8n importa credenciais E workflows sem API key nenhuma. O
+    # problema é achá-la: `Get-Command n8n` só enxerga o PATH, e um n8n
+    # instalado por npm no Windows deixa o executável em %APPDATA%\npm, que
+    # muitas vezes não está lá; e um n8n em Docker não tem executável nenhum
+    # na máquina. Procurar nos quatro lugares é a diferença entre automatizar
+    # tudo e mandar a pessoa clicar cinco vezes na interface.
+    $cli = $null
+
+    $doPath = (Get-Command n8n -ErrorAction SilentlyContinue).Source
+    if ($doPath) { $cli = @{ Modo = "exe"; Exe = $doPath } }
+
+    if (-not $cli) {
+        foreach ($cand in @("$env:APPDATA\npm\n8n.cmd", "$env:APPDATA\npm\n8n",
+                            "$env:ProgramFiles\nodejs\n8n.cmd")) {
+            if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand }; break }
+        }
+    }
+
+    if (-not $cli) {
+        # Contêiner do n8n rodando: o executável vive dentro dele.
+        $docker = (Get-Command docker -ErrorAction SilentlyContinue).Source
+        if ($docker) {
+            $nome = (& $docker ps --format "{{.Names}}`t{{.Image}}" 2>$null |
+                     Where-Object { $_ -match "n8n" } |
+                     ForEach-Object { ($_ -split "`t")[0] } | Select-Object -First 1)
+            if ($nome) { $cli = @{ Modo = "docker"; Exe = $docker; Container = $nome } }
+        }
+    }
+
+    if ($cli) {
+        Write-Host ("  CLI do n8n encontrada ({0}) — importando credenciais e workflows." -f $cli.Modo) -ForegroundColor Green
+
+        # As credenciais saem do .env com os segredos EM CLARO, porque é
+        # assim que o `import:credentials` os recebe. Pasta temporária do
+        # usuário, apagada no finally — nunca perto do repositório.
+        $credFile = Join-Path ([System.IO.Path]::GetTempPath()) ("botofertas_cred_" + [guid]::NewGuid().ToString("N") + ".json")
+        try {
+            & $python (Join-Path $BASE "n8n\setup_n8n.py") --preparar-credenciais $credFile | Out-Null
+            $temCred = Test-Path $credFile
+
+            if ($cli.Modo -eq "docker") {
+                # Dentro do contêiner o disco é outro: os arquivos precisam
+                # atravessar antes de existir para a CLI.
+                & $cli.Exe exec $cli.Container mkdir -p /tmp/botofertas 2>&1 | Out-Null
+                & $cli.Exe cp "$prontos/." "$($cli.Container):/tmp/botofertas/" 2>&1 | Out-Null
+                if ($temCred) { & $cli.Exe cp $credFile "$($cli.Container):/tmp/botofertas_cred.json" 2>&1 | Out-Null }
+                if ($temCred) {
+                    & $cli.Exe exec $cli.Container n8n import:credentials --input=/tmp/botofertas_cred.json 2>&1 |
+                        ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                }
+                & $cli.Exe exec $cli.Container n8n import:workflow --separate --input=/tmp/botofertas 2>&1 |
+                    ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                $okImport = ($LASTEXITCODE -eq 0)
+                & $cli.Exe exec $cli.Container rm -f /tmp/botofertas_cred.json 2>&1 | Out-Null
+            }
+            else {
+                if ($temCred) {
+                    & $cli.Exe import:credentials --input="$credFile" 2>&1 |
+                        ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                }
+                & $cli.Exe import:workflow --separate --input="$prontos" 2>&1 |
+                    ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                $okImport = ($LASTEXITCODE -eq 0)
+            }
+
+            if ($okImport) {
+                $importado = $true
+                $feitos.Add("2 credenciais + 5 workflows importados pela CLI do n8n")
+            }
+        }
+        finally {
+            # O arquivo tem o token do Telegram legível. Sai daqui de
+            # qualquer jeito, inclusive se a importação estourar no meio.
+            if (Test-Path $credFile) { Remove-Item $credFile -Force -ErrorAction SilentlyContinue }
+        }
+
+        if ($importado) {
+            # A CLI importa desativado. Ativar apenas os NOSSOS: um
+            # `--all` ligaria também qualquer outro workflow que o Daniel
+            # tenha na instância, o que não é decisão deste script.
+            Write-Host "  Ativando os workflows do Bot Ofertas..." -ForegroundColor Yellow
+            $lista = if ($cli.Modo -eq "docker") {
+                & $cli.Exe exec $cli.Container n8n list:workflow 2>$null
+            } else { & $cli.Exe list:workflow 2>$null }
+
+            $ativados = 0
+            foreach ($linha in $lista) {
+                if ($linha -match "Bot Ofertas") {
+                    $id = ($linha -split "\|")[0].Trim()
+                    if ($id) {
+                        if ($cli.Modo -eq "docker") {
+                            & $cli.Exe exec $cli.Container n8n update:workflow --id=$id --active=true 2>&1 | Out-Null
+                        } else {
+                            & $cli.Exe update:workflow --id=$id --active=true 2>&1 | Out-Null
+                        }
+                        if ($LASTEXITCODE -eq 0) { $ativados++ }
+                    }
+                }
+            }
+            if ($ativados -gt 0) {
+                $feitos.Add("$ativados workflow(s) ativados")
+                Write-Host "  $ativados workflow(s) ativados." -ForegroundColor Green
+            }
+            else {
+                $pendencias.Add("ative os workflows do Bot Ofertas no n8n (botao Active) — a importacao funcionou, a ativacao automatica nao")
+            }
+            $pendencias.Add("REINICIE o n8n para ele carregar os workflows importados (a CLI escreve no banco; a instancia ja rodando nao releem sozinha)")
+        }
+        else {
+            Write-Host "  A importacao pela CLI falhou." -ForegroundColor Yellow
         }
     }
 
