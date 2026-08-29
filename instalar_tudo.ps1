@@ -202,10 +202,21 @@ if (-not $importado) {
                 if ($linha -match "Bot Ofertas") {
                     $id = ($linha -split "\|")[0].Trim()
                     if ($id) {
+                        # `publish:workflow` e o comando atual; `update:workflow`
+                        # ainda funciona mas o proprio n8n 2.35 o marca como
+                        # DEPRECATED e manda usar o outro. Tenta o novo e cai
+                        # no antigo so se ele nao existir — assim funciona
+                        # tanto num n8n recente quanto num de versao anterior.
                         if ($cli.Modo -eq "docker") {
-                            & $cli.Exe exec $cli.Container n8n update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            & $cli.Exe exec $cli.Container n8n publish:workflow --id=$id 2>&1 | Out-Null
+                            if ($LASTEXITCODE -ne 0) {
+                                & $cli.Exe exec $cli.Container n8n update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            }
                         } else {
-                            & $cli.Exe update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            & $cli.Exe publish:workflow --id=$id 2>&1 | Out-Null
+                            if ($LASTEXITCODE -ne 0) {
+                                & $cli.Exe update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            }
                         }
                         if ($LASTEXITCODE -eq 0) { $ativados++ }
                     }

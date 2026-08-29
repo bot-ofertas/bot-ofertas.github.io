@@ -106,8 +106,13 @@ python n8n/setup_n8n.py --preparar-credenciais /tmp/cred.json
 n8n import:credentials --input=/tmp/cred.json && rm /tmp/cred.json
 n8n import:workflow --separate --input=n8n/prontos
 n8n list:workflow                        # pega os ids dos "Bot Ofertas — ..."
-n8n update:workflow --id=<ID> --active=true
+n8n publish:workflow --id=<ID>           # ativa (o antigo `update:workflow
+                                         # --id=<ID> --active=true` ainda
+                                         # funciona em n8n mais velho)
 ```
+
+Verificado contra um **n8n 2.35.7 real**: as 2 credenciais e os 5 workflows
+importam e os 5 ativam, sem API key nenhuma.
 
 > O arquivo de credenciais tem os segredos **em claro** — é o formato que o
 > `import:credentials` recebe (ele cifra ao gravar). Gere numa pasta

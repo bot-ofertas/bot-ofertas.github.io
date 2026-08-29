@@ -653,6 +653,12 @@ def test_preparar_credenciais_bate_com_o_header_que_o_bot_envia():
         # Os nomes precisam bater com os que os workflows referenciam.
         assert creds[0]["name"] == setup.CRED_TELEGRAM
         assert creds[1]["name"] == setup.CRED_HEADER
+
+        # O `id` nao e opcional: sem ele o import morre com
+        # "SQLITE_CONSTRAINT: NOT NULL constraint failed:
+        # credentials_entity.id" (reproduzido no n8n 2.35.7).
+        assert creds[0]["id"] == setup.CRED_ID_TELEGRAM
+        assert creds[1]["id"] == setup.CRED_ID_HEADER
     finally:
         for k, v in guardado.items():
             if v is None:
@@ -713,14 +719,35 @@ def test_preparar_grava_workflows_prontos_sem_rede():
                 # Só os campos que a API e a CLI aceitam; `id`/`active`/`tags`
                 # fazem a importação ser recusada.
                 assert sorted(pronto) == ["connections", "name", "nodes", "settings"], nome
-                # E o mesmo resultado do caminho pela API.
+                # Mesma preparação do caminho pela API — com uma diferença
+                # deliberada: lá as credenciais acabaram de ser criadas e
+                # têm ids sorteados pelo n8n; aqui elas vêm de
+                # `--preparar-credenciais`, com os ids fixos. O resto
+                # (CONFIG, janela, campos aceitos) tem que ser idêntico.
+                ids = {setup.CRED_TELEGRAM: setup.CRED_ID_TELEGRAM,
+                       setup.CRED_HEADER: setup.CRED_ID_HEADER}
                 with open(os.path.join(setup.DIR_WORKFLOWS, nome), encoding="utf-8") as f:
-                    esperado = setup.preparar_workflow(json.load(f), {}, setup._valores_config())
+                    esperado = setup.preparar_workflow(json.load(f), ids, setup._valores_config())
                 assert pronto == esperado, nome
             with open(os.path.join(destino, "01-ingestao-e-watchdog.json"), encoding="utf-8") as f:
                 bruto = f.read()
             assert "admin_chat_id: '555000111'" in bruto
             assert "silencio_ate: '08:30'" in bruto
+
+            # Bug real: os workflows saiam apontando para o placeholder
+            # `REPLACE_TELEGRAM_CRED`. A importacao dizia "Successfully
+            # imported", o workflow aparecia certinho na tela, e so na
+            # execucao o no do Telegram falhava por credencial inexistente
+            # — o n8n resolve credencial por ID, nao pelo nome.
+            assert "REPLACE_" not in bruto, "placeholder de credencial sobreviveu"
+            for nome_wf in nomes:
+                with open(os.path.join(destino, nome_wf), encoding="utf-8") as f:
+                    wf_pronto = json.load(f)
+                for no in wf_pronto["nodes"]:
+                    for tipo, ref in (no.get("credentials") or {}).items():
+                        esperado = (setup.CRED_ID_TELEGRAM if tipo == "telegramApi"
+                                    else setup.CRED_ID_HEADER)
+                        assert ref.get("id") == esperado, (nome_wf, no["name"], ref)
     finally:
         setup.request.urlopen = original
         if antes is None:

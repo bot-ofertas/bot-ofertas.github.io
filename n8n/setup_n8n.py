@@ -125,6 +125,12 @@ def _gravar_estado(estado: dict) -> None:
 CRED_TELEGRAM = "Bot Ofertas — Telegram"
 CRED_HEADER = "Bot Ofertas — Token do Webhook"
 
+# Ids fixos usados na importação por arquivo (`--preparar-credenciais`).
+# 16 caracteres alfanuméricos, o formato que o n8n gera. Fixos para que
+# reimportar atualize a mesma credencial em vez de duplicar.
+CRED_ID_TELEGRAM = "botOfertasTgrm01"
+CRED_ID_HEADER = "botOfertasHdr001"
+
 
 def garantir_credenciais(estado: dict) -> dict:
     """Cria as credenciais que faltam e devolve {nome: id}.
@@ -572,13 +578,20 @@ def preparar_credenciais(destino: str) -> int:
               file=sys.stderr)
         return 1
 
+    # O `id` NÃO é opcional, ao contrário do que o exemplo da documentação
+    # sugere: sem ele o import morre com
+    # "SQLITE_CONSTRAINT: NOT NULL constraint failed: credentials_entity.id"
+    # (reproduzido contra o n8n 2.35.7). E ele é FIXO de propósito: rodar o
+    # instalador de novo atualiza a mesma credencial em vez de encher o
+    # cofre de duplicatas com o mesmo nome, que é o tipo de bagunça que
+    # depois faz o workflow apontar para a credencial errada.
     creds = [
-        {"name": CRED_TELEGRAM, "type": "telegramApi",
+        {"id": CRED_ID_TELEGRAM, "name": CRED_TELEGRAM, "type": "telegramApi",
          "data": {"accessToken": token_tg}},
         # O nome do header tem que bater com o que `integrations/n8n.py`
         # envia. É literal nos dois lados de propósito: um valor derivado
         # de variável aqui seria mais uma coisa para sair de sincronia.
-        {"name": CRED_HEADER, "type": "httpHeaderAuth",
+        {"id": CRED_ID_HEADER, "name": CRED_HEADER, "type": "httpHeaderAuth",
          "data": {"name": "X-Bot-Token", "value": segredo}},
     ]
 
@@ -630,7 +643,18 @@ def preparar_para_importar(destino: str = "") -> int:
             continue
         with open(os.path.join(DIR_WORKFLOWS, nome), encoding="utf-8") as f:
             wf = json.load(f)
-        pronto = preparar_workflow(wf, {}, valores)
+        # Os ids FIXOS das credenciais, os mesmos que
+        # `--preparar-credenciais` grava. Sem isso os nós ficam apontando
+        # para o placeholder `REPLACE_TELEGRAM_CRED`: a importação diz
+        # "Successfully imported", o workflow aparece bonito na tela, e só
+        # na hora de publicar é que o nó do Telegram falha por credencial
+        # inexistente. O n8n resolve credencial por ID, não pelo nome —
+        # bater só o nome não basta (verificado contra o n8n 2.35.7).
+        pronto = preparar_workflow(
+            wf,
+            {CRED_TELEGRAM: CRED_ID_TELEGRAM, CRED_HEADER: CRED_ID_HEADER},
+            valores,
+        )
         caminho = os.path.join(destino, nome)
         with open(caminho, "w", encoding="utf-8") as f:
             json.dump(pronto, f, ensure_ascii=False, indent=2)
