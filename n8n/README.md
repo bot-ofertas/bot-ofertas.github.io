@@ -288,6 +288,8 @@ segredo deixa `/n8n/comando` aberto.
 | Webhook responde `403` | `N8N_TOKEN` do `.env` diferente do valor da credencial de header |
 | Alertas não chegam | `ADMIN_CHAT_ID` vazio, ou você nunca mandou `/start` para o bot |
 | `spool_pendente` crescendo no `/health` | o n8n está fora do ar ou a URL do webhook mudou |
+| `import:workflow` diz "Successfully imported" mas a interface continua vazia | a CLI gravou noutro banco. O servidor roda com `N8N_USER_FOLDER` próprio e a CLI não recebeu a mesma — ponha o mesmo valor no `.env` |
+| A CLI do n8n não é encontrada | o n8n pode estar rodando por `npx` (sem executável no disco). O instalador cobre isso, mas `npx --no-install n8n --version` confirma |
 
 Para desligar a integração inteira sem mexer em código: `N8N_ATIVO=0` no
 `.env`. O bot volta a rodar exatamente como antes.

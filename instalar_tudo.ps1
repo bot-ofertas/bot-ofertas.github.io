@@ -121,12 +121,12 @@ if (-not $importado) {
     $cli = $null
 
     $doPath = (Get-Command n8n -ErrorAction SilentlyContinue).Source
-    if ($doPath) { $cli = @{ Modo = "exe"; Exe = $doPath } }
+    if ($doPath) { $cli = @{ Modo = "exe"; Exe = $doPath; Prefixo = @() } }
 
     if (-not $cli) {
         foreach ($cand in @("$env:APPDATA\npm\n8n.cmd", "$env:APPDATA\npm\n8n",
                             "$env:ProgramFiles\nodejs\n8n.cmd")) {
-            if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand }; break }
+            if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand; Prefixo = @() }; break }
         }
     }
 
@@ -139,8 +139,22 @@ if (-not $importado) {
         if ($prefixo -and $prefixo -notmatch "^undefined") {
             $prefixo = $prefixo.Trim()
             foreach ($cand in @("$prefixo\n8n.cmd", "$prefixo\n8n", "$prefixo\bin\n8n")) {
-                if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand }; break }
+                if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand; Prefixo = @() }; break }
             }
+        }
+    }
+
+    # `npx n8n` — foi assim que o n8n do Daniel apareceu: sem executável
+    # próprio no disco, rodando a partir do cache do npm. Nenhuma das buscas
+    # acima enxerga esse caso, porque não há arquivo para achar.
+    # `--no-install` é deliberado: sem ele, o npx BAIXARIA o n8n inteiro
+    # (centenas de MB) em silêncio quando não estivesse em cache — uma
+    # instalação pesada disparada por um script que a pessoa achou que só
+    # importaria uns JSON.
+    if (-not $cli -and (Get-Command npx -ErrorAction SilentlyContinue)) {
+        & npx --no-install n8n --version 2>&1 | Out-Null
+        if ($LASTEXITCODE -eq 0) {
+            $cli = @{ Modo = "npx"; Exe = "npx"; Prefixo = @("--no-install", "n8n") }
         }
     }
 
@@ -151,12 +165,47 @@ if (-not $importado) {
             $nome = (& $docker ps --format "{{.Names}}`t{{.Image}}" 2>$null |
                      Where-Object { $_ -match "n8n" } |
                      ForEach-Object { ($_ -split "`t")[0] } | Select-Object -First 1)
-            if ($nome) { $cli = @{ Modo = "docker"; Exe = $docker; Container = $nome } }
+            if ($nome) { $cli = @{ Modo = "docker"; Exe = $docker; Container = $nome; Prefixo = @() } }
         }
     }
 
     if ($cli) {
         Write-Host ("  CLI do n8n encontrada ({0}) — importando credenciais e workflows." -f $cli.Modo) -ForegroundColor Green
+
+        # A CLI e o servidor precisam apontar para o MESMO banco, e quem
+        # decide isso é N8N_USER_FOLDER. Quando o n8n roda com uma pasta
+        # própria (ex.: D:\bot_ofertas\data\n8n) e a CLI não recebe a mesma
+        # variável, ela grava em %USERPROFILE%\.n8n — um segundo banco. O
+        # import imprime sucesso, os 5 workflows entram... noutro lugar, e
+        # a interface continua vazia. É o pior tipo de falha: silenciosa e
+        # com aparência de acerto.
+        if ($cli.Modo -ne "docker") {
+            $pastaN8n = $envVals["N8N_USER_FOLDER"]
+            if ([string]::IsNullOrWhiteSpace($pastaN8n)) {
+                # Não configurada no .env, mas se o projeto tem data\n8n com
+                # um banco dentro, é quase certo que o servidor usa essa —
+                # foi assim que a instalação do Daniel ficou montada.
+                # O n8n cria <N8N_USER_FOLDER>\.n8n\database.sqlite — ele
+                # ACRESCENTA o `.n8n`. Verificado rodando a CLI de verdade:
+                # apontar para data\n8n produz data\n8n\.n8n\database.sqlite.
+                # Procurar só por data\n8n\database.sqlite erraria o caso mais
+                # comum e cairia no banco padrão sem avisar.
+                $palpite = Join-Path $BASE "data\n8n"
+                foreach ($db in @((Join-Path $palpite ".n8n\database.sqlite"),
+                                  (Join-Path $palpite "database.sqlite"))) {
+                    if (Test-Path $db) { $pastaN8n = $palpite; break }
+                }
+            }
+            if ($pastaN8n) {
+                $env:N8N_USER_FOLDER = $pastaN8n
+                Write-Host "  Usando a pasta do n8n: $pastaN8n" -ForegroundColor DarkGray
+            }
+            else {
+                Write-Host "  Pasta do n8n: padrao (~\.n8n). Se o seu n8n roda com" -ForegroundColor DarkGray
+                Write-Host "  N8N_USER_FOLDER proprio, coloque a mesma no .env ou a" -ForegroundColor DarkGray
+                Write-Host "  importacao vai para um banco diferente do que esta no ar." -ForegroundColor DarkGray
+            }
+        }
 
         # As credenciais saem do .env com os segredos EM CLARO, porque é
         # assim que o `import:credentials` os recebe. Pasta temporária do
@@ -183,10 +232,10 @@ if (-not $importado) {
             }
             else {
                 if ($temCred) {
-                    & $cli.Exe import:credentials --input="$credFile" 2>&1 |
+                    & $cli.Exe @($cli.Prefixo) import:credentials --input="$credFile" 2>&1 |
                         ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
                 }
-                & $cli.Exe import:workflow --separate --input="$prontos" 2>&1 |
+                & $cli.Exe @($cli.Prefixo) import:workflow --separate --input="$prontos" 2>&1 |
                     ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
                 $okImport = ($LASTEXITCODE -eq 0)
             }
@@ -209,7 +258,7 @@ if (-not $importado) {
             Write-Host "  Ativando os workflows do Bot Ofertas..." -ForegroundColor Yellow
             $lista = if ($cli.Modo -eq "docker") {
                 & $cli.Exe exec $cli.Container n8n list:workflow 2>$null
-            } else { & $cli.Exe list:workflow 2>$null }
+            } else { & $cli.Exe @($cli.Prefixo) list:workflow 2>$null }
 
             $ativados = 0
             foreach ($linha in $lista) {
@@ -227,9 +276,9 @@ if (-not $importado) {
                                 & $cli.Exe exec $cli.Container n8n update:workflow --id=$id --active=true 2>&1 | Out-Null
                             }
                         } else {
-                            & $cli.Exe publish:workflow --id=$id 2>&1 | Out-Null
+                            & $cli.Exe @($cli.Prefixo) publish:workflow --id=$id 2>&1 | Out-Null
                             if ($LASTEXITCODE -ne 0) {
-                                & $cli.Exe update:workflow --id=$id --active=true 2>&1 | Out-Null
+                                & $cli.Exe @($cli.Prefixo) update:workflow --id=$id --active=true 2>&1 | Out-Null
                             }
                         }
                         if ($LASTEXITCODE -eq 0) { $ativados++ }
