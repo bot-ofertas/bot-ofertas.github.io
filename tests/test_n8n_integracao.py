@@ -18,6 +18,7 @@ Rodar:
 import json
 import inspect
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -611,6 +612,56 @@ def test_configurar_avisa_que_falta_admin_chat_id():
     # Exit != 0 é o que permite encadear os comandos sem seguir com uma
     # configuração pela metade.
     assert r.returncode != 0, saida
+
+
+def test_configurar_liga_comandos_remotos_so_com_n8n_local():
+    """O caminho de volta (n8n -> bot) e uma decisao de exposicao de rede.
+
+    Com o n8n na MESMA maquina, `127.0.0.1:8724` ja e alcancavel: ligar o
+    BOT_API_URL nao abre porta nenhuma, so aproveita um canal que existia.
+    Com o n8n fora dela, o mesmo campo exigiria expor na rede um endpoint
+    que PAUSA a operacao — isso nunca pode ser ligado por conta propria.
+
+    Este teste trava as duas metades: sem ele, uma "melhoria" futura que
+    preenchesse o campo sempre passaria despercebida e exporia a API.
+    """
+    import subprocess  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+
+    raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    def rodar(api_url: str) -> tuple[str, str]:
+        with tempfile.TemporaryDirectory(prefix="bot_volta_") as tmp:
+            for pasta in ("core", "n8n"):
+                shutil.copytree(os.path.join(raiz, pasta), os.path.join(tmp, pasta))
+            with open(os.path.join(raiz, ".env.example"), encoding="utf-8") as f:
+                base = f.read()
+            base = base.replace("TOKEN_TELEGRAM=cole_aqui_o_token_do_BotFather",
+                                "TOKEN_TELEGRAM=123456:FAKE")
+            base = re.sub(r"(?m)^N8N_API_URL=.*$", f"N8N_API_URL={api_url}", base)
+            with open(os.path.join(tmp, ".env"), "w", encoding="utf-8") as f:
+                f.write(base)
+            ambiente = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+            for chave in ("BOT_API_URL", "N8N_TOKEN", "N8N_API_URL", "ADMIN_CHAT_ID"):
+                ambiente.pop(chave, None)
+            r = subprocess.run(
+                [sys.executable, os.path.join("n8n", "setup_n8n.py"), "--configurar"],
+                cwd=tmp, capture_output=True, text=True, timeout=120, env=ambiente)
+            with open(os.path.join(tmp, ".env"), encoding="utf-8") as f:
+                env_final = f.read()
+        return r.stdout, env_final
+
+    saida, env_final = rodar("http://localhost:5678")
+    assert "BOT_API_URL=http://127.0.0.1:8724" in env_final, saida
+    assert "libera os comandos remotos" in saida, saida
+    # E a exposicao de rede continua exatamente onde estava.
+    assert re.search(r"(?m)^HEALTHCHECK_BIND=127\.0\.0\.1$", env_final), (
+        "o bind saiu de 127.0.0.1 — isso expoe /n8n/comando na rede local")
+
+    saida, env_final = rodar("https://daniel.app.n8n.cloud")
+    assert re.search(r"(?m)^BOT_API_URL=\s*$", env_final), (
+        "n8n fora da maquina nao pode ligar o caminho de volta sozinho:\n" + saida)
+    assert "decisão sua" in saida or "decisao sua" in saida, saida
 
 
 def test_preparar_credenciais_bate_com_o_header_que_o_bot_envia():

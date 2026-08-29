@@ -421,6 +421,46 @@ def configurar() -> int:
             print("                 nenhum chat encontrado. Mande /start para o seu")
             print("                 bot no Telegram e rode este comando de novo.")
 
+    # ── Caminho de volta: o n8n falando com o bot ───────────────────────
+    # Até aqui a ligação é de mão única — o bot empurra eventos e o n8n só
+    # escuta. O workflow 05 (comandos remotos: /status, /pausar, /liberar)
+    # precisa do contrário, e fica inerte enquanto BOT_API_URL estiver
+    # vazio: importa, ativa, e todo comando morre sem resposta.
+    #
+    # Quando o n8n roda NA MESMA MÁQUINA, o caminho de volta já existe e é
+    # gratuito: `127.0.0.1:8724`, o mesmo endereço onde o healthcheck já
+    # escuta. Não abre porta nenhuma para a rede, não muda bind, não
+    # aumenta exposição — só deixa de desperdiçar um canal que estava ali.
+    #
+    # Fora dessa máquina (n8n.cloud, outro host, contêiner Docker) a coisa
+    # muda de natureza: exigiria expor a API na rede, e um endpoint que
+    # PAUSA a operação não se abre sem decisão explícita do dono. Aí o
+    # comando só informa e para.
+    api_bot = (os.getenv("BOT_API_URL") or "").strip()
+    porta_hc = (os.getenv("HEALTHCHECK_PORTA") or "8724").strip()
+    if not api_bot:
+        alvo = _api_url()
+        local = any(m in alvo for m in ("localhost", "127.0.0.1", "[::1]"))
+        segredo = novos.get("N8N_TOKEN") or (os.getenv("N8N_TOKEN") or "").strip()
+        if local and segredo:
+            novos["BOT_API_URL"] = f"http://127.0.0.1:{porta_hc}"
+            print(f"  BOT_API_URL    → http://127.0.0.1:{porta_hc} "
+                  "(n8n é local; libera os comandos remotos)")
+        elif local and not segredo:
+            # Sem N8N_TOKEN o /n8n/comando aceita qualquer chamada de
+            # 127.0.0.1. Ainda é local, mas é uma porta de pausa sem
+            # tranca — melhor não ligar por conta própria.
+            print("  BOT_API_URL    não preenchido: falta N8N_TOKEN para autenticar")
+            print("                 os comandos. Rode este comando de novo depois.")
+        else:
+            print(f"  BOT_API_URL    não preenchido: seu n8n está em {alvo},")
+            print("                 fora desta máquina. Os comandos remotos exigiriam")
+            print("                 expor o healthcheck na rede (túnel ou 0.0.0.0), e")
+            print("                 isso é decisão sua — os outros 4 workflows não")
+            print("                 dependem disso. Ver n8n/README.md.")
+    else:
+        print(f"  BOT_API_URL    já definido: {api_bot}")
+
     if not _api_key():
         print("\n  N8N_API_KEY    ausente — este é o único que não dá para gerar daqui.")
         print("                 Abra o n8n → Settings → n8n API → Create an API key,")

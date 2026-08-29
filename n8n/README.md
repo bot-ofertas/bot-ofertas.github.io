@@ -258,7 +258,14 @@ curl -X POST http://127.0.0.1:8724/n8n/comando \
 
 ### Expor o healthcheck para um n8n externo
 
-Só se você quiser o workflow 05. Duas opções:
+**Se o n8n roda nesta mesma máquina, não precisa de nada disto.** O
+`--configurar` já preenche `BOT_API_URL=http://127.0.0.1:8724` sozinho: o
+caminho de volta é o mesmo endereço onde o healthcheck já escuta, então
+nenhuma porta é aberta e o workflow 05 passa a funcionar. Confira com
+`grep BOT_API_URL .env`.
+
+O que segue vale só para o n8n **fora** desta máquina — e aí é decisão sua,
+porque `POST /n8n/comando` pausa a operação do bot. Duas opções:
 
 - **n8n self-hosted na mesma máquina:** use
   `BOT_API_URL=http://host.docker.internal:8724` e
