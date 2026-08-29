@@ -1,5 +1,6 @@
 # aguardar_e_desligar.ps1
-# Chamado pela tarefa agendada BotOfertas-Shutdown às 02:00.
+# Chamado pela tarefa agendada BotOfertas-Shutdown no fim da janela de
+# operação (HORA_DESLIGAR, 02:00 por padrão — ver core/janela.py).
 # Se o bot estiver no meio de um ciclo de scraping/postagem, aguarda até
 # 35 minutos (checando a cada 60s) antes de desligar — evita matar o PC
 # durante um envio ao WhatsApp/Telegram e deixar o banco/clipboard num
@@ -43,8 +44,20 @@ Add-Type -AssemblyName System.Windows.Forms
 # num prompt, force=$true é necessário. O terceiro parâmetro ($false =
 # disableWakeEvent) continua False — mantém os Wake Timers habilitados
 # (RTCWAKE=1 em agendar_shutdown.ps1), não mude esse.
-$ok = [System.Windows.Forms.Application]::SetSuspendState('Suspend', $true, $false)
 $logFile = Join-Path $BASE "data\shutdown.log"
+$ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+
+# Registra a hora de volta ANTES de suspender: depois da chamada o processo
+# congela junto com a máquina, e uma linha escrita "depois" pode nunca sair.
+# Com a hora prevista no log, quem abre o arquivo de manhã compara com o
+# "Wake OK" seguinte e vê na hora se o despertar atrasou ou nem aconteceu.
+$volta = try {
+    (& $python -m core.janela --agenda 2>$null | ConvertFrom-Json).ligar
+} catch { "?" }
+if (-not $volta) { $volta = "?" }
+Add-Content -Path $logFile -Value "$ts - Suspendendo (volta prevista: $volta)"
+
+$ok = [System.Windows.Forms.Application]::SetSuspendState('Suspend', $true, $false)
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 if ($ok) {
     Add-Content -Path $logFile -Value "$ts - Suspensao OK"

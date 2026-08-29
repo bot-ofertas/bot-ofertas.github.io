@@ -67,6 +67,18 @@ def _rastreador_ja_rodando() -> bool:
     return False
 
 
+def rastreador_em_execucao() -> bool:
+    """Mesma checagem, exposta para fora do módulo.
+
+    O supervisor (`garantir_bot.py`) precisa exatamente desta resposta antes
+    de decidir subir o bot. Duplicar a varredura de processos lá seria criar
+    duas definições de "está rodando" que envelhecem em ritmos diferentes —
+    e é justamente a discordância entre elas que produziria um segundo
+    conjunto de rastreadores publicando em paralelo.
+    """
+    return _rastreador_ja_rodando()
+
+
 def etapa_1_validar_config() -> bool:
     """Valida .env + TOKEN_TELEGRAM."""
     try:

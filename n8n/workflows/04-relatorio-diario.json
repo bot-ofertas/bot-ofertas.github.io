@@ -7,13 +7,13 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "0 11 * * *"
+              "expression": "30 12 * * *"
             }
           ]
         }
       },
       "id": "toda-manhã-08h-brt",
-      "name": "Toda manhã 08h BRT",
+      "name": "Toda manhã 09h30 BRT",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
@@ -121,22 +121,6 @@
     }
   ],
   "connections": {
-    "Toda manhã 08h BRT": {
-      "main": [
-        [
-          {
-            "node": "Ofertas do site",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Execuções do GitHub Actions",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Ofertas do site": {
       "main": [
         [
@@ -164,6 +148,22 @@
         [
           {
             "node": "Enviar relatório",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Toda manhã 09h30 BRT": {
+      "main": [
+        [
+          {
+            "node": "Ofertas do site",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execuções do GitHub Actions",
             "type": "main",
             "index": 0
           }

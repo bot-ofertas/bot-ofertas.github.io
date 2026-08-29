@@ -46,6 +46,10 @@ import sys
 from urllib import error, request
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# O instalador é chamado como `python n8n/setup_n8n.py`, então quem entra no
+# sys.path é a pasta n8n/, não a raiz — sem esta linha, `from core import
+# janela` (usado para sincronizar a janela de operação nos workflows) falha.
+sys.path.insert(0, BASE)
 DIR_WORKFLOWS = os.path.join(BASE, "n8n", "workflows")
 ESTADO_PATH = os.path.join(BASE, "n8n", ".n8n_state.json")
 
@@ -199,12 +203,54 @@ def preencher_config(js: str, valores: dict[str, str]) -> str:
     return js
 
 
+def aplicar_janela(js: str) -> str:
+    """Sincroniza a janela de operação do PC dentro dos nós Code.
+
+    Ao contrário de `preencher_config`, aqui o valor é substituído mesmo
+    quando já existe — e de propósito. `silencio_de`/`silencio_ate` não são
+    uma escolha feita na interface do n8n: são o reflexo de HORA_LIGAR e
+    HORA_DESLIGAR do `.env`, os mesmos horários que geram as tarefas do
+    Agendador do Windows. Se o Daniel mudar o horário no `.env` e o n8n
+    ficasse com a cópia antiga, o watchdog voltaria a alertar "bot caiu"
+    todo dia no horário em que o desligamento é planejado — o ruído diário
+    que a janela de silêncio existe para eliminar.
+
+    Os JSON versionados já trazem os valores padrão preenchidos (e não
+    vazios) para que importar o arquivo à mão pela interface também produza
+    um watchdog correto, sem depender do instalador.
+    """
+    try:
+        from core import janela  # noqa: PLC0415
+
+        ag = janela.agenda()
+    except ImportError:
+        # Sem o módulo, os valores já presentes no JSON (os padrões) estão
+        # corretos — deixar como está é melhor que abortar a importação.
+        return js
+    troca = {
+        "silencio_de": ag["desligar"],
+        "silencio_ate": ag["ligar"],
+    }
+    for campo, valor in troca.items():
+        js = re.sub(
+            rf"({re.escape(campo)}\s*:\s*)'[^']*'",
+            lambda m, v=valor: f"{m.group(1)}'{v}'",
+            js,
+        )
+    js = re.sub(
+        r"(tolerancia_religar_min\s*:\s*)\d+",
+        lambda m: f"{m.group(1)}{ag['tolerancia_religar_min']}",
+        js,
+    )
+    return js
+
+
 def preparar_workflow(wf: dict, cred_ids: dict, valores: dict) -> dict:
     """Aplica credenciais e CONFIG, e remove campos que a API rejeita."""
     for node in wf.get("nodes", []):
         js = node.get("parameters", {}).get("jsCode")
         if js:
-            node["parameters"]["jsCode"] = preencher_config(js, valores)
+            node["parameters"]["jsCode"] = aplicar_janela(preencher_config(js, valores))
         creds = node.get("credentials") or {}
         for tipo, ref in creds.items():
             nome = ref.get("name", "")

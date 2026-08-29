@@ -185,6 +185,20 @@ def _status_pausa() -> dict:
         return {"pausado": False}
 
 
+def _status_janela() -> dict:
+    """Onde estamos no ciclo diário de liga/desliga do PC.
+
+    Sem isso, um `/health` consultado às 03h não tem como distinguir "o bot
+    morreu" de "o PC está desligado por agendamento" — e é essa diferença
+    que decide entre acordar alguém e não fazer nada.
+    """
+    try:
+        from core import janela  # noqa: PLC0415
+        return janela.resumo()
+    except Exception as e:
+        return {"erro": str(e)[:120]}
+
+
 def _status_quarentena() -> dict:
     """Produtos que falharam ao publicar e estão fora de rotação.
 
@@ -227,6 +241,7 @@ class _Handler(BaseHTTPRequestHandler):
                 "ml_token": _status_ml_token(),
                 "pausa": _status_pausa(),
                 "quarentena": _status_quarentena(),
+                "janela": _status_janela(),
             }
             # `payload["chrome"]["ok"] or True` estava na lista: constante
             # True, sem efeito nenhum -- o Chrome dedicado é opcional desde

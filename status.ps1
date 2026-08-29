@@ -144,6 +144,19 @@ if ($null -ne $h) {
             Write-Host "              - $pid_prod" -ForegroundColor DarkGray
         }
     }
+
+    # Ciclo diário. Mostrar a janela aqui evita a leitura errada mais cara
+    # do status: ver o bot parado de madrugada e concluir que quebrou,
+    # quando o PC está desligado por agendamento.
+    if ($h.janela) {
+        if ($h.janela.dentro_da_janela) {
+            Write-Host "  Janela:     operando ($($h.janela.ligar)-$($h.janela.desligar)) · desliga $($h.janela.proximo_desligamento)" -ForegroundColor Green
+        }
+        else {
+            Write-Host "  Janela:     FORA do horario de operacao ($($h.janela.ligar)-$($h.janela.desligar))" -ForegroundColor DarkGray
+            Write-Host "              religa $($h.janela.proxima_religada) — parada planejada, nao e falha" -ForegroundColor DarkGray
+        }
+    }
 }
 else {
     Write-Host "  Healthcheck OFF (nao respondeu na porta 8724)" -ForegroundColor Red

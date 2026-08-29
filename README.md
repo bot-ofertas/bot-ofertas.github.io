@@ -109,24 +109,51 @@ python -m core.divulgacao facebook grupo     # divulgação pura do grupo
 |---|---|
 | 01:00 | Verificação diária — relatório de saúde no Telegram |
 | 02:00 | Suspende o PC, **esperando até 35 min** se o bot estiver no meio de uma rodada (`core.database.execucao_em_andamento()`) |
-| 02:00–08:45 | Quem publica é o GitHub Actions (`bot.yml`), 1x/hora |
-| 08:45 | Wake timer acorda o PC, registra o despertar e sobe o `startup.py` |
+| 02:00–08:30 | PC dormindo. Publicam o GitHub Actions (`bot.yml`, 1x/hora) e o n8n na nuvem |
+| 08:30 | Wake timer acorda o PC, registra o despertar e sobe o `startup.py` |
+| 09:00 | Publicação de reforço pelo n8n — sai mesmo se o PC não tiver voltado |
+| 09:15 | Se ainda não houve heartbeat, o watchdog avisa: **"o PC não religou"** |
+| 09:30 | Relatório diário no Telegram |
+| a cada 30 min | Supervisor: PC ligado, dentro da janela e sem bot rodando → sobe o bot |
+
+Os horários vêm de `HORA_LIGAR`/`HORA_DESLIGAR` no `.env`, lidos por
+`core/janela.py`. É a fonte única: as tarefas do Windows, o supervisor e a
+janela de silêncio do watchdog no n8n saem todos daí. Mudou o horário? Rode
+`.\agendar_shutdown.ps1` e `python n8n/setup_n8n.py --importar` e os três
+acompanham.
 
 **Suspensão (S3), não desligamento completo.** O Wake Timer do Windows não
 acorda de um desligamento total (S5) sem "Wake on RTC" habilitado na BIOS —
 acesso físico, fora do alcance de qualquer automação. Hibernação teria o
 mesmo consumo do desligar, mas habilitá-la exige prompt de administrador que
 esta automação não tem. Em S3 o consumo é de poucos watts durante a
-madrugada, e o despertar é confiável.
+madrugada, e o despertar é confiável — que é o que decide se os grupos
+recebem oferta no dia seguinte.
 
 Se quiser desligamento **completo**, habilite `Wake on RTC` / `RTC Alarm` na
 BIOS e troque `SetSuspendState` por `shutdown /s` em `aguardar_e_desligar.ps1`.
 
-O `-Status` mostra as três tarefas com `LastRunTime` e o código de resultado
-traduzido, os wake timers ativos, o motivo do último despertar
+### Três redes de segurança, porque o despertar pode falhar
+
+Um ciclo que depende de uma tarefa acertar um instante falha inteiro quando
+esse instante escapa — queda de energia, alguém desligando no botão, uma
+atualização do Windows engolindo o gatilho. Foi o que aconteceu em
+31/07/2026, e o único sintoma foi o PC ligado de manhã sem nada rodando.
+
+1. **Supervisor a cada 30 min** (`garantir_bot.py`). Com o PC ligado dentro
+   da janela e o bot fora do ar, ele sobe o processo **pai**. No pior caso o
+   bot volta sozinho meia hora depois — sem ninguém por perto. Não age fora
+   da janela, não passa por cima de uma pausa, não sobe um segundo bot.
+2. **Alerta "o PC não religou"** no Telegram, 45 min após o horário de
+   religar. É o aviso que chega enquanto ainda dá tempo de salvar o dia.
+3. **Publicação na nuvem** (n8n, workflow 02) às 09:00, 12:00 e 20:00 BRT.
+   Independe do PC: mesmo com a máquina fora do ar o dia todo, os grupos
+   recebem oferta.
+
+O `-Status` mostra as quatro tarefas com `LastRunTime` e o código de
+resultado traduzido, os wake timers ativos, o motivo do último despertar
 (`powercfg -lastwake`) e as últimas linhas de `data/shutdown.log`. É o que
-faltava quando o ciclo falhou em silêncio em 31/07/2026 — nem o desligamento
-nem o despertar rodaram, e o único sintoma foi o PC ligado de manhã.
+faltava quando o ciclo falhou em silêncio em 31/07/2026.
 
 ## Automação em nuvem (n8n)
 

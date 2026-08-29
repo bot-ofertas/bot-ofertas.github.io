@@ -123,9 +123,9 @@ Confira em `http://127.0.0.1:8724/health` → bloco `n8n`.
 | # | Nome | Dispara com | O que faz |
 |---|------|-------------|-----------|
 | 01 | Ingestão de eventos e watchdog | webhook + a cada 15 min | Recebe todo evento do bot, acumula estatísticas, alerta no Telegram em quarentena/rodada falhada/erro. O ramo agendado avisa quando o **heartbeat some** — é assim que você fica sabendo que o PC caiu. |
-| 02 | Publicação de reforço | 12h e 20h BRT | Lê `offers.json` do site e publica no canal um resumo "TOP 3 de agora" com CTA do grupo. Roda com o PC desligado. |
+| 02 | Publicação de reforço | 09h, 12h e 20h BRT | Lê `offers.json` do site e publica no canal um resumo "TOP 3 de agora" com CTA do grupo. Roda com o PC desligado — é o piso que garante postagem diária mesmo se a máquina não religar. |
 | 03 | Divulgação dos grupos | 10h, 16h e 19h BRT | Monta o anúncio de divulgação (rodando entre Instagram, TikTok e Facebook) e entrega pronto no seu chat, com a foto sugerida. |
-| 04 | Relatório diário e saúde | 08h BRT | Junta o estado do site com as últimas execuções do GitHub Actions e manda o resumo — problemas na primeira linha. |
+| 04 | Relatório diário e saúde | 09h30 BRT | Junta o estado do site com as últimas execuções do GitHub Actions e manda o resumo — problemas na primeira linha. Roda uma hora depois do religar, para retratar o PC já de pé. |
 | 05 | Comandos remotos | mensagem no Telegram | `/status`, `/pausar`, `/retomar`, `/quarentena`, `/liberar <id>`, `/erros`, `/divulgar`, `/ping`. Exige `BOT_API_URL` acessível. |
 
 ### Por que o watchdog fica no n8n e não no bot
@@ -134,6 +134,25 @@ Um alerta gerado pelo próprio bot nunca chega justamente no caso que
 importa: o bot morto, o PC desligado, a internet caída. O heartbeat inverte
 isso — o n8n espera o sinal e reclama da **ausência** dele. O alerta só sai
 na transição (uma vez), não a cada 15 minutos, e a volta também é avisada.
+
+### A janela de silêncio (02:00 → 08:30)
+
+O PC desliga às 02:00 e volta às 08:30. Nessas 6h30 a ausência de heartbeat
+é o comportamento contratado, não uma falha — sem tratar isso, o watchdog
+mandaria um par "🔴 caiu / 🟢 voltou" **todo dia**, e em uma semana o alerta
+já teria virado ruído que ninguém abre. Dentro da janela ele fica calado e
+marca a queda como planejada.
+
+O valor está no que vem depois: passados 45 min do horário de religar sem
+nenhum sinal, sai o alerta **"o PC não religou"** — o único momento em que
+a diferença entre desligado e quebrado importa de verdade, porque é o dia
+inteiro de publicação que está em jogo.
+
+Os horários não são digitados nos JSON: `n8n/setup_n8n.py` sincroniza
+`silencio_de`/`silencio_ate` a partir de `core/janela.py` (que lê
+`HORA_LIGAR`/`HORA_DESLIGAR` do `.env`) a cada `--importar`. Os arquivos
+versionados já vêm com os valores certos preenchidos, então importar à mão
+pela interface também produz um watchdog correto.
 
 ---
 
@@ -147,6 +166,7 @@ na transição (uma vez), não a cada 15 minutos, e a volta também é avisada.
 | `rodada_concluida` | fim de cada rodada | `publicados`, `duplicatas`, `erros`, `links_falharam`, `duracao_s` |
 | `rodada_falhou` | exceção na rodada | `erro`, `fonte` |
 | `rodada_pulada` | sem DNS | `motivo` |
+| `bot_reiniciado` | supervisor subiu o bot | `origem`, `motivo`, `dentro_da_janela` |
 | `erro` | erro registrado | `operacao`, `mensagem`, `arquivo`, `linha` (1 por operação a cada 5 min) |
 
 Todo POST leva `X-Bot-Assinatura: sha256=<HMAC do corpo>` e

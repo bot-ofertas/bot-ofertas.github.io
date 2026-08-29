@@ -162,3 +162,36 @@ que responde "qual canal traz venda". A troca é sempre feita por
 `str.replace`: a versão anterior só funcionava quando o valor era
 exatamente `bot_telegram` e virava no-op silencioso em qualquer outro caso.
 `matt_tool`/`tag` são preservados sempre, e há teste que prova isso.
+
+## Regra 15 — Ciclo diário do PC (liga 08:30 / desliga 02:00)
+
+Decidido pelo Daniel em 2026-08-29. O PC opera das **08:30 às 02:00** e fica
+desligado o resto. Os horários moram em **um lugar só**: `core/janela.py`
+(lendo `HORA_LIGAR`/`HORA_DESLIGAR` do `.env`). Quem precisa deles pergunta —
+`agendar_shutdown.ps1` via `python -m core.janela --agenda`, o `garantir_bot.py`
+por import, os workflows do n8n via `setup_n8n.aplicar_janela()`. Nunca
+reescrever um horário à mão num segundo arquivo: foi assim que o watchdog
+passou a alertar "bot caiu" toda madrugada num desligamento planejado.
+
+- **Desligar é suspender (S3), não `shutdown /s`.** Wake Timer não acorda de
+  um S5 sem `Wake on RTC` na BIOS (confirmado em 2026-07-31: nem o
+  desligamento nem o despertar rodaram, o PC só voltou no braço à noite).
+  Trocar por desligamento completo quebra o religar automático — e um dia
+  sem religar é um dia sem publicar nos grupos.
+- **Nenhuma tarefa do ciclo usa `-StartWhenAvailable`**, exceto o supervisor.
+  Nas outras, "recuperar" um gatilho perdido significa desligar o PC fora de
+  hora (bug real de 2026-07-16). No supervisor é o oposto: recuperar é
+  exatamente o trabalho dele, e ele não desliga nada.
+- **O ciclo não pode depender de acertar um instante.** `BotOfertas-Supervisor`
+  roda a cada 30 min e sobe o processo **pai** se o PC estiver ligado dentro
+  da janela com o bot fora do ar — respeitando a pausa (`core.pausa`) e sem
+  nunca subir um segundo bot (`startup.rastreador_em_execucao()`).
+- **O watchdog do n8n cala a boca dentro da janela de silêncio** e, passados
+  `MINUTOS_TOLERANCIA_RELIGAR` (45) do horário de religar sem heartbeat,
+  manda o alerta que importa: *"o PC não religou"*. A marca
+  `queda_planejada` só é consumida quando o bot volta ou quando o alerta
+  sai — limpá-la antes faz o alerta genérico disparar contando as horas de
+  sono planejado como se fossem queda.
+- **Publicação diária tem piso na nuvem.** O workflow 02 publica às 09:00,
+  12:00 e 20:00 BRT direto do n8n. Se o PC não voltar, os grupos ainda
+  recebem oferta no mesmo dia.

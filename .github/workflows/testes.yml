@@ -53,6 +53,14 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_n8n_integracao.py
 
+      - name: Teste do ciclo diário (liga 08:30 / desliga 02:00)
+        # Executa o JavaScript real do watchdog com o relógio simulado. Sem
+        # isso, um erro na janela de silêncio só apareceria de madrugada, em
+        # produção, na forma de um alerta falso por dia.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_ciclo_diario.py
+
       - name: Teste de sistema (bot + n8n montados)
         # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
         # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->

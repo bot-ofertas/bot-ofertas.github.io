@@ -7,13 +7,13 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "0 15,23 * * *"
+              "expression": "0 12,15,23 * * *"
             }
           ]
         }
       },
       "id": "2x-por-dia",
-      "name": "2x por dia",
+      "name": "3x por dia",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
@@ -114,17 +114,6 @@
     }
   ],
   "connections": {
-    "2x por dia": {
-      "main": [
-        [
-          {
-            "node": "Buscar ofertas do site",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Buscar ofertas do site": {
       "main": [
         [
@@ -159,6 +148,17 @@
         [
           {
             "node": "Nada a publicar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3x por dia": {
+      "main": [
+        [
+          {
+            "node": "Buscar ofertas do site",
             "type": "main",
             "index": 0
           }
