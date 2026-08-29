@@ -613,6 +613,54 @@ def test_configurar_avisa_que_falta_admin_chat_id():
     assert r.returncode != 0, saida
 
 
+def test_preparar_grava_workflows_prontos_sem_rede():
+    """`--preparar` é o caminho de instalação que não precisa de API key.
+
+    A instalação real travou por não achar a tela da API key numa interface
+    que muda de versão para versão; sem uma saída por arquivo, o único
+    caminho restante era manual e nada garantia que o `admin_chat_id` fosse
+    parar lá dentro. O que este comando grava tem que ser byte a byte o que
+    o `--importar` enviaria, e sem tocar na rede — senão vira um segundo
+    caminho que envelhece diferente do primeiro.
+    """
+    import tempfile  # noqa: PLC0415
+
+    setup = _setup_module()
+    original = setup.request.urlopen
+
+    def _proibido(*a, **k):  # noqa: ANN002
+        raise AssertionError("--preparar não pode tocar na rede")
+
+    setup.request.urlopen = _proibido
+    antes = os.environ.get("ADMIN_CHAT_ID")
+    os.environ["ADMIN_CHAT_ID"] = "555000111"
+    try:
+        with tempfile.TemporaryDirectory(prefix="bot_prontos_") as destino:
+            assert setup.preparar_para_importar(destino) == 0
+            nomes = sorted(n for n in os.listdir(destino) if n.endswith(".json"))
+            assert len(nomes) == 5, nomes
+            for nome in nomes:
+                with open(os.path.join(destino, nome), encoding="utf-8") as f:
+                    pronto = json.load(f)
+                # Só os campos que a API e a CLI aceitam; `id`/`active`/`tags`
+                # fazem a importação ser recusada.
+                assert sorted(pronto) == ["connections", "name", "nodes", "settings"], nome
+                # E o mesmo resultado do caminho pela API.
+                with open(os.path.join(setup.DIR_WORKFLOWS, nome), encoding="utf-8") as f:
+                    esperado = setup.preparar_workflow(json.load(f), {}, setup._valores_config())
+                assert pronto == esperado, nome
+            with open(os.path.join(destino, "01-ingestao-e-watchdog.json"), encoding="utf-8") as f:
+                bruto = f.read()
+            assert "admin_chat_id: '555000111'" in bruto
+            assert "silencio_ate: '08:30'" in bruto
+    finally:
+        setup.request.urlopen = original
+        if antes is None:
+            os.environ.pop("ADMIN_CHAT_ID", None)
+        else:
+            os.environ["ADMIN_CHAT_ID"] = antes
+
+
 def test_configurar_nao_conta_placeholder_como_preenchido():
     """`cole_aqui_o_token_do_BotFather` vindo do .env.example passava por
     valor preenchido — e o erro só aparecia depois, como uma resposta

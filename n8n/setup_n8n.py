@@ -26,6 +26,8 @@ Uso:
     python n8n/setup_n8n.py --importar    # cria/atualiza e ativa tudo
     python n8n/setup_n8n.py --importar --sem-ativar
     python n8n/setup_n8n.py --listar      # o que já existe na instância
+    python n8n/setup_n8n.py --preparar    # grava os JSON prontos numa pasta,
+                                          # para importar SEM API key
 
 Variáveis usadas (.env na raiz do projeto):
     N8N_API_URL=http://localhost:5678     # endereço do seu n8n
@@ -547,6 +549,60 @@ def testar() -> int:
     return 0
 
 
+def preparar_para_importar(destino: str = "") -> int:
+    """Grava os workflows já preenchidos numa pasta, sem tocar na rede.
+
+    Existe porque a API pública do n8n exige uma API key, e conseguir essa
+    chave depende de achar a tela certa numa interface que muda de versão
+    para versão — foi exatamente onde a instalação travou. O n8n instalado
+    localmente importa por linha de comando (`n8n import:workflow`) sem
+    chave nenhuma, e a interface aceita "Import from File". Os dois querem
+    a mesma coisa: os JSON com `admin_chat_id`, `canal` e a janela de
+    operação já preenchidos.
+
+    O que sai daqui é idêntico ao que o `--importar` enviaria — mesma
+    função `preparar_workflow` — só que em arquivo em vez de HTTP.
+    """
+    destino = destino or os.path.join(BASE, "n8n", "prontos")
+    os.makedirs(destino, exist_ok=True)
+
+    valores = _valores_config()
+    print(f"\n📦 Preparando workflows em {destino}\n")
+    for campo, valor in valores.items():
+        print(f"   {campo:14} = {valor or '(vazio)'}")
+    if not valores.get("admin_chat_id"):
+        print("\n   ⚠️  admin_chat_id vazio: os workflows importam e ativam,")
+        print("       mas NENHUM alerta sai. Mande /start para o seu bot e")
+        print("       rode `--configurar` antes deste comando.")
+
+    gravados = []
+    for nome in sorted(os.listdir(DIR_WORKFLOWS)):
+        if not nome.endswith(".json"):
+            continue
+        with open(os.path.join(DIR_WORKFLOWS, nome), encoding="utf-8") as f:
+            wf = json.load(f)
+        pronto = preparar_workflow(wf, {}, valores)
+        caminho = os.path.join(destino, nome)
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(pronto, f, ensure_ascii=False, indent=2)
+        gravados.append(nome)
+        print(f"   ✅ {nome}")
+
+    print(f"\n{len(gravados)} workflow(s) prontos. Duas formas de importar, "
+          "nenhuma precisa de API key:\n")
+    print("  1) Linha de comando do próprio n8n (importa os 5 de uma vez):")
+    print(f'     n8n import:workflow --separate --input="{destino}"\n')
+    print("  2) Pela interface, um a um:")
+    print("     Workflows → ⋯ (canto superior direito) → Import from File\n")
+    print("Depois de importar, faça DUAS coisas na interface — elas são o")
+    print("que a API faria sozinha:")
+    print("  · crie as credenciais 'Bot Ofertas — Telegram' (o token do")
+    print("    BotFather) e 'Bot Ofertas — Token do Webhook' (Header Auth,")
+    print("    nome do header X-Bot-Token, valor = N8N_TOKEN do seu .env);")
+    print("  · ative cada workflow no botão Active.")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="Instala os workflows do Bot Ofertas no n8n")
     p.add_argument("--importar", action="store_true", help="cria/atualiza e ativa os workflows")
@@ -555,11 +611,16 @@ def main() -> int:
     p.add_argument("--testar", action="store_true", help="só confere conexão e configuração")
     p.add_argument("--configurar", action="store_true",
                    help="preenche o .env (gera N8N_TOKEN, descobre ADMIN_CHAT_ID)")
+    p.add_argument("--preparar", nargs="?", const="", metavar="PASTA",
+                   help="grava os workflows preenchidos numa pasta, para importar "
+                        "sem API key (n8n import:workflow ou Import from File)")
     args = p.parse_args()
 
     try:
         if args.configurar:
             return configurar()
+        if args.preparar is not None:
+            return preparar_para_importar(args.preparar)
         if args.listar:
             for w in listar_workflows():
                 marca = "▶️ " if w.get("active") else "⏸️ "

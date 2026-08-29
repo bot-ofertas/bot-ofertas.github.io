@@ -59,3 +59,8 @@ data/pausado.flag
 # Arquivos temporários
 *.zip
 afiliabot_v3/
+
+# Saída do `setup_n8n.py --preparar`: workflows com o chat_id já
+# preenchido. É gerado, não fonte — e versioná-lo colocaria dados da
+# instalação do Daniel no repositório.
+n8n/prontos/

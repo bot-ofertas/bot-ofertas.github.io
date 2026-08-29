@@ -88,6 +88,38 @@ python n8n/setup_n8n.py --testar      # confere conexão e configuração
 python n8n/setup_n8n.py --importar    # cria as credenciais, importa e ativa
 ```
 
+**Não achou a tela da API key?** Ela muda de lugar entre versões do n8n, e
+foi onde uma instalação real travou. Existe um caminho que não precisa de
+chave nenhuma:
+
+```bash
+python n8n/setup_n8n.py --preparar
+```
+
+Isso grava em `n8n/prontos/` os mesmos JSON que o `--importar` enviaria —
+com `admin_chat_id`, canal e a janela de operação já preenchidos — sem
+tocar na rede. Daí:
+
+```bash
+n8n import:workflow --separate --input=n8n/prontos   # a CLI do próprio n8n
+```
+
+ou, pela interface, **Workflows → ⋯ → Import from File**, um por vez. Nos
+dois casos sobram duas coisas para fazer à mão, que só a API faz sozinha:
+criar as credenciais (**Bot Ofertas — Telegram** e **Bot Ofertas — Token do
+Webhook**, Header Auth com header `X-Bot-Token`) e ativar cada workflow.
+
+### Atalho: um comando para tudo
+
+```powershell
+.\instalar_tudo.ps1        # ou duplo-clique em INSTALAR_TUDO.bat
+```
+
+Atualiza o código, preenche o `.env`, instala os workflows (pela API se
+houver chave, por arquivo se não houver), registra o ciclo diário e
+confere o bot. Cada etapa é independente: uma que falhe não impede as
+seguintes, e o resumo do fim lista o que ficou pendente.
+
 O instalador:
 
 - cria no cofre do n8n as credenciais **Bot Ofertas — Telegram**
