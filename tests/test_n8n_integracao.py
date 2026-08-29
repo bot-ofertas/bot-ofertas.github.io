@@ -16,7 +16,9 @@ Rodar:
     python -m pytest tests/ -v
 """
 import json
+import inspect
 import os
+import shutil
 import sys
 import tempfile
 
@@ -571,6 +573,54 @@ def test_descobrir_chat_id_extrai_chats_do_getupdates():
 def test_descobrir_chat_id_sem_token_nao_chama_rede():
     setup = _setup_module()
     assert setup.descobrir_chat_id("") == []
+
+
+def test_configurar_avisa_que_falta_admin_chat_id():
+    """Bug real (2026-08-29, achado na saída do Daniel): o resumo do
+    `--configurar` só conferia N8N_API_KEY e TOKEN_TELEGRAM. Com o
+    ADMIN_CHAT_ID vazio o comando dizia que faltava apenas a API key, o
+    `--importar` completava sem erro e os workflows subiam ativos — mas
+    nenhum alerta chegava a ninguém, incluindo o "o PC nao religou" que
+    sustenta a publicação diária. Uma config incompleta que se apresenta
+    como completa custa mais que uma que falha na cara.
+    """
+    import subprocess  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+
+    raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with tempfile.TemporaryDirectory(prefix="bot_cfg_") as tmp:
+        for pasta in ("core", "n8n"):
+            shutil.copytree(os.path.join(raiz, pasta), os.path.join(tmp, pasta))
+        shutil.copy(os.path.join(raiz, ".env.example"), tmp)
+        # .env como o de produção: token do Telegram real, sem chat_id.
+        with open(os.path.join(raiz, ".env.example"), encoding="utf-8") as f:
+            base = f.read().replace("TOKEN_TELEGRAM=cole_aqui_o_token_do_BotFather",
+                                    "TOKEN_TELEGRAM=123456:FAKE-token-de-teste")
+        with open(os.path.join(tmp, ".env"), "w", encoding="utf-8") as f:
+            f.write(base)
+
+        ambiente = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+        for chave in ("ADMIN_CHAT_ID", "ADMIN_IDS", "N8N_API_KEY", "N8N_TOKEN"):
+            ambiente.pop(chave, None)
+        r = subprocess.run([sys.executable, os.path.join("n8n", "setup_n8n.py"), "--configurar"],
+                           cwd=tmp, capture_output=True, text=True, timeout=120, env=ambiente)
+
+    saida = r.stdout
+    assert "ADMIN_CHAT_ID" in saida.split("Ainda falta preencher:")[-1], saida
+    assert "NENHUM alerta sai" in saida, saida
+    # Exit != 0 é o que permite encadear os comandos sem seguir com uma
+    # configuração pela metade.
+    assert r.returncode != 0, saida
+
+
+def test_configurar_nao_conta_placeholder_como_preenchido():
+    """`cole_aqui_o_token_do_BotFather` vindo do .env.example passava por
+    valor preenchido — e o erro só aparecia depois, como uma resposta
+    obscura da API do Telegram."""
+    setup = _setup_module()
+    fonte = inspect.getsource(setup.configurar)
+    assert "cole_aqui" in fonte and "startswith" in fonte, (
+        "a checagem de placeholder sumiu de configurar()")
 
 
 if __name__ == "__main__":

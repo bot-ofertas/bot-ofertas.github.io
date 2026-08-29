@@ -424,9 +424,38 @@ def configurar() -> int:
     else:
         print("\n✅ Nada a mudar no .env.")
 
-    faltando = [c for c in ("N8N_API_KEY", "TOKEN_TELEGRAM") if not (os.getenv(c) or "").strip()]
+    # ADMIN_CHAT_ID entra nesta conta. Ele ficava de fora, e o resultado era
+    # a pior combinação possível: o campo vazio, o resumo dizendo que só
+    # faltava a API key, e o `--importar` completando sem erro. Os workflows
+    # sobem, ficam ativos, e nenhum alerta chega a ninguém — incluindo o
+    # "o PC nao religou", que é justamente o que sustenta a publicação
+    # diária. Uma configuração incompleta que se apresenta como completa
+    # custa mais que uma que falha na cara.
+    #
+    # O valor efetivo considera o que ACABOU de ser gravado: `os.getenv`
+    # ainda reflete o ambiente carregado no import e não enxerga o .env
+    # novo, então checar só o ambiente reportaria como ausente um campo
+    # preenchido dois segundos antes.
+    def _efetivo(chave: str) -> str:
+        valor = (novos.get(chave) or os.getenv(chave) or "").strip()
+        # Um placeholder do .env.example é tão inútil quanto vazio, e pior:
+        # passa por preenchido aqui e só falha lá na frente, como um erro
+        # obscuro da API do Telegram.
+        if valor.lower().startswith(("cole_aqui", "cole-aqui", "seu_", "sua_")):
+            return ""
+        return valor
+
+    admin_final = _efetivo("ADMIN_CHAT_ID") or admin
+    faltando = [c for c in ("N8N_API_KEY", "TOKEN_TELEGRAM") if not _efetivo(c)]
+    if not admin_final:
+        faltando.append("ADMIN_CHAT_ID")
+
     if faltando:
         print(f"⚠️  Ainda falta preencher: {', '.join(faltando)}")
+        if "ADMIN_CHAT_ID" in faltando:
+            print("     Sem ADMIN_CHAT_ID os workflows importam e ativam normalmente,")
+            print("     mas NENHUM alerta sai — nem o 'o PC nao religou'. Mande /start")
+            print("     para o seu bot no Telegram e rode --configurar de novo.")
         return 1
     print("\nPróximo passo:  python n8n/setup_n8n.py --importar")
     return 0
