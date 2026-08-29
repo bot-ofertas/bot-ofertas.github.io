@@ -79,6 +79,25 @@ def rastreador_em_execucao() -> bool:
     return _rastreador_ja_rodando()
 
 
+def checagem_de_processos_confiavel() -> bool:
+    """True quando `rastreador_em_execucao()` responde com evidência.
+
+    Sem psutil a varredura não acontece e a resposta é sempre False — que é
+    indistinguível de "o bot está fora do ar". Aqui isso não faz mal (o
+    startup.py erra para o lado de subir, e ele só roda quando alguém pede),
+    mas o supervisor roda sozinho a cada 30 min: acreditando nesse False ele
+    subiria um conjunto novo de rastreadores por cima do que já está
+    publicando, meia em meia hora, o dia inteiro. Quem decide sozinho
+    precisa saber a diferença entre "não está" e "não sei".
+    """
+    try:
+        import psutil  # noqa: F401,PLC0415
+
+        return True
+    except ImportError:
+        return False
+
+
 def etapa_1_validar_config() -> bool:
     """Valida .env + TOKEN_TELEGRAM."""
     try:

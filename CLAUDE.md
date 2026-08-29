@@ -186,6 +186,14 @@ passou a alertar "bot caiu" toda madrugada num desligamento planejado.
   roda a cada 30 min e sobe o processo **pai** se o PC estiver ligado dentro
   da janela com o bot fora do ar — respeitando a pausa (`core.pausa`) e sem
   nunca subir um segundo bot (`startup.rastreador_em_execucao()`).
+  Quem decide sozinho precisa distinguir "não está rodando" de "não consegui
+  olhar": sem psutil aquela checagem responde `False` para os dois casos, e
+  agir sobre esse `False` duplicaria os rastreadores 48x por dia. O
+  supervisor consulta `startup.checagem_de_processos_confiavel()` antes e,
+  cego, não sobe nada — registra, alerta e sai com erro. Pela mesma razão ele
+  só anuncia "bot reiniciado" depois que o `startup.py` sobrevive à carência
+  de subida: com `.env` inválido ele sai em ~1s, e chamar `Popen` não é o
+  mesmo que ter subido.
 - **O watchdog do n8n cala a boca dentro da janela de silêncio** e, passados
   `MINUTOS_TOLERANCIA_RELIGAR` (45) do horário de religar sem heartbeat,
   manda o alerta que importa: *"o PC não religou"*. A marca

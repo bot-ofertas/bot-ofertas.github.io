@@ -136,10 +136,46 @@ if ($Remover) {
     exit 0
 }
 
+# Quantas tarefas nao consegui registrar. O instalador le o codigo de saida
+# deste script para dizer se o ciclo ficou de pe; sem contar as falhas ele
+# so poderia adivinhar.
+$falhasAgenda = 0
+
+# `(Get-Command python).Source` com $ErrorActionPreference = "Stop" derruba o
+# script inteiro com um erro de .NET quando o python nao esta no PATH — e,
+# pior, isso pode acontecer no meio, com metade das tarefas ja registradas e
+# a outra metade nao. Melhor descobrir agora e dizer o que fazer.
+$cmdPython = Get-Command python -ErrorAction SilentlyContinue
+if (-not $cmdPython) {
+    Write-Host "ERRO: 'python' nao esta no PATH deste usuario." -ForegroundColor Red
+    Write-Host "      As tarefas agendadas rodam python direto, entao sem isso" -ForegroundColor Red
+    Write-Host "      o ciclo diario nao teria como funcionar. Reinstale o Python" -ForegroundColor Red
+    Write-Host "      marcando 'Add python.exe to PATH' e rode este script de novo." -ForegroundColor Red
+    exit 1
+}
+$pythonExe = $cmdPython.Source
+
+# Registrar-ScheduledTask falha (sem permissao, politica de grupo, nome em
+# uso por outra conta) com erro terminante: sem este try/catch a primeira
+# falha aborta o script e as tarefas seguintes nem sao tentadas, deixando o
+# ciclo pela metade sem ninguem dizer qual metade.
+function Registrar-Tarefa {
+    param($Nome, $Params, $Ok)
+    try {
+        Register-ScheduledTask @Params -TaskName $Nome -Force -ErrorAction Stop | Out-Null
+        Write-Host "  OK: $Ok" -ForegroundColor Green
+    }
+    catch {
+        $script:falhasAgenda++
+        Write-Host "  ERRO: nao registrei $Nome — $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "        (tente abrir o PowerShell como Administrador)" -ForegroundColor DarkGray
+    }
+}
+
 # ─── 1. TAREFA DE VERIFICAÇÃO DIÁRIA — 01:00 (antes do shutdown) ─────────
 Write-Host "[1/5] Agendando verificação diária às $($AGENDA.verificacao)..." -ForegroundColor Yellow
 
-$pythonVerif = (Get-Command python).Source
+$pythonVerif = $pythonExe
 $scriptVerif = Join-Path $BASE "verificacao_diaria.py"
 
 $actionVerif = New-ScheduledTaskAction `
@@ -158,13 +194,11 @@ $settingsVerif = New-ScheduledTaskSettingsSet `
 $principalVerif = New-ScheduledTaskPrincipal `
     -UserId $env:USERNAME -LogonType Interactive
 
-Register-ScheduledTask -TaskName "BotOfertas-VerificacaoDiaria" `
-    -Action $actionVerif -Trigger $triggerVerif `
-    -Settings $settingsVerif -Principal $principalVerif `
-    -Description "Verifica saude do sistema e envia relatorio por Telegram antes do desligamento (Bot Ofertas)" `
-    -Force | Out-Null
-
-Write-Host "  OK: verificação diária agendada para $($AGENDA.verificacao)" -ForegroundColor Green
+Registrar-Tarefa "BotOfertas-VerificacaoDiaria" @{
+    Action = $actionVerif; Trigger = $triggerVerif
+    Settings = $settingsVerif; Principal = $principalVerif
+    Description = "Verifica saude do sistema e envia relatorio por Telegram antes do desligamento (Bot Ofertas)"
+} "verificação diária agendada para $($AGENDA.verificacao)"
 
 # ─── 2. TAREFA DE DESLIGAMENTO — 02:00 diariamente (aguarda se ocupado) ──
 Write-Host "[2/5] Agendando desligamento diário às $($AGENDA.desligar) (aguarda até 35min se ocupado)..." -ForegroundColor Yellow
@@ -189,13 +223,11 @@ $settingsShut = New-ScheduledTaskSettingsSet `
 $principalShut = New-ScheduledTaskPrincipal `
     -UserId $env:USERNAME -LogonType Interactive
 
-Register-ScheduledTask -TaskName "BotOfertas-Shutdown" `
-    -Action $actionShut -Trigger $triggerShut `
-    -Settings $settingsShut -Principal $principalShut `
-    -Description "Desliga (suspende) o PC no fim da janela, aguardando ate 35min se o bot estiver ocupado (Bot Ofertas)" `
-    -Force | Out-Null
-
-Write-Host "  OK: desligamento agendado para $($AGENDA.desligar) (aguarda até 35min se ocupado)" -ForegroundColor Green
+Registrar-Tarefa "BotOfertas-Shutdown" @{
+    Action = $actionShut; Trigger = $triggerShut
+    Settings = $settingsShut; Principal = $principalShut
+    Description = "Desliga (suspende) o PC no fim da janela, aguardando ate 35min se o bot estiver ocupado (Bot Ofertas)"
+} "desligamento agendado para $($AGENDA.desligar) (aguarda até 35min se ocupado)"
 
 # ─── 3. TAREFA DE WAKE UP — 08:45 diariamente ────────────────────────────
 Write-Host "[3/5] Agendando wake/inicio do bot às $($AGENDA.ligar)..." -ForegroundColor Yellow
@@ -225,13 +257,11 @@ $settingsWake = New-ScheduledTaskSettingsSet `
 $principalWake = New-ScheduledTaskPrincipal `
     -UserId $env:USERNAME -LogonType Interactive
 
-Register-ScheduledTask -TaskName "BotOfertas-WakeUp" `
-    -Action $actionWake -Trigger $triggerWake `
-    -Settings $settingsWake -Principal $principalWake `
-    -Description "Acorda o PC no inicio da janela e inicia o bot (Bot Ofertas)" `
-    -Force | Out-Null
-
-Write-Host "  OK: wake/inicio agendado para $($AGENDA.ligar)" -ForegroundColor Green
+Registrar-Tarefa "BotOfertas-WakeUp" @{
+    Action = $actionWake; Trigger = $triggerWake
+    Settings = $settingsWake; Principal = $principalWake
+    Description = "Acorda o PC no inicio da janela e inicia o bot (Bot Ofertas)"
+} "wake/inicio agendado para $($AGENDA.ligar)"
 
 # ─── 4. SUPERVISOR — de 30 em 30 min, garante o bot de pé ────────────────
 Write-Host "[4/5] Agendando supervisor (a cada 30 min dentro da janela)..." -ForegroundColor Yellow
@@ -246,7 +276,7 @@ Write-Host "[4/5] Agendando supervisor (a cada 30 min dentro da janela)..." -For
 # qualquer instante do dia": no pior caso o bot volta sozinho meia hora
 # depois. Quem decide se deve subir é o garantir_bot.py — ele nao faz nada
 # fora da janela, com pausa ativa, ou com o bot ja rodando.
-$pythonSup = (Get-Command python).Source
+$pythonSup = $pythonExe
 $scriptSup = Join-Path $BASE "garantir_bot.py"
 
 $actionSup = New-ScheduledTaskAction `
@@ -291,13 +321,11 @@ $settingsSup = New-ScheduledTaskSettingsSet `
 $principalSup = New-ScheduledTaskPrincipal `
     -UserId $env:USERNAME -LogonType Interactive
 
-Register-ScheduledTask -TaskName "BotOfertas-Supervisor" `
-    -Action $actionSup -Trigger $triggerSup `
-    -Settings $settingsSup -Principal $principalSup `
-    -Description "A cada 30 min: se o PC esta ligado dentro da janela e o bot nao esta rodando, sobe o processo pai (Bot Ofertas)" `
-    -Force | Out-Null
-
-Write-Host "  OK: supervisor a cada 30 min (só age dentro da janela)" -ForegroundColor Green
+Registrar-Tarefa "BotOfertas-Supervisor" @{
+    Action = $actionSup; Trigger = $triggerSup
+    Settings = $settingsSup; Principal = $principalSup
+    Description = "A cada 30 min: se o PC esta ligado dentro da janela e o bot nao esta rodando, sobe o processo pai (Bot Ofertas)"
+} "supervisor a cada 30 min (só age dentro da janela)"
 
 # ─── 4. Habilitar wake timers no Windows ─────────────────────────────────
 Write-Host "[5/5] Habilitando wake timers do Windows..." -ForegroundColor Yellow
@@ -333,3 +361,13 @@ Write-Host "  30 min depois que a maquina voltar — e o relatorio da manha avis
 Write-Host ""
 Write-Host "Conferir:       .\agendar_shutdown.ps1 -Status" -ForegroundColor DarkGray
 Write-Host "Cancelar:       .\agendar_shutdown.ps1 -Remover" -ForegroundColor DarkGray
+
+# Codigo de saida explicito. Sem ele, $LASTEXITCODE fica com o valor do
+# ultimo executavel nativo que rodou (o powercfg, aqui, ou o que o
+# instalador chamou antes) — e o instalador acabava anunciando "ciclo
+# agendado" ou "agendar_shutdown.ps1 falhou" com base em lixo herdado.
+if ($falhasAgenda -gt 0) {
+    Write-Host "ATENCAO: $falhasAgenda tarefa(s) NAO foram registradas — o ciclo esta incompleto." -ForegroundColor Red
+    exit 1
+}
+exit 0

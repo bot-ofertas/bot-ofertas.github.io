@@ -123,7 +123,12 @@ pausa.FLAG_PATH = os.path.join(_TMP, "pausado.flag")
 garantir_bot.LOG_CICLO = os.path.join(_TMP, "shutdown.log")
 
 _rodando = False
+_confiavel = True
 startup.rastreador_em_execucao = lambda: _rodando  # type: ignore[assignment]
+# psutil não é instalado no CI (os testes só precisam de dotenv + requests),
+# então a checagem real responderia "não sei" em todos os casos abaixo e
+# esconderia justamente a tabela de decisão que se quer testar.
+startup.checagem_de_processos_confiavel = lambda: _confiavel  # type: ignore[assignment]
 
 d = garantir_bot.diagnostico(em("12:00"))
 checar("dentro da janela, bot fora do ar → sobe", d["precisa_subir"], str(d))
@@ -146,6 +151,57 @@ pausa.retomar()
 
 d = garantir_bot.diagnostico(em("12:00"))
 checar("pausa removida → volta a subir", d["precisa_subir"], str(d))
+
+# Sem psutil, `rastreador_em_execucao()` devolve False para "não está" E para
+# "não consegui olhar". Agir sobre esse False sobe um segundo conjunto de
+# rastreadores a cada 30 min — dois processos publicando a mesma oferta no
+# canal, 48 vezes por dia. Na dúvida, o supervisor não sobe nada.
+_confiavel = False
+d = garantir_bot.diagnostico(em("12:00"))
+checar("checagem cega (sem psutil) → NÃO sobe um possível segundo bot",
+       not d["precisa_subir"], str(d))
+checar("e o motivo diz por quê, com a correção",
+       "psutil" in d["motivo"] and "pip install" in d["motivo"], d["motivo"])
+checar("o diagnóstico expõe que a checagem não é confiável",
+       d["checagem_confiavel"] is False, str(d))
+
+# Fora da janela a cegueira não importa: não se sobe nada de madrugada de
+# qualquer jeito, e o alerta seria ruído às 03h.
+d = garantir_bot.diagnostico(em("05:00"))
+checar("cego mas fora da janela → segue sendo só 'PC desligado'",
+       not d["precisa_subir"] and "fora da janela" in d["motivo"], str(d))
+_confiavel = True
+
+# `subir_bot()` chamando Popen não é o mesmo que o bot ter ficado de pé: com
+# o .env inválido o startup.py sai em ~1s. Anunciar "reiniciado" nesse caso
+# faria o log dizer que o ciclo fechou enquanto os grupos ficavam sem oferta.
+_orig_popen = garantir_bot.subprocess.Popen
+
+
+class _ProcMorto:
+    def __init__(self, *a, **k):
+        pass
+
+    def wait(self, timeout=None):
+        return 1  # saiu na hora, como o startup.py com config inválida
+
+
+class _ProcVivo:
+    def __init__(self, *a, **k):
+        pass
+
+    def wait(self, timeout=None):
+        raise garantir_bot.subprocess.TimeoutExpired("startup.py", timeout)
+
+
+garantir_bot.GRACA_SUBIDA_S = 0.1
+garantir_bot.subprocess.Popen = _ProcMorto  # type: ignore[assignment]
+checar("startup.py que morre na carência → subir_bot() responde FALHA",
+       garantir_bot.subir_bot() is False)
+garantir_bot.subprocess.Popen = _ProcVivo  # type: ignore[assignment]
+checar("startup.py que continua vivo → subir_bot() responde sucesso",
+       garantir_bot.subir_bot() is True)
+garantir_bot.subprocess.Popen = _orig_popen  # type: ignore[assignment]
 
 # ── 5. O watchdog do n8n, executado de verdade ───────────────────────────
 print("\n[5] n8n W1 'Checar heartbeat' — JS real, relógio simulado")

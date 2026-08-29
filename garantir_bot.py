@@ -28,6 +28,10 @@ O que ele NÃO faz
   explícita e ressuscitar o bot por cima dela seria ignorar o operador.
 - Não sobe um segundo bot: pergunta ao `startup.py` — a mesma checagem que
   ele faz — antes de qualquer coisa.
+- Não age quando não consegue enxergar. Sem psutil a pergunta "está
+  rodando?" responde False para tudo, inclusive com o bot de pé; agir sobre
+  esse False duplicaria os rastreadores a cada 30 min. Nesse caso ele
+  registra, alerta e sai com erro — sem subir nada.
 - Não reinicia só os filhos. Sobe o processo PAI (`python -u startup.py`),
   como manda a Regra 10 do CLAUDE.md.
 
@@ -47,6 +51,10 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
 
 LOG_CICLO = os.path.join(BASE, "data", "shutdown.log")
+
+# Quanto esperar para concluir que o startup.py ficou de pe. Ele leva
+# menos de 1s para desistir quando a configuracao esta invalida.
+GRACA_SUBIDA_S = 8
 
 try:
     from dotenv import load_dotenv
@@ -84,16 +92,28 @@ def diagnostico(agora: datetime | None = None) -> dict:
     """Estado que decide a ação — separado da ação para poder ser testado
     sem subir processo nenhum."""
     agora = agora or datetime.now()
-    from startup import rastreador_em_execucao
+    from startup import checagem_de_processos_confiavel, rastreador_em_execucao
 
     dentro = janela.dentro_da_janela(agora)
     rodando = rastreador_em_execucao()
     pausado = pausa.pausado()
+    confiavel = checagem_de_processos_confiavel()
 
     if not dentro:
         motivo = "fora da janela de operacao (PC deveria estar desligado)"
     elif pausado:
         motivo = "pausa ativa — nao vou ressuscitar por cima de uma decisao do operador"
+    elif not confiavel:
+        # Sem psutil, "esta rodando?" responde False sempre. Agir sobre esse
+        # False sobe um segundo conjunto de rastreadores a cada 30 min — e
+        # dois rastreadores publicando em paralelo é post repetido no canal,
+        # 48 vezes por dia. Na duvida, nao subir: o custo de esperar e uma
+        # rodada; o de duplicar e o grupo inteiro vendo a mesma oferta.
+        motivo = (
+            "psutil indisponivel — nao da para saber se o bot ja esta de pe; "
+            "nao vou arriscar uma segunda instancia publicando em paralelo "
+            "(corrija com: pip install -r requirements.txt)"
+        )
     elif rodando:
         motivo = "bot ja em execucao"
     else:
@@ -104,7 +124,8 @@ def diagnostico(agora: datetime | None = None) -> dict:
         "dentro_da_janela": dentro,
         "rodando": rodando,
         "pausado": pausado,
-        "precisa_subir": dentro and not rodando and not pausado,
+        "checagem_confiavel": confiavel,
+        "precisa_subir": dentro and not rodando and not pausado and confiavel,
         "motivo": motivo,
     }
 
@@ -127,11 +148,27 @@ def subir_bot() -> bool:
         kwargs["start_new_session"] = True
 
     try:
-        subprocess.Popen([python, "-u", os.path.join(BASE, "startup.py")], **kwargs)
-        return True
+        proc = subprocess.Popen([python, "-u", os.path.join(BASE, "startup.py")], **kwargs)
     except OSError as e:
         _registrar(f"Supervisor FALHOU ao subir o bot: {e}")
         return False
+
+    # Chamar Popen nao e o mesmo que o bot ter subido: com o .env invalido o
+    # startup.py sai em ~1s (etapa_1 chama sys.exit(1)). Sem esperar por
+    # isso, o supervisor anunciaria "bot reiniciado" a cada 30 min para
+    # sempre, e o log diria que o ciclo fechou enquanto os grupos ficavam
+    # sem oferta o dia inteiro. Esperar poucos segundos nao atrapalha: a
+    # tarefa so roda de meia em meia hora, e o caminho normal (startup.py
+    # entra em monitorar()) nunca retorna dentro da carencia.
+    try:
+        codigo = proc.wait(timeout=GRACA_SUBIDA_S)
+    except subprocess.TimeoutExpired:
+        return True
+    _registrar(
+        f"Supervisor subiu o startup.py, mas ele saiu em menos de "
+        f"{GRACA_SUBIDA_S}s (codigo {codigo}) — ver data/bot.log"
+    )
+    return False
 
 
 def _avisar_n8n(evento: str, dados: dict) -> None:
@@ -155,6 +192,13 @@ def main() -> int:
         return 0 if not d["precisa_subir"] else 1
 
     if not d["precisa_subir"]:
+        if d["dentro_da_janela"] and not d["checagem_confiavel"]:
+            # Este nao e um "nada a fazer": e o supervisor cego, sem poder
+            # garantir nada dentro do horario de operacao. Merece linha no
+            # log, alerta e falha visivel no Agendador de Tarefas.
+            _registrar(f"Supervisor SEM VISIBILIDADE: {d['motivo']}")
+            _avisar_n8n("supervisor_cego", {"motivo": d["motivo"]})
+            return 1
         # Silêncio no log: rodando a cada 30 min, registrar "tudo certo"
         # encheria o shutdown.log com 48 linhas por dia e enterraria as
         # que importam (suspensão, despertar, intervenção).

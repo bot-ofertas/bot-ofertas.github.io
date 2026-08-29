@@ -228,7 +228,6 @@ if (-not $importado) {
                 & $cli.Exe exec $cli.Container n8n import:workflow --separate --input=/tmp/botofertas 2>&1 |
                     ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
                 $okImport = ($LASTEXITCODE -eq 0)
-                & $cli.Exe exec $cli.Container rm -f /tmp/botofertas_cred.json 2>&1 | Out-Null
             }
             else {
                 if ($temCred) {
@@ -249,6 +248,13 @@ if (-not $importado) {
             # O arquivo tem o token do Telegram legível. Sai daqui de
             # qualquer jeito, inclusive se a importação estourar no meio.
             if (Test-Path $credFile) { Remove-Item $credFile -Force -ErrorAction SilentlyContinue }
+            # A cópia DENTRO do contêiner também: apagá-la só depois do
+            # import deixava o token em claro no disco do contêiner sempre
+            # que a importação falhasse — justamente quando ninguém volta
+            # para limpar.
+            if ($cli.Modo -eq "docker" -and $temCred) {
+                & $cli.Exe exec $cli.Container rm -f /tmp/botofertas_cred.json 2>&1 | Out-Null
+            }
         }
 
         if ($importado) {
@@ -357,12 +363,24 @@ if (-not $importado) {
 
 # ─── 4. Ciclo diário ─────────────────────────────────────────────────────
 Titulo 4 "Registrando o ciclo diario (liga 08:30 / desliga 02:00)"
-& (Join-Path $BASE "agendar_shutdown.ps1")
-if ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) {
+# $LASTEXITCODE guarda o codigo do ULTIMO executavel nativo — o n8n ou o git
+# da etapa anterior, se o script chamado nao definir o seu. Zerar antes e
+# capturar o erro terminante aqui e o que faz esta linha do resumo dizer a
+# verdade em vez de repetir lixo herdado.
+$global:LASTEXITCODE = 0
+try {
+    & (Join-Path $BASE "agendar_shutdown.ps1")
+    $okAgenda = ($LASTEXITCODE -eq 0)
+}
+catch {
+    Write-Host "  ERRO: $($_.Exception.Message)" -ForegroundColor Red
+    $okAgenda = $false
+}
+if ($okAgenda) {
     $feitos.Add("ciclo diario agendado (4 tarefas)")
 }
 else {
-    $pendencias.Add("agendar_shutdown.ps1 falhou — rode sozinho para ver o erro")
+    $pendencias.Add("ciclo diario NAO agendado — rode .\agendar_shutdown.ps1 sozinho (talvez como Administrador) para ver o erro")
 }
 
 # ─── 5. Bot ──────────────────────────────────────────────────────────────
@@ -397,8 +415,18 @@ if ($ReiniciarBot) {
 else {
     # Sem -ReiniciarBot, garante ao menos que ele esteja de pe — o mesmo
     # supervisor que roda de 30 em 30 min, so que agora.
+    $global:LASTEXITCODE = 0
     & $python (Join-Path $BASE "garantir_bot.py")
-    $feitos.Add("bot verificado (garantir_bot.py)")
+    if ($LASTEXITCODE -eq 0) {
+        $feitos.Add("bot verificado (garantir_bot.py)")
+    }
+    else {
+        # O supervisor devolve != 0 quando nao conseguiu garantir o bot de pe
+        # (subida falhou, ou psutil ausente deixando-o sem saber se ja ha um
+        # rodando). Chamar isso de "verificado" esconderia justamente o caso
+        # em que a rede de seguranca do ciclo nao existe.
+        $pendencias.Add("supervisor nao conseguiu garantir o bot de pe — veja a mensagem acima e data\shutdown.log")
+    }
     Write-Host "  (o bot NAO foi reiniciado; use -ReiniciarBot para carregar o codigo novo)" -ForegroundColor DarkGray
 }
 
