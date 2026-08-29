@@ -130,6 +130,20 @@ if (-not $importado) {
         }
     }
 
+    # O npm sabe onde ele instala global — perguntar a ele cobre a instalação
+    # com prefix customizado, que os caminhos fixos acima erram. Sem isto o
+    # bloco de diagnóstico no fim IMPRIMIA o caminho certo e o script mesmo
+    # assim desistia: sabia onde estava e não ia lá.
+    if (-not $cli -and (Get-Command npm -ErrorAction SilentlyContinue)) {
+        $prefixo = (& npm config get prefix 2>$null)
+        if ($prefixo -and $prefixo -notmatch "^undefined") {
+            $prefixo = $prefixo.Trim()
+            foreach ($cand in @("$prefixo\n8n.cmd", "$prefixo\n8n", "$prefixo\bin\n8n")) {
+                if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand }; break }
+            }
+        }
+    }
+
     if (-not $cli) {
         # Contêiner do n8n rodando: o executável vive dentro dele.
         $docker = (Get-Command docker -ErrorAction SilentlyContinue).Source
@@ -241,6 +255,54 @@ if (-not $importado) {
         Write-Host "  Importe por: Workflows -> ... -> Import from File" -ForegroundColor Green
         $feitos.Add("workflows preparados em n8n\prontos (importar a mao)")
         $pendencias.Add("importar os 5 arquivos de n8n\prontos no n8n, criar as 2 credenciais e ativar")
+
+        # Cair aqui significa que a CLI existe na maquina (o n8n roda nela)
+        # mas nao nos quatro lugares onde procurei. Imprimir o diagnostico
+        # AGORA evita a ida-e-volta de pedir `where n8n` e `docker ps` e
+        # esperar a resposta: a saida que a pessoa ja vai colar contem a
+        # informacao que resolve.
+        Write-Host ""
+        Write-Host "  --- por que nao achei a CLI do n8n ---" -ForegroundColor Yellow
+        Write-Host "  Procurei em:" -ForegroundColor DarkGray
+        Write-Host "    PATH                        -> $(if ($doPath) { $doPath } else { 'nao encontrado' })" -ForegroundColor DarkGray
+        foreach ($cand in @("$env:APPDATA\npm\n8n.cmd", "$env:APPDATA\npm\n8n",
+                            "$env:ProgramFiles\nodejs\n8n.cmd")) {
+            Write-Host "    $cand -> $(if (Test-Path $cand) { 'EXISTE' } else { 'nao existe' })" -ForegroundColor DarkGray
+        }
+
+        Write-Host "  O que ha na maquina:" -ForegroundColor DarkGray
+        $node = (Get-Command node -ErrorAction SilentlyContinue).Source
+        Write-Host "    node    : $(if ($node) { $node } else { 'ausente' })" -ForegroundColor DarkGray
+        $npm = (Get-Command npm -ErrorAction SilentlyContinue).Source
+        if ($npm) {
+            $prefixo = (& npm config get prefix 2>$null)
+            Write-Host "    npm     : $npm  (prefix: $prefixo)" -ForegroundColor DarkGray
+            # O n8n instalado globalmente vive em <prefix>\n8n.cmd. Se
+            # estiver ali e eu nao tiver achado, e porque o prefix nao e o
+            # %APPDATA%\npm padrao — e este print mostra o caminho exato.
+            if ($prefixo) {
+                foreach ($extra in @("$prefixo\n8n.cmd", "$prefixo\n8n", "$prefixo\bin\n8n")) {
+                    if (Test-Path $extra) {
+                        Write-Host "    ACHEI AQUI: $extra" -ForegroundColor Green
+                        Write-Host "    -> me mande esta linha; eu ensino o script a procurar aqui." -ForegroundColor Green
+                    }
+                }
+            }
+        }
+        else { Write-Host "    npm     : ausente" -ForegroundColor DarkGray }
+
+        $dk = (Get-Command docker -ErrorAction SilentlyContinue).Source
+        if ($dk) {
+            Write-Host "    docker  : $dk" -ForegroundColor DarkGray
+            Write-Host "    conteineres rodando:" -ForegroundColor DarkGray
+            $ps = (& $dk ps --format "{{.Names}}  {{.Image}}" 2>&1)
+            if ($ps) { $ps | ForEach-Object { Write-Host "      $_" -ForegroundColor DarkGray } }
+            else { Write-Host "      (nenhum)" -ForegroundColor DarkGray }
+        }
+        else { Write-Host "    docker  : ausente" -ForegroundColor DarkGray }
+
+        Write-Host "  Copie este bloco e me mande — com ele dá para apontar o caminho certo." -ForegroundColor Yellow
+        Write-Host ""
     }
 }
 
