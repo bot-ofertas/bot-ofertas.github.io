@@ -1,5 +1,10 @@
 # Credenciais — nunca subir
 .env
+# Cópia de segurança e temporário da gravação atômica do .env
+# (setup_n8n.gravar_no_env). Carregam TOKEN_TELEGRAM e N8N_TOKEN em
+# claro — este repositório é a página pública do projeto.
+.env.bak
+.env.novo.*
 
 # Cache Python
 __pycache__/

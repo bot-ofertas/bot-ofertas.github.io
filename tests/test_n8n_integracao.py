@@ -114,6 +114,30 @@ def test_alta_resolucao_nao_corrompe_nome_terminado_em_i():
     assert alta_resolucao(url).endswith("MOBILE_UI.jpg")
 
 
+def test_alta_resolucao_funciona_com_query_na_url():
+    """As duas regexes de variante terminam em `$`. Rodando sobre a URL
+    inteira, uma foto com query (`...-I.jpg?v=2`) nao casava: o `-I` da
+    miniatura sobrevivia e o produto era publicado com a miniatura — o
+    defeito que este modulo existe para corrigir. E o prefixo `D_NQ_NP_2X_`
+    era aplicado assim mesmo, montando uma combinacao que o CDN nao serve.
+    """
+    from core.foto_url import alta_resolucao
+
+    saida = alta_resolucao("https://http2.mlstatic.com/D_NQ_NP_811742-MLB123-I.jpg?v=2")
+    assert saida == "https://http2.mlstatic.com/D_NQ_NP_2X_811742-MLB123-O.jpg?v=2", saida
+
+
+def test_host_de_foto_nao_casa_por_sufixo_solto():
+    """`net.endswith("mlstatic.com")` casa `evil-mlstatic.com`: um dominio
+    de terceiro receberia as reescritas de URL do CDN do ML."""
+    from core.foto_url import _HOSTS_ML, _e_host
+
+    assert _e_host("https://http2.mlstatic.com/x-I.jpg", _HOSTS_ML)
+    assert _e_host("https://mlstatic.com/x-I.jpg", _HOSTS_ML)
+    assert not _e_host("https://evil-mlstatic.com/x-I.jpg", _HOSTS_ML)
+    assert not _e_host("https://mlstatic.com.br/x-I.jpg", _HOSTS_ML)
+
+
 def test_alta_resolucao_forca_https_e_remove_fragmento():
     from core.foto_url import alta_resolucao
 
@@ -889,6 +913,46 @@ def test_dois_flushes_simultaneos_nao_reenviam_o_mesmo_evento():
         assert enviados == ["oferta_publicada"], enviados
     finally:
         n8n._postar = original
+
+
+def test_gravar_env_e_atomico_e_guarda_backup():
+    """O `.env` e o arquivo mais critico do projeto: sem ele o bot nao sobe
+    e o TOKEN_TELEGRAM tem de ser gerado de novo no BotFather. Abrir o
+    proprio arquivo em "w" o trunca ANTES de escrever — queda de energia,
+    Ctrl+C ou disco cheio no meio deixavam o .env pela metade."""
+    setup = _setup_module()
+    d = tempfile.mkdtemp(prefix="env_atomico_")
+    env_antes, exemplo_antes = setup.ENV_PATH, setup.ENV_EXEMPLO_PATH
+    try:
+        setup.ENV_PATH = os.path.join(d, ".env")
+        setup.ENV_EXEMPLO_PATH = os.path.join(d, ".env.example")
+        with open(setup.ENV_PATH, "w", encoding="utf-8") as f:
+            f.write("# comentario que nao pode sumir\nTOKEN_TELEGRAM=antigo\n")
+
+        setup.gravar_no_env({"TOKEN_TELEGRAM": "novo", "N8N_TOKEN": "abc"})
+
+        final = open(setup.ENV_PATH, encoding="utf-8").read()
+        assert "TOKEN_TELEGRAM=novo" in final and "N8N_TOKEN=abc" in final, final
+        assert "comentario que nao pode sumir" in final, final
+
+        backup = setup.ENV_PATH + ".bak"
+        assert os.path.exists(backup), "sem copia da versao anterior"
+        assert "TOKEN_TELEGRAM=antigo" in open(backup, encoding="utf-8").read()
+
+        sobras = [f for f in os.listdir(d) if ".env.novo." in f]
+        assert not sobras, f"temporario deixado para tras: {sobras}"
+    finally:
+        setup.ENV_PATH, setup.ENV_EXEMPLO_PATH = env_antes, exemplo_antes
+
+
+def test_backup_do_env_esta_no_gitignore():
+    """O `.env.bak` carrega TOKEN_TELEGRAM e N8N_TOKEN em claro, e este
+    repositorio e a pagina publica do projeto: um `git add -A` na maquina do
+    Daniel publicaria os dois."""
+    ignore = open(os.path.join(BASE, ".gitignore"), encoding="utf-8").read().splitlines()
+    regras = {linha.strip() for linha in ignore}
+    for padrao in (".env", ".env.bak", ".env.novo.*"):
+        assert padrao in regras, f"{padrao} fora do .gitignore"
 
 
 if __name__ == "__main__":

@@ -58,11 +58,18 @@ def _sem_fragmento(url: str) -> str:
 
 
 def _e_host(url: str, hosts: tuple[str, ...]) -> bool:
+    """Domínio exato ou subdomínio — nunca "termina com".
+
+    `net.endswith("mlstatic.com")` também casa `evil-mlstatic.com`: um
+    domínio de terceiro passaria a receber as reescritas de URL do CDN do
+    ML. É a mesma checagem estrita que `core/tracking.py` já fazia; aqui
+    ela tinha ficado frouxa.
+    """
     try:
-        net = urlsplit(url).netloc.lower()
+        net = urlsplit(url).netloc.lower().split("@")[-1].split(":")[0]
     except ValueError:
         return False
-    return any(net.endswith(h) or f".{h}" in net for h in hosts)
+    return any(net == h or net.endswith("." + h) for h in hosts)
 
 
 def alta_resolucao(url: str) -> str:
@@ -72,17 +79,28 @@ def alta_resolucao(url: str) -> str:
     Amazon: remove o modificador de tamanho (`._AC_SX300_.jpg` → `.jpg`),
     que o CDN interpreta como "resolução máxima disponível".
     Qualquer outra origem volta inalterada (só https + sem fragmento).
+
+    A troca acontece no CAMINHO da URL, não na string inteira: as duas
+    regexes terminam em `$`, então uma foto que viesse com query
+    (`...-I.jpg?v=2`) não casava e o `-I` da miniatura sobrevivia — o
+    produto era publicado com a miniatura, que é exatamente o defeito que
+    este módulo existe para corrigir. Pior: o prefixo `D_NQ_NP_2X_` era
+    aplicado assim mesmo, montando uma combinação que o CDN não serve.
     """
     if not url or not isinstance(url, str):
         return ""
     u = _sem_fragmento(url)
+    p = urlsplit(u)
+    caminho = p.path
     if _e_host(u, _HOSTS_ML):
-        u = _RE_VARIANTE_ML.sub(lambda m: f"-O{m.group(2)}", u)
-        if "D_NQ_NP_2X_" not in u:
-            u = u.replace("D_NQ_NP_", "D_NQ_NP_2X_")
+        caminho = _RE_VARIANTE_ML.sub(lambda m: f"-O{m.group(2)}", caminho)
+        if "D_NQ_NP_2X_" not in caminho:
+            caminho = caminho.replace("D_NQ_NP_", "D_NQ_NP_2X_")
     elif _e_host(u, _HOSTS_AMAZON):
-        u = _RE_VARIANTE_AMAZON.sub(lambda m: f".{m.group(1)}", u)
-    return u
+        caminho = _RE_VARIANTE_AMAZON.sub(lambda m: f".{m.group(1)}", caminho)
+    else:
+        return u
+    return urlunsplit((p.scheme, p.netloc, caminho, p.query, ""))
 
 
 def variantes(url: str) -> list[str]:

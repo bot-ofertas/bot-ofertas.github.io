@@ -44,6 +44,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import sys
 from urllib import error, request
 
@@ -330,8 +331,32 @@ def gravar_no_env(valores: dict[str, str]) -> list[str]:
             saida.append(f"{chave}={valor}\n")
             alterados.append(chave)
 
-    with open(ENV_PATH, "w", encoding="utf-8") as f:
-        f.writelines(saida)
+    # Gravação atômica, com uma cópia da versão anterior.
+    #
+    # O `.env` é o arquivo mais crítico do projeto: sem ele o bot não sobe e
+    # o TOKEN_TELEGRAM precisa ser gerado de novo no BotFather. Abrir o
+    # próprio arquivo em modo "w" o trunca ANTES de escrever — uma queda de
+    # energia, um Ctrl+C ou um disco cheio no meio do `writelines` deixavam
+    # o `.env` pela metade ou vazio, e o sintoma seria o bot não subir mais.
+    # Escrever ao lado e renomear por cima é atômico (os.replace vale no
+    # Windows também), então ou fica o arquivo velho ou o novo, nunca um
+    # pedaço dos dois.
+    diretorio = os.path.dirname(ENV_PATH) or "."
+    temporario = os.path.join(diretorio, f".env.novo.{os.getpid()}")
+    try:
+        with open(temporario, "w", encoding="utf-8") as f:
+            f.writelines(saida)
+            f.flush()
+            os.fsync(f.fileno())
+        if os.path.exists(ENV_PATH):
+            try:
+                shutil.copy2(ENV_PATH, ENV_PATH + ".bak")
+            except OSError:
+                pass  # a cópia é conforto, não pode impedir a gravação
+        os.replace(temporario, ENV_PATH)
+    finally:
+        if os.path.exists(temporario):
+            os.remove(temporario)
     return alterados
 
 
