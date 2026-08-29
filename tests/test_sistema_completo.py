@@ -20,7 +20,7 @@ pulado com aviso em vez de falhar.
 Rodar:
     python tests/test_sistema_completo.py
 """
-import atexit, json, os, shutil, subprocess, sys, tempfile, threading, time
+import atexit, json, os, re, shutil, subprocess, sys, tempfile, threading, time
 import urllib.error, urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -435,6 +435,71 @@ checar("W4 põe o problema na PRIMEIRA linha", rel.get("problemas", 0) >= 1
        and "🔴" in rel["texto"].split("\n")[2 if rel["texto"].count("\n") > 2 else 0]
        or "🔴" in rel["texto"])
 checar("W4 mostra o placar do GitHub Actions", "✅" in rel["texto"] and "❌" in rel["texto"])
+
+# ── 12. HTML que o Telegram aceita, com dados hostis ────────────────────────
+# Todos os nós de Telegram usam parse_mode=HTML, e o Telegram recusa a
+# mensagem INTEIRA quando `&`, `<` ou `>` aparecem crus — inclusive dentro de
+# href. Não é caso raro: link de afiliado sempre tem `?matt_tool=...&...`, e
+# mensagem de exceção do Python vem cheia de `<class 'ValueError'>`. Sem
+# escapar, o alerta e o digest simplesmente não chegam — e o histórico de
+# execuções do n8n é o único lugar onde isso apareceria.
+print("\n[12] Mensagens continuam válidas com título e erro cheios de & < >")
+
+TAGS_PERMITIDAS = re.compile(r"</?(b|strong|i|em|u|s|code|pre|a)(\s[^>]*)?>")
+CRU = re.compile(r"&(?!(amp|lt|gt|quot|#\d+);)|[<>]")
+
+
+def html_invalido(texto):
+    return CRU.findall(TAGS_PERMITIDAS.sub("", texto or ""))
+
+
+TITULO_HOSTIL = "Fone JBL Tune & Bass <Original> 100% "
+LINK_HOSTIL = ("https://www.mercadolivre.com.br/p/MLB123"
+               "?matt_tool=47114387&pdp_filters=x#polycard_client=y")
+ERRO_HOSTIL = "<class 'ValueError'>: faltam 'preco' & 'link'"
+
+evt = {"body": {"evento": "erro", "ts": "2026-08-29T12:00:00", "host": "pc",
+                "dados": {"operacao": "telegram.publicar", "mensagem": ERRO_HOSTIL}},
+       "CONFIG": {"admin_chat_id": "555000111"}}
+cfg_h = rodar_no("01-ingestao-e-watchdog.json", "Configuração", evt, STORE_W1)
+rot_h = rodar_no("01-ingestao-e-watchdog.json", "Rotear evento", cfg_h, STORE_W1)
+checar("W1: alerta de erro com < > & segue sendo HTML válido",
+       not html_invalido(rot_h["alerta"]), rot_h["alerta"])
+
+quar = {"body": {"evento": "produto_quarentena", "ts": "2026-08-29T12:00:00",
+                 "dados": {"produto_id": "MLB1", "titulo": TITULO_HOSTIL,
+                           "tentativas": 3, "quarentena_ate": "2026-08-30T12:00",
+                           "mensagem": ERRO_HOSTIL}},
+        "CONFIG": {"admin_chat_id": "555000111"}}
+cfg_q = rodar_no("01-ingestao-e-watchdog.json", "Configuração", quar, STORE_W1)
+rot_q = rodar_no("01-ingestao-e-watchdog.json", "Rotear evento", cfg_q, STORE_W1)
+checar("W1: alerta de quarentena com título hostil segue válido",
+       not html_invalido(rot_q["alerta"]), rot_q["alerta"])
+
+offers_hostis = {"products": [{"titulo": TITULO_HOSTIL, "preco": 199.9,
+                               "desconto_pct": 40, "link": LINK_HOSTIL,
+                               "foto": "https://x/f.jpg"}]}
+dig = rodar_no("02-publicacao-reforco.json", "Montar digest", offers_hostis,
+               os.path.join(E2E, "store_w2_hostil.json"))
+checar("W2: digest com link de afiliado (& na query) é HTML válido",
+       dig.get("publicar") and not html_invalido(dig["texto"]), str(dig)[:300])
+checar("W2: o matt_tool sobrevive à marcação de origem",
+       "matt_tool=47114387" in dig["texto"] and "matt_source=n8n" in dig["texto"],
+       dig["texto"])
+checar("W2: o #fragment do ML não vai para o link publicado",
+       "polycard_client" not in dig["texto"], dig["texto"])
+
+div_h = rodar_no("03-divulgacao-social.json", "Gerar anúncio", offers_hostis,
+                 os.path.join(E2E, "store_w3_hostil.json"))
+checar("W3: o aviso com o texto do anúncio (URLs com &) é HTML válido",
+       not html_invalido(div_h["aviso"]), div_h["aviso"][:300])
+
+rel_h = rodar_no("04-relatorio-diario.json", "Montar relatório", {},
+                 os.path.join(E2E, "store_w4_hostil.json"),
+                 ctx={"Ofertas do site": offers_hostis,
+                      "Execuções do GitHub Actions": runs_falsos})
+checar("W4: relatório com título hostil é HTML válido",
+       not html_invalido(rel_h["texto"]), rel_h["texto"][:300])
 
 # ── Resultado ───────────────────────────────────────────────────────────────
 srv2.shutdown()
