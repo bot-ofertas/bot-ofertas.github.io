@@ -337,14 +337,23 @@ def _baixar_foto(foto_url: str) -> str:
     try:
         import io    # noqa: PLC0415
         import time  # noqa: PLC0415
-        import requests  # noqa: PLC0415
         from PIL import Image  # noqa: PLC0415
 
-        r = requests.get(foto_url, timeout=10)
-        if r.status_code != 200 or not r.content:
+        # `requests.get()` cru manda o User-Agent padrao da biblioteca, e o
+        # `mlstatic` responde 403 a ele — a causa 2 do "nao esta aparecendo
+        # as fotos". A correcao ja existia para o Telegram (core/foto_url),
+        # mas o WhatsApp seguia baixando do jeito antigo: mesma oferta, foto
+        # num canal e sem foto no outro. `baixar_melhor` manda cabecalho de
+        # navegador e ainda tenta a variante 1x quando a original sumiu do
+        # CDN. Regra 5: sem foto o envio nao sai, entao a diferenca aqui e
+        # entre publicar no grupo e nao publicar.
+        from core.foto_url import baixar_melhor  # noqa: PLC0415
+
+        conteudo, _ = baixar_melhor(foto_url)
+        if not conteudo:
             return ""
 
-        img = Image.open(io.BytesIO(r.content)).convert("RGB")
+        img = Image.open(io.BytesIO(conteudo)).convert("RGB")
         img.thumbnail((800, 800))
 
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

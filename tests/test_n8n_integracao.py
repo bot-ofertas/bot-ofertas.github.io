@@ -997,6 +997,65 @@ def test_criar_bot_aplica_o_timeout_de_verdade():
     assert 40.0 in leituras, f"nenhum cliente com read timeout de 40s: {timeouts}"
 
 
+def test_download_de_foto_manda_cabecalho_de_navegador():
+    """O `mlstatic` responde 403 ao User-Agent padrao do `requests` — e a
+    causa 2 do "nao esta aparecendo as fotos". Aqui um servidor local imita
+    esse comportamento e prova que `baixar_melhor` passa e o `requests.get`
+    cru nao."""
+    import threading
+    from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+    class CdnChato(BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def do_GET(self):
+            ua = self.headers.get("User-Agent", "")
+            if "Mozilla" not in ua:      # exatamente o que o mlstatic faz
+                self.send_response(403); self.end_headers(); return
+            self.send_response(200)
+            self.send_header("Content-Type", "image/jpeg")
+            self.end_headers()
+            self.wfile.write(b"\xff\xd8\xff\xe0bytes-da-foto")
+
+    ThreadingHTTPServer.allow_reuse_address = True
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), CdnChato)
+    porta = srv.server_address[1]
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        url = f"http://127.0.0.1:{porta}/D_NQ_NP_1-MLB1-O.jpg"
+
+        import requests
+        assert requests.get(url, timeout=5).status_code == 403, (
+            "o servidor de teste deveria recusar o User-Agent padrao")
+
+        # A checagem e em core.net.baixar_bytes, que e por onde
+        # foto_url.baixar_melhor busca cada variante: `alta_resolucao()`
+        # forca https (correto para os CDNs reais) e por isso nao alcanca um
+        # servidor http local.
+        from core.net import baixar_bytes
+        assert baixar_bytes(url), "baixar_bytes nao trouxe a foto com cabecalho de navegador"
+
+        from core.foto_url import baixar_melhor
+        assert "baixar_bytes" in inspect.getsource(baixar_melhor), (
+            "baixar_melhor deixou de passar por core.net.baixar_bytes")
+    finally:
+        srv.shutdown()
+
+
+def test_whatsapp_baixa_foto_pela_mesma_camada_do_telegram():
+    """A correcao de foto tinha sido aplicada na origem dos dados e no
+    Telegram; os DOIS downloaders do WhatsApp seguiam com `requests.get()`
+    cru. Resultado possivel: a mesma oferta sai com foto no Telegram e sem
+    foto no grupo — e sem foto o envio do WhatsApp nao sai (Regra 5)."""
+    for nome in ("integrations/whatsapp_sender.py", "integrations/whatsapp_desktop.py"):
+        fonte = open(os.path.join(BASE, nome), encoding="utf-8").read()
+        codigo = "\n".join(l for l in fonte.splitlines() if not l.strip().startswith("#"))
+        assert "baixar_melhor" in codigo, f"{nome} nao usa core.foto_url.baixar_melhor"
+        assert "requests.get(" not in codigo, (
+            f"{nome} ainda baixa com requests.get() cru (User-Agent que o mlstatic recusa)")
+
+
 if __name__ == "__main__":
     import traceback
 
