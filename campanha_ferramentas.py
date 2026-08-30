@@ -305,7 +305,11 @@ async def rodar_uma_vez() -> int:
     # qualquer execução aberta há menos de 20min como "sistema ocupado",
     # então uma rodada travada podia atrasar o desligamento noturno à toa.
     try:
-        async with Bot(token=TOKEN_TELEGRAM) as bot:
+        # Cliente com timeout de leitura de 40s: com o padrão de 5s da
+        # biblioteca, um `send_photo` lento derrubava a rodada inteira com
+        # um "Timed out" seco (registro real de 2026-08-25 23:20).
+        from integrations.telegram_bot import criar_bot  # noqa: PLC0415
+        async with criar_bot(TOKEN_TELEGRAM) as bot:
             for item in unicos:
                 if publicados >= MIN_POR_RODADA:
                     break

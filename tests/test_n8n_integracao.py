@@ -955,6 +955,48 @@ def test_backup_do_env_esta_no_gitignore():
         assert padrao in regras, f"{padrao} fora do .gitignore"
 
 
+def test_os_tres_publicadores_usam_o_cliente_com_timeout():
+    """O read timeout padrao da biblioteca (5s) e curto demais para um
+    `send_photo` com upload numa conexao domestica — foi assim que a rodada
+    das 23:20 de 25/08 morreu com um "Timed out" seco.
+
+    A correcao tinha ficado so no rastreador.py; Amazon e campanha de
+    ferramentas seguiam abrindo `Bot(token=...)` cru, ou seja, dois dos tres
+    caminhos de publicacao mantinham o defeito. Este teste roda sem o pacote
+    `telegram` instalado (o CI nao o instala) porque olha o codigo-fonte.
+    """
+    import re as _re
+
+    publicadores = ("rastreador.py", "rastreador_amazon.py", "campanha_ferramentas.py")
+    for nome in publicadores:
+        fonte = open(os.path.join(BASE, nome), encoding="utf-8").read()
+        # Ignora as linhas de comentario, que citam o padrao antigo de proposito.
+        codigo = "\n".join(l for l in fonte.splitlines() if not l.strip().startswith("#"))
+        cru = _re.findall(r"Bot\(\s*token\s*=", codigo)
+        assert not cru, f"{nome} abre Bot(token=...) direto, sem os timeouts: {cru}"
+        assert "criar_bot" in codigo, f"{nome} nao usa criar_bot()"
+
+    tg = open(os.path.join(BASE, "integrations", "telegram_bot.py"), encoding="utf-8").read()
+    assert "def criar_bot" in tg, "criar_bot() saiu de integrations/telegram_bot.py"
+    assert "TELEGRAM_TIMEOUT_LEITURA" in tg, "o timeout deixou de ser configuravel pelo .env"
+
+
+def test_criar_bot_aplica_o_timeout_de_verdade():
+    """Conferir no objeto, nao no codigo: `Bot(request=...)` guarda DOIS
+    clientes — o de `get_updates` e o das chamadas normais. Olhar o primeiro
+    (que segue no padrao de 5s de proposito) faria o teste passar mesmo se o
+    cliente configurado nao estivesse sendo usado para publicar."""
+    try:
+        from integrations.telegram_bot import criar_bot
+    except ImportError:
+        return  # sem o pacote `telegram` (caso do CI): a checagem de fonte cobre
+
+    bot = criar_bot("123:fake")
+    timeouts = [getattr(r, "_client_kwargs", {}).get("timeout") for r in bot._request]
+    leituras = [getattr(t, "read", None) for t in timeouts if t is not None]
+    assert 40.0 in leituras, f"nenhum cliente com read timeout de 40s: {timeouts}"
+
+
 if __name__ == "__main__":
     import traceback
 

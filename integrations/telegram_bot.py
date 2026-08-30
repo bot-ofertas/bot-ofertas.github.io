@@ -20,6 +20,42 @@ from telegram import Update
 
 log = logging.getLogger(__name__)
 
+# ── Cliente do Telegram com timeouts próprios ─────────────────────────────────
+# O padrão da biblioteca (5s de leitura) é curto demais para `send_photo` com
+# upload de bytes numa conexão doméstica: a rodada morria com um "Timed out"
+# seco — foi esse o registro de `rodada_falhou` das 23:20 de 2026-08-25 no
+# relatório de problemas.
+#
+# Mora AQUI, e não no rastreador.py, porque são TRÊS os processos que
+# publicam (ML, Amazon, campanha de ferramentas). Com a função no rastreador
+# do ML, os outros dois seguiam abrindo `Bot(token=...)` cru e mantinham
+# exatamente o defeito que a correção resolveu — o tipo de conserto que só
+# vale para um terço do problema.
+TIMEOUT_CONEXAO = float(os.getenv("TELEGRAM_TIMEOUT_CONEXAO", "10"))
+TIMEOUT_LEITURA = float(os.getenv("TELEGRAM_TIMEOUT_LEITURA", "40"))
+
+
+def criar_bot(token: str = "") -> Bot:
+    """Bot do Telegram com timeouts próprios.
+
+    Cai no cliente padrão se a versão instalada da biblioteca não expuser
+    `HTTPXRequest` — timeout curto é melhor que não publicar.
+    """
+    token = token or os.getenv("TOKEN_TELEGRAM", "")
+    try:
+        from telegram.request import HTTPXRequest  # noqa: PLC0415
+
+        pedido = HTTPXRequest(
+            connect_timeout=TIMEOUT_CONEXAO,
+            read_timeout=TIMEOUT_LEITURA,
+            write_timeout=TIMEOUT_LEITURA,
+            pool_timeout=TIMEOUT_CONEXAO,
+        )
+        return Bot(token=token, request=pedido)
+    except Exception as e:  # noqa: BLE001 — compatibilidade com PTB antigo
+        log.warning("HTTPXRequest indisponível (%s) — usando timeouts padrão do Telegram", e)
+        return Bot(token=token)
+
 # ── Configuração de admin ──────────────────────────────────────────────────────
 # IDs de chat autorizados a usar /status e /stats (separados por vírgula na env var ADMIN_IDS)
 _ADMIN_IDS: set[int] = set(

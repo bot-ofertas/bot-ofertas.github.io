@@ -85,32 +85,14 @@ PAUSA_ENTRE_POSTS = 6   # segundos entre posts
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
-# Timeouts do cliente HTTP do Telegram. O padrão da biblioteca (5s de leitura)
-# é curto demais para `send_photo` com upload de bytes numa conexão doméstica:
-# a rodada morria com um "Timed out" seco -- foi exatamente esse o registro de
-# `rodada_falhou` das 23:20 de 2026-08-25 no relatório de problemas. Subir o
-# read/write timeout custa, no pior caso, alguns segundos a mais numa falha
-# real; o benefício é não perder a rodada inteira por um upload lento.
-TIMEOUT_CONEXAO = float(os.getenv("TELEGRAM_TIMEOUT_CONEXAO", "10"))
-TIMEOUT_LEITURA = float(os.getenv("TELEGRAM_TIMEOUT_LEITURA", "40"))
-
-
+# Timeouts do cliente HTTP do Telegram: a definição mora em
+# integrations/telegram_bot.py, porque os TRÊS processos que publicam (ML,
+# Amazon e campanha de ferramentas) precisam dela. Aqui é só o atalho.
 def criar_bot() -> Bot:
-    """Bot do Telegram com timeouts próprios (cai no padrão se a versão da
-    biblioteca não expuser HTTPXRequest)."""
-    try:
-        from telegram.request import HTTPXRequest  # noqa: PLC0415
-        pedido = HTTPXRequest(
-            connect_timeout=TIMEOUT_CONEXAO,
-            read_timeout=TIMEOUT_LEITURA,
-            write_timeout=TIMEOUT_LEITURA,
-            pool_timeout=TIMEOUT_CONEXAO,
-        )
-        return Bot(token=TOKEN_TELEGRAM, request=pedido)
-    except Exception as e:  # noqa: BLE001 — compatibilidade com PTB antigo
-        logging.getLogger("rastreador").warning(
-            "HTTPXRequest indisponível (%s) — usando timeouts padrão do Telegram", e)
-        return Bot(token=TOKEN_TELEGRAM)
+    """Bot do Telegram com timeouts próprios (ver `telegram_bot.criar_bot`)."""
+    from integrations.telegram_bot import criar_bot as _criar  # noqa: PLC0415
+
+    return _criar(TOKEN_TELEGRAM)
 
 
 def log(msg: str) -> None:
