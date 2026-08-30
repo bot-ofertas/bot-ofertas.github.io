@@ -68,7 +68,11 @@ PA-API, quando configurada). Taxa de sucesso monitorada em
 |---|---|---|
 | 01:00 | `BotOfertas-VerificacaoDiaria` | Roda `verificacao_diaria.py` — relatório de saúde por Telegram + alertas reativos. |
 | 02:00 | `BotOfertas-Shutdown` | Roda `aguardar_e_desligar.ps1` — espera até 35min se o bot estiver ocupado (`verificar_ocioso.py`), depois **suspende** (S3, não desliga 100%). |
-| 08:45 | `BotOfertas-WakeUp` | Acorda o PC via Wake Timer e roda `startup.py`, que sobe os 3 rastreadores. |
+| 08:30 | `BotOfertas-WakeUp` | Acorda o PC via Wake Timer e roda `acordar_e_iniciar.ps1`, que registra o despertar e sobe o bot pelo `garantir_bot.py`. |
+| 30/30min | `BotOfertas-Supervisor` | Se o PC está ligado dentro da janela e o bot não está rodando, sobe o processo pai. É a rede de segurança do ciclo. |
+
+Os horários saem de `core/janela.py` (`HORA_LIGAR`/`HORA_DESLIGAR` do `.env`) —
+mudar no `.env` e rodar `.\configurar_ciclo.ps1` de novo reagenda tudo.
 
 **Por que suspensão e não desligamento completo:** confirmado em
 2026-07-31 que shutdown completo (S5) não acorda via Wake Timer do Windows

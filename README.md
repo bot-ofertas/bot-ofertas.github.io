@@ -99,11 +99,26 @@ python -m core.divulgacao facebook grupo     # divulgação pura do grupo
 
 ## Ciclo diário: desliga e religa sozinho
 
+Um comando só — atualiza o código, registra as 4 tarefas e mostra o
+resultado (ou duplo clique em `CICLO_DIARIO.bat`):
+
+```powershell
+.\configurar_ciclo.ps1            # traz o código, agenda e confere
+```
+
+Não depende do n8n: quem só quer a máquina ligando e desligando sozinha roda
+este; `instalar_tudo.ps1` é para quem quer tudo junto. Por baixo:
+
 ```powershell
 .\agendar_shutdown.ps1            # registra o ciclo
 .\agendar_shutdown.ps1 -Status    # confere se está funcionando
 .\agendar_shutdown.ps1 -Remover   # cancela
 ```
+
+Os horários moram em `core/janela.py`, que lê `HORA_LIGAR`/`HORA_DESLIGAR`
+do `.env`. Para mudar: edite o `.env` e rode `.\configurar_ciclo.ps1` de
+novo — o agendamento, o supervisor e o watchdog do n8n leem todos daí, e é
+por isso que não existe horário escrito à mão em segundo lugar.
 
 | Horário | O que acontece |
 |---|---|

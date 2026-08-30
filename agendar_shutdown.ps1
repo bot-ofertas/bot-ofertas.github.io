@@ -229,7 +229,7 @@ Registrar-Tarefa "BotOfertas-Shutdown" @{
     Description = "Desliga (suspende) o PC no fim da janela, aguardando ate 35min se o bot estiver ocupado (Bot Ofertas)"
 } "desligamento agendado para $($AGENDA.desligar) (aguarda até 35min se ocupado)"
 
-# ─── 3. TAREFA DE WAKE UP — 08:45 diariamente ────────────────────────────
+# ─── 3. TAREFA DE WAKE UP — no horario de religar (core/janela.py) ───────
 Write-Host "[3/5] Agendando wake/inicio do bot às $($AGENDA.ligar)..." -ForegroundColor Yellow
 
 # Chama acordar_e_iniciar.ps1 em vez do python direto: ele grava a linha

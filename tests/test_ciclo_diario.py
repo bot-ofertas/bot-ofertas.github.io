@@ -203,6 +203,36 @@ checar("startup.py que continua vivo → subir_bot() responde sucesso",
        garantir_bot.subir_bot() is True)
 garantir_bot.subprocess.Popen = _orig_popen  # type: ignore[assignment]
 
+# ── 4b. O comando único que registra o ciclo ─────────────────────────────
+print("\n[4b] configurar_ciclo.ps1 — o caminho de instalação do ciclo")
+
+_ciclo = open(os.path.join(RAIZ, "configurar_ciclo.ps1"), encoding="utf-8").read()
+checar("chama o agendador em vez de repetir a lógica dele",
+       "agendar_shutdown.ps1" in _ciclo)
+checar("zera $LASTEXITCODE antes de ler o resultado do agendador",
+       '$global:LASTEXITCODE = 0' in _ciclo,
+       "sem isso ele relata o código de saída do git que rodou antes")
+checar("captura o erro terminante do agendador",
+       "catch {" in _ciclo and "$ok = $false" in _ciclo)
+checar("mostra o -Status depois — a prova de que as tarefas existem",
+       "-Status" in _ciclo)
+checar("tem código de saída explícito nos dois caminhos",
+       "exit 0" in _ciclo and "exit 1" in _ciclo)
+checar("recusa rodar fora do Windows em uma linha, sem parede de erro",
+       "$IsWindows" in _ciclo)
+
+_bat = open(os.path.join(RAIZ, "CICLO_DIARIO.bat"), encoding="utf-8").read()
+checar("o .bat chama o .ps1 com ExecutionPolicy Bypass",
+       "configurar_ciclo.ps1" in _bat and "ExecutionPolicy Bypass" in _bat,
+       "a política padrão do Windows recusa .ps1 e o erro não explica isso")
+
+# Horário escrito à mão em segundo arquivo foi o que fez o watchdog alertar
+# "bot caiu" toda madrugada num desligamento planejado (Regra 15).
+for _arq in ("CHECKLIST_SISTEMA.md", "agendar_shutdown.ps1"):
+    _txt = open(os.path.join(RAIZ, _arq), encoding="utf-8").read()
+    checar(f"{_arq} não menciona mais o horário antigo de religar (08:45)",
+           "08:45" not in _txt, _arq)
+
 # ── 5. O watchdog do n8n, executado de verdade ───────────────────────────
 print("\n[5] n8n W1 'Checar heartbeat' — JS real, relógio simulado")
 
