@@ -97,6 +97,32 @@ python -m core.divulgacao instagram          # anúncio da rodada
 python -m core.divulgacao facebook grupo     # divulgação pura do grupo
 ```
 
+## WhatsApp: como ligar o envio para o grupo
+
+O envio usa o **WhatsApp Desktop já logado nesta máquina** e publica só no
+grupo configurado. Duas variáveis no `.env`, e só a primeira liga o envio:
+
+| Variável | Para que serve |
+|---|---|
+| `WHATSAPP_GROUP_ID` | **Chave geral.** Vazio = a fila registra `wa_ativo=False` e não envia nada |
+| `WHATSAPP_GROUP_NAME` | Nome do grupo **como aparece na lista de conversas** — é por ele que a automação acha a conversa (Ctrl+F), então precisa bater exatamente |
+
+Para conferir se está de pé:
+
+```powershell
+.\status.ps1        # mostra "WhatsApp: OK (desktop)" ou o motivo de estar OFF
+```
+
+O `/health` pergunta primeiro se existe destino configurado e só depois se o
+app está aberto. Antes ele olhava só o processo, então com o WhatsApp Desktop
+rodando e nenhum grupo no `.env` mostrava **OK** enquanto o grupo não recebia
+nada — verde na tela e zero postagem, sem nada explicando.
+
+Cada mensagem sai como **uma unidade**: foto + legenda juntas. Sem foto, o
+envio é abortado em vez de sair pela metade. O intervalo entre envios é
+aleatório (30–45 min, em `whatsapp_queue_sender.py`): publicar no mesmo
+instante do Telegram, sempre, é o padrão mais fácil de reconhecer como bot.
+
 ## Ciclo diário: desliga e religa sozinho
 
 Um comando só — atualiza o código, registra as 4 tarefas e mostra o

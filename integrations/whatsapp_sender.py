@@ -29,8 +29,20 @@ import urllib.parse
 
 log = logging.getLogger(__name__)
 
+def _placeholder(valor: str) -> bool:
+    """True para os valores de exemplo do `.env.example`.
+
+    Um placeholder e uma string nao-vazia, entao passaria por configuracao
+    de verdade e ligaria o envio apontando para um grupo que nao existe —
+    pior que estar desligado, porque a fila consome o item e o marca como
+    processado. Mesma convencao do `setup_n8n._efetivo`.
+    """
+    return valor.lower().startswith(("cole_aqui", "cole-aqui", "seu_", "sua_"))
+
+
 def _group_id() -> str:
-    return os.getenv("WHATSAPP_GROUP_ID", "")
+    valor = os.getenv("WHATSAPP_GROUP_ID", "").strip()
+    return "" if _placeholder(valor) else valor
 
 
 def _canal_nome() -> str:

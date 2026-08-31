@@ -67,8 +67,28 @@ def _fila_whatsapp_pendentes() -> int:
 
 
 def _status_whatsapp() -> dict:
-    """Retorna o melhor método de envio disponível para WhatsApp."""
+    """Retorna o melhor método de envio disponível para WhatsApp.
+
+    A PRIMEIRA pergunta é se existe destino configurado, não se o app está
+    aberto. `whatsapp_sender.wa_ativo()` (que é `bool(WHATSAPP_GROUP_ID)`) é
+    o que a fila consulta antes de cada envio: sem ele, o
+    whatsapp_queue_sender registra "WhatsApp pausado (wa_ativo=False)" e não
+    manda nada — para sempre. Enquanto este bloco olhava só o processo, o
+    /health e o status.ps1 mostravam "WhatsApp: OK (desktop)" nesse exato
+    cenário: verde na tela e zero postagem no grupo, sem nada explicando.
+    """
     fila = _fila_whatsapp_pendentes()
+
+    try:
+        from integrations.whatsapp_sender import wa_ativo  # noqa: PLC0415
+        if not wa_ativo():
+            return {"ok": False, "metodo": "nenhum",
+                    "motivo": "sem WHATSAPP_GROUP_ID no .env — a fila nao envia",
+                    "fila_pendente": fila}
+    except Exception as e:
+        return {"ok": False, "motivo": f"nao consegui checar a config: {e}"[:80],
+                "fila_pendente": fila}
+
     # 1º: Evolution API (headless, mais confiável)
     try:
         from integrations.whatsapp_api import _configurada, esta_conectada  # noqa: PLC0415

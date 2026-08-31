@@ -1056,6 +1056,75 @@ def test_whatsapp_baixa_foto_pela_mesma_camada_do_telegram():
             f"{nome} ainda baixa com requests.get() cru (User-Agent que o mlstatic recusa)")
 
 
+# ── WhatsApp: o /health tem de contar a mesma historia que a fila ───────────
+
+def test_health_nao_diz_ok_com_whatsapp_sem_grupo():
+    """`wa_ativo()` (= WHATSAPP_GROUP_ID preenchido) e o que a fila consulta
+    antes de cada envio. O /health olhava so se o app estava aberto, entao
+    com o WhatsApp Desktop rodando e nenhum grupo configurado ele mostrava
+    "WhatsApp: OK (desktop)" enquanto o whatsapp_queue_sender registrava
+    "wa_ativo=False" e nao mandava nada. Verde na tela, zero postagem no
+    grupo, nada explicando.
+    """
+    import core.healthcheck as hc
+    from integrations import whatsapp_desktop as wd
+
+    antes_proc = wd._processo_wa_rodando
+    antes_id = os.environ.get("WHATSAPP_GROUP_ID")
+    try:
+        wd._processo_wa_rodando = lambda: True  # app aberto nos dois casos
+
+        os.environ["WHATSAPP_GROUP_ID"] = ""
+        st = hc._status_whatsapp()
+        assert st["ok"] is False, st
+        assert "WHATSAPP_GROUP_ID" in st.get("motivo", ""), st
+
+        os.environ["WHATSAPP_GROUP_ID"] = "120363011@g.us"
+        st = hc._status_whatsapp()
+        assert st["ok"] is True and st.get("metodo") == "desktop", st
+    finally:
+        wd._processo_wa_rodando = antes_proc
+        if antes_id is None:
+            os.environ.pop("WHATSAPP_GROUP_ID", None)
+        else:
+            os.environ["WHATSAPP_GROUP_ID"] = antes_id
+
+
+def test_placeholder_do_env_nao_liga_o_whatsapp():
+    """`WHATSAPP_GROUP_ID=cole_aqui_o_id_do_grupo` e uma string nao-vazia:
+    passaria por configuracao de verdade e ligaria o envio apontando para um
+    grupo inexistente — pior que desligado, porque a fila consome o item e o
+    marca como processado."""
+    from integrations.whatsapp_sender import wa_ativo
+
+    antes = os.environ.get("WHATSAPP_GROUP_ID")
+    try:
+        for falso in ("", "   ", "cole_aqui_o_id_do_grupo", "SEU_GRUPO_AQUI"):
+            os.environ["WHATSAPP_GROUP_ID"] = falso
+            assert wa_ativo() is False, f"{falso!r} ligou o WhatsApp"
+        os.environ["WHATSAPP_GROUP_ID"] = "120363011@g.us"
+        assert wa_ativo() is True
+    finally:
+        if antes is None:
+            os.environ.pop("WHATSAPP_GROUP_ID", None)
+        else:
+            os.environ["WHATSAPP_GROUP_ID"] = antes
+
+
+def test_env_example_documenta_o_whatsapp():
+    """O `.env.example` e o ponto de partida do `--configurar`. Sem as
+    variaveis do WhatsApp ali, um `.env` recem-criado nasce com o envio
+    desligado e nada diz por que."""
+    exemplo = open(os.path.join(BASE, ".env.example"), encoding="utf-8").read()
+    for chave in ("WHATSAPP_GROUP_ID", "WHATSAPP_GROUP_NAME"):
+        assert f"{chave}=" in exemplo, f"{chave} fora do .env.example"
+
+    setup = _setup_module()
+    fonte = inspect.getsource(setup.configurar)
+    assert "WHATSAPP_GROUP_ID" in fonte, (
+        "--configurar nao avisa que falta o WHATSAPP_GROUP_ID")
+
+
 if __name__ == "__main__":
     import traceback
 

@@ -522,9 +522,20 @@ def configurar() -> int:
     faltando = [c for c in ("N8N_API_KEY", "TOKEN_TELEGRAM") if not _efetivo(c)]
     if not admin_final:
         faltando.append("ADMIN_CHAT_ID")
+    # WHATSAPP_GROUP_ID e a chave geral do WhatsApp: vazio = a fila nunca
+    # envia. Ficava de fora desta lista, entao um `.env` recem-criado saia
+    # daqui "pronto" com o WhatsApp desligado em silencio — e o /health
+    # ainda dizia OK enquanto o grupo nao recebia nada.
+    if not _efetivo("WHATSAPP_GROUP_ID"):
+        faltando.append("WHATSAPP_GROUP_ID")
 
     if faltando:
         print(f"⚠️  Ainda falta preencher: {', '.join(faltando)}")
+        if "WHATSAPP_GROUP_ID" in faltando:
+            print("     Sem WHATSAPP_GROUP_ID o Telegram publica normalmente, mas o")
+            print("     grupo do WhatsApp nao recebe NADA (a fila para em silencio).")
+            print("     Confira tambem WHATSAPP_GROUP_NAME: e por ele que a automacao")
+            print("     acha a conversa no WhatsApp Desktop, e precisa bater exatamente.")
         if "ADMIN_CHAT_ID" in faltando:
             print("     Sem ADMIN_CHAT_ID os workflows importam e ativam normalmente,")
             print("     mas NENHUM alerta sai — nem o 'o PC nao religou'. Mande /start")
