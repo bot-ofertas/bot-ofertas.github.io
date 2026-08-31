@@ -16,8 +16,9 @@ os valores acordados como padrão, e todo o resto pergunta a este módulo.
 
 Uso na linha de comando (é como o PowerShell lê os mesmos valores):
 
-    python -m core.janela --agenda    # JSON com os horários
-    python -m core.janela --dentro    # exit 0 = dentro da janela, 1 = fora
+    python -m core.janela --agenda     # JSON com os horários
+    python -m core.janela --dentro     # exit 0 = dentro da janela, 1 = fora
+    python -m core.janela --pc-ativo   # exit 0 = o PC ainda pode estar postando
 """
 from __future__ import annotations
 
@@ -32,6 +33,14 @@ HORA_DESLIGAR_PADRAO = "02:00"
 # A verificação diária roda antes do desligamento para que o relatório saia
 # com o dia inteiro contabilizado — 1h de folga cobre uma rodada em curso.
 HORA_VERIFICACAO_PADRAO = "01:00"
+
+# Quanto o desligamento pode atrasar: `aguardar_e_desligar.ps1` espera até
+# 35 min se o bot estiver no meio de uma rodada, para não cortar um envio.
+# Quem publica de fora (o GitHub Actions) precisa saber disso: no instante do
+# desligamento o PC ainda pode estar postando, e os dois bancos de
+# deduplicação são separados — a sobreposição publica a MESMA oferta duas
+# vezes no canal.
+MINUTOS_ESPERA_DESLIGAR = 35
 
 # Depois do horário de religar, quanto tempo se espera até considerar que o
 # despertar falhou. O bot leva ~1 min para subir e mandar o primeiro
@@ -86,6 +95,25 @@ def em_silencio(agora: datetime | None = None) -> bool:
     """Complemento de `dentro_da_janela`: o PC está desligado por decisão,
     não por falha. É o que impede o watchdog de gritar toda madrugada."""
     return not dentro_da_janela(agora)
+
+
+def pc_pode_estar_publicando(agora: datetime | None = None) -> bool:
+    """True enquanto o PC local ainda pode estar publicando.
+
+    É `dentro_da_janela()` MAIS a carência do desligamento. Existe para quem
+    publica de fora decidir se pode agir: às 02:00 a janela já diz "fora",
+    mas o `aguardar_e_desligar.ps1` pode estar esperando até 35 min o bot
+    terminar a rodada — e nesse intervalo o PC continua postando.
+    """
+    agora = agora or datetime.now()
+    if dentro_da_janela(agora):
+        return True
+    fim = datetime.combine(agora.date(), hora_desligar())
+    carencia = timedelta(minutes=MINUTOS_ESPERA_DESLIGAR)
+    # O desligamento relevante pode ter sido o de ontem (ex.: agora é 00:30 e
+    # o desligar é às 23:50) — por isso os dois candidatos.
+    return any(inicio <= agora < inicio + carencia
+               for inicio in (fim, fim - timedelta(days=1)))
 
 
 def proxima_religada(agora: datetime | None = None) -> datetime:
@@ -154,6 +182,9 @@ if __name__ == "__main__":
 
     if "--dentro" in sys.argv:
         sys.exit(0 if dentro_da_janela() else 1)
+    if "--pc-ativo" in sys.argv:
+        # exit 0 = o PC local pode estar publicando; quem está de fora espera.
+        sys.exit(0 if pc_pode_estar_publicando() else 1)
     if "--agenda" in sys.argv:
         print(json.dumps(agenda(), ensure_ascii=False))
         sys.exit(0)

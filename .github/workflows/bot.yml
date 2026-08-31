@@ -2,9 +2,18 @@ name: Bot Ofertas ML
 
 on:
   schedule:
-    # Só roda enquanto o PC local fica desligado (01:55-08:45 BRT = 04:55-11:45 UTC).
-    # Evita duplicar publicações com o bot local, que cobre o resto do dia
-    # (ver agendar_shutdown.ps1). Fora dessa janela, quem publica é o PC local.
+    # Só roda enquanto o PC local fica desligado. O cron é ESTÁTICO (o GitHub
+    # não sabe ler core/janela.py), então ele é só o filtro grosseiro — quem
+    # decide de verdade é o passo "Confirmar que o PC local está dormindo",
+    # que pergunta ao core/janela.py, a mesma fonte que o Agendador de
+    # Tarefas e o watchdog do n8n usam.
+    #
+    # Por que a confirmação em runtime importa: o desligamento das 02:00
+    # ESPERA até 35 min se o bot estiver no meio de uma rodada
+    # (aguardar_e_desligar.ps1), então o PC pode seguir publicando até
+    # ~02:35 — bem em cima da rodada da nuvem das 02:00 BRT. Os dois bancos
+    # de deduplicação são separados (o da nuvem é um cache do Actions), então
+    # a sobreposição publica a MESMA oferta duas vezes no canal.
     #
     # Reduzido de 3x/hora pra 1x/hora em 2026-08-09: a organizacao foi
     # sinalizada pelo GitHub por atividade automatizada excessiva. A politica
@@ -42,16 +51,45 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
+      - name: Confirmar que o PC local está dormindo
+        # Vem ANTES de instalar dependências e o Chromium de propósito: se a
+        # janela mudou, a rodada inteira é pulada em segundos em vez de gastar
+        # minutos para descobrir no fim que não devia publicar.
+        #
+        # HORA_LIGAR/HORA_DESLIGAR vêm das variáveis do repositório quando
+        # existirem (Settings → Secrets and variables → Variables). Vazias, o
+        # core/janela.py cai nos padrões 08:30/02:00 — os mesmos do .env do
+        # PC. Assim mudar o horário do ciclo não deixa a nuvem para trás
+        # publicando por cima do PC ligado.
+        id: janela
+        env:
+          HORA_LIGAR: ${{ vars.HORA_LIGAR }}
+          HORA_DESLIGAR: ${{ vars.HORA_DESLIGAR }}
+          TZ: America/Sao_Paulo
+        run: |
+          if python -m core.janela --pc-ativo; then
+            echo "O PC local deveria estar ligado agora — pulando para nao publicar duas vezes."
+            python -m core.janela
+            echo "pular=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "PC local fora da janela — a nuvem publica."
+            echo "pular=0" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Instalar dependências
+        if: steps.janela.outputs.pular != '1'
         run: pip install -r requirements.txt
 
       - name: Instalar Playwright + Chromium
+        if: steps.janela.outputs.pular != '1'
         run: python -m playwright install chromium --with-deps
 
       - name: Criar diretórios necessários
+        if: steps.janela.outputs.pular != '1'
         run: mkdir -p data assets
 
       - name: Testes (qualidade, afiliado, quarentena, n8n)
+        if: steps.janela.outputs.pular != '1'
         env:
           PYTHONIOENCODING: utf-8
         run: |
@@ -59,10 +97,12 @@ jobs:
           python tests/test_n8n_integracao.py
 
       - name: Gerar banner ALERTA CUPOM
+        if: steps.janela.outputs.pular != '1'
         run: python -m core.banner_cupom
         continue-on-error: true   # não trava o build se Pillow tiver problema
 
       - name: Rodar o bot (Mercado Livre)
+        if: steps.janela.outputs.pular != '1'
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
@@ -79,6 +119,7 @@ jobs:
         run: python rastreador.py
 
       - name: Rodar cupons Amazon (se configurado)
+        if: steps.janela.outputs.pular != '1'
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
@@ -104,13 +145,13 @@ jobs:
           key: sqlite-db-v2-${{ github.run_number }}
 
       - name: Atualizar site (GitHub Pages)
-        if: success()
+        if: success() && steps.janela.outputs.pular != '1'
         env:
           PYTHONIOENCODING: utf-8
         run: python export_json.py
 
       - name: Commitar ofertas no site
-        if: success()
+        if: success() && steps.janela.outputs.pular != '1'
         run: |
           git config user.name "Bot-Ofertas"
           git config user.email "bot@github.com"

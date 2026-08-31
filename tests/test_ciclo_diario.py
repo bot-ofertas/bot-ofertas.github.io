@@ -203,6 +203,41 @@ checar("startup.py que continua vivo → subir_bot() responde sucesso",
        garantir_bot.subir_bot() is True)
 garantir_bot.subprocess.Popen = _orig_popen  # type: ignore[assignment]
 
+# ── 3b. A nuvem não pode publicar por cima do PC ligado ──────────────────
+print("\n[3b] pc_pode_estar_publicando() — quem publica de fora espera a carência")
+
+# O GitHub Actions publica na janela em que o PC dorme. Mas às 02:00 a janela
+# já diz "fora" enquanto o aguardar_e_desligar.ps1 pode estar esperando até
+# 35 min o bot terminar a rodada — e nesse intervalo o PC continua postando.
+# Os dois bancos de deduplicação são separados (o da nuvem é um cache do
+# Actions), então a sobreposição publica a MESMA oferta duas vezes no canal.
+checar("01:59 (dentro da janela) → a nuvem espera",
+       janela.pc_pode_estar_publicando(em("01:59")))
+checar("02:00 (janela ja diz 'fora', mas o desligamento pode estar esperando)",
+       janela.pc_pode_estar_publicando(em("02:00"))
+       and not janela.dentro_da_janela(em("02:00")))
+checar("02:34 (ultimo minuto da carencia de 35min) → ainda espera",
+       janela.pc_pode_estar_publicando(em("02:34")))
+checar("02:35 (fim da carencia) → a nuvem publica",
+       not janela.pc_pode_estar_publicando(em("02:35")))
+checar("08:29 (PC ainda dormindo) → a nuvem publica",
+       not janela.pc_pode_estar_publicando(em("08:29")))
+checar("08:30 (PC religou) → a nuvem espera",
+       janela.pc_pode_estar_publicando(em("08:30")))
+
+# O bot.yml tem de consultar a fonte unica, nao repetir o horario no cron.
+_botyml = open(os.path.join(RAIZ, ".github", "workflows", "bot.yml"), encoding="utf-8").read()
+checar("bot.yml pergunta ao core/janela.py antes de publicar",
+       "core.janela --pc-ativo" in _botyml)
+checar("bot.yml roda com o fuso de Sao Paulo",
+       "America/Sao_Paulo" in _botyml,
+       "sem TZ o runner compara o horario UTC com a janela em BRT")
+checar("os passos que publicam respeitam a decisao da janela",
+       _botyml.count("steps.janela.outputs.pular != '1'") >= 6)
+checar("bot.yml aceita HORA_LIGAR/HORA_DESLIGAR do repositorio",
+       "vars.HORA_LIGAR" in _botyml and "vars.HORA_DESLIGAR" in _botyml,
+       "senao mudar o horario deixa a nuvem para tras, publicando por cima")
+
 # ── 4b. O comando único que registra o ciclo ─────────────────────────────
 print("\n[4b] configurar_ciclo.ps1 — o caminho de instalação do ciclo")
 
