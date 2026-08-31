@@ -110,8 +110,9 @@ grupo configurado. Duas variáveis no `.env`, e só a primeira liga o envio:
 Para conferir se está de pé:
 
 ```powershell
-.\status.ps1                      # visão geral
-python diagnostico_whatsapp.py    # por que o grupo não está recebendo
+.\status.ps1                             # visão geral
+python diagnostico_whatsapp.py           # por que o grupo não está recebendo
+python diagnostico_whatsapp.py --testar  # manda UMA mensagem agora, para conferir
 ```
 
 O `diagnostico_whatsapp.py` percorre os oito elos entre a oferta e o grupo
@@ -119,6 +120,12 @@ O `diagnostico_whatsapp.py` percorre os oito elos entre a oferta e o grupo
 dependências → `/health` → erros recentes), **para no primeiro que está
 quebrado** e diz o que fazer. Existe porque cada elo registra num log
 diferente e o sintoma é o mesmo em quase todos: nada acontece.
+
+O `--testar` manda **uma** mensagem real ao grupo na hora, usando a oferta
+mais recente do banco — sem ele, o único jeito de saber se a configuração
+ficou certa é esperar o próximo envio da fila, 30 a 45 min depois de cada
+reinício. Só age com a flag explícita, e recusa enviar se o diagnóstico
+achou algum elo quebrado.
 
 O `/health` pergunta primeiro se existe destino configurado e só depois se o
 app está aberto. Antes ele olhava só o processo, então com o WhatsApp Desktop

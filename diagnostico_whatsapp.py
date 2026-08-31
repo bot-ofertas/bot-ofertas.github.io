@@ -12,7 +12,8 @@ Este script percorre os elos NA ORDEM em que o envio depende deles e para no
 primeiro que está quebrado, dizendo o que fazer. Não envia nada, não altera
 nada: só lê.
 
-    python diagnostico_whatsapp.py
+    python diagnostico_whatsapp.py             # so diagnostica, nao envia nada
+    python diagnostico_whatsapp.py --testar    # manda UMA mensagem de teste ao grupo
 """
 from __future__ import annotations
 
@@ -55,6 +56,81 @@ def aviso(titulo: str, detalhe: str = "") -> None:
 
 def secao(n: int, titulo: str) -> None:
     print(f"\n[{n}] {titulo}")
+
+
+def enviar_teste() -> int:
+    """Manda UMA mensagem real ao grupo configurado, agora.
+
+    Existe porque sem isso o unico jeito de saber se a configuracao ficou
+    certa e esperar o proximo envio da fila — 30 a 45 min depois de cada
+    reinicio. Fechar esse laco em 20 segundos e a diferenca entre ajustar o
+    `.env` uma vez e ajustar as cegas a tarde inteira.
+
+    Usa uma oferta REAL do banco (a mais recente com foto), entao exercita o
+    mesmo caminho da fila: montagem da mensagem, marcacao de origem, download
+    da foto e envio foto+legenda como uma unidade so.
+
+    So roda com --testar explicito: manda mensagem de verdade no grupo.
+    """
+    import asyncio  # noqa: PLC0415
+
+    import core.database as db  # noqa: PLC0415
+    from integrations.whatsapp_sender import enviar_para_grupo  # noqa: PLC0415
+
+    print("\n" + "=" * 66)
+    print("  ENVIO DE TESTE — uma mensagem real no grupo configurado")
+    print("=" * 66)
+
+    try:
+        candidatos = [p for p in db.listar_todos(50) if (p.get("foto") or "").startswith("http")]
+    except Exception as e:
+        print(f"{VERM}Nao consegui ler o banco: {e}{FIM}")
+        return 1
+
+    if not candidatos:
+        print(f"{VERM}Nenhuma oferta com foto no banco para usar como teste.{FIM}")
+        print("Rode o bot uma vez (python -u startup.py) e tente de novo — a")
+        print("Regra 5 nao permite mandar so texto, entao o teste precisa de foto.")
+        return 1
+
+    produto = candidatos[0]
+    print(f"\nProduto do teste: {(produto.get('titulo') or '')[:55]}")
+    print(f"Grupo de destino: {os.getenv('WHATSAPP_GROUP_NAME', 'Bot-Ofertas')}")
+    print(f"\n{AMAR}Enviando... (o WhatsApp Desktop vai ganhar o foco por alguns segundos){FIM}")
+
+    try:
+        ok_envio = asyncio.run(
+            asyncio.wait_for(enviar_para_grupo(produto), timeout=120.0)
+        )
+    except asyncio.TimeoutError:
+        print(f"\n{VERM}FALHOU: passou de 120s sem concluir.{FIM}")
+        print("Suspeito principal: a busca da conversa nao achou o grupo e a")
+        print("automacao ficou esperando. Confira WHATSAPP_GROUP_NAME.")
+        return 1
+    except Exception as e:
+        print(f"\n{VERM}FALHOU com excecao: {e}{FIM}")
+        print("O registro completo esta em data/errors.jsonl.")
+        return 1
+
+    if ok_envio:
+        print(f"\n{VERDE}ENVIADO. Confira o grupo agora.{FIM}")
+        print("Se a mensagem chegou, a configuracao esta certa e a fila vai")
+        print("publicar sozinha a cada 30-45 min.")
+        print(f"\n{AMAR}Se NAO chegou nada apesar do 'ENVIADO':{FIM} o envio e por")
+        print("automacao de teclado e o WhatsApp Desktop roda num WebView2 opaco —")
+        print("nao da para confirmar por codigo em qual conversa a mensagem caiu.")
+        print("Nesse caso o suspeito e o nome: WHATSAPP_GROUP_NAME tem de ser")
+        print("IGUAL ao que aparece na sua lista de conversas.")
+        return 0
+
+    print(f"\n{VERM}NAO ENVIOU.{FIM} Motivos possiveis, na ordem:")
+    print("  1. WhatsApp Desktop fechado ou nao logado")
+    print("  2. a foto do produto nao baixou (sem foto o envio e abortado,")
+    print("     de proposito — Regra 5: nunca postar pela metade)")
+    print("  3. a janela perdeu o foco no meio (o envio aborta para nao")
+    print("     digitar em outra conversa)")
+    print("\nO registro completo esta em data/errors.jsonl e data/bot.log.")
+    return 1
 
 
 def main() -> int:
@@ -265,8 +341,17 @@ def main() -> int:
     print("  no .env e IGUAL ao que aparece na sua lista de conversas.")
     print("\nLembre tambem que apos cada reinicio o primeiro envio so sai em")
     print("30-45 min (intervalo aleatorio, de proposito, para nao parecer bot).")
+    print(f"\n{CINZA}Para nao esperar: python diagnostico_whatsapp.py --testar{FIM}")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    codigo = main()
+    if "--testar" in sys.argv:
+        if codigo != 0:
+            # Enviar por cima de um elo quebrado so produz uma falha
+            # confusa: o diagnostico ja disse o que consertar.
+            print(f"\n{AMAR}Teste NAO executado: conserte os problemas acima primeiro.{FIM}")
+        else:
+            codigo = enviar_teste()
+    sys.exit(codigo)

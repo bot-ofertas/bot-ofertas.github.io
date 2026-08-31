@@ -1160,6 +1160,71 @@ def test_diagnostico_whatsapp_aponta_o_elo_quebrado():
         assert elo in r.stdout, f"o diagnostico nao chegou no elo {elo}"
 
 
+def test_envio_de_teste_e_opt_in_e_nao_furta_a_fila():
+    """Sem `--testar` o script nao pode mandar nada — ele e um diagnostico
+    e roda enquanto o bot esta publicando. E com `--testar`, se a corrente
+    estiver quebrada, tambem nao envia: enviar por cima de um elo quebrado
+    so produz uma falha confusa depois do diagnostico ja ter dito o que
+    consertar."""
+    import subprocess
+
+    def rodar(args, env_extra):
+        env = dict(os.environ)
+        env.update(env_extra)
+        env["PYTHONIOENCODING"] = "utf-8"
+        return subprocess.run(
+            [sys.executable, os.path.join(BASE, "diagnostico_whatsapp.py")] + args,
+            capture_output=True, text=True, env=env, cwd=BASE,
+        )
+
+    r = rodar([], {"WHATSAPP_GROUP_ID": "120363011@g.us"})
+    assert "ENVIO DE TESTE" not in r.stdout, "diagnosticou e enviou sem ninguem pedir"
+
+    r = rodar(["--testar"], {"WHATSAPP_GROUP_ID": ""})
+    assert "ENVIO DE TESTE" not in r.stdout, "tentou enviar com a corrente quebrada"
+    assert "NAO executado" in r.stdout, r.stdout[-300:]
+
+
+def test_envio_de_teste_relata_os_dois_desfechos():
+    """O valor do teste esta em dizer o que aconteceu: 'ENVIADO' fecha o
+    laco de 30-45 min de espera, e a falha precisa listar os suspeitos na
+    ordem em que costumam ocorrer."""
+    import asyncio
+
+    import core.database as db
+    import diagnostico_whatsapp as diag
+    from integrations import whatsapp_sender as ws
+
+    # `enviar_teste()` importa a funcao DENTRO do corpo, entao quem precisa
+    # ser trocado e o modulo de origem — patchear o diagnostico nao teria
+    # efeito nenhum e o teste passaria sem testar nada.
+    orig_listar, orig_enviar = db.listar_todos, ws.enviar_para_grupo
+    try:
+        db.listar_todos = lambda limite=200: [
+            {"titulo": "Produto de teste", "foto": "https://http2.mlstatic.com/x-O.jpg",
+             "preco": 10.0, "link": "https://mercadolivre.com.br/p/MLB1"}]
+
+        async def deu_certo(produto, mensagem_override=None):
+            return True
+
+        async def deu_errado(produto, mensagem_override=None):
+            return False
+
+        ws.enviar_para_grupo = deu_certo
+        assert diag.enviar_teste() == 0
+
+        ws.enviar_para_grupo = deu_errado
+        assert diag.enviar_teste() == 1
+
+        # Sem oferta com foto nao da para testar: a Regra 5 proibe mandar so
+        # texto, entao o script tem de recusar em vez de mandar pela metade.
+        db.listar_todos = lambda limite=200: [{"titulo": "sem foto", "foto": ""}]
+        assert diag.enviar_teste() == 1
+    finally:
+        db.listar_todos, ws.enviar_para_grupo = orig_listar, orig_enviar
+        asyncio.set_event_loop_policy(None)
+
+
 if __name__ == "__main__":
     import traceback
 
