@@ -1125,6 +1125,41 @@ def test_env_example_documenta_o_whatsapp():
         "--configurar nao avisa que falta o WHATSAPP_GROUP_ID")
 
 
+def test_diagnostico_whatsapp_aponta_o_elo_quebrado():
+    """Entre a oferta e o grupo existem oito elos, cada um registrando em um
+    log diferente — e o sintoma e o mesmo em quase todos: nada acontece. O
+    diagnostico tem de parar no PRIMEIRO elo quebrado e dizer o que fazer,
+    em vez de despejar tudo."""
+    import subprocess
+
+    def rodar(env_extra):
+        env = dict(os.environ)
+        env.update(env_extra)
+        env["PYTHONIOENCODING"] = "utf-8"
+        return subprocess.run(
+            [sys.executable, os.path.join(BASE, "diagnostico_whatsapp.py")],
+            capture_output=True, text=True, env=env, cwd=BASE,
+        )
+
+    # Sem destino: para no elo 1 e nao segue adiante (os proximos nem sao usados).
+    r = rodar({"WHATSAPP_GROUP_ID": ""})
+    assert r.returncode == 1, r.stdout[-400:]
+    assert "WHATSAPP_GROUP_ID" in r.stdout, r.stdout[-400:]
+    assert "[2]" not in r.stdout, "seguiu checando elos que nem chegam a ser usados"
+
+    # O placeholder do .env.example tem de ser tratado como ausente, e a
+    # mensagem precisa dizer QUE e um valor de exemplo — senao a pessoa olha
+    # o .env, ve a linha preenchida e nao entende a reclamacao.
+    r = rodar({"WHATSAPP_GROUP_ID": "cole_aqui_o_id_do_grupo"})
+    assert r.returncode == 1, r.stdout[-400:]
+    assert "exemplo" in r.stdout.lower(), r.stdout[-400:]
+
+    # Com destino, percorre a corrente inteira.
+    r = rodar({"WHATSAPP_GROUP_ID": "120363011@g.us"})
+    for elo in ("[2]", "[3]", "[4]", "[5]", "[6]", "[7]"):
+        assert elo in r.stdout, f"o diagnostico nao chegou no elo {elo}"
+
+
 if __name__ == "__main__":
     import traceback
 

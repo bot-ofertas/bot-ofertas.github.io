@@ -110,8 +110,15 @@ grupo configurado. Duas variáveis no `.env`, e só a primeira liga o envio:
 Para conferir se está de pé:
 
 ```powershell
-.\status.ps1        # mostra "WhatsApp: OK (desktop)" ou o motivo de estar OFF
+.\status.ps1                      # visão geral
+python diagnostico_whatsapp.py    # por que o grupo não está recebendo
 ```
+
+O `diagnostico_whatsapp.py` percorre os oito elos entre a oferta e o grupo
+(destino configurado → pausa → processo da fila → fila → método de envio →
+dependências → `/health` → erros recentes), **para no primeiro que está
+quebrado** e diz o que fazer. Existe porque cada elo registra num log
+diferente e o sintoma é o mesmo em quase todos: nada acontece.
 
 O `/health` pergunta primeiro se existe destino configurado e só depois se o
 app está aberto. Antes ele olhava só o processo, então com o WhatsApp Desktop
