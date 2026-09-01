@@ -256,6 +256,14 @@ checar("tem código de saída explícito nos dois caminhos",
 checar("recusa rodar fora do Windows em uma linha, sem parede de erro",
        "$IsWindows" in _ciclo)
 
+# O instalador e o "comando de atualizacao do sistema": terminar sem olhar o
+# WhatsApp era o que fazia o grupo ficar mudo sem ninguem perceber.
+_inst = open(os.path.join(RAIZ, "instalar_tudo.ps1"), encoding="utf-8").read()
+checar("instalar_tudo.ps1 termina conferindo o caminho do WhatsApp",
+       "diagnostico_whatsapp.py" in _inst)
+checar("e registra pendencia quando o WhatsApp esta bloqueado",
+       "WhatsApp bloqueado" in _inst)
+
 _bat = open(os.path.join(RAIZ, "CICLO_DIARIO.bat"), encoding="utf-8").read()
 checar("o .bat chama o .ps1 com ExecutionPolicy Bypass",
        "configurar_ciclo.ps1" in _bat and "ExecutionPolicy Bypass" in _bat,

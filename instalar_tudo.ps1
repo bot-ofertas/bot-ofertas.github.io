@@ -430,6 +430,21 @@ else {
     Write-Host "  (o bot NAO foi reiniciado; use -ReiniciarBot para carregar o codigo novo)" -ForegroundColor DarkGray
 }
 
+# ─── 6. WhatsApp ─────────────────────────────────────────────────────────
+# O caminho do WhatsApp tem oito elos e cada um registra num log diferente;
+# o sintoma e o mesmo em quase todos: nada acontece. Terminar a instalacao
+# sem olhar isso e o que fazia o Daniel descobrir horas depois que o grupo
+# nunca recebeu nada. So LE — nao envia mensagem nenhuma.
+Titulo 6 "Conferindo o caminho do WhatsApp"
+$global:LASTEXITCODE = 0
+& $python (Join-Path $BASE "diagnostico_whatsapp.py")
+if ($LASTEXITCODE -eq 0) {
+    $feitos.Add("caminho do WhatsApp sem bloqueios")
+}
+else {
+    $pendencias.Add("WhatsApp bloqueado — veja o diagnostico acima (o 1o problema costuma explicar os outros)")
+}
+
 # ─── Resumo ──────────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Cyan
@@ -451,6 +466,7 @@ else {
 }
 
 Write-Host ""
-Write-Host "Conferir:  .\status.ps1                    (estado do bot)" -ForegroundColor DarkGray
-Write-Host "           .\agendar_shutdown.ps1 -Status  (ciclo diario)" -ForegroundColor DarkGray
+Write-Host "Conferir:  .\status.ps1                            (estado do bot)" -ForegroundColor DarkGray
+Write-Host "           .\agendar_shutdown.ps1 -Status          (ciclo diario)" -ForegroundColor DarkGray
+Write-Host "           python diagnostico_whatsapp.py --testar (manda 1 msg no grupo)" -ForegroundColor DarkGray
 Write-Host ""
