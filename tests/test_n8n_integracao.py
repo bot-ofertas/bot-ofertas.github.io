@@ -1225,6 +1225,79 @@ def test_envio_de_teste_relata_os_dois_desfechos():
         asyncio.set_event_loop_policy(None)
 
 
+def test_whatsapp_nunca_envia_foto_sem_legenda():
+    """O link de afiliado mora na LEGENDA. O `Enter` que dispara o envio
+    estava fora do `if _copiar_texto(...)`, entao um clipboard ocupado —
+    falha transitoria comum no Windows, que o proprio modulo documenta —
+    mandava a foto SOZINHA: sem descricao, sem preco e sem link. E a funcao
+    devolvia True, registrando "foto+legenda enviada". Post quebrado no
+    grupo, comissao zero, nada no log dizendo.
+
+    Regra 5: a mensagem sai como uma unidade ou nao sai.
+    """
+    import types
+
+    from integrations import whatsapp_desktop_silencioso as wa
+
+    teclas: list[str] = []
+    falso_pyautogui = types.SimpleNamespace(
+        hotkey=lambda *a: teclas.append("+".join(a)),
+        press=lambda k: teclas.append(k),
+        typewrite=lambda *a, **k: None,
+        FAILSAFE=True,
+        PAUSE=0,
+    )
+    falso_gw = types.SimpleNamespace(getActiveWindow=lambda: None)
+
+    originais = {n: getattr(wa, n) for n in
+                 ("_copiar_foto_hdrop", "_copiar_texto", "_janela_esta_ativa",
+                  "_limpar_campo_texto", "_devolver_foco", "_achar_janela_wa", "time")}
+    antes_mod = {n: sys.modules.get(n) for n in ("pyautogui", "pygetwindow")}
+    try:
+        sys.modules["pyautogui"] = falso_pyautogui
+        sys.modules["pygetwindow"] = falso_gw
+        wa._copiar_foto_hdrop = lambda c: True
+        wa._janela_esta_ativa = lambda j: True
+        wa._limpar_campo_texto = lambda p: None
+        wa._devolver_foco = lambda a, b: None
+        wa._achar_janela_wa = lambda: types.SimpleNamespace(
+            isMinimized=False, restore=lambda: None, activate=lambda: None,
+            maximize=lambda: None, minimize=lambda: None)
+        wa.time = types.SimpleNamespace(sleep=lambda s: None)
+        wa.os = types.SimpleNamespace(path=types.SimpleNamespace(exists=lambda p: True))
+
+        # O Enter aparece DUAS vezes num envio completo: um abre a conversa
+        # (Ctrl+F + nome + Enter) e o outro dispara o envio dentro do preview
+        # da foto. Contar e o jeito de distinguir os dois sem depender da
+        # posicao exata na sequencia.
+
+        # Clipboard ocupado: a legenda nao entra.
+        teclas.clear()
+        wa._copiar_texto = lambda t, tentativas=3: False
+        ok = wa._enviar_silencioso_impl("Grupo", "Fone — R$ 199 — link", "/tmp/f.jpg")
+        assert ok is False, "devolveu sucesso tendo mandado a foto sem legenda"
+        assert teclas.count("enter") == 1, (
+            f"apertou Enter de envio sem a legenda no clipboard: {teclas}")
+
+        # Caminho normal: nada pode ter regredido.
+        teclas.clear()
+        wa._copiar_texto = lambda t, tentativas=3: True
+        ok = wa._enviar_silencioso_impl("Grupo", "Fone — R$ 199 — link", "/tmp/f.jpg")
+        assert ok is True, "o caminho normal parou de enviar"
+        assert teclas.count("enter") == 2, f"nao enviou: {teclas}"
+        # busca + foto + legenda
+        assert teclas.count("ctrl+v") == 3, f"faltou colar algo: {teclas}"
+    finally:
+        for nome, valor in originais.items():
+            setattr(wa, nome, valor)
+        wa.os = os
+        for nome, valor in antes_mod.items():
+            if valor is None:
+                sys.modules.pop(nome, None)
+            else:
+                sys.modules[nome] = valor
+
+
 if __name__ == "__main__":
     import traceback
 
