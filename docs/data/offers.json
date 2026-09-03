@@ -1,7 +1,158 @@
 {
-  "products": [],
-  "produto_do_dia": null,
-  "stats": {},
-  "updated_at": "2026-08-25T11:34:33.862022",
-  "total": 0
+  "products": [
+    {
+      "titulo": "MONDIAL Ventilador de Mesa 30cm Super Power, Preto, 60W, 220V - VSP-30-B",
+      "preco": 113.05,
+      "preco_original": 139.9,
+      "desconto_pct": 19.2,
+      "foto": "https://m.media-amazon.com/images/I/61o7Q8hq2zL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 49,
+      "enviado_em": "2026-09-03T16:02:11.003487",
+      "link": "https://www.amazon.com.br/dp/B09B17MQLC?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 113.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WD-40 Fórmula Original - Produto Multiusos Aerossol 300ml, 200g - Desengripa, lubrifica e protege contra ferrugem",
+      "preco": 35.9,
+      "preco_original": 44.9,
+      "desconto_pct": 20.0,
+      "foto": "https://m.media-amazon.com/images/I/514x2w0chDL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 55,
+      "enviado_em": "2026-09-03T16:02:02.327747",
+      "link": "https://www.amazon.com.br/dp/B07CV2JXNH?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 35.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lâmpada Inteligente Smart Color 10W Elgin RGB Wifi Compatível com Alexa e Google Home",
+      "preco": 33.55,
+      "preco_original": 99.0,
+      "desconto_pct": 66.1,
+      "foto": "https://m.media-amazon.com/images/I/61i1yPAlVLL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-09-03T16:01:53.656510",
+      "link": "https://www.amazon.com.br/dp/B088C4QZV2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "preco": 799.89,
+      "preco_original": 1499.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-09-03T15:59:23.834947",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.89,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop 4 Bocas De Indução Even Pro Midea Cor Preto",
+      "preco": 1207.0,
+      "preco_original": 1899.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_641064-MLA99395512516_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 91,
+      "enviado_em": "2026-09-03T15:59:13.775820",
+      "link": "https://www.mercadolivre.com.br/cooktop-4-bocas-de-inducao-even-pro-midea-cor-preto/p/MLB47126979?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1207.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "LIQUIDIFICADOR PHILIPS WALITA DAILY 2L 2 VELOCIDADES PRETO 127V RI2110/31",
+      "preco": 89.9,
+      "preco_original": 149.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_705762-MLA100008028325_122025-AB.webp",
+      "categoria": "armazenamento",
+      "score": 76,
+      "enviado_em": "2026-09-03T15:59:04.841062",
+      "link": "https://www.mercadolivre.com.br/liquidificador-philips-walita-daily-2l-2-velocidades-preto-127v-ri211031/p/MLB15579063?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Prancha Display Digital Chrome Rose Ppr10 Philco Bivolt Bronze",
+      "preco": 99.0,
+      "preco_original": 143.0,
+      "desconto_pct": 30.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_859565-MLA99502217744_112025-AB.webp",
+      "categoria": "bebes",
+      "score": 66,
+      "enviado_em": "2026-09-03T15:58:55.424891",
+      "link": "https://www.mercadolivre.com.br/prancha-display-digital-chrome-rose-ppr10-philco-bivolt-bronze/p/MLB18085706?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 99.0,
+      "menor_periodo": false,
+      "verificada": true
+    }
+  ],
+  "produto_do_dia": {
+    "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+    "preco": 799.89,
+    "preco_original": 1499.0,
+    "desconto_pct": 46.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
+    "categoria": "celulares",
+    "score": 95,
+    "enviado_em": "2026-09-03T15:59:23.834947",
+    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 799.89,
+    "menor_periodo": false,
+    "verificada": true
+  },
+  "stats": {
+    "ferramentas": {
+      "total": 3,
+      "score_medio": 56,
+      "desconto_medio": 35,
+      "maior_desconto": 66
+    },
+    "eletrodomesticos": {
+      "total": 1,
+      "score_medio": 91,
+      "desconto_medio": 36,
+      "maior_desconto": 36
+    },
+    "celulares": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 46,
+      "maior_desconto": 46
+    },
+    "bebes": {
+      "total": 1,
+      "score_medio": 66,
+      "desconto_medio": 30,
+      "maior_desconto": 30
+    },
+    "armazenamento": {
+      "total": 1,
+      "score_medio": 76,
+      "desconto_medio": 40,
+      "maior_desconto": 40
+    }
+  },
+  "updated_at": "2026-09-03T16:02:19.876079",
+  "total": 7
 }
