@@ -436,6 +436,42 @@ checar("W4 põe o problema na PRIMEIRA linha", rel.get("problemas", 0) >= 1
        or "🔴" in rel["texto"])
 checar("W4 mostra o placar do GitHub Actions", "✅" in rel["texto"] and "❌" in rel["texto"])
 
+# O agendamento do bot.yml parou de disparar em 29/07/2026 e ninguem soube
+# por CINCO SEMANAS: o workflow seguia "active", as ultimas execucoes eram
+# todas bem-sucedidas, e o relatorio olhava so o `conclusion`. Historico
+# VELHO de ✅ e indistinguivel de um saudavel — e o relatorio dizia
+# "🟢 Tudo funcionando" com o piso de publicacao da nuvem morto.
+import datetime as _dt
+
+def _runs(dias_atras, conclusao="success"):
+    quando = (_dt.datetime.now(_dt.timezone.utc)
+              - _dt.timedelta(days=dias_atras)).isoformat().replace("+00:00", "Z")
+    return {"workflow_runs": [{"conclusion": conclusao, "run_started_at": quando}
+                              for _ in range(3)]}
+
+rel_velho = rodar_no("04-relatorio-diario.json", "Montar relatório", {},
+                     os.path.join(E2E, "store_w4_velho.json"),
+                     ctx={"Ofertas do site": offers,
+                          "Execuções do GitHub Actions": _runs(35)})
+checar("W4 acusa o Actions parado ha 35 dias, mesmo com tudo ✅",
+       "não roda há 35 dia" in rel_velho["texto"], rel_velho["texto"][:200])
+checar("e diz o que fazer (disparar na mao pelo Run workflow)",
+       "Run workflow" in rel_velho["texto"])
+
+rel_novo = rodar_no("04-relatorio-diario.json", "Montar relatório", {},
+                    os.path.join(E2E, "store_w4_novo.json"),
+                    ctx={"Ofertas do site": offers,
+                         "Execuções do GitHub Actions": _runs(0)})
+checar("com o Actions rodando hoje, nao inventa problema",
+       "não roda há" not in rel_novo["texto"], rel_novo["texto"][:200])
+
+rel_nunca = rodar_no("04-relatorio-diario.json", "Montar relatório", {},
+                     os.path.join(E2E, "store_w4_nunca.json"),
+                     ctx={"Ofertas do site": offers,
+                          "Execuções do GitHub Actions": {"workflow_runs": []}})
+checar("sem execucao nenhuma, tambem acusa",
+       "nunca rodou" in rel_nunca["texto"], rel_nunca["texto"][:200])
+
 # ── 12. HTML que o Telegram aceita, com dados hostis ────────────────────────
 # Todos os nós de Telegram usam parse_mode=HTML, e o Telegram recusa a
 # mensagem INTEIRA quando `&`, `<` ou `>` aparecem crus — inclusive dentro de
