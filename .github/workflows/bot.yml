@@ -120,6 +120,21 @@ jobs:
 
       - name: Rodar cupons Amazon (se configurado)
         if: steps.janela.outputs.pular != '1'
+        # Teto proprio, separado do teto do job.
+        #
+        # Medido na execucao 255 (2026-09-03): este passo levou 2min49s, de um
+        # orcamento de 10 min para o job inteiro. Ele roda ANTES dos passos que
+        # salvam o banco de deduplicacao no cache e atualizam o site — entao,
+        # se um dia ele passar do orcamento, o `continue-on-error` abaixo nao
+        # ajuda: o `timeout-minutes` do JOB mata tudo e esses passos nao rodam.
+        # A rodada seguinte comecaria com o banco vazio e REPUBLICARIA as
+        # mesmas ofertas no canal.
+        #
+        # 6 min e o dobro do tempo observado: folga para um dia ruim, e ainda
+        # assim um teto. Estourando, o passo e cortado e marcado como falha, e
+        # o `continue-on-error` deixa a rodada terminar — que e o que "Amazon
+        # nao bloqueia o ML" sempre quis dizer.
+        timeout-minutes: 6
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}

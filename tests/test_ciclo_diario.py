@@ -238,6 +238,20 @@ checar("bot.yml aceita HORA_LIGAR/HORA_DESLIGAR do repositorio",
        "vars.HORA_LIGAR" in _botyml and "vars.HORA_DESLIGAR" in _botyml,
        "senao mudar o horario deixa a nuvem para tras, publicando por cima")
 
+# Medido na execucao 255 (2026-09-03): a Amazon leva ~3 min de um orcamento
+# de 10 min do job, e roda ANTES dos passos que salvam a deduplicacao e
+# atualizam o site. Se um dia passar do orcamento, o `continue-on-error` nao
+# ajuda — o timeout do JOB mata tudo, o banco nao e salvo, e a rodada
+# seguinte REPUBLICA as mesmas ofertas.
+import re as _re2
+_amazon = _botyml[_botyml.index("Rodar cupons Amazon"):]
+_amazon = _amazon[:_amazon.index("- name: Salvar banco")]
+checar("o passo da Amazon tem teto de tempo proprio",
+       _re2.search(r"timeout-minutes:\s*\d+", _amazon) is not None,
+       "sem teto proprio, uma Amazon pendurada consome o job inteiro")
+checar("e segue com continue-on-error (Amazon nao bloqueia o ML)",
+       "continue-on-error: true" in _amazon)
+
 # ── 4b. O comando único que registra o ciclo ─────────────────────────────
 print("\n[4b] configurar_ciclo.ps1 — o caminho de instalação do ciclo")
 
