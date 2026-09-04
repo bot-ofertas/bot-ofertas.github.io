@@ -34,6 +34,14 @@ x-bot: &bot
     PAPEL: ${PAPEL:-nuvem}
   volumes:
     - rastreador_data:/app/data
+    # O historico do repositorio, so leitura. A imagem nao carrega `.git`
+    # (o `.dockerignore` o exclui de proposito — nao se poe credencial de
+    # push dentro de uma imagem), mas `core/papel.py` precisa dele para saber
+    # se o PC local ainda publica. Sem esta montagem a checagem responde
+    # "nao sei" para sempre, e o servidor espera calado por um PC que pode
+    # estar fora do ar ha semanas. Leitura apenas: o container nunca commita
+    # — quem commita e empurra `docs/` e o servidor, fora do container.
+    - ../.git:/app/.git:ro
   depends_on:
     evolution:
       # service_started, não service_healthy: Telegram nunca pode depender
@@ -91,6 +99,7 @@ services:
       HEALTHCHECK_BIND: 0.0.0.0
     volumes:
       - rastreador_data:/app/data
+      - ../.git:/app/.git:ro
       # O site (GitHub Pages) é gerado por `export_json.py` a partir do
       # banco. Com o banco dentro de um volume Docker, o `docs/` do
       # repositório precisa estar visível aqui para o servidor conseguir

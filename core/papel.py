@@ -186,9 +186,19 @@ def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
             encoding="utf-8", errors="replace",
         )
     except (OSError, subprocess.SubprocessError) as e:
-        log.debug("sem git para checar o sinal do PC: %s", e)
+        # Aviso, nao debug: sem git (ou sem `.git`) esta checagem vira no-op e
+        # o publicador de nuvem passa a esperar um PC que pode estar fora do
+        # ar. E uma degradacao segura, mas nao pode ser invisivel.
+        log.warning(
+            "Nao consegui ler o historico para saber do PC (%s) — o papel de "
+            "nuvem vai esperar dentro da janela do PC, mesmo que ele esteja "
+            "fora do ar. No servidor, confira a montagem de `.git` e o `git` "
+            "na imagem (deploy/).", e,
+        )
         return None
     if r.returncode != 0 or not r.stdout.strip():
+        log.warning("git log nao devolveu historico (%s) — sem sinal do PC.",
+                    (r.stderr or "").strip()[:120])
         return None
 
     limite = _horas_silencio_max()

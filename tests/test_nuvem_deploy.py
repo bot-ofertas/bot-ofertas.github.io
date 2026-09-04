@@ -413,6 +413,50 @@ def test_compose_liga_o_healthcheck_na_interface_certa():
     assert "127.0.0.1:8724:8724" in texto
 
 
+def test_container_consegue_ler_o_historico_do_repositorio():
+    """A prova de vida do PC le o historico com `git log`. Dentro do
+    container faltavam as DUAS pontas: o binario `git` (nao estava na imagem)
+    e o proprio `.git` (o .dockerignore o exclui de proposito). Sem elas a
+    checagem responde "nao sei" para sempre e o servidor espera calado por um
+    PC que pode estar fora do ar ha semanas."""
+    dockerfile = open(os.path.join(DEPLOY, "Dockerfile"), encoding="utf-8").read()
+    assert re.search(r"apt-get install[^\n]*(\n[^\n]*)*?\bgit\b", dockerfile), (
+        "o `git` sumiu da imagem"
+    )
+    compose = _compose_texto()
+    montagens = re.findall(r"\.\./\.git:/app/\.git:ro", compose)
+    assert montagens, "o compose parou de montar o .git no container"
+
+
+def test_sem_git_o_papel_avisa_em_vez_de_calar():
+    """Degradar para "espero dentro da janela" e seguro; degradar em silencio
+    nao e. Este projeto ja perdeu semanas para falhas que nao apareciam."""
+    import logging as _logging
+    import tempfile
+
+    from core import papel
+
+    registros = []
+
+    class _Coletor(_logging.Handler):
+        def emit(self, r):
+            registros.append(r)
+
+    log = _logging.getLogger("papel")
+    h = _Coletor()
+    log.addHandler(h)
+    antes_base, antes_cache = papel._BASE, papel._cache_sinal
+    try:
+        papel._BASE = tempfile.mkdtemp()   # pasta sem .git, como /app sem a montagem
+        papel._cache_sinal = None
+        assert papel.horas_desde_sinal_do_pc() is None
+        avisos = [r for r in registros if r.levelno >= _logging.WARNING]
+        assert avisos, "a checagem virou no-op sem uma linha de aviso"
+    finally:
+        log.removeHandler(h)
+        papel._BASE, papel._cache_sinal = antes_base, antes_cache
+
+
 def test_compose_define_o_fuso():
     """Droplet novo nasce em UTC: sem TZ a janela 08:30-02:00 escorrega 3h e
     o papel `nuvem` publica por cima do PC ligado, sem erro no log."""

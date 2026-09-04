@@ -26,8 +26,14 @@ ENV PYTHONUNBUFFERED=1 \
 # container fica em UTC e a janela 08:30–02:00 escorrega 3 horas — o papel
 # `nuvem` se acharia livre das 23:00 às 05:30 BRT e publicaria por cima do PC
 # ligado, sem erro nenhum no log. Ver `core/papel._fuso_conferido()`.
+#
+# `git` tambem nao e conforto: `core/papel.py` decide se o PC local esta mesmo
+# publicando lendo as marcas que o `core/site_publisher.py` deixa no historico
+# de `docs/`. Sem o binario, aquela checagem devolve "nao consegui saber" para
+# sempre e o servidor fica calado o dia inteiro esperando um PC que pode estar
+# fora do ar ha semanas — em silencio, que e o pior jeito de falhar.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates curl wget tzdata \
+        ca-certificates curl wget tzdata git \
  && rm -rf /var/lib/apt/lists/*
 
 # Só as libs que rodam em Linux — sem pyautogui/pywinauto/pywin32, que são a
