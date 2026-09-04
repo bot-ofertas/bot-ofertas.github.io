@@ -84,16 +84,23 @@ def test_papel_escrito_errado_cai_no_conservador():
 
 
 def test_nuvem_nao_publica_com_o_pc_ligado():
-    from core import papel
-
-    antes = _com_env(PAPEL="nuvem", HORA_LIGAR="08:30", HORA_DESLIGAR="02:00")
+    """A precondicao "o PC esta publicando" e fixada num repositorio de
+    mentira, com um sinal recente. Antes este teste lia o historico REAL do
+    checkout — e passou a falhar no dia em que o PC do Daniel ficou 6 dias
+    fora do ar, que e justamente quando a nuvem DEVE assumir. Um teste da
+    protecao contra duplicata nao pode depender de quem publicou ontem."""
+    papel, st = _com_repo(
+        [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
     try:
         meio_dia = datetime(2026, 9, 4, 12, 0)
         pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is False, "a nuvem publicaria junto com o PC — oferta duplicada"
         assert "PC local" in motivo
     finally:
-        _restaurar(antes)
+        _solta_repo(papel, st)
 
 
 def test_nuvem_publica_de_madrugada():
@@ -112,9 +119,11 @@ def test_nuvem_respeita_a_carencia_do_desligamento():
     """Às 02:00 a janela já diz "fora", mas `aguardar_e_desligar.ps1` espera
     até 35 min o bot terminar a rodada — e nesse intervalo o PC continua
     publicando. Este é o caso que a `pc_pode_estar_publicando()` cobre."""
-    from core import papel
-
-    antes = _com_env(PAPEL="nuvem", HORA_LIGAR="08:30", HORA_DESLIGAR="02:00")
+    papel, st = _com_repo(
+        [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
     try:
         dentro_da_carencia = datetime(2026, 9, 4, 2, 20)
         pode, _ = papel.pode_publicar(dentro_da_carencia)
@@ -124,7 +133,7 @@ def test_nuvem_respeita_a_carencia_do_desligamento():
         pode, _ = papel.pode_publicar(depois_da_carencia)
         assert pode is True, "ficou travado depois de a carência passar"
     finally:
-        _restaurar(antes)
+        _solta_repo(papel, st)
 
 
 def test_papeis_extremos():
@@ -174,6 +183,171 @@ def test_papel_aparece_no_health():
 
     estado = healthcheck._status_papel()
     assert "papel" in estado and "pode_publicar" in estado, estado
+
+
+# ── Prova de vida do PC (o motivo de 04/09/2026) ────────────────────────────
+
+def _repo_falso(commits):
+    """Cria um repositorio git de mentira com os commits pedidos.
+
+    `commits` e uma lista de (horas_atras, assunto). Testa o parsing de
+    verdade — o `git log` real, com datas reais — em vez de fingir a
+    resposta da funcao que se quer testar.
+    """
+    import subprocess as sp
+    import tempfile
+    from datetime import timedelta
+
+    pasta = tempfile.mkdtemp(prefix="papel_teste_")
+
+    def git(*args, env_extra=None):
+        env = dict(os.environ)
+        env.update({
+            "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@t",
+            "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@t",
+        })
+        env.update(env_extra or {})
+        return sp.run(["git", *args], cwd=pasta, capture_output=True,
+                      text=True, env=env, check=True)
+
+    git("init", "-q", "-b", "main")
+    os.makedirs(os.path.join(pasta, "docs"), exist_ok=True)
+    agora = datetime.now()
+    for horas, assunto in commits:
+        quando = (agora - timedelta(hours=horas)).strftime("%Y-%m-%dT%H:%M:%S")
+        alvo = os.path.join(pasta, "docs", "offers.json")
+        with open(alvo, "a", encoding="utf-8") as f:
+            f.write(assunto + "\n")
+        git("add", "docs/offers.json")
+        git("commit", "-q", "-m", assunto,
+            env_extra={"GIT_AUTHOR_DATE": quando, "GIT_COMMITTER_DATE": quando})
+    return pasta
+
+
+def _com_repo(commits, **env):
+    """Aponta o core.papel para um repositorio de mentira e limpa o cache."""
+    from core import papel
+
+    pasta = _repo_falso(commits)
+    antes_base = papel._BASE
+    antes_cache = papel._cache_sinal
+    papel._BASE = pasta
+    papel._cache_sinal = None
+    antes_env = _com_env(**env)
+    return papel, (antes_base, antes_cache, antes_env)
+
+
+def _solta_repo(papel, estado):
+    antes_base, antes_cache, antes_env = estado
+    papel._BASE = antes_base
+    papel._cache_sinal = antes_cache
+    _restaurar(antes_env)
+
+
+def test_pc_publicando_ha_pouco_segura_a_nuvem():
+    papel, st = _com_repo(
+        [(30, "chore: atualiza site (rastreador-ml) [skip ci]"),
+         (2, "chore: atualiza site (rastreador-amazon) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
+    try:
+        morto, motivo = papel.pc_parece_morto()
+        assert morto is False, motivo
+        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        assert pode is False, f"publicou junto com o PC vivo: {motivo}"
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_pc_calado_ha_dias_libera_a_nuvem():
+    """O caso real de 04/09/2026: PC fora do ar ha 6 dias e agendamento da
+    nuvem morto ha 5 semanas — os grupos sem oferta nenhuma. Uma trava que so
+    olha o relogio manteria a nuvem calada de dia por causa de um PC que nao
+    estava publicando."""
+    papel, st = _com_repo(
+        [(200, "chore: atualiza site (rastreador-ml) [skip ci]"),
+         (150, "chore: atualiza ofertas do site [skip ci]")],  # este e do Actions
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
+    try:
+        morto, motivo = papel.pc_parece_morto()
+        assert morto is True, motivo
+        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        assert pode is True, f"a nuvem ficou calada com o PC morto: {motivo}"
+        assert "pelo menos" in motivo or "nao publica" in motivo
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_commit_do_actions_nao_conta_como_sinal_do_PC():
+    """Se a marca do Actions valesse como prova de vida do PC, a nuvem se
+    calaria por causa da propria publicacao anterior — e nunca mais voltaria."""
+    papel, st = _com_repo(
+        [(1, "chore: atualiza ofertas do site [skip ci]"),
+         (2, "chore: atualiza ofertas do site (servidor) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+    )
+    try:
+        # Historico curto de mais para concluir silencio -> "nao da para saber"
+        assert papel.horas_desde_sinal_do_pc() is None
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_sem_historico_suficiente_nao_age_no_escuro():
+    """Checkout raso do Actions: `git log` devolve quase nada. "Nao consegui
+    olhar" nunca pode virar "o PC esta morto" — mesmo cuidado que o
+    supervisor tomou com o psutil ausente."""
+    papel, st = _com_repo(
+        [(1, "chore: atualiza ofertas do site [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
+    try:
+        assert papel.horas_desde_sinal_do_pc() is None
+        morto, _ = papel.pc_parece_morto()
+        assert morto is False
+        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        assert pode is False, "publicou sem conseguir confirmar que o PC estava fora"
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_checagem_de_silencio_pode_ser_desligada():
+    papel, st = _com_repo(
+        [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="0",
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
+    try:
+        morto, _ = papel.pc_parece_morto()
+        assert morto is False
+        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        assert pode is False, "PC_SILENCIO_MAX_H=0 deveria manter o comportamento antigo"
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_workflow_busca_historico_suficiente():
+    """Sem `fetch-depth`, o checkout do Actions traz 1 commit e a prova de
+    vida do PC responde sempre "nao sei" — a correcao acima viraria no-op."""
+    texto = open(os.path.join(BASE, ".github", "workflows", "bot.yml"),
+                 encoding="utf-8").read()
+    achado = re.search(r"fetch-depth:\s*(\d+)", texto)
+    assert achado, "bot.yml voltou ao checkout raso"
+    assert int(achado.group(1)) >= 50, f"fetch-depth curto demais: {achado.group(1)}"
+
+
+def test_timer_do_servidor_nao_mascara_falha():
+    """`SuccessExitStatus=0 1` fazia `systemctl status` dizer "success" com a
+    atualizacao falhando. Uma unidade oneshot que falha nao impede o proximo
+    disparo do timer — mascarar so escondia o problema."""
+    texto = open(os.path.join(DEPLOY, "instalar_timers.sh"), encoding="utf-8").read()
+    assert "SuccessExitStatu" + "s=" not in texto, (
+        "o mascaramento de saida de erro voltou para as unidades systemd"
+    )
 
 
 # ── Placeholder do grupo do WhatsApp ────────────────────────────────────────

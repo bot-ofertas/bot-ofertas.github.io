@@ -224,6 +224,16 @@ Decidido pelo Daniel em 2026-09-04. O bot também roda num servidor Linux
   coisa que cada instância precisa saber; `PAPEL` vazio é `local` (o PC, que
   nunca definiu nada) e `PAPEL` escrito errado é `nuvem` (só quem tentou
   configurar erra a grafia, e ali o risco é publicar demais).
+- **Estar dentro da janela do PC não prova que o PC está publicando.** O
+  papel `nuvem` só se cala se houver SINAL DE VIDA recente do PC — as marcas
+  que `core/site_publisher.py` deixa no histórico de `docs/`, visíveis a
+  qualquer checkout, sem exigir rede até o PC. Passado `PC_SILENCIO_MAX_H`
+  (6h) sem sinal, a nuvem assume. Bug real de 2026-09-04: PC fora do ar havia
+  6 dias e agendamento da nuvem morto havia 5 semanas, os grupos sem oferta
+  nenhuma — uma trava só de relógio teria mantido a nuvem calada de dia por
+  causa de um PC que não existia mais. E o contrário também vale: sem
+  histórico para olhar (checkout raso), a resposta é "não sei" e a nuvem
+  espera — nunca se age no escuro (mesmo princípio do psutil no supervisor).
 - **Fuso não é detalhe.** `core/janela.py` compara com o relógio local, e um
   droplet nasce em UTC: sem `TZ=America/Sao_Paulo` a janela escorrega 3h e o
   papel `nuvem` publica por cima do PC ligado sem um erro sequer no log.

@@ -35,6 +35,16 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          # O padrao do checkout e raso (1 commit). `core/papel.py` decide se
+          # o PC local esta mesmo publicando olhando as marcas que o
+          # `core/site_publisher.py` deixa no historico de `docs/` — com um
+          # commit so, ele responde "nao consigo saber" e a nuvem fica calada
+          # de dia mesmo com o PC fora do ar (o caso real de 04/09/2026:
+          # PC parado ha 6 dias e agendamento morto ha 5 semanas, os grupos
+          # sem oferta nenhuma). 200 commits cobrem semanas de publicacao e
+          # custam segundos.
+          fetch-depth: 200
 
       - name: Restaurar banco de dados (deduplicação)
         # Em cache-miss, mantém o DB versionado no repo (seed com histórico).

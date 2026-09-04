@@ -57,12 +57,34 @@ from __future__ import annotations
 import json
 import logging
 import os
+import subprocess
 import sys
+import time
 from datetime import datetime
 
 from core import janela
 
 log = logging.getLogger("papel")
+
+_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Marcas que SO o publicador do PC deixa no historico do repositorio.
+# `core/site_publisher.py` roda a cada rodada do bot local e empurra `docs/`
+# com "chore: atualiza site (rastreador-ml)" / "(rastreador-amazon)". O
+# GitHub Actions commita "chore: atualiza ofertas do site" (sem origem) e o
+# servidor, "(servidor)" — nenhum dos dois casa com estas marcas.
+_MARCAS_DO_PC = ("[pc-local]", "atualiza site (rastreador")
+
+# Quanto silencio do PC basta para a nuvem concluir que ele NAO esta
+# publicando. 0 desliga a checagem (a nuvem sempre espera dentro da janela).
+HORAS_SILENCIO_PADRAO = 6.0
+
+# Quantos commits olhar para tras. Precisa cobrir com folga um dia de
+# publicacao do PC (ele empurra no maximo 1x/hora, ~17h de janela).
+_COMMITS_INSPECIONADOS = 80
+
+_cache_sinal: tuple[float, "float | None"] | None = None
+_CACHE_S = 300
 
 LOCAL = "local"
 NUVEM = "nuvem"
@@ -121,6 +143,103 @@ def _fuso_conferido(agora: datetime | None = None) -> bool:
     return desloc.total_seconds() == OFFSET_ESPERADO_H * 3600
 
 
+def _horas_silencio_max() -> float:
+    bruto = (os.getenv("PC_SILENCIO_MAX_H") or "").strip()
+    if not bruto:
+        return HORAS_SILENCIO_PADRAO
+    try:
+        return max(0.0, float(bruto))
+    except ValueError:
+        return HORAS_SILENCIO_PADRAO
+
+
+def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
+    """Ha quantas horas o PC deu o ultimo sinal de vida, ou None se nao da
+    para saber.
+
+    O sinal e o proprio historico do repositorio: o bot no PC empurra `docs/`
+    a cada rodada (`core/site_publisher.py`), e essa marca fica visivel para
+    qualquer um que tenha um checkout — inclusive o runner do GitHub e o
+    servidor. Nao exige rede ate o PC nem porta aberta.
+
+    Devolve None de proposito quando o historico nao alcanca o periodo
+    perguntado (checkout raso do Actions, repositorio recem-clonado): "nao
+    consegui olhar" nao pode virar "o PC esta morto". Mesmo cuidado que
+    `startup.checagem_de_processos_confiavel()` tomou com o psutil — agir
+    sobre uma resposta cega foi o que quase duplicou os rastreadores.
+    """
+    global _cache_sinal
+    agora = agora or datetime.now()
+
+    if _cache_sinal is not None and (time.time() - _cache_sinal[0]) < _CACHE_S:
+        return _cache_sinal[1]
+
+    try:
+        r = subprocess.run(
+            # `-- docs/` estreita a janela aos commits que interessam: os de
+            # publicacao do site. Sem isso, uma leva de commits de
+            # desenvolvimento empurra os commits do PC para fora dos 80
+            # inspecionados e a resposta vira um limite inferior fraco.
+            ["git", "log", f"-n{_COMMITS_INSPECIONADOS}", "--format=%ct%x09%s",
+             "--", "docs/"],
+            cwd=_BASE, capture_output=True, text=True, timeout=15,
+            encoding="utf-8", errors="replace",
+        )
+    except (OSError, subprocess.SubprocessError) as e:
+        log.debug("sem git para checar o sinal do PC: %s", e)
+        return None
+    if r.returncode != 0 or not r.stdout.strip():
+        return None
+
+    limite = _horas_silencio_max()
+    agora_ts = agora.timestamp()
+    mais_antigo: float | None = None
+
+    resultado: float | None = None
+    for linha in r.stdout.splitlines():
+        ts_txt, _, assunto = linha.partition("\t")
+        try:
+            ts = float(ts_txt)
+        except ValueError:
+            continue
+        mais_antigo = ts
+        if any(m in assunto for m in _MARCAS_DO_PC):
+            resultado = max(0.0, (agora_ts - ts) / 3600.0)
+            break
+
+    if resultado is None:
+        # Nenhuma marca do PC no trecho olhado. So da para concluir "o PC
+        # esta calado" se o historico voltar mais do que o periodo perguntado
+        # — senao o que faltou foi historico, nao publicacao.
+        if mais_antigo is None or (agora_ts - mais_antigo) / 3600.0 < limite:
+            _cache_sinal = (time.time(), None)
+            return None
+        # Atencao: aqui o numero e um LIMITE INFERIOR ("esta calado ha pelo
+        # menos isto"), nao a idade do ultimo sinal — o ultimo sinal do PC
+        # pode ser mais recente e simplesmente nao estar no trecho olhado. A
+        # decisao (>= limite) continua valida; a redacao de quem mostra o
+        # numero e que precisa dizer "pelo menos".
+        resultado = (agora_ts - mais_antigo) / 3600.0
+
+    _cache_sinal = (time.time(), resultado)
+    return resultado
+
+
+def pc_parece_morto(agora: datetime | None = None) -> tuple[bool, str]:
+    """(o PC esta calado ha tempo demais?, explicacao)."""
+    limite = _horas_silencio_max()
+    if limite <= 0:
+        return False, "checagem de silencio desligada (PC_SILENCIO_MAX_H=0)"
+    horas = horas_desde_sinal_do_pc(agora)
+    if horas is None:
+        return False, "sem historico suficiente para saber do PC"
+    if horas >= limite:
+        # "pelo menos": ver a nota em horas_desde_sinal_do_pc sobre o caso em
+        # que nenhuma marca do PC aparece no trecho inspecionado.
+        return True, f"o PC nao publica ha pelo menos {horas:.1f}h (limite {limite:.0f}h)"
+    return False, f"o PC publicou ha {horas:.1f}h"
+
+
 def pode_publicar(agora: datetime | None = None) -> tuple[bool, str]:
     """(pode?, motivo). O motivo vai para o log e para `/health` — um
     publicador em silêncio tem que saber dizer por quê."""
@@ -136,10 +255,22 @@ def pode_publicar(agora: datetime | None = None) -> tuple[bool, str]:
 
     # NUVEM: só quando o PC local não pode estar publicando.
     if janela.pc_pode_estar_publicando(agora):
+        # O relogio dizer que o PC deveria estar ligado nao e o mesmo que ele
+        # estar publicando. Em 04/09/2026 o PC estava fora do ar havia 6 dias
+        # (ultimo commit dele em 29/08 08:50) e o agendamento da nuvem estava
+        # morto havia 5 semanas: os grupos ficaram sem oferta nenhuma, e uma
+        # trava que so olha a hora teria mantido a nuvem calada de dia
+        # "para nao atrapalhar" um PC que nao existia mais.
+        morto, explicacao = pc_parece_morto(agora)
+        if morto:
+            return True, (
+                f"papel nuvem — dentro da janela do PC, mas {explicacao}: "
+                "a nuvem assume para os grupos nao ficarem sem oferta"
+            )
         return False, (
             "papel nuvem — o PC local pode estar publicando agora "
             f"(janela {janela.hora_ligar():%H:%M}-{janela.hora_desligar():%H:%M} "
-            f"+{janela.MINUTOS_ESPERA_DESLIGAR}min de carencia); "
+            f"+{janela.MINUTOS_ESPERA_DESLIGAR}min de carencia; {explicacao}); "
             "publicar junto duplicaria a oferta no grupo"
         )
     return True, "papel nuvem — PC local fora da janela, a nuvem cobre"
@@ -161,6 +292,7 @@ def resumo(agora: datetime | None = None) -> dict:
         "motivo": motivo,
         "fuso_ok": _fuso_conferido(agora),
         "utc_offset": agora.astimezone().strftime("%z"),
+        "horas_sem_sinal_do_pc": horas_desde_sinal_do_pc(agora),
     }
 
 

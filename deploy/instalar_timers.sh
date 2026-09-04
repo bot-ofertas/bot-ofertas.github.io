@@ -45,9 +45,11 @@ Wants=network-online.target
 Type=oneshot
 WorkingDirectory=${RAIZ}
 ExecStart=/usr/bin/env bash ${script}
-# Um erro aqui (rede fora, GitHub fora) não pode virar unidade "failed"
-# permanente: o próximo disparo tenta de novo, que é o comportamento certo.
-SuccessExitStatus=0 1
+# Sem SuccessExitStatus mascarando saida 1: uma unidade `oneshot` que falha
+# NAO impede os disparos seguintes do timer (o proximo roda igual), entao
+# tratar erro como sucesso so servia para `systemctl status` mentir dizendo
+# "success" enquanto a atualizacao nao acontecia — exatamente o tipo de
+# silencio que este projeto ja pagou caro.
 UNIT
 
     cat > "/etc/systemd/system/${nome}.timer" <<UNIT
