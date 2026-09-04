@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "3 Corações Cappuccino 3Corações Classic - 200G, Pote",
+      "preco": 14.99,
+      "preco_original": 74.95,
+      "desconto_pct": 80.0,
+      "foto": "https://m.media-amazon.com/images/I/61iX7s9TL5L._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 52,
+      "enviado_em": "2026-09-04T18:39:23.019881",
+      "link": "https://www.amazon.com.br/dp/B007N6SI94?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 14.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Pokémon TCG: Mega Evolução - Caos Ascendente - 3-Pack Blister - Português",
+      "preco": 33.73,
+      "preco_original": 42.99,
+      "desconto_pct": 21.5,
+      "foto": "https://m.media-amazon.com/images/I/81kDBbtamUL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 61,
+      "enviado_em": "2026-09-04T18:39:14.313886",
+      "link": "https://www.amazon.com.br/dp/B0GVVN4T41?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 33.73,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "DAS, Massa para Modelar, Branco, 1Kg",
+      "preco": 30.6,
+      "preco_original": 42.99,
+      "desconto_pct": 28.8,
+      "foto": "https://m.media-amazon.com/images/I/61Hh2n69xrL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 63,
+      "enviado_em": "2026-09-04T18:39:05.581650",
+      "link": "https://www.amazon.com.br/dp/B001GAP4YA?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 30.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis adidas Corrida Feminino Adizero Drive Rc Performance",
+      "preco": 685.0,
+      "preco_original": 899.0,
+      "desconto_pct": 23.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_738239-MLB108435633107_032026-AB-tnis-adidas-corrida-feminino-adizero-drive-rc-performance.webp",
+      "categoria": "impressoras",
+      "score": 66,
+      "enviado_em": "2026-09-04T18:36:09.740933",
+      "link": "https://produto.mercadolivre.com.br/MLB-5724907678-tnis-adidas-corrida-feminino-adizero-drive-rc-performance-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 685.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tapete Higiênico Para Cachorro 50 Unidades 60x55cm Com Gel Absorvente Fralda Manta Pet Cão Branco Branco",
+      "preco": 45.0,
+      "preco_original": 69.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971200-MLA114202177794_082026-AB.webp",
+      "categoria": "pet",
+      "score": 69,
+      "enviado_em": "2026-09-04T18:35:59.973674",
+      "link": "https://www.mercadolivre.com.br/tapete-higienico-para-cachorro-50-unidades-60x55cm-com-gel-absorvente-fralda-manta-pet-cao-com-fitas-adesivas-anti-odor-atrativo-canino/p/MLB28131416?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 45.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-Ondas PMO30F Flat 28L Preto Espelhado Philco 220V",
+      "preco": 540.0,
+      "preco_original": 799.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_611221-MLA93871707676_102025-AB.webp",
+      "categoria": "monitores",
+      "score": 77,
+      "enviado_em": "2026-09-04T18:35:50.179129",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-pmo30f-flat-28l-preto-espelhado-philco-220v/p/MLB59111649?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 540.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Controle Joystick Sem Fio Sony PlayStation 5 DualSense Midnight Black",
+      "preco": 351.2,
+      "preco_original": 599.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_759059-MLA99508283678_112025-AB.webp",
+      "categoria": "games",
+      "score": 84,
+      "enviado_em": "2026-09-04T18:35:40.462132",
+      "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-5-dualsense-midnight-black/p/MLB18010993?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 351.2,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Pais & Filhos - Caiu Perdeu, 54 Pçs, idade mínima recomendada - 6 anos",
       "preco": 20.24,
       "preco_original": 26.58,
@@ -228,10 +333,10 @@
   },
   "stats": {
     "brinquedos": {
-      "total": 4,
-      "score_medio": 63,
-      "desconto_medio": 35,
-      "maior_desconto": 63
+      "total": 7,
+      "score_medio": 61,
+      "desconto_medio": 39,
+      "maior_desconto": 80
     },
     "ferramentas": {
       "total": 3,
@@ -240,16 +345,28 @@
       "maior_desconto": 66
     },
     "pet": {
-      "total": 1,
-      "score_medio": 78,
-      "desconto_medio": 41,
+      "total": 2,
+      "score_medio": 74,
+      "desconto_medio": 38,
       "maior_desconto": 41
     },
     "impressoras": {
-      "total": 1,
-      "score_medio": 71,
-      "desconto_medio": 33,
+      "total": 2,
+      "score_medio": 69,
+      "desconto_medio": 28,
       "maior_desconto": 33
+    },
+    "monitores": {
+      "total": 1,
+      "score_medio": 77,
+      "desconto_medio": 32,
+      "maior_desconto": 32
+    },
+    "games": {
+      "total": 1,
+      "score_medio": 84,
+      "desconto_medio": 41,
+      "maior_desconto": 41
     },
     "eletrodomesticos": {
       "total": 1,
@@ -282,6 +399,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-04T17:17:09.483439",
-  "total": 14
+  "updated_at": "2026-09-04T18:39:32.121367",
+  "total": 21
 }
