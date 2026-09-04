@@ -48,6 +48,13 @@ COPY . /app
 
 RUN mkdir -p /app/data /app/assets
 
+# O `.git` chega por montagem do servidor (ver docker-compose.vps.yml), com
+# dono podendo nao bater com o usuario do container. Nesse caso o git recusa
+# ler o repositorio ("detected dubious ownership") e a prova de vida do PC
+# volta a responder "nao sei" — de novo em silencio. `safe.directory` custa
+# uma linha e fecha esse caminho.
+RUN git config --global --add safe.directory /app
+
 EXPOSE 8724
 
 CMD ["python", "-u", "deploy/entrypoint.py"]
