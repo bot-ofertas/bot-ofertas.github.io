@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Pais & Filhos - Caiu Perdeu, 54 Pçs, idade mínima recomendada - 6 anos",
+      "preco": 20.24,
+      "preco_original": 26.58,
+      "desconto_pct": 23.9,
+      "foto": "https://m.media-amazon.com/images/I/81QAJDzi7DL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 53,
+      "enviado_em": "2026-09-04T17:17:00.682480",
+      "link": "https://www.amazon.com.br/dp/B07LHC55HY?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 20.24,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit De Cartas UNO Clássico Mattel Com 108 Cartas 7 Anos Ou Mai",
+      "preco": 19.95,
+      "preco_original": 24.99,
+      "desconto_pct": 20.2,
+      "foto": "https://m.media-amazon.com/images/I/71yJ6Tu7+zL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 50,
+      "enviado_em": "2026-09-04T17:16:52.012150",
+      "link": "https://www.amazon.com.br/dp/B00CTH0A1Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 19.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Vasenol Geleia de Vaselina Hidratante para Pele Ressecada",
+      "preco": 22.78,
+      "preco_original": 33.99,
+      "desconto_pct": 33.0,
+      "foto": "https://m.media-amazon.com/images/I/61VOWQ8WA6L._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 62,
+      "enviado_em": "2026-09-04T17:16:43.106945",
+      "link": "https://www.amazon.com.br/dp/B07JR55K68?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 22.78,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Patinete Elétrico GM5 P1 Preto Dobrável com Bluetooth, 25 Km/h e Autonomia de 22 Km",
+      "preco": 1159.0,
+      "preco_original": 3165.0,
+      "desconto_pct": 63.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_711637-MLA114364475655_072026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 88,
+      "enviado_em": "2026-09-04T17:14:13.898061",
+      "link": "https://www.mercadolivre.com.br/patinete-eletrico-gm5-p1-preto-dobravel-com-bluetooth-25-kmh-e-autonomia-de-22-km/p/MLB51757209?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1159.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A17 5g 128gb 4gb Super Amoled 6.7'' Câmera 50mp Selfie 13 Mp 5000 Mah Nfc Dual Sim Recursos Ia - Preto",
+      "preco": 944.9,
+      "preco_original": 1855.0,
+      "desconto_pct": 49.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "categoria": "cameras",
+      "score": 95,
+      "enviado_em": "2026-09-04T17:14:04.602067",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a17-5g-128gb-4gb-super-amoled-67-camera-50mp-selfie-13-mp-5000-mah-nfc-dual-sim-recursos-ia-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 944.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Ração Gran Plus Choice Adultos Sabor Frango E Carne 15kg",
+      "preco": 126.9,
+      "preco_original": 218.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_905034-MLA107826056416_032026-AB.webp",
+      "categoria": "pet",
+      "score": 78,
+      "enviado_em": "2026-09-04T17:13:55.493424",
+      "link": "https://www.mercadolivre.com.br/racao-gran-plus-choice-adultos-sabor-frango-e-carne-15kg/p/MLB66460432?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 126.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de Pó e Água Electrolux 1400W 12 Litros 5,9 raio de ação Compacto Potente Função Sopro protetor térmico AWD01",
+      "preco": 179.0,
+      "preco_original": 269.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_977365-MLA112063523985_052026-AB.webp",
+      "categoria": "impressoras",
+      "score": 71,
+      "enviado_em": "2026-09-04T17:13:45.101504",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-electrolux-1400w-12-litros-59-raio-de-acao-compacto-potente-funcao-sopro-protetor-termico-awd01/p/MLB6339793?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "MONDIAL Ventilador de Mesa 30cm Super Power, Preto, 60W, 220V - VSP-30-B",
       "preco": 113.05,
       "preco_original": 139.9,
@@ -107,26 +212,44 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
-    "preco": 799.89,
-    "preco_original": 1499.0,
-    "desconto_pct": 46.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_807017-MLA91535682558_092025-AB.webp",
-    "categoria": "celulares",
+    "titulo": "Smartphone Samsung Galaxy A17 5g 128gb 4gb Super Amoled 6.7'' Câmera 50mp Selfie 13 Mp 5000 Mah Nfc Dual Sim Recursos Ia - Preto",
+    "preco": 944.9,
+    "preco_original": 1855.0,
+    "desconto_pct": 49.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+    "categoria": "cameras",
     "score": 95,
-    "enviado_em": "2026-09-03T15:59:23.834947",
-    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB54987753?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-09-04T17:14:04.602067",
+    "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a17-5g-128gb-4gb-super-amoled-67-camera-50mp-selfie-13-mp-5000-mah-nfc-dual-sim-recursos-ia-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 799.89,
+    "menor_preco_30d": 944.9,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
+    "brinquedos": {
+      "total": 4,
+      "score_medio": 63,
+      "desconto_medio": 35,
+      "maior_desconto": 63
+    },
     "ferramentas": {
       "total": 3,
       "score_medio": 56,
       "desconto_medio": 35,
       "maior_desconto": 66
+    },
+    "pet": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 41,
+      "maior_desconto": 41
+    },
+    "impressoras": {
+      "total": 1,
+      "score_medio": 71,
+      "desconto_medio": 33,
+      "maior_desconto": 33
     },
     "eletrodomesticos": {
       "total": 1,
@@ -139,6 +262,12 @@
       "score_medio": 95,
       "desconto_medio": 46,
       "maior_desconto": 46
+    },
+    "cameras": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 49,
+      "maior_desconto": 49
     },
     "bebes": {
       "total": 1,
@@ -153,6 +282,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-03T16:02:19.876079",
-  "total": 7
+  "updated_at": "2026-09-04T17:17:09.483439",
+  "total": 14
 }
