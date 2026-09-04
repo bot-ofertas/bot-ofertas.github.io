@@ -340,6 +340,19 @@ def test_workflow_busca_historico_suficiente():
     assert int(achado.group(1)) >= 50, f"fetch-depth curto demais: {achado.group(1)}"
 
 
+def test_um_gravador_so_para_o_banco_de_deduplicacao():
+    """`actions/cache@v4` salva sozinho no fim do job, com a MESMA chave do
+    passo explicito de salvar — dois gravadores na mesma chave. Medido na
+    execucao 256: "Unable to reserve cache with key sqlite-db-v2-256". O dado
+    em disputa e a deduplicacao, cuja perda REPUBLICA as ofertas no canal."""
+    texto = open(os.path.join(BASE, ".github", "workflows", "bot.yml"),
+                 encoding="utf-8").read()
+    usos = re.findall(r"^\s*uses:\s*(actions/cache\S*)", texto, re.M)
+    gravadores = [u for u in usos if u.endswith("/save@v4") or re.match(r"^actions/cache@", u)]
+    assert len(gravadores) == 1, f"mais de um gravador de cache: {usos}"
+    assert gravadores[0].endswith("/save@v4"), gravadores
+
+
 def test_timer_do_servidor_nao_mascara_falha():
     """`SuccessExitStatus=0 1` fazia `systemctl status` dizer "success" com a
     atualizacao falhando. Uma unidade oneshot que falha nao impede o proximo
@@ -438,6 +451,54 @@ def test_scripts_nao_leem_env_com_cut():
             if linha.lstrip().startswith("#"):
                 continue
             assert not re.search(r"\.env.*cut -d=", linha), f"{nome}: {linha.strip()}"
+
+
+def test_ler_env_devolve_o_valor_inteiro():
+    """Prova funcional do substituto do `cut -d= -f2`: a chave da Evolution
+    e gerada por `secrets.token_urlsafe` e pode conter `=`; truncada, a API
+    responde 401 sem nada no output explicando por que."""
+    import subprocess as sp
+    import tempfile
+
+    casos = {
+        "EVOLUTION_API_KEY": "abc=def==ghi/jk+lm",
+        "WHATSAPP_INSTANCE": "botofertas",
+        "COM_ASPAS": '"valor entre aspas"',
+        "REPETIDA": "primeiro",
+    }
+    with tempfile.TemporaryDirectory() as tmp:
+        env_path = os.path.join(tmp, ".env")
+        with open(env_path, "w", encoding="utf-8") as f:
+            for k, v in casos.items():
+                f.write(f"{k}={v}\n")
+            f.write("REPETIDA=ultimo\n")   # a ultima ocorrencia e a que vale
+
+        script = (
+            f'ENV_FILE="{env_path}"\n'
+            "ler_env() {\n"
+            '  local chave="$1"\n'
+            '  sed -n "s/^[[:space:]]*${chave}[[:space:]]*=//p" "$ENV_FILE" \\\n'
+            "    | tail -n 1 \\\n"
+            "    | sed -e 's/^\"\\(.*\\)\"$/\\1/' -e \"s/^'\\(.*\\)'$/\\1/\"\n"
+            "}\n"
+            'for k in EVOLUTION_API_KEY WHATSAPP_INSTANCE COM_ASPAS REPETIDA; do\n'
+            '  echo "$k=$(ler_env "$k")"\n'
+            "done\n"
+        )
+        r = sp.run(["bash", "-c", script], capture_output=True, text=True)
+        assert r.returncode == 0, r.stderr
+        saida = dict(l.split("=", 1) for l in r.stdout.strip().splitlines())
+
+    assert saida["EVOLUTION_API_KEY"] == "abc=def==ghi/jk+lm", saida
+    assert saida["WHATSAPP_INSTANCE"] == "botofertas", saida
+    assert saida["COM_ASPAS"] == "valor entre aspas", saida
+    assert saida["REPETIDA"] == "ultimo", saida
+
+    # E a implementacao testada acima e mesmo a que esta no repositorio.
+    comum = open(os.path.join(DEPLOY, "_comum.sh"), encoding="utf-8").read()
+    assert 'sed -n "s/^[[:space:]]*${chave}[[:space:]]*=//p"' in comum, (
+        "deploy/_comum.sh mudou a leitura do .env — atualize este teste junto"
+    )
 
 
 def test_nenhum_segredo_versionado_no_deploy():

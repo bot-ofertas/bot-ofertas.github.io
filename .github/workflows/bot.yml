@@ -47,8 +47,20 @@ jobs:
           fetch-depth: 200
 
       - name: Restaurar banco de dados (deduplicação)
+        # `cache/restore`, não `cache`. O `actions/cache@v4` também SALVA no
+        # fim do job, com a mesma chave do passo "Salvar banco atualizado no
+        # cache" — dois gravadores disputando a mesma chave. Medido na
+        # execucao 256 (04/09/2026): o passo explícito salvou às 17:17:08 e o
+        # pós-job do cache reclamou logo depois,
+        # "Unable to reserve cache with key sqlite-db-v2-256, another job may
+        # be creating this cache". Nesse dia o banco foi salvo pelo passo
+        # certo, mas a corrida deixava toda execução com uma mensagem de
+        # falha no gravador da deduplicação — justamente o dado cuja perda
+        # REPUBLICA as mesmas ofertas no canal. Um gravador só, no passo que
+        # roda antes de o job poder ser morto por tempo.
+        #
         # Em cache-miss, mantém o DB versionado no repo (seed com histórico).
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: data/bot_ofertas.db
           key: sqlite-db-v2-${{ github.run_number }}
