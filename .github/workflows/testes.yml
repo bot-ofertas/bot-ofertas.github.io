@@ -61,6 +61,14 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_ciclo_diario.py
 
+      - name: Teste do bot na nuvem (papel, compose, scripts de deploy)
+        # Impede a volta do pior caso da migração para servidor: dois
+        # publicadores ativos ao mesmo tempo, cada um com o seu banco de
+        # deduplicação, mandando a MESMA oferta duas vezes para o grupo.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_nuvem_deploy.py
+
       - name: Teste de sistema (bot + n8n montados)
         # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
         # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->
@@ -68,6 +76,26 @@ jobs:
         env:
           PYTHONIOENCODING: utf-8
         run: python tests/test_sistema_completo.py
+
+      - name: Conferir que todo teste em tests/ roda neste workflow
+        # Os testes são chamados um a um, por nome, para que a falha diga
+        # QUAL área quebrou em vez de "pytest falhou". O preço disso é que um
+        # arquivo de teste novo fica de fora sem ninguém perceber — e um
+        # teste que ninguém executa não é trava nenhuma, é só arquivo. Este
+        # passo cobra a inclusão.
+        run: |
+          python - <<'PY'
+          import glob, os, sys
+          wf = open(".github/workflows/testes.yml", encoding="utf-8").read()
+          esquecidos = [f for f in sorted(glob.glob("tests/test_*.py")) if f not in wf]
+          if esquecidos:
+              print("Estes testes existem mas nao sao executados por este workflow:")
+              for f in esquecidos:
+                  print(f"  - {f}")
+              print("\nAdicione um passo `run: python <arquivo>` acima.")
+              sys.exit(1)
+          print("Todos os testes de tests/ estao no workflow.")
+          PY
 
       - name: Compilar todos os módulos Python
         # Pega erro de sintaxe em arquivo que nenhum teste importa (os
