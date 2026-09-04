@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Argan Óleo Reparador 50ml , Lola Cosmetics",
+      "preco": 19.19,
+      "preco_original": 383.8,
+      "desconto_pct": 95.0,
+      "foto": "https://m.media-amazon.com/images/I/41sfmT4opyL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 69,
+      "enviado_em": "2026-09-04T22:07:04.188546",
+      "link": "https://www.amazon.com.br/dp/B07SBXMSGB?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 19.19,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "La Roche-Posay Cicaplast Baume B5+ Cuidado Multirreparador Calmante",
+      "preco": 73.05,
+      "preco_original": 89.9,
+      "desconto_pct": 18.7,
+      "foto": "https://m.media-amazon.com/images/I/41LpbF-1WDL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 62,
+      "enviado_em": "2026-09-04T22:06:55.672973",
+      "link": "https://www.amazon.com.br/dp/B072MK7BN2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 73.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Sabonete, PHEBO, Amarelo, 720g",
+      "preco": 31.67,
+      "preco_original": 43.99,
+      "desconto_pct": 28.0,
+      "foto": "https://m.media-amazon.com/images/I/51rOgkMtK5L._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 73,
+      "enviado_em": "2026-09-04T22:06:47.148673",
+      "link": "https://www.amazon.com.br/dp/B00N6AKNQW?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 31.67,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Parafusadeira Furadeira The Black Tools TB12A 3/8 a Bateria Cor Amarelo Frequência 60Hz",
+      "preco": 66.4,
+      "preco_original": 119.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_648315-MLA113252989356_072026-AB.webp",
+      "categoria": "cameras",
+      "score": 77,
+      "enviado_em": "2026-09-04T22:03:53.204469",
+      "link": "https://www.mercadolivre.com.br/parafusadeira-furadeira-the-black-tools-tb12a-38-a-bateria-cor-amarelo-frequencia-60hz/p/MLB24076624?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 66.4,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Zoetis Simparic 80mg Antipulgas Carrapatos Cães 20-40kg 1 Comprimido Cinza Cinza",
+      "preco": 88.16,
+      "preco_original": 134.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_889301-MLA100046829659_122025-AB.webp",
+      "categoria": "pet",
+      "score": 70,
+      "enviado_em": "2026-09-04T22:03:43.824616",
+      "link": "https://www.mercadolivre.com.br/zoetis-simparic-80mg-antipulgas-carrapatos-caes-20-40kg-1-comprimido/p/MLB29265875?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 88.16,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Aspirador de Pó e Água Electrolux Compacto Potente 1400W Função Sopro 12L total 5L útil protetor térmico AWD01",
+      "preco": 179.0,
+      "preco_original": 269.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658360-MLA111078325188_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 71,
+      "enviado_em": "2026-09-04T22:03:34.362187",
+      "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-electrolux-compacto-potente-1400w-funcao-sopro-12l-total-5l-util-protetor-termico-awd01/p/MLB6339794?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Chave De Impacto A Bateria 21v 1/2  Pol 2400 Rpm Bivolt Com Acessórios E Maleta The Black Tools Amarelo/preto 127/220v",
+      "preco": 264.95,
+      "preco_original": 513.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_652182-MLA113971474078_072026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 84,
+      "enviado_em": "2026-09-04T22:03:25.402766",
+      "link": "https://www.mercadolivre.com.br/chave-de-impacto-a-bateria-21v-12-pol-2400-rpm-bivolt-com-acessorios-e-maleta-the-black-tools/p/MLB28530314?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 264.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "3 Corações Cappuccino 3Corações Classic - 200G, Pote",
       "preco": 14.99,
       "preco_original": 74.95,
@@ -339,21 +444,39 @@
       "maior_desconto": 80
     },
     "ferramentas": {
-      "total": 3,
-      "score_medio": 56,
-      "desconto_medio": 35,
+      "total": 4,
+      "score_medio": 63,
+      "desconto_medio": 38,
       "maior_desconto": 66
     },
     "pet": {
-      "total": 2,
-      "score_medio": 74,
-      "desconto_medio": 38,
+      "total": 3,
+      "score_medio": 72,
+      "desconto_medio": 37,
       "maior_desconto": 41
+    },
+    "beleza": {
+      "total": 3,
+      "score_medio": 68,
+      "desconto_medio": 47,
+      "maior_desconto": 95
     },
     "impressoras": {
       "total": 2,
       "score_medio": 69,
       "desconto_medio": 28,
+      "maior_desconto": 33
+    },
+    "cameras": {
+      "total": 2,
+      "score_medio": 86,
+      "desconto_medio": 47,
+      "maior_desconto": 49
+    },
+    "bebes": {
+      "total": 2,
+      "score_medio": 69,
+      "desconto_medio": 32,
       "maior_desconto": 33
     },
     "monitores": {
@@ -380,18 +503,6 @@
       "desconto_medio": 46,
       "maior_desconto": 46
     },
-    "cameras": {
-      "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 49,
-      "maior_desconto": 49
-    },
-    "bebes": {
-      "total": 1,
-      "score_medio": 66,
-      "desconto_medio": 30,
-      "maior_desconto": 30
-    },
     "armazenamento": {
       "total": 1,
       "score_medio": 76,
@@ -399,6 +510,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-04T18:39:32.121367",
-  "total": 21
+  "updated_at": "2026-09-04T22:07:12.796561",
+  "total": 28
 }
