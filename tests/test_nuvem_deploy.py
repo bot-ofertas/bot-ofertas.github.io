@@ -315,6 +315,30 @@ def test_sem_historico_suficiente_nao_age_no_escuro():
         _solta_repo(papel, st)
 
 
+def test_cache_guarda_o_fato_e_nao_a_conta():
+    """O cache guardava as HORAS ja calculadas contra um instante especifico.
+    Uma segunda pergunta, com outro instante, recebia a resposta da primeira
+    por ate 5 minutos — e a decisao "o PC esta vivo?" saia errada em silencio.
+    Agora o cache guarda o timestamp do commit (um fato do repositorio) e a
+    conta e refeita a cada chamada."""
+    from datetime import timedelta
+
+    papel, st = _com_repo(
+        [(10, "chore: atualiza site (rastreador-ml) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
+    )
+    try:
+        t0 = datetime.now()
+        h0 = papel.horas_desde_sinal_do_pc(t0)
+        h1 = papel.horas_desde_sinal_do_pc(t0 + timedelta(hours=5))
+        assert h0 is not None and h1 is not None
+        assert abs((h1 - h0) - 5.0) < 0.05, (
+            f"o cache devolveu a conta velha: {h0:.2f}h e depois {h1:.2f}h"
+        )
+    finally:
+        _solta_repo(papel, st)
+
+
 def test_checagem_de_silencio_pode_ser_desligada():
     papel, st = _com_repo(
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],

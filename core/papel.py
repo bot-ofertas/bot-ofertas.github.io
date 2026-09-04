@@ -83,7 +83,7 @@ HORAS_SILENCIO_PADRAO = 6.0
 # publicacao do PC (ele empurra no maximo 1x/hora, ~17h de janela).
 _COMMITS_INSPECIONADOS = 80
 
-_cache_sinal: tuple[float, "float | None"] | None = None
+_cache_sinal: "tuple[float, tuple[float | None, float | None]] | None" = None
 _CACHE_S = 300
 
 LOCAL = "local"
@@ -153,24 +153,18 @@ def _horas_silencio_max() -> float:
         return HORAS_SILENCIO_PADRAO
 
 
-def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
-    """Ha quantas horas o PC deu o ultimo sinal de vida, ou None se nao da
-    para saber.
+def _fatos_do_historico() -> tuple[float | None, float | None]:
+    """(timestamp do ultimo sinal do PC, timestamp do commit mais antigo que
+    eu olhei) — os dois em epoch, ou None quando nao deu para olhar.
 
-    O sinal e o proprio historico do repositorio: o bot no PC empurra `docs/`
-    a cada rodada (`core/site_publisher.py`), e essa marca fica visivel para
-    qualquer um que tenha um checkout — inclusive o runner do GitHub e o
-    servidor. Nao exige rede ate o PC nem porta aberta.
-
-    Devolve None de proposito quando o historico nao alcanca o periodo
-    perguntado (checkout raso do Actions, repositorio recem-clonado): "nao
-    consegui olhar" nao pode virar "o PC esta morto". Mesmo cuidado que
-    `startup.checagem_de_processos_confiavel()` tomou com o psutil — agir
-    sobre uma resposta cega foi o que quase duplicou os rastreadores.
+    Sao FATOS do repositorio: nao dependem de que horas sao nem de qual
+    limite de silencio esta configurado. Por isso o cache mora aqui e nao no
+    resultado em horas — a versao anterior guardava as horas ja calculadas
+    contra um instante especifico, entao uma chamada seguinte com outro
+    instante (ou com outro PC_SILENCIO_MAX_H) recebia a resposta do anterior
+    por ate 5 minutos.
     """
     global _cache_sinal
-    agora = agora or datetime.now()
-
     if _cache_sinal is not None and (time.time() - _cache_sinal[0]) < _CACHE_S:
         return _cache_sinal[1]
 
@@ -195,17 +189,14 @@ def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
             "fora do ar. No servidor, confira a montagem de `.git` e o `git` "
             "na imagem (deploy/).", e,
         )
-        return None
+        return None, None
     if r.returncode != 0 or not r.stdout.strip():
         log.warning("git log nao devolveu historico (%s) — sem sinal do PC.",
                     (r.stderr or "").strip()[:120])
-        return None
+        return None, None
 
-    limite = _horas_silencio_max()
-    agora_ts = agora.timestamp()
+    marca: float | None = None
     mais_antigo: float | None = None
-
-    resultado: float | None = None
     for linha in r.stdout.splitlines():
         ts_txt, _, assunto = linha.partition("\t")
         try:
@@ -213,26 +204,51 @@ def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
         except ValueError:
             continue
         mais_antigo = ts
-        if any(m in assunto for m in _MARCAS_DO_PC):
-            resultado = max(0.0, (agora_ts - ts) / 3600.0)
-            break
+        if marca is None and any(m in assunto for m in _MARCAS_DO_PC):
+            marca = ts
+            # Nao para o laco: `mais_antigo` precisa chegar ate o fim do
+            # trecho para o caso "nenhuma marca" saber ate onde eu enxerguei.
 
-    if resultado is None:
-        # Nenhuma marca do PC no trecho olhado. So da para concluir "o PC
-        # esta calado" se o historico voltar mais do que o periodo perguntado
-        # — senao o que faltou foi historico, nao publicacao.
-        if mais_antigo is None or (agora_ts - mais_antigo) / 3600.0 < limite:
-            _cache_sinal = (time.time(), None)
-            return None
-        # Atencao: aqui o numero e um LIMITE INFERIOR ("esta calado ha pelo
-        # menos isto"), nao a idade do ultimo sinal — o ultimo sinal do PC
-        # pode ser mais recente e simplesmente nao estar no trecho olhado. A
-        # decisao (>= limite) continua valida; a redacao de quem mostra o
-        # numero e que precisa dizer "pelo menos".
-        resultado = (agora_ts - mais_antigo) / 3600.0
+    fatos = (marca, mais_antigo)
+    _cache_sinal = (time.time(), fatos)
+    return fatos
 
-    _cache_sinal = (time.time(), resultado)
-    return resultado
+
+def horas_desde_sinal_do_pc(agora: datetime | None = None) -> float | None:
+    """Ha quantas horas o PC deu o ultimo sinal de vida, ou None se nao da
+    para saber.
+
+    O sinal e o proprio historico do repositorio: o bot no PC empurra `docs/`
+    a cada rodada (`core/site_publisher.py`), e essa marca fica visivel para
+    qualquer um que tenha um checkout — inclusive o runner do GitHub e o
+    servidor. Nao exige rede ate o PC nem porta aberta.
+
+    Devolve None de proposito quando o historico nao alcanca o periodo
+    perguntado (checkout raso do Actions, repositorio recem-clonado): "nao
+    consegui olhar" nao pode virar "o PC esta morto". Mesmo cuidado que
+    `startup.checagem_de_processos_confiavel()` tomou com o psutil — agir
+    sobre uma resposta cega foi o que quase duplicou os rastreadores.
+
+    Quando nenhuma marca do PC aparece no trecho olhado, o numero devolvido e
+    um LIMITE INFERIOR ("calado ha pelo menos isto"): o ultimo sinal pode ser
+    mais antigo do que o trecho alcanca. A decisao (>= limite) segue valida;
+    quem mostra o numero e que precisa dizer "pelo menos".
+    """
+    agora = agora or datetime.now()
+    agora_ts = agora.timestamp()
+    marca, mais_antigo = _fatos_do_historico()
+
+    if marca is not None:
+        return max(0.0, (agora_ts - marca) / 3600.0)
+
+    if mais_antigo is None:
+        return None
+    horas_vistas = (agora_ts - mais_antigo) / 3600.0
+    if horas_vistas < _horas_silencio_max():
+        # O historico que eu enxergo e mais curto que o periodo perguntado:
+        # o que faltou foi historico, nao publicacao.
+        return None
+    return horas_vistas
 
 
 def pc_parece_morto(agora: datetime | None = None) -> tuple[bool, str]:
