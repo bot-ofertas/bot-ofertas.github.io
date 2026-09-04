@@ -227,8 +227,18 @@ checar("08:30 (PC religou) → a nuvem espera",
 
 # O bot.yml tem de consultar a fonte unica, nao repetir o horario no cron.
 _botyml = open(os.path.join(RAIZ, ".github", "workflows", "bot.yml"), encoding="utf-8").read()
-checar("bot.yml pergunta ao core/janela.py antes de publicar",
-       "core.janela --pc-ativo" in _botyml)
+# A pergunta continua sendo "o PC pode estar publicando agora?", mas quem
+# responde passou a ser `core/papel.py` — que consulta `core/janela.py` por
+# dentro. A indirecao existe porque agora sao TRES publicadores (PC, este
+# workflow e o servidor em deploy/), e cada um so precisa dizer quem e.
+checar("bot.yml pergunta ao core/papel.py antes de publicar",
+       "core.papel --pode-publicar" in _botyml)
+checar("e o papel do workflow e configuravel pelo repositorio",
+       "vars.PAPEL" in _botyml,
+       "sem isso, aposentar o Actions exigiria editar codigo")
+checar("o papel do workflow, sem variavel definida, e 'nuvem'",
+       "'nuvem'" in _botyml,
+       "papel vazio vira 'local' (sem trava) — errado para o Actions")
 checar("bot.yml roda com o fuso de Sao Paulo",
        "America/Sao_Paulo" in _botyml,
        "sem TZ o runner compara o horario UTC com a janela em BRT")

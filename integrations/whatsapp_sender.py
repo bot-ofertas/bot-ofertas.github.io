@@ -36,8 +36,19 @@ def _placeholder(valor: str) -> bool:
     de verdade e ligaria o envio apontando para um grupo que nao existe —
     pior que estar desligado, porque a fila consome o item e o marca como
     processado. Mesma convencao do `setup_n8n._efetivo`.
+
+    A checagem por prefixo sozinha nao cobria o exemplo que o
+    `deploy/.env.example` traz para a nuvem: `120363XXXXXXXXX@g.us`. Ele nao
+    comeca com nenhum dos prefixos, entao `wa_ativo()` respondia True num
+    servidor recem-instalado e a fila drenava as ofertas para um JID que nao
+    existe — em silencio, uma a cada 30-45 min. Um JID de verdade e so
+    digitos antes do `@`, entao a corrida de `X` maiusculos e assinatura
+    segura de exemplo nao preenchido.
     """
-    return valor.lower().startswith(("cole_aqui", "cole-aqui", "seu_", "sua_"))
+    v = valor.lower()
+    if v.startswith(("cole_aqui", "cole-aqui", "seu_", "sua_", "exemplo")):
+        return True
+    return "xxx" in v
 
 
 def _group_id() -> str:

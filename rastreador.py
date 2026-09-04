@@ -422,6 +422,18 @@ async def rodar_uma_vez() -> None:
             f"({info_pausa.get('motivo', '')}) — nada a fazer nesta rodada.")
         return
 
+    # Papel desta instancia (core/papel.py). No PC nao muda nada — sem a
+    # variavel PAPEL o papel e "local" e a resposta e sempre "pode". Num
+    # servidor de nuvem e o que impede de publicar em cima do PC ligado:
+    # os bancos de deduplicacao sao separados, entao os dois publicando ao
+    # mesmo tempo mandam a MESMA oferta duas vezes para o grupo.
+    from core import papel as _papel  # noqa: PLC0415
+
+    _bloqueado, _motivo_papel = _papel.bloqueado()
+    if _bloqueado:
+        log(f"\u23f8\ufe0f  Rodada ML nao publica: {_motivo_papel}")
+        return
+
     # Pré-checagem de DNS. Sem rede, cada passo seguinte gastaria dezenas de
     # segundos em timeout até a rodada morrer com um "Timed out" genérico
     # (registro real de 2026-08-25 23:20). Aqui isso vira uma saída em ~3s,

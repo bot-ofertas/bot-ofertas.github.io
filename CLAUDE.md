@@ -203,3 +203,42 @@ passou a alertar "bot caiu" toda madrugada num desligamento planejado.
 - **Publicação diária tem piso na nuvem.** O workflow 02 publica às 09:00,
   12:00 e 20:00 BRT direto do n8n. Se o PC não voltar, os grupos ainda
   recebem oferta no mesmo dia.
+
+## Regra 16 — Servidor externo (nuvem)
+
+Decidido pelo Daniel em 2026-09-04. O bot também roda num servidor Linux
+(`deploy/`, testado para DigitalOcean), para não depender do PC ligado.
+
+- **No servidor não existe WhatsApp Desktop.** A automação de janela da
+  Regra 5 é do Windows e não roda ali. O caminho é a **Evolution API**
+  (`integrations/whatsapp_api.py`), que já é a primeira tentativa de envio.
+  Ela exige **um QR lido no celular do Daniel, uma vez** — isso é decisão
+  dele, não se automatiza. Tudo o mais da Regra 5 continua valendo: foto +
+  legenda numa unidade só, um grupo só, intervalo randômico.
+- **Quem pode publicar é `core/papel.py`, e ninguém decide sozinho.** São
+  três publicadores capazes de postar no MESMO canal (PC, GitHub Actions,
+  servidor), cada um com o seu próprio banco de deduplicação — nenhum
+  enxerga o que o outro publicou. Dois publicando ao mesmo tempo é a mesma
+  oferta duas vezes no grupo, o estrago da Regra 11 outra vez. A variável
+  `PAPEL` (`local` / `nuvem` / `nuvem-exclusiva` / `desligado`) é a única
+  coisa que cada instância precisa saber; `PAPEL` vazio é `local` (o PC, que
+  nunca definiu nada) e `PAPEL` escrito errado é `nuvem` (só quem tentou
+  configurar erra a grafia, e ali o risco é publicar demais).
+- **Fuso não é detalhe.** `core/janela.py` compara com o relógio local, e um
+  droplet nasce em UTC: sem `TZ=America/Sao_Paulo` a janela escorrega 3h e o
+  papel `nuvem` publica por cima do PC ligado sem um erro sequer no log.
+  `GET /health` traz `papel.fuso_ok` justamente para isso.
+- **O servidor PUXA do GitHub, o GitHub não empurra para o servidor**
+  (`deploy/atualizar.sh` + timer). Assim não existe chave de acesso ao
+  servidor guardada no GitHub, nada precisa ser aberto no firewall, e trocar
+  o IP do droplet não quebra o deploy.
+- **Nenhuma porta fica exposta na internet.** A 8080 da Evolution autentica
+  com a mesma chave que envia mensagem pelo número do Daniel; publicada para
+  fora, é um painel de controle do WhatsApp dele à disposição de quem achar
+  o IP. As duas portas ficam no loopback e se acessam por túnel SSH.
+- **O site não pode congelar na migração.** `core/site_publisher.py` roda
+  dentro do container, onde não existe `.git` (a imagem não carrega
+  credencial de push, de propósito): quem commita e empurra `docs/` é o
+  servidor, fora do container (`deploy/publicar_site.sh`), com uma chave de
+  deploy gerada no próprio servidor — a parte privada nunca sai do disco
+  dele e nenhuma senha é digitada em lugar nenhum.

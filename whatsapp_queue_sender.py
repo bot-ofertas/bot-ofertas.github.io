@@ -69,6 +69,17 @@ async def processar_fila_uma_vez() -> bool:
         log.info("WhatsApp pausado (wa_ativo=False) — fila continua parada.")
         return False
 
+    # Mesmo papel dos rastreadores (core/papel.py): num servidor de nuvem em
+    # papel `nuvem`, a fila espera enquanto o PC local pode estar publicando.
+    # O item nao e descartado aqui — fica na fila e sai quando o papel
+    # liberar (ou expira sozinho por IDADE_MAX_S, como qualquer item velho).
+    from core import papel  # noqa: PLC0415
+
+    bloqueado, motivo = papel.bloqueado()
+    if bloqueado:
+        log.info("Fila do WhatsApp em espera — %s", motivo)
+        return False
+
     proximo = None
     while True:
         candidato = db.proximo_da_fila_whatsapp()

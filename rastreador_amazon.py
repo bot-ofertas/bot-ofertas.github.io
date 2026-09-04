@@ -86,6 +86,19 @@ async def rodar_uma_vez() -> None:
     if pausa.pausado():
         log(f"⏸️  Publicação pausada ({pausa.info().get('motivo', '')}) — Amazon não roda.")
         return
+
+    # Papel desta instancia (core/papel.py). No PC nao muda nada — sem a
+    # variavel PAPEL o papel e "local" e a resposta e sempre "pode". Num
+    # servidor de nuvem e o que impede de publicar em cima do PC ligado:
+    # os bancos de deduplicacao sao separados, entao os dois publicando ao
+    # mesmo tempo mandam a MESMA oferta duas vezes para o grupo.
+    from core import papel as _papel  # noqa: PLC0415
+
+    _bloqueado, _motivo_papel = _papel.bloqueado()
+    if _bloqueado:
+        log(f"\u23f8\ufe0f  Rodada Amazon nao publica: {_motivo_papel}")
+        return
+
     if not dns_ok("www.amazon.com.br"):
         log("🌐 Sem resolução de DNS — pulando a rodada Amazon.")
         db.registrar_erro("rede", "DNS indisponível — rodada Amazon pulada")

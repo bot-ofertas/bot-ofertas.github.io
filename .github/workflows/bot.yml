@@ -51,29 +51,37 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Confirmar que o PC local está dormindo
+      - name: Confirmar que esta rodada pode publicar
         # Vem ANTES de instalar dependências e o Chromium de propósito: se a
-        # janela mudou, a rodada inteira é pulada em segundos em vez de gastar
-        # minutos para descobrir no fim que não devia publicar.
+        # rodada não deve publicar, ela é pulada em segundos em vez de gastar
+        # minutos para descobrir isso no fim.
         #
-        # HORA_LIGAR/HORA_DESLIGAR vêm das variáveis do repositório quando
-        # existirem (Settings → Secrets and variables → Variables). Vazias, o
-        # core/janela.py cai nos padrões 08:30/02:00 — os mesmos do .env do
-        # PC. Assim mudar o horário do ciclo não deixa a nuvem para trás
-        # publicando por cima do PC ligado.
+        # Quem responde é `core/papel.py`, o mesmo módulo que o servidor da
+        # nuvem consulta — antes esta regra existia só aqui, escrita em shell,
+        # e passou a valer para três publicadores (o PC, este workflow e o
+        # servidor em deploy/). Cada um só precisa dizer QUEM É.
+        #
+        # PAPEL vem da variável do repositório (Settings → Secrets and
+        # variables → Variables); vazia, este workflow assume `nuvem`, que é o
+        # que ele sempre foi: publica só enquanto o PC local está desligado.
+        # No dia em que o servidor virar `nuvem-exclusiva`, aposentar este
+        # workflow é trocar essa variável para `desligado` — sem editar código
+        # e sem apagar nada.
+        #
+        # HORA_LIGAR/HORA_DESLIGAR também vêm de lá. Vazias, o core/janela.py
+        # cai nos padrões 08:30/02:00 — os mesmos do .env do PC.
         id: janela
         env:
           HORA_LIGAR: ${{ vars.HORA_LIGAR }}
           HORA_DESLIGAR: ${{ vars.HORA_DESLIGAR }}
+          PAPEL: ${{ vars.PAPEL || 'nuvem' }}
           TZ: America/Sao_Paulo
         run: |
-          if python -m core.janela --pc-ativo; then
-            echo "O PC local deveria estar ligado agora — pulando para nao publicar duas vezes."
-            python -m core.janela
-            echo "pular=1" >> "$GITHUB_OUTPUT"
-          else
-            echo "PC local fora da janela — a nuvem publica."
+          if python -m core.papel --pode-publicar; then
             echo "pular=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "Esta rodada nao publica — ver o motivo acima."
+            echo "pular=1" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Instalar dependências

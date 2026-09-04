@@ -219,6 +219,22 @@ def _status_janela() -> dict:
         return {"erro": str(e)[:120]}
 
 
+def _status_papel() -> dict:
+    """Qual publicador esta instância é, e se ela pode publicar agora.
+
+    Com o bot também num servidor (deploy/), três processos passam a ser
+    capazes de postar no mesmo canal: o PC, o GitHub Actions e o servidor.
+    Sem esta linha no /health não há como responder "por que o servidor
+    está quieto?" — a resposta certa costuma ser "porque o PC está ligado",
+    e não "porque quebrou".
+    """
+    try:
+        from core import papel  # noqa: PLC0415
+        return papel.resumo()
+    except Exception as e:
+        return {"erro": str(e)[:120]}
+
+
 def _status_quarentena() -> dict:
     """Produtos que falharam ao publicar e estão fora de rotação.
 
@@ -262,6 +278,7 @@ class _Handler(BaseHTTPRequestHandler):
                 "pausa": _status_pausa(),
                 "quarentena": _status_quarentena(),
                 "janela": _status_janela(),
+                "papel": _status_papel(),
             }
             # `payload["chrome"]["ok"] or True` estava na lista: constante
             # True, sem efeito nenhum -- o Chrome dedicado é opcional desde

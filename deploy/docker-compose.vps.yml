@@ -1,10 +1,59 @@
+# Bot Ofertas num servidor Linux (DigitalOcean, Hetzner, Oracle...).
+#
+# Sobe 5 containers: a Evolution API (a ponte com o WhatsApp) e os 4
+# processos do bot, os mesmos que o `startup.py` sobe no PC do Daniel.
+#
+# Rodar:  bash deploy/deploy_vps.sh        (a partir da raiz do repositório)
+
+# ── Base comum aos 4 processos do bot ────────────────────────────────────
+# Tudo o que estiver no `.env` chega ao container por `env_file`. A versão
+# anterior listava as variáveis uma a uma em `environment:`, e qualquer
+# chave nova do `.env` (N8N_TOKEN, ADMIN_CHAT_ID, PUBLICAR_SEM_FOTO,
+# HORA_LIGAR...) simplesmente não existia dentro do container: o operador
+# editava o `.env`, reiniciava e nada mudava, sem uma linha de erro para
+# explicar. `environment:` fica só para o que é DIFERENTE aqui dentro.
+x-bot: &bot
+  build:
+    context: ..
+    dockerfile: deploy/Dockerfile
+  restart: always
+  env_file:
+    - ../.env
+  environment: &bot-env
+    # O nome do serviço resolve na rede do compose — a Evolution não precisa
+    # (e não deve) ficar exposta na internet para o bot alcançá-la.
+    WHATSAPP_WEBHOOK_URL: http://evolution:8080
+    WHATSAPP_API_KEY: ${EVOLUTION_API_KEY:?defina EVOLUTION_API_KEY no .env}
+    WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
+    # Fuso do ciclo diário. Ver comentário no Dockerfile: sem isto a janela
+    # 08:30–02:00 escorrega 3 horas e o servidor publica por cima do PC.
+    TZ: ${TZ:-America/Sao_Paulo}
+    # Quem é este publicador (core/papel.py). `nuvem` é o padrão seguro:
+    # publica só enquanto o PC local não pode estar publicando. Troque para
+    # `nuvem-exclusiva` DEPOIS de calar o PC e o GitHub Actions.
+    PAPEL: ${PAPEL:-nuvem}
+  volumes:
+    - rastreador_data:/app/data
+  depends_on:
+    evolution:
+      # service_started, não service_healthy: Telegram nunca pode depender
+      # do WhatsApp (Regra 6). Se o Evolution falhar ou demorar no
+      # healthcheck, quem posta no Telegram sobe do mesmo jeito — o código
+      # Python já trata WhatsApp como best-effort.
+      condition: service_started
+
 services:
   evolution:
     image: atendai/evolution-api:v2.1.1
     container_name: bot_evolution
     restart: always
     ports:
-      - "8080:8080"
+      # Só no loopback do servidor. A porta 8080 serve o `/manager`, que
+      # autentica com a MESMA chave que dá poder de enviar mensagem em nome
+      # do WhatsApp do Daniel — deixá-la aberta na internet é publicar um
+      # painel de controle do número dele. Para escanear o QR, use um túnel
+      # SSH a partir do seu computador (o README mostra o comando).
+      - "127.0.0.1:8080:8080"
     environment:
       SERVER_URL: ${SERVER_URL:-http://localhost:8080}
       AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:?defina EVOLUTION_API_KEY no .env}
@@ -19,6 +68,7 @@ services:
       LANGUAGE: pt-BR
       DEL_INSTANCE: "false"
       TEMP_KEY_TTL: "3600"
+      TZ: ${TZ:-America/Sao_Paulo}
     volumes:
       - evolution_data:/evolution/instances
       - evolution_store:/evolution/store
@@ -29,106 +79,44 @@ services:
       retries: 3
 
   rastreador:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
+    <<: *bot
     container_name: bot_rastreador
-    restart: always
-    depends_on:
-      evolution:
-        # service_started, não service_healthy: Telegram nunca pode depender
-        # do WhatsApp. Se o Evolution falhar/demorar no healthcheck, o
-        # container que posta no Telegram precisa subir do mesmo jeito — o
-        # código Python já trata WhatsApp como best-effort (timeout 90s).
-        condition: service_started
     environment:
-      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
-      CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
-      ML_AFFILIATE_TOOL_ID: ${ML_AFFILIATE_TOOL_ID:-47114387}
-      AMAZON_AFFILIATE_TAG: ${AMAZON_AFFILIATE_TAG:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      WHATSAPP_WEBHOOK_URL: http://evolution:8080
-      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
-      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
-      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
-      LOOP_MIN: ${LOOP_MIN:-30}
-      LOOP_MAX: ${LOOP_MAX:-45}
+      <<: *bot-env
+      # 0.0.0.0 DENTRO do container (a rede do container é isolada; em
+      # 127.0.0.1 o `ports:` abaixo publicaria uma porta morta — era o caso
+      # da versão anterior deste arquivo, que mapeava 8724 sem nunca
+      # conseguir responder). Quem limita a exposição é o mapeamento, que
+      # prende a porta ao loopback do servidor.
+      HEALTHCHECK_BIND: 0.0.0.0
     volumes:
       - rastreador_data:/app/data
+      # O site (GitHub Pages) é gerado por `export_json.py` a partir do
+      # banco. Com o banco dentro de um volume Docker, o `docs/` do
+      # repositório precisa estar visível aqui para o servidor conseguir
+      # atualizar o site — ver `deploy/publicar_site.sh`.
+      - ../docs:/app/docs
     ports:
-      - "8724:8724"  # healthcheck para n8n
+      - "127.0.0.1:8724:8724"
 
   rastreador_amazon:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
+    <<: *bot
     container_name: bot_rastreador_amazon
-    restart: always
     command: ["python", "-u", "rastreador_amazon.py", "--random", "--loop-min", "45", "--loop-max", "75"]
-    depends_on:
-      evolution:
-        # service_started, não service_healthy: Telegram nunca pode depender
-        # do WhatsApp. Se o Evolution falhar/demorar no healthcheck, o
-        # container que posta no Telegram precisa subir do mesmo jeito — o
-        # código Python já trata WhatsApp como best-effort (timeout 90s).
-        condition: service_started
-    environment:
-      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
-      CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
-      AMAZON_AFFILIATE_TAG: ${AMAZON_AFFILIATE_TAG:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      WHATSAPP_WEBHOOK_URL: http://evolution:8080
-      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
-      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
-      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
-    volumes:
-      - rastreador_data:/app/data
 
   campanha_ferramentas:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
+    <<: *bot
     container_name: bot_campanha_ferramentas
-    restart: always
     command: ["python", "-u", "campanha_ferramentas.py", "--loop", "15"]
-    depends_on:
-      evolution:
-        condition: service_started
-    environment:
-      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
-      CANAL_GERAL: ${CANAL_GERAL:?defina no .env}
-      ML_AFFILIATE_TOOL_ID: ${ML_AFFILIATE_TOOL_ID:-47114387}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      WHATSAPP_WEBHOOK_URL: http://evolution:8080
-      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
-      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
-      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
-    volumes:
-      - rastreador_data:/app/data
 
-  # Fila de envio WhatsApp com intervalo aleatório 30-45min -- desacopla o
-  # WhatsApp do Telegram (que continua imediato). Ver whatsapp_queue_sender.py.
-  # Compartilha o mesmo volume/banco SQLite (WAL) dos outros 3 containers,
-  # que só ENFILEIRAM (escrita local, rápida); este é o único que de fato
-  # consome a fila e fala com o Evolution API.
+  # Fila de envio do WhatsApp com intervalo aleatório de 30-45 min — desacopla
+  # o WhatsApp do Telegram (que continua imediato). Compartilha o mesmo volume
+  # (banco SQLite em WAL) dos outros 3, que só ENFILEIRAM; este é o único que
+  # consome a fila e fala com a Evolution API.
   whatsapp_queue:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
+    <<: *bot
     container_name: bot_whatsapp_queue
-    restart: always
     command: ["python", "-u", "whatsapp_queue_sender.py"]
-    depends_on:
-      evolution:
-        condition: service_started
-    environment:
-      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM:?defina no .env}
-      WHATSAPP_WEBHOOK_URL: http://evolution:8080
-      WHATSAPP_API_KEY: ${EVOLUTION_API_KEY}
-      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-botofertas}
-      WHATSAPP_GROUP_ID: ${WHATSAPP_GROUP_ID:?defina no .env}
-    volumes:
-      - rastreador_data:/app/data
 
 volumes:
   evolution_data:
