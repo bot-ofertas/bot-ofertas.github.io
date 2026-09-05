@@ -21,8 +21,16 @@ cd "$RAIZ"
 URL="$(git remote get-url origin)"
 # Aceita as duas formas que o remoto pode ter e extrai dono/repo.
 CAMINHO="$(printf '%s' "$URL" | sed -E 's#^https://github\.com/##; s#^git@github\.com:##; s#\.git$##')"
-if [[ -z "$CAMINHO" || "$CAMINHO" == "$URL" && "$URL" != *github.com* ]]; then
-    echo "ERRO: o remoto 'origin' não parece ser do GitHub: $URL" >&2
+# Valida o RESULTADO, nao a diferenca entre entrada e saida. A checagem
+# anterior (`"$CAMINHO" == "$URL" && "$URL" != *github.com*`) so pegava o caso
+# em que o sed nao mudava NADA — bastava a URL terminar em `.git` para ela
+# passar batido. Testado: `https://gitlab.com/fulano/projeto.git` era aceito e
+# virava o caminho `https://gitlab.com/fulano/projeto`, que configuraria o
+# remoto como `github-bot-ofertas:https://gitlab.com/...` e mandaria colar a
+# chave numa URL de settings inexistente.
+if [[ ! "$CAMINHO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
+    echo "ERRO: o remoto 'origin' nao parece ser do GitHub: $URL" >&2
+    echo "       (esperava algo como dono/repositorio; obtive: '$CAMINHO')" >&2
     exit 1
 fi
 

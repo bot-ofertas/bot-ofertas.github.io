@@ -29,26 +29,59 @@ status)
     dc ps
     echo
     echo "── papel / saúde ────────────────────────────────────────"
-    if curl -sf --max-time 5 http://127.0.0.1:8724/health -o /tmp/health.$$ ; then
-        python3 - /tmp/health.$$ <<'PY'
-import json, sys
-d = json.load(open(sys.argv[1], encoding="utf-8"))
-p = d.get("papel", {})
-print(f"papel        : {p.get('papel','?')}")
-print(f"pode publicar: {p.get('pode_publicar')}  ({p.get('motivo','')})")
-if p.get("fuso_ok") is False:
-    print(f"  !! FUSO ERRADO ({p.get('utc_offset')}): a janela do ciclo escorrega."
-          "\n     Confira TZ=America/Sao_Paulo no .env e reinicie.")
-for chave in ("telegram", "whatsapp", "rastreador"):
-    c = d.get(chave, {})
-    print(f"{chave:<13}: {'ok' if c.get('ok') else 'ATENCAO'}  {c.get('detalhe', c.get('motivo',''))}")
-u = d.get("ultimo_post", {})
-if u:
-    print(f"ultimo post  : {u.get('quando', u)}")
-PY
-        rm -f /tmp/health.$$
+    # NAO usar `curl -sf` aqui. O /health responde 503 DE PROPOSITO quando um
+    # componente critico esta com falha, e o `-f` faz o curl sair com erro
+    # nesse caso — ou seja, o comando diria "healthcheck nao respondeu"
+    # exatamente quando ele respondeu e tinha algo importante a dizer. E a
+    # mesma armadilha que o `status.ps1` caiu (bug de 2026-08, ja corrigido
+    # la); reproduzida aqui ao vivo: HTTP 503, `curl -sf` sai 22.
+    RESP="$(mktemp)"; trap 'rm -f "$RESP"' EXIT
+    CODE="$(curl -s -o "$RESP" -w '%{http_code}' --max-time 5 \
+            http://127.0.0.1:8724/health 2>/dev/null || true)"
+
+    if [[ -z "$CODE" || "$CODE" == "000" ]]; then
+        echo "o healthcheck nao respondeu em 127.0.0.1:8724 (sem conexao)."
+        echo "   bash deploy/botctl.sh logs rastreador"
     else
-        echo "healthcheck não respondeu em 127.0.0.1:8724 — veja: botctl.sh logs rastreador"
+        python3 - "$RESP" "$CODE" <<'PYSTATUS'
+import json, sys
+
+try:
+    d = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception:
+    print(f"HTTP {sys.argv[2]}, mas a resposta nao era JSON:")
+    print(open(sys.argv[1], encoding="utf-8", errors="replace").read()[:300])
+    raise SystemExit(0)
+
+# 503 nao e "fora do ar": e o healthcheck reprovando um componente critico.
+falhos = d.get("criticos_com_falha") or []
+print(f"HTTP {sys.argv[2]} — {'tudo ok' if d.get('ok') else 'com falha: ' + ', '.join(falhos)}")
+
+p = d.get("papel") or {}
+print(f"papel        : {p.get('papel', '?')}")
+print(f"pode publicar: {p.get('pode_publicar')}")
+if p.get("motivo"):
+    print(f"               {p['motivo']}")
+if p.get("fuso_ok") is False:
+    print(f"  !! FUSO ERRADO ({p.get('utc_offset')}): a janela do ciclo escorrega 3h."
+          "\n     Confira TZ=America/Sao_Paulo no .env e reinicie.")
+
+for chave in ("telegram", "whatsapp", "rastreador"):
+    c = d.get(chave) or {}
+    detalhe = c.get("motivo") or c.get("metodo") or ""
+    print(f"{chave:<13}: {'ok' if c.get('ok') else 'ATENCAO':<8} {detalhe}")
+
+u = d.get("ultimo_post") or {}
+idade = u.get("idade_s")
+if idade is None:
+    print("ultimo post  : nenhum registrado")
+else:
+    print(f"ultimo post  : ha {idade/3600:.1f}h ({u.get('ts')})")
+
+q = d.get("quarentena") or {}
+if q.get("total"):
+    print(f"quarentena   : {q['total']} produto(s) fora de rotacao")
+PYSTATUS
     fi
     ;;
 

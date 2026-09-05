@@ -569,6 +569,102 @@ def test_ler_env_devolve_o_valor_inteiro():
     )
 
 
+def test_status_nao_trata_503_como_bot_fora_do_ar():
+    """`/health` responde 503 DE PROPOSITO quando um componente critico falha,
+    e `curl -sf` sai com erro nesse caso. Usar `-f` ali faz o comando dizer
+    "o healthcheck nao respondeu" exatamente quando ele respondeu e tinha algo
+    importante a dizer — a mesma mentira que o `status.ps1` contava antes de
+    ser corrigido. Reproduzido ao vivo: /health devolveu 503 e `curl -sf` saiu
+    com codigo 22."""
+    texto = open(os.path.join(DEPLOY, "botctl.sh"), encoding="utf-8").read()
+    for linha in texto.splitlines():
+        nu = linha.strip()
+        if nu.startswith("#") or "/health" not in nu:
+            continue
+        assert not re.search(r"curl\s+(-\w*f\w*\s|--fail)", nu), (
+            f"curl com --fail contra o /health: {nu}"
+        )
+
+
+def test_guarda_de_url_do_github_valida_o_resultado():
+    """A guarda antiga comparava a URL antes e depois do sed; bastava a URL
+    terminar em `.git` para uma URL de outro servico passar batido e virar um
+    caminho sem sentido no remoto. Testado com URLs reais."""
+    import subprocess as sp
+
+    script = open(os.path.join(DEPLOY, "configurar_git_deploy.sh"), encoding="utf-8").read()
+    assert "=~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$" in script, (
+        "a validacao do caminho dono/repo mudou — atualize este teste junto"
+    )
+
+    casos = {
+        "https://github.com/bot-ofertas/bot-ofertas.github.io": True,
+        "https://github.com/bot-ofertas/bot-ofertas.github.io.git": True,
+        "git@github.com:bot-ofertas/bot-ofertas.github.io.git": True,
+        "https://gitlab.com/fulano/projeto.git": False,
+        "/caminho/local/repo": False,
+        "": False,
+    }
+    for url, esperado in casos.items():
+        prog = (
+            f'URL={url!r}\n'
+            "CAMINHO=\"$(printf '%s' \"$URL\" | sed -E "
+            "'s#^https://github\\.com/##; s#^git@github\\.com:##; s#\\.git$##')\"\n"
+            'if [[ ! "$CAMINHO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then exit 1; fi\n'
+            'echo "$CAMINHO"\n'
+        )
+        r = sp.run(["bash", "-c", prog], capture_output=True, text=True)
+        aceito = r.returncode == 0
+        assert aceito is esperado, f"{url!r}: aceito={aceito}, esperado={esperado}"
+
+
+def test_sem_crase_dentro_de_heredoc_sem_aspas():
+    """Um heredoc `<<UNIT` (sem aspas) precisa expandir as variaveis, entao
+    tambem expande crases e $(): uma crase num COMENTARIO vira substituicao de
+    comando. Aconteceu de verdade — o bash tentava rodar `oneshot` e a palavra
+    desaparecia do arquivo de unidade gerado."""
+    for nome in os.listdir(DEPLOY):
+        if not nome.endswith(".sh"):
+            continue
+        texto = open(os.path.join(DEPLOY, nome), encoding="utf-8").read()
+        for delim, corpo in re.findall(r"<<([A-Z][A-Z0-9_]*)\n(.*?)\n\1\n", texto, re.S):
+            assert "`" not in corpo, (
+                f"{nome}: crase dentro do heredoc <<{delim} (sem aspas) — "
+                "vira substituicao de comando"
+            )
+
+
+def test_unidades_systemd_geradas_sao_validas():
+    """Gera as unidades num diretorio temporario e passa o `systemd-analyze
+    verify` nelas. Sem isso, um erro de diretiva so apareceria no servidor,
+    na hora de instalar."""
+    import shutil
+    import subprocess as sp
+    import tempfile
+
+    if not shutil.which("systemd-analyze"):
+        print("    (systemd-analyze indisponivel — pulando)")
+        return
+
+    with tempfile.TemporaryDirectory() as tmp:
+        r = sp.run(["bash", os.path.join(DEPLOY, "instalar_timers.sh")],
+                   cwd=BASE, capture_output=True, text=True,
+                   env={**os.environ, "UNIT_DIR": tmp})
+        assert r.returncode == 0, f"instalar_timers.sh falhou: {r.stderr[:400]}"
+        # O script nao pode tentar executar nada do conteudo das unidades.
+        assert "command not found" not in (r.stderr + r.stdout), (
+            f"o script executou parte do conteudo da unidade: {r.stderr[:300]}"
+        )
+
+        unidades = sorted(f for f in os.listdir(tmp) if f.endswith((".service", ".timer")))
+        assert len(unidades) == 4, f"esperava 4 unidades, achei {unidades}"
+        for u in unidades:
+            v = sp.run(["systemd-analyze", "verify", os.path.join(tmp, u)],
+                       capture_output=True, text=True)
+            saida = (v.stdout + v.stderr).strip()
+            assert not saida, f"{u}: {saida[:300]}"
+
+
 def test_nenhum_segredo_versionado_no_deploy():
     """Mesma trava que já existe para os workflows do n8n (Regra 13)."""
     suspeitos = re.compile(
