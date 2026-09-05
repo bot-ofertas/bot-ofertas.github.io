@@ -81,15 +81,22 @@ def setup_logging(nivel: int = logging.INFO) -> None:
     logging.getLogger("bot").info("Log inicializado — txt=%s json=%s", TXT_LOG, JSON_LOG)
 
 
-def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) -> None:
+def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
+             _nivel: int = 1) -> None:
     """Grava um erro estruturado em JSON (para n8n consumir) + log texto.
 
     Args:
         operacao: identificador da operação (ex: 'envio_whatsapp', 'scrap_ml').
         exc: exceção capturada.
         contexto: dict com dados adicionais (produto, canal, url etc.).
+        _nivel: quantos quadros subir na pilha para achar QUEM falhou. O padrão
+            1 é o chamador direto. Quem chama por intermédio de outra função
+            (o `db.registrar_erro(..., exc=...)` faz isso) passa 2, senão o
+            "Onde" do relatório apontaria para o intermediário — que é sempre
+            o mesmo arquivo e não diz nada sobre a falha real.
     """
-    frame = inspect.stack()[1]
+    pilha = inspect.stack()
+    frame = pilha[min(_nivel, len(pilha) - 1)]
     entrada = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "operacao": operacao,

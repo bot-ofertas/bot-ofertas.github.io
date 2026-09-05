@@ -501,7 +501,19 @@ def execucao_em_andamento(minutos_max: int = 20) -> bool:
     return row is not None
 
 
-def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
+def registrar_erro(tipo: str, mensagem: str, produto_id: str = "",
+                   exc: BaseException | None = None) -> None:
+    """Registra um erro na tabela `erros_log` e espelha no relatório do Desktop.
+
+    `exc` existe por causa de um ponto cego real. Quando o chamador TEM uma
+    exceção em mãos e passa só `str(e)`, o relatório perde arquivo, função,
+    linha e traceback — e o erro vira uma linha solta impossível de
+    investigar. Foi o que aconteceu com `campanha_ferramentas_falhou`: 19
+    ocorrências entre 2026-08 e 2026-09, todas com a mensagem "Timed out" e
+    NADA além disso, enquanto `amazon.rodada_falhou` — a mesma classe de
+    falha, registrada por `log_erro()` — trazia traceback completo nas 43
+    dela. Passando `exc`, os dois caminhos entregam o mesmo diagnóstico.
+    """
     now = datetime.now().isoformat()
     with _conn() as con:
         con.execute(
@@ -513,9 +525,15 @@ def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
     # quem só olha o arquivo do Desktop. Best-effort: nunca derruba o
     # registro no banco acima, que é a fonte de verdade.
     try:
-        from core.error_logger import registrar_evento
         ctx = {"produto_id": produto_id} if produto_id else {}
-        registrar_evento(tipo, mensagem, ctx)
+        if exc is not None:
+            # _nivel=2: pular este frame e apontar para quem capturou a
+            # exceção de verdade.
+            from core.error_logger import log_erro
+            log_erro(tipo, exc, ctx, _nivel=2)
+        else:
+            from core.error_logger import registrar_evento
+            registrar_evento(tipo, mensagem, ctx)
     except Exception:
         pass
 

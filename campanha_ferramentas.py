@@ -282,7 +282,7 @@ async def rodar_uma_vez() -> int:
             brutos = await _buscar_pagina(url)
         except Exception as e:
             log(f"  ⚠️  Erro buscando {nicho}: {e}")
-            db.registrar_erro("scraping", str(e))
+            db.registrar_erro("scraping", str(e), exc=e)
             continue
         filtrados = _filtrar_e_afiliar(brutos, nicho, DESCONTO_MINIMO, limite=50)
         relevantes = [i for i in filtrados if _e_ferramenta(i)]
@@ -370,7 +370,7 @@ async def rodar_uma_vez() -> int:
                         link_afiliado = await provider.generate_affiliate_link_async(url_original)
                     except Exception as e:
                         log(f"     ❌ Erro ao gerar link: {e}")
-                        db.registrar_erro("affiliate", str(e), produto_id)
+                        db.registrar_erro("affiliate", str(e), produto_id, exc=e)
                         db.liberar_claim(produto_id)
                         continue
 
@@ -446,7 +446,7 @@ async def rodar_uma_vez() -> int:
                     await asyncio.sleep(PAUSA_ENTRE_POSTS)
                 except Exception as e_item:
                     log(f"  ⚠️  Erro inesperado em '{titulo_curto}': {e_item}")
-                    db.registrar_erro("item_falhou", str(e_item), produto_id)
+                    db.registrar_erro("item_falhou", str(e_item), produto_id, exc=e_item)
                     # Rede de segurança: libera a reivindicação se algo explodiu
                     # antes de chegar num estado terminal — vira no-op se já foi
                     # resolvido (liberar_claim só apaga linhas ainda 'processing').
@@ -483,7 +483,7 @@ def main() -> None:
                 asyncio.run(rodar_uma_vez())
             except Exception as e:
                 log(f"⚠️  Rodada falhou inesperadamente: {e}")
-                db.registrar_erro("campanha_ferramentas_falhou", str(e))
+                db.registrar_erro("campanha_ferramentas_falhou", str(e), exc=e)
             log(f"\n⏳ Próxima rodada em {args.loop} minuto(s)...")
             time.sleep(args.loop * 60)
     else:

@@ -1298,6 +1298,80 @@ def test_whatsapp_nunca_envia_foto_sem_legenda():
                 sys.modules[nome] = valor
 
 
+def test_erro_com_excecao_leva_traceback_ao_relatorio():
+    """Quem captura uma exceção e reporta só `str(e)` entrega um relatório
+    inútil.
+
+    Caso real: `campanha_ferramentas_falhou` acumulou 19 registros entre
+    2026-08 e 2026-09, TODOS com a mensagem "Timed out" e nada mais — sem
+    arquivo, sem linha, sem traceback. Ao lado, `amazon.rodada_falhou`
+    registrava a mesma classe de falha por `log_erro()` e trazia traceback
+    completo nas 43 ocorrências dela. Dois caminhos de log para o mesmo tipo
+    de erro, um deles cego — e por isso a falha ficou semanas sem correção.
+    """
+    import importlib
+    import tempfile
+
+    from core import error_logger as el
+
+    with tempfile.TemporaryDirectory() as tmp:
+        antes = (el.DESKTOP_TXT, el.JSON_LOG, el._espelhar_no_n8n)
+        el.DESKTOP_TXT = os.path.join(tmp, "desktop.txt")
+        el.JSON_LOG = os.path.join(tmp, "erros.jsonl")
+        el._espelhar_no_n8n = lambda entrada: None
+
+        db = importlib.import_module("core.database")
+        conn_antes = db._conn
+
+        class _ConexaoFalsa:
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def execute(self, *a): pass
+
+        db._conn = lambda *a, **k: _ConexaoFalsa()
+
+        class TimedOut(Exception):
+            def __str__(self): return "Timed out"
+
+        def envio_que_estoura():
+            raise TimedOut()
+
+        def rodada_da_campanha():
+            try:
+                envio_que_estoura()
+            except Exception as e:
+                db.registrar_erro("campanha_ferramentas_falhou", str(e), exc=e)
+
+        try:
+            rodada_da_campanha()
+            texto = open(el.DESKTOP_TXT, encoding="utf-8").read()
+        finally:
+            db._conn = conn_antes
+            el.DESKTOP_TXT, el.JSON_LOG, el._espelhar_no_n8n = antes
+
+    assert "TimedOut: Timed out" in texto, f"perdeu o TIPO da excecao:\n{texto}"
+    assert "Traceback" in texto, f"perdeu o traceback:\n{texto}"
+    assert "envio_que_estoura" in texto, f"o traceback nao alcanca a origem:\n{texto}"
+    # E o "Onde" tem que apontar para quem capturou, nao para o database.py
+    # que apenas intermedeia (é o que o parametro _nivel resolve).
+    assert "rodada_da_campanha" in texto, f"o 'Onde' aponta para o lugar errado:\n{texto}"
+    assert "database.py" not in texto.split("Traceback")[0], (
+        f"o 'Onde' parou no intermediario:\n{texto}"
+    )
+
+
+def test_todo_registrar_erro_com_excecao_repassa_a_excecao():
+    """Trava a correção nos pontos de chamada: quem tem uma exceção em mãos
+    precisa passá-la, senão o relatório volta a nascer cego."""
+    for arquivo in ("campanha_ferramentas.py", "rastreador.py", "rastreador_amazon.py"):
+        texto = open(os.path.join(BASE, arquivo), encoding="utf-8").read()
+        for linha in texto.splitlines():
+            if "registrar_erro(" not in linha or "def " in linha:
+                continue
+            if re.search(r"str\(e[_a-z]*\)", linha):
+                assert "exc=" in linha, f"{arquivo}: perdeu a excecao -> {linha.strip()}"
+
+
 if __name__ == "__main__":
     import traceback
 

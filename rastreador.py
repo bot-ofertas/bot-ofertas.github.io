@@ -147,7 +147,7 @@ async def processar_categoria(
         )
     except Exception as e:
         log(f"  ❌ Erro ao buscar [{nicho}]: {e}")
-        db.registrar_erro("scraping", str(e))
+        db.registrar_erro("scraping", str(e), exc=e)
         contadores["erros"] += 1
         return
 
@@ -238,7 +238,7 @@ async def processar_categoria(
             except Exception as e:
                 link_afiliado = None
                 log(f"     ❌ Erro ao gerar link: {e}")
-                db.registrar_erro("affiliate", str(e), produto_id)
+                db.registrar_erro("affiliate", str(e), produto_id, exc=e)
 
             if not link_afiliado or not provider.validate_affiliate_link(link_afiliado):
                 log(f"     ❌ Falha total ao gerar link — pulando {titulo_curto}")
@@ -388,7 +388,7 @@ async def processar_categoria(
             # validar/score/publicar) não pode derrubar a categoria inteira —
             # loga e segue para o próximo item.
             log(f"  ⚠️  Erro inesperado processando '{titulo_curto}': {e_item}")
-            db.registrar_erro("item_falhou", str(e_item), produto_id)
+            db.registrar_erro("item_falhou", str(e_item), produto_id, exc=e_item)
             # Rede de segurança: se a reivindicação foi feita mas algo
             # explodiu antes de chegar num estado terminal (sucesso ou uma
             # das duas falhas tratadas acima), libera pra não travar o
@@ -610,7 +610,7 @@ def main() -> None:
                 asyncio.run(rodar_uma_vez())
             except Exception as e:
                 log(f"⚠️  Rodada falhou inesperadamente: {e}")
-                db.registrar_erro("rodada_falhou", str(e))
+                db.registrar_erro("rodada_falhou", str(e), exc=e)
                 n8n.emitir("rodada_falhou", {
                     "erro": f"{type(e).__name__}: {e}"[:300], "fonte": "mercadolivre",
                 })
