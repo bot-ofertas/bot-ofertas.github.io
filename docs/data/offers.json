@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Johnson's Baby Sabonete Líquido Relaxante Hora do Sono, 400ml",
+      "preco": 24.98,
+      "preco_original": 62.45,
+      "desconto_pct": 60.0,
+      "foto": "https://m.media-amazon.com/images/I/51ZGkcF+raL._AC_UL320_.jpg",
+      "categoria": "bebes",
+      "score": 54,
+      "enviado_em": "2026-09-05T04:12:50.772378",
+      "link": "https://www.amazon.com.br/dp/B07DHRS6RN?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 24.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Johnson's Baby Shampoo Glicerina Para Bebê, 750ml",
+      "preco": 34.65,
+      "preco_original": 46.2,
+      "desconto_pct": 25.0,
+      "foto": "https://m.media-amazon.com/images/I/41r01KSc5DL._AC_UL320_.jpg",
+      "categoria": "bebes",
+      "score": 55,
+      "enviado_em": "2026-09-05T04:12:42.217890",
+      "link": "https://www.amazon.com.br/dp/B07DHSCLPR?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 34.65,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Granado Refil Sabonete Líquido Bebê, Tradicional, 250ml",
+      "preco": 15.09,
+      "preco_original": 60.36,
+      "desconto_pct": 75.0,
+      "foto": "https://m.media-amazon.com/images/I/51kcPBSuPRL._AC_UL320_.jpg",
+      "categoria": "bebes",
+      "score": 54,
+      "enviado_em": "2026-09-05T04:12:33.679354",
+      "link": "https://www.amazon.com.br/dp/B07D2FXHM1?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 15.09,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeirinha Infantil Para Carro Mass Litet 0 A 36kg Com 13 Ajustes De Cabeça 4 Reclínios E Cinto 3 Pontos - BB456",
+      "preco": 533.11,
+      "preco_original": 999.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_658042-MLA99508459328_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 90,
+      "enviado_em": "2026-09-05T04:10:11.938175",
+      "link": "https://www.mercadolivre.com.br/cadeirinha-infantil-para-carro-mass-litet-0-a-36kg-com-13-ajustes-de-cabeca-4-reclinios-e-cinto-3-pontos-bb456/p/MLB23603325?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 533.11,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Motorola Moto G06 128gb 4gb Ram Orange",
+      "preco": 643.16,
+      "preco_original": 999.0,
+      "desconto_pct": 35.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651353-MLA115768418107_082026-AB.webp",
+      "categoria": "celulares",
+      "score": 79,
+      "enviado_em": "2026-09-05T04:10:02.852802",
+      "link": "https://www.mercadolivre.com.br/celular-motorola-moto-g06-128gb-4gb-ram-orange/p/MLB63043381?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 643.16,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bebê Reborn Boneca Silicone Girafinha Menina Pode Dar Banho",
+      "preco": 116.1,
+      "preco_original": 359.0,
+      "desconto_pct": 67.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_760525-MLA111872303676_062026-AB.webp",
+      "categoria": "brinquedos",
+      "score": 77,
+      "enviado_em": "2026-09-05T04:09:53.895508",
+      "link": "https://www.mercadolivre.com.br/bebe-reborn-boneca-silicone-girafinha-menina-pode-dar-banho/p/MLB51013655?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 116.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 2 Câmeras Segurança Ip Interna Externa Wifi iCSee Infravermelho Prova D’Água - HW",
+      "preco": 179.99,
+      "preco_original": 349.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_694546-MLA117038112537_092026-AB.webp",
+      "categoria": "casa",
+      "score": 86,
+      "enviado_em": "2026-09-05T04:09:44.971475",
+      "link": "https://www.mercadolivre.com.br/kit-2-cameras-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw/p/MLB46836439?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 179.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-Ondas Philco 28L Preto Espelhado Flat PMO30F",
       "preco": 540.0,
       "preco_original": 799.0,
@@ -498,10 +603,16 @@
   },
   "stats": {
     "brinquedos": {
-      "total": 7,
-      "score_medio": 61,
-      "desconto_medio": 39,
+      "total": 8,
+      "score_medio": 63,
+      "desconto_medio": 42,
       "maior_desconto": 80
+    },
+    "bebes": {
+      "total": 5,
+      "score_medio": 60,
+      "desconto_medio": 45,
+      "maior_desconto": 75
     },
     "ferramentas": {
       "total": 4,
@@ -533,11 +644,11 @@
       "desconto_medio": 28,
       "maior_desconto": 33
     },
-    "bebes": {
+    "celulares": {
       "total": 2,
-      "score_medio": 69,
-      "desconto_medio": 32,
-      "maior_desconto": 33
+      "score_medio": 87,
+      "desconto_medio": 41,
+      "maior_desconto": 46
     },
     "tvs": {
       "total": 1,
@@ -575,9 +686,15 @@
       "desconto_medio": 36,
       "maior_desconto": 36
     },
-    "celulares": {
+    "casa": {
       "total": 1,
-      "score_medio": 95,
+      "score_medio": 86,
+      "desconto_medio": 48,
+      "maior_desconto": 48
+    },
+    "automotivo": {
+      "total": 1,
+      "score_medio": 90,
       "desconto_medio": 46,
       "maior_desconto": 46
     },
@@ -588,6 +705,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-05T01:12:41.769529",
-  "total": 32
+  "updated_at": "2026-09-05T04:12:59.475346",
+  "total": 39
 }
