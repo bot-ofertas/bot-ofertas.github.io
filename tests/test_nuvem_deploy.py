@@ -642,9 +642,14 @@ def test_unidades_systemd_geradas_sao_validas():
     import subprocess as sp
     import tempfile
 
-    if not shutil.which("systemd-analyze"):
-        print("    (systemd-analyze indisponivel — pulando)")
-        return
+    # A GERACAO e conferida SEMPRE. Só o `systemd-analyze verify` depende da
+    # ferramenta estar instalada. A versao anterior deste teste saia cedo
+    # quando ela faltava e pulava tambem as assercoes que nao precisam dela —
+    # inclusive a que pega crase virando execucao de comando, que e o defeito
+    # real que este teste nasceu para travar. Um teste que se desliga inteiro
+    # por causa de uma dependencia opcional e a mesma familia de no-op
+    # silencioso que este projeto vem pagando caro.
+    tem_verify = bool(shutil.which("systemd-analyze"))
 
     with tempfile.TemporaryDirectory() as tmp:
         r = sp.run(["bash", os.path.join(DEPLOY, "instalar_timers.sh")],
@@ -658,6 +663,19 @@ def test_unidades_systemd_geradas_sao_validas():
 
         unidades = sorted(f for f in os.listdir(tmp) if f.endswith((".service", ".timer")))
         assert len(unidades) == 4, f"esperava 4 unidades, achei {unidades}"
+
+        # O conteudo tem que chegar inteiro ao arquivo: se uma palavra sumiu
+        # no caminho, foi o shell que a consumiu.
+        servico = open(os.path.join(tmp, "bot-ofertas-atualizar.service"),
+                       encoding="utf-8").read()
+        assert "Type=oneshot" in servico, servico
+        assert "uma unidade oneshot que falha" in servico, (
+            "o comentario chegou mutilado ao arquivo — algo foi expandido pelo shell"
+        )
+
+        if not tem_verify:
+            print("    (systemd-analyze ausente: geracao conferida, verify pulado)")
+            return
         for u in unidades:
             v = sp.run(["systemd-analyze", "verify", os.path.join(tmp, u)],
                        capture_output=True, text=True)
