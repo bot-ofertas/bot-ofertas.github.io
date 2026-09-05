@@ -1,0 +1,472 @@
+# instalar_tudo.ps1
+# Um comando para deixar bot + n8n + ciclo diário funcionando.
+#
+# Existe porque a instalação virou uma sequência de oito passos manuais em
+# que cada um podia falhar em silêncio — e travou justamente no mais frágil:
+# achar a tela da API key numa interface que muda de versão para versão.
+# Aqui, se a chave existir a importação vai pela API; se não existir, o
+# script cai sozinho no caminho por arquivo, que não precisa de chave
+# nenhuma. Nos dois casos o resultado é o mesmo.
+#
+# Cada etapa é independente: uma que falhe não impede as seguintes, e o
+# resumo do fim diz exatamente o que ficou pendente. O oposto — abortar no
+# primeiro erro — deixaria o ciclo diário desconfigurado por causa de um
+# problema no n8n, que são coisas sem relação nenhuma.
+#
+# Uso:
+#   .\instalar_tudo.ps1                 # tudo (sem reiniciar o bot)
+#   .\instalar_tudo.ps1 -ReiniciarBot   # também reinicia, esperando o bot ficar ocioso
+#   .\instalar_tudo.ps1 -SemGit         # não faz git pull
+
+param(
+    [switch]$ReiniciarBot,
+    [switch]$SemGit
+)
+
+$ErrorActionPreference = "Continue"
+$BASE = $PSScriptRoot
+Set-Location $BASE
+
+$pendencias = New-Object System.Collections.Generic.List[string]
+$feitos = New-Object System.Collections.Generic.List[string]
+
+function Titulo($n, $texto) {
+    Write-Host ""
+    Write-Host "──────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+    Write-Host " [$n] $texto" -ForegroundColor Cyan
+    Write-Host "──────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+}
+
+Write-Host ""
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host "  BOT OFERTAS — instalacao completa" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+$python = (Get-Command python -ErrorAction SilentlyContinue).Source
+if (-not $python) {
+    Write-Host "`nERRO: python nao esta no PATH. Instale o Python e rode de novo." -ForegroundColor Red
+    exit 1
+}
+
+# ─── 1. Código atualizado ────────────────────────────────────────────────
+Titulo 1 "Atualizando o codigo"
+if ($SemGit) {
+    Write-Host "  pulado (-SemGit)" -ForegroundColor DarkGray
+}
+else {
+    $branch = "claude/bot-ofertas-n8n-8d7qe2"
+    git pull origin $branch 2>&1 | ForEach-Object { Write-Host "  $_" -ForegroundColor DarkGray }
+    if ($LASTEXITCODE -eq 0) { $feitos.Add("codigo atualizado ($branch)") }
+    else {
+        # Causa mais comum: alteração local no .env ou em algum script. Não
+        # é motivo para parar — o resto da instalação usa o código que já
+        # está no disco e funciona igual.
+        Write-Host "  git pull falhou — seguindo com o codigo local." -ForegroundColor Yellow
+        $pendencias.Add("git pull falhou (rode 'git status' para ver o que trava)")
+    }
+}
+
+# ─── 2. .env ─────────────────────────────────────────────────────────────
+Titulo 2 "Preenchendo o .env (gera N8N_TOKEN, descobre ADMIN_CHAT_ID)"
+& $python (Join-Path $BASE "n8n\setup_n8n.py") --configurar
+$envOk = ($LASTEXITCODE -eq 0)
+if ($envOk) { $feitos.Add(".env completo") }
+
+# Relê o .env do disco: o --configurar acabou de escrever nele, e este
+# processo do PowerShell não enxerga isso sozinho.
+$envVals = @{}
+if (Test-Path (Join-Path $BASE ".env")) {
+    Get-Content (Join-Path $BASE ".env") | ForEach-Object {
+        if ($_ -match '^\s*([A-Z0-9_]+)\s*=\s*(.*)$') {
+            $envVals[$Matches[1]] = $Matches[2].Trim()
+        }
+    }
+}
+$temApiKey = -not [string]::IsNullOrWhiteSpace($envVals["N8N_API_KEY"])
+$temChatId = -not [string]::IsNullOrWhiteSpace($envVals["ADMIN_CHAT_ID"])
+
+if (-not $temChatId) {
+    $pendencias.Add("ADMIN_CHAT_ID vazio — mande /start para o seu bot no Telegram e rode este script de novo (sem ele, NENHUM alerta chega)")
+}
+
+# ─── 3. Workflows no n8n ─────────────────────────────────────────────────
+Titulo 3 "Instalando os workflows no n8n"
+$importado = $false
+
+if ($temApiKey) {
+    Write-Host "  N8N_API_KEY presente — importando pela API." -ForegroundColor Green
+    & $python (Join-Path $BASE "n8n\setup_n8n.py") --importar
+    if ($LASTEXITCODE -eq 0) {
+        $importado = $true
+        $feitos.Add("5 workflows importados e ativados pela API")
+    }
+    else {
+        Write-Host "  A importacao pela API falhou — caindo no caminho por arquivo." -ForegroundColor Yellow
+    }
+}
+else {
+    Write-Host "  Sem N8N_API_KEY — usando o caminho que nao precisa de chave." -ForegroundColor Yellow
+}
+
+if (-not $importado) {
+    $prontos = Join-Path $BASE "n8n\prontos"
+    & $python (Join-Path $BASE "n8n\setup_n8n.py") --preparar $prontos | Out-Null
+
+    # A CLI do n8n importa credenciais E workflows sem API key nenhuma. O
+    # problema é achá-la: `Get-Command n8n` só enxerga o PATH, e um n8n
+    # instalado por npm no Windows deixa o executável em %APPDATA%\npm, que
+    # muitas vezes não está lá; e um n8n em Docker não tem executável nenhum
+    # na máquina. Procurar nos quatro lugares é a diferença entre automatizar
+    # tudo e mandar a pessoa clicar cinco vezes na interface.
+    $cli = $null
+
+    $doPath = (Get-Command n8n -ErrorAction SilentlyContinue).Source
+    if ($doPath) { $cli = @{ Modo = "exe"; Exe = $doPath; Prefixo = @() } }
+
+    if (-not $cli) {
+        foreach ($cand in @("$env:APPDATA\npm\n8n.cmd", "$env:APPDATA\npm\n8n",
+                            "$env:ProgramFiles\nodejs\n8n.cmd")) {
+            if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand; Prefixo = @() }; break }
+        }
+    }
+
+    # O npm sabe onde ele instala global — perguntar a ele cobre a instalação
+    # com prefix customizado, que os caminhos fixos acima erram. Sem isto o
+    # bloco de diagnóstico no fim IMPRIMIA o caminho certo e o script mesmo
+    # assim desistia: sabia onde estava e não ia lá.
+    if (-not $cli -and (Get-Command npm -ErrorAction SilentlyContinue)) {
+        $prefixo = (& npm config get prefix 2>$null)
+        if ($prefixo -and $prefixo -notmatch "^undefined") {
+            $prefixo = $prefixo.Trim()
+            foreach ($cand in @("$prefixo\n8n.cmd", "$prefixo\n8n", "$prefixo\bin\n8n")) {
+                if (Test-Path $cand) { $cli = @{ Modo = "exe"; Exe = $cand; Prefixo = @() }; break }
+            }
+        }
+    }
+
+    # `npx n8n` — foi assim que o n8n do Daniel apareceu: sem executável
+    # próprio no disco, rodando a partir do cache do npm. Nenhuma das buscas
+    # acima enxerga esse caso, porque não há arquivo para achar.
+    # `--no-install` é deliberado: sem ele, o npx BAIXARIA o n8n inteiro
+    # (centenas de MB) em silêncio quando não estivesse em cache — uma
+    # instalação pesada disparada por um script que a pessoa achou que só
+    # importaria uns JSON.
+    if (-not $cli -and (Get-Command npx -ErrorAction SilentlyContinue)) {
+        & npx --no-install n8n --version 2>&1 | Out-Null
+        if ($LASTEXITCODE -eq 0) {
+            $cli = @{ Modo = "npx"; Exe = "npx"; Prefixo = @("--no-install", "n8n") }
+        }
+    }
+
+    if (-not $cli) {
+        # Contêiner do n8n rodando: o executável vive dentro dele.
+        $docker = (Get-Command docker -ErrorAction SilentlyContinue).Source
+        if ($docker) {
+            $nome = (& $docker ps --format "{{.Names}}`t{{.Image}}" 2>$null |
+                     Where-Object { $_ -match "n8n" } |
+                     ForEach-Object { ($_ -split "`t")[0] } | Select-Object -First 1)
+            if ($nome) { $cli = @{ Modo = "docker"; Exe = $docker; Container = $nome; Prefixo = @() } }
+        }
+    }
+
+    if ($cli) {
+        Write-Host ("  CLI do n8n encontrada ({0}) — importando credenciais e workflows." -f $cli.Modo) -ForegroundColor Green
+
+        # A CLI e o servidor precisam apontar para o MESMO banco, e quem
+        # decide isso é N8N_USER_FOLDER. Quando o n8n roda com uma pasta
+        # própria (ex.: D:\bot_ofertas\data\n8n) e a CLI não recebe a mesma
+        # variável, ela grava em %USERPROFILE%\.n8n — um segundo banco. O
+        # import imprime sucesso, os 5 workflows entram... noutro lugar, e
+        # a interface continua vazia. É o pior tipo de falha: silenciosa e
+        # com aparência de acerto.
+        if ($cli.Modo -ne "docker") {
+            $pastaN8n = $envVals["N8N_USER_FOLDER"]
+            if ([string]::IsNullOrWhiteSpace($pastaN8n)) {
+                # Não configurada no .env, mas se o projeto tem data\n8n com
+                # um banco dentro, é quase certo que o servidor usa essa —
+                # foi assim que a instalação do Daniel ficou montada.
+                # O n8n cria <N8N_USER_FOLDER>\.n8n\database.sqlite — ele
+                # ACRESCENTA o `.n8n`. Verificado rodando a CLI de verdade:
+                # apontar para data\n8n produz data\n8n\.n8n\database.sqlite.
+                # Procurar só por data\n8n\database.sqlite erraria o caso mais
+                # comum e cairia no banco padrão sem avisar.
+                $palpite = Join-Path $BASE "data\n8n"
+                foreach ($db in @((Join-Path $palpite ".n8n\database.sqlite"),
+                                  (Join-Path $palpite "database.sqlite"))) {
+                    if (Test-Path $db) { $pastaN8n = $palpite; break }
+                }
+            }
+            if ($pastaN8n) {
+                $env:N8N_USER_FOLDER = $pastaN8n
+                Write-Host "  Usando a pasta do n8n: $pastaN8n" -ForegroundColor DarkGray
+            }
+            else {
+                Write-Host "  Pasta do n8n: padrao (~\.n8n). Se o seu n8n roda com" -ForegroundColor DarkGray
+                Write-Host "  N8N_USER_FOLDER proprio, coloque a mesma no .env ou a" -ForegroundColor DarkGray
+                Write-Host "  importacao vai para um banco diferente do que esta no ar." -ForegroundColor DarkGray
+            }
+        }
+
+        # As credenciais saem do .env com os segredos EM CLARO, porque é
+        # assim que o `import:credentials` os recebe. Pasta temporária do
+        # usuário, apagada no finally — nunca perto do repositório.
+        $credFile = Join-Path ([System.IO.Path]::GetTempPath()) ("botofertas_cred_" + [guid]::NewGuid().ToString("N") + ".json")
+        try {
+            & $python (Join-Path $BASE "n8n\setup_n8n.py") --preparar-credenciais $credFile | Out-Null
+            $temCred = Test-Path $credFile
+
+            if ($cli.Modo -eq "docker") {
+                # Dentro do contêiner o disco é outro: os arquivos precisam
+                # atravessar antes de existir para a CLI.
+                & $cli.Exe exec $cli.Container mkdir -p /tmp/botofertas 2>&1 | Out-Null
+                & $cli.Exe cp "$prontos/." "$($cli.Container):/tmp/botofertas/" 2>&1 | Out-Null
+                if ($temCred) { & $cli.Exe cp $credFile "$($cli.Container):/tmp/botofertas_cred.json" 2>&1 | Out-Null }
+                if ($temCred) {
+                    & $cli.Exe exec $cli.Container n8n import:credentials --input=/tmp/botofertas_cred.json 2>&1 |
+                        ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                }
+                & $cli.Exe exec $cli.Container n8n import:workflow --separate --input=/tmp/botofertas 2>&1 |
+                    ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                $okImport = ($LASTEXITCODE -eq 0)
+            }
+            else {
+                if ($temCred) {
+                    & $cli.Exe @($cli.Prefixo) import:credentials --input="$credFile" 2>&1 |
+                        ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                }
+                & $cli.Exe @($cli.Prefixo) import:workflow --separate --input="$prontos" 2>&1 |
+                    ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+                $okImport = ($LASTEXITCODE -eq 0)
+            }
+
+            if ($okImport) {
+                $importado = $true
+                $feitos.Add("2 credenciais + 5 workflows importados pela CLI do n8n")
+            }
+        }
+        finally {
+            # O arquivo tem o token do Telegram legível. Sai daqui de
+            # qualquer jeito, inclusive se a importação estourar no meio.
+            if (Test-Path $credFile) { Remove-Item $credFile -Force -ErrorAction SilentlyContinue }
+            # A cópia DENTRO do contêiner também: apagá-la só depois do
+            # import deixava o token em claro no disco do contêiner sempre
+            # que a importação falhasse — justamente quando ninguém volta
+            # para limpar.
+            if ($cli.Modo -eq "docker" -and $temCred) {
+                & $cli.Exe exec $cli.Container rm -f /tmp/botofertas_cred.json 2>&1 | Out-Null
+            }
+        }
+
+        if ($importado) {
+            # A CLI importa desativado. Ativar apenas os NOSSOS: um
+            # `--all` ligaria também qualquer outro workflow que o Daniel
+            # tenha na instância, o que não é decisão deste script.
+            Write-Host "  Ativando os workflows do Bot Ofertas..." -ForegroundColor Yellow
+            $lista = if ($cli.Modo -eq "docker") {
+                & $cli.Exe exec $cli.Container n8n list:workflow 2>$null
+            } else { & $cli.Exe @($cli.Prefixo) list:workflow 2>$null }
+
+            $ativados = 0
+            foreach ($linha in $lista) {
+                if ($linha -match "Bot Ofertas") {
+                    $id = ($linha -split "\|")[0].Trim()
+                    if ($id) {
+                        # `publish:workflow` e o comando atual; `update:workflow`
+                        # ainda funciona mas o proprio n8n 2.35 o marca como
+                        # DEPRECATED e manda usar o outro. Tenta o novo e cai
+                        # no antigo so se ele nao existir — assim funciona
+                        # tanto num n8n recente quanto num de versao anterior.
+                        if ($cli.Modo -eq "docker") {
+                            & $cli.Exe exec $cli.Container n8n publish:workflow --id=$id 2>&1 | Out-Null
+                            if ($LASTEXITCODE -ne 0) {
+                                & $cli.Exe exec $cli.Container n8n update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            }
+                        } else {
+                            & $cli.Exe @($cli.Prefixo) publish:workflow --id=$id 2>&1 | Out-Null
+                            if ($LASTEXITCODE -ne 0) {
+                                & $cli.Exe @($cli.Prefixo) update:workflow --id=$id --active=true 2>&1 | Out-Null
+                            }
+                        }
+                        if ($LASTEXITCODE -eq 0) { $ativados++ }
+                    }
+                }
+            }
+            if ($ativados -gt 0) {
+                $feitos.Add("$ativados workflow(s) ativados")
+                Write-Host "  $ativados workflow(s) ativados." -ForegroundColor Green
+            }
+            else {
+                $pendencias.Add("ative os workflows do Bot Ofertas no n8n (botao Active) — a importacao funcionou, a ativacao automatica nao")
+            }
+            $pendencias.Add("REINICIE o n8n para ele carregar os workflows importados (a CLI escreve no banco; a instancia ja rodando nao releem sozinha)")
+        }
+        else {
+            Write-Host "  A importacao pela CLI falhou." -ForegroundColor Yellow
+        }
+    }
+
+    if (-not $importado) {
+        Write-Host "  Arquivos prontos em: $prontos" -ForegroundColor Green
+        Write-Host "  Importe por: Workflows -> ... -> Import from File" -ForegroundColor Green
+        $feitos.Add("workflows preparados em n8n\prontos (importar a mao)")
+        $pendencias.Add("importar os 5 arquivos de n8n\prontos no n8n, criar as 2 credenciais e ativar")
+
+        # Cair aqui significa que a CLI existe na maquina (o n8n roda nela)
+        # mas nao nos quatro lugares onde procurei. Imprimir o diagnostico
+        # AGORA evita a ida-e-volta de pedir `where n8n` e `docker ps` e
+        # esperar a resposta: a saida que a pessoa ja vai colar contem a
+        # informacao que resolve.
+        Write-Host ""
+        Write-Host "  --- por que nao achei a CLI do n8n ---" -ForegroundColor Yellow
+        Write-Host "  Procurei em:" -ForegroundColor DarkGray
+        Write-Host "    PATH                        -> $(if ($doPath) { $doPath } else { 'nao encontrado' })" -ForegroundColor DarkGray
+        foreach ($cand in @("$env:APPDATA\npm\n8n.cmd", "$env:APPDATA\npm\n8n",
+                            "$env:ProgramFiles\nodejs\n8n.cmd")) {
+            Write-Host "    $cand -> $(if (Test-Path $cand) { 'EXISTE' } else { 'nao existe' })" -ForegroundColor DarkGray
+        }
+
+        Write-Host "  O que ha na maquina:" -ForegroundColor DarkGray
+        $node = (Get-Command node -ErrorAction SilentlyContinue).Source
+        Write-Host "    node    : $(if ($node) { $node } else { 'ausente' })" -ForegroundColor DarkGray
+        $npm = (Get-Command npm -ErrorAction SilentlyContinue).Source
+        if ($npm) {
+            $prefixo = (& npm config get prefix 2>$null)
+            Write-Host "    npm     : $npm  (prefix: $prefixo)" -ForegroundColor DarkGray
+            # O n8n instalado globalmente vive em <prefix>\n8n.cmd. Se
+            # estiver ali e eu nao tiver achado, e porque o prefix nao e o
+            # %APPDATA%\npm padrao — e este print mostra o caminho exato.
+            if ($prefixo) {
+                foreach ($extra in @("$prefixo\n8n.cmd", "$prefixo\n8n", "$prefixo\bin\n8n")) {
+                    if (Test-Path $extra) {
+                        Write-Host "    ACHEI AQUI: $extra" -ForegroundColor Green
+                        Write-Host "    -> me mande esta linha; eu ensino o script a procurar aqui." -ForegroundColor Green
+                    }
+                }
+            }
+        }
+        else { Write-Host "    npm     : ausente" -ForegroundColor DarkGray }
+
+        $dk = (Get-Command docker -ErrorAction SilentlyContinue).Source
+        if ($dk) {
+            Write-Host "    docker  : $dk" -ForegroundColor DarkGray
+            Write-Host "    conteineres rodando:" -ForegroundColor DarkGray
+            $ps = (& $dk ps --format "{{.Names}}  {{.Image}}" 2>&1)
+            if ($ps) { $ps | ForEach-Object { Write-Host "      $_" -ForegroundColor DarkGray } }
+            else { Write-Host "      (nenhum)" -ForegroundColor DarkGray }
+        }
+        else { Write-Host "    docker  : ausente" -ForegroundColor DarkGray }
+
+        Write-Host "  Copie este bloco e me mande — com ele dá para apontar o caminho certo." -ForegroundColor Yellow
+        Write-Host ""
+    }
+}
+
+# ─── 4. Ciclo diário ─────────────────────────────────────────────────────
+Titulo 4 "Registrando o ciclo diario (liga 08:30 / desliga 02:00)"
+# $LASTEXITCODE guarda o codigo do ULTIMO executavel nativo — o n8n ou o git
+# da etapa anterior, se o script chamado nao definir o seu. Zerar antes e
+# capturar o erro terminante aqui e o que faz esta linha do resumo dizer a
+# verdade em vez de repetir lixo herdado.
+$global:LASTEXITCODE = 0
+try {
+    & (Join-Path $BASE "agendar_shutdown.ps1")
+    $okAgenda = ($LASTEXITCODE -eq 0)
+}
+catch {
+    Write-Host "  ERRO: $($_.Exception.Message)" -ForegroundColor Red
+    $okAgenda = $false
+}
+if ($okAgenda) {
+    $feitos.Add("ciclo diario agendado (4 tarefas)")
+}
+else {
+    $pendencias.Add("ciclo diario NAO agendado — rode .\agendar_shutdown.ps1 sozinho (talvez como Administrador) para ver o erro")
+}
+
+# ─── 5. Bot ──────────────────────────────────────────────────────────────
+Titulo 5 "Bot"
+if ($ReiniciarBot) {
+    # Regra 10 do CLAUDE.md: nunca derrubar no meio de uma rodada, e sempre
+    # matar/relancar o processo PAI — reiniciar so os filhos esgota o
+    # contador de tentativas do supervisor e derruba o bot em silencio.
+    Write-Host "  Esperando o bot ficar ocioso (ate 5 min)..." -ForegroundColor Yellow
+    $limite = (Get-Date).AddMinutes(5)
+    do {
+        & $python (Join-Path $BASE "verificar_ocioso.py") | Out-Null
+        $ocioso = ($LASTEXITCODE -eq 0)
+        if (-not $ocioso) { Start-Sleep -Seconds 20 }
+    } while (-not $ocioso -and (Get-Date) -lt $limite)
+
+    if (-not $ocioso) {
+        Write-Host "  Ainda ocupado depois de 5 min — NAO vou reiniciar agora." -ForegroundColor Yellow
+        $pendencias.Add("reiniciar o bot depois (rodada em andamento durante a instalacao)")
+    }
+    else {
+        Get-CimInstance Win32_Process -Filter "Name like '%python%'" -ErrorAction SilentlyContinue |
+            Where-Object { $_.CommandLine -match "startup\.py|rastreador.*\.py|campanha_ferramentas\.py|whatsapp_queue_sender\.py" } |
+            ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+        Start-Sleep -Seconds 2
+        Start-Process -FilePath $python -ArgumentList "-u", (Join-Path $BASE "startup.py") `
+            -WorkingDirectory $BASE -WindowStyle Hidden
+        Write-Host "  startup.py relancado (processo pai)." -ForegroundColor Green
+        $feitos.Add("bot reiniciado pelo processo pai")
+    }
+}
+else {
+    # Sem -ReiniciarBot, garante ao menos que ele esteja de pe — o mesmo
+    # supervisor que roda de 30 em 30 min, so que agora.
+    $global:LASTEXITCODE = 0
+    & $python (Join-Path $BASE "garantir_bot.py")
+    if ($LASTEXITCODE -eq 0) {
+        $feitos.Add("bot verificado (garantir_bot.py)")
+    }
+    else {
+        # O supervisor devolve != 0 quando nao conseguiu garantir o bot de pe
+        # (subida falhou, ou psutil ausente deixando-o sem saber se ja ha um
+        # rodando). Chamar isso de "verificado" esconderia justamente o caso
+        # em que a rede de seguranca do ciclo nao existe.
+        $pendencias.Add("supervisor nao conseguiu garantir o bot de pe — veja a mensagem acima e data\shutdown.log")
+    }
+    Write-Host "  (o bot NAO foi reiniciado; use -ReiniciarBot para carregar o codigo novo)" -ForegroundColor DarkGray
+}
+
+# ─── 6. WhatsApp ─────────────────────────────────────────────────────────
+# O caminho do WhatsApp tem oito elos e cada um registra num log diferente;
+# o sintoma e o mesmo em quase todos: nada acontece. Terminar a instalacao
+# sem olhar isso e o que fazia o Daniel descobrir horas depois que o grupo
+# nunca recebeu nada. So LE — nao envia mensagem nenhuma.
+Titulo 6 "Conferindo o caminho do WhatsApp"
+$global:LASTEXITCODE = 0
+& $python (Join-Path $BASE "diagnostico_whatsapp.py")
+if ($LASTEXITCODE -eq 0) {
+    $feitos.Add("caminho do WhatsApp sem bloqueios")
+}
+else {
+    $pendencias.Add("WhatsApp bloqueado — veja o diagnostico acima (o 1o problema costuma explicar os outros)")
+}
+
+# ─── Resumo ──────────────────────────────────────────────────────────────
+Write-Host ""
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host "  RESUMO" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Feito:" -ForegroundColor Green
+foreach ($f in $feitos) { Write-Host "  OK  $f" -ForegroundColor Green }
+
+if ($pendencias.Count -gt 0) {
+    Write-Host ""
+    Write-Host "Falta voce fazer:" -ForegroundColor Yellow
+    $i = 1
+    foreach ($p in $pendencias) { Write-Host "  $i. $p" -ForegroundColor Yellow; $i++ }
+}
+else {
+    Write-Host ""
+    Write-Host "Nada pendente." -ForegroundColor Green
+}
+
+Write-Host ""
+Write-Host "Conferir:  .\status.ps1                            (estado do bot)" -ForegroundColor DarkGray
+Write-Host "           .\agendar_shutdown.ps1 -Status          (ciclo diario)" -ForegroundColor DarkGray
+Write-Host "           python diagnostico_whatsapp.py --testar (manda 1 msg no grupo)" -ForegroundColor DarkGray
+Write-Host ""

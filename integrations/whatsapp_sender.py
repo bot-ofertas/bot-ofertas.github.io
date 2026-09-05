@@ -29,8 +29,31 @@ import urllib.parse
 
 log = logging.getLogger(__name__)
 
+def _placeholder(valor: str) -> bool:
+    """True para os valores de exemplo do `.env.example`.
+
+    Um placeholder e uma string nao-vazia, entao passaria por configuracao
+    de verdade e ligaria o envio apontando para um grupo que nao existe —
+    pior que estar desligado, porque a fila consome o item e o marca como
+    processado. Mesma convencao do `setup_n8n._efetivo`.
+
+    A checagem por prefixo sozinha nao cobria o exemplo que o
+    `deploy/.env.example` traz para a nuvem: `120363XXXXXXXXX@g.us`. Ele nao
+    comeca com nenhum dos prefixos, entao `wa_ativo()` respondia True num
+    servidor recem-instalado e a fila drenava as ofertas para um JID que nao
+    existe — em silencio, uma a cada 30-45 min. Um JID de verdade e so
+    digitos antes do `@`, entao a corrida de `X` maiusculos e assinatura
+    segura de exemplo nao preenchido.
+    """
+    v = valor.lower()
+    if v.startswith(("cole_aqui", "cole-aqui", "seu_", "sua_", "exemplo")):
+        return True
+    return "xxx" in v
+
+
 def _group_id() -> str:
-    return os.getenv("WHATSAPP_GROUP_ID", "")
+    valor = os.getenv("WHATSAPP_GROUP_ID", "").strip()
+    return "" if _placeholder(valor) else valor
 
 
 def _canal_nome() -> str:
@@ -59,12 +82,36 @@ def marcar_link_para_whatsapp(texto: str) -> str:
     (com o link já embutido) ANTES de chegar aqui — passar só produto["link"]
     não pegaria esse caso. Troca de texto, não gera link novo do zero: evita
     duplicar a chamada lenta ao portal de afiliados (Playwright) só pra
-    trocar um parâmetro de rastreamento."""
+    trocar um parâmetro de rastreamento.
+
+    Correção de 2026-08-27: a troca por `str.replace` só funcionava quando a
+    origem era exatamente "bot_telegram". Link sem `matt_source`, com outro
+    valor, ou vindo do encurtador oficial passava batido e o WhatsApp
+    publicava com a marcação do Telegram — a métrica por canal ficava
+    errada em silêncio. Agora cada URL do texto é reescrita com
+    `core.tracking.marcar_origem`, que usa `urllib.parse` (Regra 11) e
+    preserva `matt_tool`/`tag` intactos (Regras 3 e 4).
+    """
     if not texto:
         return texto
-    return (texto
-            .replace("matt_source=bot_telegram", "matt_source=bot_whatsapp")
-            .replace("ascsubtag=bot_telegram", "ascsubtag=bot_whatsapp"))
+
+    import re  # noqa: PLC0415
+    from core.tracking import marcar_origem  # noqa: PLC0415
+
+    # Pontuação final de frase não faz parte da URL (o ")" fica de fora
+    # também, por causa de links entre parênteses).
+    padrao = re.compile(r"https?://[^\s<>\"']+")
+
+    def _troca(m: "re.Match[str]") -> str:
+        bruta = m.group(0)
+        limpa = bruta.rstrip(".,;:!?)\u201d\"'")
+        sufixo = bruta[len(limpa):]
+        try:
+            return marcar_origem(limpa, "whatsapp") + sufixo
+        except Exception:
+            return bruta  # nunca quebra a mensagem por causa do tracking
+
+    return padrao.sub(_troca, texto)
 
 
 def montar_mensagem_wa(produto: dict) -> str:
@@ -105,6 +152,22 @@ def montar_mensagem_wa(produto: dict) -> str:
     ]
     if categoria:
         linhas.append(f"\n#{categoria} #oferta #desconto #publicidade")
+
+    # CTA do canal do Telegram nas mensagens do WhatsApp (e vice-versa no
+    # Telegram): cada grupo alimenta o outro em vez de os dois crescerem
+    # isolados. Best-effort — problema no módulo de divulgação nunca pode
+    # impedir o envio da oferta.
+    try:
+        from core.divulgacao import GRUPO_TELEGRAM  # noqa: PLC0415
+        from core.tracking import link_utm  # noqa: PLC0415
+        linhas += [
+            "",
+            "📢 Receba antes no Telegram: "
+            + link_utm(GRUPO_TELEGRAM, origem="whatsapp",
+                       campanha="grupo_ofertas", conteudo="cta_mensagem"),
+        ]
+    except Exception:
+        pass
 
     return "\n".join(filter(lambda x: x is not None, linhas))
 
@@ -297,14 +360,23 @@ def _baixar_foto(foto_url: str) -> str:
     try:
         import io    # noqa: PLC0415
         import time  # noqa: PLC0415
-        import requests  # noqa: PLC0415
         from PIL import Image  # noqa: PLC0415
 
-        r = requests.get(foto_url, timeout=10)
-        if r.status_code != 200 or not r.content:
+        # `requests.get()` cru manda o User-Agent padrao da biblioteca, e o
+        # `mlstatic` responde 403 a ele — a causa 2 do "nao esta aparecendo
+        # as fotos". A correcao ja existia para o Telegram (core/foto_url),
+        # mas o WhatsApp seguia baixando do jeito antigo: mesma oferta, foto
+        # num canal e sem foto no outro. `baixar_melhor` manda cabecalho de
+        # navegador e ainda tenta a variante 1x quando a original sumiu do
+        # CDN. Regra 5: sem foto o envio nao sai, entao a diferenca aqui e
+        # entre publicar no grupo e nao publicar.
+        from core.foto_url import baixar_melhor  # noqa: PLC0415
+
+        conteudo, _ = baixar_melhor(foto_url)
+        if not conteudo:
             return ""
 
-        img = Image.open(io.BytesIO(r.content)).convert("RGB")
+        img = Image.open(io.BytesIO(conteudo)).convert("RGB")
         img.thumbnail((800, 800))
 
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -1,0 +1,204 @@
+{
+  "name": "Bot Ofertas — 05 Comandos remotos",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "mensagem-no-telegram",
+      "name": "Mensagem no Telegram",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -680,
+        0
+      ],
+      "webhookId": "bot-ofertas-comandos",
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Traduz um comando do Telegram numa chamada para a API do bot.\n// Só o chat do Daniel é aceito: sem essa checagem, qualquer pessoa que\n// achasse o bot poderia pausar a operação inteira.\nconst CONFIG = {\n  admin_chat_id: '',                                  // preencha\n  // URL da API do bot. Vazio = o bot não está acessível de fora (caso\n  // normal: healthcheck em 127.0.0.1). Preencha só se você expôs o\n  // healthcheck por túnel (cloudflared/ngrok) ou está rodando numa VPS.\n  api_bot: '',                                        // ex: https://bot.seudominio.com\n};\n\nconst msg = $json.message || {};\nconst texto = (msg.text || '').trim();\nconst chat = String(msg.chat?.id || '');\n\nif (CONFIG.admin_chat_id && chat !== String(CONFIG.admin_chat_id)) {\n  return [{ json: { autorizado: false, chat_id: chat,\n                    resposta: '⛔ Este bot aceita comandos só do administrador.' } }];\n}\n\nconst MAPA = {\n  '/status': { comando: 'status' },\n  '/pausar': { comando: 'pausar', dados: { motivo: 'comando do Telegram' } },\n  '/retomar': { comando: 'retomar' },\n  '/quarentena': { comando: 'quarentena_listar' },\n  '/liberar': { comando: 'quarentena_liberar' },\n  '/erros': { comando: 'erros', dados: { limite: 10 } },\n  '/divulgar': { comando: 'divulgacao', dados: { rede: 'instagram' } },\n  '/ping': { comando: 'ping' },\n};\n\nconst [cmd, ...args] = texto.split(/\\s+/);\nconst alvo = MAPA[cmd.toLowerCase()];\n\nif (!alvo) {\n  return [{ json: { autorizado: true, chamar: false, chat_id: chat,\n    resposta: 'Comandos: ' + Object.keys(MAPA).join(' ') } }];\n}\nif (cmd.toLowerCase() === '/liberar' && args[0]) {\n  alvo.dados = { produto_id: args[0] };\n}\nif (!CONFIG.api_bot) {\n  return [{ json: { autorizado: true, chamar: false, chat_id: chat,\n    resposta: '⚠️ API do bot não configurada neste workflow (CONFIG.api_bot). ' +\n              'Os comandos precisam de um endereço acessível do n8n.' } }];\n}\n\nreturn [{ json: { autorizado: true, chamar: true, chat_id: chat,\n                  url: CONFIG.api_bot.replace(/\\/$/, '') + '/n8n/comando',\n                  corpo: { comando: alvo.comando, dados: alvo.dados || {} } } }];\n"
+      },
+      "id": "interpretar-comando",
+      "name": "Interpretar comando",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.chamar}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "chamar-a-api-do-bot?",
+      "name": "Chamar a API do bot?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json.url}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.corpo) }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "post-comando-no-bot",
+      "name": "POST comando no bot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Resposta da API do bot -> texto curto pro Telegram.\nconst r = $json;\n// Telegram com parse_mode HTML recusa a mensagem inteira quando `&`, `<`\n// ou `>` aparecem crus. Titulo de produto com \"&\" e mensagem de excecao\n// do Python (`<class 'ValueError'>`) sao o caso comum, nao o raro.\nconst esc = (s) => String(s ?? '')\n  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst linha = (t) => `<code>${esc(String(t).slice(0, 3500))}</code>`;\nif (r.ok === false) {\n  return [{ json: { resposta: `❌ ${esc(r.erro || 'comando falhou')}`,\n                    chat_id: $('Interpretar comando').first().json.chat_id } }];\n}\nconst res = r.resultado ?? r;\nlet texto;\nif (res.stats) {\n  const s = res.stats;\n  texto = `📊 <b>Status</b>\\nEnviados: ${s.enviados} · Pendentes: ${s.pendentes}\\n` +\n          `Taxa de afiliado: ${s.taxa_afiliado}%\\nFila WhatsApp: ${res.fila_whatsapp}\\n` +\n          `Quarentena: ${res.quarentena}\\nPausado: ${res.pausado ? 'SIM' : 'não'}`;\n} else if (res.itens) {\n  texto = `🚫 <b>Quarentena</b> (${res.total})\\n` +\n          (res.itens.map(i => `• ${esc(i.produto_id)} — ${i.tentativas}x`).join('\\n') || '(vazia)');\n} else if (res.texto) {\n  texto = linha(res.texto);\n} else {\n  texto = linha(JSON.stringify(res, null, 1));\n}\nreturn [{ json: { resposta: texto, chat_id: $('Interpretar comando').first().json.chat_id } }];\n"
+      },
+      "id": "formatar-resposta",
+      "name": "Formatar resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.resposta}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "responder",
+      "name": "Responder",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Mensagem no Telegram": {
+      "main": [
+        [
+          {
+            "node": "Interpretar comando",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interpretar comando": {
+      "main": [
+        [
+          {
+            "node": "Chamar a API do bot?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chamar a API do bot?": {
+      "main": [
+        [
+          {
+            "node": "POST comando no bot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST comando no bot": {
+      "main": [
+        [
+          {
+            "node": "Formatar resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatar resposta": {
+      "main": [
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

@@ -1,0 +1,302 @@
+{
+  "name": "Bot Ofertas — 01 Ingestão de eventos e watchdog",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bot-ofertas",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "webhook-do-bot",
+      "name": "Webhook do Bot",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -460,
+        0
+      ],
+      "webhookId": "bot-ofertas-webhook",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_HEADER_CRED",
+          "name": "Bot Ofertas — Token do Webhook"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// ⚙️ CONFIGURAÇÃO — edite APENAS os valores abaixo.\n// Não guarde token aqui: o token do Telegram fica na credencial do n8n e o\n// segredo do webhook na credencial de Header Auth.\nconst CONFIG = {\n  // chat_id do Daniel (para receber os alertas). Descubra mandando /start\n  // para o bot e abrindo https://api.telegram.org/bot<TOKEN>/getUpdates\n  admin_chat_id: '',\n  // canal público onde as ofertas são publicadas (ex: '@ofertaseletronics')\n  canal: '@ofertaseletronics',\n  // quantos minutos sem heartbeat até considerar o bot fora do ar\n  limite_heartbeat_min: 30,\n  // quantos erros na mesma janela até alertar\n  limite_erros: 5,\n  // Janela de operação do PC (mesmos valores de core/janela.py). Entre\n  // `silencio_de` e `silencio_ate` o PC está desligado POR DECISÃO, não por\n  // falha: sem isso o watchdog dispararia \"bot caiu\" todo dia às 02:30 e\n  // \"bot voltou\" às 08:30, e o alerta que importa viraria ruído diário que\n  // ninguém mais lê.\n  silencio_de: '02:00',\n  silencio_ate: '08:30',\n  // Fuso do PC em horas relativas ao UTC (Brasília = -3). O n8n roda em UTC;\n  // comparar o relógio do servidor com um horário de Brasília sem converter\n  // deslocaria a janela em 3 horas.\n  fuso_horas: -3,\n  // Minutos de tolerância depois de `silencio_ate` antes de considerar que o\n  // despertar falhou (boot + subida do bot + primeiro heartbeat).\n  tolerancia_religar_min: 45,\n};\nreturn [{ json: { ...$json, CONFIG } }];\n"
+      },
+      "id": "configuração",
+      "name": "Configuração",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Roteia o evento e prepara a mensagem de alerta (quando houver).\n// Também acumula estatísticas do dia em workflow static data — é o que o\n// relatório diário (workflow 04) e o watchdog abaixo consultam.\nconst e = $json.body ?? $json;\nconst CONFIG = $json.CONFIG ?? {};\nconst store = $getWorkflowStaticData('global');\nconst agora = Date.now();\n\nstore.contadores = store.contadores || {};\nstore.contadores[e.evento] = (store.contadores[e.evento] || 0) + 1;\nstore.ultimo_evento_ts = agora;\n\nlet alerta = '';\nconst d = e.dados || {};\n\n// Telegram com parse_mode HTML recusa a mensagem inteira quando `&`, `<`\n// ou `>` aparecem crus — inclusive dentro de href. Titulo de produto com\n// \"&\" e mensagem de excecao do Python (`<class 'ValueError'>`) sao o caso\n// comum, nao o raro: sem escapar, o alerta simplesmente nao chega.\nconst esc = (s) => String(s ?? '')\n  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nswitch (e.evento) {\n  case 'heartbeat':\n    // O pulso é o que sustenta o watchdog: sem ele, ninguém percebe que o\n    // PC do Daniel desligou/travou — o próprio bot não teria como avisar.\n    store.ultimo_heartbeat_ts = agora;\n    store.ultimo_heartbeat = e.ts;\n    store.heartbeat_dados = d;\n    store.alerta_queda_enviado = false;\n    break;\n\n  case 'oferta_publicada':\n    store.ofertas_hoje = (store.ofertas_hoje || 0) + 1;\n    store.ultimas_ofertas = [{ titulo: d.titulo, preco: d.preco, desconto: d.desconto_pct,\n                               link: d.link, foto: d.foto, ts: e.ts },\n                             ...(store.ultimas_ofertas || [])].slice(0, 20);\n    break;\n\n  case 'produto_quarentena':\n    alerta = `🚫 <b>Produto em quarentena</b>\\n` +\n             `${esc(d.titulo || d.produto_id)}\\n` +\n             `Falhou ${d.tentativas}x ao publicar — fora de rotação até ${(d.quarentena_ate||'').slice(0,16)}.\\n` +\n             `Motivo: ${esc(d.mensagem || 'não informado')}`;\n    break;\n\n  case 'rodada_falhou':\n    alerta = `⚠️ <b>Rodada falhou</b> (${esc(d.fonte || '?')})\\n<code>${esc((d.erro||'').slice(0,300))}</code>`;\n    break;\n\n  case 'rodada_pulada':\n    // Rede fora do ar não é alerta imediato: o watchdog cobre a queda longa.\n    store.ultima_rodada_pulada = e.ts;\n    break;\n\n  case 'rodada_concluida':\n    store.ultima_rodada = { ts: e.ts, ...d };\n    if ((d.erros || 0) >= (CONFIG.limite_erros ?? 5)) {\n      alerta = `⚠️ <b>Rodada com ${d.erros} erro(s)</b>\\n` +\n               `Publicados: ${d.publicados} · Links falhos: ${d.links_falharam}`;\n    }\n    break;\n\n  case 'erro':\n    alerta = `❌ <b>Erro no bot</b>\\n${esc(d.operacao||'')}: ${esc((d.mensagem||'').slice(0,300))}`;\n    break;\n}\n\n// Sem admin_chat_id preenchido, o nó do Telegram falharia em TODA\n// execução com \"chat not found\" — e, pior, em silêncio para quem não abre\n// o histórico de execuções do n8n. Melhor não tentar mandar e deixar o\n// motivo no output: quem instalou pelo n8n/setup_n8n.py já tem o campo\n// preenchido; quem importou o JSON à mão vê aqui o que falta.\nconst temDestino = !!(CONFIG.admin_chat_id || '').toString().trim();\nconst config_incompleta = alerta !== '' && !temDestino;\nif (config_incompleta) {\n  console.log('ALERTA NÃO ENVIADO: preencha admin_chat_id no nó Configuração. ' +\n              'Conteúdo: ' + alerta.replace(/<[^>]+>/g, ''));\n}\n\nreturn [{ json: { evento: e.evento, ts: e.ts, host: e.host, dados: d,\n                  alerta, tem_alerta: alerta !== '' && temDestino,\n                  config_incompleta,\n                  chat_id: CONFIG.admin_chat_id, CONFIG } }];\n"
+      },
+      "id": "rotear-evento",
+      "name": "Rotear evento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.tem_alerta}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "tem-alerta?",
+      "name": "Tem alerta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.alerta}}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "avisar-daniel",
+      "name": "Avisar Daniel",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        420,
+        -100
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "só-registrar",
+      "name": "Só registrar",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        420,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "a-cada-15-min",
+      "name": "A cada 15 min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// WATCHDOG — roda no n8n (nuvem), não no PC do Daniel. Se o bot parar de\n// mandar heartbeat, é este nó que percebe. Um alerta gerado pelo próprio bot\n// nunca chegaria justamente no caso que importa: o bot morto.\nconst store = $getWorkflowStaticData('global');\nconst CONFIG = { admin_chat_id: '', silencio_de: '02:00', silencio_ate: '08:30',\n                 fuso_horas: -3, tolerancia_religar_min: 45 };   // espelha o nó Configuração\nconst LIMITE_MIN = 30;\nconst agora = Date.now();\nconst ultimo = store.ultimo_heartbeat_ts || 0;\n\n// ── Janela de silêncio ──────────────────────────────────────────────────\n// O PC desliga às 02:00 e volta às 08:30. Durante essas 6h30 a ausência de\n// heartbeat é o comportamento esperado, não uma falha — alertar aqui\n// produziria um par \"caiu/voltou\" por dia, todo dia, até o Daniel parar de\n// abrir as mensagens do bot. Fora da janela, a mesma ausência é exatamente o\n// que precisa ser gritado.\nconst minutosLocais = (ms) => {\n  const d = new Date(ms + CONFIG.fuso_horas * 3600000);\n  return d.getUTCHours() * 60 + d.getUTCMinutes();\n};\nconst paraMin = (hhmm) => {\n  const [h, m] = String(hhmm || '0:0').split(':').map(Number);\n  return (h || 0) * 60 + (m || 0);\n};\n\nconst agoraMin = minutosLocais(agora);\nconst de = paraMin(CONFIG.silencio_de);\nconst ate = paraMin(CONFIG.silencio_ate);\n// A janela atravessa a meia-noite quando `de > ate`; nesse caso \"dentro\" é\n// a união dos dois pedaços, não a interseção.\nconst emSilencio = de === ate ? false\n                 : de < ate   ? (agoraMin >= de && agoraMin < ate)\n                              : (agoraMin >= de || agoraMin < ate);\n\nif (emSilencio) {\n  // Marca que a queda é planejada: assim o retorno às 08:30 não dispara um\n  // \"🟢 voltou\" para uma queda que nunca foi anunciada.\n  store.queda_planejada = true;\n  return [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id,\n                    motivo: 'janela de silencio (PC desligado por agendamento)' } }];\n}\n\n// ── Fora do silêncio: o PC deveria estar de pé ──────────────────────────\nif (!ultimo) {\n  return [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, motivo: 'nenhum heartbeat recebido ainda' } }];\n}\n\nconst idadeMin = Math.round((agora - ultimo) / 60000);\n\n// Saindo da janela de silêncio: o heartbeat velho ainda é consequência do\n// desligamento planejado, não uma queda nova. Enquanto a marca estiver de\n// pé, o alerta genérico lá embaixo não pode disparar — ele diria \"o bot\n// parou de responder há 587 min\" às 08:45, contando as horas em que o PC\n// estava dormindo de propósito.\nif (store.queda_planejada) {\n  if (idadeMin <= LIMITE_MIN) {\n    // O bot voltou e já mandou heartbeat: ciclo fechado, nada a dizer.\n    store.queda_planejada = false;\n    return [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin,\n                      motivo: 'PC religou normalmente' } }];\n  }\n\n  const atraso = agoraMin - ate;\n  if (atraso < CONFIG.tolerancia_religar_min) {\n    // Ainda dentro da folga de boot. A marca CONTINUA de pé de propósito:\n    // limpá-la aqui faria a checagem seguinte tratar a mesma ausência como\n    // queda comum e mandar o alerta errado.\n    return [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin,\n                      motivo: `aguardando o bot subir (${atraso} min apos religar)` } }];\n  }\n\n  // Passou da folga e continua sem sinal: o despertar falhou. Este é o\n  // alerta que salva o dia de publicação — sem ele o Daniel só descobriria\n  // à noite, com os grupos mudos desde de manhã.\n  store.queda_planejada = false;\n  store.alerta_queda_enviado = true;\n  return [{ json: {\n    alertar: !!(CONFIG.admin_chat_id || '').toString().trim(),\n    chat_id: CONFIG.admin_chat_id,\n    idade_min: idadeMin,\n    texto: `🔴 <b>O PC nao religou</b>\\n` +\n           `Era para ter voltado as ${CONFIG.silencio_ate} — ja se passaram ${atraso} min ` +\n           `e o ultimo sinal tem ${idadeMin} min.\\n\\n` +\n           `Os grupos ficam sem postagem ate alguem ligar a maquina. ` +\n           `O supervisor sobe o bot sozinho ate 30 min depois que ela voltar.`,\n  } }];\n}\n\n// Só alerta na TRANSIÇÃO para \"fora do ar\". Sem essa trava, o watchdog\n// mandaria a mesma mensagem a cada 15 min durante toda a madrugada, e o\n// alerta viraria ruído que ninguém lê.\nconst temDestino = !!(CONFIG.admin_chat_id || '').toString().trim();\n\nif (idadeMin > LIMITE_MIN && !store.alerta_queda_enviado) {\n  store.alerta_queda_enviado = true;\n  const hb = store.heartbeat_dados || {};\n  return [{ json: {\n    alertar: temDestino,\n    chat_id: CONFIG.admin_chat_id,\n    idade_min: idadeMin,\n    texto: `🔴 <b>Bot Ofertas parou de responder</b>\\n` +\n           `Último sinal há ${idadeMin} min (limite: ${LIMITE_MIN}).\\n` +\n           `Fila WhatsApp: ${hb.fila_whatsapp ?? '?'} · Quarentena: ${hb.quarentena ?? '?'}\\n\\n` +\n           `Verifique o PC: o startup.py pode ter caído ou a máquina desligou.`,\n  } }];\n}\n\nif (idadeMin <= LIMITE_MIN && store.alerta_queda_enviado === true) {\n  store.alerta_queda_enviado = false;\n  return [{ json: { alertar: true, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin,\n                    texto: `🟢 <b>Bot Ofertas voltou</b> — heartbeat normal de novo.` } }];\n}\n\nreturn [{ json: { alertar: false, chat_id: CONFIG.admin_chat_id, idade_min: idadeMin } }];\n"
+      },
+      "id": "checar-heartbeat",
+      "name": "Checar heartbeat",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.alertar}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "bot-caiu?",
+      "name": "Bot caiu?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{$json.chat_id}}",
+        "text": "={{$json.texto}}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "alerta-de-queda",
+      "name": "Alerta de queda",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CRED",
+          "name": "Bot Ofertas — Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "tudo-certo",
+      "name": "Tudo certo",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        200,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook do Bot": {
+      "main": [
+        [
+          {
+            "node": "Configuração",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuração": {
+      "main": [
+        [
+          {
+            "node": "Rotear evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rotear evento": {
+      "main": [
+        [
+          {
+            "node": "Tem alerta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem alerta?": {
+      "main": [
+        [
+          {
+            "node": "Avisar Daniel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Só registrar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "A cada 15 min": {
+      "main": [
+        [
+          {
+            "node": "Checar heartbeat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Checar heartbeat": {
+      "main": [
+        [
+          {
+            "node": "Bot caiu?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bot caiu?": {
+      "main": [
+        [
+          {
+            "node": "Alerta de queda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tudo certo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": false,
+    "executionTimeout": 300
+  },
+  "tags": []
+}

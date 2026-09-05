@@ -1,0 +1,175 @@
+name: Testes
+
+# Roda em pull request e em push para main. Existe separado de bot.yml de
+# propósito: o bot.yml PUBLICA ofertas de verdade no canal do Telegram, então
+# não pode ser disparado por pull_request — um PR passaria a postar no canal.
+# Aqui só rodam checagens, sem token e sem efeito externo.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Um push novo no mesmo PR cancela a execução anterior: sem isso, cada
+  # correção enfileira mais um job e o resultado que importa (o do último
+  # commit) fica esperando os antigos terminarem.
+  group: testes-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar só o necessário para os testes
+        # requirements.txt inteiro traz playwright, pywinauto (Windows) e
+        # instagrapi — nada disso é usado pelos testes, e instalar tudo
+        # levaria minutos a cada PR. Os módulos testados importam apenas
+        # requests + python-dotenv.
+        run: pip install python-dotenv requests
+
+      - name: Criar diretórios usados em runtime
+        run: mkdir -p data assets
+
+      - name: Testes de qualidade (score, anti-fraude, afiliado)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_qualidade.py
+
+      - name: Testes de integração (n8n, quarentena, foto, tracking)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_n8n_integracao.py
+
+      - name: Teste do ciclo diário (liga 08:30 / desliga 02:00)
+        # Executa o JavaScript real do watchdog com o relógio simulado. Sem
+        # isso, um erro na janela de silêncio só apareceria de madrugada, em
+        # produção, na forma de um alerta falso por dia.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_ciclo_diario.py
+
+      - name: Teste do bot na nuvem (papel, compose, scripts de deploy)
+        # Impede a volta do pior caso da migração para servidor: dois
+        # publicadores ativos ao mesmo tempo, cada um com o seu banco de
+        # deduplicação, mandando a MESMA oferta duas vezes para o grupo.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_nuvem_deploy.py
+
+      - name: Teste de sistema (bot + n8n montados)
+        # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
+        # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->
+        # alerta, e comando do Telegram -> n8n -> API do bot.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_sistema_completo.py
+
+      - name: Conferir que todo teste em tests/ roda neste workflow
+        # Os testes são chamados um a um, por nome, para que a falha diga
+        # QUAL área quebrou em vez de "pytest falhou". O preço disso é que um
+        # arquivo de teste novo fica de fora sem ninguém perceber — e um
+        # teste que ninguém executa não é trava nenhuma, é só arquivo. Este
+        # passo cobra a inclusão.
+        run: |
+          python - <<'PY'
+          import glob, os, sys
+          wf = open(".github/workflows/testes.yml", encoding="utf-8").read()
+          esquecidos = [f for f in sorted(glob.glob("tests/test_*.py")) if f not in wf]
+          if esquecidos:
+              print("Estes testes existem mas nao sao executados por este workflow:")
+              for f in esquecidos:
+                  print(f"  - {f}")
+              print("\nAdicione um passo `run: python <arquivo>` acima.")
+              sys.exit(1)
+          print("Todos os testes de tests/ estao no workflow.")
+          PY
+
+      - name: Compilar todos os módulos Python
+        # Pega erro de sintaxe em arquivo que nenhum teste importa (os
+        # scripts de automação do Windows, por exemplo).
+        run: python -m compileall -q core integrations affiliates tests n8n *.py
+
+      - name: Validar os workflows do n8n
+        # Os Code nodes são JavaScript dentro de JSON: um erro de sintaxe
+        # neles só apareceria quando o workflow rodasse na nuvem.
+        run: |
+          python - <<'PY' > /tmp/check_nodes.js
+          import glob, json, os
+          casos = []
+          for f in sorted(glob.glob("n8n/workflows/*.json")):
+              wf = json.load(open(f, encoding="utf-8"))
+              nomes = {n["name"] for n in wf["nodes"]}
+              assert len(nomes) == len(wf["nodes"]), f"{f}: nós com nome repetido"
+              for origem, saidas in wf.get("connections", {}).items():
+                  assert origem in nomes, f"{f}: conexão de nó inexistente {origem}"
+                  for saida in saidas["main"]:
+                      for c in saida:
+                          assert c["node"] in nomes, f"{f}: conexão para {c['node']}"
+              for n in wf["nodes"]:
+                  js = n["parameters"].get("jsCode")
+                  if js:
+                      casos.append({"arquivo": os.path.basename(f), "no": n["name"], "js": js})
+          print("const casos = " + json.dumps(casos, ensure_ascii=False) + ";")
+          print("""
+          let erros = 0;
+          for (const c of casos) {
+            try { new Function(c.js); }
+            catch (e) { erros++; console.log('ERRO', c.arquivo, '/', c.no, '->', e.message); }
+          }
+          console.log(`${casos.length - erros}/${casos.length} Code nodes com sintaxe valida`);
+          process.exit(erros ? 1 : 0);
+          """)
+          PY
+          node /tmp/check_nodes.js
+
+      - name: Validar sintaxe dos scripts PowerShell
+        # O runner do GitHub já traz o pwsh. Existe porque um erro de sintaxe
+        # no status.ps1 passou despercebido por dias: nada no projeto abria
+        # esses arquivos, e o único jeito de descobrir era rodar no Windows.
+        shell: pwsh
+        run: |
+          $falhas = 0
+          Get-ChildItem -Path . -Filter *.ps1 -Recurse -File | Sort-Object Name | ForEach-Object {
+              $erros = $null; $tokens = $null
+              [System.Management.Automation.Language.Parser]::ParseFile(
+                  $_.FullName, [ref]$tokens, [ref]$erros) | Out-Null
+              if ($erros -and $erros.Count -gt 0) {
+                  $falhas++
+                  Write-Host ("ERRO {0}" -f $_.Name)
+                  foreach ($e in $erros) {
+                      Write-Host ("     linha {0}: {1}" -f $e.Extent.StartLineNumber, $e.Message)
+                  }
+              }
+              else { Write-Host ("ok   {0}" -f $_.Name) }
+          }
+          if ($falhas -gt 0) { exit 1 }
+          Write-Host "Todos os scripts PowerShell com sintaxe valida"
+
+      - name: Conferir que nenhum segredo entrou nos arquivos versionados
+        run: |
+          python - <<'PY'
+          import glob, json, sys
+          suspeitos = ("accessToken", "apiKey", "api_key", "X-N8N-API-KEY")
+          falhas = []
+          for f in glob.glob("n8n/workflows/*.json"):
+              bruto = json.dumps(json.load(open(f, encoding="utf-8")), ensure_ascii=False)
+              for s in suspeitos:
+                  if s in bruto:
+                      falhas.append(f"{f}: contém '{s}'")
+          if falhas:
+              print("\n".join(falhas)); sys.exit(1)
+          print("Nenhum segredo nos workflows versionados.")
+          PY

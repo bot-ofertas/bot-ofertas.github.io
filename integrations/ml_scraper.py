@@ -126,7 +126,8 @@ def _extrair_itens_do_json(obj, profundidade: int = 0) -> list[dict]:
             if isinstance(thumbnail, dict):
                 thumbnail = thumbnail.get("url", "")
             if thumbnail:
-                thumbnail = thumbnail.replace("I.jpg", "O.jpg").replace("W.jpg", "O.jpg")
+                from core.foto_url import alta_resolucao  # noqa: PLC0415
+                thumbnail = alta_resolucao(thumbnail)
 
             if permalink and preco:
                 encontrados.append({

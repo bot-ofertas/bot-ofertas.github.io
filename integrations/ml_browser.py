@@ -295,6 +295,12 @@ def _extrair_produtos_json(html: str) -> list[dict]:
                     foto = pics.get("url") or pics.get("src")
                 elif isinstance(pics, list) and pics:
                     foto = pics[0].get("url") if isinstance(pics[0], dict) else pics[0]
+                # O card do carrossel entrega a MINIATURA. Publicar essa URL
+                # dava foto pequena — e, quando o CDN já tinha expirado a
+                # miniatura, nenhuma foto (relatado pelo Daniel em 27/08).
+                if foto:
+                    from core.foto_url import alta_resolucao  # noqa: PLC0415
+                    foto = alta_resolucao(foto) or foto
 
                 # Selo do ML (ex: "MAIS VENDIDO", "OFERTA IMPERDÍVEL") -- dado
                 # real deles, mais confiavel que tentar estimar volume de

@@ -16,6 +16,8 @@ from typing import Optional
 
 import requests
 
+from core.foto_url import alta_resolucao
+
 log = logging.getLogger("foto_extractor")
 
 _HEADERS = {
@@ -30,7 +32,8 @@ _HEADERS = {
 
 def _via_html(url_produto: str) -> Optional[str]:
     try:
-        r = requests.get(url_produto, headers=_HEADERS, timeout=15, allow_redirects=True)
+        from core.net import get  # noqa: PLC0415
+        r = get(url_produto, headers=_HEADERS, timeout=15, allow_redirects=True)
         html = r.text
         # og:image
         m = re.search(
@@ -40,7 +43,7 @@ def _via_html(url_produto: str) -> Optional[str]:
         if m:
             u = m.group(1)
             if u.startswith("http") and "logo" not in u.lower():
-                return u.replace("http://", "https://").replace("-I.", "-O.")
+                return alta_resolucao(u)
         # D_NQ_NP no HTML
         for pat in [
             r'https://http2\.mlstatic\.com/D_NQ_NP_2X_[^"\'\s>]+',
@@ -48,7 +51,7 @@ def _via_html(url_produto: str) -> Optional[str]:
         ]:
             m2 = re.search(pat, html)
             if m2:
-                return m2.group(0).replace("-I.", "-O.")
+                return alta_resolucao(m2.group(0))
     except Exception as e:
         log.debug("via_html falhou: %s", e)
     return None
@@ -59,7 +62,8 @@ def _via_search_api(nome_produto: str) -> Optional[str]:
     try:
         # Search API público — sem auth
         q = " ".join(nome_produto.split()[:5])  # 5 primeiras palavras
-        r = requests.get(
+        from core.net import get  # noqa: PLC0415
+        r = get(
             "https://api.mercadolibre.com/sites/MLB/search",
             params={"q": q, "limit": 3},
             headers=_HEADERS,
@@ -70,7 +74,7 @@ def _via_search_api(nome_produto: str) -> Optional[str]:
         for item in r.json().get("results", []):
             thumb = item.get("thumbnail") or ""
             if thumb and "D_NQ_NP" in thumb:
-                return thumb.replace("-I.", "-O.").replace("http://", "https://")
+                return alta_resolucao(thumb)
     except Exception as e:
         log.debug("via_search_api falhou: %s", e)
     return None
@@ -104,7 +108,11 @@ def _via_playwright(url_produto: str) -> Optional[str]:
                 return im ? im.replace('-I.','-O.') : '';
             }""")
             b.close()
-            return foto or None
+            # A troca `-I.` → `-O.` dentro do page.evaluate acima é só um
+            # primeiro palpite feito no navegador; quem decide a variante
+            # final (incluindo o prefixo 2X) é alta_resolucao, para a regra
+            # ficar num lugar só.
+            return alta_resolucao(foto) if foto else None
     except Exception as e:
         log.debug("via_playwright falhou: %s", e)
     return None

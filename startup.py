@@ -67,6 +67,37 @@ def _rastreador_ja_rodando() -> bool:
     return False
 
 
+def rastreador_em_execucao() -> bool:
+    """Mesma checagem, exposta para fora do módulo.
+
+    O supervisor (`garantir_bot.py`) precisa exatamente desta resposta antes
+    de decidir subir o bot. Duplicar a varredura de processos lá seria criar
+    duas definições de "está rodando" que envelhecem em ritmos diferentes —
+    e é justamente a discordância entre elas que produziria um segundo
+    conjunto de rastreadores publicando em paralelo.
+    """
+    return _rastreador_ja_rodando()
+
+
+def checagem_de_processos_confiavel() -> bool:
+    """True quando `rastreador_em_execucao()` responde com evidência.
+
+    Sem psutil a varredura não acontece e a resposta é sempre False — que é
+    indistinguível de "o bot está fora do ar". Aqui isso não faz mal (o
+    startup.py erra para o lado de subir, e ele só roda quando alguém pede),
+    mas o supervisor roda sozinho a cada 30 min: acreditando nesse False ele
+    subiria um conjunto novo de rastreadores por cima do que já está
+    publicando, meia em meia hora, o dia inteiro. Quem decide sozinho
+    precisa saber a diferença entre "não está" e "não sei".
+    """
+    try:
+        import psutil  # noqa: F401,PLC0415
+
+        return True
+    except ImportError:
+        return False
+
+
 def etapa_1_validar_config() -> bool:
     """Valida .env + TOKEN_TELEGRAM."""
     try:

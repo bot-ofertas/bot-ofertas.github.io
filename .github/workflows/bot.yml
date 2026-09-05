@@ -2,9 +2,18 @@ name: Bot Ofertas ML
 
 on:
   schedule:
-    # Só roda enquanto o PC local fica desligado (01:55-08:45 BRT = 04:55-11:45 UTC).
-    # Evita duplicar publicações com o bot local, que cobre o resto do dia
-    # (ver agendar_shutdown.ps1). Fora dessa janela, quem publica é o PC local.
+    # Só roda enquanto o PC local fica desligado. O cron é ESTÁTICO (o GitHub
+    # não sabe ler core/janela.py), então ele é só o filtro grosseiro — quem
+    # decide de verdade é o passo "Confirmar que o PC local está dormindo",
+    # que pergunta ao core/janela.py, a mesma fonte que o Agendador de
+    # Tarefas e o watchdog do n8n usam.
+    #
+    # Por que a confirmação em runtime importa: o desligamento das 02:00
+    # ESPERA até 35 min se o bot estiver no meio de uma rodada
+    # (aguardar_e_desligar.ps1), então o PC pode seguir publicando até
+    # ~02:35 — bem em cima da rodada da nuvem das 02:00 BRT. Os dois bancos
+    # de deduplicação são separados (o da nuvem é um cache do Actions), então
+    # a sobreposição publica a MESMA oferta duas vezes no canal.
     #
     # Reduzido de 3x/hora pra 1x/hora em 2026-08-09: a organizacao foi
     # sinalizada pelo GitHub por atividade automatizada excessiva. A politica
@@ -26,10 +35,32 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          # O padrao do checkout e raso (1 commit). `core/papel.py` decide se
+          # o PC local esta mesmo publicando olhando as marcas que o
+          # `core/site_publisher.py` deixa no historico de `docs/` — com um
+          # commit so, ele responde "nao consigo saber" e a nuvem fica calada
+          # de dia mesmo com o PC fora do ar (o caso real de 04/09/2026:
+          # PC parado ha 6 dias e agendamento morto ha 5 semanas, os grupos
+          # sem oferta nenhuma). 200 commits cobrem semanas de publicacao e
+          # custam segundos.
+          fetch-depth: 200
 
       - name: Restaurar banco de dados (deduplicação)
+        # `cache/restore`, não `cache`. O `actions/cache@v4` também SALVA no
+        # fim do job, com a mesma chave do passo "Salvar banco atualizado no
+        # cache" — dois gravadores disputando a mesma chave. Medido na
+        # execucao 256 (04/09/2026): o passo explícito salvou às 17:17:08 e o
+        # pós-job do cache reclamou logo depois,
+        # "Unable to reserve cache with key sqlite-db-v2-256, another job may
+        # be creating this cache". Nesse dia o banco foi salvo pelo passo
+        # certo, mas a corrida deixava toda execução com uma mensagem de
+        # falha no gravador da deduplicação — justamente o dado cuja perda
+        # REPUBLICA as mesmas ofertas no canal. Um gravador só, no passo que
+        # roda antes de o job poder ser morto por tempo.
+        #
         # Em cache-miss, mantém o DB versionado no repo (seed com histórico).
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: data/bot_ofertas.db
           key: sqlite-db-v2-${{ github.run_number }}
@@ -42,36 +73,106 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
+      - name: Confirmar que esta rodada pode publicar
+        # Vem ANTES de instalar dependências e o Chromium de propósito: se a
+        # rodada não deve publicar, ela é pulada em segundos em vez de gastar
+        # minutos para descobrir isso no fim.
+        #
+        # Quem responde é `core/papel.py`, o mesmo módulo que o servidor da
+        # nuvem consulta — antes esta regra existia só aqui, escrita em shell,
+        # e passou a valer para três publicadores (o PC, este workflow e o
+        # servidor em deploy/). Cada um só precisa dizer QUEM É.
+        #
+        # PAPEL vem da variável do repositório (Settings → Secrets and
+        # variables → Variables); vazia, este workflow assume `nuvem`, que é o
+        # que ele sempre foi: publica só enquanto o PC local está desligado.
+        # No dia em que o servidor virar `nuvem-exclusiva`, aposentar este
+        # workflow é trocar essa variável para `desligado` — sem editar código
+        # e sem apagar nada.
+        #
+        # HORA_LIGAR/HORA_DESLIGAR também vêm de lá. Vazias, o core/janela.py
+        # cai nos padrões 08:30/02:00 — os mesmos do .env do PC.
+        id: janela
+        env:
+          HORA_LIGAR: ${{ vars.HORA_LIGAR }}
+          HORA_DESLIGAR: ${{ vars.HORA_DESLIGAR }}
+          PAPEL: ${{ vars.PAPEL || 'nuvem' }}
+          TZ: America/Sao_Paulo
+        run: |
+          if python -m core.papel --pode-publicar; then
+            echo "pular=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "Esta rodada nao publica — ver o motivo acima."
+            echo "pular=1" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Instalar dependências
+        if: steps.janela.outputs.pular != '1'
         run: pip install -r requirements.txt
 
       - name: Instalar Playwright + Chromium
+        if: steps.janela.outputs.pular != '1'
         run: python -m playwright install chromium --with-deps
 
       - name: Criar diretórios necessários
+        if: steps.janela.outputs.pular != '1'
         run: mkdir -p data assets
 
+      - name: Testes (qualidade, afiliado, quarentena, n8n)
+        if: steps.janela.outputs.pular != '1'
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          python tests/test_qualidade.py
+          python tests/test_n8n_integracao.py
+
       - name: Gerar banner ALERTA CUPOM
+        if: steps.janela.outputs.pular != '1'
         run: python -m core.banner_cupom
         continue-on-error: true   # não trava o build se Pillow tiver problema
 
       - name: Rodar o bot (Mercado Livre)
+        if: steps.janela.outputs.pular != '1'
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           ML_AFFILIATE_TOOL_ID: ${{ secrets.ML_AFFILIATE_TOOL_ID }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # n8n: as rodadas da nuvem (janela em que o PC fica desligado)
+          # também empurram eventos, senão o painel e o relatório diário
+          # ficariam cegos justamente na madrugada. Secrets opcionais —
+          # sem eles a integração vira no-op, como no PC.
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_TOKEN: ${{ secrets.N8N_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: python rastreador.py
 
       - name: Rodar cupons Amazon (se configurado)
+        if: steps.janela.outputs.pular != '1'
+        # Teto proprio, separado do teto do job.
+        #
+        # Medido na execucao 255 (2026-09-03): este passo levou 2min49s, de um
+        # orcamento de 10 min para o job inteiro. Ele roda ANTES dos passos que
+        # salvam o banco de deduplicacao no cache e atualizam o site — entao,
+        # se um dia ele passar do orcamento, o `continue-on-error` abaixo nao
+        # ajuda: o `timeout-minutes` do JOB mata tudo e esses passos nao rodam.
+        # A rodada seguinte comecaria com o banco vazio e REPUBLICARIA as
+        # mesmas ofertas no canal.
+        #
+        # 6 min e o dobro do tempo observado: folga para um dia ruim, e ainda
+        # assim um teto. Estourando, o passo e cortado e marcado como falha, e
+        # o `continue-on-error` deixa a rodada terminar — que e o que "Amazon
+        # nao bloqueia o ML" sempre quis dizer.
+        timeout-minutes: 6
         env:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_TOKEN: ${{ secrets.N8N_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: |
           if [ -n "$AMAZON_AFFILIATE_TAG" ]; then
@@ -89,13 +190,13 @@ jobs:
           key: sqlite-db-v2-${{ github.run_number }}
 
       - name: Atualizar site (GitHub Pages)
-        if: success()
+        if: success() && steps.janela.outputs.pular != '1'
         env:
           PYTHONIOENCODING: utf-8
         run: python export_json.py
 
       - name: Commitar ofertas no site
-        if: success()
+        if: success() && steps.janela.outputs.pular != '1'
         run: |
           git config user.name "Bot-Ofertas"
           git config user.email "bot@github.com"

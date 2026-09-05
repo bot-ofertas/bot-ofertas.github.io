@@ -60,6 +60,16 @@ WhatsApp** — se o WhatsApp falhar, o Telegram publica normalmente.
 Não publicar produto sem link de afiliado válido, sem imagem, ou com dados
 incompletos (título/preço ausentes).
 
+**Exceção decidida pelo Daniel em 2026-08-27 (foto indisponível):** quando o
+CDN recusa o download do arquivo da foto, o post sai como texto com o
+*preview nativo* do link — que carrega a imagem oficial do anúncio. O post
+não fica sem imagem; o que se evita é perder a oferta inteira porque o
+`mlstatic` devolveu 403. A tentativa de anexar a foto vem sempre primeiro
+(alta resolução → variante 1x → download direto dos bytes), o fallback é o
+último recurso, e cada ocorrência é registrada como
+`telegram.publicado_sem_foto`. Para voltar ao comportamento estrito:
+`PUBLICAR_SEM_FOTO=0` no `.env`.
+
 ## Regra 8 — Priorização
 
 1. Corrigir erro relatado pelo Daniel (imediato, mesmo turno)
@@ -107,3 +117,138 @@ relatório legível em `C:\Users\Daniel\Desktop\problemas de execucao.txt`
 - Toda integração externa (Mercado Livre, Amazon, Telegram, WhatsApp) deve
   reportar saúde própria em `/health` (ver `core/healthcheck.py`) e logar
   falhas via `core/error_logger.py` — nunca falhar silenciosamente.
+
+## Regra 12 — Quarentena de publicação
+
+Um produto que falha ao publicar **nunca** pode voltar indefinidamente à
+rotação. Bug real (MLB68674214, 2026-08-25): 5 tentativas registradas entre
+11:27 e 17:25, cada uma consumindo uma das 4 vagas de publicação da rodada,
+porque `liberar_claim()` apagava a linha e o produto era raspado de novo na
+rodada seguinte — sem contador, sem limite, sem fim.
+
+- Toda falha de publicação chama `db.registrar_falha_publicacao()`.
+- Ao atingir `MAX_TENTATIVAS_PUBLICACAO` (3), o produto entra em quarentena
+  por `HORAS_QUARENTENA` (24) e os rastreadores o pulam via
+  `db.em_quarentena()` **antes** de gastar qualquer chamada de rede.
+- Publicação bem-sucedida chama `db.limpar_falha_publicacao()` — falha
+  isolada de ontem não conta para o limite de hoje.
+- A quarentena ativa aparece em `/health`, `/quarentena`, no `status.ps1` e
+  no relatório de problemas da Área de Trabalho. Nada de produto sumindo em
+  silêncio.
+
+## Regra 13 — n8n
+
+- A integração é **opcional e não-bloqueante**: sem `N8N_WEBHOOK_URL` tudo
+  vira no-op e o bot roda exatamente como antes. Nenhuma publicação pode
+  esperar, falhar ou atrasar por causa do n8n (mesma lógica da Regra 6).
+- O bot **empurra** eventos (`integrations/n8n.py`); o n8n não consulta o
+  bot. Desenho baseado em o n8n alcançar `127.0.0.1:8724` exige túnel/porta
+  aberta e quebra na primeira troca de IP.
+- Todo POST vai assinado (HMAC-SHA256 do corpo, `X-Bot-Assinatura`) e com
+  `X-Bot-Token`. `POST /n8n/comando` altera estado (pausa, quarentena):
+  sem `N8N_TOKEN` definido só aceita chamada de `127.0.0.1`.
+- Evento que não sai vai para `data/n8n_spool.jsonl` (teto de 500) e é
+  reenviado depois — queda de rede não pode perder o histórico.
+- Segredo nenhum entra em `n8n/workflows/*.json`. Os tokens saem do `.env`
+  local direto para o cofre de credenciais do n8n, via `n8n/setup_n8n.py`.
+  Há teste automatizado que falha se um segredo aparecer nesses arquivos.
+
+## Regra 14 — Rastreamento por canal
+
+Cada canal publica o link com sua própria marcação de origem
+(`matt_source` no ML, `ascsubtag` na Amazon, `utm_source` no resto) — é o
+que responde "qual canal traz venda". A troca é sempre feita por
+`core.tracking.marcar_origem()`, com `urllib.parse`, **nunca** por
+`str.replace`: a versão anterior só funcionava quando o valor era
+exatamente `bot_telegram` e virava no-op silencioso em qualquer outro caso.
+`matt_tool`/`tag` são preservados sempre, e há teste que prova isso.
+
+## Regra 15 — Ciclo diário do PC (liga 08:30 / desliga 02:00)
+
+Decidido pelo Daniel em 2026-08-29. O PC opera das **08:30 às 02:00** e fica
+desligado o resto. Os horários moram em **um lugar só**: `core/janela.py`
+(lendo `HORA_LIGAR`/`HORA_DESLIGAR` do `.env`). Quem precisa deles pergunta —
+`agendar_shutdown.ps1` via `python -m core.janela --agenda`, o `garantir_bot.py`
+por import, os workflows do n8n via `setup_n8n.aplicar_janela()`. Nunca
+reescrever um horário à mão num segundo arquivo: foi assim que o watchdog
+passou a alertar "bot caiu" toda madrugada num desligamento planejado.
+
+- **Desligar é suspender (S3), não `shutdown /s`.** Wake Timer não acorda de
+  um S5 sem `Wake on RTC` na BIOS (confirmado em 2026-07-31: nem o
+  desligamento nem o despertar rodaram, o PC só voltou no braço à noite).
+  Trocar por desligamento completo quebra o religar automático — e um dia
+  sem religar é um dia sem publicar nos grupos.
+- **Nenhuma tarefa do ciclo usa `-StartWhenAvailable`**, exceto o supervisor.
+  Nas outras, "recuperar" um gatilho perdido significa desligar o PC fora de
+  hora (bug real de 2026-07-16). No supervisor é o oposto: recuperar é
+  exatamente o trabalho dele, e ele não desliga nada.
+- **O ciclo não pode depender de acertar um instante.** `BotOfertas-Supervisor`
+  roda a cada 30 min e sobe o processo **pai** se o PC estiver ligado dentro
+  da janela com o bot fora do ar — respeitando a pausa (`core.pausa`) e sem
+  nunca subir um segundo bot (`startup.rastreador_em_execucao()`).
+  Quem decide sozinho precisa distinguir "não está rodando" de "não consegui
+  olhar": sem psutil aquela checagem responde `False` para os dois casos, e
+  agir sobre esse `False` duplicaria os rastreadores 48x por dia. O
+  supervisor consulta `startup.checagem_de_processos_confiavel()` antes e,
+  cego, não sobe nada — registra, alerta e sai com erro. Pela mesma razão ele
+  só anuncia "bot reiniciado" depois que o `startup.py` sobrevive à carência
+  de subida: com `.env` inválido ele sai em ~1s, e chamar `Popen` não é o
+  mesmo que ter subido.
+- **O watchdog do n8n cala a boca dentro da janela de silêncio** e, passados
+  `MINUTOS_TOLERANCIA_RELIGAR` (45) do horário de religar sem heartbeat,
+  manda o alerta que importa: *"o PC não religou"*. A marca
+  `queda_planejada` só é consumida quando o bot volta ou quando o alerta
+  sai — limpá-la antes faz o alerta genérico disparar contando as horas de
+  sono planejado como se fossem queda.
+- **Publicação diária tem piso na nuvem.** O workflow 02 publica às 09:00,
+  12:00 e 20:00 BRT direto do n8n. Se o PC não voltar, os grupos ainda
+  recebem oferta no mesmo dia.
+
+## Regra 16 — Servidor externo (nuvem)
+
+Decidido pelo Daniel em 2026-09-04. O bot também roda num servidor Linux
+(`deploy/`, testado para DigitalOcean), para não depender do PC ligado.
+
+- **No servidor não existe WhatsApp Desktop.** A automação de janela da
+  Regra 5 é do Windows e não roda ali. O caminho é a **Evolution API**
+  (`integrations/whatsapp_api.py`), que já é a primeira tentativa de envio.
+  Ela exige **um QR lido no celular do Daniel, uma vez** — isso é decisão
+  dele, não se automatiza. Tudo o mais da Regra 5 continua valendo: foto +
+  legenda numa unidade só, um grupo só, intervalo randômico.
+- **Quem pode publicar é `core/papel.py`, e ninguém decide sozinho.** São
+  três publicadores capazes de postar no MESMO canal (PC, GitHub Actions,
+  servidor), cada um com o seu próprio banco de deduplicação — nenhum
+  enxerga o que o outro publicou. Dois publicando ao mesmo tempo é a mesma
+  oferta duas vezes no grupo, o estrago da Regra 11 outra vez. A variável
+  `PAPEL` (`local` / `nuvem` / `nuvem-exclusiva` / `desligado`) é a única
+  coisa que cada instância precisa saber; `PAPEL` vazio é `local` (o PC, que
+  nunca definiu nada) e `PAPEL` escrito errado é `nuvem` (só quem tentou
+  configurar erra a grafia, e ali o risco é publicar demais).
+- **Estar dentro da janela do PC não prova que o PC está publicando.** O
+  papel `nuvem` só se cala se houver SINAL DE VIDA recente do PC — as marcas
+  que `core/site_publisher.py` deixa no histórico de `docs/`, visíveis a
+  qualquer checkout, sem exigir rede até o PC. Passado `PC_SILENCIO_MAX_H`
+  (6h) sem sinal, a nuvem assume. Bug real de 2026-09-04: PC fora do ar havia
+  6 dias e agendamento da nuvem morto havia 5 semanas, os grupos sem oferta
+  nenhuma — uma trava só de relógio teria mantido a nuvem calada de dia por
+  causa de um PC que não existia mais. E o contrário também vale: sem
+  histórico para olhar (checkout raso), a resposta é "não sei" e a nuvem
+  espera — nunca se age no escuro (mesmo princípio do psutil no supervisor).
+- **Fuso não é detalhe.** `core/janela.py` compara com o relógio local, e um
+  droplet nasce em UTC: sem `TZ=America/Sao_Paulo` a janela escorrega 3h e o
+  papel `nuvem` publica por cima do PC ligado sem um erro sequer no log.
+  `GET /health` traz `papel.fuso_ok` justamente para isso.
+- **O servidor PUXA do GitHub, o GitHub não empurra para o servidor**
+  (`deploy/atualizar.sh` + timer). Assim não existe chave de acesso ao
+  servidor guardada no GitHub, nada precisa ser aberto no firewall, e trocar
+  o IP do droplet não quebra o deploy.
+- **Nenhuma porta fica exposta na internet.** A 8080 da Evolution autentica
+  com a mesma chave que envia mensagem pelo número do Daniel; publicada para
+  fora, é um painel de controle do WhatsApp dele à disposição de quem achar
+  o IP. As duas portas ficam no loopback e se acessam por túnel SSH.
+- **O site não pode congelar na migração.** `core/site_publisher.py` roda
+  dentro do container, onde não existe `.git` (a imagem não carrega
+  credencial de push, de propósito): quem commita e empurra `docs/` é o
+  servidor, fora do container (`deploy/publicar_site.sh`), com uma chave de
+  deploy gerada no próprio servidor — a parte privada nunca sai do disco
+  dele e nenhuma senha é digitada em lugar nenhum.

@@ -94,6 +94,28 @@ CREATE TABLE IF NOT EXISTS fila_whatsapp (
     enviado_em   TEXT
 );
 
+-- Falhas de publicação por produto (quarentena).
+-- Antes desta tabela, um produto que falhasse ao publicar no Telegram
+-- caía em db.liberar_claim() -> a linha 'processing' era apagada, o
+-- produto voltava a ser raspado na rodada seguinte, falhava de novo, e
+-- assim indefinidamente. Bug real observado com MLB68674214: 5 registros
+-- de "telegram / falha ao publicar" pro MESMO produto entre 2026-08-25
+-- 11:27 e 17:25 (relatório de problemas de 26/08), sem nenhum limite de
+-- tentativas. Agora cada falha incrementa `tentativas`; ao atingir o
+-- limite o produto entra em quarentena até `quarentena_ate` e deixa de
+-- ser tentado, liberando a vaga da rodada pra uma oferta publicável.
+CREATE TABLE IF NOT EXISTS falhas_publicacao (
+    produto_id      TEXT PRIMARY KEY,
+    titulo          TEXT DEFAULT '',
+    tentativas      INTEGER NOT NULL DEFAULT 0,
+    mensagem        TEXT DEFAULT '',
+    primeira_falha  TEXT,
+    ultima_falha    TEXT,
+    quarentena_ate  TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_falhas_quarentena ON falhas_publicacao(quarentena_ate);
+
 CREATE INDEX IF NOT EXISTS idx_produtos_status ON produtos(status);
 CREATE INDEX IF NOT EXISTS idx_produtos_adicionado ON produtos(adicionado_em);
 CREATE INDEX IF NOT EXISTS idx_produtos_affiliate ON produtos(affiliate_status);
@@ -379,7 +401,7 @@ def erros_ultima_janela(minutos: int = 10) -> int:
 
 # ── Limpeza automática ────────────────────────────────────────────────────────
 
-def limpar_antigos(dias: int = 2, dias_precos: int = 35) -> int:
+def limpar_antigos(dias: int = 2, dias_precos: int = 35, dias_falhas: int = 7) -> int:
     """Remove produtos/erros/execuções com mais de `dias` dias, e histórico
     de preço com mais de `dias_precos` dias (janela separada e maior).
 
@@ -425,6 +447,17 @@ def limpar_antigos(dias: int = 2, dias_precos: int = 35) -> int:
             "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
             (f"-{dias} days",)
         )
+        # Falhas de publicação vivem mais que os produtos de propósito: a
+        # linha em `produtos` é apagada em `dias` (2), então sem uma janela
+        # maior aqui o produto problemático voltaria a ser raspado e
+        # tentado logo depois de sair da quarentena de 24h, com o contador
+        # zerado. `dias_falhas` cobre a quarentena inteira com folga.
+        _garantir_tabela_falhas(con)
+        con.execute(
+            "DELETE FROM falhas_publicacao WHERE ultima_falha < "
+            "strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime', ?)",
+            (f"-{dias_falhas} days",)
+        )
     return removidos
 
 
@@ -468,7 +501,19 @@ def execucao_em_andamento(minutos_max: int = 20) -> bool:
     return row is not None
 
 
-def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
+def registrar_erro(tipo: str, mensagem: str, produto_id: str = "",
+                   exc: BaseException | None = None) -> None:
+    """Registra um erro na tabela `erros_log` e espelha no relatório do Desktop.
+
+    `exc` existe por causa de um ponto cego real. Quando o chamador TEM uma
+    exceção em mãos e passa só `str(e)`, o relatório perde arquivo, função,
+    linha e traceback — e o erro vira uma linha solta impossível de
+    investigar. Foi o que aconteceu com `campanha_ferramentas_falhou`: 19
+    ocorrências entre 2026-08 e 2026-09, todas com a mensagem "Timed out" e
+    NADA além disso, enquanto `amazon.rodada_falhou` — a mesma classe de
+    falha, registrada por `log_erro()` — trazia traceback completo nas 43
+    dela. Passando `exc`, os dois caminhos entregam o mesmo diagnóstico.
+    """
     now = datetime.now().isoformat()
     with _conn() as con:
         con.execute(
@@ -480,11 +525,163 @@ def registrar_erro(tipo: str, mensagem: str, produto_id: str = "") -> None:
     # quem só olha o arquivo do Desktop. Best-effort: nunca derruba o
     # registro no banco acima, que é a fonte de verdade.
     try:
-        from core.error_logger import registrar_evento
         ctx = {"produto_id": produto_id} if produto_id else {}
-        registrar_evento(tipo, mensagem, ctx)
+        if exc is not None:
+            # _nivel=2: pular este frame e apontar para quem capturou a
+            # exceção de verdade.
+            from core.error_logger import log_erro
+            log_erro(tipo, exc, ctx, _nivel=2)
+        else:
+            from core.error_logger import registrar_evento
+            registrar_evento(tipo, mensagem, ctx)
     except Exception:
         pass
+
+
+# ── Falhas de publicação e quarentena ────────────────────────────────────────
+
+MAX_TENTATIVAS_PUBLICACAO = 3
+HORAS_QUARENTENA = 24
+
+_falhas_tbl_checked = False
+
+
+def _garantir_tabela_falhas(con) -> None:
+    """Cria falhas_publicacao sob demanda.
+
+    Não dá pra assumir que inicializar() rodou: whatsapp_queue_sender.py,
+    gerar_relatorio_problemas.py e o healthcheck abrem o mesmo banco em
+    processos separados, e um banco antigo (criado antes desta tabela
+    existir) só ganha a tabela no próximo inicializar(). Um SELECT contra
+    tabela inexistente levantaria OperationalError no meio do fluxo de
+    publicação — exatamente o caminho que esta feature deveria proteger.
+    """
+    global _falhas_tbl_checked
+    if _falhas_tbl_checked:
+        return
+    con.execute("""
+        CREATE TABLE IF NOT EXISTS falhas_publicacao (
+            produto_id      TEXT PRIMARY KEY,
+            titulo          TEXT DEFAULT '',
+            tentativas      INTEGER NOT NULL DEFAULT 0,
+            mensagem        TEXT DEFAULT '',
+            primeira_falha  TEXT,
+            ultima_falha    TEXT,
+            quarentena_ate  TEXT
+        )
+    """)
+    con.execute(
+        "CREATE INDEX IF NOT EXISTS idx_falhas_quarentena "
+        "ON falhas_publicacao(quarentena_ate)"
+    )
+    _falhas_tbl_checked = True
+
+
+def registrar_falha_publicacao(
+    produto_id: str,
+    mensagem: str = "",
+    titulo: str = "",
+    max_tentativas: int = MAX_TENTATIVAS_PUBLICACAO,
+    horas_quarentena: int = HORAS_QUARENTENA,
+) -> dict:
+    """Contabiliza mais uma falha de publicação do produto.
+
+    Retorna {"produto_id", "tentativas", "quarentena": bool, "quarentena_ate"}.
+    Quando `tentativas` atinge `max_tentativas`, o produto entra em
+    quarentena por `horas_quarentena` e em_quarentena() passa a devolver
+    True — o rastreador então pula esse produto em vez de tentar publicá-lo
+    a cada rodada pra sempre.
+    """
+    from datetime import timedelta  # noqa: PLC0415
+    agora = datetime.now()
+    now_iso = agora.isoformat()
+    with _conn() as con:
+        _garantir_tabela_falhas(con)
+        row = con.execute(
+            "SELECT tentativas FROM falhas_publicacao WHERE produto_id = ?",
+            (produto_id,),
+        ).fetchone()
+        tentativas = (row[0] if row else 0) + 1
+        quarentena_ate = (
+            (agora + timedelta(hours=horas_quarentena)).isoformat()
+            if tentativas >= max_tentativas else None
+        )
+        if row:
+            con.execute(
+                "UPDATE falhas_publicacao SET tentativas=?, mensagem=?, "
+                "ultima_falha=?, quarentena_ate=?, titulo=COALESCE(NULLIF(?,''), titulo) "
+                "WHERE produto_id=?",
+                (tentativas, str(mensagem)[:300], now_iso, quarentena_ate,
+                 titulo, produto_id),
+            )
+        else:
+            con.execute(
+                "INSERT INTO falhas_publicacao (produto_id, titulo, tentativas, "
+                "mensagem, primeira_falha, ultima_falha, quarentena_ate) "
+                "VALUES (?,?,?,?,?,?,?)",
+                (produto_id, titulo, tentativas, str(mensagem)[:300],
+                 now_iso, now_iso, quarentena_ate),
+            )
+    return {
+        "produto_id": produto_id,
+        "titulo": titulo,
+        "tentativas": tentativas,
+        "max_tentativas": max_tentativas,
+        "mensagem": str(mensagem)[:300],
+        "quarentena": quarentena_ate is not None,
+        "quarentena_ate": quarentena_ate,
+    }
+
+
+def em_quarentena(produto_id: str) -> bool:
+    """True se o produto está em quarentena de publicação AGORA."""
+    with _conn() as con:
+        _garantir_tabela_falhas(con)
+        row = con.execute(
+            "SELECT quarentena_ate FROM falhas_publicacao WHERE produto_id = ?",
+            (produto_id,),
+        ).fetchone()
+    if not row or not row[0]:
+        return False
+    try:
+        return datetime.fromisoformat(row[0]) > datetime.now()
+    except (TypeError, ValueError):
+        return False
+
+
+def limpar_falha_publicacao(produto_id: str) -> None:
+    """Zera o histórico de falhas do produto — chamado após publicar com
+    sucesso, pra que uma falha isolada de ontem não conte pro limite de hoje."""
+    with _conn() as con:
+        _garantir_tabela_falhas(con)
+        con.execute("DELETE FROM falhas_publicacao WHERE produto_id = ?", (produto_id,))
+
+
+def listar_quarentena(limite: int = 50, apenas_ativas: bool = True) -> list[dict]:
+    """Produtos que falharam ao publicar (para /quarentena e para o n8n)."""
+    sql = "SELECT * FROM falhas_publicacao"
+    params: list = []
+    if apenas_ativas:
+        sql += " WHERE quarentena_ate IS NOT NULL AND quarentena_ate > ?"
+        params.append(datetime.now().isoformat())
+    sql += " ORDER BY ultima_falha DESC LIMIT ?"
+    params.append(limite)
+    with _conn() as con:
+        _garantir_tabela_falhas(con)
+        rows = con.execute(sql, params).fetchall()
+    return [dict(r) for r in rows]
+
+
+def liberar_quarentena(produto_id: str = "") -> int:
+    """Tira produto(s) da quarentena (comando manual/n8n). Sem produto_id,
+    libera todos. Retorna quantas linhas foram liberadas."""
+    with _conn() as con:
+        _garantir_tabela_falhas(con)
+        if produto_id:
+            con.execute("DELETE FROM falhas_publicacao WHERE produto_id = ?", (produto_id,))
+        else:
+            con.execute("DELETE FROM falhas_publicacao")
+        return con.execute("SELECT changes()").fetchone()[0]
 
 
 # ── Fila de envio WhatsApp (intervalo aleatório 30-45min) ─────────────────────

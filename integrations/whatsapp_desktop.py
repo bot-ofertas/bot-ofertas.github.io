@@ -140,14 +140,18 @@ def _baixar_e_salvar_foto(url: str) -> Optional[str]:
     if not url or not url.startswith("http"):
         return None
     try:
-        import requests  # noqa: PLC0415
         from PIL import Image  # noqa: PLC0415
+
+        # Mesmo motivo do whatsapp_sender._baixar_foto: `requests.get()` cru
+        # leva 403 do `mlstatic`, e sem foto a mensagem nao sai (Regra 5).
+        from core.foto_url import baixar_melhor  # noqa: PLC0415
+
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         destino = os.path.join(base, "data", f"wa_desktop_{int(time.time() * 1000)}.jpg")
-        r = requests.get(url, timeout=10)
-        if r.status_code != 200 or not r.content:
+        conteudo, _ = baixar_melhor(url)
+        if not conteudo:
             return None
-        img = Image.open(io.BytesIO(r.content)).convert("RGB")
+        img = Image.open(io.BytesIO(conteudo)).convert("RGB")
         img.thumbnail((900, 900))
         img.save(destino, "JPEG", quality=85, optimize=True)
         return destino

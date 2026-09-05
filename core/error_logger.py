@@ -81,15 +81,22 @@ def setup_logging(nivel: int = logging.INFO) -> None:
     logging.getLogger("bot").info("Log inicializado — txt=%s json=%s", TXT_LOG, JSON_LOG)
 
 
-def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) -> None:
+def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
+             _nivel: int = 1) -> None:
     """Grava um erro estruturado em JSON (para n8n consumir) + log texto.
 
     Args:
         operacao: identificador da operação (ex: 'envio_whatsapp', 'scrap_ml').
         exc: exceção capturada.
         contexto: dict com dados adicionais (produto, canal, url etc.).
+        _nivel: quantos quadros subir na pilha para achar QUEM falhou. O padrão
+            1 é o chamador direto. Quem chama por intermédio de outra função
+            (o `db.registrar_erro(..., exc=...)` faz isso) passa 2, senão o
+            "Onde" do relatório apontaria para o intermediário — que é sempre
+            o mesmo arquivo e não diz nada sobre a falha real.
     """
-    frame = inspect.stack()[1]
+    pilha = inspect.stack()
+    frame = pilha[min(_nivel, len(pilha) - 1)]
     entrada = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "operacao": operacao,
@@ -118,6 +125,8 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) ->
         operacao, entrada["exception"], entrada["mensagem"],
         entrada["arquivo"], entrada["linha"], entrada["contexto"],
     )
+    # Espelho para o n8n (workflow 01 decide se vira alerta)
+    _espelhar_no_n8n(entrada)
 
 
 def _gravar_desktop_txt(e: dict) -> None:
@@ -181,6 +190,41 @@ def registrar_evento(operacao: str, mensagem: str, contexto: dict | None = None)
         _gravar_desktop_txt(entrada)
     except Exception:
         pass
+    _espelhar_no_n8n(entrada)
+
+
+# ── Espelho para o n8n ───────────────────────────────────────────────────────
+
+# Um surto de erro repetido (31 falhas em 21 min, 2026-08-23) viraria 31
+# mensagens no Telegram. O throttle deixa passar 1 evento por operação a
+# cada _JANELA_S — o suficiente pra saber que está acontecendo, sem
+# transformar o alerta em ruído que ninguém lê. O registro completo continua
+# indo pro errors.jsonl e pro bloco de notas, sem throttle nenhum.
+_JANELA_THROTTLE_S = 300
+_ultimo_evento_n8n: dict[str, float] = {}
+
+
+def _espelhar_no_n8n(entrada: dict) -> None:
+    """Envia o erro ao n8n (best-effort, com throttle por operação)."""
+    import time  # noqa: PLC0415
+
+    operacao = entrada.get("operacao", "")
+    agora = time.time()
+    if agora - _ultimo_evento_n8n.get(operacao, 0.0) < _JANELA_THROTTLE_S:
+        return
+    _ultimo_evento_n8n[operacao] = agora
+    try:
+        from integrations.n8n import emitir  # noqa: PLC0415
+        emitir("erro", {
+            "operacao": operacao,
+            "exception": entrada.get("exception", ""),
+            "mensagem": entrada.get("mensagem", ""),
+            "arquivo": entrada.get("arquivo", ""),
+            "linha": entrada.get("linha", 0),
+            "contexto": entrada.get("contexto", {}),
+        })
+    except Exception:
+        pass  # o n8n nunca pode atrapalhar o registro do erro
 
 
 def erros_recentes(limite: int = 50) -> list[dict]:

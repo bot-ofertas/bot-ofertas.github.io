@@ -48,6 +48,9 @@ from integrations.ml_browser import (
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
 from integrations.whatsapp_sender import wa_ativo
+from integrations import n8n
+from core import pausa
+from core.net import dns_ok
 
 load_dotenv()
 
@@ -240,6 +243,31 @@ async def rodar_uma_vez() -> int:
         log("❌ TOKEN_TELEGRAM não definido no .env")
         return 0
 
+    # Pausa global e pré-checagem de rede — mesma lógica do rastreador.py.
+    # Sai ANTES de db.iniciar_execucao() para não deixar execução vazia no
+    # histórico nem marcar "sistema ocupado" para o desligamento noturno.
+    if pausa.pausado():
+        log(f"⏸️  Publicação pausada ({pausa.info().get('motivo', '')}) — campanha não roda.")
+        return 0
+
+    # Papel desta instancia (core/papel.py). No PC nao muda nada — sem a
+    # variavel PAPEL o papel e "local" e a resposta e sempre "pode". Num
+    # servidor de nuvem e o que impede de publicar em cima do PC ligado:
+    # os bancos de deduplicacao sao separados, entao os dois publicando ao
+    # mesmo tempo mandam a MESMA oferta duas vezes para o grupo.
+    from core import papel as _papel  # noqa: PLC0415
+
+    _bloqueado, _motivo_papel = _papel.bloqueado()
+    if _bloqueado:
+        log(f"\u23f8\ufe0f  Campanha nao publica: {_motivo_papel}")
+        return 0
+
+    if not dns_ok():
+        log("🌐 Sem resolução de DNS — pulando a rodada da campanha.")
+        db.registrar_erro("rede", "DNS indisponível — campanha pulada")
+        n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel", "fonte": "ferramentas"})
+        return 0
+
     # Registrado na mesma tabela `execucoes` do rastreador.py/rastreador_amazon.py
     # — é o que core.database.execucao_em_andamento() consulta pro desligamento
     # noturno saber que a campanha está no meio de uma rodada e esperar.
@@ -254,7 +282,7 @@ async def rodar_uma_vez() -> int:
             brutos = await _buscar_pagina(url)
         except Exception as e:
             log(f"  ⚠️  Erro buscando {nicho}: {e}")
-            db.registrar_erro("scraping", str(e))
+            db.registrar_erro("scraping", str(e), exc=e)
             continue
         filtrados = _filtrar_e_afiliar(brutos, nicho, DESCONTO_MINIMO, limite=50)
         relevantes = [i for i in filtrados if _e_ferramenta(i)]
@@ -290,7 +318,11 @@ async def rodar_uma_vez() -> int:
     # qualquer execução aberta há menos de 20min como "sistema ocupado",
     # então uma rodada travada podia atrasar o desligamento noturno à toa.
     try:
-        async with Bot(token=TOKEN_TELEGRAM) as bot:
+        # Cliente com timeout de leitura de 40s: com o padrão de 5s da
+        # biblioteca, um `send_photo` lento derrubava a rodada inteira com
+        # um "Timed out" seco (registro real de 2026-08-25 23:20).
+        from integrations.telegram_bot import criar_bot  # noqa: PLC0415
+        async with criar_bot(TOKEN_TELEGRAM) as bot:
             for item in unicos:
                 if publicados >= MIN_POR_RODADA:
                     break
@@ -327,6 +359,10 @@ async def rodar_uma_vez() -> int:
                     # Feita bem antes das duas chamadas de rede lentas (geração
                     # de link + publicação) que criam a janela de corrida de
                     # verdade.
+                    if db.em_quarentena(produto_id):
+                        log(f"  🚫 Em quarentena (falhas anteriores): {titulo_curto}")
+                        continue
+
                     if not db.claim_produto(produto_id, item.get("titulo", "")):
                         continue
 
@@ -334,7 +370,7 @@ async def rodar_uma_vez() -> int:
                         link_afiliado = await provider.generate_affiliate_link_async(url_original)
                     except Exception as e:
                         log(f"     ❌ Erro ao gerar link: {e}")
-                        db.registrar_erro("affiliate", str(e), produto_id)
+                        db.registrar_erro("affiliate", str(e), produto_id, exc=e)
                         db.liberar_claim(produto_id)
                         continue
 
@@ -357,7 +393,21 @@ async def rodar_uma_vez() -> int:
 
                     if not sucesso:
                         db.registrar_erro("telegram", "falha ao publicar", produto_id)
-                        db.liberar_claim(produto_id)
+                        falha = db.registrar_falha_publicacao(
+                            produto_id, "falha ao publicar no Telegram",
+                            item.get("titulo", ""),
+                        )
+                        if falha["quarentena"]:
+                            # Mesmo tratamento do rastreador.py: esgotadas as
+                            # tentativas, o produto sai de rotação em vez de
+                            # voltar a cada 15 min consumindo a vaga da rodada.
+                            item["status"] = "quarentena"
+                            db.atualizar_produto(item)
+                            log(f"  🚫 {falha['tentativas']}ª falha — quarentena até "
+                                f"{falha['quarentena_ate'][:16]}: {titulo_curto}")
+                            n8n.emitir("produto_quarentena", falha)
+                        else:
+                            db.liberar_claim(produto_id)
                         continue
 
                     item["status"] = "enviado"
@@ -365,6 +415,17 @@ async def rodar_uma_vez() -> int:
                     db.atualizar_produto(item)
                     db.atualizar_afiliado(produto_id, provider.name, link_afiliado, "ok")
                     db.marcar_enviado(produto_id)
+                    db.limpar_falha_publicacao(produto_id)
+                    n8n.emitir("oferta_publicada", {
+                        "produto_id": produto_id,
+                        "titulo": item.get("titulo"),
+                        "preco": item.get("preco"),
+                        "desconto_pct": item.get("desconto_pct"),
+                        "categoria": "ferramentas",
+                        "foto": item.get("foto"),
+                        "link": link_afiliado,
+                        "fonte": "mercadolivre",
+                    })
                     publicados += 1
                     log(f"  ✅ ({publicados}/{MIN_POR_RODADA}) {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF")
 
@@ -385,7 +446,7 @@ async def rodar_uma_vez() -> int:
                     await asyncio.sleep(PAUSA_ENTRE_POSTS)
                 except Exception as e_item:
                     log(f"  ⚠️  Erro inesperado em '{titulo_curto}': {e_item}")
-                    db.registrar_erro("item_falhou", str(e_item), produto_id)
+                    db.registrar_erro("item_falhou", str(e_item), produto_id, exc=e_item)
                     # Rede de segurança: libera a reivindicação se algo explodiu
                     # antes de chegar num estado terminal — vira no-op se já foi
                     # resolvido (liberar_claim só apaga linhas ainda 'processing').
@@ -422,7 +483,7 @@ def main() -> None:
                 asyncio.run(rodar_uma_vez())
             except Exception as e:
                 log(f"⚠️  Rodada falhou inesperadamente: {e}")
-                db.registrar_erro("campanha_ferramentas_falhou", str(e))
+                db.registrar_erro("campanha_ferramentas_falhou", str(e), exc=e)
             log(f"\n⏳ Próxima rodada em {args.loop} minuto(s)...")
             time.sleep(args.loop * 60)
     else:
