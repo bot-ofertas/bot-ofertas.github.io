@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Micro-Ondas Philco 28L Preto Espelhado Flat PMO30F",
+      "preco": 540.0,
+      "preco_original": 799.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_714218-MLA93664694702_102025-AB.webp",
+      "categoria": "cameras",
+      "score": 77,
+      "enviado_em": "2026-09-05T01:07:39.621689",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-philco-28l-preto-espelhado-flat-pmo30f/p/MLB58934030?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 540.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV 4K 50\" LG NANO UHD AI NU850 2026 Processador α7 Ger9 HDR10 Xbox Bluetooth Wi-Fi AI Search Google Gemini webOS 26 - 50NU850BPSA",
+      "preco": 2159.0,
+      "preco_original": 3899.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_756409-MLA115252629948_082026-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-09-05T01:07:30.145153",
+      "link": "https://www.mercadolivre.com.br/smart-tv-4k-50-lg-nano-uhd-ai-nu850-2026-processador-7-ger9-hdr10-xbox-bluetooth-wi-fi-ai-search-google-gemini-webos-26-50nu850bpsa/p/MLB76779956?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2159.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco Roku Tv Dolby Áudio Hdr10 P32crb",
+      "preco": 815.15,
+      "preco_original": 1499.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_636675-MLA107807100101_022026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 95,
+      "enviado_em": "2026-09-05T01:07:21.392114",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-roku-tv-dolby-audio-hdr10-p32crb/p/MLB66055148?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 815.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Camisa Gola Polo Masculina Pique Premium Algodão Confortável",
+      "preco": 33.9,
+      "preco_original": 54.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_804138-MLB113502958558_072026-AB-camisa-gola-polo-masculina-pique-premium-algodo-confortavel.webp",
+      "categoria": "esportes",
+      "score": 74,
+      "enviado_em": "2026-09-05T01:07:12.162203",
+      "link": "https://produto.mercadolivre.com.br/MLB-5187281878-camisa-gola-polo-masculina-pique-premium-algodo-confortavel-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Argan Óleo Reparador 50ml , Lola Cosmetics",
       "preco": 19.19,
       "preco_original": 383.8,
@@ -57,7 +117,7 @@
       "link": "https://www.mercadolivre.com.br/parafusadeira-furadeira-the-black-tools-tb12a-38-a-bateria-cor-amarelo-frequencia-60hz/p/MLB24076624?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 66.4,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -87,7 +147,7 @@
       "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-electrolux-compacto-potente-1400w-funcao-sopro-12l-total-5l-util-protetor-termico-awd01/p/MLB6339794?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 179.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -192,7 +252,7 @@
       "link": "https://www.mercadolivre.com.br/micro-ondas-pmo30f-flat-28l-preto-espelhado-philco-220v/p/MLB59111649?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 540.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -281,8 +341,8 @@
       "enviado_em": "2026-09-04T17:14:04.602067",
       "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a17-5g-128gb-4gb-super-amoled-67-camera-50mp-selfie-13-mp-5000-mah-nfc-dual-sim-recursos-ia-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 944.9,
-      "menor_periodo": false,
+      "menor_preco_30d": 912.69,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -312,7 +372,7 @@
       "link": "https://www.mercadolivre.com.br/aspirador-de-po-e-agua-electrolux-1400w-12-litros-59-raio-de-acao-compacto-potente-funcao-sopro-protetor-termico-awd01/p/MLB6339793?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 179.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -432,8 +492,8 @@
     "enviado_em": "2026-09-04T17:14:04.602067",
     "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a17-5g-128gb-4gb-super-amoled-67-camera-50mp-selfie-13-mp-5000-mah-nfc-dual-sim-recursos-ia-preto/p/MLB55027309?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 944.9,
-    "menor_periodo": false,
+    "menor_preco_30d": 912.69,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -455,6 +515,12 @@
       "desconto_medio": 37,
       "maior_desconto": 41
     },
+    "cameras": {
+      "total": 3,
+      "score_medio": 83,
+      "desconto_medio": 42,
+      "maior_desconto": 49
+    },
     "beleza": {
       "total": 3,
       "score_medio": 68,
@@ -467,17 +533,17 @@
       "desconto_medio": 28,
       "maior_desconto": 33
     },
-    "cameras": {
-      "total": 2,
-      "score_medio": 86,
-      "desconto_medio": 47,
-      "maior_desconto": 49
-    },
     "bebes": {
       "total": 2,
       "score_medio": 69,
       "desconto_medio": 32,
       "maior_desconto": 33
+    },
+    "tvs": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 44,
+      "maior_desconto": 44
     },
     "monitores": {
       "total": 1,
@@ -490,6 +556,18 @@
       "score_medio": 84,
       "desconto_medio": 41,
       "maior_desconto": 41
+    },
+    "esportes": {
+      "total": 1,
+      "score_medio": 74,
+      "desconto_medio": 38,
+      "maior_desconto": 38
+    },
+    "eletronicos": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 45,
+      "maior_desconto": 45
     },
     "eletrodomesticos": {
       "total": 1,
@@ -510,6 +588,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-04T22:07:12.796561",
-  "total": 28
+  "updated_at": "2026-09-05T01:12:41.769529",
+  "total": 32
 }
