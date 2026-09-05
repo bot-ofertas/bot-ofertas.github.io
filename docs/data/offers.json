@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Galaxy Tab S10 Lite, 128GB, Tela 10.9\", WIFI, Cinza",
+      "preco": 2280.0,
+      "preco_original": 3149.0,
+      "desconto_pct": 27.6,
+      "foto": "https://m.media-amazon.com/images/I/51UFm7dGUuL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 82,
+      "enviado_em": "2026-09-05T13:23:51.896787",
+      "link": "https://www.amazon.com.br/dp/B0FMFRFNWG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2280.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "EPSON Multifuncional EcoTank L3250 - Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,Preto.",
+      "preco": 1023.0,
+      "preco_original": 1379.0,
+      "desconto_pct": 25.8,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 74,
+      "enviado_em": "2026-09-05T13:23:43.268581",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1023.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Dell 15 15-I1300-A30P, Intel Core i5-1334U, Windows 11 Home | Tela 15.6 FHD 120 Hz Antirreflexo, 8 GB RAM, 512 GB SSD, UHD Graphics, Wi‑Fi 6, leitor SD, USB 3.2 Type-C, Garantia de 1 Ano",
+      "preco": 3599.1,
+      "preco_original": 4500.0,
+      "desconto_pct": 20.0,
+      "foto": "https://m.media-amazon.com/images/I/51LAU1+ACrL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 75,
+      "enviado_em": "2026-09-05T13:23:34.626250",
+      "link": "https://www.amazon.com.br/dp/B0FHCHBRGF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3599.1,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Inteligente Full HD Im3 C Mibo Cam WIFI Branca Intelbras",
+      "preco": 166.5,
+      "preco_original": 401.0,
+      "desconto_pct": 58.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_600720-MLA99856285817_112025-AB.webp",
+      "categoria": "impressoras",
+      "score": 84,
+      "enviado_em": "2026-09-05T13:19:08.628807",
+      "link": "https://www.mercadolivre.com.br/camera-inteligente-full-hd-im3-c-mibo-cam-wifi-branca-intelbras/p/MLB24214075?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 166.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lavadora de roupas Electrolux Efficient Lee18 18kg com cesto inox 127",
+      "preco": 2149.0,
+      "preco_original": 3039.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_822477-MLA99566766842_122025-AB.webp",
+      "categoria": "moveis",
+      "score": 89,
+      "enviado_em": "2026-09-05T13:18:59.397622",
+      "link": "https://www.mercadolivre.com.br/lavadora-de-roupas-electrolux-efficient-lee18-18kg-com-cesto-inox-127/p/MLB51054606?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2149.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV PRO LG 50'' 4K Ultra HD AI 50UN85C",
+      "preco": 2189.0,
+      "preco_original": 3455.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_837435-MLA116824598567_082026-AB.webp",
+      "categoria": "tvs",
+      "score": 86,
+      "enviado_em": "2026-09-05T13:18:50.389867",
+      "link": "https://www.mercadolivre.com.br/smart-tv-pro-lg-50-4k-ultra-hd-ai-50un85c/p/MLB74962073?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2189.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Robô aspirador Robot W90 varre aspira e passa pano 30w Wap cor preto",
+      "preco": 317.9,
+      "preco_original": 514.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748103-MLA99906601653_112025-AB.webp",
+      "categoria": "livros",
+      "score": 80,
+      "enviado_em": "2026-09-05T13:18:41.030006",
+      "link": "https://www.mercadolivre.com.br/robo-aspirador-robot-w90-varre-aspira-e-passa-pano-30w-wap-cor-preto/p/MLB19731776?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 317.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
       "preco": 948.96,
       "preco_original": 1499.0,
@@ -797,11 +902,29 @@
       "desconto_medio": 48,
       "maior_desconto": 95
     },
+    "tvs": {
+      "total": 3,
+      "score_medio": 91,
+      "desconto_medio": 39,
+      "maior_desconto": 44
+    },
     "pet": {
       "total": 3,
       "score_medio": 72,
       "desconto_medio": 37,
       "maior_desconto": 41
+    },
+    "informatica": {
+      "total": 3,
+      "score_medio": 77,
+      "desconto_medio": 24,
+      "maior_desconto": 27
+    },
+    "impressoras": {
+      "total": 3,
+      "score_medio": 74,
+      "desconto_medio": 38,
+      "maior_desconto": 58
     },
     "celulares": {
       "total": 3,
@@ -815,17 +938,11 @@
       "desconto_medio": 42,
       "maior_desconto": 49
     },
-    "tvs": {
+    "livros": {
       "total": 2,
-      "score_medio": 93,
-      "desconto_medio": 40,
-      "maior_desconto": 44
-    },
-    "impressoras": {
-      "total": 2,
-      "score_medio": 69,
-      "desconto_medio": 28,
-      "maior_desconto": 33
+      "score_medio": 87,
+      "desconto_medio": 38,
+      "maior_desconto": 38
     },
     "esportes": {
       "total": 2,
@@ -845,17 +962,17 @@
       "desconto_medio": 39,
       "maior_desconto": 46
     },
+    "moveis": {
+      "total": 1,
+      "score_medio": 89,
+      "desconto_medio": 29,
+      "maior_desconto": 29
+    },
     "monitores": {
       "total": 1,
       "score_medio": 77,
       "desconto_medio": 32,
       "maior_desconto": 32
-    },
-    "livros": {
-      "total": 1,
-      "score_medio": 93,
-      "desconto_medio": 38,
-      "maior_desconto": 38
     },
     "games": {
       "total": 1,
@@ -876,6 +993,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-05T10:20:27.202083",
-  "total": 50
+  "updated_at": "2026-09-05T13:24:00.816832",
+  "total": 57
 }
