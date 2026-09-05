@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 948.96,
+      "preco_original": 1499.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 91,
+      "enviado_em": "2026-09-05T10:16:32.957088",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 948.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Jogo de Jantar 30 Peças Biona Margaridas Donna Em Cerâmica",
+      "preco": 159.2,
+      "preco_original": 436.0,
+      "desconto_pct": 63.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_987838-MLA95680419008_102025-AB.webp",
+      "categoria": "casa",
+      "score": 79,
+      "enviado_em": "2026-09-05T10:16:24.345246",
+      "link": "https://www.mercadolivre.com.br/jogo-de-jantar-30-pecas-biona-margaridas-donna-em-ceramica/p/MLB43279887?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 159.2,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Bike Spinning 6kg Sensação inércia Fitness Preto e Vermelho Sevenfit Para Cardio E Musculação",
+      "preco": 387.48,
+      "preco_original": 1094.0,
+      "desconto_pct": 64.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745785-MLA114987927277_072026-AB.webp",
+      "categoria": "esportes",
+      "score": 85,
+      "enviado_em": "2026-09-05T10:16:15.169805",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-bike-spinning-6kg-sensacao-inercia-fitness-preto-e-vermelho-sevenfit-para-cardio-e-musculacao/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 387.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira De Carro Infantil Max360 Isofix 36kgs Maxi Baby - Preto",
+      "preco": 888.9,
+      "preco_original": 1299.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_788401-MLU78410200759_082024-AB.webp",
+      "categoria": "automotivo",
+      "score": 79,
+      "enviado_em": "2026-09-05T10:16:06.244908",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-carro-infantil-max360-isofix-36kgs-maxi-baby-preto/p/MLB26415897?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 888.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Smart TV 43' LG 43AU801C0SA 4K",
       "preco": 1588.99,
       "preco_original": 1835.1,
@@ -755,17 +815,35 @@
       "desconto_medio": 42,
       "maior_desconto": 49
     },
+    "tvs": {
+      "total": 2,
+      "score_medio": 93,
+      "desconto_medio": 40,
+      "maior_desconto": 44
+    },
     "impressoras": {
       "total": 2,
       "score_medio": 69,
       "desconto_medio": 28,
       "maior_desconto": 33
     },
-    "tvs": {
-      "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 44,
-      "maior_desconto": 44
+    "esportes": {
+      "total": 2,
+      "score_medio": 80,
+      "desconto_medio": 51,
+      "maior_desconto": 64
+    },
+    "casa": {
+      "total": 2,
+      "score_medio": 83,
+      "desconto_medio": 56,
+      "maior_desconto": 63
+    },
+    "automotivo": {
+      "total": 2,
+      "score_medio": 85,
+      "desconto_medio": 39,
+      "maior_desconto": 46
     },
     "monitores": {
       "total": 1,
@@ -785,29 +863,11 @@
       "desconto_medio": 41,
       "maior_desconto": 41
     },
-    "esportes": {
-      "total": 1,
-      "score_medio": 74,
-      "desconto_medio": 38,
-      "maior_desconto": 38
-    },
     "eletrodomesticos": {
       "total": 1,
       "score_medio": 91,
       "desconto_medio": 36,
       "maior_desconto": 36
-    },
-    "casa": {
-      "total": 1,
-      "score_medio": 86,
-      "desconto_medio": 48,
-      "maior_desconto": 48
-    },
-    "automotivo": {
-      "total": 1,
-      "score_medio": 90,
-      "desconto_medio": 46,
-      "maior_desconto": 46
     },
     "armazenamento": {
       "total": 1,
@@ -816,6 +876,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-09-05T07:18:54.832409",
-  "total": 46
+  "updated_at": "2026-09-05T10:20:27.202083",
+  "total": 50
 }
