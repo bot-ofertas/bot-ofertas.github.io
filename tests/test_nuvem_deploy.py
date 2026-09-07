@@ -803,6 +803,56 @@ def test_push_do_site_so_acontece_na_main():
         "o push do site nao esta preso ao branch padrao"
 
 
+def test_site_publisher_commita_sem_identidade_na_maquina():
+    """Observado ao vivo na rodada #264: no runner do Actions o
+    `git commit` do site morria com "Author identity unknown" — nas duas
+    origens, ML e Amazon — porque a identidade so e definida depois, no
+    passo do workflow. E a identidade tem que ir por `-c` (valida so para
+    aquela invocacao): escrever em ~/.gitconfig alteraria a configuracao da
+    maquina, o que a Regra 10 proibe."""
+    import subprocess as sp_
+    import tempfile
+
+    from core import site_publisher as sp
+
+    texto = open(os.path.join(BASE, "core", "site_publisher.py"), encoding="utf-8").read()
+    assert '_identidade_minima()' in texto
+    assert 'user.email=bot@github.com' in texto
+    assert "config", "a identidade vai por -c, nunca por `git config` gravado"
+
+    base_original = sp._BASE
+    # Neutraliza a config global/sistema de QUEM roda o teste. Sem isto o
+    # cenario "runner sem identidade" nunca chega a ser exercitado: a
+    # maquina de desenvolvimento tem identidade global, o fallback nao e
+    # acionado, e o teste passa a testar o ambiente em vez do codigo.
+    antes_env = {k: os.environ.get(k) for k in ("GIT_CONFIG_GLOBAL", "GIT_CONFIG_SYSTEM")}
+    try:
+        os.environ["GIT_CONFIG_GLOBAL"] = os.devnull
+        os.environ["GIT_CONFIG_SYSTEM"] = os.devnull
+        with tempfile.TemporaryDirectory() as tmp:
+            sp_.run(["git", "init", "-q", tmp], check=True)
+            sp._BASE = tmp
+            # Maquina sem identidade (o runner): precisa injetar.
+            assert sp._identidade_minima(), "sem identidade e sem fallback -> commit falha"
+            # E com o fallback o commit tem que sair de verdade.
+            open(os.path.join(tmp, "a.txt"), "w").write("x")
+            sp_.run(["git", "add", "a.txt"], cwd=tmp, check=True)
+            feito = sp_.run(["git", *sp._identidade_minima(), "commit", "-m", "t"],
+                            cwd=tmp, capture_output=True, text=True)
+            assert feito.returncode == 0, feito.stderr[:200]
+            # Maquina com identidade propria (o PC do Daniel): nao mexe.
+            sp_.run(["git", "config", "user.email", "dono@exemplo"], cwd=tmp, check=True)
+            assert sp._identidade_minima() == [], \
+                "sobrescreveria o autor dos commits do PC"
+    finally:
+        sp._BASE = base_original
+        for k, v in antes_env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
 if __name__ == "__main__":
     import traceback
 

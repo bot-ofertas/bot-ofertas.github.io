@@ -47,6 +47,22 @@ def _git(*args: str) -> subprocess.CompletedProcess:
     )
 
 
+def _identidade_minima() -> list[str]:
+    """Argumentos `-c` de identidade — vazio quando a maquina ja tem uma.
+
+    Nao sobrescreve identidade existente de proposito: no PC do Daniel os
+    commits do site sao dele, e trocar o autor por um generico mudaria o
+    historico que qualquer um le para saber quem publicou o que.
+    """
+    try:
+        r = _git("config", "user.email")
+        if r.returncode == 0 and r.stdout.strip():
+            return []
+    except Exception:
+        pass
+    return ["-c", "user.name=Bot-Ofertas", "-c", "user.email=bot@github.com"]
+
+
 def _pode_publicar_agora() -> bool:
     try:
         with open(_ESTADO_PATH, encoding="utf-8") as f:
@@ -110,7 +126,18 @@ def publicar_site(origem: str = "local") -> bool:
         if diff.returncode == 0:
             return False  # nada novo pra publicar
 
-        commit = _git("commit", "-m", f"chore: atualiza site ({origem}) [skip ci]")
+        # Sem identidade configurada o `git commit` morre com "Author identity
+        # unknown" e o site nunca sai — e no runner do GitHub Actions e
+        # exatamente esse o estado (a identidade so e definida depois, no
+        # passo do workflow que empurra). Observado ao vivo na rodada #264,
+        # nas duas origens: rastreador-ml e rastreador-amazon.
+        #
+        # A identidade vai por `-c`, valendo so para ESTA invocacao: nao
+        # escreve em ~/.gitconfig (Regra 10 — nao alterar configuracao da
+        # maquina) e, no PC do Daniel, que ja tem identidade propria, o
+        # fallback nem chega a ser usado.
+        commit = _git(*_identidade_minima(),
+                      "commit", "-m", f"chore: atualiza site ({origem}) [skip ci]")
         if commit.returncode != 0:
             _falhou("git commit", commit.stderr.strip()[:300])
             return False
