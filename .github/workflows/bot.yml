@@ -23,6 +23,14 @@ on:
     # (3x/hora) estava bem dentro dessa zona de risco.
     - cron: '0 5-11 * * *'   # ~02:00-08:00 BRT, 1x/hora
   workflow_dispatch:  # permite rodar manualmente no GitHub
+    inputs:
+      forcar:
+        description: >-
+          Publicar mesmo dentro da janela do PC. Use SÓ sabendo que o PC não
+          está publicando: os dois bancos de deduplicação são separados e a
+          mesma oferta sairia duas vezes no grupo.
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -99,7 +107,18 @@ jobs:
           PAPEL: ${{ vars.PAPEL || 'nuvem' }}
           TZ: America/Sao_Paulo
         run: |
-          if python -m core.papel --pode-publicar; then
+          # O forcar so vale em acionamento MANUAL, e so para a rodada que
+          # a pessoa acabou de disparar. A alternativa seria trocar a
+          # variavel PAPEL do repositorio para `nuvem-exclusiva` — mas isso
+          # e permanente e silencioso: a nuvem passaria a publicar 24h por
+          # dia por cima do PC ate alguem lembrar de desfazer. Foi assim que
+          # a nuvem publicou 8 vezes sobre o PC ativo em 05/09/2026.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && \
+             [ "${{ inputs.forcar }}" = "true" ]; then
+            echo "::warning::Rodada FORCADA manualmente — o portao do papel foi ignorado."
+            python -m core.papel --resumo || true
+            echo "pular=0" >> "$GITHUB_OUTPUT"
+          elif python -m core.papel --pode-publicar; then
             echo "pular=0" >> "$GITHUB_OUTPUT"
           else
             echo "Esta rodada nao publica — ver o motivo acima."
@@ -196,7 +215,16 @@ jobs:
         run: python export_json.py
 
       - name: Commitar ofertas no site
-        if: success() && steps.janela.outputs.pular != '1'
+        # `HEAD:main` empurra o commit ATUAL para a main — o que so e o site
+        # quando a rodada esta na propria main. Disparado manualmente em
+        # outro ref (uma branch de PR, por exemplo), o mesmo push jogaria a
+        # branch inteira dentro da main, por fora da revisao. Enquanto so o
+        # cron rodava isso nunca acontecia; o botao de disparo manual tornou
+        # alcancavel. A rodada publica no Telegram do mesmo jeito — o que
+        # esta condicao evita e a branch virar main sem ninguem pedir.
+        if: >-
+          success() && steps.janela.outputs.pular != '1'
+          && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         run: |
           git config user.name "Bot-Ofertas"
           git config user.email "bot@github.com"

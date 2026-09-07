@@ -771,6 +771,38 @@ def test_workflow_do_actions_pergunta_ao_papel():
     assert "PAPEL:" in texto
 
 
+def test_forcar_e_manual_e_de_uma_rodada_so():
+    """O atalho para publicar dentro da janela do PC tem que ser um gesto
+    manual e efêmero. A alternativa — trocar a variável PAPEL do repositório
+    para `nuvem-exclusiva` — é permanente e silenciosa: a nuvem passaria a
+    publicar 24h por cima do PC até alguém lembrar de desfazer, que foi
+    exatamente o estrago de 05/09/2026 (8 publicações sobre o PC ativo)."""
+    texto = open(os.path.join(BASE, ".github", "workflows", "bot.yml"),
+                 encoding="utf-8").read()
+    assert "inputs:" in texto and "forcar:" in texto, "sem botao manual de forcar"
+    # Sem esta condição, um disparo agendado com `inputs.forcar` vazio ainda
+    # entraria no ramo forçado se alguém trocasse a comparação por um teste
+    # de "não-vazio" — e o cron publicaria por cima do PC toda hora.
+    assert 'github.event_name }}" = "workflow_dispatch"' in texto, \
+        "forcar precisa valer so em acionamento manual"
+    assert '"${{ inputs.forcar }}" = "true"' in texto, \
+        "forcar precisa ser comparado com true explicitamente"
+    # O caminho normal continua perguntando ao papel.
+    assert "elif python -m core.papel --pode-publicar" in texto
+
+
+def test_push_do_site_so_acontece_na_main():
+    """`git push HEAD:main` empurra o commit atual, não o site. Rodando em
+    outro ref (disparo manual numa branch de PR) ele jogaria a branch inteira
+    dentro da main sem revisão nenhuma."""
+    texto = open(os.path.join(BASE, ".github", "workflows", "bot.yml"),
+                 encoding="utf-8").read()
+    assert "HEAD:main" in texto, "o passo de publicar o site sumiu — reveja este teste"
+    bloco = texto.split("- name: Commitar ofertas no site", 1)[1].split("- name:", 1)[0]
+    assert "default_branch" in bloco, \
+        "o push do site nao esta preso ao branch padrao"
+
+
 if __name__ == "__main__":
     import traceback
 
