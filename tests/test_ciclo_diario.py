@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -426,6 +427,63 @@ else:
            out.get("alertar") and "parou de responder" in (out.get("texto") or ""), str(out)[:300])
 
 shutil.rmtree(_TMP, ignore_errors=True)
+
+# ── aplicar_tudo.ps1 ─────────────────────────────────────────────────────
+# O roteiro manual (stop -> fetch -> checkout -> configurar -> start) tem
+# cinco pontos de falha silenciosa, e o script existe para fechar os cinco.
+# Cada asserção abaixo guarda um deles.
+print("\n[6] aplicar_tudo.ps1 — as travas dos cinco pontos de falha")
+_apl = os.path.join(RAIZ, "aplicar_tudo.ps1")
+checar("aplicar_tudo.ps1 existe", os.path.isfile(_apl))
+if os.path.isfile(_apl):
+    _t = open(_apl, encoding="utf-8").read()
+    # 1. checkout sobre arvore suja: o git recusa e os passos seguintes
+    #    rodariam no codigo ANTIGO achando que estao no novo.
+    checar("guarda alteracao local antes do checkout",
+           "git stash push" in _t and "git status --porcelain" in _t)
+    # 2. registrar tarefa do Agendador exige elevacao; sem checar, o ciclo
+    #    fica pela metade sem dizer qual metade.
+    checar("exige Administrador para mexer no Agendador",
+           "IsInRole" in _t and "-SemAgenda" in _t)
+    # 3. a licao do aguardar_e_desligar.ps1: Get-Command python sem
+    #    -ErrorAction derruba o script inteiro, sem log.
+    checar("nao deixa Get-Command python derrubar o script",
+           "Get-Command python -ErrorAction SilentlyContinue" in _t)
+    # 4. Regra 15: "chamar Popen nao e o mesmo que ter subido".
+    checar("confirma que o startup.py sobreviveu a carencia",
+           "startup.py*" in _t and "Start-Sleep" in _t)
+    # 5. Regra 10: nunca parar no meio de uma rodada.
+    checar("consulta execucao_em_andamento antes de parar",
+           "execucao_em_andamento" in _t)
+    # Regra 10: o processo que sobe e o PAI.
+    checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
+           "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 8")[-1])
+
+# ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
+print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")
+_col = os.path.join(RAIZ, "coletar_diagnostico.ps1")
+checar("coletar_diagnostico.ps1 existe", os.path.isfile(_col))
+if os.path.isfile(_col):
+    _c = open(_col, encoding="utf-8").read()
+    _regras = re.findall(r"-replace '([^']+)', '\*\*\*REDIGIDO\*\*\*'", _c)
+    checar("tem regras de redacao", len(_regras) >= 3, f"achei {len(_regras)}")
+    # A prova que importa: as regras do .ps1, aplicadas ao log que REALMENTE
+    # vazou neste repositorio, nao podem deixar token nenhum passar. Sem
+    # isto, o zip so mudaria o vazamento de lugar.
+    _amostra = subprocess.run(["git", "show", "2c57563:rastreador.log"],
+                              cwd=RAIZ, capture_output=True).stdout.decode("utf-8", "replace")
+    _pad = r"\d{8,12}:AA[\w-]{30,}"
+    if _amostra and re.search(_pad, _amostra):
+        _saida = _amostra
+        for _r in _regras:
+            _saida = re.sub(_r, "***REDIGIDO***", _saida)
+        checar("redige por completo o log que vazou de verdade",
+               not re.search(_pad, _saida))
+    checar("nao copia o .env", "_env_CHAVES" in _c and "(preenchido," in _c)
+    checar("pula perfil de navegador e arquivo de token",
+           "token|cookie|session" in _c)
+    checar("le o corpo do /health mesmo em 503",
+           "GetResponseStream" in _c)
 
 # ── Resultado ────────────────────────────────────────────────────────────
 print()
