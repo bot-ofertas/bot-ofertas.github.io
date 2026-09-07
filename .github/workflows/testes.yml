@@ -69,6 +69,16 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_nuvem_deploy.py
 
+      - name: Teste de redacao de segredos (repo publico)
+        # Este repositorio e publico e ja teve o token do bot do Telegram
+        # commitado em monitor.log e rastreador.log (achado em 2026-09-07).
+        # Alem de provar o filtro, este passo varre TODO arquivo versionado
+        # atras de segredo — .gitignore nao serve de trava aqui, porque nao
+        # vale para arquivo que ja foi commitado uma vez.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_segredos.py
+
       - name: Teste de sistema (bot + n8n montados)
         # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
         # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->

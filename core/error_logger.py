@@ -26,6 +26,8 @@ import traceback
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
+from core.segredos import FiltroDeSegredos, redigir
+
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(BASE, "data")
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -68,13 +70,22 @@ def setup_logging(nivel: int = logging.INFO) -> None:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
+    # O filtro vai nos HANDLERS, não no logger raiz: filtro de logger só é
+    # consultado para quem chama aquele logger direto, e o `httpx` — que
+    # escreve a URL do Telegram com o token dentro — loga no logger dele,
+    # propagando para cá. Preso ao handler, todo registro passa pelo filtro
+    # independentemente de qual biblioteca o emitiu (vazamento real, 2026-09-07).
+    filtro = FiltroDeSegredos()
+
     ch = logging.StreamHandler(sys.stdout)
     ch.setFormatter(fmt)
+    ch.addFilter(filtro)
     root.addHandler(ch)
 
     # Arquivo texto rotativo (5MB x 5)
     fh = RotatingFileHandler(TXT_LOG, maxBytes=5_000_000, backupCount=5, encoding="utf-8")
     fh.setFormatter(fmt)
+    fh.addFilter(filtro)
     root.addHandler(fh)
 
     root._bot_configured = True  # type: ignore[attr-defined]
@@ -101,12 +112,17 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
         "ts": datetime.now().isoformat(timespec="seconds"),
         "operacao": operacao,
         "exception": type(exc).__name__,
-        "mensagem": str(exc)[:500],
+        # `str(exc)` da python-telegram-bot é literalmente
+        # "The token `<token>` was rejected by the server" — e esta entrada
+        # vai para errors.jsonl, para o bloco de notas do Desktop E pela rede
+        # para o n8n. Redigir aqui, não em cada destino.
+        "mensagem": redigir(str(exc))[:500],
         "arquivo": os.path.basename(frame.filename),
         "funcao": frame.function,
         "linha": frame.lineno,
-        "contexto": contexto or {},
-        "traceback": traceback.format_exc(limit=5).splitlines()[-8:],
+        "contexto": {k: redigir(v) if isinstance(v, str) else v
+                     for k, v in (contexto or {}).items()},
+        "traceback": [redigir(l) for l in traceback.format_exc(limit=5).splitlines()[-8:]],
     }
     # JSONL (uma linha por erro — fácil de tail e n8n consumir)
     try:

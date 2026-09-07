@@ -14,6 +14,8 @@ __pycache__/
 # Dados locais (não subir para o GitHub)
 envios.log
 rastreador.log
+monitor.log
+data/monitor_status.json
 data/rastreador_auto.log
 data/ml_profile/
 data/bot_ofertas.db

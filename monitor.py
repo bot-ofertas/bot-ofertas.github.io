@@ -17,6 +17,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# monitor.py escreve seu próprio log e NÃO passa por core.error_logger.setup_logging,
+# então o filtro de segredos de lá não o alcança. Foi por aqui que o token do
+# Telegram foi parar em monitor.log — commitado num repositório público
+# (achado em 2026-09-07): a exceção da python-telegram-bot diz
+# "The token `<token>` was rejected by the server", e `str(e)` ia inteiro
+# para o log e para data/monitor_status.json.
+from core.segredos import FiltroDeSegredos, redigir
+
 _STATUS_ARQUIVO = os.path.join("data", "monitor_status.json")
 
 logging.basicConfig(
@@ -25,6 +33,8 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s",
     encoding="utf-8",
 )
+for _h in logging.getLogger().handlers:
+    _h.addFilter(FiltroDeSegredos())
 
 
 async def _checar_telegram(token: str) -> dict:
@@ -36,7 +46,7 @@ async def _checar_telegram(token: str) -> dict:
             me = await bot.get_me()
         return {"ok": True, "username": me.username}
     except Exception as e:
-        return {"ok": False, "erro": str(e)}
+        return {"ok": False, "erro": redigir(str(e))}
 
 
 def _checar_produtos() -> dict:
@@ -48,7 +58,7 @@ def _checar_produtos() -> dict:
     except FileNotFoundError:
         return {"ok": True, "total": 0, "pendentes": 0}
     except Exception as e:
-        return {"ok": False, "erro": str(e)}
+        return {"ok": False, "erro": redigir(str(e))}
 
 
 async def main() -> None:
