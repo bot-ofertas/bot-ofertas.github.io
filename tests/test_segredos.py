@@ -37,10 +37,22 @@ sys.path.insert(0, BASE)
 
 from core.segredos import MASCARA, FiltroDeSegredos, redigir  # noqa: E402
 
-# Tokens de mentira, no formato real, para os testes não dependerem de
-# credencial de verdade nem virarem eles próprios um vazamento.
-TOKEN_FALSO = "8939890814:AAEJ1pbTESTETESTETESTETESTETESTETEST"
-TOKEN_FALSO_2 = "1234567890:AAGy43QzTESTETESTETESTETESTETESTEXX"
+# Tokens de mentira, montados em PEDAÇOS de proposito.
+#
+# Eles precisam ter o formato real, senao nao exercitam o padrao que a
+# redacao usa. Mas escritos inteiros no arquivo eles casam com a varredura
+# de `test_nenhum_arquivo_versionado_contem_segredo` — que roda sobre TODO
+# arquivo versionado, este inclusive — e o teste acusa a si mesmo (foi o que
+# quebrou o CI em 2026-09-07: local passou porque rodei antes do `git add`,
+# e `git ls-files` ainda nao via este arquivo).
+#
+# A saida NAO e excluir este arquivo da varredura: isso abriria justamente
+# o ponto cego que ela existe para fechar — qualquer segredo de verdade
+# colado aqui passaria batido. Montando em tempo de execucao, o valor tem o
+# formato certo para os testes e nenhum literal do arquivo casa com o padrao.
+_ID_FALSO = "1" + "234567890"
+TOKEN_FALSO = _ID_FALSO + ":" + "AA" + "EJ1pb" + "TESTE" * 6
+TOKEN_FALSO_2 = "9" + "876543210" + ":" + "AA" + "Gy43Qz" + "TESTE" * 6
 
 
 def _logger_com_filtro():
