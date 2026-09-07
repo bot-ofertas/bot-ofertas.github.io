@@ -76,8 +76,34 @@ _BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _MARCAS_DO_PC = ("[pc-local]", "atualiza site (rastreador")
 
 # Quanto silencio do PC basta para a nuvem concluir que ele NAO esta
-# publicando. 0 desliga a checagem (a nuvem sempre espera dentro da janela).
-HORAS_SILENCIO_PADRAO = 6.0
+# publicando. 0 (o padrao) DESLIGA a checagem: dentro da janela, a nuvem
+# sempre espera.
+#
+# Por que o padrao e 0, e nao 6h como nasceu:
+#
+# A checagem foi criada em 2026-09-04 sobre a leitura de que o PC do Daniel
+# estava fora do ar havia 6 dias. Essa leitura era FALSA. O relatorio de
+# execucao da maquina dele (05/09) mostra o bot rodando e registrando rodadas
+# a noite inteira; o que estava quebrado era o push do `docs/` para o GitHub,
+# desde 29/08 — e como o push e justamente o sinal que esta funcao le,
+# "sem push" foi lido como "maquina morta".
+#
+# O erro custou caro: entre 04/09 17h e 05/09 13h a nuvem publicou 8 vezes em
+# cima de um PC que estava publicando, cada um com o seu banco de
+# deduplicacao. E o cenario de oferta repetida no grupo que a Regra 11 existe
+# para impedir.
+#
+# A licao nao e "o sinal e ruim", e sim que os dois erros possiveis NAO custam
+# o mesmo:
+#
+#   achar que o PC esta vivo quando esta morto  -> uma rodada de silencio
+#   achar que o PC esta morto quando esta vivo  -> oferta duplicada no grupo
+#
+# Entao a ausencia de sinal nunca pode, sozinha, autorizar a publicacao. Ligar
+# isto (>0) e uma decisao consciente de quem sabe que o push do site esta
+# saudavel — e desde 2026-09-05 uma falha de push aparece no relatorio
+# (`site_publisher_falhou`), o que torna possivel saber disso.
+HORAS_SILENCIO_PADRAO = 0.0
 
 # Quantos commits olhar para tras. Precisa cobrir com folga um dia de
 # publicacao do PC (ele empurra no maximo 1x/hora, ~17h de janela).

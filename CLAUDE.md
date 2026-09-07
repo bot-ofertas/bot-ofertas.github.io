@@ -227,13 +227,21 @@ Decidido pelo Daniel em 2026-09-04. O bot também roda num servidor Linux
 - **Estar dentro da janela do PC não prova que o PC está publicando.** O
   papel `nuvem` só se cala se houver SINAL DE VIDA recente do PC — as marcas
   que `core/site_publisher.py` deixa no histórico de `docs/`, visíveis a
-  qualquer checkout, sem exigir rede até o PC. Passado `PC_SILENCIO_MAX_H`
-  (6h) sem sinal, a nuvem assume. Bug real de 2026-09-04: PC fora do ar havia
-  6 dias e agendamento da nuvem morto havia 5 semanas, os grupos sem oferta
-  nenhuma — uma trava só de relógio teria mantido a nuvem calada de dia por
-  causa de um PC que não existia mais. E o contrário também vale: sem
-  histórico para olhar (checkout raso), a resposta é "não sei" e a nuvem
-  espera — nunca se age no escuro (mesmo princípio do psutil no supervisor).
+  qualquer checkout, sem exigir rede até o PC. Mas **ausência de sinal não é
+  prova de morte**, e `PC_SILENCIO_MAX_H` nasce em `0` — desligado. Ligar é
+  decisão consciente de quem sabe que o push do site está saudável.
+  Incidente de 2026-09-05 que fixou essa regra: eu li "o PC não empurra
+  `docs/` desde 29/08" como "o PC está fora do ar", quando o relatório da
+  máquina mostrava o bot publicando a noite toda — o que estava quebrado era
+  o push, e ele falhava em silêncio (`log.warning` e nada mais). A nuvem
+  publicou 8 vezes por cima do PC ativo. Os dois erros não custam o mesmo:
+  achar o PC vivo quando está morto custa uma rodada de silêncio; achar o PC
+  morto quando está vivo custa oferta duplicada no grupo (Regra 11). Desde
+  então toda falha do `core/site_publisher.py` vira `site_publisher_falhou`
+  no relatório, no `/health` e no n8n — sem isso o sinal não é confiável.
+  E sem histórico para olhar (checkout raso), a resposta é "não sei" e a
+  nuvem espera — nunca se age no escuro (mesmo princípio do psutil no
+  supervisor).
 - **Fuso não é detalhe.** `core/janela.py` compara com o relógio local, e um
   droplet nasce em UTC: sem `TZ=America/Sao_Paulo` a janela escorrega 3h e o
   papel `nuvem` publica por cima do PC ligado sem um erro sequer no log.

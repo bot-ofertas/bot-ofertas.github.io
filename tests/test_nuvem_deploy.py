@@ -339,6 +339,48 @@ def test_cache_guarda_o_fato_e_nao_a_conta():
         _solta_repo(papel, st)
 
 
+def test_por_padrao_a_ausencia_de_sinal_nao_libera_a_nuvem():
+    """A ausencia de sinal do PC NUNCA pode, sozinha, autorizar publicacao.
+
+    Incidente de 2026-09-05: a checagem nasceu com 6h de padrao, sobre a
+    leitura (falsa) de que o PC estava fora do ar. Ele estava publicando; o
+    que estava quebrado era o push do `docs/`, que e justamente o sinal lido
+    aqui. Resultado: 8 rodadas da nuvem por cima de um PC ativo, com bancos
+    de deduplicacao separados — oferta repetida no grupo.
+
+    Os dois erros nao custam o mesmo: achar o PC vivo quando esta morto custa
+    uma rodada de silencio; achar o PC morto quando esta vivo custa oferta
+    duplicada. Por isso o padrao e o lado seguro, e assumir "morto" e opt-in.
+    """
+    papel, st = _com_repo(
+        [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
+        PAPEL="nuvem", PC_SILENCIO_MAX_H=None,   # <- sem definir: o padrao
+        HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+    )
+    try:
+        assert papel.HORAS_SILENCIO_PADRAO == 0.0, (
+            "o padrao voltou a assumir que o PC morreu por falta de sinal"
+        )
+        morto, _ = papel.pc_parece_morto()
+        assert morto is False
+        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        assert pode is False, f"publicou dentro da janela do PC sem prova: {motivo}"
+    finally:
+        _solta_repo(papel, st)
+
+
+def test_falha_de_push_do_site_vira_erro_visivel():
+    """Um push que falha em silencio quebra DUAS coisas: o site congela e o
+    sinal de vida do PC mente. Todo caminho de erro do site_publisher precisa
+    chegar ao relatorio."""
+    texto = open(os.path.join(BASE, "core", "site_publisher.py"), encoding="utf-8").read()
+    assert "site_publisher_falhou" in texto, "as falhas de publicacao do site voltaram a ser mudas"
+    # nenhum `return False` de erro pode sair so com log.warning
+    corpo = texto[texto.index("def publicar_site"):]
+    for bloco in re.findall(r"log\.warning\([^)]*\)\s*\n\s*return False", corpo):
+        raise AssertionError(f"caminho de erro mudo: {bloco[:80]}")
+
+
 def test_checagem_de_silencio_pode_ser_desligada():
     papel, st = _com_repo(
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],

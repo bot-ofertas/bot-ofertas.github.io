@@ -62,6 +62,30 @@ def _marcar_publicado_agora() -> None:
         f.write(str(time.time()))
 
 
+def _falhou(etapa: str, detalhe: str, exc: BaseException | None = None) -> None:
+    """Registra uma falha de publicacao do site onde ela seja VISTA.
+
+    Ate aqui todo caminho de erro daqui era `log.warning` e um `return
+    False` — some no bot.log e nao aparece no relatorio do Desktop, no
+    /health nem no n8n. O custo disso ficou claro em 2026-09-05: o push do
+    `docs/` estava quebrado desde 29/08 (site congelado por 7 dias) e nao
+    havia UM registro de erro em lugar nenhum.
+
+    Pior que o site parado: `core/papel.py` usa exatamente essas marcas no
+    historico como sinal de vida do PC. Um push que falha em silencio faz um
+    publicador de nuvem concluir que o PC morreu e comecar a publicar por
+    cima dele — a mesma oferta duas vezes no grupo. O sinal so pode ser
+    confiavel se a falha dele for barulhenta.
+    """
+    msg = f"{etapa}: {detalhe}"[:400]
+    log.warning("publicar_site — %s", msg)
+    try:
+        from core import database as db  # noqa: PLC0415
+        db.registrar_erro("site_publisher_falhou", msg, exc=exc)
+    except Exception:
+        pass
+
+
 def publicar_site(origem: str = "local") -> bool:
     """Commita e publica docs/ (paginas SEO + sitemap) se houver mudanca.
 
@@ -79,7 +103,7 @@ def publicar_site(origem: str = "local") -> bool:
     try:
         add = _git("add", "docs/ofertas/", "docs/sitemap.xml", "docs/robots.txt")
         if add.returncode != 0:
-            log.warning("git add falhou: %s", add.stderr.strip()[:300])
+            _falhou("git add", add.stderr.strip()[:300])
             return False
 
         diff = _git("diff", "--cached", "--quiet")
@@ -88,25 +112,25 @@ def publicar_site(origem: str = "local") -> bool:
 
         commit = _git("commit", "-m", f"chore: atualiza site ({origem}) [skip ci]")
         if commit.returncode != 0:
-            log.warning("git commit falhou: %s", commit.stderr.strip()[:300])
+            _falhou("git commit", commit.stderr.strip()[:300])
             return False
 
         pull = _git("pull", "--rebase", "origin", "main")
         if pull.returncode != 0:
-            log.warning("git pull --rebase falhou (deixando commit local pra proxima tentativa): %s",
-                        pull.stderr.strip()[:300])
+            _falhou("git pull --rebase (o commit fica local para a proxima)",
+                    pull.stderr.strip()[:300])
             _git("rebase", "--abort")
             return False
 
         push = _git("push", "origin", "main")
         if push.returncode != 0:
-            log.warning("git push falhou (deixando commit local pra proxima tentativa): %s",
-                        push.stderr.strip()[:300])
+            _falhou("git push (o commit fica local para a proxima)",
+                    push.stderr.strip()[:300])
             return False
 
         _marcar_publicado_agora()
         log.info("Site publicado com sucesso (origem=%s).", origem)
         return True
     except Exception as e:
-        log.warning("publicar_site falhou inesperadamente: %s", e)
+        _falhou("excecao inesperada", str(e), exc=e)
         return False
