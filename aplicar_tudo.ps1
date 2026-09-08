@@ -42,7 +42,7 @@ function Ok($t)   { Write-Host "  OK: $t"   -ForegroundColor Green }
 function Aviso($t){ Write-Host "  AVISO: $t" -ForegroundColor Yellow }
 function Erro($t) { Write-Host "  ERRO: $t"  -ForegroundColor Red }
 
-$problemas = 0
+
 
 # -------------------------------------------------- achar git e python
 # "Existe no PATH" nao e o mesmo que "funciona" — dois motivos reais,
@@ -59,6 +59,8 @@ $problemas = 0
 # Por isso aqui se TESTA cada candidato de verdade (`--version`) e, se o
 # PATH nao servir, se procura nos lugares onde esses programas costumam ser
 # instalados.
+$problemas = 0
+
 function Testar-Programa($caminho) {
     if (-not $caminho) { return $false }
     try {
@@ -122,14 +124,21 @@ else {
     ) (Caminhos-Do-Registro @("HKLM:\SOFTWARE\GitForWindows",
                              "HKCU:\SOFTWARE\GitForWindows") "cmd\git.exe")
 }
+# Sem git NAO se aborta. O git serve para TRAZER codigo novo; o bot roda
+# sem ele. Quem publica no WhatsApp e o whatsapp_queue_sender.py, filho do
+# startup.py, e nenhum dos dois toca em git (so core/site_publisher.py e
+# core/papel.py tocam, e os dois toleram a ausencia). Tratar git como
+# obrigatorio foi erro meu de desenho: deixava o Daniel sem publicar por
+# causa de uma ferramenta que a publicacao nao usa.
 if (-not $git) {
-    Erro "nao achei um 'git' que funcione."
+    Aviso "nao achei um 'git' que funcione — vou seguir com o codigo que ja esta no disco."
     Onde-Procurei
-    Write-Host "        Se voce sabe onde ele esta, passe o caminho:" -ForegroundColor DarkGray
-    Write-Host "          .\aplicar_tudo.ps1 -SemAgenda -Git `"C:\caminho\git.exe`"" -ForegroundColor DarkGray
-    exit 1
+    Write-Host "        O bot NAO precisa de git para publicar; ele so nao vai receber" -ForegroundColor DarkGray
+    Write-Host "        as correcoes novas agora. Para trazer o codigo depois:" -ForegroundColor DarkGray
+    Write-Host "          .\aplicar_tudo.ps1 -Git `"C:\caminho\git.exe`"" -ForegroundColor DarkGray
+    $problemas++
 }
-Ok "git em $git"
+else { Ok "git em $git" }
 
 if ($Python -and (Testar-Programa $Python)) { $python = $Python }
 else {
@@ -161,7 +170,8 @@ Ok "python em $python"
 # pastas encontradas na frente do PATH DESTE PROCESSO, eles herdam a escolha
 # certa. E do processo: nada e gravado no registro nem no ambiente do
 # usuario (Regra 10 — nao alterar configuracao da maquina).
-$env:PATH = (Split-Path $python) + ";" + (Split-Path $git) + ";" + $env:PATH
+$env:PATH = (Split-Path $python) + ";" + $env:PATH
+if ($git) { $env:PATH = (Split-Path $git) + ";" + $env:PATH }
 
 # ------------------------------------------------------- rodada em curso
 Passo 2 "Conferindo se ha publicacao em andamento (Regra 10)"
@@ -180,6 +190,10 @@ Passo 3 "Parando o bot"
 & (Join-Path $BASE "stop.ps1")
 
 # ------------------------------------------------------------ traz o codigo
+if (-not $git) {
+    Passo 4 "Trazendo a branch: PULADO (sem git) — seguindo com o codigo do disco"
+}
+else {
 Passo 4 "Trazendo a branch $Branch"
 $sujo = & $git status --porcelain
 if ($sujo) {
@@ -194,6 +208,7 @@ if ($LASTEXITCODE -ne 0) { Erro "git fetch falhou (sem internet? sem credencial?
 if ($LASTEXITCODE -ne 0) { Erro "git checkout falhou"; exit 1 }
 & $git pull --ff-only origin $Branch | Out-Null
 Ok "codigo em $(& $git rev-parse --short HEAD)"
+}
 
 # ------------------------------------------------------------- validacao
 Passo 5 "Validando o codigo (compile + import real — Regra 2)"

@@ -499,6 +499,22 @@ if os.path.isfile(_apl):
     checar("nao grava PATH na maquina",
            "SetEnvironmentVariable" not in _t and "[Environment]::SetEnv" not in _t)
 
+    # 9. git AUSENTE NAO PODE IMPEDIR A PUBLICACAO. O git so traz codigo
+    #    novo; quem publica no WhatsApp e o whatsapp_queue_sender.py, filho
+    #    do startup.py, e nenhum dos dois toca em git. Tratar git como
+    #    obrigatorio deixava o bot parado por causa de uma ferramenta que a
+    #    publicacao nao usa (erro de desenho meu, corrigido em 08/09/2026).
+    _bloco_git = _t.split("if (-not $git)", 1)
+    checar("sem git o script avisa e segue, nao aborta",
+           len(_bloco_git) > 1 and "exit 1" not in _bloco_git[1].split("else")[0],
+           "sem git ainda aborta")
+    checar("sem git o passo de trazer a branch e pulado",
+           "PULADO (sem git)" in _t)
+    # E o python continua sendo fatal — sem ele nao ha bot nenhum.
+    checar("sem python continua abortando",
+           "nao achei um 'python' que funcione" in _t
+           and "exit 1" in _t.split("nao achei um 'python'")[1][:600])
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 8")[-1])
