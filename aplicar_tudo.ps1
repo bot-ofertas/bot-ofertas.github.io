@@ -284,9 +284,33 @@ else {
 
 # ------------------------------------------------------------- validacao
 Passo 6 "Validando o codigo (compile + import real — Regra 2)"
-& $python -m py_compile startup.py rastreador.py core/janela.py core/papel.py core/segredos.py
+
+# A lista e filtrada pelo que EXISTE no disco. `core/papel.py` e
+# `core/segredos.py` sao arquivos novos da branch: sem git eles nao foram
+# trazidos, e validar um arquivo inexistente derrubava o script com
+# "[Errno 2] No such file or directory: 'core/papel.py'" — travando o bot
+# por causa de um arquivo que ele nem usa ainda (visto no PC do Daniel,
+# 08/09/2026). O que importa validar e o que vai rodar.
+$paraCompilar = @()
+$paraImportar = @()
+foreach ($par in @(
+        @("startup.py",        "startup"),
+        @("rastreador.py",     "rastreador"),
+        @("core/janela.py",    "core.janela"),
+        @("core/papel.py",     "core.papel"),
+        @("core/segredos.py",  "core.segredos"),
+        @("core/database.py",  "core.database"),
+        @("integrations/whatsapp_sender.py", "integrations.whatsapp_sender"))) {
+    if (Test-Path (Join-Path $BASE $par[0])) {
+        $paraCompilar += $par[0]
+        $paraImportar += $par[1]
+    }
+}
+Write-Host "  validando $($paraCompilar.Count) arquivo(s) presentes" -ForegroundColor DarkGray
+
+& $python -m py_compile @paraCompilar
 if ($LASTEXITCODE -ne 0) { Erro "py_compile falhou"; exit 1 }
-& $python -c "import startup, core.janela, core.papel, core.segredos"
+& $python -c "import $($paraImportar -join ', ')"
 if ($LASTEXITCODE -ne 0) { Erro "import real falhou — o bot nao subiria"; exit 1 }
 Ok "compila e importa"
 

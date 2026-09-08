@@ -544,6 +544,17 @@ if os.path.isfile(_apl):
     checar("confere o import depois de registrar, e nao so instala",
            _t.count('import win32clipboard') >= 2)
 
+    # 13. A validacao listava arquivos que so existem NA BRANCH
+    #     (core/papel.py, core/segredos.py). Sem git eles nao foram
+    #     trazidos e o py_compile morria com "[Errno 2] No such file or
+    #     directory: 'core/papel.py'" — travando o bot por causa de um
+    #     arquivo que ele nem usa ainda (PC do Daniel, 08/09/2026).
+    checar("valida so os arquivos que existem no disco",
+           "Test-Path (Join-Path $BASE $par[0])" in _t,
+           "arquivo ausente derruba o script de novo")
+    checar("a lista de validacao e montada, nao fixa",
+           "$paraCompilar" in _t and "$paraImportar" in _t)
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])
