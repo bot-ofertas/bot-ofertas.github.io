@@ -515,9 +515,18 @@ if os.path.isfile(_apl):
            "nao achei um 'python' que funcione" in _t
            and "exit 1" in _t.split("nao achei um 'python'")[1][:600])
 
+    # 10. Python recem-instalado nao tem NADA (nem python-telegram-bot, nem
+    #     playwright). Sem instalar, o passo de import real falha com
+    #     ModuleNotFoundError e parece erro de codigo.
+    checar("instala as dependencias quando faltam",
+           "pip install" in _t and "requirements.txt" in _t)
+    checar("instala tambem o navegador do Playwright",
+           "playwright install chromium" in _t,
+           "sem o navegador a raspagem do ML nao roda")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
-           "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 8")[-1])
+           "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])
 
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")

@@ -28,6 +28,7 @@
 param(
     [string]$Branch = "claude/bot-ofertas-n8n-8d7qe2",
     [switch]$SemAgenda,
+    [switch]$SemDependencias,
     # Saida de emergencia: se a busca automatica nao achar, aponte o caminho
     #   .\aplicar_tudo.ps1 -Git "C:\...\git.exe" -Python "C:\...\python.exe"
     [string]$Git = "",
@@ -210,8 +211,35 @@ if ($LASTEXITCODE -ne 0) { Erro "git checkout falhou"; exit 1 }
 Ok "codigo em $(& $git rev-parse --short HEAD)"
 }
 
+# ------------------------------------------------------- dependencias
+# Um Python recem-instalado nao tem NADA: nem python-telegram-bot, nem
+# playwright, nem pyautogui. O passo seguinte (import real) falharia com
+# ModuleNotFoundError e pareceria erro de codigo. Achado em 08/09/2026: a
+# limpeza do sistema levou o Python inteiro, entao reinstalar significa
+# comecar do zero tambem nas dependencias.
+if ($SemDependencias) {
+    Passo 5 "Dependencias: pulado (-SemDependencias)"
+}
+else {
+    Passo 5 "Conferindo as dependencias do bot"
+    & $python -c "import telegram, playwright, dotenv, psutil" 2>$null
+    if ($LASTEXITCODE -ne 0) {
+        Aviso "faltam pacotes — instalando (pode levar alguns minutos)"
+        & $python -m pip install --disable-pip-version-check -q -r requirements.txt
+        if ($LASTEXITCODE -ne 0) { Erro "pip install falhou"; $problemas++ }
+        else {
+            # O playwright instala a biblioteca, mas o NAVEGADOR vem
+            # separado — sem ele a raspagem do Mercado Livre nao roda.
+            & $python -m playwright install chromium
+            if ($LASTEXITCODE -ne 0) { Aviso "playwright install chromium falhou — a raspagem do ML pode nao rodar"; $problemas++ }
+            else { Ok "dependencias e Chromium instalados" }
+        }
+    }
+    else { Ok "dependencias ja presentes" }
+}
+
 # ------------------------------------------------------------- validacao
-Passo 5 "Validando o codigo (compile + import real — Regra 2)"
+Passo 6 "Validando o codigo (compile + import real — Regra 2)"
 & $python -m py_compile startup.py rastreador.py core/janela.py core/papel.py core/segredos.py
 if ($LASTEXITCODE -ne 0) { Erro "py_compile falhou"; exit 1 }
 & $python -c "import startup, core.janela, core.papel, core.segredos"
@@ -219,7 +247,7 @@ if ($LASTEXITCODE -ne 0) { Erro "import real falhou — o bot nao subiria"; exit
 Ok "compila e importa"
 
 # ------------------------------------------------------------------ .env
-Passo 6 "Conferindo o .env"
+Passo 7 "Conferindo o .env"
 if (-not (Test-Path (Join-Path $BASE ".env"))) {
     Erro ".env nao existe — o bot nao tem token nem canal."
     exit 1
@@ -242,10 +270,10 @@ else { Ok "WHATSAPP_GROUP_NAME definido" }
 
 # ----------------------------------------------------------------- agenda
 if ($SemAgenda) {
-    Passo 7 "Agendador: pulado (-SemAgenda)"
+    Passo 8 "Agendador: pulado (-SemAgenda)"
 }
 else {
-    Passo 7 "Registrando o ciclo diario (liga 08:30 / desliga 02:00)"
+    Passo 8 "Registrando o ciclo diario (liga 08:30 / desliga 02:00)"
     $admin = ([Security.Principal.WindowsPrincipal] `
               [Security.Principal.WindowsIdentity]::GetCurrent()
              ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -264,7 +292,7 @@ else {
 }
 
 # ------------------------------------------------------------------ subir
-Passo 8 "Subindo o bot (processo PAI — Regra 10)"
+Passo 9 "Subindo o bot (processo PAI — Regra 10)"
 & (Join-Path $BASE "start.ps1")
 
 # "Chamar Popen nao e o mesmo que ter subido" (Regra 15): com .env invalido
