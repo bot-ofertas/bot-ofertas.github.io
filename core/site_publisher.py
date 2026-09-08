@@ -142,7 +142,15 @@ def publicar_site(origem: str = "local") -> bool:
             _falhou("git commit", commit.stderr.strip()[:300])
             return False
 
-        pull = _git("pull", "--rebase", "origin", "main")
+        # --autostash: uma rodada tambem regenera arquivos RASTREADOS que
+        # nao entram neste commit (assets/banner_cupom.png,
+        # docs/data/offers.json). Eles ficam como alteracao nao estagiada, e
+        # `git pull --rebase` se recusa a rodar com a arvore suja:
+        #   "cannot pull with rebase: You have unstaged changes."
+        # O commit do site ficava preso local, o push nunca acontecia, e o
+        # site parava de atualizar — sem nada quebrar visivelmente. Com
+        # --autostash o git guarda e devolve essas alteracoes sozinho.
+        pull = _git("pull", "--rebase", "--autostash", "origin", "main")
         if pull.returncode != 0:
             _falhou("git pull --rebase (o commit fica local para a proxima)",
                     pull.stderr.strip()[:300])

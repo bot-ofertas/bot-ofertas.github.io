@@ -853,6 +853,53 @@ def test_site_publisher_commita_sem_identidade_na_maquina():
                 os.environ[k] = v
 
 
+def test_pull_do_site_nao_trava_com_arvore_suja():
+    """Reproduzido ao vivo na rodada #265:
+
+      publicar_site — git pull --rebase: error: cannot pull with rebase:
+      You have unstaged changes. error: Please commit or stash them.
+
+    Uma rodada regenera arquivos RASTREADOS que o site_publisher nao
+    estagia (assets/banner_cupom.png, docs/data/offers.json). Eles ficam
+    como alteracao nao estagiada e o rebase se recusa a rodar: o commit do
+    site fica preso local, o push nunca acontece, e o site para de
+    atualizar sem nada quebrar visivelmente — que e exatamente o silencio
+    que fez a nuvem julgar o PC morto e publicar por cima dele (Regra 16).
+    """
+    import subprocess as sp_
+    import tempfile
+
+    texto = open(os.path.join(BASE, "core", "site_publisher.py"), encoding="utf-8").read()
+    assert '"pull", "--rebase", "--autostash"' in texto, \
+        "o pull do site voltou a travar com arvore suja"
+
+    # Prova mecanica: sem --autostash falha, com --autostash passa.
+    env = dict(os.environ, GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_SYSTEM=os.devnull)
+    with tempfile.TemporaryDirectory() as tmp:
+        remoto = os.path.join(tmp, "remoto.git")
+        clone = os.path.join(tmp, "clone")
+        sp_.run(["git", "init", "-q", "--bare", "-b", "main", remoto], check=True, env=env)
+        sp_.run(["git", "clone", "-q", remoto, clone], check=True, env=env)
+        g = lambda *a, **k: sp_.run(["git", *a], cwd=clone, env=env,
+                                    capture_output=True, text=True, **k)
+        g("config", "user.email", "t@e"); g("config", "user.name", "t")
+        os.makedirs(os.path.join(clone, "assets"))
+        open(os.path.join(clone, "assets", "banner.png"), "w").write("v1")
+        open(os.path.join(clone, "sitemap.xml"), "w").write("v1")
+        g("add", "-A"); g("commit", "-qm", "inicial"); g("push", "-q", "origin", "main")
+
+        # A rodada: regenera o banner (rastreado, NAO estagiado) e o site.
+        open(os.path.join(clone, "assets", "banner.png"), "w").write("v2")
+        open(os.path.join(clone, "sitemap.xml"), "w").write("v2")
+        g("add", "sitemap.xml"); g("commit", "-qm", "chore: atualiza site")
+
+        sem = g("pull", "--rebase", "origin", "main")
+        assert sem.returncode != 0 and "unstaged" in (sem.stderr + sem.stdout), \
+            "o cenario nao reproduziu a falha — teste sem valor"
+        com = g("pull", "--rebase", "--autostash", "origin", "main")
+        assert com.returncode == 0, com.stderr[:200]
+
+
 if __name__ == "__main__":
     import traceback
 
