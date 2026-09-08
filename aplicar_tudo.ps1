@@ -255,6 +255,25 @@ else {
         else {
             # O playwright instala a biblioteca, mas o NAVEGADOR vem
             # separado — sem ele a raspagem do Mercado Livre nao roda.
+            # O pywin32 instala DLLs (pywintypes*.dll, pythoncom*.dll) que
+            # precisam ser registradas. Sem isso o `import win32clipboard`
+            # falha com "DLL load failed" mesmo com o pacote instalado — e o
+            # sintoma seria de novo o WhatsApp mudo, agora com o pacote na
+            # lista. Rodar o postinstall e barato e idempotente.
+            & $python -c "import win32clipboard" 2>$null
+            if ($LASTEXITCODE -ne 0) {
+                Aviso "pywin32 instalado mas nao importa — rodando o postinstall"
+                & $python -m pywin32_postinstall -install 2>$null
+                & $python -c "import win32clipboard" 2>$null
+                if ($LASTEXITCODE -ne 0) {
+                    Erro "win32clipboard nao importa — o WhatsApp NAO vai conseguir anexar a foto"
+                    Write-Host "        (a Regra 5 aborta o envio sem a foto, entao nada sairia no grupo)" -ForegroundColor DarkGray
+                    Write-Host "        Tente numa janela de Administrador: python -m pywin32_postinstall -install" -ForegroundColor DarkGray
+                    $problemas++
+                }
+                else { Ok "pywin32 registrado" }
+            }
+
             & $python -m playwright install chromium
             if ($LASTEXITCODE -ne 0) { Aviso "playwright install chromium falhou — a raspagem do ML pode nao rodar"; $problemas++ }
             else { Ok "dependencias e Chromium instalados" }

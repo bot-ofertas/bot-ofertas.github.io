@@ -536,6 +536,14 @@ if os.path.isfile(_apl):
            "import telegram, playwright, dotenv, psutil, win32clipboard" in _t,
            "sem isso, faltando so o pywin32 o script acharia que esta tudo certo")
 
+    # 12. pywin32 instala DLLs que precisam ser registradas; sem isso o
+    #     `import win32clipboard` falha com "DLL load failed" MESMO com o
+    #     pacote instalado — e o sintoma volta a ser o WhatsApp mudo.
+    checar("roda o postinstall do pywin32 quando o import falha",
+           "pywin32_postinstall" in _t)
+    checar("confere o import depois de registrar, e nao so instala",
+           _t.count('import win32clipboard') >= 2)
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])
