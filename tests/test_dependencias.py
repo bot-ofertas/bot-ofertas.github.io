@@ -131,6 +131,52 @@ def test_pywin32_esta_declarado_e_so_para_windows():
         "pywin32 sem marcador de plataforma quebra a instalacao no Linux"
 
 
+# Nomes que o SISTEMA fornece — nao sao configuracao do bot e nao devem
+# aparecer no .env.example.
+_DO_SISTEMA = {
+    "GITHUB_ACTIONS", "USERNAME", "USERPROFILE", "HOME", "TEMP", "PATH",
+    "TZ", "LOCALAPPDATA", "PROGRAMFILES", "WT_SESSION",
+}
+
+
+def test_toda_variavel_lida_esta_no_env_example():
+    """Auditoria de 08/09/2026: o codigo lia 53 variaveis e 25 nao estavam no
+    .env.example. Quem reconstruisse o .env por ele — que e exatamente o que
+    se faz depois de perder a maquina — perdia cada uma em silencio: o valor
+    caia no padrao embutido sem nada avisando. Foi assim que
+    WHATSAPP_GROUP_NAME ficou vazio e a busca do grupo passou a procurar o
+    literal "Bot-Ofertas"."""
+    import ast as _ast
+
+    lidas = set()
+    for raiz, dirs, arquivos in os.walk(BASE):
+        dirs[:] = [d for d in dirs if d not in IGNORAR_DIRS and d != "tests"]
+        for arq in arquivos:
+            if not arq.endswith(".py"):
+                continue
+            try:
+                arvore = _ast.parse(open(os.path.join(raiz, arq),
+                                        encoding="utf-8", errors="replace").read())
+            except SyntaxError:
+                continue
+            for no in _ast.walk(arvore):
+                if (isinstance(no, _ast.Call) and isinstance(no.func, _ast.Attribute)
+                        and no.func.attr in ("getenv", "get") and no.args):
+                    a0 = no.args[0]
+                    if (isinstance(a0, _ast.Constant) and isinstance(a0.value, str)
+                            and a0.value.isupper()):
+                        lidas.add(a0.value)
+
+    texto = open(os.path.join(BASE, ".env.example"), encoding="utf-8").read()
+    declaradas = {l.split("=")[0].strip() for l in texto.splitlines()
+                  if "=" in l and not l.strip().startswith("#")}
+    faltando = sorted(n for n in lidas if n not in declaradas and n not in _DO_SISTEMA)
+    assert not faltando, (
+        "variavel lida pelo codigo e ausente do .env.example — quem "
+        "reconstruir o .env por ele perde a definicao em silencio:\n  "
+        + "\n  ".join(faltando))
+
+
 if __name__ == "__main__":
     import traceback
 

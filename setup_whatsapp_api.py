@@ -25,7 +25,15 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 API_URL = os.getenv("WHATSAPP_WEBHOOK_URL", "http://localhost:8080")
-API_KEY = os.getenv("WHATSAPP_API_KEY", "b6d3f7c9e2a48b5f7c1e9d2a4b8f5e7c")
+# Sem valor padrao: o anterior estava escrito aqui, num repositorio publico.
+# Uma chave que qualquer um le no GitHub autentica o envio de mensagem pelo
+# numero do Daniel (Regra 16) — melhor falhar dizendo o que fazer.
+API_KEY = os.getenv("WHATSAPP_API_KEY", "") or os.getenv("EVOLUTION_API_KEY", "")
+if not API_KEY:
+    raise SystemExit(
+        "WHATSAPP_API_KEY (ou EVOLUTION_API_KEY) nao esta no .env.\n"
+        "Gere uma: python -c \"import secrets; print(secrets.token_hex(16))\""
+    )
 INSTANCE = os.getenv("WHATSAPP_INSTANCE", "botofertas")
 
 

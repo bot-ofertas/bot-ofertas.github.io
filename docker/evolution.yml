@@ -4,10 +4,22 @@ services:
     container_name: bot_evolution_api
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      # Loopback SO. Esta porta serve o /manager da Evolution, que autentica
+      # com a MESMA chave que envia mensagem pelo numero do Daniel: publicada
+      # para fora, e um painel de controle do WhatsApp dele para quem achar o
+      # IP (Regra 16). Para acessar de outra maquina, tunel SSH:
+      #   ssh -L 8080:127.0.0.1:8080 usuario@servidor
+      - "127.0.0.1:8080:8080"
     environment:
       SERVER_URL: http://localhost:8080
-      AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:-b6d3f7c9e2a48b5f7c1e9d2a4b8f5e7c}
+      # SEM VALOR PADRAO, de proposito. O padrao anterior era uma chave
+      # FIXA escrita neste arquivo, num repositorio PUBLICO: quem subisse a
+      # pilha sem definir a variavel ficava com uma chave que qualquer um le
+      # no GitHub — e essa chave autentica o envio de mensagem pelo numero do
+      # Daniel (Regra 16). Agora o `docker compose` recusa subir e diz o que
+      # fazer. Gere a sua com:
+      #   python -c "import secrets; print(secrets.token_hex(16))"
+      AUTHENTICATION_API_KEY: '${EVOLUTION_API_KEY:?defina EVOLUTION_API_KEY no .env}'
       AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES: "true"
 
       DATABASE_ENABLED: "true"
