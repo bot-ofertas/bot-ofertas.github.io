@@ -34,7 +34,7 @@ APELIDOS = {
     "telegram": "python-telegram-bot",
     "PIL": "pillow",
     "amazon_paapi": "python-amazon-paapi",
-    "amazon_creatorsapi": "amazon-creatorsapi",
+    "amazon_creatorsapi": "amazon-creatorsapi-python-sdk",
     "bs4": "beautifulsoup4",
     "cv2": "opencv-python",
     "yaml": "pyyaml",

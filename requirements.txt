@@ -33,6 +33,9 @@ pywin32; sys_platform == "win32"
 pytrends
 
 # integrations/amazon_paapi.py importa `amazon_creatorsapi`, que e um
-# pacote DIFERENTE de `python-amazon-paapi` (ja listado acima).
-amazon-creatorsapi
+# pacote DIFERENTE de `python-amazon-paapi` (ja listado acima). O nome no
+# pip nao e derivavel do nome do import: e `amazon-creatorsapi-python-sdk`.
+# Escrever `amazon-creatorsapi` (404 no PyPI) faria o `pip install -r`
+# falhar INTEIRO e nao instalar nem o pywin32 — checado no PyPI antes.
+amazon-creatorsapi-python-sdk
 
