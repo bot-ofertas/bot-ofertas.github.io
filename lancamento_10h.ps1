@@ -1,4 +1,4 @@
-# Reinicia o bot (processo pai + filhos) -- o loop roda uma rodada
+﻿# Reinicia o bot (processo pai + filhos) -- o loop roda uma rodada
 # imediatamente ao iniciar, entao isso garante uma rodada fresca logo
 # as 10h, já com a priorizacao de itens "MAIS VENDIDO" (ver commit
 # 277c751, 2026-08-14) e com as ofertas mais atuais do momento (nao

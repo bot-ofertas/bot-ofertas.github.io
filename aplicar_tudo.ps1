@@ -1,4 +1,4 @@
-# aplicar_tudo.ps1 — aplica a branch e devolve o bot ao ar, num comando so.
+﻿# aplicar_tudo.ps1 — aplica a branch e devolve o bot ao ar, num comando so.
 #
 # Existe porque a sequencia manual (stop -> fetch -> checkout -> configurar
 # ciclo -> start) tem cinco pontos de falha silenciosa, e cada um deles ja

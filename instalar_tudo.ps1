@@ -1,4 +1,4 @@
-# instalar_tudo.ps1
+﻿# instalar_tudo.ps1
 # Um comando para deixar bot + n8n + ciclo diário funcionando.
 #
 # Existe porque a instalação virou uma sequência de oito passos manuais em

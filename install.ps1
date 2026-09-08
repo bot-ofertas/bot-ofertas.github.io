@@ -1,4 +1,4 @@
-# install.ps1 — Instalador completo do Bot Ofertas via PowerShell
+﻿# install.ps1 — Instalador completo do Bot Ofertas via PowerShell
 # Uso: .\install.ps1
 
 $ErrorActionPreference = "Stop"

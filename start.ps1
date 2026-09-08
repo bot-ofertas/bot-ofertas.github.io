@@ -1,4 +1,4 @@
-# start.ps1 — Inicia o Bot Ofertas em segundo plano
+﻿# start.ps1 — Inicia o Bot Ofertas em segundo plano
 $ErrorActionPreference = "Stop"
 $BASE = $PSScriptRoot
 Set-Location $BASE

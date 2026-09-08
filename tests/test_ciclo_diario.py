@@ -485,6 +485,33 @@ if os.path.isfile(_col):
     checar("le o corpo do /health mesmo em 503",
            "GetResponseStream" in _c)
 
+# ── Codificacao dos .ps1 ─────────────────────────────────────────────────
+# O Windows PowerShell 5.1 (o que vem no Windows) le um .ps1 SEM BOM como
+# cp1252, nao como UTF-8. Um travessao "—" (E2 80 94) vira "â€”", e o "\u201d"
+# do cp1252 (0x94) e uma ASPA que o parser aceita como fim de string: a
+# string fecha no meio e o arquivo inteiro deixa de ser analisavel.
+#
+# Nao e teorico. Em 07/09/2026, 10 dos 15 .ps1 estavam assim — start.ps1 e
+# stop.ps1 entre eles (o Daniel nao conseguia iniciar nem parar o bot), e
+# tambem aguardar_e_desligar.ps1 e acordar_e_iniciar.ps1, ou seja, o ciclo
+# liga/desliga nao tinha como funcionar. O erro no PC dele foi:
+#   ')' de fechamento ausente na expressao.
+print("\n[8] .ps1 legiveis pelo Windows PowerShell (BOM UTF-8)")
+_ps1 = subprocess.run(["git", "ls-files", "*.ps1"], cwd=RAIZ,
+                      capture_output=True, text=True).stdout.split()
+checar("achei os .ps1 do repositorio", len(_ps1) >= 10, f"{len(_ps1)} arquivos")
+# Caracteres que, decodificados como cp1252, viram aspa ou apostrofo — sao
+# estes que quebram o PARSER, nao a acentuacao comum (que so sai feia).
+_PERIGOSOS = "–—‘’“”"
+for _f in _ps1:
+    _b = open(os.path.join(RAIZ, _f), "rb").read()
+    _tem_bom = _b.startswith(b"\xef\xbb\xbf")
+    _txt = _b.decode("utf-8-sig")
+    _n = sum(_txt.count(c) for c in _PERIGOSOS)
+    checar(f"{_f} tem BOM UTF-8", _tem_bom,
+           f"sem BOM e com {_n} caractere(s) que quebram o parser" if _n
+           else "sem BOM (acentos sairiam errados)")
+
 # ── Resultado ────────────────────────────────────────────────────────────
 print()
 if _falhas:

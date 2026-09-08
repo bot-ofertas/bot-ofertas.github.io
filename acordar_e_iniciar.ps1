@@ -1,4 +1,4 @@
-# acordar_e_iniciar.ps1
+﻿# acordar_e_iniciar.ps1
 # Ação da tarefa BotOfertas-WakeUp: registra que o PC acordou e sobe o bot
 # pelo processo PAI.
 #

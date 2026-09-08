@@ -1,4 +1,4 @@
-# Reativa o WhatsApp apos pausa de 2h (pedido do Daniel, 2026-08-16 17:44 --
+﻿# Reativa o WhatsApp apos pausa de 2h (pedido do Daniel, 2026-08-16 17:44 --
 # ele precisava usar o PC e a automacao do WhatsApp estava atrapalhando).
 # Restaura WHATSAPP_GROUP_ID no .env e reinicia o bot pra pegar a mudanca.
 

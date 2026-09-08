@@ -1,4 +1,4 @@
-# aguardar_e_desligar.ps1
+﻿# aguardar_e_desligar.ps1
 # Chamado pela tarefa agendada BotOfertas-Shutdown no fim da janela de
 # operação (HORA_DESLIGAR, 02:00 por padrão — ver core/janela.py).
 # Se o bot estiver no meio de um ciclo de scraping/postagem, aguarda até

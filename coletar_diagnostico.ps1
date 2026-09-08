@@ -1,4 +1,4 @@
-# coletar_diagnostico.ps1 — junta o estado da instalacao num zip so.
+﻿# coletar_diagnostico.ps1 — junta o estado da instalacao num zip so.
 #
 # Serve para levar o diagnostico daqui para uma conversa/analise fora deste
 # PC. O que ele NAO faz, de proposito:

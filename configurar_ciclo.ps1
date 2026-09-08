@@ -1,4 +1,4 @@
-# configurar_ciclo.ps1 — liga o PC às 08:30 e desliga às 02:00, num comando só.
+﻿# configurar_ciclo.ps1 — liga o PC às 08:30 e desliga às 02:00, num comando só.
 #
 # Existe separado do instalar_tudo.ps1 de propósito: registrar o ciclo diário
 # não deveria depender de o n8n estar configurado. Quem só quer a máquina

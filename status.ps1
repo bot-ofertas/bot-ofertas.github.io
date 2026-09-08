@@ -1,4 +1,4 @@
-# status.ps1 — Estado do Bot Ofertas
+﻿# status.ps1 — Estado do Bot Ofertas
 $BASE = $PSScriptRoot
 
 Write-Host "==============================================" -ForegroundColor Cyan
