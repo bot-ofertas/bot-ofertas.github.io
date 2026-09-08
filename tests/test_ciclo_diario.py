@@ -524,6 +524,18 @@ if os.path.isfile(_apl):
            "playwright install chromium" in _t,
            "sem o navegador a raspagem do ML nao roda")
 
+    # 11. Sem git, o requirements.txt do disco e o ANTIGO — e era nele que
+    #     faltava o pywin32. Instalar a lista velha devolveria o Telegram e
+    #     deixaria o WhatsApp mudo do mesmo jeito.
+    checar("sem git, busca a lista de pacotes atualizada da branch",
+           "requirements_branch" in _t and "raw.githubusercontent.com" in _t)
+    checar("valida o que baixou antes de instalar",
+           '-match "(?m)^pywin32"' in _t,
+           "um 404 salvo em arquivo tambem 'baixa com sucesso'")
+    checar("a checagem de pacotes inclui o win32clipboard",
+           "import telegram, playwright, dotenv, psutil, win32clipboard" in _t,
+           "sem isso, faltando so o pywin32 o script acharia que esta tudo certo")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])

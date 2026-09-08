@@ -222,10 +222,35 @@ if ($SemDependencias) {
 }
 else {
     Passo 5 "Conferindo as dependencias do bot"
-    & $python -c "import telegram, playwright, dotenv, psutil" 2>$null
+
+    # Sem git, o requirements.txt do disco e o ANTIGO — e e justamente nele
+    # que faltava o pywin32, de quem vem o win32clipboard. Instalar a lista
+    # velha devolveria o Telegram e deixaria o WhatsApp mudo do mesmo jeito
+    # (a foto nao chega ao clipboard e o envio e abortado pela Regra 5).
+    # Entao, sem git, busco SO esta lista da branch — um arquivo de texto,
+    # nao codigo executavel.
+    $listaReq = Join-Path $BASE "requirements.txt"
+    if (-not $git) {
+        $urlReq = "https://raw.githubusercontent.com/bot-ofertas/bot-ofertas.github.io/$Branch/requirements.txt"
+        $tmpReq = Join-Path $env:TEMP "requirements_branch.txt"
+        try {
+            Invoke-WebRequest $urlReq -OutFile $tmpReq -UseBasicParsing -ErrorAction Stop
+            # So aceito se vier a lista de verdade: um 404 salvo em arquivo
+            # tambem "baixa com sucesso", e instalar uma pagina de erro nao
+            # da erro util nenhum.
+            if ((Get-Content $tmpReq -Raw) -match "(?m)^pywin32") {
+                $listaReq = $tmpReq
+                Ok "lista de pacotes atualizada trazida da branch (sem git)"
+            }
+            else { Aviso "o requirements.txt baixado nao parece valido — usando o do disco" }
+        }
+        catch { Aviso "nao consegui baixar a lista atualizada ($($_.Exception.Message)) — usando a do disco" }
+    }
+
+    & $python -c "import telegram, playwright, dotenv, psutil, win32clipboard" 2>$null
     if ($LASTEXITCODE -ne 0) {
         Aviso "faltam pacotes — instalando (pode levar alguns minutos)"
-        & $python -m pip install --disable-pip-version-check -q -r requirements.txt
+        & $python -m pip install --disable-pip-version-check -q -r $listaReq
         if ($LASTEXITCODE -ne 0) { Erro "pip install falhou"; $problemas++ }
         else {
             # O playwright instala a biblioteca, mas o NAVEGADOR vem
