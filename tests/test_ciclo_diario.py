@@ -481,6 +481,24 @@ if os.path.isfile(_apl):
                f"& $git {_cmd}" in _t,
                "chamada solta a 'git' volta a depender do PATH")
 
+    # 8. O PATH pode simplesmente nao ter git/python (visto em 08/09/2026).
+    #    O registro do Windows guarda onde os instaladores puseram cada um —
+    #    independe do PATH e de quem elevou a janela.
+    checar("procura tambem no registro do Windows",
+           "Caminhos-Do-Registro" in _t and "GitForWindows" in _t
+           and "PythonCore" in _t)
+    checar("aceita o caminho na mao quando a busca falha",
+           "[string]$Git" in _t and "[string]$Python" in _t)
+    checar("diz ONDE procurou quando nao acha",
+           "Onde-Procurei" in _t)
+    # Os filhos (start.ps1 e cia) fazem a propria busca e cairiam no mesmo
+    # atalho da Loja. Herdar o PATH do processo resolve — e e do PROCESSO,
+    # nada gravado na maquina (Regra 10).
+    checar("passa a escolha aos scripts filhos pelo PATH do processo",
+           "$env:PATH = (Split-Path $python)" in _t)
+    checar("nao grava PATH na maquina",
+           "SetEnvironmentVariable" not in _t and "[Environment]::SetEnv" not in _t)
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 8")[-1])

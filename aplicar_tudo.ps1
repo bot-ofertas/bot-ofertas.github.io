@@ -27,7 +27,11 @@
 [CmdletBinding()]
 param(
     [string]$Branch = "claude/bot-ofertas-n8n-8d7qe2",
-    [switch]$SemAgenda
+    [switch]$SemAgenda,
+    # Saida de emergencia: se a busca automatica nao achar, aponte o caminho
+    #   .\aplicar_tudo.ps1 -Git "C:\...\git.exe" -Python "C:\...\python.exe"
+    [string]$Git = "",
+    [string]$Python = ""
 )
 
 $BASE = $PSScriptRoot
@@ -64,11 +68,30 @@ function Testar-Programa($caminho) {
     catch { return $false }
 }
 
-function Achar-Programa($nome, [string[]]$ondeProcurar) {
+# O instalador do Git e o do Python registram onde se instalaram. E a fonte
+# mais confiavel: independe do PATH, de quem elevou a janela e de o programa
+# ter sido instalado "so para mim" ou "para todos".
+function Caminhos-Do-Registro($chaves, $sufixo) {
+    $achados = @()
+    foreach ($chave in $chaves) {
+        foreach ($k in (Get-ChildItem $chave -ErrorAction SilentlyContinue)) {
+            $v = (Get-ItemProperty $k.PSPath -ErrorAction SilentlyContinue).'(default)'
+            if ($v) { $achados += (Join-Path $v $sufixo) }
+        }
+        $direto = (Get-ItemProperty $chave -ErrorAction SilentlyContinue).InstallPath
+        if ($direto) { $achados += (Join-Path $direto $sufixo) }
+    }
+    return $achados
+}
+
+function Achar-Programa($nome, [string[]]$ondeProcurar, [string[]]$doRegistro = @()) {
+    $script:ultimaBusca = @()
     $candidatos = @()
     $doPath = Get-Command $nome -ErrorAction SilentlyContinue
     if ($doPath) { $candidatos += $doPath.Source }
+    $candidatos += $doRegistro
     foreach ($padrao in $ondeProcurar) {
+        $script:ultimaBusca += $padrao
         $candidatos += (Get-ChildItem $padrao -ErrorAction SilentlyContinue |
                         Sort-Object FullName -Descending |
                         ForEach-Object { $_.FullName })
@@ -77,35 +100,68 @@ function Achar-Programa($nome, [string[]]$ondeProcurar) {
     return $null
 }
 
+function Onde-Procurei() {
+    Write-Host "        Procurei no PATH, no registro do Windows e em:" -ForegroundColor DarkGray
+    foreach ($p in $script:ultimaBusca) { Write-Host "          $p" -ForegroundColor DarkGray }
+}
+
 Passo 1 "Conferindo git e python"
 
-$git = Achar-Programa "git" @(
-    "$env:ProgramFiles\Git\cmd\git.exe",
-    "${env:ProgramFiles(x86)}\Git\cmd\git.exe",
-    "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe"
-)
+if ($Git -and (Testar-Programa $Git)) { $git = $Git }
+else {
+    $git = Achar-Programa "git" @(
+        "$env:ProgramFiles\Git\cmd\git.exe",
+        "$env:ProgramFiles\Git\bin\git.exe",
+        "${env:ProgramFiles(x86)}\Git\cmd\git.exe",
+        "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe",
+        # GitHub Desktop traz o proprio git, e muita gente so tem esse
+        "$env:LOCALAPPDATA\GitHubDesktop\app-*\resources\app\git\cmd\git.exe",
+        "$env:USERPROFILE\scoop\shims\git.exe",
+        "$env:ProgramData\chocolatey\bin\git.exe",
+        "D:\Git\cmd\git.exe"
+    ) (Caminhos-Do-Registro @("HKLM:\SOFTWARE\GitForWindows",
+                             "HKCU:\SOFTWARE\GitForWindows") "cmd\git.exe")
+}
 if (-not $git) {
     Erro "nao achei um 'git' que funcione."
-    Write-Host "        Se voce abriu como Administrador, o PATH pode ser de OUTRO" -ForegroundColor DarkGray
-    Write-Host "        usuario. Tente numa janela NORMAL do PowerShell:" -ForegroundColor DarkGray
-    Write-Host "          powershell -ExecutionPolicy Bypass -File .\aplicar_tudo.ps1 -SemAgenda" -ForegroundColor DarkGray
+    Onde-Procurei
+    Write-Host "        Se voce sabe onde ele esta, passe o caminho:" -ForegroundColor DarkGray
+    Write-Host "          .\aplicar_tudo.ps1 -SemAgenda -Git `"C:\caminho\git.exe`"" -ForegroundColor DarkGray
     exit 1
 }
 Ok "git em $git"
 
-$python = Achar-Programa "python" @(
-    "$env:LOCALAPPDATA\Programs\Python\Python*\python.exe",
-    "$env:ProgramFiles\Python*\python.exe",
-    "C:\Python*\python.exe"
-)
+if ($Python -and (Testar-Programa $Python)) { $python = $Python }
+else {
+    $python = Achar-Programa "python" @(
+        "$env:LOCALAPPDATA\Programs\Python\Python*\python.exe",
+        "$env:ProgramFiles\Python*\python.exe",
+        "C:\Python*\python.exe",
+        "D:\Python*\python.exe",
+        # O Python DA LOJA de verdade (nao o atalho): fica em WindowsApps
+        # numa pasta PythonSoftwareFoundation.*, e esse executa.
+        "$env:LOCALAPPDATA\Microsoft\WindowsApps\PythonSoftwareFoundation.Python*\python.exe",
+        "$env:ProgramFiles\WindowsApps\PythonSoftwareFoundation.Python*\python.exe"
+    ) (Caminhos-Do-Registro @("HKLM:\SOFTWARE\Python\PythonCore",
+                             "HKCU:\SOFTWARE\Python\PythonCore") "InstallPath\python.exe")
+}
 if (-not $python) {
     Erro "nao achei um 'python' que funcione."
-    Write-Host "        Se apareceu 'Python was not found... Microsoft Store', o que" -ForegroundColor DarkGray
-    Write-Host "        esta no PATH e um ATALHO, nao o Python. Mesma saida: rode numa" -ForegroundColor DarkGray
-    Write-Host "        janela NORMAL do PowerShell, com -SemAgenda." -ForegroundColor DarkGray
+    Onde-Procurei
+    Write-Host "        'Python was not found... Microsoft Store' significa que o que" -ForegroundColor DarkGray
+    Write-Host "        esta no PATH e um ATALHO, nao o Python." -ForegroundColor DarkGray
+    Write-Host "        Se voce sabe onde ele esta, passe o caminho:" -ForegroundColor DarkGray
+    Write-Host "          .\aplicar_tudo.ps1 -SemAgenda -Python `"C:\caminho\python.exe`"" -ForegroundColor DarkGray
     exit 1
 }
 Ok "python em $python"
+
+# Os scripts filhos (start.ps1, stop.ps1, configurar_ciclo.ps1) fazem a
+# propria busca por `python` e cairiam no mesmo atalho da Loja. Pondo as
+# pastas encontradas na frente do PATH DESTE PROCESSO, eles herdam a escolha
+# certa. E do processo: nada e gravado no registro nem no ambiente do
+# usuario (Regra 10 — nao alterar configuracao da maquina).
+$env:PATH = (Split-Path $python) + ";" + (Split-Path $git) + ";" + $env:PATH
 
 # ------------------------------------------------------- rodada em curso
 Passo 2 "Conferindo se ha publicacao em andamento (Regra 10)"
