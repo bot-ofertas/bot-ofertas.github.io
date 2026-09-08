@@ -103,6 +103,26 @@ function Achar-Programa($nome, [string[]]$ondeProcurar, [string[]]$doRegistro = 
     return $null
 }
 
+# Sem git, os arquivos NOVOS da branch nao existem no disco —
+# `configurar_ciclo.ps1` nem sequer existe na main, entao o passo do
+# Agendador chamaria um arquivo inexistente. Buscar so o que o ciclo precisa,
+# do proprio repositorio do Daniel, resolve sem exigir a instalacao do git.
+function Buscar-DaBranch($nome) {
+    $destino = Join-Path $BASE $nome
+    $url = "https://raw.githubusercontent.com/bot-ofertas/bot-ofertas.github.io/$Branch/$nome"
+    try {
+        $pasta = Split-Path $destino
+        if (-not (Test-Path $pasta)) { New-Item -ItemType Directory -Force -Path $pasta | Out-Null }
+        Invoke-WebRequest $url -OutFile $destino -UseBasicParsing -ErrorAction Stop
+        # Um 404 tambem "baixa com sucesso": o corpo vira o arquivo. Um .ps1
+        # que comeca com "404" nao da erro util nenhum quando executado.
+        $primeira = (Get-Content $destino -TotalCount 1 -ErrorAction SilentlyContinue)
+        if ($primeira -match "^\s*404" ) { Remove-Item $destino -Force; return $false }
+        return $true
+    }
+    catch { return $false }
+}
+
 function Onde-Procurei() {
     Write-Host "        Procurei no PATH, no registro do Windows e em:" -ForegroundColor DarkGray
     foreach ($p in $script:ultimaBusca) { Write-Host "          $p" -ForegroundColor DarkGray }
@@ -353,6 +373,17 @@ else {
         $problemas++
     }
     else {
+        if (-not $git) {
+            # Sem git nada disso foi trazido; e `configurar_ciclo.ps1` nem
+            # existe na main, entao a chamada abaixo falharia por arquivo
+            # inexistente.
+            foreach ($arq in @("configurar_ciclo.ps1", "agendar_shutdown.ps1",
+                               "aguardar_e_desligar.ps1", "acordar_e_iniciar.ps1",
+                               "garantir_bot.py")) {
+                if (Buscar-DaBranch $arq) { Write-Host "  trazido: $arq" -ForegroundColor DarkGray }
+                else { Aviso "nao consegui trazer $arq — o ciclo pode ficar incompleto"; $problemas++ }
+            }
+        }
         & (Join-Path $BASE "configurar_ciclo.ps1") -SemGit
         if ($LASTEXITCODE -ne 0) { Erro "configurar_ciclo.ps1 terminou com erro"; $problemas++ }
         else { Ok "ciclo diario registrado" }

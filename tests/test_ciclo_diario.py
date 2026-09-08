@@ -555,6 +555,17 @@ if os.path.isfile(_apl):
     checar("a lista de validacao e montada, nao fixa",
            "$paraCompilar" in _t and "$paraImportar" in _t)
 
+    # 14. `configurar_ciclo.ps1` NAO EXISTE na main — e arquivo novo da
+    #     branch. Sem git ele nao esta no disco, e o passo do Agendador
+    #     chamaria um arquivo inexistente: o ciclo 08:30/02:00 que o Daniel
+    #     pediu nunca seria registrado.
+    checar("sem git, traz os arquivos do ciclo da branch",
+           "Buscar-DaBranch" in _t and "configurar_ciclo.ps1" in _t
+           and "agendar_shutdown.ps1" in _t)
+    checar("descarta um 404 salvo como arquivo",
+           '$primeira -match "^\\s*404"' in _t,
+           "um .ps1 comecando com 404 nao da erro util quando executado")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])

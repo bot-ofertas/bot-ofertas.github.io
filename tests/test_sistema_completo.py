@@ -21,6 +21,7 @@ Rodar:
     python tests/test_sistema_completo.py
 """
 import atexit, json, os, re, shutil, subprocess, sys, tempfile, threading, time
+from datetime import datetime, timezone
 import urllib.error, urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -39,6 +40,15 @@ let store = {};
 try { store = JSON.parse(fs.readFileSync(storeFile, 'utf8')); } catch (e) {}
 let ctx = {};
 if (ctxFile && fs.existsSync(ctxFile)) ctx = JSON.parse(fs.readFileSync(ctxFile, 'utf8'));
+
+// Relogio fixo opcional. O watchdog CALA-SE dentro da janela de silencio
+// (02:00-08:30, Regra 15), entao um teste que usa o relogio de verdade
+// falha todas as madrugadas — nao por regressao, mas por horario. Prender
+// Date.now e o mesmo recurso que o test_ciclo_diario ja usa.
+if (process.env.E2E_AGORA_MS) {
+  const fixo = Number(process.env.E2E_AGORA_MS);
+  Date.now = () => fixo;
+}
 
 const $getWorkflowStaticData = () => store;
 const $ = (nome) => ({ first: () => ({ json: ctx[nome] || {} }) });
@@ -255,18 +265,28 @@ except urllib.error.HTTPError as e:
 
 # ── 6. Watchdog do n8n percebe o bot morto ──────────────────────────────────
 print("\n[6] Watchdog na nuvem detecta queda do PC")
+# Relógio preso às 15:00 BRT (18:00 UTC): fora da janela de silêncio, onde
+# o watchdog DEVE alertar. Sem isso este bloco falha todas as madrugadas —
+# aconteceu de verdade, às 02:09 BRT de 08/09/2026, e a leitura fácil seria
+# "o watchdog quebrou" quando ele estava fazendo exatamente o que a Regra 15
+# manda: ficar calado no desligamento planejado.
+_AGORA = datetime(2026, 9, 8, 18, 0, 0, tzinfo=timezone.utc)
+_AGORA_MS = int(_AGORA.timestamp() * 1000)
+os.environ["E2E_AGORA_MS"] = str(_AGORA_MS)
+
 s = json.load(open(STORE_W1))
-s["ultimo_heartbeat_ts"] = int((time.time() - 45 * 60) * 1000)   # 45 min atrás
+s["ultimo_heartbeat_ts"] = _AGORA_MS - 45 * 60 * 1000          # 45 min atrás
 json.dump(s, open(STORE_W1, "w"))
 w = rodar_no("01-ingestao-e-watchdog.json", "Checar heartbeat", {}, STORE_W1)
 checar("alerta de queda disparado", w.get("alertar") is True, f"idade {w.get('idade_min')} min")
 checar("mensagem nomeia o problema", "parou de responder" in (w.get("texto") or ""))
 w2 = rodar_no("01-ingestao-e-watchdog.json", "Checar heartbeat", {}, STORE_W1)
 checar("não repete o alerta a cada 15 min", w2.get("alertar") is False)
-s = json.load(open(STORE_W1)); s["ultimo_heartbeat_ts"] = int(time.time() * 1000)
+s = json.load(open(STORE_W1)); s["ultimo_heartbeat_ts"] = _AGORA_MS
 json.dump(s, open(STORE_W1, "w"))
 w3 = rodar_no("01-ingestao-e-watchdog.json", "Checar heartbeat", {}, STORE_W1)
 checar("avisa quando o bot volta", w3.get("alertar") is True and "voltou" in w3.get("texto", ""))
+os.environ.pop("E2E_AGORA_MS", None)
 
 # ── 7. Spool: nada se perde com o n8n fora do ar ────────────────────────────
 print("\n[7] Queda do n8n não perde evento")
