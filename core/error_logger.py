@@ -26,6 +26,8 @@ import traceback
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
+from core.segredos import FiltroDeSegredos, redigir
+
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(BASE, "data")
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -68,38 +70,59 @@ def setup_logging(nivel: int = logging.INFO) -> None:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
+    # O filtro vai nos HANDLERS, não no logger raiz: filtro de logger só é
+    # consultado para quem chama aquele logger direto, e o `httpx` — que
+    # escreve a URL do Telegram com o token dentro — loga no logger dele,
+    # propagando para cá. Preso ao handler, todo registro passa pelo filtro
+    # independentemente de qual biblioteca o emitiu (vazamento real, 2026-09-07).
+    filtro = FiltroDeSegredos()
+
     ch = logging.StreamHandler(sys.stdout)
     ch.setFormatter(fmt)
+    ch.addFilter(filtro)
     root.addHandler(ch)
 
     # Arquivo texto rotativo (5MB x 5)
     fh = RotatingFileHandler(TXT_LOG, maxBytes=5_000_000, backupCount=5, encoding="utf-8")
     fh.setFormatter(fmt)
+    fh.addFilter(filtro)
     root.addHandler(fh)
 
     root._bot_configured = True  # type: ignore[attr-defined]
     logging.getLogger("bot").info("Log inicializado — txt=%s json=%s", TXT_LOG, JSON_LOG)
 
 
-def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) -> None:
+def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
+             _nivel: int = 1) -> None:
     """Grava um erro estruturado em JSON (para n8n consumir) + log texto.
 
     Args:
         operacao: identificador da operação (ex: 'envio_whatsapp', 'scrap_ml').
         exc: exceção capturada.
         contexto: dict com dados adicionais (produto, canal, url etc.).
+        _nivel: quantos quadros subir na pilha para achar QUEM falhou. O padrão
+            1 é o chamador direto. Quem chama por intermédio de outra função
+            (o `db.registrar_erro(..., exc=...)` faz isso) passa 2, senão o
+            "Onde" do relatório apontaria para o intermediário — que é sempre
+            o mesmo arquivo e não diz nada sobre a falha real.
     """
-    frame = inspect.stack()[1]
+    pilha = inspect.stack()
+    frame = pilha[min(_nivel, len(pilha) - 1)]
     entrada = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "operacao": operacao,
         "exception": type(exc).__name__,
-        "mensagem": str(exc)[:500],
+        # `str(exc)` da python-telegram-bot é literalmente
+        # "The token `<token>` was rejected by the server" — e esta entrada
+        # vai para errors.jsonl, para o bloco de notas do Desktop E pela rede
+        # para o n8n. Redigir aqui, não em cada destino.
+        "mensagem": redigir(str(exc))[:500],
         "arquivo": os.path.basename(frame.filename),
         "funcao": frame.function,
         "linha": frame.lineno,
-        "contexto": contexto or {},
-        "traceback": traceback.format_exc(limit=5).splitlines()[-8:],
+        "contexto": {k: redigir(v) if isinstance(v, str) else v
+                     for k, v in (contexto or {}).items()},
+        "traceback": [redigir(l) for l in traceback.format_exc(limit=5).splitlines()[-8:]],
     }
     # JSONL (uma linha por erro — fácil de tail e n8n consumir)
     try:
@@ -118,6 +141,8 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None) ->
         operacao, entrada["exception"], entrada["mensagem"],
         entrada["arquivo"], entrada["linha"], entrada["contexto"],
     )
+    # Espelho para o n8n (workflow 01 decide se vira alerta)
+    _espelhar_no_n8n(entrada)
 
 
 def _gravar_desktop_txt(e: dict) -> None:
@@ -181,6 +206,41 @@ def registrar_evento(operacao: str, mensagem: str, contexto: dict | None = None)
         _gravar_desktop_txt(entrada)
     except Exception:
         pass
+    _espelhar_no_n8n(entrada)
+
+
+# ── Espelho para o n8n ───────────────────────────────────────────────────────
+
+# Um surto de erro repetido (31 falhas em 21 min, 2026-08-23) viraria 31
+# mensagens no Telegram. O throttle deixa passar 1 evento por operação a
+# cada _JANELA_S — o suficiente pra saber que está acontecendo, sem
+# transformar o alerta em ruído que ninguém lê. O registro completo continua
+# indo pro errors.jsonl e pro bloco de notas, sem throttle nenhum.
+_JANELA_THROTTLE_S = 300
+_ultimo_evento_n8n: dict[str, float] = {}
+
+
+def _espelhar_no_n8n(entrada: dict) -> None:
+    """Envia o erro ao n8n (best-effort, com throttle por operação)."""
+    import time  # noqa: PLC0415
+
+    operacao = entrada.get("operacao", "")
+    agora = time.time()
+    if agora - _ultimo_evento_n8n.get(operacao, 0.0) < _JANELA_THROTTLE_S:
+        return
+    _ultimo_evento_n8n[operacao] = agora
+    try:
+        from integrations.n8n import emitir  # noqa: PLC0415
+        emitir("erro", {
+            "operacao": operacao,
+            "exception": entrada.get("exception", ""),
+            "mensagem": entrada.get("mensagem", ""),
+            "arquivo": entrada.get("arquivo", ""),
+            "linha": entrada.get("linha", 0),
+            "contexto": entrada.get("contexto", {}),
+        })
+    except Exception:
+        pass  # o n8n nunca pode atrapalhar o registro do erro
 
 
 def erros_recentes(limite: int = 50) -> list[dict]:

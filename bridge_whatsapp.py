@@ -127,7 +127,11 @@ def _enviar_whatsapp(mensagem: str) -> bool:
         pyautogui.hotkey("ctrl", "alt", "/")
         time.sleep(0.8)
 
-        pyautogui.typewrite("Bot-Ofertas", interval=0.07)
+        # Mesmo literal escrito na mao que havia em whatsapp_sender.py:
+        # quem tem o grupo com outro nome configura WHATSAPP_GROUP_NAME e
+        # esta busca continuaria procurando um grupo que nao existe.
+        from integrations.whatsapp_sender import nome_do_grupo  # noqa: PLC0415
+        pyautogui.typewrite(nome_do_grupo(), interval=0.07)
         time.sleep(1.5)
 
         pyautogui.press("down")

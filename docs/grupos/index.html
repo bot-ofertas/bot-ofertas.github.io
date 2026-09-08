@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grupos de Ofertas — Telegram e WhatsApp | Bot Ofertas</title>
+<meta name="description" content="Entre no grupo e receba as melhores ofertas de eletrônicos, celulares e informática todos os dias. Grátis, sem spam.">
+<link rel="canonical" href="https://bot-ofertas.github.io/grupos/">
+<meta property="og:title" content="Entre no grupo de ofertas — eletrônicos com até 70% OFF">
+<meta property="og:description" content="Ofertas garimpadas e conferidas todo dia. Telegram e WhatsApp, grátis.">
+<meta property="og:url" content="https://bot-ofertas.github.io/grupos/">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --linha:#252a35;
+    --txt:#eef1f6; --txt2:#a4adbd;
+    --tg:#2aabee; --wa:#25d366; --dourado:#ffc94d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--txt); min-height:100vh;
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    padding:28px 18px 56px;
+  }
+  .wrap{max-width:560px;margin:0 auto}
+  header{text-align:center;margin-bottom:28px}
+  .selo{
+    display:inline-block;background:rgba(255,201,77,.12);color:var(--dourado);
+    border:1px solid rgba(255,201,77,.35);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;margin-bottom:14px;
+  }
+  h1{font-size:27px;line-height:1.25;letter-spacing:-.4px}
+  h1 span{color:var(--dourado)}
+  .sub{color:var(--txt2);margin-top:10px;font-size:15px}
+  .btns{display:grid;gap:12px;margin:26px 0}
+  .btn{
+    display:flex;align-items:center;gap:13px;text-decoration:none;color:#08121b;
+    background:var(--tg);border-radius:14px;padding:16px 18px;font-weight:700;
+    font-size:16px;transition:transform .12s ease,filter .12s ease;
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .btn.wa{background:var(--wa)}
+  .btn small{display:block;font-weight:500;font-size:12.5px;opacity:.75}
+  .btn .ico{font-size:23px;line-height:1}
+  .btn .seta{margin-left:auto;font-size:19px}
+  .porque{background:var(--card);border:1px solid var(--linha);border-radius:14px;padding:18px 20px}
+  .porque h2{font-size:15px;margin-bottom:11px;color:var(--txt2);text-transform:uppercase;letter-spacing:.6px}
+  .porque li{list-style:none;padding:6px 0 6px 26px;position:relative;font-size:14.5px}
+  .porque li::before{content:"✓";position:absolute;left:0;color:var(--wa);font-weight:700}
+  .ofertas{margin-top:26px}
+  .ofertas h2{font-size:15px;margin-bottom:12px;color:var(--txt2);text-transform:uppercase;letter-spacing:.6px}
+  .oferta{
+    display:flex;gap:12px;align-items:center;background:var(--card);
+    border:1px solid var(--linha);border-radius:12px;padding:11px;margin-bottom:10px;
+    text-decoration:none;color:inherit;
+  }
+  .oferta:hover{border-color:#39404f}
+  .oferta img{width:58px;height:58px;object-fit:contain;background:#fff;border-radius:9px;flex:none}
+  .oferta .t{font-size:13.5px;line-height:1.35;max-height:37px;overflow:hidden}
+  .oferta .p{font-size:15px;font-weight:700;margin-top:3px}
+  .oferta .off{color:var(--wa);font-size:12.5px;font-weight:700}
+  .vazio{color:var(--txt2);font-size:14px;text-align:center;padding:14px}
+  footer{margin-top:30px;text-align:center;color:var(--txt2);font-size:12.5px;line-height:1.7}
+  footer a{color:var(--txt2)}
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f4f6fa;--card:#fff;--linha:#e2e6ee;--txt:#12161d;--txt2:#5c6675}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="selo">🔥 Grátis · sem spam</div>
+    <h1>Ofertas de eletrônicos com até <span>70% OFF</span>, todo dia</h1>
+    <p class="sub">Celulares, notebooks, TVs e informática. O preço é conferido contra o histórico antes de entrar no grupo.</p>
+  </header>
+
+  <div class="btns">
+    <a class="btn" id="btn-tg" href="https://t.me/ofertaseletronics" rel="noopener">
+      <span class="ico">📢</span>
+      <span>Entrar no Telegram<small>Canal oficial · notificação na hora</small></span>
+      <span class="seta">→</span>
+    </a>
+    <a class="btn wa" id="btn-wa" href="https://chat.whatsapp.com/JyJ9uLoZdE5LboH9GjAooC" rel="noopener">
+      <span class="ico">📲</span>
+      <span>Entrar no WhatsApp<small>Grupo · as melhores do dia</small></span>
+      <span class="seta">→</span>
+    </a>
+  </div>
+
+  <section class="porque">
+    <h2>Por que entrar</h2>
+    <ul>
+      <li>Desconto real conferido contra o histórico de preço — nada de “de/por” inflado.</li>
+      <li>Só oferta boa: poucas por dia, escolhidas por nota de qualidade.</li>
+      <li>Cupons e quedas de preço avisados assim que aparecem.</li>
+      <li>Sem cobrança, sem cadastro. Saia quando quiser.</li>
+    </ul>
+  </section>
+
+  <section class="ofertas">
+    <h2>Amostra do que sai no grupo</h2>
+    <div id="lista"><p class="vazio">Carregando ofertas…</p></div>
+  </section>
+
+  <footer>
+    <a href="/">Ver todas as ofertas no site</a><br>
+    Conteúdo publicitário. Podemos receber comissão pelas compras feitas por estes links,<br>
+    sem custo adicional para você.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Propaga a origem (utm_source) da campanha para os links dos grupos.
+  // É isto que responde "qual anúncio trouxe gente pro grupo" — sem isso,
+  // todo mundo chega como tráfego anônimo e não dá pra saber o que investir.
+  var params = new URLSearchParams(location.search);
+  var origem = params.get('utm_source') || params.get('origem') || 'site';
+  var campanha = params.get('utm_campaign') || 'grupo_ofertas';
+
+  function marcar(el, destino) {
+    if (!el) return;
+    try {
+      var u = new URL(el.getAttribute('href'));
+      u.searchParams.set('utm_source', origem);
+      u.searchParams.set('utm_medium', 'ponte');
+      u.searchParams.set('utm_campaign', campanha);
+      u.searchParams.set('utm_content', destino);
+      el.setAttribute('href', u.toString());
+    } catch (e) { /* href inválido: mantém como está */ }
+    el.addEventListener('click', function () {
+      try {
+        var k = 'cliques_grupo';
+        var d = JSON.parse(localStorage.getItem(k) || '{}');
+        var chave = destino + '|' + origem;
+        d[chave] = (d[chave] || 0) + 1;
+        localStorage.setItem(k, JSON.stringify(d));
+      } catch (e) { /* navegador sem storage: o clique segue normal */ }
+    });
+  }
+
+  marcar(document.getElementById('btn-tg'), 'telegram');
+  marcar(document.getElementById('btn-wa'), 'whatsapp');
+
+  // Prova social: as ofertas reais que o bot publicou, do mesmo JSON que
+  // alimenta o site. Falha em silêncio — a página existe para converter,
+  // e os botões acima não podem depender deste fetch.
+  var brl = function (v) {
+    return 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');
+  };
+
+  fetch('../data/offers.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (dados) {
+      var lista = document.getElementById('lista');
+      var itens = (dados.products || [])
+        .filter(function (p) { return p.link && p.titulo; })
+        .sort(function (a, b) { return (b.desconto_pct || 0) - (a.desconto_pct || 0); })
+        .slice(0, 3);
+
+      if (!itens.length) {
+        lista.innerHTML = '<p class="vazio">Novas ofertas em instantes — entre no grupo para receber.</p>';
+        return;
+      }
+
+      lista.innerHTML = itens.map(function (p) {
+        var off = p.desconto_pct ? '<span class="off">' + Math.round(p.desconto_pct) + '% OFF</span>' : '';
+        var img = p.foto
+          ? '<img src="' + p.foto + '" alt="" loading="lazy" referrerpolicy="no-referrer">'
+          : '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'/%3E" alt="">';
+        return '<a class="oferta" href="' + p.link + '" target="_blank" rel="nofollow sponsored noopener">' +
+               img +
+               '<span><span class="t">' + p.titulo.slice(0, 80) + '</span>' +
+               '<span class="p">' + brl(p.preco) + ' ' + off + '</span></span></a>';
+      }).join('');
+    })
+    .catch(function () {
+      document.getElementById('lista').innerHTML =
+        '<p class="vazio">Entre no grupo para ver as ofertas de hoje.</p>';
+    });
+})();
+</script>
+</body>
+</html>

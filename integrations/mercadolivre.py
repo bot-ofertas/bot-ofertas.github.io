@@ -25,14 +25,16 @@ TERMOS_BUSCA: dict[str, list[str]] = {
 }
 
 
-def _headers() -> dict:
-    token = os.getenv("ML_ACCESS_TOKEN", "").strip("'\"")
-    if not token:
-        raise RuntimeError(
-            "ML_ACCESS_TOKEN não definido no .env\n"
-            "  → Rode: python ml_auth.py"
-        )
-    return {"Authorization": f"Bearer {token}"}
+def _headers(forcar_token: bool = False) -> dict:
+    """Header autenticado, com renovação automática do token.
+
+    Antes lia ML_ACCESS_TOKEN direto do ambiente: quando o token de 6h
+    vencia (o do fluxo client_credentials sempre vence), toda chamada
+    passava a devolver 401 até alguém rodar `python ml_auth.py` à mão.
+    core.ml_token renova sozinho 10 min antes do vencimento.
+    """
+    from core.ml_token import cabecalhos  # noqa: PLC0415
+    return cabecalhos(forcar_token)
 
 
 def buscar_por_termo(termo: str, desconto_min: int = 15, limite: int = 20) -> list[dict]:
@@ -60,8 +62,11 @@ def buscar_por_termo(termo: str, desconto_min: int = 15, limite: int = 20) -> li
         if desconto_pct < desconto_min:
             continue
 
-        foto = item.get("thumbnail", "")
-        foto = foto.replace("I.jpg", "O.jpg") if foto else None
+        # alta_resolucao() em vez de replace("I.jpg", "O.jpg"): a troca por
+        # substring casa no meio de qualquer nome terminado em "I" e não
+        # sobe a variante 1x -> 2X (ver core/foto_url.py).
+        from core.foto_url import alta_resolucao  # noqa: PLC0415
+        foto = alta_resolucao(item.get("thumbnail", "")) or None
 
         produtos.append({
             "ml_id":              item["id"],

@@ -53,20 +53,33 @@ def _copiar_foto_hdrop(caminho: str) -> bool:
         return False
 
 
-def _copiar_texto(texto: str) -> bool:
-    try:
-        import win32clipboard  # noqa: PLC0415
-        import win32con  # noqa: PLC0415
-        win32clipboard.OpenClipboard()
+def _copiar_texto(texto: str, tentativas: int = 3) -> bool:
+    """Coloca o texto no clipboard. Tenta de novo antes de desistir.
+
+    `OpenClipboard` falha quando OUTRO processo esta com o clipboard aberto
+    naquele instante — e isso e transitorio por natureza (o usuario copiando
+    algo, outro app sincronizando). Desistir na primeira tentativa custava a
+    legenda inteira da oferta; esperar 200ms e tentar de novo resolve o caso
+    comum.
+    """
+    ultimo = None
+    for tentativa in range(1, max(1, tentativas) + 1):
         try:
-            win32clipboard.EmptyClipboard()
-            win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, texto)
-        finally:
-            win32clipboard.CloseClipboard()
-        return True
-    except Exception as e:
-        log.warning("clipboard texto: %s", e)
-        return False
+            import win32clipboard  # noqa: PLC0415
+            import win32con  # noqa: PLC0415
+            win32clipboard.OpenClipboard()
+            try:
+                win32clipboard.EmptyClipboard()
+                win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, texto)
+            finally:
+                win32clipboard.CloseClipboard()
+            return True
+        except Exception as e:
+            ultimo = e
+            if tentativa < tentativas:
+                time.sleep(0.2)
+    log.warning("clipboard texto falhou em %d tentativa(s): %s", tentativas, ultimo)
+    return False
 
 
 def _janela_e_processo_whatsapp(w) -> bool:
@@ -366,10 +379,26 @@ def _enviar_silencioso_impl(nome_grupo: str, mensagem: str, caminho_foto: str = 
             _limpar_campo_texto(pyautogui)
             time.sleep(0.2)
 
-            # Legenda: cola direto (preview já foca a caixa)
-            if _copiar_texto(mensagem):
-                pyautogui.hotkey("ctrl", "v")
-                time.sleep(0.5)
+            # Legenda: cola direto (preview já foca a caixa).
+            #
+            # Se ela NAO entrar no clipboard, o envio e abortado — o `Enter`
+            # abaixo estava fora deste `if`, entao um clipboard ocupado fazia
+            # a foto ser enviada SOZINHA: sem descricao, sem preco e sem o
+            # link de afiliado (que mora na legenda). E a funcao ainda
+            # devolvia True, registrando "foto+legenda enviada". Post
+            # quebrado no grupo, comissao zero, e nada no log dizendo.
+            # Regra 5: a mensagem sai como uma unidade ou nao sai.
+            if not _copiar_texto(mensagem):
+                log.error("Legenda nao entrou no clipboard — abortando "
+                          "(nao envio foto sem descricao nem link de afiliado)")
+                pyautogui.press("escape")
+                time.sleep(0.2)
+                pyautogui.press("escape")
+                _devolver_foco(janela, janela_anterior)
+                return False
+
+            pyautogui.hotkey("ctrl", "v")
+            time.sleep(0.5)
 
             # Enter envia (dentro do preview de foto, Enter dispara envio)
             pyautogui.press("enter")

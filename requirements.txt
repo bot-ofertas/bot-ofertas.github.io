@@ -14,3 +14,28 @@ psutil
 telethon>=1.44.0
 pywinauto
 python-amazon-paapi>=6.3.0
+
+# --- Acrescentados em 2026-09-08 -------------------------------------------
+# O PC do Daniel ficou sem Python (limpeza de sistema). Reinstalar e rodar
+# `pip install -r requirements.txt` NAO devolvia o bot ao ar, porque estes
+# tres eram importados pelo codigo e nunca estiveram na lista.
+
+# pywin32 traz win32clipboard/win32api/win32con/win32event/win32process.
+# Sem ele, `_copiar_arquivo_clipboard` devolve False, a foto nao chega ao
+# clipboard e o envio e ABORTADO — porque a Regra 5 exige foto + legenda
+# como uma unidade so. Ou seja: sem pywin32 o WhatsApp nao publica nada, e
+# a unica pista e um `log.warning("clipboard CF_HDROP: ...")`.
+# So Windows: no servidor Linux (deploy/) quem envia e a Evolution API.
+pywin32; sys_platform == "win32"
+
+# core/trending.py — assuntos em alta. Tem fallback, mas sem ele a
+# funcionalidade some silenciosamente.
+pytrends
+
+# integrations/amazon_paapi.py importa `amazon_creatorsapi`, que e um
+# pacote DIFERENTE de `python-amazon-paapi` (ja listado acima). O nome no
+# pip nao e derivavel do nome do import: e `amazon-creatorsapi-python-sdk`.
+# Escrever `amazon-creatorsapi` (404 no PyPI) faria o `pip install -r`
+# falhar INTEIRO e nao instalar nem o pywin32 — checado no PyPI antes.
+amazon-creatorsapi-python-sdk
+

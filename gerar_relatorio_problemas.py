@@ -46,6 +46,30 @@ def _resumo_por_tipo(erros: list[tuple]) -> dict[str, int]:
     return resumo
 
 
+def _quarentena() -> list[dict]:
+    """Produtos fora de rotação por falha repetida de publicação.
+
+    Lê o banco direto (sem importar core.database) pelo mesmo motivo de
+    _erros_24h(): este script roda como tarefa agendada isolada e não pode
+    falhar por causa de uma dependência do bot que não carregou.
+    """
+    if not os.path.exists(DB_PATH):
+        return []
+    agora = datetime.datetime.now().isoformat()
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.execute(
+                "SELECT produto_id, titulo, tentativas, mensagem, quarentena_ate "
+                "FROM falhas_publicacao WHERE quarentena_ate > ? "
+                "ORDER BY ultima_falha DESC LIMIT 20",
+                (agora,),
+            )
+            return [dict(r) for r in cur.fetchall()]
+    except sqlite3.OperationalError:
+        return []   # banco antigo, sem a tabela ainda
+
+
 def gerar_relatorio() -> str:
     from core.monitor import verificar_saude  # noqa: PLC0415
 
@@ -85,6 +109,20 @@ def gerar_relatorio() -> str:
             linhas.append(f"    {mensagem}")
             if produto_id:
                 linhas.append(f"    produto: {produto_id}")
+            linhas.append("")
+
+    quarentena = _quarentena()
+    if quarentena:
+        linhas.append("-" * 70)
+        linhas.append(f"PRODUTOS EM QUARENTENA: {len(quarentena)}")
+        linhas.append("(falharam ao publicar várias vezes seguidas e saíram de")
+        linhas.append(" rotação — voltam sozinhos quando o prazo vencer)")
+        linhas.append("-" * 70)
+        for q in quarentena:
+            titulo = (q.get("titulo") or "")[:60]
+            linhas.append(f"[{q['produto_id']}] {titulo}")
+            linhas.append(f"    {q['tentativas']} tentativa(s) · {q.get('mensagem') or ''}")
+            linhas.append(f"    volta em: {(q.get('quarentena_ate') or '')[:16].replace('T', ' ')}")
             linhas.append("")
 
     linhas.append("=" * 70)

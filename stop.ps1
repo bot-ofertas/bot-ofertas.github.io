@@ -1,4 +1,4 @@
-# stop.ps1 — Para o Bot Ofertas
+﻿# stop.ps1 — Para o Bot Ofertas
 $BASE = $PSScriptRoot
 
 $ps = Get-CimInstance Win32_Process | Where-Object {

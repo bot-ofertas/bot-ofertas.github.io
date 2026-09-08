@@ -47,6 +47,22 @@ def _git(*args: str) -> subprocess.CompletedProcess:
     )
 
 
+def _identidade_minima() -> list[str]:
+    """Argumentos `-c` de identidade — vazio quando a maquina ja tem uma.
+
+    Nao sobrescreve identidade existente de proposito: no PC do Daniel os
+    commits do site sao dele, e trocar o autor por um generico mudaria o
+    historico que qualquer um le para saber quem publicou o que.
+    """
+    try:
+        r = _git("config", "user.email")
+        if r.returncode == 0 and r.stdout.strip():
+            return []
+    except Exception:
+        pass
+    return ["-c", "user.name=Bot-Ofertas", "-c", "user.email=bot@github.com"]
+
+
 def _pode_publicar_agora() -> bool:
     try:
         with open(_ESTADO_PATH, encoding="utf-8") as f:
@@ -60,6 +76,30 @@ def _marcar_publicado_agora() -> None:
     os.makedirs(os.path.dirname(_ESTADO_PATH), exist_ok=True)
     with open(_ESTADO_PATH, "w", encoding="utf-8") as f:
         f.write(str(time.time()))
+
+
+def _falhou(etapa: str, detalhe: str, exc: BaseException | None = None) -> None:
+    """Registra uma falha de publicacao do site onde ela seja VISTA.
+
+    Ate aqui todo caminho de erro daqui era `log.warning` e um `return
+    False` — some no bot.log e nao aparece no relatorio do Desktop, no
+    /health nem no n8n. O custo disso ficou claro em 2026-09-05: o push do
+    `docs/` estava quebrado desde 29/08 (site congelado por 7 dias) e nao
+    havia UM registro de erro em lugar nenhum.
+
+    Pior que o site parado: `core/papel.py` usa exatamente essas marcas no
+    historico como sinal de vida do PC. Um push que falha em silencio faz um
+    publicador de nuvem concluir que o PC morreu e comecar a publicar por
+    cima dele — a mesma oferta duas vezes no grupo. O sinal so pode ser
+    confiavel se a falha dele for barulhenta.
+    """
+    msg = f"{etapa}: {detalhe}"[:400]
+    log.warning("publicar_site — %s", msg)
+    try:
+        from core import database as db  # noqa: PLC0415
+        db.registrar_erro("site_publisher_falhou", msg, exc=exc)
+    except Exception:
+        pass
 
 
 def publicar_site(origem: str = "local") -> bool:
@@ -79,34 +119,53 @@ def publicar_site(origem: str = "local") -> bool:
     try:
         add = _git("add", "docs/ofertas/", "docs/sitemap.xml", "docs/robots.txt")
         if add.returncode != 0:
-            log.warning("git add falhou: %s", add.stderr.strip()[:300])
+            _falhou("git add", add.stderr.strip()[:300])
             return False
 
         diff = _git("diff", "--cached", "--quiet")
         if diff.returncode == 0:
             return False  # nada novo pra publicar
 
-        commit = _git("commit", "-m", f"chore: atualiza site ({origem}) [skip ci]")
+        # Sem identidade configurada o `git commit` morre com "Author identity
+        # unknown" e o site nunca sai — e no runner do GitHub Actions e
+        # exatamente esse o estado (a identidade so e definida depois, no
+        # passo do workflow que empurra). Observado ao vivo na rodada #264,
+        # nas duas origens: rastreador-ml e rastreador-amazon.
+        #
+        # A identidade vai por `-c`, valendo so para ESTA invocacao: nao
+        # escreve em ~/.gitconfig (Regra 10 — nao alterar configuracao da
+        # maquina) e, no PC do Daniel, que ja tem identidade propria, o
+        # fallback nem chega a ser usado.
+        commit = _git(*_identidade_minima(),
+                      "commit", "-m", f"chore: atualiza site ({origem}) [skip ci]")
         if commit.returncode != 0:
-            log.warning("git commit falhou: %s", commit.stderr.strip()[:300])
+            _falhou("git commit", commit.stderr.strip()[:300])
             return False
 
-        pull = _git("pull", "--rebase", "origin", "main")
+        # --autostash: uma rodada tambem regenera arquivos RASTREADOS que
+        # nao entram neste commit (assets/banner_cupom.png,
+        # docs/data/offers.json). Eles ficam como alteracao nao estagiada, e
+        # `git pull --rebase` se recusa a rodar com a arvore suja:
+        #   "cannot pull with rebase: You have unstaged changes."
+        # O commit do site ficava preso local, o push nunca acontecia, e o
+        # site parava de atualizar — sem nada quebrar visivelmente. Com
+        # --autostash o git guarda e devolve essas alteracoes sozinho.
+        pull = _git("pull", "--rebase", "--autostash", "origin", "main")
         if pull.returncode != 0:
-            log.warning("git pull --rebase falhou (deixando commit local pra proxima tentativa): %s",
-                        pull.stderr.strip()[:300])
+            _falhou("git pull --rebase (o commit fica local para a proxima)",
+                    pull.stderr.strip()[:300])
             _git("rebase", "--abort")
             return False
 
         push = _git("push", "origin", "main")
         if push.returncode != 0:
-            log.warning("git push falhou (deixando commit local pra proxima tentativa): %s",
-                        push.stderr.strip()[:300])
+            _falhou("git push (o commit fica local para a proxima)",
+                    push.stderr.strip()[:300])
             return False
 
         _marcar_publicado_agora()
         log.info("Site publicado com sucesso (origem=%s).", origem)
         return True
     except Exception as e:
-        log.warning("publicar_site falhou inesperadamente: %s", e)
+        _falhou("excecao inesperada", str(e), exc=e)
         return False

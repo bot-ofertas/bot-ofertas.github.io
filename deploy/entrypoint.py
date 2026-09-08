@@ -17,6 +17,22 @@ setup_logging()
 from core.healthcheck import iniciar_healthcheck
 iniciar_healthcheck()
 
+# Diz na primeira linha do log quem este container e e se ele pode publicar
+# agora. Um servidor em papel `nuvem` fica quieto o dia inteiro DE PROPOSITO
+# (o PC esta ligado); sem esta linha, "quieto por decisao" e "quieto porque
+# quebrou" tem exatamente a mesma aparencia nos logs.
+import logging  # noqa: E402
+
+from core import papel  # noqa: E402
+
+_estado = papel.resumo()
+logging.getLogger("entrypoint").info(
+    "Papel=%s | pode publicar agora: %s (%s) | fuso %s%s",
+    _estado["papel"], _estado["pode_publicar"], _estado["motivo"],
+    _estado["utc_offset"],
+    "" if _estado["fuso_ok"] else "  <-- FORA DO HORARIO DE BRASILIA: confira TZ no .env",
+)
+
 # LOOP_MIN/LOOP_MAX são documentados no docker-compose.vps.yml/.env.example
 # como configuráveis, mas rastreador.py só lê --loop-min/--loop-max via
 # argparse — sem isso aqui, mudar LOOP_MIN/LOOP_MAX no .env da VPS não tinha

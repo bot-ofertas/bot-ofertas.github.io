@@ -75,6 +75,36 @@ async def rodar_uma_vez() -> None:
         print("❌ TOKEN_TELEGRAM não definido.")
         return
 
+    # Mesma pausa e mesma pré-checagem de rede do rastreador ML: a bandeira
+    # em data/pausado.flag vale para TODOS os processos (é por isso que ela
+    # é um arquivo, e não uma variável em memória), e sem DNS a rodada morre
+    # em timeouts encadeados em vez de sair em ~3s com a causa nomeada.
+    from core import pausa  # noqa: PLC0415
+    from core.net import dns_ok  # noqa: PLC0415
+    from integrations import n8n  # noqa: PLC0415
+
+    if pausa.pausado():
+        log(f"⏸️  Publicação pausada ({pausa.info().get('motivo', '')}) — Amazon não roda.")
+        return
+
+    # Papel desta instancia (core/papel.py). No PC nao muda nada — sem a
+    # variavel PAPEL o papel e "local" e a resposta e sempre "pode". Num
+    # servidor de nuvem e o que impede de publicar em cima do PC ligado:
+    # os bancos de deduplicacao sao separados, entao os dois publicando ao
+    # mesmo tempo mandam a MESMA oferta duas vezes para o grupo.
+    from core import papel as _papel  # noqa: PLC0415
+
+    _bloqueado, _motivo_papel = _papel.bloqueado()
+    if _bloqueado:
+        log(f"\u23f8\ufe0f  Rodada Amazon nao publica: {_motivo_papel}")
+        return
+
+    if not dns_ok("www.amazon.com.br"):
+        log("🌐 Sem resolução de DNS — pulando a rodada Amazon.")
+        db.registrar_erro("rede", "DNS indisponível — rodada Amazon pulada")
+        n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel", "fonte": "amazon"})
+        return
+
     db.inicializar()
     removidos = db.limpar_antigos(dias=2)
     if removidos:
@@ -107,7 +137,11 @@ async def rodar_uma_vez() -> None:
         com_cupom = sum(1 for p in produtos if p.get("cupom"))
         log(f"  {com_cupom} com cupom de desconto")
 
-        async with Bot(token=TOKEN_TELEGRAM) as bot:
+        # Cliente com timeout de leitura de 40s: com o padrão de 5s da
+        # biblioteca, um `send_photo` lento derrubava a rodada inteira com
+        # um "Timed out" seco (registro real de 2026-08-25 23:20).
+        from integrations.telegram_bot import criar_bot  # noqa: PLC0415
+        async with criar_bot(TOKEN_TELEGRAM) as bot:
             for item in produtos:
                 if publicados >= MAX_POR_EXECUCAO:
                     break
@@ -123,6 +157,12 @@ async def rodar_uma_vez() -> None:
                     # tagueado com ?tag=..., sem relação garantida com registros antigos)
                     if db.produto_id_existe(produto_id):
                         log(f"  ↩️  Duplicata: {item['titulo'][:50]}")
+                        continue
+
+                    # Quarentena: produto que já falhou várias vezes ao
+                    # publicar sai de rotação até expirar (ver core/database).
+                    if db.em_quarentena(produto_id):
+                        log(f"  🚫 Em quarentena: {item['titulo'][:50]}")
                         continue
 
                     # Validação anti-golpe (ajustada — cupons Amazon têm preço base real)
@@ -182,8 +222,24 @@ async def rodar_uma_vez() -> None:
                         db.inserir_produto(item)
                         db.atualizar_afiliado(produto_id, "amazon", item["affiliate_link"], "ok")
                         db.marcar_enviado(produto_id)
+                        db.limpar_falha_publicacao(produto_id)
                         publicados += 1
                         log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
+
+                        try:
+                            from integrations import n8n  # noqa: PLC0415
+                            n8n.emitir("oferta_publicada", {
+                                "produto_id": produto_id,
+                                "titulo": item.get("titulo"),
+                                "preco": item.get("preco"),
+                                "desconto_pct": item.get("desconto_pct"),
+                                "categoria": item.get("categoria", "amazon"),
+                                "foto": item.get("foto"),
+                                "link": item.get("affiliate_link"),
+                                "fonte": "amazon",
+                            })
+                        except Exception:
+                            pass
 
                         try:
                             from core.metrics import inc, set_gauge  # noqa: PLC0415
@@ -219,6 +275,28 @@ async def rodar_uma_vez() -> None:
                         except Exception as _e:
                             log(f"     ⚠️  Social: {_e}")
                         await asyncio.sleep(PAUSA_ENTRE_POSTS)
+                    else:
+                        # A falha de publicação não tinha NENHUM tratamento
+                        # aqui: o item simplesmente não era inserido e voltava
+                        # na rodada seguinte, para sempre, sem sequer virar
+                        # registro em erros_log. Agora conta tentativa e entra
+                        # em quarentena igual ao fluxo do Mercado Livre.
+                        db.registrar_erro("telegram", "falha ao publicar", produto_id)
+                        falha = db.registrar_falha_publicacao(
+                            produto_id, "falha ao publicar no Telegram (Amazon)",
+                            item.get("titulo", ""),
+                        )
+                        if falha["quarentena"]:
+                            log(f"  🚫 {falha['tentativas']}ª falha — quarentena até "
+                                f"{falha['quarentena_ate'][:16]}: {item.get('titulo','')[:50]}")
+                            try:
+                                from integrations import n8n  # noqa: PLC0415
+                                n8n.emitir("produto_quarentena", falha)
+                            except Exception:
+                                pass
+                        else:
+                            log(f"  ⚠️  Falha {falha['tentativas']}/{falha['max_tentativas']} "
+                                f"ao publicar: {item.get('titulo','')[:50]}")
                 except Exception as e_item:
                     # Um item malformado não pode derrubar o processo inteiro —
                     # loga e segue para o próximo (mesma proteção do rastreador.py).
