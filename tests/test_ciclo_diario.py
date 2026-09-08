@@ -447,14 +447,40 @@ if os.path.isfile(_apl):
            "IsInRole" in _t and "-SemAgenda" in _t)
     # 3. a licao do aguardar_e_desligar.ps1: Get-Command python sem
     #    -ErrorAction derruba o script inteiro, sem log.
-    checar("nao deixa Get-Command python derrubar o script",
-           "Get-Command python -ErrorAction SilentlyContinue" in _t)
+    # Vale para TODO Get-Command do arquivo, nao so o do python: com
+    # $ErrorActionPreference = "Stop" um deles sem -ErrorAction derruba o
+    # script inteiro, sem log — a armadilha do aguardar_e_desligar.ps1.
+    _gc = [l.strip() for l in _t.splitlines()
+           if "Get-Command" in l and not l.strip().startswith("#")]
+    checar("nenhum Get-Command pode derrubar o script",
+           _gc and all("-ErrorAction SilentlyContinue" in l for l in _gc),
+           f"{len(_gc)} chamada(s); sem guarda: "
+           + str([l for l in _gc if "-ErrorAction SilentlyContinue" not in l]))
     # 4. Regra 15: "chamar Popen nao e o mesmo que ter subido".
     checar("confirma que o startup.py sobreviveu a carencia",
            "startup.py*" in _t and "Start-Sleep" in _t)
     # 5. Regra 10: nunca parar no meio de uma rodada.
     checar("consulta execucao_em_andamento antes de parar",
            "execucao_em_andamento" in _t)
+    # 6. "Existe no PATH" nao e "funciona". Dois casos reais, vistos juntos
+    #    no PC do Daniel em 08/09/2026 numa janela de Administrador:
+    #    o `python` do PATH era o ATALHO da Microsoft Store (executado, so
+    #    abre a loja), e o `git` nao existia — elevar trocou o perfil de
+    #    usuario e, com ele, o PATH.
+    checar("testa git e python de verdade, nao so se existem",
+           "Testar-Programa" in _t and "--version" in _t)
+    checar("ignora o atalho da Microsoft Store",
+           "WindowsApps" in _t)
+    checar("procura fora do PATH quando ele nao serve",
+           "Achar-Programa" in _t and "LOCALAPPDATA" in _t)
+    # 7. Comando inexistente lanca CommandNotFoundException e NAO mexe em
+    #    $LASTEXITCODE: a guarda `if ($LASTEXITCODE -ne 0)` nao pegava nada e
+    #    o script seguia com todos os passos de git falhando em silencio.
+    for _cmd in ("status --porcelain", "fetch origin", "checkout"):
+        checar(f"git '{_cmd}' chamado pelo caminho encontrado",
+               f"& $git {_cmd}" in _t,
+               "chamada solta a 'git' volta a depender do PATH")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 8")[-1])

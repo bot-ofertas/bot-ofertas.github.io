@@ -40,16 +40,71 @@ function Erro($t) { Write-Host "  ERRO: $t"  -ForegroundColor Red }
 
 $problemas = 0
 
-# ---------------------------------------------------------------- python
-Passo 1 "Conferindo o python"
-# -ErrorAction SilentlyContinue de proposito: ver o comentario 3 no topo.
-$cmdPython = Get-Command python -ErrorAction SilentlyContinue
-if (-not $cmdPython) {
-    Erro "'python' nao esta no PATH deste usuario."
-    Write-Host "        Reinstale o Python marcando 'Add python.exe to PATH'." -ForegroundColor DarkGray
+# -------------------------------------------------- achar git e python
+# "Existe no PATH" nao e o mesmo que "funciona" — dois motivos reais,
+# os dois vistos no PC do Daniel em 08/09/2026 numa janela de Administrador:
+#
+#   1. O Windows deixa ATALHOS em ...\WindowsApps\python.exe que nao sao o
+#      Python: executados, so abrem a Microsoft Store ("Python was not
+#      found; run without arguments to install..."). `Get-Command python`
+#      encontra esse atalho, entao a checagem "existe?" passava e o script
+#      seguia sem Python nenhum.
+#   2. Elevar para Administrador pode trocar o perfil de usuario, e com ele
+#      o PATH: `git` sumiu por completo ("O termo 'git' nao e reconhecido").
+#
+# Por isso aqui se TESTA cada candidato de verdade (`--version`) e, se o
+# PATH nao servir, se procura nos lugares onde esses programas costumam ser
+# instalados.
+function Testar-Programa($caminho) {
+    if (-not $caminho) { return $false }
+    try {
+        $saida = & $caminho --version 2>&1 | Out-String
+        return ($LASTEXITCODE -eq 0 -and $saida -match '\d+\.\d+')
+    }
+    catch { return $false }
+}
+
+function Achar-Programa($nome, [string[]]$ondeProcurar) {
+    $candidatos = @()
+    $doPath = Get-Command $nome -ErrorAction SilentlyContinue
+    if ($doPath) { $candidatos += $doPath.Source }
+    foreach ($padrao in $ondeProcurar) {
+        $candidatos += (Get-ChildItem $padrao -ErrorAction SilentlyContinue |
+                        Sort-Object FullName -Descending |
+                        ForEach-Object { $_.FullName })
+    }
+    foreach ($c in $candidatos) { if (Testar-Programa $c) { return $c } }
+    return $null
+}
+
+Passo 1 "Conferindo git e python"
+
+$git = Achar-Programa "git" @(
+    "$env:ProgramFiles\Git\cmd\git.exe",
+    "${env:ProgramFiles(x86)}\Git\cmd\git.exe",
+    "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe"
+)
+if (-not $git) {
+    Erro "nao achei um 'git' que funcione."
+    Write-Host "        Se voce abriu como Administrador, o PATH pode ser de OUTRO" -ForegroundColor DarkGray
+    Write-Host "        usuario. Tente numa janela NORMAL do PowerShell:" -ForegroundColor DarkGray
+    Write-Host "          powershell -ExecutionPolicy Bypass -File .\aplicar_tudo.ps1 -SemAgenda" -ForegroundColor DarkGray
     exit 1
 }
-$python = $cmdPython.Source
+Ok "git em $git"
+
+$python = Achar-Programa "python" @(
+    "$env:LOCALAPPDATA\Programs\Python\Python*\python.exe",
+    "$env:ProgramFiles\Python*\python.exe",
+    "C:\Python*\python.exe"
+)
+if (-not $python) {
+    Erro "nao achei um 'python' que funcione."
+    Write-Host "        Se apareceu 'Python was not found... Microsoft Store', o que" -ForegroundColor DarkGray
+    Write-Host "        esta no PATH e um ATALHO, nao o Python. Mesma saida: rode numa" -ForegroundColor DarkGray
+    Write-Host "        janela NORMAL do PowerShell, com -SemAgenda." -ForegroundColor DarkGray
+    exit 1
+}
 Ok "python em $python"
 
 # ------------------------------------------------------- rodada em curso
@@ -70,19 +125,19 @@ Passo 3 "Parando o bot"
 
 # ------------------------------------------------------------ traz o codigo
 Passo 4 "Trazendo a branch $Branch"
-$sujo = git status --porcelain
+$sujo = & $git status --porcelain
 if ($sujo) {
     $marca = "aplicar_tudo-" + (Get-Date -Format "yyyyMMdd-HHmmss")
     Aviso "ha alteracoes locais nao commitadas — guardando em '$marca'"
     Write-Host "        Recupere depois com: git stash list ; git stash pop" -ForegroundColor DarkGray
-    git stash push -u -m $marca | Out-Null
+    & $git stash push -u -m $marca | Out-Null
 }
-git fetch origin $Branch
+& $git fetch origin $Branch
 if ($LASTEXITCODE -ne 0) { Erro "git fetch falhou (sem internet? sem credencial?)"; exit 1 }
-git checkout $Branch
+& $git checkout $Branch
 if ($LASTEXITCODE -ne 0) { Erro "git checkout falhou"; exit 1 }
-git pull --ff-only origin $Branch | Out-Null
-Ok "codigo em $(git rev-parse --short HEAD)"
+& $git pull --ff-only origin $Branch | Out-Null
+Ok "codigo em $(& $git rev-parse --short HEAD)"
 
 # ------------------------------------------------------------- validacao
 Passo 5 "Validando o codigo (compile + import real — Regra 2)"
