@@ -69,6 +69,16 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_nuvem_deploy.py
 
+      - name: Teste de dependencias (requirements.txt completo)
+        # O PC do Daniel ficou sem Python; reinstalar e rodar
+        # `pip install -r requirements.txt` nao devolvia o bot ao ar porque
+        # pywin32 — de quem vem o win32clipboard usado para anexar a foto no
+        # WhatsApp — nunca esteve na lista. A falta era muda: import dentro
+        # de try/except, log.warning, e o envio abortado pela Regra 5.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_dependencias.py
+
       - name: Teste de redacao de segredos (repo publico)
         # Este repositorio e publico e ja teve o token do bot do Telegram
         # commitado em monitor.log e rastreador.log (achado em 2026-09-07).
