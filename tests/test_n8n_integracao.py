@@ -1372,6 +1372,40 @@ def test_todo_registrar_erro_com_excecao_repassa_a_excecao():
                 assert "exc=" in linha, f"{arquivo}: perdeu a excecao -> {linha.strip()}"
 
 
+def test_nome_do_grupo_tem_fonte_unica():
+    """Havia DOIS jeitos de decidir o nome do grupo no mesmo arquivo: a
+    linha ~210 lia WHATSAPP_GROUP_NAME e a ~518 tinha "Bot-Ofertas" escrito
+    na mao. Quem tem o grupo com outro nome configurava a variavel, via o
+    caminho principal respeitar, e o fallback continuava procurando um grupo
+    inexistente — a busca nao acha nada e nada explica por que. Mesmo
+    padrao de defeito da Regra 14 (o str.replace que virava no-op)."""
+    import os as _os
+
+    from integrations import whatsapp_sender as ws
+
+    antes_env = _os.environ.get("WHATSAPP_GROUP_NAME")
+    try:
+        _os.environ.pop("WHATSAPP_GROUP_NAME", None)
+        assert ws.nome_do_grupo() == "Bot-Ofertas", "padrao historico mudou"
+        _os.environ["WHATSAPP_GROUP_NAME"] = "  Ofertas do Daniel  "
+        assert ws.nome_do_grupo() == "Ofertas do Daniel", "nao aparou espacos"
+        _os.environ["WHATSAPP_GROUP_NAME"] = "   "
+        assert ws.nome_do_grupo() == "Bot-Ofertas", "variavel em branco virou nome"
+    finally:
+        if antes_env is None:
+            _os.environ.pop("WHATSAPP_GROUP_NAME", None)
+        else:
+            _os.environ["WHATSAPP_GROUP_NAME"] = antes_env
+
+    # Nenhum caminho de envio pode voltar a escrever o nome na mao.
+    for arquivo in ("integrations/whatsapp_sender.py", "bridge_whatsapp.py"):
+        texto = open(os.path.join(BASE, arquivo), encoding="utf-8").read()
+        for linha in texto.splitlines():
+            if "typewrite(" in linha and "#" not in linha.split("typewrite(")[0]:
+                assert '"Bot-Ofertas"' not in linha, \
+                    f"{arquivo}: nome do grupo escrito na mao -> {linha.strip()}"
+
+
 if __name__ == "__main__":
     import traceback
 

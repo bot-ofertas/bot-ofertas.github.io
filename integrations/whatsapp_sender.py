@@ -51,6 +51,16 @@ def _placeholder(valor: str) -> bool:
     return "xxx" in v
 
 
+def nome_do_grupo() -> str:
+    """Nome exato da conversa, como aparece na lista do WhatsApp.
+
+    E por ele que a automacao acha o grupo (Ctrl+F). Sem
+    WHATSAPP_GROUP_NAME no .env cai no historico "Bot-Ofertas" — que so
+    funciona para quem batizou o grupo exatamente assim.
+    """
+    return (os.getenv("WHATSAPP_GROUP_NAME") or "").strip() or "Bot-Ofertas"
+
+
 def _group_id() -> str:
     valor = os.getenv("WHATSAPP_GROUP_ID", "").strip()
     return "" if _placeholder(valor) else valor
@@ -207,7 +217,7 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
 
     mensagem = marcar_link_para_whatsapp(mensagem_override or montar_mensagem_wa(produto))
     foto_url = produto.get("foto") or produto.get("imagem") or ""
-    nome_grupo = os.getenv("WHATSAPP_GROUP_NAME", "Bot-Ofertas")
+    nome_grupo = nome_do_grupo()
 
     # ── Tentativa 1: Evolution API (endpoint HTTP com foto+legenda) ──────────
     # Método preferido — funciona em servidor headless e não depende do PC ligado.
@@ -511,11 +521,19 @@ def _enviar_via_pyautogui(mensagem: str, foto_url: str = "") -> bool:
             pyautogui.press("enter")
             time.sleep(6)                   # aguarda WhatsApp Web carregar
 
-        # Abre o grupo Bot-Ofertas via atalho de busca
+        # Abre o grupo via atalho de busca.
+        #
+        # Este literal era "Bot-Ofertas" escrito na mao, enquanto o caminho
+        # principal (linha ~210) lia WHATSAPP_GROUP_NAME: quem tivesse o
+        # grupo com outro nome configurava a variavel, via o caminho
+        # principal respeitar, e este fallback continuava procurando um
+        # grupo que nao existe — a busca nao acha nada, o Enter cai na
+        # conversa errada ou em nenhuma, e nada explica por que. Uma fonte
+        # so, para os dois nao divergirem de novo.
         pyautogui.hotkey("ctrl", "alt", "/")
         time.sleep(0.6)
 
-        pyautogui.typewrite("Bot-Ofertas", interval=0.05)
+        pyautogui.typewrite(nome_do_grupo(), interval=0.05)
         time.sleep(1.0)
 
         pyautogui.press("down")
