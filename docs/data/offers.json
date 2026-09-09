@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Kit Halteres Ajustável 6 em 1 15kg Multifuncional com Barra, Kettlebell e Suporte para Flexões | Musculação Completa para Casa",
+      "preco": 139.79,
+      "preco_original": 159.9,
+      "desconto_pct": 12.6,
+      "foto": "https://m.media-amazon.com/images/I/71C3haroDtL._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 43,
+      "enviado_em": "2026-09-09T09:31:16.841795",
+      "link": "https://www.amazon.com.br/dp/B0H9Z27QS6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 139.79,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 5 Faixas Elásticas Elásticos Alongamento Pilates Yoga Exercícios Condicionamento Físico Yoga Saúde Relaxamento Academia Músculos Personal Trainer Thera Band Fitness Mini Bands",
+      "preco": 11.09,
+      "preco_original": 15.89,
+      "desconto_pct": 30.2,
+      "foto": "https://m.media-amazon.com/images/I/719fD1g-wvL._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 57,
+      "enviado_em": "2026-09-09T09:31:08.326894",
+      "link": "https://www.amazon.com.br/dp/B07KQMVYKL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 11.09,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Romantic Crown Mochila Feminino Masculino Viagem Expansível para Notebook",
+      "preco": 102.86,
+      "preco_original": 129.99,
+      "desconto_pct": 20.9,
+      "foto": "https://m.media-amazon.com/images/I/61ov9flqL+L._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 58,
+      "enviado_em": "2026-09-09T09:30:59.792063",
+      "link": "https://www.amazon.com.br/dp/B0GXTY8SMX?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 102.86,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon",
+      "preco": 98.0,
+      "preco_original": 159.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_900432-MLA113518359539_062026-AB.webp",
+      "categoria": "casa",
+      "score": 80,
+      "enviado_em": "2026-09-09T09:28:30.203247",
+      "link": "https://www.mercadolivre.com.br/kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon/p/MLB63904966?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 98.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook ASUS VivoBook Go 15 AMD Ryzen 5 7520U 8GB 512GB SSD KeepOS Tela 15,6\" FHD Mixed Black - E1504FA-NJ732",
+      "preco": 2838.0,
+      "preco_original": 3799.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_737034-MLU75570682760_042024-AB.webp",
+      "categoria": "notebooks",
+      "score": 80,
+      "enviado_em": "2026-09-09T09:28:20.679300",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-15-amd-ryzen-5-7520u-8gb-512gb-ssd-keepos-tela-156-fhd-mixed-black-e1504fa-nj732/p/MLB35715045?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 2838.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Papéis De Carta Estampas 10 Un Com Envelope Lavanda Palha",
+      "preco": 31.17,
+      "preco_original": 48.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_840285-MLB92180039094_092025-AB--papeis-de-carta-estampas-10-un-com-envelope-lavanda.webp",
+      "categoria": "tablets",
+      "score": 70,
+      "enviado_em": "2026-09-09T09:28:11.980435",
+      "link": "https://www.mercadolivre.com.br/papeis-de-carta-estampas-10-un-com-envelope-lavanda/up/MLBU3208849335?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 31.17,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cooktop Itatiaia Essencial 4 Bocas cor Preto",
+      "preco": 280.5,
+      "preco_original": 491.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_744038-MLA112582906036_062026-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 78,
+      "enviado_em": "2026-09-09T09:28:02.360753",
+      "link": "https://www.mercadolivre.com.br/cooktop-itatiaia-essencial-4-bocas-cor-preto/p/MLB11998125?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 280.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Parafusadeira E Chave De Impacto 1/2'' Gdx 18v-285 + 2 Baterias Gba 2ah - Maleta E Carregador Gal 18v-20 Bivolt Bosch Azul",
       "preco": 1119.0,
       "preco_original": 1399.0,
@@ -77,11 +182,29 @@
     "verificada": true
   },
   "stats": {
+    "esportes": {
+      "total": 3,
+      "score_medio": 53,
+      "desconto_medio": 21,
+      "maior_desconto": 30
+    },
+    "tablets": {
+      "total": 1,
+      "score_medio": 70,
+      "desconto_medio": 36,
+      "maior_desconto": 36
+    },
     "pet": {
       "total": 1,
       "score_medio": 84,
       "desconto_medio": 54,
       "maior_desconto": 54
+    },
+    "notebooks": {
+      "total": 1,
+      "score_medio": 80,
+      "desconto_medio": 25,
+      "maior_desconto": 25
     },
     "games": {
       "total": 1,
@@ -95,6 +218,18 @@
       "desconto_medio": 20,
       "maior_desconto": 20
     },
+    "eletrodomesticos": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 42,
+      "maior_desconto": 42
+    },
+    "casa": {
+      "total": 1,
+      "score_medio": 80,
+      "desconto_medio": 38,
+      "maior_desconto": 38
+    },
     "cameras": {
       "total": 1,
       "score_medio": 76,
@@ -102,6 +237,6 @@
       "maior_desconto": 67
     }
   },
-  "updated_at": "2026-09-08T17:28:35.803452",
-  "total": 4
+  "updated_at": "2026-09-09T09:31:25.432997",
+  "total": 11
 }
