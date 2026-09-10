@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Mochila Tática Impermeável Militar Reforçada Grande 50litros",
+      "preco": 82.65,
+      "preco_original": 179.0,
+      "desconto_pct": 54.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_640703-MLB78251451200_082024-AB-mochila-tatica-impermeavel-militar-reforcada-grande-50litros.webp",
+      "categoria": "armazenamento",
+      "score": 78,
+      "enviado_em": "2026-09-10T09:27:15.304840",
+      "link": "https://produto.mercadolivre.com.br/MLB-5004194280-mochila-tatica-impermeavel-militar-reforcada-grande-50litros-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 82.65,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa de Som Amplificada Philco Extreme Bluetooth 5.3 480W 2 Microfones TWS Flash Light Bateria Recarregável PCX4801",
+      "preco": 475.15,
+      "preco_original": 1212.0,
+      "desconto_pct": 60.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_680616-MLA116669244073_082026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 83,
+      "enviado_em": "2026-09-10T09:27:06.243625",
+      "link": "https://www.mercadolivre.com.br/caixa-de-som-amplificada-philco-extreme-bluetooth-53-480w-2-microfones-tws-flash-light-bateria-recarregavel-pcx4801/p/MLB69013896?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 475.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Gloss Fran By Franciny Ehlke Liphoney Mel Liphoney-mel",
+      "preco": 18.44,
+      "preco_original": 69.0,
+      "desconto_pct": 73.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_855365-MLB95050151929_102025-AB--gloss-fran-by-franciny-ehlke-liphoney-mel.webp",
+      "categoria": "beleza",
+      "score": 70,
+      "enviado_em": "2026-09-10T09:26:57.280492",
+      "link": "https://www.mercadolivre.com.br/gloss-fran-by-franciny-ehlke-liphoney-mel/up/MLBU2980829097?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 18.44,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Carro Reclinável 5P 0-36kg Bauhaus Preto Maxi Baby",
+      "preco": 474.0,
+      "preco_original": 879.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882497-MLA113716578405_062026-AB.webp",
+      "categoria": "automotivo",
+      "score": 88,
+      "enviado_em": "2026-09-10T09:26:48.451923",
+      "link": "https://www.mercadolivre.com.br/cadeira-carro-reclinavel-5p-0-36kg-bauhaus-preto-maxi-baby/p/MLB74476575?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 474.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Halteres Ajustável 6 em 1 15kg Multifuncional com Barra, Kettlebell e Suporte para Flexões | Musculação Completa para Casa",
       "preco": 139.79,
       "preco_original": 159.9,
@@ -167,17 +227,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Controle joystick sem fio Sony PlayStation DualSense Wireless Controller PS5 cosmic red",
-    "preco": 408.03,
-    "preco_original": 699.0,
-    "desconto_pct": 41.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_984099-MLA99993479459_112025-AB.webp",
-    "categoria": "games",
-    "score": 86,
-    "enviado_em": "2026-09-08T17:26:28.246654",
-    "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-dualsense-wireless-controller-ps5-cosmic-red/p/MLB18010994?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Cadeira Carro Reclinável 5P 0-36kg Bauhaus Preto Maxi Baby",
+    "preco": 474.0,
+    "preco_original": 879.0,
+    "desconto_pct": 46.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882497-MLA113716578405_062026-AB.webp",
+    "categoria": "automotivo",
+    "score": 88,
+    "enviado_em": "2026-09-10T09:26:48.451923",
+    "link": "https://www.mercadolivre.com.br/cadeira-carro-reclinavel-5p-0-36kg-bauhaus-preto-maxi-baby/p/MLB74476575?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 408.03,
+    "menor_preco_30d": 474.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -218,6 +278,12 @@
       "desconto_medio": 20,
       "maior_desconto": 20
     },
+    "eletronicos": {
+      "total": 1,
+      "score_medio": 83,
+      "desconto_medio": 60,
+      "maior_desconto": 60
+    },
     "eletrodomesticos": {
       "total": 1,
       "score_medio": 78,
@@ -235,8 +301,26 @@
       "score_medio": 76,
       "desconto_medio": 67,
       "maior_desconto": 67
+    },
+    "beleza": {
+      "total": 1,
+      "score_medio": 70,
+      "desconto_medio": 73,
+      "maior_desconto": 73
+    },
+    "automotivo": {
+      "total": 1,
+      "score_medio": 88,
+      "desconto_medio": 46,
+      "maior_desconto": 46
+    },
+    "armazenamento": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 54,
+      "maior_desconto": 54
     }
   },
-  "updated_at": "2026-09-09T09:31:25.432997",
-  "total": 11
+  "updated_at": "2026-09-10T09:30:11.909448",
+  "total": 15
 }
