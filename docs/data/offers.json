@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Galaxy Tab S10 Lite, 128GB, Tela 10.9\", WIFI, Cinza",
+      "preco": 2165.9,
+      "preco_original": 3149.0,
+      "desconto_pct": 31.2,
+      "foto": "https://m.media-amazon.com/images/I/51UFm7dGUuL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 91,
+      "enviado_em": "2026-09-11T09:30:22.001292",
+      "link": "https://www.amazon.com.br/dp/B0FMFRFNWG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2165.9,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "EPSON Multifuncional EcoTank L3250 - Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,Preto.",
+      "preco": 901.18,
+      "preco_original": 1379.0,
+      "desconto_pct": 34.6,
+      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 93,
+      "enviado_em": "2026-09-11T09:30:13.409928",
+      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 901.18,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Dell 15 15-I1300-A30P, Intel Core i5-1334U, Windows 11 Home | Tela 15.6 FHD 120 Hz Antirreflexo, 8 GB RAM, 512 GB SSD, UHD Graphics, Wi‑Fi 6, leitor SD, USB 3.2 Type-C, Garantia de 1 Ano",
+      "preco": 3599.1,
+      "preco_original": 4500.0,
+      "desconto_pct": 20.0,
+      "foto": "https://m.media-amazon.com/images/I/51LAU1+ACrL._AC_UL320_.jpg",
+      "categoria": "informatica",
+      "score": 80,
+      "enviado_em": "2026-09-11T09:30:04.833693",
+      "link": "https://www.amazon.com.br/dp/B0FHCHBRGF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3599.1,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 2 Câmeras Segurança Ip Interna Externa Wifi iCSee Infravermelho Prova D’Água - HW",
+      "preco": 179.99,
+      "preco_original": 349.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_694546-MLA117038112537_092026-AB.webp",
+      "categoria": "casa",
+      "score": 91,
+      "enviado_em": "2026-09-11T09:26:08.740371",
+      "link": "https://www.mercadolivre.com.br/kit-2-cameras-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw/p/MLB46836439?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 179.99,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Top Puma Original Feminino Alta Sustentação Academia Fitness",
+      "preco": 46.05,
+      "preco_original": 139.0,
+      "desconto_pct": 66.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_899152-MLB113410235826_072026-AB-top-puma-original-feminino-alta-sustentaco-academia-fitness.webp",
+      "categoria": "moda",
+      "score": 78,
+      "enviado_em": "2026-09-11T09:25:59.461923",
+      "link": "https://produto.mercadolivre.com.br/MLB-3102506128-top-puma-original-feminino-alta-sustentaco-academia-fitness-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 46.05,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Samsung Galaxy A36 5G 128GB 6GB RAM Câmera Tripla de até 50MP Selfie de 12MP IP67 Super AMOLED 6.7'' NFC Recursos AI Android e Segurança Snapdragon - Branco",
+      "preco": 1254.0,
+      "preco_original": 2538.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968548-MLA99944961199_112025-AB.webp",
+      "categoria": "saude",
+      "score": 100,
+      "enviado_em": "2026-09-11T09:25:50.149433",
+      "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-camera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-branco/p/MLB47109375?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1254.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Ddpai N1 Dual Câmera Veicular 1296p+1080p Uber Nightvis App",
+      "preco": 474.62,
+      "preco_original": 998.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_706795-MLB115003789643_072026-AB--ddpai-n1-dual-camera-veicular-1296p1080p-uber-nightvis-app.webp",
+      "categoria": "automotivo",
+      "score": 92,
+      "enviado_em": "2026-09-11T09:25:40.639902",
+      "link": "https://www.mercadolivre.com.br/ddpai-n1-dual-camera-veicular-1296p1080p-uber-nightvis-app/up/MLBU1756154230?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 474.62,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Mochila Tática Impermeável Militar Reforçada Grande 50litros",
       "preco": 82.65,
       "preco_original": 179.0,
@@ -164,89 +269,47 @@
       "menor_preco_30d": 280.5,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Parafusadeira E Chave De Impacto 1/2'' Gdx 18v-285 + 2 Baterias Gba 2ah - Maleta E Carregador Gal 18v-20 Bivolt Bosch Azul",
-      "preco": 1119.0,
-      "preco_original": 1399.0,
-      "desconto_pct": 20.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_711712-MLA100031204469_122025-AB.webp",
-      "categoria": "ferramentas",
-      "score": 66,
-      "enviado_em": "2026-09-08T17:26:37.398864",
-      "link": "https://www.mercadolivre.com.br/parafusadeira-e-chave-de-impacto-12-gdx-18v-285-2-baterias-gba-2ah-maleta-e-carregador-gal-18v-20-bivolt-bosch/p/MLB48950142?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 1119.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Controle joystick sem fio Sony PlayStation DualSense Wireless Controller PS5 cosmic red",
-      "preco": 408.03,
-      "preco_original": 699.0,
-      "desconto_pct": 41.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_984099-MLA99993479459_112025-AB.webp",
-      "categoria": "games",
-      "score": 86,
-      "enviado_em": "2026-09-08T17:26:28.246654",
-      "link": "https://www.mercadolivre.com.br/controle-joystick-sem-fio-sony-playstation-dualsense-wireless-controller-ps5-cosmic-red/p/MLB18010994?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 408.03,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 10 Cuecas Boxer Lupo Algodão Confortável Box Original",
-      "preco": 161.4,
-      "preco_original": 499.0,
-      "desconto_pct": 67.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753249-MLB84466321970_052025-AB-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
-      "categoria": "cameras",
-      "score": 76,
-      "enviado_em": "2026-09-08T17:26:19.370336",
-      "link": "https://produto.mercadolivre.com.br/MLB-1473758753-kit-10-cuecas-boxer-lupo-algodo-confortavel-box-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 161.4,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Ração Gran Plus Choice Adultos Sabor Frango E Carne 15kg",
-      "preco": 99.92,
-      "preco_original": 218.0,
-      "desconto_pct": 54.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_905034-MLA107826056416_032026-AB.webp",
-      "categoria": "pet",
-      "score": 84,
-      "enviado_em": "2026-09-08T17:26:10.066728",
-      "link": "https://www.mercadolivre.com.br/racao-gran-plus-choice-adultos-sabor-frango-e-carne-15kg/p/MLB66460432?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 99.92,
-      "menor_periodo": true,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira Carro Reclinável 5P 0-36kg Bauhaus Preto Maxi Baby",
-    "preco": 474.0,
-    "preco_original": 879.0,
-    "desconto_pct": 46.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882497-MLA113716578405_062026-AB.webp",
-    "categoria": "automotivo",
-    "score": 88,
-    "enviado_em": "2026-09-10T09:26:48.451923",
-    "link": "https://www.mercadolivre.com.br/cadeira-carro-reclinavel-5p-0-36kg-bauhaus-preto-maxi-baby/p/MLB74476575?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Smartphone Samsung Galaxy A36 5G 128GB 6GB RAM Câmera Tripla de até 50MP Selfie de 12MP IP67 Super AMOLED 6.7'' NFC Recursos AI Android e Segurança Snapdragon - Branco",
+    "preco": 1254.0,
+    "preco_original": 2538.0,
+    "desconto_pct": 50.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968548-MLA99944961199_112025-AB.webp",
+    "categoria": "saude",
+    "score": 100,
+    "enviado_em": "2026-09-11T09:25:50.149433",
+    "link": "https://www.mercadolivre.com.br/smartphone-samsung-galaxy-a36-5g-128gb-6gb-ram-camera-tripla-de-ate-50mp-selfie-de-12mp-ip67-super-amoled-67-nfc-recursos-ai-android-e-seguranca-snapdragon-branco/p/MLB47109375?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 474.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 1254.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
+    "informatica": {
+      "total": 3,
+      "score_medio": 88,
+      "desconto_medio": 29,
+      "maior_desconto": 34
+    },
     "esportes": {
       "total": 3,
       "score_medio": 53,
       "desconto_medio": 21,
       "maior_desconto": 30
+    },
+    "casa": {
+      "total": 2,
+      "score_medio": 86,
+      "desconto_medio": 43,
+      "maior_desconto": 48
+    },
+    "automotivo": {
+      "total": 2,
+      "score_medio": 90,
+      "desconto_medio": 49,
+      "maior_desconto": 52
     },
     "tablets": {
       "total": 1,
@@ -254,11 +317,11 @@
       "desconto_medio": 36,
       "maior_desconto": 36
     },
-    "pet": {
+    "saude": {
       "total": 1,
-      "score_medio": 84,
-      "desconto_medio": 54,
-      "maior_desconto": 54
+      "score_medio": 100,
+      "desconto_medio": 50,
+      "maior_desconto": 50
     },
     "notebooks": {
       "total": 1,
@@ -266,17 +329,11 @@
       "desconto_medio": 25,
       "maior_desconto": 25
     },
-    "games": {
+    "moda": {
       "total": 1,
-      "score_medio": 86,
-      "desconto_medio": 41,
-      "maior_desconto": 41
-    },
-    "ferramentas": {
-      "total": 1,
-      "score_medio": 66,
-      "desconto_medio": 20,
-      "maior_desconto": 20
+      "score_medio": 78,
+      "desconto_medio": 66,
+      "maior_desconto": 66
     },
     "eletronicos": {
       "total": 1,
@@ -290,29 +347,11 @@
       "desconto_medio": 42,
       "maior_desconto": 42
     },
-    "casa": {
-      "total": 1,
-      "score_medio": 80,
-      "desconto_medio": 38,
-      "maior_desconto": 38
-    },
-    "cameras": {
-      "total": 1,
-      "score_medio": 76,
-      "desconto_medio": 67,
-      "maior_desconto": 67
-    },
     "beleza": {
       "total": 1,
       "score_medio": 70,
       "desconto_medio": 73,
       "maior_desconto": 73
-    },
-    "automotivo": {
-      "total": 1,
-      "score_medio": 88,
-      "desconto_medio": 46,
-      "maior_desconto": 46
     },
     "armazenamento": {
       "total": 1,
@@ -321,6 +360,6 @@
       "maior_desconto": 54
     }
   },
-  "updated_at": "2026-09-10T09:30:11.909448",
-  "total": 15
+  "updated_at": "2026-09-11T09:30:30.834184",
+  "total": 18
 }
