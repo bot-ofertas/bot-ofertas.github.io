@@ -46,6 +46,11 @@ isso é o único cenário que exige intervenção manual.
 - **Mercado Livre:** todo link deve conter `matt_tool=47114387`.
 - **Amazon:** todo link deve conter `tag=silver1230c-20`.
 
+O texto gerado por IA **nunca** escreve link: o prompt manda o modelo usar o
+marcador `{LINK}` e `core/ai_safety.py` apaga qualquer URL alucinada, injeta o
+link real e confere com `parse_qs()` que ele saiu íntegro — se não sair, a
+mensagem do WhatsApp cai no fallback determinístico de `core/ai_content.py`.
+
 Isso é validado e reforçado no pipeline de geração de link
 (`core/*` + `integrations/amazon_paapi.py` para enriquecimento opcional via
 PA-API, quando configurada). Taxa de sucesso monitorada em
