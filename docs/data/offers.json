@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Contigo, Garrafa Térmica Inox Parede Dupla Matterhorn, 591ML",
+      "preco": 45.48,
+      "preco_original": 149.9,
+      "desconto_pct": 69.7,
+      "foto": "https://m.media-amazon.com/images/I/41Sy1XymrLS._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 69,
+      "enviado_em": "2026-09-13T23:08:05.518408",
+      "link": "https://www.amazon.com.br/dp/B07K8WF98V?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 45.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Romantic Crown Mochila Feminino Masculino Viagem Expansível para Notebook",
+      "preco": 113.99,
+      "preco_original": 129.99,
+      "desconto_pct": 12.3,
+      "foto": "https://m.media-amazon.com/images/I/61ov9flqL+L._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 43,
+      "enviado_em": "2026-09-13T23:07:56.910313",
+      "link": "https://www.amazon.com.br/dp/B0GXTY8SMX?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 102.86,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 5 Faixas Elásticas Elásticos Alongamento Pilates Yoga Exercícios Condicionamento Físico Yoga Saúde Relaxamento Academia Músculos Personal Trainer Thera Band Fitness Mini Bands",
+      "preco": 8.67,
+      "preco_original": 11.14,
+      "desconto_pct": 22.2,
+      "foto": "https://m.media-amazon.com/images/I/719fD1g-wvL._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 54,
+      "enviado_em": "2026-09-13T23:07:48.303277",
+      "link": "https://www.amazon.com.br/dp/B07KQMVYKL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 8.67,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Lavadora De Alta Pressão Desobstruidora Wap Ousada Wl 2600 Ultra 1500w De Potência 1750 Psi Amarelo 127v 60hz",
+      "preco": 426.55,
+      "preco_original": 597.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_890076-MLA99640027044_122025-AB.webp",
+      "categoria": "ferramentas",
+      "score": 69,
+      "enviado_em": "2026-09-13T23:05:57.104942",
+      "link": "https://www.mercadolivre.com.br/lavadora-de-alta-pressao-desobstruidora-wap-ousada-wl-2600-ultra-1500w-de-potencia-1750-psi/p/MLB56331914?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 426.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Maquina Barbear,aparelho De Barbear Eletrico Multifuncio",
+      "preco": 55.09,
+      "preco_original": 99.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_772603-MLB114943104753_072026-AB-maquina-barbearaparelho-de-barbear-eletrico-multifuncio.webp",
+      "categoria": "beleza",
+      "score": 91,
+      "enviado_em": "2026-09-13T23:05:47.230029",
+      "link": "https://produto.mercadolivre.com.br/MLB-7223217402-maquina-barbearaparelho-de-barbear-eletrico-multifuncio-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 55.09,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart TV 4K 50\" LG NANO UHD AI NU850 2026 Processador α7 Ger9 HDR10 Xbox Bluetooth Wi-Fi AI Search Google Gemini webOS 26 - 50NU850BPSA",
+      "preco": 2276.0,
+      "preco_original": 3899.0,
+      "desconto_pct": 41.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_756409-MLA115252629948_082026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 95,
+      "enviado_em": "2026-09-13T23:05:37.902380",
+      "link": "https://www.mercadolivre.com.br/smart-tv-4k-50-lg-nano-uhd-ai-nu850-2026-processador-7-ger9-hdr10-xbox-bluetooth-wi-fi-ai-search-google-gemini-webos-26-50nu850bpsa/p/MLB76779956?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2159.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smartphone Motorola Moto G56 5g - 256gb 8gb Ram+8gb Ram Boost, Camera 50mp Sony Lytia 600 Ultrarresistencia Militar e Ip68 + Ip69 - Cinza",
+      "preco": 1339.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748002-MLA104773303805_012026-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-09-13T23:05:28.583965",
+      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-ultrarresistencia-militar-e-ip68-ip69-cinza/p/MLB50301060?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1339.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "EPSON Multifuncional EcoTank L3250 - Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,Preto.",
       "preco": 1065.35,
       "preco_original": 1379.0,
@@ -192,8 +297,8 @@
       "enviado_em": "2026-09-12T09:05:45.961846",
       "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "excelente",
-      "menor_preco_30d": 1592.0,
-      "menor_periodo": false,
+      "menor_preco_30d": 1566.0,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -213,17 +318,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Kit Inversora De Solda Gp-150 + Máscara Pró Euro Amarelo 220v",
-    "preco": 279.9,
-    "preco_original": 899.0,
-    "desconto_pct": 68.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_954972-MLA115998930474_092026-AB.webp",
-    "categoria": "ferramentas",
-    "score": 83,
-    "enviado_em": "2026-09-13T10:04:31.522257",
-    "link": "https://www.mercadolivre.com.br/kit-inversora-de-solda-gp-150-mascara-pro-euro-amarelo/p/MLB77339745?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 279.9,
+    "titulo": "Smartphone Motorola Moto G56 5g - 256gb 8gb Ram+8gb Ram Boost, Camera 50mp Sony Lytia 600 Ultrarresistencia Militar e Ip68 + Ip69 - Cinza",
+    "preco": 1339.0,
+    "preco_original": 2699.0,
+    "desconto_pct": 50.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748002-MLA104773303805_012026-AB.webp",
+    "categoria": "celulares",
+    "score": 95,
+    "enviado_em": "2026-09-13T23:05:28.583965",
+    "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-ultrarresistencia-militar-e-ip68-ip69-cinza/p/MLB50301060?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 1339.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -234,11 +339,29 @@
       "desconto_medio": 25,
       "maior_desconto": 36
     },
+    "esportes": {
+      "total": 4,
+      "score_medio": 66,
+      "desconto_medio": 40,
+      "maior_desconto": 69
+    },
     "informatica": {
       "total": 3,
       "score_medio": 77,
       "desconto_medio": 23,
       "maior_desconto": 27
+    },
+    "ferramentas": {
+      "total": 2,
+      "score_medio": 76,
+      "desconto_medio": 48,
+      "maior_desconto": 68
+    },
+    "celulares": {
+      "total": 2,
+      "score_medio": 95,
+      "desconto_medio": 48,
+      "maior_desconto": 50
     },
     "tablets": {
       "total": 1,
@@ -258,23 +381,17 @@
       "desconto_medio": 50,
       "maior_desconto": 50
     },
-    "ferramentas": {
-      "total": 1,
-      "score_medio": 83,
-      "desconto_medio": 68,
-      "maior_desconto": 68
-    },
-    "esportes": {
-      "total": 1,
-      "score_medio": 97,
-      "desconto_medio": 56,
-      "maior_desconto": 56
-    },
-    "celulares": {
+    "eletronicos": {
       "total": 1,
       "score_medio": 95,
-      "desconto_medio": 46,
-      "maior_desconto": 46
+      "desconto_medio": 41,
+      "maior_desconto": 41
+    },
+    "beleza": {
+      "total": 1,
+      "score_medio": 91,
+      "desconto_medio": 44,
+      "maior_desconto": 44
     },
     "armazenamento": {
       "total": 1,
@@ -283,6 +400,6 @@
       "maior_desconto": 34
     }
   },
-  "updated_at": "2026-09-13T10:08:05.189211",
-  "total": 14
+  "updated_at": "2026-09-13T23:08:14.583824",
+  "total": 21
 }
