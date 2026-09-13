@@ -95,7 +95,7 @@ def test_nuvem_nao_publica_com_o_pc_ligado():
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
     )
     try:
-        meio_dia = datetime(2026, 9, 4, 12, 0)
+        meio_dia = _hoje_as(12, 0)
         pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is False, "a nuvem publicaria junto com o PC — oferta duplicada"
         assert "PC local" in motivo
@@ -108,7 +108,7 @@ def test_nuvem_publica_de_madrugada():
 
     antes = _com_env(PAPEL="nuvem", HORA_LIGAR="08:30", HORA_DESLIGAR="02:00")
     try:
-        madrugada = datetime(2026, 9, 4, 4, 0)
+        madrugada = _hoje_as(4, 0)
         pode, _ = papel.pode_publicar(madrugada)
         assert pode is True, "ninguém publicaria de madrugada"
     finally:
@@ -125,11 +125,11 @@ def test_nuvem_respeita_a_carencia_do_desligamento():
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
     )
     try:
-        dentro_da_carencia = datetime(2026, 9, 4, 2, 20)
+        dentro_da_carencia = _hoje_as(2, 20)
         pode, _ = papel.pode_publicar(dentro_da_carencia)
         assert pode is False, "publicou em cima do PC que ainda estava terminando a rodada"
 
-        depois_da_carencia = datetime(2026, 9, 4, 2, 40)
+        depois_da_carencia = _hoje_as(2, 40)
         pode, _ = papel.pode_publicar(depois_da_carencia)
         assert pode is True, "ficou travado depois de a carência passar"
     finally:
@@ -141,14 +141,14 @@ def test_papeis_extremos():
 
     antes = _com_env(PAPEL="desligado")
     try:
-        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 4, 0))
+        pode, _ = papel.pode_publicar(_hoje_as(4, 0))
         assert pode is False
     finally:
         _restaurar(antes)
 
     antes = _com_env(PAPEL="nuvem-exclusiva")
     try:
-        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, _ = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is True, "o publicador exclusivo ficou travado no meio do dia"
     finally:
         _restaurar(antes)
@@ -224,6 +224,24 @@ def _repo_falso(commits):
     return pasta
 
 
+def _hoje_as(hora: int, minuto: int = 0) -> datetime:
+    """Instante de HOJE no horario pedido.
+
+    Os commits de mentira sao criados em `datetime.now() - N horas`, entao o
+    instante avaliado precisa vir do MESMO relogio. Com uma data FIXA
+    (2026-09-04) estes testes funcionaram enquanto "hoje" estava perto dela
+    e quebraram sozinhos com a passagem do tempo: em 13/09/2026 um commit
+    de "200h atras" caiu em 05/09 — DEPOIS do instante avaliado — e o
+    `max(0.0, ...)` de `horas_desde_sinal_do_pc` grampeava em 0.0, como se
+    o PC tivesse acabado de publicar. O teste que deveria provar "PC calado
+    ha dias libera a nuvem" passou a afirmar o contrario.
+
+    Mesma classe de defeito do bloco do watchdog em test_sistema_completo,
+    corrigido em 08/09/2026: teste que depende de quando roda.
+    """
+    return datetime.now().replace(hour=hora, minute=minuto, second=0, microsecond=0)
+
+
 def _com_repo(commits, **env):
     """Aponta o core.papel para um repositorio de mentira e limpa o cache."""
     from core import papel
@@ -254,7 +272,7 @@ def test_pc_publicando_ha_pouco_segura_a_nuvem():
     try:
         morto, motivo = papel.pc_parece_morto()
         assert morto is False, motivo
-        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, f"publicou junto com o PC vivo: {motivo}"
     finally:
         _solta_repo(papel, st)
@@ -274,7 +292,7 @@ def test_pc_calado_ha_dias_libera_a_nuvem():
     try:
         morto, motivo = papel.pc_parece_morto()
         assert morto is True, motivo
-        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is True, f"a nuvem ficou calada com o PC morto: {motivo}"
         assert "pelo menos" in motivo or "nao publica" in motivo
     finally:
@@ -309,7 +327,7 @@ def test_sem_historico_suficiente_nao_age_no_escuro():
         assert papel.horas_desde_sinal_do_pc() is None
         morto, _ = papel.pc_parece_morto()
         assert morto is False
-        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, _ = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, "publicou sem conseguir confirmar que o PC estava fora"
     finally:
         _solta_repo(papel, st)
@@ -363,7 +381,7 @@ def test_por_padrao_a_ausencia_de_sinal_nao_libera_a_nuvem():
         )
         morto, _ = papel.pc_parece_morto()
         assert morto is False
-        pode, motivo = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, f"publicou dentro da janela do PC sem prova: {motivo}"
     finally:
         _solta_repo(papel, st)
@@ -390,7 +408,7 @@ def test_checagem_de_silencio_pode_ser_desligada():
     try:
         morto, _ = papel.pc_parece_morto()
         assert morto is False
-        pode, _ = papel.pode_publicar(datetime(2026, 9, 4, 12, 0))
+        pode, _ = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, "PC_SILENCIO_MAX_H=0 deveria manter o comportamento antigo"
     finally:
         _solta_repo(papel, st)

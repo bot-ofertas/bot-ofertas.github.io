@@ -78,6 +78,34 @@ def wa_ativo() -> bool:
     return bool(_group_id())
 
 
+def fila_tera_quem_envie() -> bool:
+    """Existe, NESTE ambiente, alguem capaz de drenar a fila do WhatsApp?
+
+    No GitHub Actions nao existe: `enviar_para_grupo()` ja devolve False
+    ali (sem display para a automacao de janela) e o workflow nunca roda o
+    `whatsapp_queue_sender.py`. Enfileirar mesmo assim tem dois custos
+    reais, medidos em producao:
+
+      1. a fila so cresce, rodada apos rodada, dentro do banco que o
+         Actions guarda no cache entre execucoes — 58 -> 64 -> 68 -> 100
+         entre 08/09 e 13/09/2026, sem nada consumir;
+      2. o numero vira um diagnostico FALSO. "WhatsApp: na fila (68
+         pendente(s))" no log da nuvem foi lido como "o PC do Daniel tem 68
+         ofertas esperando" — e repassado a ele varias vezes nesse sentido.
+         Era a fila morta da propria nuvem.
+
+    No servidor Linux (deploy/) a Evolution API envia de verdade, e la o
+    `GITHUB_ACTIONS` nao existe: aquele caminho fica intacto.
+    """
+    if not os.getenv("GITHUB_ACTIONS"):
+        return True
+    try:
+        from integrations.whatsapp_api import _configurada  # noqa: PLC0415
+        return bool(_configurada())
+    except Exception:
+        return False
+
+
 def marcar_link_para_whatsapp(texto: str) -> str:
     """Troca a marcação de origem (matt_source do ML / ascsubtag da Amazon)
     de "bot_telegram" pra "bot_whatsapp" em qualquer link embutido no texto.
