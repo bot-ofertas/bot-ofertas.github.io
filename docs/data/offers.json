@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Parafusadeira e Furadeira de Impacto 3/8\" WAP K21 ID02 2000 mAh",
+      "preco": 179.0,
+      "preco_original": 260.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_621555-MLA114663974288_082026-AB.webp",
+      "categoria": "livros",
+      "score": 69,
+      "enviado_em": "2026-09-14T10:24:49.082418",
+      "link": "https://www.mercadolivre.com.br/parafusadeira-e-furadeira-de-impacto-38-wap-k21-id02-2000-mah/p/MLB28765604?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 179.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
+      "preco": 979.94,
+      "preco_original": 1499.0,
+      "desconto_pct": 34.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 89,
+      "enviado_em": "2026-09-14T10:24:39.107792",
+      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 948.96,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira Gamer Lancer Preta e Branca Healer",
+      "preco": 382.44,
+      "preco_original": 899.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_951583-MLA105697862101_012026-AB.webp",
+      "categoria": "games",
+      "score": 90,
+      "enviado_em": "2026-09-14T10:24:30.200369",
+      "link": "https://www.mercadolivre.com.br/cadeira-gamer-lancer-preta-e-branca-healer/p/MLB19069354?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 382.44,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Micro-ondas Brastemp 32L Cinza com Menu Gourmet - BMS46AR",
+      "preco": 687.27,
+      "preco_original": 889.0,
+      "desconto_pct": 22.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_682152-MLA99468136788_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 65,
+      "enviado_em": "2026-09-14T10:24:19.385958",
+      "link": "https://www.mercadolivre.com.br/micro-ondas-brastemp-32l-cinza-com-menu-gourmet-bms46ar/p/MLB19119110?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 687.27,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Contigo, Garrafa Térmica Inox Parede Dupla Matterhorn, 591ML",
       "preco": 45.48,
       "preco_original": 149.9,
@@ -192,7 +252,7 @@
       "link": "https://www.mercadolivre.com.br/volante-gamer-logitech-g29-driving-force-para-playstation-e-pc/p/MLB22307702?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 1599.0,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -208,111 +268,6 @@
       "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-500g-dark-lab-unidade/p/MLB26796581?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 49.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Bundle Nintendo Switch OLED + Super Mario Bros. Wonder + 3 Meses de Assinatura Nintendo Switch Online",
-      "preco": 2045.08,
-      "preco_original": 2699.9,
-      "desconto_pct": 24.3,
-      "foto": "https://m.media-amazon.com/images/I/61JwTVae3+L._AC_UY218_.jpg",
-      "categoria": "games",
-      "score": 79,
-      "enviado_em": "2026-09-12T09:09:37.538123",
-      "link": "https://www.amazon.com.br/dp/B0FR6PC1FB?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 2045.08,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Havit Headphone Fone de Ouvido H2002d, Gamer, com Microfone, Falante 53mm, Plug 3, 5mm: compatível com XBOX ONE e PS4, HAVIT, HV-H2002d",
-      "preco": 172.89,
-      "preco_original": 219.0,
-      "desconto_pct": 21.1,
-      "foto": "https://m.media-amazon.com/images/I/71+kXnOiM2L._AC_UY218_.jpg",
-      "categoria": "games",
-      "score": 57,
-      "enviado_em": "2026-09-12T09:09:28.714017",
-      "link": "https://www.amazon.com.br/dp/B07Y2G7VX5?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 172.89,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Base De Carregamento Do Dualsense - PlayStation 5",
-      "preco": 159.01,
-      "preco_original": 249.9,
-      "desconto_pct": 36.4,
-      "foto": "https://m.media-amazon.com/images/I/41y-G-g+dVL._AC_UY218_.jpg",
-      "categoria": "games",
-      "score": 69,
-      "enviado_em": "2026-09-12T09:09:20.073210",
-      "link": "https://www.amazon.com.br/dp/B09JH4PD8Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 159.01,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Camiseta Light T-shirt Insider Masculino",
-      "preco": 59.0,
-      "preco_original": 189.0,
-      "desconto_pct": 68.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_779849-MLB89746747076_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
-      "categoria": "moda",
-      "score": 75,
-      "enviado_em": "2026-09-12T09:06:17.531126",
-      "link": "https://produto.mercadolivre.com.br/MLB-4085597457-camiseta-light-t-shirt-insider-masculino-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 59.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Bicicleta Ergométrica Bike Spinning 6kg Sensação inércia Fitness Preto e Vermelho Sevenfit Para Cardio E Musculação",
-      "preco": 478.11,
-      "preco_original": 1094.0,
-      "desconto_pct": 56.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745785-MLA114987927277_072026-AB.webp",
-      "categoria": "esportes",
-      "score": 97,
-      "enviado_em": "2026-09-12T09:05:56.232395",
-      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-bike-spinning-6kg-sensacao-inercia-fitness-preto-e-vermelho-sevenfit-para-cardio-e-musculacao/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 387.48,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Celular smartphone Motorola G86 5G 256gb 8gb+16gb Ram Boost Grafite",
-      "preco": 1592.0,
-      "preco_original": 2999.0,
-      "desconto_pct": 46.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
-      "categoria": "celulares",
-      "score": 95,
-      "enviado_em": "2026-09-12T09:05:45.961846",
-      "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1566.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Basike Fone De Ouvido Sem Fio Bluetooth Para Bluetooth 5.3 Branco",
-      "preco": 65.54,
-      "preco_original": 99.0,
-      "desconto_pct": 34.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_690574-MLB100520428706_122025-AB--basike-fone-de-ouvido-sem-fio-bluetooth-para-bluetooth-53.webp",
-      "categoria": "armazenamento",
-      "score": 69,
-      "enviado_em": "2026-09-12T09:05:37.002657",
-      "link": "https://www.mercadolivre.com.br/basike-fone-de-ouvido-sem-fio-bluetooth-para-bluetooth-53/up/MLBU3492708662?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 65.54,
       "menor_periodo": false,
       "verificada": true
     }
@@ -333,23 +288,29 @@
     "verificada": true
   },
   "stats": {
-    "games": {
-      "total": 4,
-      "score_medio": 69,
-      "desconto_medio": 25,
-      "maior_desconto": 36
-    },
-    "esportes": {
-      "total": 4,
-      "score_medio": 66,
-      "desconto_medio": 40,
-      "maior_desconto": 69
-    },
     "informatica": {
       "total": 3,
       "score_medio": 77,
       "desconto_medio": 23,
       "maior_desconto": 27
+    },
+    "esportes": {
+      "total": 3,
+      "score_medio": 55,
+      "desconto_medio": 35,
+      "maior_desconto": 69
+    },
+    "livros": {
+      "total": 2,
+      "score_medio": 70,
+      "desconto_medio": 41,
+      "maior_desconto": 50
+    },
+    "games": {
+      "total": 2,
+      "score_medio": 81,
+      "desconto_medio": 39,
+      "maior_desconto": 57
     },
     "ferramentas": {
       "total": 2,
@@ -357,11 +318,11 @@
       "desconto_medio": 48,
       "maior_desconto": 68
     },
-    "celulares": {
-      "total": 2,
-      "score_medio": 95,
-      "desconto_medio": 48,
-      "maior_desconto": 50
+    "tvs": {
+      "total": 1,
+      "score_medio": 89,
+      "desconto_medio": 34,
+      "maior_desconto": 34
     },
     "tablets": {
       "total": 1,
@@ -369,37 +330,31 @@
       "desconto_medio": 28,
       "maior_desconto": 28
     },
-    "moda": {
-      "total": 1,
-      "score_medio": 75,
-      "desconto_medio": 68,
-      "maior_desconto": 68
-    },
-    "livros": {
-      "total": 1,
-      "score_medio": 71,
-      "desconto_medio": 50,
-      "maior_desconto": 50
-    },
     "eletronicos": {
       "total": 1,
       "score_medio": 95,
       "desconto_medio": 41,
       "maior_desconto": 41
     },
+    "eletrodomesticos": {
+      "total": 1,
+      "score_medio": 65,
+      "desconto_medio": 22,
+      "maior_desconto": 22
+    },
+    "celulares": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 50,
+      "maior_desconto": 50
+    },
     "beleza": {
       "total": 1,
       "score_medio": 91,
       "desconto_medio": 44,
       "maior_desconto": 44
-    },
-    "armazenamento": {
-      "total": 1,
-      "score_medio": 69,
-      "desconto_medio": 34,
-      "maior_desconto": 34
     }
   },
-  "updated_at": "2026-09-13T23:08:14.583824",
-  "total": 21
+  "updated_at": "2026-09-14T10:27:46.750468",
+  "total": 18
 }
