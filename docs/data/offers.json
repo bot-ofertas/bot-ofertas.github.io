@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Kit Lavagem Completa Shampoo Cera Tok Final Intense Sintra Fast Pneu Pretinho Acessórios",
+      "preco": 122.35,
+      "preco_original": 199.92,
+      "desconto_pct": 38.8,
+      "foto": "https://m.media-amazon.com/images/I/71pzyI++-dL._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 73,
+      "enviado_em": "2026-09-15T09:54:42.437476",
+      "link": "https://www.amazon.com.br/dp/B0H52LF5JF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 122.35,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira para Auto 0-36Kg Isofix Litet All Stages Fix 2.0 Preta e Cinza - BB452",
+      "preco": 698.9,
+      "preco_original": 828.9,
+      "desconto_pct": 15.7,
+      "foto": "https://m.media-amazon.com/images/I/615AvAaOM8L._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 47,
+      "enviado_em": "2026-09-15T09:54:33.668432",
+      "link": "https://www.amazon.com.br/dp/B0BXMV4ZXW?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 698.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WAP Aspirador de Pó Automotivo Car 12V2, Portátil, 420ml, com Recipiente Removível e Filtro Lavável, 180W 12VDC",
+      "preco": 99.9,
+      "preco_original": 119.9,
+      "desconto_pct": 16.7,
+      "foto": "https://m.media-amazon.com/images/I/71zj-+xJrbL._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 43,
+      "enviado_em": "2026-09-15T09:54:24.732037",
+      "link": "https://www.amazon.com.br/dp/B0CLDRS18S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 99.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tapete Higiênico Para Cachorro 50 Unidades 60x55cm Com Gel Absorvente Fralda Manta Pet Cão Branco Branco",
+      "preco": 47.34,
+      "preco_original": 69.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971200-MLA114202177794_082026-AB.webp",
+      "categoria": "pet",
+      "score": 66,
+      "enviado_em": "2026-09-15T09:50:56.725202",
+      "link": "https://www.mercadolivre.com.br/tapete-higienico-para-cachorro-50-unidades-60x55cm-com-gel-absorvente-fralda-manta-pet-cao-com-fitas-adesivas-anti-odor-atrativo-canino/p/MLB28131416?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 45.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit Com 10 Cuecas Boxer Masculina Microfibra Original",
+      "preco": 75.99,
+      "preco_original": 138.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882952-MLB106804965837_022026-AB-kit-com-10-cuecas-boxer-masculina-microfibra-original.webp",
+      "categoria": "moda",
+      "score": 89,
+      "enviado_em": "2026-09-15T09:50:47.326036",
+      "link": "https://produto.mercadolivre.com.br/MLB-1837525408-kit-com-10-cuecas-boxer-masculina-microfibra-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 75.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
+      "preco": 171.94,
+      "preco_original": 349.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
+      "categoria": "eletronicos",
+      "score": 82,
+      "enviado_em": "2026-09-15T09:50:38.383533",
+      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 171.94,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
+      "preco": 4391.0,
+      "preco_original": 5855.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
+      "categoria": "notebooks",
+      "score": 80,
+      "enviado_em": "2026-09-15T09:50:29.295078",
+      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4391.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "WAP Extratora Portátil Spot Cleaner W3, 3 em 1, Borrifa, Esfrega e Extrai, com Sistema de Autolimpeza, 1450W 127V",
       "preco": 482.07,
       "preco_original": 849.9,
@@ -399,6 +504,12 @@
       "desconto_medio": 45,
       "maior_desconto": 68
     },
+    "automotivo": {
+      "total": 4,
+      "score_medio": 61,
+      "desconto_medio": 33,
+      "maior_desconto": 60
+    },
     "livros": {
       "total": 3,
       "score_medio": 73,
@@ -423,6 +534,12 @@
       "desconto_medio": 39,
       "maior_desconto": 57
     },
+    "eletronicos": {
+      "total": 2,
+      "score_medio": 89,
+      "desconto_medio": 46,
+      "maior_desconto": 50
+    },
     "tvs": {
       "total": 1,
       "score_medio": 89,
@@ -441,17 +558,29 @@
       "desconto_medio": 50,
       "maior_desconto": 50
     },
+    "pet": {
+      "total": 1,
+      "score_medio": 66,
+      "desconto_medio": 32,
+      "maior_desconto": 32
+    },
+    "notebooks": {
+      "total": 1,
+      "score_medio": 80,
+      "desconto_medio": 25,
+      "maior_desconto": 25
+    },
     "monitores": {
       "total": 1,
       "score_medio": 95,
       "desconto_medio": 59,
       "maior_desconto": 59
     },
-    "eletronicos": {
+    "moda": {
       "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 41,
-      "maior_desconto": 41
+      "score_medio": 89,
+      "desconto_medio": 44,
+      "maior_desconto": 44
     },
     "eletrodomesticos": {
       "total": 1,
@@ -470,14 +599,8 @@
       "score_medio": 91,
       "desconto_medio": 44,
       "maior_desconto": 44
-    },
-    "automotivo": {
-      "total": 1,
-      "score_medio": 79,
-      "desconto_medio": 60,
-      "maior_desconto": 60
     }
   },
-  "updated_at": "2026-09-15T04:05:29.438007",
-  "total": 25
+  "updated_at": "2026-09-15T09:54:51.425939",
+  "total": 32
 }
