@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "WAP Extratora Portátil Spot Cleaner W3, 3 em 1, Borrifa, Esfrega e Extrai, com Sistema de Autolimpeza, 1450W 127V",
+      "preco": 482.07,
+      "preco_original": 849.9,
+      "desconto_pct": 43.3,
+      "foto": "https://m.media-amazon.com/images/I/71YOp9GJX2L._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 89,
+      "enviado_em": "2026-09-15T04:05:20.577675",
+      "link": "https://www.amazon.com.br/dp/B0CH3WBKN6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 482.07,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WD-40 Fórmula Original - Produto Multiusos Aerossol 300ml, 200g - Desengripa, lubrifica e protege contra ferrugem",
+      "preco": 35.33,
+      "preco_original": 44.9,
+      "desconto_pct": 21.3,
+      "foto": "https://m.media-amazon.com/images/I/514x2w0chDL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 61,
+      "enviado_em": "2026-09-15T04:05:11.891183",
+      "link": "https://www.amazon.com.br/dp/B07CV2JXNH?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 35.33,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Lâmpada Inteligente Smart Color 10W Elgin RGB Wifi Compatível com Alexa e Google Home",
+      "preco": 33.76,
+      "preco_original": 99.0,
+      "desconto_pct": 65.9,
+      "foto": "https://m.media-amazon.com/images/I/61i1yPAlVLL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-09-15T04:05:03.276126",
+      "link": "https://www.amazon.com.br/dp/B088C4QZV2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Ergométrica Bike Spinning 6kg Sensação inércia Fitness Preto e Vermelho Sevenfit Para Cardio E Musculação",
+      "preco": 443.82,
+      "preco_original": 1094.0,
+      "desconto_pct": 59.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745785-MLA114987927277_072026-AB.webp",
+      "categoria": "monitores",
+      "score": 95,
+      "enviado_em": "2026-09-15T04:01:59.026241",
+      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-bike-spinning-6kg-sensacao-inercia-fitness-preto-e-vermelho-sevenfit-para-cardio-e-musculacao/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 387.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Estação De Solda Retrabalho Rápid 2 Em 1 Soprador Ferro 127v Preto 127v",
+      "preco": 217.55,
+      "preco_original": 599.0,
+      "desconto_pct": 63.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_784702-MLB116000433909_082026-AB--estacao-de-solda-retrabalho-rapid-2-em-1-soprador-ferro-127v.webp",
+      "categoria": "livros",
+      "score": 78,
+      "enviado_em": "2026-09-15T04:01:49.497045",
+      "link": "https://www.mercadolivre.com.br/estacao-de-solda-retrabalho-rapid-2-em-1-soprador-ferro-127v/up/MLBU4702916940?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 217.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Case Suporte Veícular Teto Carro Externo Starlink Mini Imã88",
+      "preco": 317.45,
+      "preco_original": 799.0,
+      "desconto_pct": 60.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_717569-MLB109283370016_042026-AB-case-suporte-veicular-teto-carro-externo-starlink-mini-im88.webp",
+      "categoria": "automotivo",
+      "score": 79,
+      "enviado_em": "2026-09-15T04:01:39.936777",
+      "link": "https://produto.mercadolivre.com.br/MLB-6085020128-case-suporte-veicular-teto-carro-externo-starlink-mini-im88-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 317.45,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular smartphone Motorola G86 5G 256gb 8gb+16gb Ram Boost Grafite",
+      "preco": 1484.0,
+      "preco_original": 2999.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
+      "categoria": "saude",
+      "score": 100,
+      "enviado_em": "2026-09-15T04:01:30.720636",
+      "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1484.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Parafusadeira e Furadeira de Impacto 3/8\" WAP K21 ID02 2000 mAh",
       "preco": 179.0,
       "preco_original": 260.0,
@@ -273,21 +378,33 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Motorola Moto G56 5g - 256gb 8gb Ram+8gb Ram Boost, Camera 50mp Sony Lytia 600 Ultrarresistencia Militar e Ip68 + Ip69 - Cinza",
-    "preco": 1339.0,
-    "preco_original": 2699.0,
+    "titulo": "Celular smartphone Motorola G86 5G 256gb 8gb+16gb Ram Boost Grafite",
+    "preco": 1484.0,
+    "preco_original": 2999.0,
     "desconto_pct": 50.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748002-MLA104773303805_012026-AB.webp",
-    "categoria": "celulares",
-    "score": 95,
-    "enviado_em": "2026-09-13T23:05:28.583965",
-    "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-ultrarresistencia-militar-e-ip68-ip69-cinza/p/MLB50301060?matt_tool=47114387&matt_source=bot_telegram",
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
+    "categoria": "saude",
+    "score": 100,
+    "enviado_em": "2026-09-15T04:01:30.720636",
+    "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1339.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 1484.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
+    "ferramentas": {
+      "total": 5,
+      "score_medio": 73,
+      "desconto_medio": 45,
+      "maior_desconto": 68
+    },
+    "livros": {
+      "total": 3,
+      "score_medio": 73,
+      "desconto_medio": 48,
+      "maior_desconto": 63
+    },
     "informatica": {
       "total": 3,
       "score_medio": 77,
@@ -300,23 +417,11 @@
       "desconto_medio": 35,
       "maior_desconto": 69
     },
-    "livros": {
-      "total": 2,
-      "score_medio": 70,
-      "desconto_medio": 41,
-      "maior_desconto": 50
-    },
     "games": {
       "total": 2,
       "score_medio": 81,
       "desconto_medio": 39,
       "maior_desconto": 57
-    },
-    "ferramentas": {
-      "total": 2,
-      "score_medio": 76,
-      "desconto_medio": 48,
-      "maior_desconto": 68
     },
     "tvs": {
       "total": 1,
@@ -329,6 +434,18 @@
       "score_medio": 62,
       "desconto_medio": 28,
       "maior_desconto": 28
+    },
+    "saude": {
+      "total": 1,
+      "score_medio": 100,
+      "desconto_medio": 50,
+      "maior_desconto": 50
+    },
+    "monitores": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 59,
+      "maior_desconto": 59
     },
     "eletronicos": {
       "total": 1,
@@ -353,8 +470,14 @@
       "score_medio": 91,
       "desconto_medio": 44,
       "maior_desconto": 44
+    },
+    "automotivo": {
+      "total": 1,
+      "score_medio": 79,
+      "desconto_medio": 60,
+      "maior_desconto": 60
     }
   },
-  "updated_at": "2026-09-14T10:27:46.750468",
-  "total": 18
+  "updated_at": "2026-09-15T04:05:29.438007",
+  "total": 25
 }
