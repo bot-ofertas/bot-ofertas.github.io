@@ -1406,6 +1406,66 @@ def test_nome_do_grupo_tem_fonte_unica():
                     f"{arquivo}: nome do grupo escrito na mao -> {linha.strip()}"
 
 
+def test_nuvem_nao_enfileira_whatsapp_que_ninguem_envia():
+    """No GitHub Actions ninguem drena a fila do WhatsApp: o envio direto ja
+    devolve False (sem display) e o workflow nunca roda o
+    whatsapp_queue_sender.py. Enfileirar mesmo assim cobrou dois precos
+    reais, medidos em producao entre 08 e 13/09/2026:
+
+      1. a fila so cresceu, rodada apos rodada, dentro do banco que o
+         Actions guarda em cache: 58 -> 64 -> 68 -> 100;
+      2. o numero virou diagnostico FALSO — "na fila (68 pendente(s))" no
+         log da NUVEM foi lido como "o PC do Daniel tem 68 ofertas
+         esperando" e repassado a ele assim. Era a fila morta da nuvem.
+
+    No servidor Linux a Evolution API envia de verdade e `GITHUB_ACTIONS`
+    nao existe la: aquele caminho segue intacto."""
+    import os as _os
+
+    from integrations.whatsapp_sender import fila_tera_quem_envie, wa_ativo
+
+    guardado = {k: _os.environ.get(k) for k in
+                ("GITHUB_ACTIONS", "WHATSAPP_GROUP_ID",
+                 "WHATSAPP_WEBHOOK_URL", "WHATSAPP_API_KEY")}
+    try:
+        # Ambiente da nuvem: grupo configurado (o secret existe), sem Evolution.
+        _os.environ["GITHUB_ACTIONS"] = "true"
+        _os.environ["WHATSAPP_GROUP_ID"] = "120363000000000000@g.us"
+        _os.environ.pop("WHATSAPP_WEBHOOK_URL", None)
+        _os.environ.pop("WHATSAPP_API_KEY", None)
+        assert wa_ativo() is True, "o cenario nao reproduz a nuvem"
+        assert fila_tera_quem_envie() is False, \
+            "a nuvem voltaria a encher uma fila que ninguem drena"
+
+        # Com a Evolution configurada (servidor), enfileirar faz sentido.
+        _os.environ["WHATSAPP_WEBHOOK_URL"] = "http://127.0.0.1:8080"
+        _os.environ["WHATSAPP_API_KEY"] = "chave"
+        assert fila_tera_quem_envie() is True
+
+        # PC do Daniel: sem GITHUB_ACTIONS, nada muda.
+        _os.environ.pop("GITHUB_ACTIONS", None)
+        _os.environ.pop("WHATSAPP_WEBHOOK_URL", None)
+        _os.environ.pop("WHATSAPP_API_KEY", None)
+        assert fila_tera_quem_envie() is True, "quebrou o caminho do PC"
+    finally:
+        for k, v in guardado.items():
+            if v is None:
+                _os.environ.pop(k, None)
+            else:
+                _os.environ[k] = v
+
+    # Nenhum ponto pode enfileirar sem consultar o guarda.
+    for arquivo in ("rastreador.py", "rastreador_amazon.py", "campanha_ferramentas.py"):
+        texto = open(os.path.join(BASE, arquivo), encoding="utf-8").read()
+        for i, linha in enumerate(texto.splitlines()):
+            if "db.enfileirar_whatsapp(" not in linha:
+                continue
+            # o `if` que governa esta chamada esta nas linhas acima
+            acima = "\n".join(texto.splitlines()[max(0, i - 6):i])
+            assert "fila_tera_quem_envie()" in acima, \
+                f"{arquivo}:{i + 1} enfileira sem checar quem vai enviar"
+
+
 if __name__ == "__main__":
     import traceback
 

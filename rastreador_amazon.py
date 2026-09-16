@@ -33,7 +33,7 @@ from core.validador import validar
 from integrations.amazon_scraper import buscar_cupons_amazon_async, amazon_ativo
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
-from integrations.whatsapp_sender import wa_ativo
+from integrations.whatsapp_sender import fila_tera_quem_envie, wa_ativo
 
 try:
     from core.ai_content import gerar_conteudo
@@ -260,13 +260,15 @@ async def rodar_uma_vez() -> None:
                         # WhatsApp entra na fila (intervalo aleatório 30-45min,
                         # ver whatsapp_queue_sender.py) em vez de sair junto com
                         # o Telegram -- mesmo motivo do rastreador.py.
-                        if wa_ativo():
+                        if wa_ativo() and fila_tera_quem_envie():
                             item_fila = dict(item)
                             msg_wa = conteudo_ia.get("mensagem_whatsapp")
                             if msg_wa:
                                 item_fila["mensagem_override"] = msg_wa
                             db.enfileirar_whatsapp(item_fila)
                             log(f"     💚 WhatsApp: na fila ({db.tamanho_fila_whatsapp()} pendente(s))")
+                        elif wa_ativo():
+                            log("     💚 WhatsApp: sem quem envie neste ambiente — nao enfileirado")
 
                         try:
                             redes = await publicar_todas_redes(item)

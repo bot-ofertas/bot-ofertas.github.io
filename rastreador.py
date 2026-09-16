@@ -38,7 +38,7 @@ from affiliates.registry import get_provider, health_report
 from integrations.ml_browser import buscar_ofertas_browser_async
 from integrations.telegram_bot import publicar, publicar_alerta_cupom
 from integrations.social_poster import publicar_todas_redes, resumo_redes
-from integrations.whatsapp_sender import wa_ativo
+from integrations.whatsapp_sender import fila_tera_quem_envie, wa_ativo
 from core import pausa
 from core.net import dns_ok
 from integrations import n8n
@@ -344,12 +344,14 @@ async def processar_categoria(
                 # sempre, é um padrão fácil de reconhecer como bot. Telegram
                 # continua sem depender do WhatsApp -- enfileirar_whatsapp()
                 # é só uma escrita local, nunca atrasa nem falha a rodada.
-                if wa_ativo():
+                if wa_ativo() and fila_tera_quem_envie():
                     item_fila = dict(item)
                     if texto_wa:
                         item_fila["mensagem_override"] = texto_wa
                     db.enfileirar_whatsapp(item_fila)
                     log(f"     💚 WhatsApp: na fila ({db.tamanho_fila_whatsapp()} pendente(s))")
+                elif wa_ativo():
+                    log("     💚 WhatsApp: sem quem envie neste ambiente — nao enfileirado")
 
                 # Demais redes (Instagram, Twitter…)
                 try:
