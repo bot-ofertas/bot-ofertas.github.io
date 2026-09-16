@@ -28,6 +28,7 @@ Rodar:
 import io
 import logging
 import os
+import pathlib
 import re
 import subprocess
 import sys
@@ -160,6 +161,81 @@ def test_logs_nao_voltam_a_ser_versionados():
     for proibido in ("monitor.log", "rastreador.log"):
         assert proibido not in saida, "%s voltou para o versionamento" % proibido
 
+
+# ---------------------------------------------------------------------------
+# empacotar_projeto.ps1 empacota a pasta inteira para analise fora do PC.
+# A redacao dele e a unica coisa entre o codigo do Daniel e um anexo publico,
+# entao ela precisa valer nos DOIS sentidos: apagar segredo de verdade e nao
+# estragar codigo legitimo. Uma regra larga demais transformaria
+# `API_KEY = os.getenv("API_KEY", "")` em `API_KEY = ***REDIGIDO***` e o dump
+# perderia justamente o que ha para analisar.
+# ---------------------------------------------------------------------------
+
+_SCRIPT_EMPACOTA = pathlib.Path(BASE) / "empacotar_projeto.ps1"
+
+
+def _regras_de_redacao():
+    """Le as regras direto do .ps1 — testar uma copia nao prova nada."""
+    src = _SCRIPT_EMPACOTA.read_text(encoding="utf-8")
+    regras = re.findall(r"-replace '(.+?)', '(.+?)'", src)
+    assert regras, "nenhuma regra -replace encontrada em empacotar_projeto.ps1"
+    return regras
+
+
+def _redigir_como_o_script(texto):
+    for padrao, troca in _regras_de_redacao():
+        padrao = padrao.replace("(?im)", "")
+        texto = re.sub(padrao, troca.replace("$1", r"\1"), texto,
+                       flags=re.IGNORECASE | re.MULTILINE)
+    return texto
+
+
+def test_empacotador_apaga_segredo_de_verdade():
+    # montados em pedacos: um segredo literal aqui seria pego pela varredura
+    # de test_nenhum_arquivo_versionado_contem_segredo, e com razao.
+    casos = {
+        "telegram": "api.telegram.org/bot" + "8939890814" + ":" + "AA" + "X" * 33,
+        "anthropic": "sk-ant-" + "api03-" + "y" * 40,
+        "mercadolivre": "APP_" + "USR-" + "1234567890123456-081512-abc",
+        "github": "ghp_" + "Z" * 36,
+        "env": "N8N_TOKEN=abcdef123456789xyz",
+        "senha": "SENHA: umaSenhaBemLonga123",
+    }
+    for nome, bruto in casos.items():
+        assert "REDIGIDO" in _redigir_como_o_script(bruto), \
+            "empacotador deixaria passar segredo (%s): %s" % (nome, bruto[:30])
+
+
+def test_empacotador_nao_estraga_codigo_legitimo():
+    intactos = [
+        'ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")',
+        '_AFFILIATE_TAG = os.getenv("AMAZON_AFFILIATE_TAG", "")',
+        '_TOOL_ID = os.getenv("ML_AFFILIATE_TOOL_ID") or "47114387"',
+        "N8N_TOKEN=",
+        "TOKEN_TELEGRAM=seu-token-aqui",
+        "# TOKEN_TELEGRAM vem do .env, nunca do codigo",
+    ]
+    for linha in intactos:
+        assert _redigir_como_o_script(linha) == linha, \
+            "empacotador mutilou codigo legitimo: %s" % linha
+
+
+def test_empacotador_nunca_inclui_o_env():
+    """O .env so pode sair como NOMES de chave — nunca o arquivo."""
+    src = _SCRIPT_EMPACOTA.read_text(encoding="utf-8")
+    assert '$f.Name -eq ".env"' in src, "falta a exclusao explicita do .env"
+    for proibido in ("ml_profile", "node_modules", "__pycache__"):
+        assert proibido in src, "empacotador nao exclui %s" % proibido
+
+
+def test_empacotador_e_lido_como_ascii_pelo_powershell():
+    """PowerShell 5.1 le .ps1 sem BOM como cp1252. Um traco longo dentro de
+    string vira terminador de string e o script nao roda. Dois cintos: BOM
+    presente E corpo 100%% ASCII."""
+    bruto = _SCRIPT_EMPACOTA.read_bytes()
+    assert bruto[:3] == b"\xef\xbb\xbf", "empacotar_projeto.ps1 perdeu o BOM UTF-8"
+    fora = [b for b in bruto[3:] if b > 127]
+    assert not fora, "%d byte(s) nao-ASCII no corpo do .ps1" % len(fora)
 
 if __name__ == "__main__":
     import traceback
