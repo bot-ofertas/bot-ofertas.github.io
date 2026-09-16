@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "La Roche-Posay Cicaplast Baume B5+ Cuidado Multirreparador Calmante",
+      "preco": 73.05,
+      "preco_original": 89.9,
+      "desconto_pct": 18.7,
+      "foto": "https://m.media-amazon.com/images/I/41LpbF-1WDL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 67,
+      "enviado_em": "2026-09-16T09:50:31.715990",
+      "link": "https://www.amazon.com.br/dp/B072MK7BN2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 73.05,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Elseve Collagen Lifter Máscara de Tratamento Condicionante Efeito Teia Para Resgate de Massa com Peptídeos de Colágeno Reconstrói a Fibra e Dá Volume por 72h 300g",
+      "preco": 31.46,
+      "preco_original": 40.99,
+      "desconto_pct": 23.2,
+      "foto": "https://m.media-amazon.com/images/I/71EYznJIxWL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 73,
+      "enviado_em": "2026-09-16T09:50:23.040304",
+      "link": "https://www.amazon.com.br/dp/B0G45KPX15?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 31.46,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Argan Óleo Reparador 50ml , Lola Cosmetics",
+      "preco": 16.23,
+      "preco_original": 44.9,
+      "desconto_pct": 63.9,
+      "foto": "https://m.media-amazon.com/images/I/41sfmT4opyL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 69,
+      "enviado_em": "2026-09-16T09:50:14.502789",
+      "link": "https://www.amazon.com.br/dp/B07SBXMSGB?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 16.23,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Mini Quadriciclo 49cc A Gasolina C/nota Fiscal - Dsr",
+      "preco": 4701.0,
+      "preco_original": 6326.0,
+      "desconto_pct": 25.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_915706-MLB92969285017_092025-AB-mini-quadriciclo-49cc-a-gasolina-cnota-fiscal-dsr.webp",
+      "categoria": "brinquedos",
+      "score": 85,
+      "enviado_em": "2026-09-16T09:46:17.428393",
+      "link": "https://produto.mercadolivre.com.br/MLB-3956880337-mini-quadriciclo-49cc-a-gasolina-cnota-fiscal-dsr-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 4701.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Escrivaninha Industrial Mesa Estudo Aparador Office Aço Mdf",
+      "preco": 124.43,
+      "preco_original": 197.0,
+      "desconto_pct": 37.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_995995-MLB116712089111_082026-AB-escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf.webp",
+      "categoria": "moveis",
+      "score": 78,
+      "enviado_em": "2026-09-16T09:45:56.608417",
+      "link": "https://produto.mercadolivre.com.br/MLB-4641352916-escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 124.43,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "HUAWEI WATCH GT 7 Pro 46mm Smart Watch, Bateria de até 21 dias, Caixa em liga de titânio e bisel em cerâmica nano-tech, ECG, Monitoramento da Frequência Cardíaca, Golfe, Ciclismo, Preto",
+      "preco": 1424.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935533-MLA114994321916_082026-AB.webp",
+      "categoria": "esportes",
+      "score": 97,
+      "enviado_em": "2026-09-16T09:45:47.862410",
+      "link": "https://www.mercadolivre.com.br/huawei-watch-gt-7-pro-46mm-smart-watch-bateria-de-ate-21-dias-caixa-em-liga-de-titanio-e-bisel-em-ceramica-nano-tech-ecg-monitoramento-da-frequencia-cardiaca-golfe-ciclismo-preto/p/MLB77599088?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1424.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Asus Vivobook Go Core I3 N305 8gb 512ssd 15,6 Fhd Cool Silver",
+      "preco": 3136.0,
+      "preco_original": 3999.0,
+      "desconto_pct": 21.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_815942-MLA109216021790_042026-AB.webp",
+      "categoria": "informatica",
+      "score": 76,
+      "enviado_em": "2026-09-16T09:45:39.024505",
+      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-core-i3-n305-8gb-512ssd-156-fhd-cool-silver/p/MLB35354805?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 3136.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Lavagem Completa Shampoo Cera Tok Final Intense Sintra Fast Pneu Pretinho Acessórios",
       "preco": 122.35,
       "preco_original": 199.92,
@@ -269,288 +374,53 @@
       "menor_preco_30d": 687.27,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Contigo, Garrafa Térmica Inox Parede Dupla Matterhorn, 591ML",
-      "preco": 45.48,
-      "preco_original": 149.9,
-      "desconto_pct": 69.7,
-      "foto": "https://m.media-amazon.com/images/I/41Sy1XymrLS._AC_UL320_.jpg",
-      "categoria": "esportes",
-      "score": 69,
-      "enviado_em": "2026-09-13T23:08:05.518408",
-      "link": "https://www.amazon.com.br/dp/B07K8WF98V?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 45.48,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Romantic Crown Mochila Feminino Masculino Viagem Expansível para Notebook",
-      "preco": 113.99,
-      "preco_original": 129.99,
-      "desconto_pct": 12.3,
-      "foto": "https://m.media-amazon.com/images/I/61ov9flqL+L._AC_UL320_.jpg",
-      "categoria": "esportes",
-      "score": 43,
-      "enviado_em": "2026-09-13T23:07:56.910313",
-      "link": "https://www.amazon.com.br/dp/B0GXTY8SMX?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "ruim",
-      "menor_preco_30d": 102.86,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 5 Faixas Elásticas Elásticos Alongamento Pilates Yoga Exercícios Condicionamento Físico Yoga Saúde Relaxamento Academia Músculos Personal Trainer Thera Band Fitness Mini Bands",
-      "preco": 8.67,
-      "preco_original": 11.14,
-      "desconto_pct": 22.2,
-      "foto": "https://m.media-amazon.com/images/I/719fD1g-wvL._AC_UL320_.jpg",
-      "categoria": "esportes",
-      "score": 54,
-      "enviado_em": "2026-09-13T23:07:48.303277",
-      "link": "https://www.amazon.com.br/dp/B07KQMVYKL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 8.67,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Lavadora De Alta Pressão Desobstruidora Wap Ousada Wl 2600 Ultra 1500w De Potência 1750 Psi Amarelo 127v 60hz",
-      "preco": 426.55,
-      "preco_original": 597.0,
-      "desconto_pct": 28.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_890076-MLA99640027044_122025-AB.webp",
-      "categoria": "ferramentas",
-      "score": 69,
-      "enviado_em": "2026-09-13T23:05:57.104942",
-      "link": "https://www.mercadolivre.com.br/lavadora-de-alta-pressao-desobstruidora-wap-ousada-wl-2600-ultra-1500w-de-potencia-1750-psi/p/MLB56331914?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 426.55,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Maquina Barbear,aparelho De Barbear Eletrico Multifuncio",
-      "preco": 55.09,
-      "preco_original": 99.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_772603-MLB114943104753_072026-AB-maquina-barbearaparelho-de-barbear-eletrico-multifuncio.webp",
-      "categoria": "beleza",
-      "score": 91,
-      "enviado_em": "2026-09-13T23:05:47.230029",
-      "link": "https://produto.mercadolivre.com.br/MLB-7223217402-maquina-barbearaparelho-de-barbear-eletrico-multifuncio-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 55.09,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart TV 4K 50\" LG NANO UHD AI NU850 2026 Processador α7 Ger9 HDR10 Xbox Bluetooth Wi-Fi AI Search Google Gemini webOS 26 - 50NU850BPSA",
-      "preco": 2276.0,
-      "preco_original": 3899.0,
-      "desconto_pct": 41.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_756409-MLA115252629948_082026-AB.webp",
-      "categoria": "eletronicos",
-      "score": 95,
-      "enviado_em": "2026-09-13T23:05:37.902380",
-      "link": "https://www.mercadolivre.com.br/smart-tv-4k-50-lg-nano-uhd-ai-nu850-2026-processador-7-ger9-hdr10-xbox-bluetooth-wi-fi-ai-search-google-gemini-webos-26-50nu850bpsa/p/MLB76779956?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 2159.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smartphone Motorola Moto G56 5g - 256gb 8gb Ram+8gb Ram Boost, Camera 50mp Sony Lytia 600 Ultrarresistencia Militar e Ip68 + Ip69 - Cinza",
-      "preco": 1339.0,
-      "preco_original": 2699.0,
-      "desconto_pct": 50.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_748002-MLA104773303805_012026-AB.webp",
-      "categoria": "celulares",
-      "score": 95,
-      "enviado_em": "2026-09-13T23:05:28.583965",
-      "link": "https://www.mercadolivre.com.br/smartphone-motorola-moto-g56-5g-256gb-8gb-ram8gb-ram-boost-camera-50mp-sony-lytia-600-ultrarresistencia-militar-e-ip68-ip69-cinza/p/MLB50301060?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1339.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "EPSON Multifuncional EcoTank L3250 - Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt,Preto.",
-      "preco": 1065.35,
-      "preco_original": 1379.0,
-      "desconto_pct": 22.7,
-      "foto": "https://m.media-amazon.com/images/I/51Go2vIg0ML._AC_UL320_.jpg",
-      "categoria": "informatica",
-      "score": 69,
-      "enviado_em": "2026-09-13T10:07:56.277972",
-      "link": "https://www.amazon.com.br/dp/B098YHFT9S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 901.18,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Galaxy Tab S10 Lite, 128GB, Tela 10.9\", WIFI, Cinza",
-      "preco": 2279.05,
-      "preco_original": 3149.0,
-      "desconto_pct": 27.6,
-      "foto": "https://m.media-amazon.com/images/I/51UFm7dGUuL._AC_UL320_.jpg",
-      "categoria": "informatica",
-      "score": 82,
-      "enviado_em": "2026-09-13T10:07:47.639872",
-      "link": "https://www.amazon.com.br/dp/B0FMFRFNWG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 2165.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Dell 15 15-I1300-A30P, Intel Core i5-1334U, Windows 11 Home | Tela 15.6 FHD 120 Hz Antirreflexo, 8 GB RAM, 512 GB SSD, UHD Graphics, Wi‑Fi 6, leitor SD, USB 3.2 Type-C, Garantia de 1 Ano",
-      "preco": 3599.1,
-      "preco_original": 4500.0,
-      "desconto_pct": 20.0,
-      "foto": "https://m.media-amazon.com/images/I/51LAU1+ACrL._AC_UL320_.jpg",
-      "categoria": "informatica",
-      "score": 80,
-      "enviado_em": "2026-09-13T10:07:38.893407",
-      "link": "https://www.amazon.com.br/dp/B0FHCHBRGF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 3599.1,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Papel Adesivo Holográfico Vinil A4 20 Folhas Love - Coração",
-      "preco": 42.85,
-      "preco_original": 59.0,
-      "desconto_pct": 28.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_937574-MLB83225650891_032025-AB--papel-adesivo-holografico-vinil-a4-20-folhas.webp",
-      "categoria": "tablets",
-      "score": 62,
-      "enviado_em": "2026-09-13T10:04:41.149950",
-      "link": "https://www.mercadolivre.com.br/papel-adesivo-holografico-vinil-a4-20-folhas/up/MLBU2971607027?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 42.85,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit Inversora De Solda Gp-150 + Máscara Pró Euro Amarelo 220v",
-      "preco": 279.9,
-      "preco_original": 899.0,
-      "desconto_pct": 68.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_954972-MLA115998930474_092026-AB.webp",
-      "categoria": "ferramentas",
-      "score": 83,
-      "enviado_em": "2026-09-13T10:04:31.522257",
-      "link": "https://www.mercadolivre.com.br/kit-inversora-de-solda-gp-150-mascara-pro-euro-amarelo/p/MLB77339745?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 279.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Volante Gamer Logitech G29 Driving Force para PlayStation e PC",
-      "preco": 1599.0,
-      "preco_original": 1999.0,
-      "desconto_pct": 20.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_730363-MLA99890032125_112025-AB.webp",
-      "categoria": "games",
-      "score": 71,
-      "enviado_em": "2026-09-13T10:04:21.629731",
-      "link": "https://www.mercadolivre.com.br/volante-gamer-logitech-g29-driving-force-para-playstation-e-pc/p/MLB22307702?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 1599.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Creatina Monohidratada Pura 500g Dark Lab Unidade",
-      "preco": 49.9,
-      "preco_original": 99.0,
-      "desconto_pct": 50.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_734286-MLA115263082370_082026-AB.webp",
-      "categoria": "livros",
-      "score": 71,
-      "enviado_em": "2026-09-13T10:04:12.544153",
-      "cupom": "R$20 OFF com Cupom",
-      "link": "https://www.mercadolivre.com.br/creatina-monohidratada-pura-500g-dark-lab-unidade/p/MLB26796581?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 49.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Celular smartphone Motorola G86 5G 256gb 8gb+16gb Ram Boost Grafite",
-    "preco": 1484.0,
-    "preco_original": 2999.0,
-    "desconto_pct": 50.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
-    "categoria": "saude",
-    "score": 100,
-    "enviado_em": "2026-09-15T04:01:30.720636",
-    "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "HUAWEI WATCH GT 7 Pro 46mm Smart Watch, Bateria de até 21 dias, Caixa em liga de titânio e bisel em cerâmica nano-tech, ECG, Monitoramento da Frequência Cardíaca, Golfe, Ciclismo, Preto",
+    "preco": 1424.0,
+    "preco_original": 2699.0,
+    "desconto_pct": 47.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935533-MLA114994321916_082026-AB.webp",
+    "categoria": "esportes",
+    "score": 97,
+    "enviado_em": "2026-09-16T09:45:47.862410",
+    "link": "https://www.mercadolivre.com.br/huawei-watch-gt-7-pro-46mm-smart-watch-bateria-de-ate-21-dias-caixa-em-liga-de-titanio-e-bisel-em-ceramica-nano-tech-ecg-monitoramento-da-frequencia-cardiaca-golfe-ciclismo-preto/p/MLB77599088?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1484.0,
-    "menor_periodo": true,
+    "menor_preco_30d": 1424.0,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "ferramentas": {
-      "total": 5,
-      "score_medio": 73,
-      "desconto_medio": 45,
-      "maior_desconto": 68
-    },
     "automotivo": {
       "total": 4,
       "score_medio": 61,
       "desconto_medio": 33,
       "maior_desconto": 60
     },
-    "livros": {
+    "ferramentas": {
       "total": 3,
-      "score_medio": 73,
-      "desconto_medio": 48,
+      "score_medio": 72,
+      "desconto_medio": 44,
+      "maior_desconto": 65
+    },
+    "beleza": {
+      "total": 3,
+      "score_medio": 70,
+      "desconto_medio": 35,
       "maior_desconto": 63
     },
-    "informatica": {
-      "total": 3,
-      "score_medio": 77,
-      "desconto_medio": 23,
-      "maior_desconto": 27
-    },
-    "esportes": {
-      "total": 3,
-      "score_medio": 55,
-      "desconto_medio": 35,
-      "maior_desconto": 69
-    },
-    "games": {
+    "livros": {
       "total": 2,
-      "score_medio": 81,
-      "desconto_medio": 39,
-      "maior_desconto": 57
-    },
-    "eletronicos": {
-      "total": 2,
-      "score_medio": 89,
-      "desconto_medio": 46,
-      "maior_desconto": 50
+      "score_medio": 74,
+      "desconto_medio": 47,
+      "maior_desconto": 63
     },
     "tvs": {
       "total": 1,
       "score_medio": 89,
       "desconto_medio": 34,
       "maior_desconto": 34
-    },
-    "tablets": {
-      "total": 1,
-      "score_medio": 62,
-      "desconto_medio": 28,
-      "maior_desconto": 28
     },
     "saude": {
       "total": 1,
@@ -570,6 +440,12 @@
       "desconto_medio": 25,
       "maior_desconto": 25
     },
+    "moveis": {
+      "total": 1,
+      "score_medio": 78,
+      "desconto_medio": 37,
+      "maior_desconto": 37
+    },
     "monitores": {
       "total": 1,
       "score_medio": 95,
@@ -582,25 +458,43 @@
       "desconto_medio": 44,
       "maior_desconto": 44
     },
+    "informatica": {
+      "total": 1,
+      "score_medio": 76,
+      "desconto_medio": 21,
+      "maior_desconto": 21
+    },
+    "games": {
+      "total": 1,
+      "score_medio": 90,
+      "desconto_medio": 57,
+      "maior_desconto": 57
+    },
+    "esportes": {
+      "total": 1,
+      "score_medio": 97,
+      "desconto_medio": 47,
+      "maior_desconto": 47
+    },
+    "eletronicos": {
+      "total": 1,
+      "score_medio": 82,
+      "desconto_medio": 50,
+      "maior_desconto": 50
+    },
     "eletrodomesticos": {
       "total": 1,
       "score_medio": 65,
       "desconto_medio": 22,
       "maior_desconto": 22
     },
-    "celulares": {
+    "brinquedos": {
       "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 50,
-      "maior_desconto": 50
-    },
-    "beleza": {
-      "total": 1,
-      "score_medio": 91,
-      "desconto_medio": 44,
-      "maior_desconto": 44
+      "score_medio": 85,
+      "desconto_medio": 25,
+      "maior_desconto": 25
     }
   },
-  "updated_at": "2026-09-15T09:54:51.425939",
-  "total": 32
+  "updated_at": "2026-09-16T09:50:40.401736",
+  "total": 25
 }
