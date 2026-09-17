@@ -1,6 +1,66 @@
 {
   "products": [
     {
+      "titulo": "Notebook Acer Aspire 5 A515-45-R5AT AMD Ryzen 5 5500U 15.6\"AMD Radeon Graphics 256GB SDD 8GB RAM Windows 11",
+      "preco": 3288.0,
+      "preco_original": 6699.0,
+      "desconto_pct": 50.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809656-MLA82164414546_022025-AB.webp",
+      "categoria": "monitores",
+      "score": 95,
+      "enviado_em": "2026-09-17T09:54:08.939503",
+      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r5at-amd-ryzen-5-5500u-156amd-radeon-graphics-256gb-sdd-8gb-ram-windows-11/p/MLB41734795?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3288.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Câmera Segurança Ip Externa Wifi A28 App Icsee À Prova Dágua Ip66 Dome Lente Dupla Lentes 2 Em 1 Vigilancia Visão Noturna Infravermelho  4k Uhd Nova Geração Lançamento 2026 Nexgen",
+      "preco": 104.95,
+      "preco_original": 350.0,
+      "desconto_pct": 70.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_927792-MLB91185357960_092025-AB--camera-seguranca-ip-externa-wifi-a28-app-icsee-a-prova-dagua.webp",
+      "categoria": "cameras",
+      "score": 72,
+      "enviado_em": "2026-09-17T09:53:59.892600",
+      "link": "https://www.mercadolivre.com.br/camera-seguranca-ip-externa-wifi-a28-app-icsee-a-prova-dagua/up/MLBU3403280878?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 104.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Top Lupo Loba Fitness Confortável Ótima Sustentação Academia",
+      "preco": 39.97,
+      "preco_original": 149.0,
+      "desconto_pct": 73.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_943209-MLB95115260847_102025-AB-top-lupo-loba-fitness-confortavel-otima-sustentaco-academia.webp",
+      "categoria": "moda",
+      "score": 79,
+      "enviado_em": "2026-09-17T09:53:50.022305",
+      "link": "https://produto.mercadolivre.com.br/MLB-3781902941-top-lupo-loba-fitness-confortavel-otima-sustentaco-academia-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.97,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Patinete Eletrico 3 Rodas Triciclo Drift 450w 120kg Vermelho Vermelho/azul",
+      "preco": 777.75,
+      "preco_original": 1099.0,
+      "desconto_pct": 29.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_937844-MLB116369053497_082026-AB--patinete-eletrico-3-rodas-triciclo-drift-450w-120kg-vermelho.webp",
+      "categoria": "brinquedos",
+      "score": 81,
+      "enviado_em": "2026-09-17T09:53:40.901637",
+      "link": "https://www.mercadolivre.com.br/patinete-eletrico-3-rodas-triciclo-drift-450w-120kg-vermelho/up/MLBU4780172365?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 777.75,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "La Roche-Posay Cicaplast Baume B5+ Cuidado Multirreparador Calmante",
       "preco": 73.05,
       "preco_original": 89.9,
@@ -149,296 +209,41 @@
       "menor_preco_30d": 99.9,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Tapete Higiênico Para Cachorro 50 Unidades 60x55cm Com Gel Absorvente Fralda Manta Pet Cão Branco Branco",
-      "preco": 47.34,
-      "preco_original": 69.0,
-      "desconto_pct": 32.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_971200-MLA114202177794_082026-AB.webp",
-      "categoria": "pet",
-      "score": 66,
-      "enviado_em": "2026-09-15T09:50:56.725202",
-      "link": "https://www.mercadolivre.com.br/tapete-higienico-para-cachorro-50-unidades-60x55cm-com-gel-absorvente-fralda-manta-pet-cao-com-fitas-adesivas-anti-odor-atrativo-canino/p/MLB28131416?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 45.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit Com 10 Cuecas Boxer Masculina Microfibra Original",
-      "preco": 75.99,
-      "preco_original": 138.0,
-      "desconto_pct": 44.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_882952-MLB106804965837_022026-AB-kit-com-10-cuecas-boxer-masculina-microfibra-original.webp",
-      "categoria": "moda",
-      "score": 89,
-      "enviado_em": "2026-09-15T09:50:47.326036",
-      "link": "https://produto.mercadolivre.com.br/MLB-1837525408-kit-com-10-cuecas-boxer-masculina-microfibra-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 75.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
-      "preco": 171.94,
-      "preco_original": 349.0,
-      "desconto_pct": 50.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
-      "categoria": "eletronicos",
-      "score": 82,
-      "enviado_em": "2026-09-15T09:50:38.383533",
-      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 171.94,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
-      "preco": 4391.0,
-      "preco_original": 5855.0,
-      "desconto_pct": 25.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
-      "categoria": "notebooks",
-      "score": 80,
-      "enviado_em": "2026-09-15T09:50:29.295078",
-      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 4391.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "WAP Extratora Portátil Spot Cleaner W3, 3 em 1, Borrifa, Esfrega e Extrai, com Sistema de Autolimpeza, 1450W 127V",
-      "preco": 482.07,
-      "preco_original": 849.9,
-      "desconto_pct": 43.3,
-      "foto": "https://m.media-amazon.com/images/I/71YOp9GJX2L._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 89,
-      "enviado_em": "2026-09-15T04:05:20.577675",
-      "link": "https://www.amazon.com.br/dp/B0CH3WBKN6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 482.07,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "WD-40 Fórmula Original - Produto Multiusos Aerossol 300ml, 200g - Desengripa, lubrifica e protege contra ferrugem",
-      "preco": 35.33,
-      "preco_original": 44.9,
-      "desconto_pct": 21.3,
-      "foto": "https://m.media-amazon.com/images/I/514x2w0chDL._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 61,
-      "enviado_em": "2026-09-15T04:05:11.891183",
-      "link": "https://www.amazon.com.br/dp/B07CV2JXNH?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 35.33,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Lâmpada Inteligente Smart Color 10W Elgin RGB Wifi Compatível com Alexa e Google Home",
-      "preco": 33.76,
-      "preco_original": 99.0,
-      "desconto_pct": 65.9,
-      "foto": "https://m.media-amazon.com/images/I/61i1yPAlVLL._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 65,
-      "enviado_em": "2026-09-15T04:05:03.276126",
-      "link": "https://www.amazon.com.br/dp/B088C4QZV2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 33.55,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Bicicleta Ergométrica Bike Spinning 6kg Sensação inércia Fitness Preto e Vermelho Sevenfit Para Cardio E Musculação",
-      "preco": 443.82,
-      "preco_original": 1094.0,
-      "desconto_pct": 59.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_745785-MLA114987927277_072026-AB.webp",
-      "categoria": "monitores",
-      "score": 95,
-      "enviado_em": "2026-09-15T04:01:59.026241",
-      "link": "https://www.mercadolivre.com.br/bicicleta-ergometrica-bike-spinning-6kg-sensacao-inercia-fitness-preto-e-vermelho-sevenfit-para-cardio-e-musculacao/p/MLB42978348?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 387.48,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Estação De Solda Retrabalho Rápid 2 Em 1 Soprador Ferro 127v Preto 127v",
-      "preco": 217.55,
-      "preco_original": 599.0,
-      "desconto_pct": 63.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_784702-MLB116000433909_082026-AB--estacao-de-solda-retrabalho-rapid-2-em-1-soprador-ferro-127v.webp",
-      "categoria": "livros",
-      "score": 78,
-      "enviado_em": "2026-09-15T04:01:49.497045",
-      "link": "https://www.mercadolivre.com.br/estacao-de-solda-retrabalho-rapid-2-em-1-soprador-ferro-127v/up/MLBU4702916940?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 217.55,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Case Suporte Veícular Teto Carro Externo Starlink Mini Imã88",
-      "preco": 317.45,
-      "preco_original": 799.0,
-      "desconto_pct": 60.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_717569-MLB109283370016_042026-AB-case-suporte-veicular-teto-carro-externo-starlink-mini-im88.webp",
-      "categoria": "automotivo",
-      "score": 79,
-      "enviado_em": "2026-09-15T04:01:39.936777",
-      "link": "https://produto.mercadolivre.com.br/MLB-6085020128-case-suporte-veicular-teto-carro-externo-starlink-mini-im88-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 317.45,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Celular smartphone Motorola G86 5G 256gb 8gb+16gb Ram Boost Grafite",
-      "preco": 1484.0,
-      "preco_original": 2999.0,
-      "desconto_pct": 50.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_634166-MLA99936645603_112025-AB.webp",
-      "categoria": "saude",
-      "score": 100,
-      "enviado_em": "2026-09-15T04:01:30.720636",
-      "link": "https://www.mercadolivre.com.br/celular-smartphone-motorola-g86-5g-256gb-8gb16gb-ram-boost-grafite/p/MLB51533757?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1484.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Parafusadeira e Furadeira de Impacto 3/8\" WAP K21 ID02 2000 mAh",
-      "preco": 179.0,
-      "preco_original": 260.0,
-      "desconto_pct": 31.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_621555-MLA114663974288_082026-AB.webp",
-      "categoria": "livros",
-      "score": 69,
-      "enviado_em": "2026-09-14T10:24:49.082418",
-      "link": "https://www.mercadolivre.com.br/parafusadeira-e-furadeira-de-impacto-38-wap-k21-id02-2000-mah/p/MLB28765604?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 179.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smart Tv 32 Philco P32vik Roku Led Dolby Audio Hdr Wi-fi 110/220v",
-      "preco": 979.94,
-      "preco_original": 1499.0,
-      "desconto_pct": 34.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_691057-MLA100479527690_122025-AB.webp",
-      "categoria": "tvs",
-      "score": 89,
-      "enviado_em": "2026-09-14T10:24:39.107792",
-      "link": "https://www.mercadolivre.com.br/smart-tv-32-philco-p32vik-roku-led-dolby-audio-hdr-wi-fi-110220v/p/MLB63036814?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 948.96,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Cadeira Gamer Lancer Preta e Branca Healer",
-      "preco": 382.44,
-      "preco_original": 899.0,
-      "desconto_pct": 57.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_951583-MLA105697862101_012026-AB.webp",
-      "categoria": "games",
-      "score": 90,
-      "enviado_em": "2026-09-14T10:24:30.200369",
-      "link": "https://www.mercadolivre.com.br/cadeira-gamer-lancer-preta-e-branca-healer/p/MLB19069354?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 382.44,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Micro-ondas Brastemp 32L Cinza com Menu Gourmet - BMS46AR",
-      "preco": 687.27,
-      "preco_original": 889.0,
-      "desconto_pct": 22.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_682152-MLA99468136788_112025-AB.webp",
-      "categoria": "eletrodomesticos",
-      "score": 65,
-      "enviado_em": "2026-09-14T10:24:19.385958",
-      "link": "https://www.mercadolivre.com.br/micro-ondas-brastemp-32l-cinza-com-menu-gourmet-bms46ar/p/MLB19119110?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 687.27,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "HUAWEI WATCH GT 7 Pro 46mm Smart Watch, Bateria de até 21 dias, Caixa em liga de titânio e bisel em cerâmica nano-tech, ECG, Monitoramento da Frequência Cardíaca, Golfe, Ciclismo, Preto",
-    "preco": 1424.0,
-    "preco_original": 2699.0,
-    "desconto_pct": 47.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935533-MLA114994321916_082026-AB.webp",
-    "categoria": "esportes",
-    "score": 97,
-    "enviado_em": "2026-09-16T09:45:47.862410",
-    "link": "https://www.mercadolivre.com.br/huawei-watch-gt-7-pro-46mm-smart-watch-bateria-de-ate-21-dias-caixa-em-liga-de-titanio-e-bisel-em-ceramica-nano-tech-ecg-monitoramento-da-frequencia-cardiaca-golfe-ciclismo-preto/p/MLB77599088?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Notebook Acer Aspire 5 A515-45-R5AT AMD Ryzen 5 5500U 15.6\"AMD Radeon Graphics 256GB SDD 8GB RAM Windows 11",
+    "preco": 3288.0,
+    "preco_original": 6699.0,
+    "desconto_pct": 50.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809656-MLA82164414546_022025-AB.webp",
+    "categoria": "monitores",
+    "score": 95,
+    "enviado_em": "2026-09-17T09:54:08.939503",
+    "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r5at-amd-ryzen-5-5500u-156amd-radeon-graphics-256gb-sdd-8gb-ram-windows-11/p/MLB41734795?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1424.0,
+    "menor_preco_30d": 3288.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "automotivo": {
-      "total": 4,
-      "score_medio": 61,
-      "desconto_medio": 33,
-      "maior_desconto": 60
-    },
-    "ferramentas": {
-      "total": 3,
-      "score_medio": 72,
-      "desconto_medio": 44,
-      "maior_desconto": 65
-    },
     "beleza": {
       "total": 3,
       "score_medio": 70,
       "desconto_medio": 35,
       "maior_desconto": 63
     },
-    "livros": {
+    "automotivo": {
+      "total": 3,
+      "score_medio": 54,
+      "desconto_medio": 24,
+      "maior_desconto": 38
+    },
+    "brinquedos": {
       "total": 2,
-      "score_medio": 74,
-      "desconto_medio": 47,
-      "maior_desconto": 63
-    },
-    "tvs": {
-      "total": 1,
-      "score_medio": 89,
-      "desconto_medio": 34,
-      "maior_desconto": 34
-    },
-    "saude": {
-      "total": 1,
-      "score_medio": 100,
-      "desconto_medio": 50,
-      "maior_desconto": 50
-    },
-    "pet": {
-      "total": 1,
-      "score_medio": 66,
-      "desconto_medio": 32,
-      "maior_desconto": 32
-    },
-    "notebooks": {
-      "total": 1,
-      "score_medio": 80,
-      "desconto_medio": 25,
-      "maior_desconto": 25
+      "score_medio": 83,
+      "desconto_medio": 27,
+      "maior_desconto": 29
     },
     "moveis": {
       "total": 1,
@@ -449,14 +254,14 @@
     "monitores": {
       "total": 1,
       "score_medio": 95,
-      "desconto_medio": 59,
-      "maior_desconto": 59
+      "desconto_medio": 50,
+      "maior_desconto": 50
     },
     "moda": {
       "total": 1,
-      "score_medio": 89,
-      "desconto_medio": 44,
-      "maior_desconto": 44
+      "score_medio": 79,
+      "desconto_medio": 73,
+      "maior_desconto": 73
     },
     "informatica": {
       "total": 1,
@@ -464,37 +269,19 @@
       "desconto_medio": 21,
       "maior_desconto": 21
     },
-    "games": {
-      "total": 1,
-      "score_medio": 90,
-      "desconto_medio": 57,
-      "maior_desconto": 57
-    },
     "esportes": {
       "total": 1,
       "score_medio": 97,
       "desconto_medio": 47,
       "maior_desconto": 47
     },
-    "eletronicos": {
+    "cameras": {
       "total": 1,
-      "score_medio": 82,
-      "desconto_medio": 50,
-      "maior_desconto": 50
-    },
-    "eletrodomesticos": {
-      "total": 1,
-      "score_medio": 65,
-      "desconto_medio": 22,
-      "maior_desconto": 22
-    },
-    "brinquedos": {
-      "total": 1,
-      "score_medio": 85,
-      "desconto_medio": 25,
-      "maior_desconto": 25
+      "score_medio": 72,
+      "desconto_medio": 70,
+      "maior_desconto": 70
     }
   },
-  "updated_at": "2026-09-16T09:50:40.401736",
-  "total": 25
+  "updated_at": "2026-09-17T09:56:36.911841",
+  "total": 14
 }
