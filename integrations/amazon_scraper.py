@@ -41,9 +41,26 @@ _UA = (
 # pequeno e roda devagar). Os 10 departamentos abaixo foram validados ao
 # vivo com o mesmo filtro rh=p_n_deal_type já usado, retornando produtos
 # nunca vistos pelo bot.
-_URLS_AMAZON: list[tuple[str, str]] = [
+# As duas primeiras sao AGREGADORES CURADOS pela propria Amazon (a pagina de
+# cupons e a de ofertas do dia) — sao a razao de este rastreador existir e a
+# unica fonte onde o badge de cupom aparece. Ficam FORA do sorteio, sempre
+# visitadas primeiro.
+#
+# Bug real, achado em 2026-09-17 nos logs das rodadas #277, #280 e #283 (todas
+# com "0 com cupom de desconto"): as 15 URLs eram embaralhadas juntas e o laco
+# para assim que junta `limite*2` produtos — o que acontece depois de 2 ou 3
+# categorias. A pagina de cupons entrava numa loteria de 15 e perdia na
+# maioria das rodadas, entao um "Rastreador Amazon Cupons" passava rodadas
+# inteiras sem olhar cupom nenhum.
+_FONTES_CURADAS: list[tuple[str, str]] = [
     ("cupons",           "https://www.amazon.com.br/coupons"),
     ("ofertas_dia",      "https://www.amazon.com.br/deals"),
+]
+
+# Departamentos: continuam embaralhados a cada rodada. Aqui o sorteio E
+# desejado — sempre varrer na mesma ordem faria as categorias do fim da lista
+# quase nunca serem alcancadas (motivo da ampliacao de 2026-08-01).
+_URLS_AMAZON: list[tuple[str, str]] = [
     ("eletronicos",      "https://www.amazon.com.br/s?i=electronics&rh=p_n_deal_type%3A23566064011"),
     ("informatica",      "https://www.amazon.com.br/s?i=computers&rh=p_n_deal_type%3A23566064011"),
     ("casa",             "https://www.amazon.com.br/s?i=kitchen&rh=p_n_deal_type%3A23566064011"),
@@ -250,7 +267,8 @@ async def buscar_cupons_amazon_async(
     # problema de concorrência entre chamadas simultâneas). Com 15 URLs e o
     # corte antecipado de limite*2, sempre escanear na mesma ordem faria as
     # categorias do fim da lista quase nunca serem alcançadas.
-    ordem = random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
+    # Curadas primeiro, sempre; departamentos sorteados depois.
+    ordem = _FONTES_CURADAS + random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
@@ -289,6 +307,20 @@ async def buscar_cupons_amazon_async(
                     if desconto_min > 0:
                         produtos = [p for p in produtos if (p.get("desconto_pct") or 0) >= desconto_min
                                     or p.get("cupom")]  # cupom sempre passa
+
+                    # Quantos vieram e quantos traziam badge de cupom, POR
+                    # fonte. Sem isso, "0 com cupom" no resumo final e mudo:
+                    # nao distingue "a pagina de cupons nao foi visitada" de
+                    # "foi visitada e o seletor nao casa mais" — e foi
+                    # justamente essa mudez que escondeu o bug da ordem
+                    # aleatoria por rodadas seguidas.
+                    _com_cupom = sum(1 for x in produtos if x.get("cupom"))
+                    log.info("amazon[%s]: %d produto(s), %d com cupom",
+                             categoria, len(produtos), _com_cupom)
+                    if categoria in ("cupons", "ofertas_dia") and not produtos:
+                        log.warning(
+                            "amazon[%s]: fonte curada devolveu ZERO produtos — "
+                            "seletor do DOM provavelmente mudou", categoria)
 
                     todos.extend(produtos)
                 except Exception as e:

@@ -95,6 +95,55 @@ def test_validate_affiliate_link():
     assert prov.validate_affiliate_link("") is False
 
 
+# ---------------------------------------------------------------------------
+# Ordem das fontes da Amazon.
+#
+# Bug real (2026-09-17): as 15 URLs — inclusive a pagina de cupons — eram
+# embaralhadas juntas, e o laco para assim que junta `limite*2` produtos, o que
+# acontece depois de 2 ou 3 categorias. A pagina de cupons entrava numa loteria
+# de 15 e perdia ~80% das vezes, entao o "Rastreador Amazon Cupons" passava
+# rodadas inteiras sem olhar cupom nenhum. Logs das rodadas #277, #280 e #283:
+# "0 com cupom de desconto" nas tres.
+# ---------------------------------------------------------------------------
+
+def test_fontes_curadas_da_amazon_vem_sempre_primeiro():
+    import random  # noqa: PLC0415
+    from integrations.amazon_scraper import _FONTES_CURADAS, _URLS_AMAZON  # noqa: PLC0415
+
+    nomes_curados = [n for n, _ in _FONTES_CURADAS]
+    assert "cupons" in nomes_curados, "a pagina de cupons saiu das fontes curadas"
+    assert "ofertas_dia" in nomes_curados
+
+    # Reproduz a ordem que o scraper monta, varias vezes: as curadas nunca
+    # podem depender do sorteio.
+    for _ in range(200):
+        ordem = _FONTES_CURADAS + random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
+        assert [n for n, _ in ordem[:len(_FONTES_CURADAS)]] == nomes_curados, \
+            "uma fonte curada caiu no sorteio — o bug de 2026-09-17 voltou"
+
+
+def test_fonte_curada_nao_se_repete_na_lista_sorteada():
+    """Duplicata faria a mesma pagina ser varrida duas vezes por rodada,
+    gastando uma das poucas fontes que o corte por `limite*2` permite."""
+    from integrations.amazon_scraper import _FONTES_CURADAS, _URLS_AMAZON  # noqa: PLC0415
+
+    curadas = {n for n, _ in _FONTES_CURADAS}
+    repetidas = curadas & {n for n, _ in _URLS_AMAZON}
+    assert not repetidas, "fonte curada duplicada na lista sorteada: %s" % repetidas
+
+
+def test_scraper_avisa_quando_fonte_curada_vem_vazia():
+    """Um seletor que apodrece tem de aparecer no log. Foi a mudez do resumo
+    ('0 com cupom', sem dizer por que) que escondeu o bug da ordem."""
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+    assert "fonte curada devolveu ZERO produtos" in src, \
+        "sumiu o aviso de fonte curada vazia — a falha volta a ser silenciosa"
+    assert "amazon[%s]: %d produto(s), %d com cupom" in src, \
+        "sumiu a contagem por fonte — '0 com cupom' volta a ser indiagnosticavel"
+
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py
     import traceback
