@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Chuveiro Loren Shower Eletrônico 7500w 220v Lorenzetti",
+      "preco": 104.9,
+      "preco_original": 125.9,
+      "desconto_pct": 16.7,
+      "foto": "https://m.media-amazon.com/images/I/31fyFHV8H-L._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 46,
+      "enviado_em": "2026-09-17T13:03:27.117523",
+      "link": "https://www.amazon.com.br/dp/B095VF5GR7?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 104.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WD-40 Fórmula Original - Produto Multiusos Aerossol 300ml, 200g - Desengripa, lubrifica e protege contra ferrugem",
+      "preco": 35.75,
+      "preco_original": 44.9,
+      "desconto_pct": 20.4,
+      "foto": "https://m.media-amazon.com/images/I/514x2w0chDL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 55,
+      "enviado_em": "2026-09-17T13:03:18.351177",
+      "link": "https://www.amazon.com.br/dp/B07CV2JXNH?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 35.33,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Lâmpada Inteligente Smart Color 10W Elgin RGB Wifi Compatível com Alexa e Google Home",
+      "preco": 33.76,
+      "preco_original": 99.0,
+      "desconto_pct": 65.9,
+      "foto": "https://m.media-amazon.com/images/I/61i1yPAlVLL._AC_UY218_.jpg",
+      "categoria": "ferramentas",
+      "score": 65,
+      "enviado_em": "2026-09-17T13:03:09.586401",
+      "link": "https://www.amazon.com.br/dp/B088C4QZV2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+      "preco": 449.0,
+      "preco_original": 623.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 68,
+      "enviado_em": "2026-09-17T12:59:41.968413",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 449.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "3 Rolos Bobina Papel Térmico Térmica Impressora Portátil A4 Branco",
+      "preco": 36.77,
+      "preco_original": 54.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605530-MLB115045294036_082026-AB--3-rolos-bobina-papel-termico-termica-impressora-portatil-a4.webp",
+      "categoria": "tablets",
+      "score": 66,
+      "enviado_em": "2026-09-17T12:59:31.963639",
+      "link": "https://www.mercadolivre.com.br/3-rolos-bobina-papel-termico-termica-impressora-portatil-a4/up/MLBU4782429115?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 36.77,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Gamer Acer Nitro V15 ANV15-52-52VN Intel® Core™ i5-13420H 13ªG 512 GB SSD 16 GB RAM RTX 4060 15.6”",
+      "preco": 6399.0,
+      "preco_original": 8999.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968548-MLA99943896901_112025-AB.webp",
+      "categoria": "informatica",
+      "score": 83,
+      "enviado_em": "2026-09-17T12:59:22.810005",
+      "link": "https://www.mercadolivre.com.br/notebook-gamer-acer-nitro-v15-anv15-52-52vn-intel-core-i5-13420h-13g-512-gb-ssd-16-gb-ram-rtx-4060-156/p/MLB54358498?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 6399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Enssu Aparador De Pelos Corporais Masculino Com Lâmina Segura e Base, Máquina de Barbear IPX7 À Prova d’Água",
+      "preco": 125.71,
+      "preco_original": 324.0,
+      "desconto_pct": 61.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_986028-MLA117190573943_092026-AB.webp",
+      "categoria": "beleza",
+      "score": 85,
+      "enviado_em": "2026-09-17T12:59:13.471570",
+      "link": "https://www.mercadolivre.com.br/enssu-aparador-de-pelos-corporais-masculino-com-lamina-segura-e-base-maquina-de-barbear-ipx7-prova-dagua/p/MLB65182534?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 125.71,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Notebook Acer Aspire 5 A515-45-R5AT AMD Ryzen 5 5500U 15.6\"AMD Radeon Graphics 256GB SDD 8GB RAM Windows 11",
       "preco": 3288.0,
       "preco_original": 6699.0,
@@ -164,51 +269,6 @@
       "menor_preco_30d": 3136.0,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Kit Lavagem Completa Shampoo Cera Tok Final Intense Sintra Fast Pneu Pretinho Acessórios",
-      "preco": 122.35,
-      "preco_original": 199.92,
-      "desconto_pct": 38.8,
-      "foto": "https://m.media-amazon.com/images/I/71pzyI++-dL._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 73,
-      "enviado_em": "2026-09-15T09:54:42.437476",
-      "link": "https://www.amazon.com.br/dp/B0H52LF5JF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 122.35,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Cadeira para Auto 0-36Kg Isofix Litet All Stages Fix 2.0 Preta e Cinza - BB452",
-      "preco": 698.9,
-      "preco_original": 828.9,
-      "desconto_pct": 15.7,
-      "foto": "https://m.media-amazon.com/images/I/615AvAaOM8L._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 47,
-      "enviado_em": "2026-09-15T09:54:33.668432",
-      "link": "https://www.amazon.com.br/dp/B0BXMV4ZXW?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 698.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "WAP Aspirador de Pó Automotivo Car 12V2, Portátil, 420ml, com Recipiente Removível e Filtro Lavável, 180W 12VDC",
-      "preco": 99.9,
-      "preco_original": 119.9,
-      "desconto_pct": 16.7,
-      "foto": "https://m.media-amazon.com/images/I/71zj-+xJrbL._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 43,
-      "enviado_em": "2026-09-15T09:54:24.732037",
-      "link": "https://www.amazon.com.br/dp/B0CLDRS18S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "ruim",
-      "menor_preco_30d": 99.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
@@ -228,22 +288,34 @@
   },
   "stats": {
     "beleza": {
-      "total": 3,
-      "score_medio": 70,
-      "desconto_medio": 35,
+      "total": 4,
+      "score_medio": 74,
+      "desconto_medio": 42,
       "maior_desconto": 63
     },
-    "automotivo": {
+    "ferramentas": {
       "total": 3,
-      "score_medio": 54,
-      "desconto_medio": 24,
-      "maior_desconto": 38
+      "score_medio": 55,
+      "desconto_medio": 34,
+      "maior_desconto": 65
+    },
+    "informatica": {
+      "total": 2,
+      "score_medio": 80,
+      "desconto_medio": 25,
+      "maior_desconto": 28
     },
     "brinquedos": {
       "total": 2,
       "score_medio": 83,
       "desconto_medio": 27,
       "maior_desconto": 29
+    },
+    "tablets": {
+      "total": 1,
+      "score_medio": 66,
+      "desconto_medio": 32,
+      "maior_desconto": 32
     },
     "moveis": {
       "total": 1,
@@ -263,12 +335,6 @@
       "desconto_medio": 73,
       "maior_desconto": 73
     },
-    "informatica": {
-      "total": 1,
-      "score_medio": 76,
-      "desconto_medio": 21,
-      "maior_desconto": 21
-    },
     "esportes": {
       "total": 1,
       "score_medio": 97,
@@ -280,8 +346,14 @@
       "score_medio": 72,
       "desconto_medio": 70,
       "maior_desconto": 70
+    },
+    "bebes": {
+      "total": 1,
+      "score_medio": 68,
+      "desconto_medio": 28,
+      "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-17T09:56:36.911841",
-  "total": 14
+  "updated_at": "2026-09-17T13:03:36.453242",
+  "total": 18
 }
