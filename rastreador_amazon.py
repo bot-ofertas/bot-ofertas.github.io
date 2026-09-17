@@ -45,7 +45,9 @@ load_dotenv()
 TOKEN_TELEGRAM = os.getenv("TOKEN_TELEGRAM", "")
 CANAIS = {"geral": os.getenv("CANAL_GERAL", "")}
 
-MAX_POR_EXECUCAO = 3   # máximo de posts por rodada (Amazon é mais restrito)
+# Mesma regra do rastreador.py: uma oferta por loja por rodada (2026-09-17).
+# Configurável no .env; o valor antigo era 3.
+MAX_POR_EXECUCAO = max(1, int(os.getenv("MAX_POR_RODADA_AMAZON") or "1"))
 DESCONTO_MIN     = 10  # cupons sem desconto calculável passam mesmo assim
 PAUSA_ENTRE_POSTS = 8  # segundos (Amazon é mais sensível a spam)
 SCORE_MINIMO     = 40  # threshold menor pois cupons têm valor extra intrínseco
