@@ -10,6 +10,20 @@ e publica automaticamente — preservando a comissão em todas as URLs.
 
 ---
 
+## Instalação
+
+No Windows, pelo PowerShell:
+
+```powershell
+.\install.ps1
+```
+
+Passo a passo, requisitos e o que fazer quando algo não sobe: **[INSTALL.md](INSTALL.md)**.
+Operação do dia a dia: `.\start.ps1`, `.\status.ps1`, `.\logs.ps1`, `.\stop.ps1`.
+No servidor Linux, o caminho é outro: [`deploy/README.md`](deploy/README.md).
+
+---
+
 ## Como funciona (fluxo de uma oferta)
 
 ```
