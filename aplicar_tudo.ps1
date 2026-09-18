@@ -216,6 +216,40 @@ if (-not $git) {
 }
 else {
 Passo 4 "Trazendo a branch $Branch"
+
+# A pasta pode estar recusada pelo git antes de qualquer comando funcionar.
+# Bug real (18/09/2026, no PC do Daniel): D:\bot_ofertas pertence ao SID da
+# conta antiga do Windows, entao o git aplica a protecao contra CVE-2022-24765
+# e recusa a pasta inteira. O sintoma era "ERRO: git fetch falhou (sem
+# internet? sem credencial?)" — que aponta para o lugar errado e manda
+# investigar rede, quando rede nao tem nada a ver. Pior: o `git status` que
+# procura alteracoes locais falhava do mesmo jeito e devolvia vazio, entao o
+# script ainda concluia "nenhuma alteracao local" antes de morrer no fetch.
+# Por isso esta checagem vem ANTES dele: um `git status` que nao consegue
+# olhar nao pode passar por "esta tudo limpo".
+$teste = & $git rev-parse --is-inside-work-tree 2>&1
+if ($LASTEXITCODE -ne 0) {
+    $texto = ($teste | Out-String)
+    if ($texto -match "dubious ownership" -or $texto -match "safe\.directory") {
+        Erro "o git recusa esta pasta: ela pertence a outra conta do Windows."
+        Write-Host "        Nao e rede, nao e credencial, nao e o bot." -ForegroundColor DarkGray
+        Write-Host "        E a protecao do git contra CVE-2022-24765." -ForegroundColor DarkGray
+        Write-Host ""
+        Write-Host "        Rode esta linha e DEPOIS rode este script de novo," -ForegroundColor Yellow
+        Write-Host "        na MESMA janela:" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "          git config --global --add safe.directory $($BASE -replace '\\','/')" -ForegroundColor White
+        Write-Host ""
+        Write-Host "        Ela marca SO esta pasta como confiavel. Nao mexe em" -ForegroundColor DarkGray
+        Write-Host "        configuracao do Windows nem em seguranca do PC." -ForegroundColor DarkGray
+    }
+    else {
+        Erro "o git nao consegue ler esta pasta:"
+        Write-Host $texto -ForegroundColor DarkGray
+    }
+    exit 1
+}
+
 $sujo = & $git status --porcelain
 if ($sujo) {
     $marca = "aplicar_tudo-" + (Get-Date -Format "yyyyMMdd-HHmmss")
@@ -223,8 +257,14 @@ if ($sujo) {
     Write-Host "        Recupere depois com: git stash list ; git stash pop" -ForegroundColor DarkGray
     & $git stash push -u -m $marca | Out-Null
 }
-& $git fetch origin $Branch
-if ($LASTEXITCODE -ne 0) { Erro "git fetch falhou (sem internet? sem credencial?)"; exit 1 }
+$saida = & $git fetch origin $Branch 2>&1
+if ($LASTEXITCODE -ne 0) {
+    # Sem o texto do git, a mensagem vira adivinhacao — e adivinhacao mandou
+    # o Daniel procurar problema de rede num problema de dono de pasta.
+    Erro "git fetch falhou. O git disse:"
+    Write-Host ($saida | Out-String) -ForegroundColor DarkGray
+    exit 1
+}
 & $git checkout $Branch
 if ($LASTEXITCODE -ne 0) { Erro "git checkout falhou"; exit 1 }
 & $git pull --ff-only origin $Branch | Out-Null
