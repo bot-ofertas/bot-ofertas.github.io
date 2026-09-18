@@ -132,17 +132,52 @@ def test_fonte_curada_nao_se_repete_na_lista_sorteada():
     assert not repetidas, "fonte curada duplicada na lista sorteada: %s" % repetidas
 
 
-def test_scraper_avisa_quando_fonte_curada_vem_vazia():
-    """Um seletor que apodrece tem de aparecer no log. Foi a mudez do resumo
+def test_scraper_avisa_quando_categoria_vem_vazia():
+    """Um zero tem de aparecer no log JA classificado. Foi a mudez do resumo
     ('0 com cupom', sem dizer por que) que escondeu o bug da ordem."""
     import pathlib as _p  # noqa: PLC0415
 
     raiz = _p.Path(__file__).resolve().parent.parent
     src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
-    assert "fonte curada devolveu ZERO produtos" in src, \
-        "sumiu o aviso de fonte curada vazia — a falha volta a ser silenciosa"
-    assert "amazon[%s]: %d produto(s), %d com cupom" in src, \
+    assert "amazon[%s]: %d card(s) no DOM, %d produto(s) apos " in src, \
         "sumiu a contagem por fonte — '0 com cupom' volta a ser indiagnosticavel"
+    assert "_DIAG_SCRIPT" in src, "sumiu o diagnostico de DOM do zero"
+
+
+def test_zero_produto_distingue_bloqueio_de_seletor():
+    """Zero produto tem tres causas e o log precisa dizer QUAL. Rodada #288
+    (18/09, 03:04): 15 fontes com zero e a unica mensagem era 'seletor do DOM
+    provavelmente mudou' — uma suposicao (Regra 2). Bloqueio anti-bot da
+    Amazon tambem da zero, e ali reescrever seletor e trabalho jogado fora."""
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+
+    assert "BLOQUEIO anti-bot" in src, "o log nao sabe mais nomear bloqueio"
+    assert "nenhum passou" in src, "o log nao sabe mais nomear filtro de desconto"
+    assert "ZERO card no DOM sem marca de bloqueio" in src, \
+        "o log nao sabe mais nomear seletor podre"
+
+    # O diagnostico so pode custar chamada quando ja deu zero.
+    i_if = src.index("if not produtos:")
+    i_eval = src.index("page.evaluate(_DIAG_SCRIPT)")
+    assert i_eval > i_if, "diagnostico rodando fora do caminho de zero produto"
+
+    # E nao pode derrubar a rodada se ele mesmo falhar.
+    trecho = src[i_if:i_if + 600]
+    assert "except Exception:" in trecho, \
+        "diagnostico sem protecao — uma falha nele mataria a categoria inteira"
+
+
+def test_diag_script_procura_marcas_reais_de_bloqueio():
+    """As marcas sao o que a Amazon Brasil realmente escreve na pagina de
+    bloqueio — em portugues e em ingles, porque o interstitial vem nos dois."""
+    from integrations import amazon_scraper as a  # noqa: PLC0415
+
+    for marca in ("Digite os caracteres", "Continuar comprando",
+                  "automated access", "captchacharacters", "validateCaptcha"):
+        assert marca in a._DIAG_SCRIPT, f"sumiu a marca de bloqueio {marca!r}"
 
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py

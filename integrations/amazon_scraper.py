@@ -157,6 +157,48 @@ _DOM_SCRIPT = r"""
 """
 
 
+# Roda SO quando a categoria devolve zero produtos. Nao mexe na raspagem: so
+# responde "zero por que?". Sem isso o log dizia "seletor do DOM provavelmente
+# mudou" — uma SUPOSICAO (Regra 2), e a errada na maior parte das vezes: uma
+# pagina de bloqueio anti-bot da Amazon tambem devolve zero card, e o
+# tratamento e o oposto (esperar/trocar de saida, nao reescrever seletor).
+_DIAG_SCRIPT = r"""
+() => {
+    const seletores = [
+        '[data-testid="deal-card"]',
+        '[data-component-type="s-search-result"]',
+        '[data-asin]',
+        '.a-carousel-card',
+        '.octopus-pc-item',
+    ];
+    const contagem = {};
+    for (const sel of seletores) {
+        contagem[sel] = document.querySelectorAll(sel).length;
+    }
+    const texto = (document.body ? document.body.innerText : '') || '';
+    const marcas_bloqueio = [
+        'Digite os caracteres',
+        'Type the characters',
+        'Continuar comprando',
+        'automated access',
+        'Para discutir o acesso automatizado',
+        'Sorry, we just need to make sure',
+        'Desculpe-nos',
+    ];
+    const achadas = marcas_bloqueio.filter(m => texto.includes(m));
+    return {
+        titulo:    (document.title || '').slice(0, 120),
+        url_final: location.href.slice(0, 200),
+        contagem:  contagem,
+        tamanho_texto: texto.length,
+        bloqueio:  achadas,
+        tem_captcha: !!document.querySelector(
+            '#captchacharacters, form[action*="validateCaptcha"]'),
+    };
+}
+"""
+
+
 def _link_afiliado(url: str) -> str:
     """Adiciona tag de afiliado à URL da Amazon.
 
@@ -315,12 +357,43 @@ async def buscar_cupons_amazon_async(
                     # justamente essa mudez que escondeu o bug da ordem
                     # aleatoria por rodadas seguidas.
                     _com_cupom = sum(1 for x in produtos if x.get("cupom"))
-                    log.info("amazon[%s]: %d produto(s), %d com cupom",
-                             categoria, len(produtos), _com_cupom)
-                    if categoria in ("cupons", "ofertas_dia") and not produtos:
-                        log.warning(
-                            "amazon[%s]: fonte curada devolveu ZERO produtos — "
-                            "seletor do DOM provavelmente mudou", categoria)
+                    log.info("amazon[%s]: %d card(s) no DOM, %d produto(s) apos "
+                             "filtro, %d com cupom",
+                             categoria, len(raw), len(produtos), _com_cupom)
+
+                    # Zero produto tem tres causas diferentes e so o DOM
+                    # distingue: (a) a pagina veio e os cards nao casam mais
+                    # com o seletor, (b) a pagina veio, os cards casaram e o
+                    # filtro de desconto cortou tudo, (c) a Amazon devolveu
+                    # pagina de bloqueio/captcha e nao ha pagina nenhuma.
+                    # Tratar (c) como (a) leva a reescrever seletor que esta
+                    # certo. So pergunta quando da zero — nenhuma chamada
+                    # extra na rodada saudavel.
+                    if not produtos:
+                        try:
+                            d = await page.evaluate(_DIAG_SCRIPT)
+                        except Exception:
+                            d = None
+                        if d:
+                            if d.get("bloqueio") or d.get("tem_captcha"):
+                                log.warning(
+                                    "amazon[%s]: BLOQUEIO anti-bot — a pagina nao "
+                                    "chegou a carregar produtos (marcas=%s captcha=%s "
+                                    "titulo=%r). Nao e seletor: nao mexer no DOM.",
+                                    categoria, d.get("bloqueio"), d.get("tem_captcha"),
+                                    d.get("titulo"))
+                            elif len(raw) > 0:
+                                log.warning(
+                                    "amazon[%s]: %d card(s) extraidos e nenhum passou "
+                                    "o filtro de desconto >= %d%% — pagina saudavel, "
+                                    "oferta fraca.", categoria, len(raw), desconto_min)
+                            else:
+                                log.warning(
+                                    "amazon[%s]: ZERO card no DOM sem marca de bloqueio "
+                                    "— seletores=%s texto=%d titulo=%r url=%s",
+                                    categoria, d.get("contagem"),
+                                    d.get("tamanho_texto"), d.get("titulo"),
+                                    d.get("url_final"))
 
                     todos.extend(produtos)
                 except Exception as e:
