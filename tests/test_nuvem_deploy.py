@@ -89,13 +89,14 @@ def test_nuvem_nao_publica_com_o_pc_ligado():
     checkout — e passou a falhar no dia em que o PC do Daniel ficou 6 dias
     fora do ar, que e justamente quando a nuvem DEVE assumir. Um teste da
     protecao contra duplicata nao pode depender de quem publicou ontem."""
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
-        meio_dia = _hoje_as(12, 0)
         pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is False, "a nuvem publicaria junto com o PC — oferta duplicada"
         assert "PC local" in motivo
@@ -119,13 +120,14 @@ def test_nuvem_respeita_a_carencia_do_desligamento():
     """Às 02:00 a janela já diz "fora", mas `aguardar_e_desligar.ps1` espera
     até 35 min o bot terminar a rodada — e nesse intervalo o PC continua
     publicando. Este é o caso que a `pc_pode_estar_publicando()` cobre."""
+    dentro_da_carencia = _hoje_as(2, 20)
     papel, st = _com_repo(
         [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=dentro_da_carencia,
     )
     try:
-        dentro_da_carencia = _hoje_as(2, 20)
         pode, _ = papel.pode_publicar(dentro_da_carencia)
         assert pode is False, "publicou em cima do PC que ainda estava terminando a rodada"
 
@@ -187,12 +189,35 @@ def test_papel_aparece_no_health():
 
 # ── Prova de vida do PC (o motivo de 04/09/2026) ────────────────────────────
 
-def _repo_falso(commits):
+def _repo_falso(commits, ref=None):
     """Cria um repositorio git de mentira com os commits pedidos.
 
-    `commits` e uma lista de (horas_atras, assunto). Testa o parsing de
-    verdade — o `git log` real, com datas reais — em vez de fingir a
-    resposta da funcao que se quer testar.
+    `commits` e uma lista de (horas_atras, assunto), contadas a partir de
+    `ref` (padrao: agora). Testa o parsing de verdade — o `git log` real,
+    com datas reais — em vez de fingir a resposta da funcao que se quer
+    testar.
+
+    `ref` existe porque "N horas atras" so significa N horas se for contado
+    do MESMO instante em que o teste avalia. Os commits nasciam de `now` e a
+    avaliacao vinha de `_hoje_as(12, 0)`: rodando as 03:20, o instante
+    avaliado ficava ~9h no FUTURO, um commit de "1h atras" aparecia com 10h e
+    tres testes acusavam "PC morto" com o PC vivo. O CI roda este arquivo
+    (testes.yml), entao qualquer PR aberta antes das ~08:00 UTC nascia
+    vermelha.
+
+    Passar `ref` NAO basta sozinho, e essa meia-correcao foi verificada como
+    insuficiente em 18/09/2026: `pc_parece_morto()` e
+    `horas_desde_sinal_do_pc()` chamados SEM argumento continuam medindo
+    contra `datetime.now()`. Com os commits datados de meio-dia e a medicao
+    no relogio real, os mesmos testes passavam a falhar das 16h as 23h
+    locais — a mesma quebra, no outro extremo do dia.
+
+    A regra, entao, e uma so: cada teste escolhe UM instante e o usa em
+    tudo — nas datas dos commits (`ref`), em `pc_parece_morto(...)`,
+    em `horas_desde_sinal_do_pc(...)` e em `pode_publicar(...)`. Nenhum
+    deles pode ficar lendo o relogio de verdade. `core/papel.py` ja aceita
+    o instante em todas essas funcoes; quem misturava as duas fontes era
+    so este arquivo.
     """
     import subprocess as sp
     import tempfile
@@ -212,7 +237,7 @@ def _repo_falso(commits):
 
     git("init", "-q", "-b", "main")
     os.makedirs(os.path.join(pasta, "docs"), exist_ok=True)
-    agora = datetime.now()
+    agora = ref or datetime.now()
     for horas, assunto in commits:
         quando = (agora - timedelta(hours=horas)).strftime("%Y-%m-%dT%H:%M:%S")
         alvo = os.path.join(pasta, "docs", "offers.json")
@@ -242,11 +267,17 @@ def _hoje_as(hora: int, minuto: int = 0) -> datetime:
     return datetime.now().replace(hour=hora, minute=minuto, second=0, microsecond=0)
 
 
-def _com_repo(commits, **env):
-    """Aponta o core.papel para um repositorio de mentira e limpa o cache."""
+def _com_repo(commits, ref=None, **env):
+    """Aponta o core.papel para um repositorio de mentira e limpa o cache.
+
+    Quem avalia num instante de `_hoje_as(...)` DEVE passar o mesmo instante
+    em `ref` E nas chamadas de `core.papel` do corpo do teste — senao os
+    commits e a avaliacao vem de relogios diferentes e o resultado passa a
+    depender da hora em que o CI rodou. Ver a docstring de `_repo_falso`.
+    """
     from core import papel
 
-    pasta = _repo_falso(commits)
+    pasta = _repo_falso(commits, ref=ref)
     antes_base = papel._BASE
     antes_cache = papel._cache_sinal
     papel._BASE = pasta
@@ -263,16 +294,18 @@ def _solta_repo(papel, estado):
 
 
 def test_pc_publicando_ha_pouco_segura_a_nuvem():
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(30, "chore: atualiza site (rastreador-ml) [skip ci]"),
          (2, "chore: atualiza site (rastreador-amazon) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
-        morto, motivo = papel.pc_parece_morto()
+        morto, motivo = papel.pc_parece_morto(meio_dia)
         assert morto is False, motivo
-        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
+        pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is False, f"publicou junto com o PC vivo: {motivo}"
     finally:
         _solta_repo(papel, st)
@@ -283,16 +316,18 @@ def test_pc_calado_ha_dias_libera_a_nuvem():
     nuvem morto ha 5 semanas — os grupos sem oferta nenhuma. Uma trava que so
     olha o relogio manteria a nuvem calada de dia por causa de um PC que nao
     estava publicando."""
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(200, "chore: atualiza site (rastreador-ml) [skip ci]"),
          (150, "chore: atualiza ofertas do site [skip ci]")],  # este e do Actions
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
-        morto, motivo = papel.pc_parece_morto()
+        morto, motivo = papel.pc_parece_morto(meio_dia)
         assert morto is True, motivo
-        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
+        pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is True, f"a nuvem ficou calada com o PC morto: {motivo}"
         assert "pelo menos" in motivo or "nao publica" in motivo
     finally:
@@ -318,16 +353,18 @@ def test_sem_historico_suficiente_nao_age_no_escuro():
     """Checkout raso do Actions: `git log` devolve quase nada. "Nao consegui
     olhar" nunca pode virar "o PC esta morto" — mesmo cuidado que o
     supervisor tomou com o psutil ausente."""
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(1, "chore: atualiza ofertas do site [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
-        assert papel.horas_desde_sinal_do_pc() is None
-        morto, _ = papel.pc_parece_morto()
+        assert papel.horas_desde_sinal_do_pc(meio_dia) is None
+        morto, _ = papel.pc_parece_morto(meio_dia)
         assert morto is False
-        pode, _ = papel.pode_publicar(_hoje_as(12, 0))
+        pode, _ = papel.pode_publicar(meio_dia)
         assert pode is False, "publicou sem conseguir confirmar que o PC estava fora"
     finally:
         _solta_repo(papel, st)
@@ -370,18 +407,20 @@ def test_por_padrao_a_ausencia_de_sinal_nao_libera_a_nuvem():
     uma rodada de silencio; achar o PC morto quando esta vivo custa oferta
     duplicada. Por isso o padrao e o lado seguro, e assumir "morto" e opt-in.
     """
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H=None,   # <- sem definir: o padrao
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
         assert papel.HORAS_SILENCIO_PADRAO == 0.0, (
             "o padrao voltou a assumir que o PC morreu por falta de sinal"
         )
-        morto, _ = papel.pc_parece_morto()
+        morto, _ = papel.pc_parece_morto(meio_dia)
         assert morto is False
-        pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
+        pode, motivo = papel.pode_publicar(meio_dia)
         assert pode is False, f"publicou dentro da janela do PC sem prova: {motivo}"
     finally:
         _solta_repo(papel, st)
@@ -400,15 +439,17 @@ def test_falha_de_push_do_site_vira_erro_visivel():
 
 
 def test_checagem_de_silencio_pode_ser_desligada():
+    meio_dia = _hoje_as(12, 0)
     papel, st = _com_repo(
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="0",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=meio_dia,
     )
     try:
-        morto, _ = papel.pc_parece_morto()
+        morto, _ = papel.pc_parece_morto(meio_dia)
         assert morto is False
-        pode, _ = papel.pode_publicar(_hoje_as(12, 0))
+        pode, _ = papel.pode_publicar(meio_dia)
         assert pode is False, "PC_SILENCIO_MAX_H=0 deveria manter o comportamento antigo"
     finally:
         _solta_repo(papel, st)
