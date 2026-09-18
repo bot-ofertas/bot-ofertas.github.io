@@ -7,7 +7,9 @@ apenas 1:1. Para postar em grupos automaticamente, usamos a Evolution API
 (open-source, roda em Docker).
 
 Setup:
-    docker compose -f docker/evolution.yml up -d
+    docker compose --env-file .env -f docker/evolution.yml up -d
+    # o --env-file e obrigatorio: sem ele o compose procura o .env
+    # dentro de docker/ e recusa subir sem a EVOLUTION_API_KEY
     # Acessa http://localhost:8080, cria instância "botofertas"
     # Escaneia QR pelo celular (uma vez), pega apikey no .env
 
