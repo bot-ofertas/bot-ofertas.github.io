@@ -1,6 +1,112 @@
 {
   "products": [
     {
+      "titulo": "Baggio Café Café Torrado e Moído Aroma de Chocolate Trufado 250g",
+      "preco": 33.74,
+      "preco_original": 134.96,
+      "desconto_pct": 75.0,
+      "foto": "https://m.media-amazon.com/images/I/61RsSLpjOWL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 72,
+      "enviado_em": "2026-09-18T09:32:31.739754",
+      "link": "https://www.amazon.com.br/dp/B075W7XHMY?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 33.74,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Conjunto de Bowls Tigelas de Inox com Tampa Plástica Electrolux",
+      "preco": 99.8,
+      "preco_original": 159.9,
+      "desconto_pct": 37.6,
+      "foto": "https://m.media-amazon.com/images/I/51hUmO15FhL._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 79,
+      "enviado_em": "2026-09-18T09:32:23.086805",
+      "link": "https://www.amazon.com.br/dp/B0C2ZNDWK6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 99.8,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
+      "preco": 89.0,
+      "preco_original": 159.9,
+      "desconto_pct": 44.3,
+      "foto": "https://m.media-amazon.com/images/I/51UxR8FHe-L._AC_UY218_.jpg",
+      "categoria": "casa",
+      "score": 77,
+      "enviado_em": "2026-09-18T09:32:14.441556",
+      "link": "https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 89.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Camiseta Dry-fit  Preta Caveira Unisex Dark Lab",
+      "preco": 29.9,
+      "preco_original": 69.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_706587-MLB115944612831_082026-AB-camiseta-dry-fit-preta-caveira-unisex-dark-lab.webp",
+      "categoria": "esportes",
+      "score": 63,
+      "enviado_em": "2026-09-18T09:29:45.887748",
+      "link": "https://produto.mercadolivre.com.br/MLB-3800842215-camiseta-dry-fit-preta-caveira-unisex-dark-lab-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 29.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
+      "preco": 3818.0,
+      "preco_original": 6199.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
+      "categoria": "livros",
+      "score": 98,
+      "enviado_em": "2026-09-18T09:29:35.835347",
+      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3818.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 100 Blocos Magnéticos De Montar Construção Brinquedo 100",
+      "preco": 71.94,
+      "preco_original": 119.0,
+      "desconto_pct": 40.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_916503-MLB106850902022_022026-AB--kit-100-blocos-magneticos-de-montar-construcao-brinquedo.webp",
+      "categoria": "brinquedos",
+      "score": 80,
+      "enviado_em": "2026-09-18T09:29:25.205836",
+      "link": "https://www.mercadolivre.com.br/kit-100-blocos-magneticos-de-montar-construcao-brinquedo/up/MLBU3802887639?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 71.94,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Secador Taiff Style 2000w Motor Ac Preto 127 v",
+      "preco": 167.55,
+      "preco_original": 404.0,
+      "desconto_pct": 58.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_701108-MLA105261068161_012026-AB.webp",
+      "categoria": "bebes",
+      "score": 79,
+      "enviado_em": "2026-09-18T09:29:15.995604",
+      "cupom": "R$40 OFF com Cupom",
+      "link": "https://www.mercadolivre.com.br/secador-taiff-style-2000w-motor-ac-preto-127-v/p/MLB18920578?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 167.55,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Chuveiro Loren Shower Eletrônico 7500w 220v Lorenzetti",
       "preco": 104.9,
       "preco_original": 125.9,
@@ -162,7 +268,7 @@
       "link": "https://www.mercadolivre.com.br/patinete-eletrico-3-rodas-triciclo-drift-450w-120kg-vermelho/up/MLBU4780172365?matt_tool=47114387&matt_source=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 777.75,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -272,18 +378,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Notebook Acer Aspire 5 A515-45-R5AT AMD Ryzen 5 5500U 15.6\"AMD Radeon Graphics 256GB SDD 8GB RAM Windows 11",
-    "preco": 3288.0,
-    "preco_original": 6699.0,
-    "desconto_pct": 50.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809656-MLA82164414546_022025-AB.webp",
-    "categoria": "monitores",
-    "score": 95,
-    "enviado_em": "2026-09-17T09:54:08.939503",
-    "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r5at-amd-ryzen-5-5500u-156amd-radeon-graphics-256gb-sdd-8gb-ram-windows-11/p/MLB41734795?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
+    "preco": 3818.0,
+    "preco_original": 6199.0,
+    "desconto_pct": 38.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
+    "categoria": "livros",
+    "score": 98,
+    "enviado_em": "2026-09-18T09:29:35.835347",
+    "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 3288.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 3818.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
@@ -299,17 +405,35 @@
       "desconto_medio": 34,
       "maior_desconto": 65
     },
+    "casa": {
+      "total": 3,
+      "score_medio": 76,
+      "desconto_medio": 52,
+      "maior_desconto": 75
+    },
+    "brinquedos": {
+      "total": 3,
+      "score_medio": 82,
+      "desconto_medio": 31,
+      "maior_desconto": 40
+    },
     "informatica": {
       "total": 2,
       "score_medio": 80,
       "desconto_medio": 25,
       "maior_desconto": 28
     },
-    "brinquedos": {
+    "esportes": {
       "total": 2,
-      "score_medio": 83,
-      "desconto_medio": 27,
-      "maior_desconto": 29
+      "score_medio": 80,
+      "desconto_medio": 52,
+      "maior_desconto": 56
+    },
+    "bebes": {
+      "total": 2,
+      "score_medio": 74,
+      "desconto_medio": 43,
+      "maior_desconto": 58
     },
     "tablets": {
       "total": 1,
@@ -335,25 +459,19 @@
       "desconto_medio": 73,
       "maior_desconto": 73
     },
-    "esportes": {
+    "livros": {
       "total": 1,
-      "score_medio": 97,
-      "desconto_medio": 47,
-      "maior_desconto": 47
+      "score_medio": 98,
+      "desconto_medio": 38,
+      "maior_desconto": 38
     },
     "cameras": {
       "total": 1,
       "score_medio": 72,
       "desconto_medio": 70,
       "maior_desconto": 70
-    },
-    "bebes": {
-      "total": 1,
-      "score_medio": 68,
-      "desconto_medio": 28,
-      "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-17T13:03:36.453242",
-  "total": 18
+  "updated_at": "2026-09-18T09:32:40.769914",
+  "total": 25
 }
