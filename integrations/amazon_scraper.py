@@ -438,6 +438,17 @@ async def buscar_cupons_amazon_async(
                                             "amazon[%s]: recuperado na 2a tentativa "
                                             "— %d card(s), %d produto(s)",
                                             categoria, len(raw), len(produtos))
+                                    else:
+                                        # Sem esta linha a retentativa que volta
+                                        # vazia e MUDA, e "throttle passageiro"
+                                        # fica indistinguivel de "esta fonte
+                                        # recusa sempre" — que e o caso de
+                                        # /coupons e /deals na rodada #292.
+                                        log.warning(
+                                            "amazon[%s]: 2a tentativa tambem veio "
+                                            "vazia (%d card(s)) — esta fonte esta "
+                                            "recusando de forma persistente, nao "
+                                            "por instante.", categoria, len(raw))
                                 except Exception as e2:
                                     log.info("amazon[%s]: 2a tentativa tambem falhou: %s",
                                              categoria, e2)

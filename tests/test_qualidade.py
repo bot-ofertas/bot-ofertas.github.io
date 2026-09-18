@@ -302,6 +302,14 @@ def test_retentativa_da_amazon_e_uma_so():
     # E o reload tem de estar protegido: um erro nele nao pode matar a rodada.
     assert "except Exception as e2:" in ramo, "retentativa sem protecao"
 
+    # Os DOIS desfechos da retentativa tem de aparecer no log. Uma retentativa
+    # que volta vazia em silencio faz "throttle passageiro" parecer igual a
+    # "esta fonte recusa sempre" — foi o caso de /coupons e /deals na rodada
+    # #292, e e a mesma mudez que escondeu o bug da ordem por rodadas seguidas.
+    assert "recuperado na 2a tentativa" in ramo, "sumiu o log do sucesso"
+    assert "2a tentativa tambem veio" in ramo, \
+        "retentativa que volta vazia voltou a ser muda"
+
     # A pausa existe e e uma constante, nao um numero solto no meio do laco.
     arvore = _ast.parse(src)
     nomes = {n.targets[0].id for n in arvore.body
