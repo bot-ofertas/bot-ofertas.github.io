@@ -173,11 +173,141 @@ def test_zero_produto_distingue_bloqueio_de_seletor():
 def test_diag_script_procura_marcas_reais_de_bloqueio():
     """As marcas sao o que a Amazon Brasil realmente escreve na pagina de
     bloqueio — em portugues e em ingles, porque o interstitial vem nos dois."""
-    from integrations import amazon_scraper as a  # noqa: PLC0415
+    codigo = _diag_sem_comentarios()
 
     for marca in ("Digite os caracteres", "Continuar comprando",
                   "automated access", "captchacharacters", "validateCaptcha"):
-        assert marca in a._DIAG_SCRIPT, f"sumiu a marca de bloqueio {marca!r}"
+        assert marca in codigo, f"sumiu a marca de bloqueio {marca!r}"
+
+def _diag_sem_comentarios():
+    """O _DIAG_SCRIPT sem as linhas de comentario do JS.
+
+    Procurar uma marca no texto inteiro do script casa com o COMENTARIO que
+    explica a marca — o teste passa mesmo com a checagem arrancada. Foi o que
+    aconteceu quando exercitei a regressao: tirei `includes('Algo deu errado')`
+    do codigo e o teste seguiu verde porque a frase continuava no comentario
+    logo acima.
+    """
+    import re as _re  # noqa: PLC0415
+    from integrations import amazon_scraper as a  # noqa: PLC0415
+
+    linhas = [l for l in a._DIAG_SCRIPT.split("\n")
+              if not l.strip().startswith("//")]
+    return _re.sub(r"/\*.*?\*/", "", "\n".join(linhas), flags=_re.S)
+
+
+def test_extrair_da_pagina_aplica_o_filtro_e_deixa_cupom_passar():
+    """Exercita a funcao de verdade, com uma pagina de mentira: e ela que as
+    DUAS tentativas usam, entao um defeito aqui vale em dobro."""
+    import asyncio  # noqa: PLC0415
+    from integrations import amazon_scraper as a  # noqa: PLC0415
+
+    cards = [
+        # 40% OFF -> passa
+        {"titulo": "Furadeira de Impacto 650W", "link": "https://www.amazon.com.br/dp/B0ABCDEFGH",
+         "precoTexto": "R$ 120,00", "origTexto": "R$ 200,00", "descTexto": "40% OFF",
+         "foto": "https://img/x.jpg", "cupomTexto": ""},
+        # 5% OFF sem cupom -> cortado
+        {"titulo": "Cabo USB-C Reforcado 2m", "link": "https://www.amazon.com.br/dp/B0IJKLMNOP",
+         "precoTexto": "R$ 95,00", "origTexto": "R$ 100,00", "descTexto": "5% OFF",
+         "foto": "https://img/y.jpg", "cupomTexto": ""},
+        # 5% OFF MAS com cupom -> passa mesmo abaixo do minimo
+        {"titulo": "Escova Secadora Rotativa", "link": "https://www.amazon.com.br/dp/B0QRSTUVWX",
+         "precoTexto": "R$ 95,00", "origTexto": "R$ 100,00", "descTexto": "5% OFF",
+         "foto": "https://img/z.jpg", "cupomTexto": "Cupom de R$ 30"},
+    ]
+
+    class _PaginaFalsa:
+        async def evaluate(self, _script):
+            return cards
+
+    raw, produtos = asyncio.run(
+        a._extrair_da_pagina(_PaginaFalsa(), "ferramentas", 20))
+
+    assert len(raw) == 3, "a funcao nao pode mexer nos cards crus"
+    titulos = [x["titulo"] for x in produtos]
+    assert any("Furadeira" in t for t in titulos), "cortou uma oferta de 40%"
+    assert not any("Cabo USB-C" in t for t in titulos), "5% sem cupom passou pelo filtro"
+    assert any("Escova" in t for t in titulos), \
+        "cupom abaixo do desconto minimo foi cortado — e ele que o rastreador procura"
+
+
+def test_toda_url_da_amazon_sai_com_a_tag_de_afiliado_como_query():
+    """Regra 4: `tag` tem de chegar como parametro de query DE VERDADE.
+    Checagem por substring aceitaria a tag presa dentro de um #fragment."""
+    from urllib.parse import urlsplit, parse_qs  # noqa: PLC0415
+    from integrations import amazon_scraper as a  # noqa: PLC0415
+
+    if not a._AFFILIATE_TAG:
+        a._AFFILIATE_TAG = "silver1230c-20"
+
+    sujas = [
+        "https://www.amazon.com.br/dp/B0ABCDEFGH",
+        "https://www.amazon.com.br/dp/B0ABCDEFGH?psc=1&ref=lixo",
+        "https://www.amazon.com.br/dp/B0ABCDEFGH#tracking=abc",
+        "https://www.amazon.com.br/dp/B0ABCDEFGH?psc=1#tracking=abc",
+    ]
+    for suja in sujas:
+        link = a._link_afiliado(suja)
+        partes = urlsplit(link)
+        q = parse_qs(partes.query)
+        assert q.get("tag") == [a._AFFILIATE_TAG], \
+            f"tag nao chegou como query real em {suja!r} -> {link!r}"
+        assert partes.fragment == "", \
+            f"fragmento sobreviveu em {link!r} (Regra 11)"
+
+
+def test_erro_de_servidor_da_amazon_nao_e_confundido_com_seletor():
+    """Rodada #291 (18/09, 21:31): treze fontes com titulo 'Algo deu errado' e
+    corpo vazio, enquanto brinquedos trouxe 24 cards na MESMA rodada — os
+    seletores estavam certos o tempo todo. O ramo de erro/throttle tem de vir
+    antes do de seletor, senao o diagnostico acusa o inocente."""
+    import pathlib as _p  # noqa: PLC0415
+
+    codigo = _diag_sem_comentarios()
+
+    for marca in ("includes('Algo deu errado')", "includes('Something went wrong')",
+                  "erro_servidor"):
+        assert marca in codigo, f"sumiu a checagem de erro de servidor {marca!r}"
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+    i_erro = src.index('elif d.get("erro_servidor")')
+    i_seletor = src.index("ZERO card no DOM sem marca de bloqueio")
+    assert i_erro < i_seletor, \
+        "o ramo de seletor esta capturando o caso de erro/throttle"
+
+
+def test_retentativa_da_amazon_e_uma_so():
+    """Insistir ate conseguir e o caminho de virar bloqueio de verdade. A
+    segunda tentativa existe, roda so no caso de erro/throttle, e nao pode
+    virar laco."""
+    import ast as _ast  # noqa: PLC0415
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+
+    i_erro = src.index('elif d.get("erro_servidor")')
+    i_fim = src.index("elif len(raw) > 0:", i_erro)
+    ramo = src[i_erro:i_fim]
+
+    assert "page.reload(" in ramo, "sumiu a segunda tentativa"
+    assert ramo.count("page.reload(") == 1, "mais de um reload no mesmo ramo"
+    for laco in ("while ", "for "):
+        assert laco not in ramo, f"a retentativa virou laco ({laco.strip()})"
+    assert "_extrair_da_pagina" in ramo, \
+        "a retentativa nao usa o mesmo extrator — os dois filtros vao divergir"
+
+    # E o reload tem de estar protegido: um erro nele nao pode matar a rodada.
+    assert "except Exception as e2:" in ramo, "retentativa sem protecao"
+
+    # A pausa existe e e uma constante, nao um numero solto no meio do laco.
+    arvore = _ast.parse(src)
+    nomes = {n.targets[0].id for n in arvore.body
+             if isinstance(n, _ast.Assign) and isinstance(n.targets[0], _ast.Name)}
+    assert "_PAUSA_RETENTATIVA_MS" in nomes, "a pausa da retentativa sumiu"
+
 
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py

@@ -186,7 +186,20 @@ _DIAG_SCRIPT = r"""
         'Desculpe-nos',
     ];
     const achadas = marcas_bloqueio.filter(m => texto.includes(m));
+
+    // Pagina de erro/throttle da Amazon: titulo "Algo deu errado" (ou o
+    // equivalente em ingles) com o body VAZIO. Nao e captcha — nao tem
+    // formulario nem instrucao — e nao e seletor: e a Amazon recusando
+    // servir a pagina naquele instante.
+    const titulo_ = document.title || '';
+    const erro_servidor = (
+        titulo_.includes('Algo deu errado') ||
+        titulo_.includes('Something went wrong') ||
+        titulo_.includes('Desculpe') ||
+        (texto.length === 0 && titulo_.length > 0)
+    );
     return {
+        erro_servidor: erro_servidor,
         titulo:    (document.title || '').slice(0, 120),
         url_final: location.href.slice(0, 200),
         contagem:  contagem,
@@ -278,6 +291,28 @@ def _normalizar(raw: list, categoria: str) -> list[dict]:
     return produtos
 
 
+# Pausa antes da segunda tentativa quando a Amazon devolve a pagina de erro.
+# Curta de proposito: e para atravessar um throttle de instante, nao para
+# insistir numa loja que esta recusando — insistir e o caminho de virar
+# bloqueio de verdade.
+_PAUSA_RETENTATIVA_MS = 3000
+
+
+async def _extrair_da_pagina(page, categoria: str, desconto_min: int):
+    """(cards crus, produtos filtrados) de uma pagina ja carregada.
+
+    Existe para que a primeira tentativa e a retentativa nao tenham duas
+    copias do mesmo filtro — duas copias e onde uma delas fica para tras.
+    """
+    raw = await page.evaluate(_DOM_SCRIPT)
+    produtos = _normalizar(raw, categoria)
+    if desconto_min > 0:
+        # cupom sempre passa, mesmo abaixo do desconto minimo
+        produtos = [p for p in produtos
+                    if (p.get("desconto_pct") or 0) >= desconto_min or p.get("cupom")]
+    return raw, produtos
+
+
 async def buscar_cupons_amazon_async(
     desconto_min: int = 10,
     limite: int = 10,
@@ -342,13 +377,8 @@ async def buscar_cupons_amazon_async(
                     # Aguarda lazy-load dos cards
                     await page.wait_for_timeout(2500)
 
-                    raw = await page.evaluate(_DOM_SCRIPT)
-                    produtos = _normalizar(raw, categoria)
-
-                    # Filtra por desconto mínimo
-                    if desconto_min > 0:
-                        produtos = [p for p in produtos if (p.get("desconto_pct") or 0) >= desconto_min
-                                    or p.get("cupom")]  # cupom sempre passa
+                    raw, produtos = await _extrair_da_pagina(
+                        page, categoria, desconto_min)
 
                     # Quantos vieram e quantos traziam badge de cupom, POR
                     # fonte. Sem isso, "0 com cupom" no resumo final e mudo:
@@ -382,6 +412,35 @@ async def buscar_cupons_amazon_async(
                                     "titulo=%r). Nao e seletor: nao mexer no DOM.",
                                     categoria, d.get("bloqueio"), d.get("tem_captcha"),
                                     d.get("titulo"))
+                            elif d.get("erro_servidor"):
+                                log.warning(
+                                    "amazon[%s]: a Amazon nao serviu a pagina "
+                                    "(titulo=%r, corpo vazio) — throttle/erro do "
+                                    "lado deles. Nao e seletor: outras categorias "
+                                    "da mesma rodada trazem cards normalmente.",
+                                    categoria, d.get("titulo"))
+                                # UMA segunda tentativa, so neste caso. Na
+                                # rodada #291 treze das quinze fontes cairam
+                                # aqui e uma unica (brinquedos) passou e trouxe
+                                # 24 cards — ou seja, a recusa e por requisicao,
+                                # nao pela rodada inteira. Uma so: repetir ate
+                                # conseguir e o que transforma throttle em
+                                # bloqueio.
+                                try:
+                                    await page.wait_for_timeout(_PAUSA_RETENTATIVA_MS)
+                                    await page.reload(wait_until="domcontentloaded",
+                                                      timeout=20000)
+                                    await page.wait_for_timeout(2500)
+                                    raw, produtos = await _extrair_da_pagina(
+                                        page, categoria, desconto_min)
+                                    if produtos:
+                                        log.info(
+                                            "amazon[%s]: recuperado na 2a tentativa "
+                                            "— %d card(s), %d produto(s)",
+                                            categoria, len(raw), len(produtos))
+                                except Exception as e2:
+                                    log.info("amazon[%s]: 2a tentativa tambem falhou: %s",
+                                             categoria, e2)
                             elif len(raw) > 0:
                                 log.warning(
                                     "amazon[%s]: %d card(s) extraidos e nenhum passou "
