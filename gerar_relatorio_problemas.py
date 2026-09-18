@@ -4,8 +4,11 @@ GERADOR DE RELATÓRIO DE PROBLEMAS — arquivo de texto simples na área de
 trabalho, pra consulta rápida sem precisar abrir código/terminal.
 
 Lê os erros registrados em erros_log (últimas 24h) + o status geral de
-saúde do sistema, e escreve/atualiza um .txt legível em:
-    C:\\Users\\Daniel\\Desktop\\problemas de execucao.txt
+saúde do sistema, e escreve/atualiza um .txt legível dentro da pasta
+"problemas de execução" da Área de Trabalho, ao lado do log de execução e do
+arquivo de erros detalhados (o caminho vem de `core/execucao_log.py` — antes
+era montado aqui com `~/Desktop`, que erra quando o OneDrive assume a pasta
+ou quando o Windows em português a chama de "Área de Trabalho").
 
 Uso:
     python gerar_relatorio_problemas.py
@@ -18,8 +21,6 @@ import os
 import sqlite3
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "bot_ofertas.db")
-DESKTOP_PATH = os.path.join(os.path.expanduser("~"), "Desktop")
-ARQUIVO_SAIDA = os.path.join(DESKTOP_PATH, "problemas de execucao.txt")
 
 
 def _erros_24h() -> list[tuple]:
@@ -128,17 +129,24 @@ def gerar_relatorio() -> str:
     linhas.append("=" * 70)
     linhas.append("Esse arquivo é atualizado automaticamente pelo bot. Pode fechar e")
     linhas.append("reabrir quando quiser conferir o estado mais recente.")
+    linhas.append("")
+    linhas.append("Nesta mesma pasta:")
+    linhas.append("  log de execução.txt   — uma execução por bloco, com o ponto")
+    linhas.append("                          exato onde deu erro (ou SEM ERROS)")
+    linhas.append("  erros detalhados.txt  — cada erro com traceback completo")
     linhas.append("=" * 70)
 
     return "\n".join(linhas)
 
 
 def main() -> None:
+    from core.execucao_log import caminho_relatorio  # noqa: PLC0415
+
     conteudo = gerar_relatorio()
-    os.makedirs(DESKTOP_PATH, exist_ok=True)
-    with open(ARQUIVO_SAIDA, "w", encoding="utf-8") as f:
+    saida = caminho_relatorio()  # já cria a pasta na Área de Trabalho
+    with open(saida, "w", encoding="utf-8") as f:
         f.write(conteudo)
-    print(f"Relatório salvo em: {ARQUIVO_SAIDA}")
+    print(f"Relatório salvo em: {saida}")
 
 
 if __name__ == "__main__":

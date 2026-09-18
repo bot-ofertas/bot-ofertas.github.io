@@ -216,6 +216,40 @@ def share_url(produto: dict) -> str:
     return f"https://wa.me/?text={urllib.parse.quote(texto)}"
 
 
+def _registrar_envio_falhou(tentativas: list[str], produto: dict, nome_grupo: str) -> None:
+    """Grava no log da Área de Trabalho POR QUE o envio não saiu.
+
+    Ponto cego real deste arquivo: cada caminho de envio falhava com um
+    `log.warning()` e a função devolvia `False` — informação que morria no
+    `data/bot.log`. Para quem olha a Área de Trabalho, uma oferta que não
+    chegou no grupo era indistinguível de uma rodada sem oferta nenhuma.
+    `registrar_evento()` é o caminho certo aqui (e não `log_erro()`): não
+    existe exceção para passar, a falha é condição de negócio — todos os
+    caminhos tentados terminaram sem enviar. Ele escreve no
+    "erros detalhados.txt", no errors.jsonl, no bloco da execução em curso
+    (é o "em que ponto") e espelha no n8n com throttle.
+    """
+    try:
+        from core.error_logger import registrar_evento  # noqa: PLC0415
+        registrar_evento(
+            "whatsapp.envio_falhou",
+            "nenhum caminho de envio funcionou — " + "; ".join(tentativas),
+            {"grupo": nome_grupo,
+             "produto": str(produto.get("id") or produto.get("titulo") or "")[:80]},
+        )
+    except Exception:
+        pass  # registro é best-effort: nunca derruba a rodada
+
+
+def _registrar_envio_ok(metodo: str, nome_grupo: str) -> None:
+    try:
+        from core import execucao_log  # noqa: PLC0415
+        execucao_log.etapa(f"oferta enviada no WhatsApp via {metodo}",
+                           detalhe=f"grupo: {nome_grupo}")
+    except Exception:
+        pass
+
+
 async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None) -> bool:
     """Envia para o grupo WhatsApp configurado.
 
@@ -246,6 +280,9 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
     mensagem = marcar_link_para_whatsapp(mensagem_override or montar_mensagem_wa(produto))
     foto_url = produto.get("foto") or produto.get("imagem") or ""
     nome_grupo = nome_do_grupo()
+    # Motivo de cada caminho recusado, na ordem em que foram tentados. Vira
+    # a linha "em que ponto" do log de execução quando nenhum enviar.
+    tentativas: list[str] = []
 
     # ── Tentativa 1: Evolution API (endpoint HTTP com foto+legenda) ──────────
     # Método preferido — funciona em servidor headless e não depende do PC ligado.
@@ -255,10 +292,15 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
         )
         if _api_configurada():
             if enviar_oferta_completa(produto, mensagem):
+                _registrar_envio_ok("Evolution API", nome_grupo)
                 return True
             log.info("WA API não enviou — caindo para WhatsApp Desktop.")
+            tentativas.append("Evolution API: configurada, mas não enviou")
+        else:
+            tentativas.append("Evolution API: não configurada")
     except Exception as e:
         log.warning("WA API falhou: %s", e)
+        tentativas.append(f"Evolution API: {type(e).__name__}: {e}"[:160])
 
     if os.getenv("GITHUB_ACTIONS"):
         log.debug("WhatsApp local ignorado em GitHub Actions (sem display)")
@@ -286,10 +328,14 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
             ok = await enviar_whatsapp_bg(nome_grupo, mensagem, caminho)
             _limpar_fotos_antigas()
             if ok:
+                _registrar_envio_ok("Chrome/Playwright", nome_grupo)
                 return True
             log.warning("WhatsApp Playwright não enviou — pulando (sem fallback pro Desktop sem garantia).")
+            tentativas.append("Chrome/Playwright: não confirmou o envio")
         except Exception as e:
             log.warning("WhatsApp Playwright falhou: %s — pulando (sem fallback pro Desktop sem garantia).", e)
+            tentativas.append(f"Chrome/Playwright: {type(e).__name__}: {e}"[:160])
+        _registrar_envio_falhou(tentativas, produto, nome_grupo)
         return False
 
     # ── Tentativa 3: WhatsApp Desktop (só Windows) — pula em Linux/VPS ──────
@@ -333,19 +379,33 @@ async def enviar_para_grupo(produto: dict, mensagem_override: str | None = None)
                     )
                 except asyncio.TimeoutError:
                     log.warning("WhatsApp Desktop travou por >75s — desistindo (thread órfã segue em segundo plano, sem bloquear o resto).")
+                    tentativas.append("WhatsApp Desktop: travou por mais de 75s")
                     ok = False
                 await _enviar_para_canal_best_effort(enviar_para_grupo_desktop, mensagem, foto_url)
                 if ok:
+                    _registrar_envio_ok("WhatsApp Desktop", nome_grupo)
                     return True
                 log.info("WhatsApp Desktop não enviou.")
+                if not tentativas or not tentativas[-1].startswith("WhatsApp Desktop"):
+                    tentativas.append("WhatsApp Desktop: aberto, mas o envio não completou")
+            else:
+                tentativas.append("WhatsApp Desktop: o aplicativo não está rodando "
+                                  "(abra e deixe logado)")
         except Exception as e:
             log.warning("WhatsApp Desktop falhou: %s", e)
+            tentativas.append(f"WhatsApp Desktop: {type(e).__name__}: {e}"[:160])
+    else:
+        tentativas.append(f"WhatsApp Desktop: indisponível fora do Windows ({sys.platform})")
 
     # ── Tentativa 4: pyautogui em Web — só se explicitamente habilitado ──────
     if os.getenv("WHATSAPP_PYAUTOGUI_FALLBACK", "0") == "1":
         log.info("Usando fallback pyautogui (atrapalha a digitação).")
-        return _enviar_via_pyautogui(mensagem, foto_url)
+        if _enviar_via_pyautogui(mensagem, foto_url):
+            _registrar_envio_ok("pyautogui (WhatsApp Web)", nome_grupo)
+            return True
+        tentativas.append("pyautogui no WhatsApp Web: não enviou")
 
+    _registrar_envio_falhou(tentativas, produto, nome_grupo)
     return False
 
 

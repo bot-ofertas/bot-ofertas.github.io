@@ -17,6 +17,27 @@ Write-Host "==============================================" -ForegroundColor Cya
 # coisa. $IsWindows não existe no Windows PowerShell 5.1: ali ele é $null, e
 # nesse caso estamos necessariamente no Windows.
 $ehWindows = ($null -eq $IsWindows) -or $IsWindows
+# ── Pasta de problemas na Area de Trabalho ───────────────────────────────────
+function Get-PastaProblemas($base) {
+    # Quem decide o caminho e o core/execucao_log.py (uma fonte so) e o deixa
+    # escrito em data\caminho_log_execucao.txt. Repetir aqui a busca pela Area
+    # de Trabalho daria caminhos diferentes justamente nos casos que importam:
+    # OneDrive assumindo a pasta, ou o Windows em portugues mostrando
+    # "Area de Trabalho". O fallback abaixo so vale antes da primeira execucao,
+    # quando o ponteiro ainda nao existe.
+    $ponteiro = Join-Path $base "data\caminho_log_execucao.txt"
+    if (Test-Path $ponteiro) {
+        $linhas = @(Get-Content $ponteiro -Encoding UTF8 | Where-Object { $_.Trim() })
+        if ($linhas.Count -ge 1 -and (Test-Path $linhas[0].Trim())) {
+            return $linhas[0].Trim()
+        }
+    }
+    return (Join-Path ([Environment]::GetFolderPath("Desktop")) "problemas de execução")
+}
+
+function Get-ArquivoLogExecucao($base) {
+    return (Join-Path (Get-PastaProblemas $base) "log de execução.txt")
+}
 
 $procs = @()
 if ($ehWindows) {
@@ -184,6 +205,42 @@ if (Test-Path $errFile) {
     else { Write-Host "  (nenhum)" -ForegroundColor Green }
 }
 else { Write-Host "  (nenhum)" -ForegroundColor Green }
+
+# ── Log de execucao na Area de Trabalho ─────────────────────────────────────
+# A pergunta que o Daniel faz ("a ultima execucao deu erro? onde?") tem
+# resposta escrita: o ultimo bloco do log. Mostrar aqui evita ter que abrir o
+# arquivo para saber se vale abrir o arquivo.
+$pastaProblemas = Get-PastaProblemas $BASE
+$arqExec = Get-ArquivoLogExecucao $BASE
+Write-Host "`nUltima execucao registrada:" -ForegroundColor Yellow
+Write-Host "  $arqExec" -ForegroundColor DarkGray
+if ((Test-Path $arqExec) -and (@(Get-Content $arqExec -Encoding UTF8 -Tail 1).Count -gt 0)) {
+    $linhas = @(Get-Content $arqExec -Encoding UTF8 -Tail 80)
+    $inicio = -1
+    for ($i = $linhas.Count - 1; $i -ge 0; $i--) {
+        if ($linhas[$i] -like "EXECU*:*") { $inicio = $i; break }
+    }
+    if ($inicio -lt 0) { $inicio = 0 }
+    foreach ($linha in $linhas[$inicio..($linhas.Count - 1)]) {
+        if ($linha -match "^[=-]+$" -or $linha.Trim() -eq "") { continue }
+        $cor = "DarkGray"
+        if ($linha -like "*``[ERRO``]*" -or $linha -like "RESULTADO*ERRO*") { $cor = "Red" }
+        elseif ($linha -like "RESULTADO*SEM ERROS*") { $cor = "Green" }
+        elseif ($linha -like "RESULTADO*INTERROMPIDA*") { $cor = "Yellow" }
+        Write-Host "  $linha" -ForegroundColor $cor
+    }
+}
+else {
+    Write-Host "  (nenhuma execucao registrada ainda)" -ForegroundColor DarkGray
+}
+
+$emAndamento = @()
+if (Test-Path (Join-Path $pastaProblemas "em andamento")) {
+    $emAndamento = @(Get-ChildItem (Join-Path $pastaProblemas "em andamento") -Filter *.txt -File -ErrorAction SilentlyContinue)
+}
+if ($emAndamento.Count -gt 0) {
+    Write-Host "  em andamento agora: $(($emAndamento | ForEach-Object { $_.BaseName }) -join ', ')" -ForegroundColor Cyan
+}
 
 # ── Última rodada ────────────────────────────────────────────────────────────
 Write-Host "`nUltima atividade (data/rastreador_local.log):" -ForegroundColor Yellow

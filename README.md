@@ -240,11 +240,42 @@ curl -X POST http://127.0.0.1:8724/n8n/comando \
 A quarentena ativa aparece no `/health`, no `status.ps1` e no relatório de
 problemas da Área de Trabalho.
 
+## Onde ver se deu erro (Área de Trabalho)
+
+Toda execução grava um bloco de texto na pasta **problemas de execução**, na
+Área de Trabalho do Windows — sem abrir terminal e sem ler JSON:
+
+```
+problemas de execução/
+  log de execução.txt        uma execução por bloco, terminando em
+                             "RESULTADO: SEM ERROS", "ERRO" (com o arquivo,
+                             a função e a linha onde falhou) ou
+                             "INTERROMPIDA" (o processo morreu antes de
+                             terminar — PC desligado, queda de energia)
+  erros detalhados.txt       um bloco por erro, com traceback completo
+  relatório de problemas.txt resumo das últimas 24h, atualizado de madrugada
+  em andamento/              a execução que está rodando agora
+```
+
+O caminho sai da API do Windows (funciona com o OneDrive assumindo a pasta e
+com o nome em português) e é decidido em [`core/execucao_log.py`](core/execucao_log.py).
+O `start.ps1` mostra a pasta ao subir o bot e o `status.ps1` imprime o último
+bloco, então dá para responder "a última rodada deu erro?" sem abrir arquivo.
+No servidor Linux, onde não há Área de Trabalho, `BOT_PASTA_PROBLEMAS` aponta
+para um volume.
+
+Conferir sem subir o bot:
+
+```bash
+python -m core.healthcheck    # imprime o JSON, sai 1 se houver critico fora
+```
+
 ## Testes
 
 ```bash
 python tests/test_qualidade.py          # score, anti-fraude, afiliado
 python tests/test_n8n_integracao.py     # n8n, quarentena, foto, tracking
+python tests/test_log_execucao.py       # log de execucao da Area de Trabalho
 python tests/test_sistema_completo.py   # bot + n8n montados (precisa do Node)
 # ou, com pytest instalado:
 python -m pytest tests/ -v
