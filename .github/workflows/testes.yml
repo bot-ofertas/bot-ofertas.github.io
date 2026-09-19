@@ -89,6 +89,15 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_segredos.py
 
+      - name: Teste do log de execucao na Area de Trabalho
+        # O arquivo que o Daniel abre quando algo nao publicou. As armadilhas
+        # que o teste tranca: bloco dizendo "SEM ERROS" numa execucao que
+        # quebrou, execucao morta no meio (PC desligado) desaparecendo do log,
+        # e token vazando num arquivo que vai anexado no diagnostico.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_log_execucao.py
+
       - name: Teste de sistema (bot + n8n montados)
         # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
         # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->

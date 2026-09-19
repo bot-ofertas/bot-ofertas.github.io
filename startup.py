@@ -35,6 +35,7 @@ os.makedirs(os.path.join(BASE, "data"), exist_ok=True)
 # Logging estruturado (texto rotativo + JSONL para erros — n8n consome)
 from core.error_logger import setup_logging  # noqa: E402
 setup_logging()
+from core import execucao_log  # noqa: E402
 log = logging.getLogger("startup")
 
 
@@ -330,17 +331,38 @@ def main() -> None:
     log.info("BOT OFERTAS — inicialização sequencial (WhatsApp Desktop nativo)")
     log.info("=" * 60)
 
+    # Bloco da SUBIDA, não do processo inteiro: startup.py fica de pé o dia
+    # todo supervisionando os filhos, e o que precisa estar no log da Área de
+    # Trabalho é se o bot subiu e, quando não subiu, em qual das 4 etapas
+    # parou. Cada rodada dos rastreadores abre o bloco dela depois.
+    subida = execucao_log.abrir_execucao("startup.py — subida do bot")
+
     if _rastreador_ja_rodando():
         log.info("Rastreador já em execução — nada a fazer.")
+        subida.etapa("rastreador já estava em execução — nada a subir")
+        subida.fechar(resumo="nada a fazer: o bot já estava no ar")
         return
 
     if not etapa_1_validar_config():
         log.error("Configuração inválida. Corrija .env antes de continuar.")
+        subida.erro("etapa 1/4 — validação da configuração",
+                    mensagem="o .env está inválido ou incompleto; sem isso o bot "
+                             "não sobe (veja data/bot.log para qual chave falta)")
+        subida.fechar()
         sys.exit(1)
+    subida.etapa("etapa 1/4 — configuração do .env validada")
 
-    etapa_2_verificar_whatsapp_desktop()
+    wa_ok = etapa_2_verificar_whatsapp_desktop()
+    subida.etapa(
+        "etapa 2/4 — WhatsApp Desktop detectado" if wa_ok
+        else "etapa 2/4 — WhatsApp Desktop NÃO detectado; só o Telegram vai publicar",
+        ok=wa_ok)
     etapa_3_healthcheck()
+    subida.etapa("etapa 3/4 — healthcheck no ar")
     proc = etapa_4_iniciar_rastreador()
+    subida.etapa("etapa 4/4 — rastreadores e fila do WhatsApp iniciados")
+    subida.fechar(resumo="bot no ar — daqui em diante cada rodada tem o seu próprio bloco")
+
     monitorar(proc)
 
 

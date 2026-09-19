@@ -106,12 +106,30 @@ catch {
 }
 (Redigir ($estado -join "`r`n")) | Set-Content (Join-Path $tmp "_ESTADO.txt") -Encoding UTF8
 
-# ── relatorio da Area de Trabalho ───────────────────────────────────────
-foreach ($nome in @("problemas de execucao.txt", "Problemas de execução para corrigir.txt")) {
-    $rel = Join-Path ([Environment]::GetFolderPath("Desktop")) $nome
-    if (Test-Path $rel) {
-        Redigir (Get-Content $rel -Raw) | Set-Content (Join-Path $tmp $nome) -Encoding UTF8
+# ── relatorios da Area de Trabalho ──────────────────────────────────────
+# Os .txt agora moram todos na pasta "problemas de execucao" (ver
+# core/execucao_log.py); os dois nomes soltos ficam na lista para instalacao
+# que ainda nao rodou a versao nova e tem os arquivos antigos na mesa.
+$mesa = [Environment]::GetFolderPath("Desktop")
+$ponteiro = Join-Path $BASE "data\caminho_log_execucao.txt"
+$pastaProblemas = Join-Path $mesa "problemas de execução"
+if (Test-Path $ponteiro) {
+    $primeira = @(Get-Content $ponteiro -Encoding UTF8 | Where-Object { $_.Trim() })
+    if ($primeira.Count -ge 1 -and (Test-Path $primeira[0].Trim())) {
+        $pastaProblemas = $primeira[0].Trim()
     }
+}
+$aRecolher = @()
+if (Test-Path $pastaProblemas) {
+    $aRecolher += @(Get-ChildItem $pastaProblemas -Filter *.txt -File -ErrorAction SilentlyContinue)
+}
+foreach ($nome in @("problemas de execucao.txt", "Problemas de execução para corrigir.txt")) {
+    $solto = Join-Path $mesa $nome
+    if (Test-Path $solto) { $aRecolher += @(Get-Item $solto) }
+}
+foreach ($arq in $aRecolher) {
+    Redigir (Get-Content $arq.FullName -Raw) |
+        Set-Content (Join-Path $tmp $arq.Name) -Encoding UTF8
 }
 
 # ── zip ─────────────────────────────────────────────────────────────────
