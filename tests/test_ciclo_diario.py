@@ -566,6 +566,28 @@ if os.path.isfile(_apl):
            '$primeira -match "^\\s*404"' in _t,
            "um .ps1 comecando com 404 nao da erro util quando executado")
 
+    # 15. Bug real de 18/09/2026: D:\bot_ofertas pertence ao SID da conta
+    #     antiga do Windows, o git recusa a pasta (CVE-2022-24765) e o script
+    #     morria dizendo "git fetch falhou (sem internet? sem credencial?)" —
+    #     mandando investigar rede num problema de dono de pasta. O bot ficou
+    #     parado por causa da mensagem, nao por causa do defeito.
+    checar("reconhece a pasta recusada pelo git antes de culpar a rede",
+           "dubious ownership" in _t and "safe.directory" in _t,
+           "o script volta a mandar o Daniel procurar problema de rede")
+    checar("a checagem de dono vem ANTES do git status",
+           _t.index("dubious ownership") < _t.index("git status --porcelain"),
+           "um git status que nao consegue olhar passaria por 'tudo limpo'")
+    checar("nao adivinha mais a causa do fetch: mostra o que o git disse",
+           "sem internet? sem credencial?" not in _t.split("# Bug real")[-1]
+           .split("$saida = ")[-1] and "O git disse:" in _t,
+           "adivinhacao foi o que apontou para o lugar errado")
+    # Regra 10: nunca alterar configuracao de seguranca do PC — o script
+    # MOSTRA a linha do safe.directory, quem decide roda e o Daniel.
+    checar("nao roda o safe.directory sozinho, so mostra a linha",
+           "--add safe.directory" in _t
+           and "& $git config --global --add safe.directory" not in _t,
+           "confiar numa pasta e decisao do dono, nao do script")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])

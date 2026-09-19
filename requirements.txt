@@ -39,3 +39,8 @@ pytrends
 # falhar INTEIRO e nao instalar nem o pywin32 — checado no PyPI antes.
 amazon-creatorsapi-python-sdk
 
+# httpx vinha de carona com o python-telegram-bot. verificar_tudo.py passou a
+# importa-lo DIRETO (o getMe do bloco 6), e depender de dependencia transitiva
+# e frageil: o dia em que o telegram trocar de cliente HTTP, a verificacao
+# quebra numa maquina recem-instalada. Declarado por tests/test_dependencias.py.
+httpx

@@ -1,0 +1,50 @@
+# Diagnostico de loja — LISTA ofertas, nunca publica.
+#
+# Por que existe: a rede do ambiente onde eu trabalho bloqueia amazon.com.br e
+# mercadolivre.com.br, entao eu nao consigo exercitar a raspagem de verdade.
+# Rodar o bot completo para testar publica no grupo do Daniel — e se o PC dele
+# estiver publicando ao mesmo tempo, vira oferta duplicada (Regra 11/16).
+#
+# Este workflow roda so o CLI do scraper, que imprime o que achou e sai.
+#
+# Duas travas, de proposito:
+#   - TOKEN_TELEGRAM e WHATSAPP_GROUP_ID NAO entram no ambiente. Sem o token,
+#     publicar e impossivel — nao depende de eu ter escrito o passo certo;
+#   - nao toca no cache do banco de deduplicacao nem no site.
+name: Diagnostico de loja (nao publica)
+
+on:
+  workflow_dispatch:
+    inputs:
+      loja:
+        description: 'Qual loja diagnosticar'
+        required: true
+        default: 'amazon'
+        type: choice
+        options:
+          - amazon
+
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: pip install --disable-pip-version-check -q -r requirements.txt
+
+      - name: Instalar Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Amazon — listar o que a raspagem acha
+        if: ${{ inputs.loja == 'amazon' }}
+        env:
+          AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
+          PYTHONIOENCODING: utf-8
+        run: python -m integrations.amazon_scraper

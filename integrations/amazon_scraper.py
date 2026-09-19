@@ -41,9 +41,26 @@ _UA = (
 # pequeno e roda devagar). Os 10 departamentos abaixo foram validados ao
 # vivo com o mesmo filtro rh=p_n_deal_type já usado, retornando produtos
 # nunca vistos pelo bot.
-_URLS_AMAZON: list[tuple[str, str]] = [
+# As duas primeiras sao AGREGADORES CURADOS pela propria Amazon (a pagina de
+# cupons e a de ofertas do dia) — sao a razao de este rastreador existir e a
+# unica fonte onde o badge de cupom aparece. Ficam FORA do sorteio, sempre
+# visitadas primeiro.
+#
+# Bug real, achado em 2026-09-17 nos logs das rodadas #277, #280 e #283 (todas
+# com "0 com cupom de desconto"): as 15 URLs eram embaralhadas juntas e o laco
+# para assim que junta `limite*2` produtos — o que acontece depois de 2 ou 3
+# categorias. A pagina de cupons entrava numa loteria de 15 e perdia na
+# maioria das rodadas, entao um "Rastreador Amazon Cupons" passava rodadas
+# inteiras sem olhar cupom nenhum.
+_FONTES_CURADAS: list[tuple[str, str]] = [
     ("cupons",           "https://www.amazon.com.br/coupons"),
     ("ofertas_dia",      "https://www.amazon.com.br/deals"),
+]
+
+# Departamentos: continuam embaralhados a cada rodada. Aqui o sorteio E
+# desejado — sempre varrer na mesma ordem faria as categorias do fim da lista
+# quase nunca serem alcancadas (motivo da ampliacao de 2026-08-01).
+_URLS_AMAZON: list[tuple[str, str]] = [
     ("eletronicos",      "https://www.amazon.com.br/s?i=electronics&rh=p_n_deal_type%3A23566064011"),
     ("informatica",      "https://www.amazon.com.br/s?i=computers&rh=p_n_deal_type%3A23566064011"),
     ("casa",             "https://www.amazon.com.br/s?i=kitchen&rh=p_n_deal_type%3A23566064011"),
@@ -92,12 +109,32 @@ _DOM_SCRIPT = r"""
             if (!asinMatch) continue;
             link = `https://www.amazon.com.br/dp/${asinMatch[1]}`;
 
-            // Título
+            // Titulo.
+            // A /deals nova usa CSS Modules: a classe do card e
+            // `ProductCard-module__card_<hash>` e o hash muda a cada build da
+            // Amazon, entao nome de classe inteiro nao serve de seletor —
+            // tem de casar pelo PREFIXO. Evidencia (rodada #294, 19/09 01:31):
+            // os cards tinham link /dp/, ASIN e preco, e titulo_len=0; era so
+            // o titulo que nao casava.
             const tituloEl = card.querySelector(
                 'h2 a span, h2 span, .a-size-medium.a-color-base, .a-text-normal, ' +
-                '[data-testid="product-title"], .a-size-base-plus'
+                '[data-testid="product-title"], .a-size-base-plus, ' +
+                '[class*="ProductCard-module__title"], ' +
+                '[class*="ProductCard-module__productTitle"]'
             );
-            const titulo = tituloEl ? tituloEl.textContent.trim() : '';
+            let titulo = tituloEl ? tituloEl.textContent.trim() : '';
+
+            // Ultimo recurso, nesta ordem: o texto alternativo da foto e o
+            // aria-label do link carregam o nome do produto mesmo quando a
+            // Amazon troca a estrutura interna do card. Nao dependem de
+            // nenhuma classe, entao sobrevivem ao proximo redesenho.
+            if (!titulo) {
+                const imgAlt = card.querySelector('img[alt]');
+                if (imgAlt) titulo = (imgAlt.getAttribute('alt') || '').trim();
+            }
+            if (!titulo && linkEl) {
+                titulo = (linkEl.getAttribute('aria-label') || '').trim();
+            }
             if (!titulo || titulo.length < 5) continue;
 
             // Preço atual
@@ -136,6 +173,96 @@ _DOM_SCRIPT = r"""
         } catch(e) {}
     }
     return resultado;
+}
+"""
+
+
+# Roda SO quando a categoria devolve zero produtos. Nao mexe na raspagem: so
+# responde "zero por que?". Sem isso o log dizia "seletor do DOM provavelmente
+# mudou" — uma SUPOSICAO (Regra 2), e a errada na maior parte das vezes: uma
+# pagina de bloqueio anti-bot da Amazon tambem devolve zero card, e o
+# tratamento e o oposto (esperar/trocar de saida, nao reescrever seletor).
+_DIAG_SCRIPT = r"""
+() => {
+    const seletores = [
+        '[data-testid="deal-card"]',
+        '[data-component-type="s-search-result"]',
+        '[data-asin]',
+        '.a-carousel-card',
+        '.octopus-pc-item',
+    ];
+    const contagem = {};
+    let melhor = null;
+    for (const sel of seletores) {
+        const achados = document.querySelectorAll(sel);
+        contagem[sel] = achados.length;
+        if (melhor === null && achados.length > 3) melhor = sel;
+    }
+
+    // Quando o seletor CASA e mesmo assim nao sai produto, o que falta esta
+    // DENTRO do card. Sem isto o log diz "10 elementos, 0 produtos" e nao da
+    // para saber se faltou o link, o ASIN ou o titulo — que sao tres
+    // correcoes diferentes. Amostra de ate 3 cards, so os fatos de cada um.
+    const amostra = [];
+    if (melhor) {
+        for (const card of Array.from(document.querySelectorAll(melhor)).slice(0, 3)) {
+            const linkEl = card.querySelector('a[href*="/dp/"], a[href*="/gp/product/"]');
+            const href = linkEl ? (linkEl.href || '') : '';
+            const tituloEl = card.querySelector(
+                'h2 a span, h2 span, .a-size-medium.a-color-base, .a-text-normal, ' +
+                '[data-testid="product-title"], .a-size-base-plus'
+            );
+            const precoEl = card.querySelector(
+                '.a-price:not(.a-text-price) .a-offscreen, ' +
+                '.a-price-whole, [data-testid="price-amount"]'
+            );
+            amostra.push({
+                tem_link_dp: !!linkEl,
+                tem_asin:    /\/(?:dp|gp\/product)\/[A-Z0-9]{10}/.test(href),
+                titulo_len:  tituloEl ? tituloEl.textContent.trim().length : 0,
+                tem_preco:   !!precoEl,
+                // Os nomes de classe que o card REALMENTE usa: e por eles que
+                // se escreve o seletor novo, em vez de adivinhar.
+                classes:     (card.className || '').slice(0, 120),
+                tem_link_qualquer: !!card.querySelector('a[href]'),
+            });
+        }
+    }
+    const texto = (document.body ? document.body.innerText : '') || '';
+    const marcas_bloqueio = [
+        'Digite os caracteres',
+        'Type the characters',
+        'Continuar comprando',
+        'automated access',
+        'Para discutir o acesso automatizado',
+        'Sorry, we just need to make sure',
+        'Desculpe-nos',
+    ];
+    const achadas = marcas_bloqueio.filter(m => texto.includes(m));
+
+    // Pagina de erro/throttle da Amazon: titulo "Algo deu errado" (ou o
+    // equivalente em ingles) com o body VAZIO. Nao e captcha — nao tem
+    // formulario nem instrucao — e nao e seletor: e a Amazon recusando
+    // servir a pagina naquele instante.
+    const titulo_ = document.title || '';
+    const erro_servidor = (
+        titulo_.includes('Algo deu errado') ||
+        titulo_.includes('Something went wrong') ||
+        titulo_.includes('Desculpe') ||
+        (texto.length === 0 && titulo_.length > 0)
+    );
+    return {
+        erro_servidor: erro_servidor,
+        titulo:    (document.title || '').slice(0, 120),
+        url_final: location.href.slice(0, 200),
+        contagem:  contagem,
+        tamanho_texto: texto.length,
+        melhor_seletor: melhor,
+        amostra: amostra,
+        bloqueio:  achadas,
+        tem_captcha: !!document.querySelector(
+            '#captchacharacters, form[action*="validateCaptcha"]'),
+    };
 }
 """
 
@@ -219,6 +346,28 @@ def _normalizar(raw: list, categoria: str) -> list[dict]:
     return produtos
 
 
+# Pausa antes da segunda tentativa quando a Amazon devolve a pagina de erro.
+# Curta de proposito: e para atravessar um throttle de instante, nao para
+# insistir numa loja que esta recusando — insistir e o caminho de virar
+# bloqueio de verdade.
+_PAUSA_RETENTATIVA_MS = 3000
+
+
+async def _extrair_da_pagina(page, categoria: str, desconto_min: int):
+    """(cards crus, produtos filtrados) de uma pagina ja carregada.
+
+    Existe para que a primeira tentativa e a retentativa nao tenham duas
+    copias do mesmo filtro — duas copias e onde uma delas fica para tras.
+    """
+    raw = await page.evaluate(_DOM_SCRIPT)
+    produtos = _normalizar(raw, categoria)
+    if desconto_min > 0:
+        # cupom sempre passa, mesmo abaixo do desconto minimo
+        produtos = [p for p in produtos
+                    if (p.get("desconto_pct") or 0) >= desconto_min or p.get("cupom")]
+    return raw, produtos
+
+
 async def buscar_cupons_amazon_async(
     desconto_min: int = 10,
     limite: int = 10,
@@ -250,7 +399,8 @@ async def buscar_cupons_amazon_async(
     # problema de concorrência entre chamadas simultâneas). Com 15 URLs e o
     # corte antecipado de limite*2, sempre escanear na mesma ordem faria as
     # categorias do fim da lista quase nunca serem alcançadas.
-    ordem = random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
+    # Curadas primeiro, sempre; departamentos sorteados depois.
+    ordem = _FONTES_CURADAS + random.sample(_URLS_AMAZON, len(_URLS_AMAZON))
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
@@ -282,13 +432,102 @@ async def buscar_cupons_amazon_async(
                     # Aguarda lazy-load dos cards
                     await page.wait_for_timeout(2500)
 
-                    raw = await page.evaluate(_DOM_SCRIPT)
-                    produtos = _normalizar(raw, categoria)
+                    raw, produtos = await _extrair_da_pagina(
+                        page, categoria, desconto_min)
 
-                    # Filtra por desconto mínimo
-                    if desconto_min > 0:
-                        produtos = [p for p in produtos if (p.get("desconto_pct") or 0) >= desconto_min
-                                    or p.get("cupom")]  # cupom sempre passa
+                    # Quantos vieram e quantos traziam badge de cupom, POR
+                    # fonte. Sem isso, "0 com cupom" no resumo final e mudo:
+                    # nao distingue "a pagina de cupons nao foi visitada" de
+                    # "foi visitada e o seletor nao casa mais" — e foi
+                    # justamente essa mudez que escondeu o bug da ordem
+                    # aleatoria por rodadas seguidas.
+                    _com_cupom = sum(1 for x in produtos if x.get("cupom"))
+                    log.info("amazon[%s]: %d card(s) no DOM, %d produto(s) apos "
+                             "filtro, %d com cupom",
+                             categoria, len(raw), len(produtos), _com_cupom)
+
+                    # Zero produto tem tres causas diferentes e so o DOM
+                    # distingue: (a) a pagina veio e os cards nao casam mais
+                    # com o seletor, (b) a pagina veio, os cards casaram e o
+                    # filtro de desconto cortou tudo, (c) a Amazon devolveu
+                    # pagina de bloqueio/captcha e nao ha pagina nenhuma.
+                    # Tratar (c) como (a) leva a reescrever seletor que esta
+                    # certo. So pergunta quando da zero — nenhuma chamada
+                    # extra na rodada saudavel.
+                    if not produtos:
+                        try:
+                            d = await page.evaluate(_DIAG_SCRIPT)
+                        except Exception:
+                            d = None
+                        if d:
+                            if d.get("bloqueio") or d.get("tem_captcha"):
+                                log.warning(
+                                    "amazon[%s]: BLOQUEIO anti-bot — a pagina nao "
+                                    "chegou a carregar produtos (marcas=%s captcha=%s "
+                                    "titulo=%r). Nao e seletor: nao mexer no DOM.",
+                                    categoria, d.get("bloqueio"), d.get("tem_captcha"),
+                                    d.get("titulo"))
+                            elif d.get("erro_servidor"):
+                                log.warning(
+                                    "amazon[%s]: a Amazon nao serviu a pagina "
+                                    "(titulo=%r, corpo vazio) — throttle/erro do "
+                                    "lado deles. Nao e seletor: outras categorias "
+                                    "da mesma rodada trazem cards normalmente.",
+                                    categoria, d.get("titulo"))
+                                # UMA segunda tentativa, so neste caso. Na
+                                # rodada #291 treze das quinze fontes cairam
+                                # aqui e uma unica (brinquedos) passou e trouxe
+                                # 24 cards — ou seja, a recusa e por requisicao,
+                                # nao pela rodada inteira. Uma so: repetir ate
+                                # conseguir e o que transforma throttle em
+                                # bloqueio.
+                                try:
+                                    await page.wait_for_timeout(_PAUSA_RETENTATIVA_MS)
+                                    await page.reload(wait_until="domcontentloaded",
+                                                      timeout=20000)
+                                    await page.wait_for_timeout(2500)
+                                    raw, produtos = await _extrair_da_pagina(
+                                        page, categoria, desconto_min)
+                                    if produtos:
+                                        log.info(
+                                            "amazon[%s]: recuperado na 2a tentativa "
+                                            "— %d card(s), %d produto(s)",
+                                            categoria, len(raw), len(produtos))
+                                    else:
+                                        # Sem esta linha a retentativa que volta
+                                        # vazia e MUDA, e "throttle passageiro"
+                                        # fica indistinguivel de "esta fonte
+                                        # recusa sempre" — que e o caso de
+                                        # /coupons e /deals na rodada #292.
+                                        log.warning(
+                                            "amazon[%s]: 2a tentativa tambem veio "
+                                            "vazia (%d card(s)) — esta fonte esta "
+                                            "recusando de forma persistente, nao "
+                                            "por instante.", categoria, len(raw))
+                                except Exception as e2:
+                                    log.info("amazon[%s]: 2a tentativa tambem falhou: %s",
+                                             categoria, e2)
+                            elif len(raw) > 0:
+                                log.warning(
+                                    "amazon[%s]: %d card(s) extraidos e nenhum passou "
+                                    "o filtro de desconto >= %d%% — pagina saudavel, "
+                                    "oferta fraca.", categoria, len(raw), desconto_min)
+                            else:
+                                log.warning(
+                                    "amazon[%s]: ZERO card no DOM sem marca de bloqueio "
+                                    "— seletores=%s texto=%d titulo=%r url=%s",
+                                    categoria, d.get("contagem"),
+                                    d.get("tamanho_texto"), d.get("titulo"),
+                                    d.get("url_final"))
+                                if d.get("amostra"):
+                                    # O seletor externo casou e o produto nao
+                                    # saiu: a falha esta DENTRO do card, e esta
+                                    # linha diz em qual parte.
+                                    log.warning(
+                                        "amazon[%s]: o seletor %r casou mas nenhum "
+                                        "card virou produto — amostra=%s",
+                                        categoria, d.get("melhor_seletor"),
+                                        d.get("amostra"))
 
                     todos.extend(produtos)
                 except Exception as e:
