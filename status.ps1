@@ -64,6 +64,28 @@ if ($wa) { Write-Host "  WhatsApp Desktop      RODANDO" -ForegroundColor Green }
 elseif (-not $ehWindows) { Write-Host "  WhatsApp Desktop      (nao verificavel fora do Windows)" -ForegroundColor DarkGray }
 else { Write-Host "  WhatsApp Desktop      NAO ENCONTRADO" -ForegroundColor Red }
 
+# ── Evolution API (Docker) ───────────────────────────────────────────────
+# Entrou aqui porque o install.ps1 passou a subir este container. Sem esta
+# linha, um "WhatsApp: OFF (evolution-desconectada)" no /health nao
+# distingue "o container caiu" de "o QR nunca foi lido" (Regra 16) — e as
+# duas coisas se resolvem de formas bem diferentes.
+if (Get-Command docker -ErrorAction SilentlyContinue) {
+    $estadoEvo = (& docker ps --filter "name=bot_evolution_api" --format "{{.Status}}" 2>&1 | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "  Evolution API         (Docker nao respondeu - Desktop aberto?)" -ForegroundColor DarkGray
+    }
+    elseif ($estadoEvo) {
+        Write-Host "  Evolution API         RODANDO ($estadoEvo)" -ForegroundColor Green
+    }
+    else {
+        Write-Host "  Evolution API         container parado" -ForegroundColor DarkGray
+    }
+}
+else {
+    # No PC do Daniel isso e o normal: quem envia e o WhatsApp Desktop.
+    Write-Host "  Evolution API         (Docker nao instalado - envio pelo Desktop)" -ForegroundColor DarkGray
+}
+
 # ── Healthcheck ──────────────────────────────────────────────────────────────
 Write-Host "`nHealthcheck (http://127.0.0.1:8724/health):" -ForegroundColor Yellow
 

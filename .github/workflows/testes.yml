@@ -79,6 +79,18 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_dependencias.py
 
+      - name: Teste da instalacao em PowerShell (install/start/stop/status)
+        # Trava quatro falhas silenciosas dos scripts de operacao: o
+        # `.\stop.ps1` que dizia "Bot parado" deixando o rastreador da Amazon
+        # publicando (o padrao era `*rastreador.py*`, e "rastreador_amazon.py"
+        # nao contem "rastreador.py"); o `docker compose -f docker/...` sem
+        # `--env-file`, que recusa subir mesmo com a chave no .env da raiz; o
+        # `.\logs.ps1` que dois scripts mandavam rodar e nunca existiu; e o
+        # install.ps1 anunciando Chromium instalado quando o download falhava.
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_instalacao_powershell.py
+
       - name: Teste de redacao de segredos (repo publico)
         # Este repositorio e publico e ja teve o token do bot do Telegram
         # commitado em monitor.log e rastreador.log (achado em 2026-09-07).
