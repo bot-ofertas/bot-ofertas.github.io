@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "Freezer Horizontal 100L Inverter Bivolt Branco Midea",
+      "preco": 1249.0,
+      "preco_original": 1579.0,
+      "desconto_pct": 20.9,
+      "foto": "https://m.media-amazon.com/images/I/41GOo1UPNmL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 68,
+      "enviado_em": "2026-09-19T14:19:56.264700",
+      "link": "https://www.amazon.com.br/dp/B0FK163DY6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1249.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Club De Nuit Intense Da Armaf Edt 105ml Masculino",
+      "preco": 221.26,
+      "preco_original": 299.0,
+      "desconto_pct": 26.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_863486-MLB114945658162_082026-AB--perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino.webp",
+      "categoria": "beleza",
+      "score": 79,
+      "enviado_em": "2026-09-19T14:18:42.892627",
+      "link": "https://www.mercadolivre.com.br/perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino/up/MLBU4793518944?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 221.26,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Jogo De Cartas UNO Clássico Mattel Com 108 Cartas 7 Anos Ou Mais",
       "preco": 16.73,
       "preco_original": 24.99,
@@ -210,200 +240,29 @@
       "menor_preco_30d": 167.55,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Chuveiro Loren Shower Eletrônico 7500w 220v Lorenzetti",
-      "preco": 104.9,
-      "preco_original": 125.9,
-      "desconto_pct": 16.7,
-      "foto": "https://m.media-amazon.com/images/I/31fyFHV8H-L._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 46,
-      "enviado_em": "2026-09-17T13:03:27.117523",
-      "link": "https://www.amazon.com.br/dp/B095VF5GR7?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 104.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "WD-40 Fórmula Original - Produto Multiusos Aerossol 300ml, 200g - Desengripa, lubrifica e protege contra ferrugem",
-      "preco": 35.75,
-      "preco_original": 44.9,
-      "desconto_pct": 20.4,
-      "foto": "https://m.media-amazon.com/images/I/514x2w0chDL._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 55,
-      "enviado_em": "2026-09-17T13:03:18.351177",
-      "link": "https://www.amazon.com.br/dp/B07CV2JXNH?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 35.33,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Lâmpada Inteligente Smart Color 10W Elgin RGB Wifi Compatível com Alexa e Google Home",
-      "preco": 33.76,
-      "preco_original": 99.0,
-      "desconto_pct": 65.9,
-      "foto": "https://m.media-amazon.com/images/I/61i1yPAlVLL._AC_UY218_.jpg",
-      "categoria": "ferramentas",
-      "score": 65,
-      "enviado_em": "2026-09-17T13:03:09.586401",
-      "link": "https://www.amazon.com.br/dp/B088C4QZV2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 33.55,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
-      "preco": 449.0,
-      "preco_original": 623.0,
-      "desconto_pct": 28.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
-      "categoria": "bebes",
-      "score": 68,
-      "enviado_em": "2026-09-17T12:59:41.968413",
-      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 449.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "3 Rolos Bobina Papel Térmico Térmica Impressora Portátil A4 Branco",
-      "preco": 36.77,
-      "preco_original": 54.0,
-      "desconto_pct": 32.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_605530-MLB115045294036_082026-AB--3-rolos-bobina-papel-termico-termica-impressora-portatil-a4.webp",
-      "categoria": "tablets",
-      "score": 66,
-      "enviado_em": "2026-09-17T12:59:31.963639",
-      "link": "https://www.mercadolivre.com.br/3-rolos-bobina-papel-termico-termica-impressora-portatil-a4/up/MLBU4782429115?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 36.77,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Gamer Acer Nitro V15 ANV15-52-52VN Intel® Core™ i5-13420H 13ªG 512 GB SSD 16 GB RAM RTX 4060 15.6”",
-      "preco": 6399.0,
-      "preco_original": 8999.0,
-      "desconto_pct": 28.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_968548-MLA99943896901_112025-AB.webp",
-      "categoria": "informatica",
-      "score": 83,
-      "enviado_em": "2026-09-17T12:59:22.810005",
-      "link": "https://www.mercadolivre.com.br/notebook-gamer-acer-nitro-v15-anv15-52-52vn-intel-core-i5-13420h-13g-512-gb-ssd-16-gb-ram-rtx-4060-156/p/MLB54358498?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 6399.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Enssu Aparador De Pelos Corporais Masculino Com Lâmina Segura e Base, Máquina de Barbear IPX7 À Prova d’Água",
-      "preco": 125.71,
-      "preco_original": 324.0,
-      "desconto_pct": 61.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_986028-MLA117190573943_092026-AB.webp",
-      "categoria": "beleza",
-      "score": 85,
-      "enviado_em": "2026-09-17T12:59:13.471570",
-      "link": "https://www.mercadolivre.com.br/enssu-aparador-de-pelos-corporais-masculino-com-lamina-segura-e-base-maquina-de-barbear-ipx7-prova-dagua/p/MLB65182534?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 125.71,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Acer Aspire 5 A515-45-R5AT AMD Ryzen 5 5500U 15.6\"AMD Radeon Graphics 256GB SDD 8GB RAM Windows 11",
-      "preco": 3288.0,
-      "preco_original": 6699.0,
-      "desconto_pct": 50.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_809656-MLA82164414546_022025-AB.webp",
-      "categoria": "monitores",
-      "score": 95,
-      "enviado_em": "2026-09-17T09:54:08.939503",
-      "link": "https://www.mercadolivre.com.br/notebook-acer-aspire-5-a515-45-r5at-amd-ryzen-5-5500u-156amd-radeon-graphics-256gb-sdd-8gb-ram-windows-11/p/MLB41734795?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 3288.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Câmera Segurança Ip Externa Wifi A28 App Icsee À Prova Dágua Ip66 Dome Lente Dupla Lentes 2 Em 1 Vigilancia Visão Noturna Infravermelho  4k Uhd Nova Geração Lançamento 2026 Nexgen",
-      "preco": 104.95,
-      "preco_original": 350.0,
-      "desconto_pct": 70.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_927792-MLB91185357960_092025-AB--camera-seguranca-ip-externa-wifi-a28-app-icsee-a-prova-dagua.webp",
-      "categoria": "cameras",
-      "score": 72,
-      "enviado_em": "2026-09-17T09:53:59.892600",
-      "link": "https://www.mercadolivre.com.br/camera-seguranca-ip-externa-wifi-a28-app-icsee-a-prova-dagua/up/MLBU3403280878?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 104.95,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Top Lupo Loba Fitness Confortável Ótima Sustentação Academia",
-      "preco": 39.97,
-      "preco_original": 149.0,
-      "desconto_pct": 73.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_943209-MLB95115260847_102025-AB-top-lupo-loba-fitness-confortavel-otima-sustentaco-academia.webp",
-      "categoria": "moda",
-      "score": 79,
-      "enviado_em": "2026-09-17T09:53:50.022305",
-      "link": "https://produto.mercadolivre.com.br/MLB-3781902941-top-lupo-loba-fitness-confortavel-otima-sustentaco-academia-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 39.97,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Patinete Eletrico 3 Rodas Triciclo Drift 450w 120kg Vermelho Vermelho/azul",
-      "preco": 777.75,
-      "preco_original": 1099.0,
-      "desconto_pct": 29.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_937844-MLB116369053497_082026-AB--patinete-eletrico-3-rodas-triciclo-drift-450w-120kg-vermelho.webp",
-      "categoria": "brinquedos",
-      "score": 81,
-      "enviado_em": "2026-09-17T09:53:40.901637",
-      "link": "https://www.mercadolivre.com.br/patinete-eletrico-3-rodas-triciclo-drift-450w-120kg-vermelho/up/MLBU4780172365?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 777.75,
-      "menor_periodo": true,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
-    "preco": 3818.0,
-    "preco_original": 6199.0,
-    "desconto_pct": 38.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
-    "categoria": "livros",
-    "score": 98,
-    "enviado_em": "2026-09-18T09:29:35.835347",
-    "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Bicicleta Aro 29 Gts Dexter 24 Marchas Freio A Disco Cor Grafite Com Preto Tamanho Do Quadro 21",
+    "preco": 799.0,
+    "preco_original": 1413.0,
+    "desconto_pct": 43.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861212-MLA99932433553_112025-AB.webp",
+    "categoria": "redes",
+    "score": 95,
+    "enviado_em": "2026-09-19T09:16:36.400894",
+    "link": "https://www.mercadolivre.com.br/bicicleta-aro-29-gts-dexter-24-marchas-freio-a-disco-cor-grafite-com-preto-tamanho-do-quadro-21/p/MLB37800447?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 3818.0,
-    "menor_periodo": true,
+    "menor_preco_30d": 799.0,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "brinquedos": {
-      "total": 5,
-      "score_medio": 73,
-      "desconto_medio": 33,
-      "maior_desconto": 40
-    },
-    "ferramentas": {
-      "total": 3,
-      "score_medio": 55,
+      "total": 4,
+      "score_medio": 72,
       "desconto_medio": 34,
-      "maior_desconto": 65
+      "maior_desconto": 40
     },
     "casa": {
       "total": 3,
@@ -412,28 +271,10 @@
       "maior_desconto": 75
     },
     "tablets": {
-      "total": 2,
-      "score_medio": 71,
-      "desconto_medio": 42,
-      "maior_desconto": 52
-    },
-    "informatica": {
-      "total": 2,
+      "total": 1,
       "score_medio": 76,
-      "desconto_medio": 30,
-      "maior_desconto": 31
-    },
-    "cameras": {
-      "total": 2,
-      "score_medio": 74,
-      "desconto_medio": 55,
-      "maior_desconto": 70
-    },
-    "bebes": {
-      "total": 2,
-      "score_medio": 74,
-      "desconto_medio": 43,
-      "maior_desconto": 58
+      "desconto_medio": 52,
+      "maior_desconto": 52
     },
     "redes": {
       "total": 1,
@@ -441,23 +282,17 @@
       "desconto_medio": 43,
       "maior_desconto": 43
     },
-    "monitores": {
-      "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 50,
-      "maior_desconto": 50
-    },
-    "moda": {
-      "total": 1,
-      "score_medio": 79,
-      "desconto_medio": 73,
-      "maior_desconto": 73
-    },
     "livros": {
       "total": 1,
       "score_medio": 98,
       "desconto_medio": 38,
       "maior_desconto": 38
+    },
+    "informatica": {
+      "total": 1,
+      "score_medio": 68,
+      "desconto_medio": 31,
+      "maior_desconto": 31
     },
     "esportes": {
       "total": 1,
@@ -465,13 +300,31 @@
       "desconto_medio": 56,
       "maior_desconto": 56
     },
+    "cupons": {
+      "total": 1,
+      "score_medio": 68,
+      "desconto_medio": 21,
+      "maior_desconto": 20
+    },
+    "cameras": {
+      "total": 1,
+      "score_medio": 75,
+      "desconto_medio": 39,
+      "maior_desconto": 39
+    },
     "beleza": {
       "total": 1,
-      "score_medio": 85,
-      "desconto_medio": 61,
-      "maior_desconto": 61
+      "score_medio": 79,
+      "desconto_medio": 26,
+      "maior_desconto": 26
+    },
+    "bebes": {
+      "total": 1,
+      "score_medio": 79,
+      "desconto_medio": 58,
+      "maior_desconto": 58
     }
   },
-  "updated_at": "2026-09-19T09:18:53.153567",
-  "total": 25
+  "updated_at": "2026-09-19T14:20:05.263672",
+  "total": 16
 }
