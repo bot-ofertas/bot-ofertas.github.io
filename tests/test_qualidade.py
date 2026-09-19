@@ -317,6 +317,37 @@ def test_retentativa_da_amazon_e_uma_so():
     assert "_PAUSA_RETENTATIVA_MS" in nomes, "a pausa da retentativa sumiu"
 
 
+def test_diag_diz_por_que_o_card_foi_rejeitado():
+    """Rodada #293 (19/09, 01:24): /coupons redirecionou para
+    /deals?bubble-id=deals-collection-coupons, a pagina CARREGOU (texto=5738,
+    titulo 'Ofertas e Promocoes') e `[data-asin]` casou 10 elementos — mas
+    nenhum virou produto. "10 elementos, 0 produtos" nao diz se faltou o
+    link, o ASIN ou o titulo, e cada um desses e uma correcao diferente."""
+    codigo = _diag_sem_comentarios()
+
+    for campo in ("tem_link_dp", "tem_asin", "titulo_len", "tem_preco",
+                  "classes", "melhor_seletor", "amostra"):
+        assert campo in codigo, f"a amostra do card perdeu o campo {campo!r}"
+
+    # A amostra e limitada: o log nao pode virar despejo de HTML.
+    assert "slice(0, 3)" in codigo, "a amostra deixou de ser limitada a 3 cards"
+    assert "slice(0, 120)" in codigo, "o nome de classe deixou de ser truncado"
+
+
+def test_amostra_do_card_so_aparece_no_ramo_de_seletor():
+    """Ela custa querySelector por card. So pode rodar quando ja deu zero E o
+    diagnostico ja descartou bloqueio e throttle."""
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+
+    i_seletor = src.index("ZERO card no DOM sem marca de bloqueio")
+    i_amostra = src.index('if d.get("amostra"):')
+    assert i_amostra > i_seletor, \
+        "a amostra saiu do ramo de seletor — passou a custar em caso saudavel"
+
+
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py
     import traceback

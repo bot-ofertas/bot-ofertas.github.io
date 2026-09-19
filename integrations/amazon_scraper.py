@@ -172,8 +172,41 @@ _DIAG_SCRIPT = r"""
         '.octopus-pc-item',
     ];
     const contagem = {};
+    let melhor = null;
     for (const sel of seletores) {
-        contagem[sel] = document.querySelectorAll(sel).length;
+        const achados = document.querySelectorAll(sel);
+        contagem[sel] = achados.length;
+        if (melhor === null && achados.length > 3) melhor = sel;
+    }
+
+    // Quando o seletor CASA e mesmo assim nao sai produto, o que falta esta
+    // DENTRO do card. Sem isto o log diz "10 elementos, 0 produtos" e nao da
+    // para saber se faltou o link, o ASIN ou o titulo — que sao tres
+    // correcoes diferentes. Amostra de ate 3 cards, so os fatos de cada um.
+    const amostra = [];
+    if (melhor) {
+        for (const card of Array.from(document.querySelectorAll(melhor)).slice(0, 3)) {
+            const linkEl = card.querySelector('a[href*="/dp/"], a[href*="/gp/product/"]');
+            const href = linkEl ? (linkEl.href || '') : '';
+            const tituloEl = card.querySelector(
+                'h2 a span, h2 span, .a-size-medium.a-color-base, .a-text-normal, ' +
+                '[data-testid="product-title"], .a-size-base-plus'
+            );
+            const precoEl = card.querySelector(
+                '.a-price:not(.a-text-price) .a-offscreen, ' +
+                '.a-price-whole, [data-testid="price-amount"]'
+            );
+            amostra.push({
+                tem_link_dp: !!linkEl,
+                tem_asin:    /\/(?:dp|gp\/product)\/[A-Z0-9]{10}/.test(href),
+                titulo_len:  tituloEl ? tituloEl.textContent.trim().length : 0,
+                tem_preco:   !!precoEl,
+                // Os nomes de classe que o card REALMENTE usa: e por eles que
+                // se escreve o seletor novo, em vez de adivinhar.
+                classes:     (card.className || '').slice(0, 120),
+                tem_link_qualquer: !!card.querySelector('a[href]'),
+            });
+        }
     }
     const texto = (document.body ? document.body.innerText : '') || '';
     const marcas_bloqueio = [
@@ -204,6 +237,8 @@ _DIAG_SCRIPT = r"""
         url_final: location.href.slice(0, 200),
         contagem:  contagem,
         tamanho_texto: texto.length,
+        melhor_seletor: melhor,
+        amostra: amostra,
         bloqueio:  achadas,
         tem_captcha: !!document.querySelector(
             '#captchacharacters, form[action*="validateCaptcha"]'),
@@ -464,6 +499,15 @@ async def buscar_cupons_amazon_async(
                                     categoria, d.get("contagem"),
                                     d.get("tamanho_texto"), d.get("titulo"),
                                     d.get("url_final"))
+                                if d.get("amostra"):
+                                    # O seletor externo casou e o produto nao
+                                    # saiu: a falha esta DENTRO do card, e esta
+                                    # linha diz em qual parte.
+                                    log.warning(
+                                        "amazon[%s]: o seletor %r casou mas nenhum "
+                                        "card virou produto — amostra=%s",
+                                        categoria, d.get("melhor_seletor"),
+                                        d.get("amostra"))
 
                     todos.extend(produtos)
                 except Exception as e:
