@@ -501,6 +501,56 @@ def execucao_em_andamento(minutos_max: int = 20) -> bool:
     return row is not None
 
 
+def detalhe_execucao_em_andamento(minutos_max: int = 20) -> dict:
+    """O mesmo veredito de `execucao_em_andamento()`, com a EVIDENCIA junto.
+
+    Existe porque o booleano sozinho tranca sem explicar. No PC do Daniel
+    (2026-09-19) o `aplicar_tudo.ps1` parou no passo 2 duas vezes seguidas
+    dizendo apenas "ha uma rodada de publicacao em andamento. Espere ela
+    terminar" — sem dizer ha quanto tempo ela comecou nem se o processo dono
+    dela ainda existe. Sao duas situacoes opostas com a mesma mensagem:
+
+      - rodada de verdade em curso  -> esperar e a atitude certa (Regra 10:
+        parar no meio corta um envio pela metade);
+      - rodada que morreu com o processo -> esperar nao resolve nada, e o
+        bot fica fora do ar ate alguem entender por conta propria.
+
+    Mesma licao do `git status` que nao conseguia olhar e passava por "tudo
+    limpo", e do psutil ausente no supervisor: quem bloqueia precisa dizer
+    sobre o que esta bloqueando.
+
+    Devolve sempre as chaves `em_andamento`, `iniciado_em`, `ha_minutos`,
+    `id`. `iniciado_em` e None quando nao ha rodada aberta.
+    """
+    from datetime import timedelta  # noqa: PLC0415
+
+    agora = datetime.now()
+    corte = (agora - timedelta(minutes=minutos_max)).isoformat()
+    with _conn() as con:
+        row = con.execute(
+            "SELECT id, iniciado_em FROM execucoes "
+            "WHERE concluido_em IS NULL AND iniciado_em >= ? "
+            "ORDER BY iniciado_em DESC LIMIT 1",
+            (corte,),
+        ).fetchone()
+
+    if row is None:
+        return {"em_andamento": False, "iniciado_em": None,
+                "ha_minutos": None, "id": None}
+
+    iniciado = row[1]
+    try:
+        ha_min = (agora - datetime.fromisoformat(iniciado)).total_seconds() / 60.0
+    except Exception:
+        # Timestamp ilegivel nao pode virar excecao aqui: quem chama esta
+        # decidindo se reinicia o bot, e uma excecao viraria "nao consegui
+        # perguntar ao banco" — outra resposta cega.
+        ha_min = None
+
+    return {"em_andamento": True, "iniciado_em": iniciado,
+            "ha_minutos": ha_min, "id": row[0]}
+
+
 def registrar_erro(tipo: str, mensagem: str, produto_id: str = "",
                    exc: BaseException | None = None) -> None:
     """Registra um erro na tabela `erros_log` e espelha no relatório do Desktop.

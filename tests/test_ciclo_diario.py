@@ -588,6 +588,32 @@ if os.path.isfile(_apl):
            and "& $git config --global --add safe.directory" not in _t,
            "confiar numa pasta e decisao do dono, nao do script")
 
+    # 16. Bug real de 19/09/2026: o passo 2 parou duas vezes seguidas com
+    #     "ha uma rodada de publicacao em andamento. Espere ela terminar" e
+    #     nada mais. Sem a hora de inicio, sem dizer se o processo dono da
+    #     rodada ainda vive, e sem dizer que a trava se solta sozinha em
+    #     20 min. Uma rodada de verdade e uma rodada que morreu com o
+    #     processo tinham a MESMA mensagem, e so uma delas se resolve
+    #     esperando.
+    checar("a trava de rodada diz ha quanto tempo ela comecou",
+           "detalhe_execucao_em_andamento" in _t and "comecou ha" in _t,
+           "a trava volta a bloquear sem dizer sobre o que")
+    checar("a trava diz se o processo dono da rodada ainda vive",
+           "processos_vivos" in _t and "checagem_confiavel" in _t,
+           "sem isso, rodada viva e rodada morta sao indistinguiveis")
+    checar("a trava avisa que se solta sozinha",
+           "se solta sozinha" in _t,
+           "esperar sem prazo foi o que travou o bot do Daniel")
+    # O JSON tem de vir marcado: `import startup` imprime a linha do logger
+    # ANTES dele, e sem a marca o ConvertFrom-Json falha e o script cai no
+    # caminho antigo SEM AVISAR -- a melhoria vira no-op silencioso.
+    checar("o JSON do diagnostico vem marcado para nao se misturar ao log",
+           '"##DET##"' in _t and "-like \"##DET##*\"" in _t,
+           "a linha do logger se mistura ao JSON e o diagnostico e descartado")
+    checar("ainda funciona com codigo antigo (sem a funcao nova)",
+           "execucao_em_andamento" in _t and "codigo antigo" in _t,
+           "um checkout mais velho ficaria sem o passo 2")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])

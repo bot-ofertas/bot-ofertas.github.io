@@ -196,15 +196,74 @@ if ($git) { $env:PATH = (Split-Path $git) + ";" + $env:PATH }
 
 # ------------------------------------------------------- rodada em curso
 Passo 2 "Conferindo se ha publicacao em andamento (Regra 10)"
-$emAndamento = & $python -c "from core.database import execucao_em_andamento; print('SIM' if execucao_em_andamento() else 'NAO')" 2>$null
-if ($emAndamento -eq "SIM") {
-    Erro "ha uma rodada de publicacao em andamento."
-    Write-Host "        Espere ela terminar e rode de novo — parar agora corta um" -ForegroundColor DarkGray
-    Write-Host "        envio pela metade." -ForegroundColor DarkGray
+
+# A trava precisa dizer SOBRE O QUE esta travando. Bug real (19/09/2026, PC do
+# Daniel): o script parou aqui duas vezes seguidas com "ha uma rodada de
+# publicacao em andamento. Espere ela terminar" e nada mais — sem a hora de
+# inicio, sem dizer se o processo dono da rodada ainda existe, e sem dizer que
+# a propria trava se solta sozinha em 20 min. Duas situacoes opostas tinham a
+# mesma mensagem: rodada de verdade (esperar e certo) e rodada que morreu com o
+# processo (esperar nao resolve, mas o corte de 20 min libera). Mesmo defeito
+# do "sem internet? sem credencial?" do passo 4.
+$py2 = @'
+import json
+from core.database import detalhe_execucao_em_andamento
+d = detalhe_execucao_em_andamento()
+try:
+    import startup
+    d["processos_vivos"] = startup.rastreador_em_execucao()
+    d["checagem_confiavel"] = startup.checagem_de_processos_confiavel()
+except Exception:
+    d["processos_vivos"] = None
+    d["checagem_confiavel"] = None
+# Marca de inicio de linha: `import startup` inicializa o logger, que
+# escreve "Log inicializado -- ..." no stdout ANTES desta linha. Sem a marca,
+# o ConvertFrom-Json recebe as duas linhas juntas, falha, e o script cai no
+# caminho antigo sem avisar -- a melhoria inteira viraria no-op silencioso.
+print("##DET##" + json.dumps(d))
+'@
+$bruto = & $python -c $py2 2>$null
+$det = $null
+$linha = $bruto | Where-Object { $_ -like "##DET##*" } | Select-Object -First 1
+if ($linha) {
+    try { $det = ($linha -replace '^##DET##', '') | ConvertFrom-Json } catch { $det = $null }
+}
+
+if ($det -eq $null) {
+    # Codigo antigo, sem detalhe_execucao_em_andamento(): cai no booleano.
+    $emAndamento = & $python -c "from core.database import execucao_em_andamento; print('SIM' if execucao_em_andamento() else 'NAO')" 2>$null
+    if ($emAndamento -eq "SIM") {
+        Erro "ha uma rodada de publicacao em andamento."
+        Write-Host "        Espere ate 20 min e rode de novo — a trava se solta sozinha." -ForegroundColor DarkGray
+        exit 1
+    }
+    elseif ($emAndamento -eq "NAO") { Ok "nenhuma rodada em andamento" }
+    else { Aviso "nao consegui perguntar ao banco (codigo antigo?) — seguindo" }
+}
+elseif ($det.em_andamento) {
+    $min = if ($det.ha_minutos -ne $null) { "{0:N1}" -f $det.ha_minutos } else { "?" }
+    $faltam = if ($det.ha_minutos -ne $null) { [math]::Max(0, [math]::Ceiling(20 - $det.ha_minutos)) } else { 20 }
+
+    Erro "ha uma rodada de publicacao aberta (comecou ha $min min)."
+    Write-Host "        Inicio: $($det.iniciado_em)  (execucao #$($det.id))" -ForegroundColor DarkGray
+
+    if ($det.checagem_confiavel -eq $false) {
+        Write-Host "        Nao da para saber se o processo dela vive (sem psutil)." -ForegroundColor DarkGray
+    }
+    elseif ($det.processos_vivos -eq $true) {
+        Write-Host "        Os rastreadores ESTAO rodando — e uma rodada de verdade." -ForegroundColor DarkGray
+        Write-Host "        Parar agora corta um envio pela metade (Regra 10)." -ForegroundColor DarkGray
+    }
+    elseif ($det.processos_vivos -eq $false) {
+        Write-Host "        Mas NAO ha rastreador rodando: a rodada morreu junto com o" -ForegroundColor Yellow
+        Write-Host "        processo e a linha ficou aberta. Nada esta publicando agora." -ForegroundColor Yellow
+    }
+
+    Write-Host ""
+    Write-Host "        A trava se solta sozinha em ~$faltam min. Rode de novo depois disso." -ForegroundColor Yellow
     exit 1
 }
-elseif ($emAndamento -eq "NAO") { Ok "nenhuma rodada em andamento" }
-else { Aviso "nao consegui perguntar ao banco (codigo antigo?) — seguindo" }
+else { Ok "nenhuma rodada em andamento" }
 
 # ------------------------------------------------------------- parar bot
 Passo 3 "Parando o bot"
