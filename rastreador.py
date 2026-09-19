@@ -79,7 +79,14 @@ CATEGORIAS_ATIVAS = [
 ]
 DESCONTO_MINIMO   = 20
 SCORE_MINIMO      = 60
-MAX_POR_EXECUCAO  = 4   # 4 posts por execução × 18 runs/dia = ~72 posts/dia
+# Quantas ofertas DESTA loja saem por rodada.
+#
+# Era 4 fixo (4 × 18 rodadas/dia ≈ 72 posts/dia), contra 3 da Amazon: o grupo
+# recebia quase 60% de Mercado Livre. Pedido do Daniel em 2026-09-17: uma
+# oferta de CADA loja por rodada, para o grupo ver as três lojas em vez de
+# uma dominar. Configurável no .env — quem quiser o volume antigo põe 4 de
+# volta sem mexer em código.
+MAX_POR_EXECUCAO  = max(1, int(os.getenv("MAX_POR_RODADA_ML") or "1"))
 MAX_POR_CATEGORIA = 1   # nunca posta a mesma categoria 2x no mesmo run
 PAUSA_ENTRE_POSTS = 6   # segundos entre posts
 

@@ -237,6 +237,57 @@ def test_empacotador_e_lido_como_ascii_pelo_powershell():
     fora = [b for b in bruto[3:] if b > 127]
     assert not fora, "%d byte(s) nao-ASCII no corpo do .ps1" % len(fora)
 
+def test_verificar_tudo_nunca_imprime_valor_de_segredo():
+    """verificar_tudo.py LE o .env para dizer o que esta configurado. A saida
+    dele e feita para ser colada numa conversa, entao nunca pode carregar o
+    valor — so o nome da chave e o tamanho. Regra 10, e o vazamento de
+    2026-09-07, que comecou exatamente assim: um log colado.
+
+    A checagem e por AST, nao por regex: procurar a palavra "token" no texto
+    acusa ate a mensagem "401 - token invalido", que nao vaza nada. O que
+    importa e se a VARIAVEL que guarda o segredo chega a uma funcao de
+    impressao.
+    """
+    import ast as _ast  # noqa: PLC0415
+
+    alvo = pathlib.Path(BASE) / "verificar_tudo.py"
+    arvore = _ast.parse(alvo.read_text(encoding="utf-8"))
+
+    IMPRIME = {"ok", "falha", "aviso", "pulado", "print"}
+    PERIGOSAS = {"v", "token"}          # onde o valor do segredo mora
+    vazamentos = []
+
+    for no in _ast.walk(arvore):
+        if not (isinstance(no, _ast.Call) and isinstance(no.func, _ast.Name)
+                and no.func.id in IMPRIME):
+            continue
+        for arg in no.args:
+            # valor passado cru: ok("X", token)
+            if isinstance(arg, _ast.Name) and arg.id in PERIGOSAS:
+                vazamentos.append(f"linha {no.lineno}: {arg.id} passado cru")
+            # interpolado numa f-string: f"...{token}..." — mas len(token) e ok
+            if isinstance(arg, _ast.JoinedStr):
+                for pedaco in _ast.walk(arg):
+                    if isinstance(pedaco, _ast.FormattedValue):
+                        for n2 in _ast.walk(pedaco.value):
+                            if isinstance(n2, _ast.Name) and n2.id in PERIGOSAS:
+                                envolto = any(
+                                    isinstance(c, _ast.Call)
+                                    and isinstance(c.func, _ast.Name)
+                                    and c.func.id == "len"
+                                    for c in _ast.walk(pedaco.value))
+                                if not envolto:
+                                    vazamentos.append(
+                                        f"linha {no.lineno}: {n2.id} interpolado sem len()")
+
+    assert not vazamentos, "verificar_tudo.py imprimiria segredo -> " + "; ".join(vazamentos)
+
+    src = alvo.read_text(encoding="utf-8")
+    assert "os.getenv" in src, "o teste ficou desatualizado — o script nao le mais o .env"
+    assert 'f"{len(v)} caracteres"' in src, "sumiu o formato que mostra so o TAMANHO da chave"
+
+
+
 if __name__ == "__main__":
     import traceback
 

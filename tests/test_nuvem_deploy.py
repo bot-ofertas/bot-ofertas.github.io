@@ -93,6 +93,7 @@ def test_nuvem_nao_publica_com_o_pc_ligado():
         [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
         meio_dia = _hoje_as(12, 0)
@@ -123,6 +124,7 @@ def test_nuvem_respeita_a_carencia_do_desligamento():
         [(1, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(2, 20),
     )
     try:
         dentro_da_carencia = _hoje_as(2, 20)
@@ -187,12 +189,22 @@ def test_papel_aparece_no_health():
 
 # ── Prova de vida do PC (o motivo de 04/09/2026) ────────────────────────────
 
-def _repo_falso(commits):
+def _repo_falso(commits, ref=None):
     """Cria um repositorio git de mentira com os commits pedidos.
 
-    `commits` e uma lista de (horas_atras, assunto). Testa o parsing de
-    verdade — o `git log` real, com datas reais — em vez de fingir a
-    resposta da funcao que se quer testar.
+    `commits` e uma lista de (horas_atras, assunto), contadas a partir de
+    `ref` (padrao: agora). Testa o parsing de verdade — o `git log` real,
+    com datas reais — em vez de fingir a resposta da funcao que se quer
+    testar.
+
+    `ref` existe porque "N horas atras" so significa N horas se for contado
+    do MESMO instante em que o teste avalia. Bug que eu mesmo introduzi na
+    PR #4 (achado em 17/09/2026): os commits nasciam de `now` e a avaliacao
+    vinha de `_hoje_as(12, 0)`. Rodando as 02:20, o instante avaliado ficava
+    ~10h no FUTURO, e um commit de "2h atras" aparecia com 11,7h — acima do
+    limite de 6h. Tres testes passaram a acusar "PC morto" com o PC vivo, so
+    por causa da hora do relogio. O CI roda este arquivo (testes.yml), entao
+    qualquer PR aberta antes das 12:00 UTC ficava vermelha.
     """
     import subprocess as sp
     import tempfile
@@ -212,7 +224,7 @@ def _repo_falso(commits):
 
     git("init", "-q", "-b", "main")
     os.makedirs(os.path.join(pasta, "docs"), exist_ok=True)
-    agora = datetime.now()
+    agora = ref or datetime.now()
     for horas, assunto in commits:
         quando = (agora - timedelta(hours=horas)).strftime("%Y-%m-%dT%H:%M:%S")
         alvo = os.path.join(pasta, "docs", "offers.json")
@@ -242,11 +254,15 @@ def _hoje_as(hora: int, minuto: int = 0) -> datetime:
     return datetime.now().replace(hour=hora, minute=minuto, second=0, microsecond=0)
 
 
-def _com_repo(commits, **env):
-    """Aponta o core.papel para um repositorio de mentira e limpa o cache."""
+def _com_repo(commits, ref=None, **env):
+    """Aponta o core.papel para um repositorio de mentira e limpa o cache.
+
+    Quem avalia num instante de `_hoje_as(...)` DEVE passar o mesmo instante
+    em `ref` — senao os commits e a avaliacao vem de relogios diferentes.
+    """
     from core import papel
 
-    pasta = _repo_falso(commits)
+    pasta = _repo_falso(commits, ref=ref)
     antes_base = papel._BASE
     antes_cache = papel._cache_sinal
     papel._BASE = pasta
@@ -268,9 +284,10 @@ def test_pc_publicando_ha_pouco_segura_a_nuvem():
          (2, "chore: atualiza site (rastreador-amazon) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
-        morto, motivo = papel.pc_parece_morto()
+        morto, motivo = papel.pc_parece_morto(_hoje_as(12, 0))
         assert morto is False, motivo
         pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, f"publicou junto com o PC vivo: {motivo}"
@@ -288,9 +305,10 @@ def test_pc_calado_ha_dias_libera_a_nuvem():
          (150, "chore: atualiza ofertas do site [skip ci]")],  # este e do Actions
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
-        morto, motivo = papel.pc_parece_morto()
+        morto, motivo = papel.pc_parece_morto(_hoje_as(12, 0))
         assert morto is True, motivo
         pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is True, f"a nuvem ficou calada com o PC morto: {motivo}"
@@ -322,10 +340,11 @@ def test_sem_historico_suficiente_nao_age_no_escuro():
         [(1, "chore: atualiza ofertas do site [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="6",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
-        assert papel.horas_desde_sinal_do_pc() is None
-        morto, _ = papel.pc_parece_morto()
+        assert papel.horas_desde_sinal_do_pc(_hoje_as(12, 0)) is None
+        morto, _ = papel.pc_parece_morto(_hoje_as(12, 0))
         assert morto is False
         pode, _ = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, "publicou sem conseguir confirmar que o PC estava fora"
@@ -374,12 +393,13 @@ def test_por_padrao_a_ausencia_de_sinal_nao_libera_a_nuvem():
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H=None,   # <- sem definir: o padrao
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
         assert papel.HORAS_SILENCIO_PADRAO == 0.0, (
             "o padrao voltou a assumir que o PC morreu por falta de sinal"
         )
-        morto, _ = papel.pc_parece_morto()
+        morto, _ = papel.pc_parece_morto(_hoje_as(12, 0))
         assert morto is False
         pode, motivo = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, f"publicou dentro da janela do PC sem prova: {motivo}"
@@ -404,9 +424,10 @@ def test_checagem_de_silencio_pode_ser_desligada():
         [(500, "chore: atualiza site (rastreador-ml) [skip ci]")],
         PAPEL="nuvem", PC_SILENCIO_MAX_H="0",
         HORA_LIGAR="08:30", HORA_DESLIGAR="02:00",
+        ref=_hoje_as(12, 0),
     )
     try:
-        morto, _ = papel.pc_parece_morto()
+        morto, _ = papel.pc_parece_morto(_hoje_as(12, 0))
         assert morto is False
         pode, _ = papel.pode_publicar(_hoje_as(12, 0))
         assert pode is False, "PC_SILENCIO_MAX_H=0 deveria manter o comportamento antigo"
@@ -916,6 +937,46 @@ def test_pull_do_site_nao_trava_com_arvore_suja():
             "o cenario nao reproduziu a falha — teste sem valor"
         com = g("pull", "--rebase", "--autostash", "origin", "main")
         assert com.returncode == 0, com.stderr[:200]
+
+
+def test_nenhum_teste_com_ref_avalia_pelo_relogio_da_parede():
+    """Guarda contra a recaida que eu ja tive duas vezes.
+
+    Um teste que cria os commits a partir de `ref=_hoje_as(...)` e depois
+    pergunta `pc_parece_morto()` sem argumento mistura dois relogios: os
+    commits nascem do instante fingido e a conta sai do instante real. O
+    veredito passa a depender da hora em que o CI rodou.
+
+    Na PR #4 eu introduzi isso; no 17/09 "corrigi" so o fixture, threading
+    `ref` para dentro do `_repo_falso`, e deixei as CHAMADAS de avaliacao no
+    relogio da parede — a PR #5 ficou vermelha as 21:30 UTC com
+    `test_pc_publicando_ha_pouco_segura_a_nuvem` acusando "o PC nao publica ha
+    pelo menos 11.5h" para um commit de 2h. Revisar na mao nao pegou nas duas
+    vezes; entao quem revisa agora e o teste.
+    """
+    import ast as _ast  # noqa: PLC0415
+    import re as _re  # noqa: PLC0415
+
+    fonte = open(__file__, encoding="utf-8").read()
+    linhas = fonte.split("\n")
+    alvos = ("pc_parece_morto()", "horas_desde_sinal_do_pc()", "pode_publicar()")
+
+    culpados = []
+    for no in _ast.parse(fonte).body:
+        if not (isinstance(no, _ast.FunctionDef) and no.name.startswith("test_")):
+            continue
+        if no.name == "test_nenhum_teste_com_ref_avalia_pelo_relogio_da_parede":
+            continue  # a propria guarda cita os nomes que procura
+        corpo = "\n".join(linhas[no.lineno - 1:no.end_lineno])
+        if not _re.search(r"ref=_hoje_as\(", corpo):
+            continue
+        for alvo in alvos:
+            if alvo in corpo:
+                culpados.append(f"{no.name}: {alvo} sem o mesmo instante de ref")
+
+    assert not culpados, (
+        "teste avaliando pelo relogio da parede com commits de instante "
+        "fingido:\n  " + "\n  ".join(culpados))
 
 
 if __name__ == "__main__":
