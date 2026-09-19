@@ -348,6 +348,69 @@ def test_amostra_do_card_so_aparece_no_ramo_de_seletor():
         "a amostra saiu do ramo de seletor — passou a custar em caso saudavel"
 
 
+def test_titulo_do_card_novo_da_amazon_tem_de_onde_sair():
+    """Rodada #294 (19/09, 01:31): os cards da /deals traziam link /dp/, ASIN e
+    preco, e `titulo_len: 0`. A classe era
+    'ProductCard-module__card_uyr_Jh7WpSkPx4iEpn4w' — CSS Modules, com hash que
+    muda a cada build da Amazon. Casar pelo nome inteiro nao serve; tem de ser
+    por prefixo, e ainda assim precisa de uma saida que nao dependa de classe
+    nenhuma."""
+    codigo = _diag_sem_comentarios()  # so para garantir que o modulo importa
+    assert codigo
+
+    import pathlib as _p  # noqa: PLC0415
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "integrations" / "amazon_scraper.py").read_text(encoding="utf-8")
+    i_ini = src.index("_DOM_SCRIPT = r")
+    i_fim = src.index("_DIAG_SCRIPT")
+    dom = src[i_ini:i_fim]
+
+    assert '[class*="ProductCard-module__title"]' in dom, \
+        "sumiu o seletor por prefixo — o hash do CSS Module muda a cada build"
+    # E as duas saidas que nao dependem de classe: se a Amazon redesenhar de
+    # novo, alt da foto e aria-label do link continuam carregando o nome.
+    assert "img[alt]" in dom and "aria-label" in dom, \
+        "sumiu o ultimo recurso do titulo — o proximo redesenho zera tudo"
+    # O piso de tamanho continua: titulo vazio nunca pode virar post (Regra 7).
+    assert "titulo.length < 5" in dom, "caiu o piso de tamanho do titulo"
+
+
+def test_cupom_da_amazon_tem_teto_de_desconto():
+    """Bug real: o comentario prometia "rejeita so se for desconto impossivel
+    (>90%)" e o codigo nao tinha teto nenhum — QUALQUER motivo com "desconto
+    irreal" escapava do `continue`. A rodada #294 publicou "NIVEA | 95% OFF"
+    com o validador tendo REJEITADO o produto. 95% e o sinal classico de
+    preco-base inflado que a Regra 7 manda recusar."""
+    import pathlib as _p  # noqa: PLC0415
+    import rastreador_amazon as r  # noqa: PLC0415
+    from core.validador import validar  # noqa: PLC0415
+
+    assert r.TETO_DESCONTO_AMAZON == 90, "o teto saiu do lugar"
+    assert r.TETO_DESCONTO_AMAZON > 75, \
+        "teto igual ao do validador anula a excecao do cupom"
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    src = (raiz / "rastreador_amazon.py").read_text(encoding="utf-8")
+    assert "desconto <= TETO_DESCONTO_AMAZON" in src, \
+        "a excecao do cupom voltou a ser sem teto"
+
+    # A regra que o codigo aplica, reproduzida sobre o validador de verdade.
+    def publicaria(pct):
+        item = {"preco": 100.0, "preco_original": 100.0 / (1 - pct / 100),
+                "desconto_pct": float(pct)}
+        ok, motivo = validar(item, reputacao={})
+        if ok:
+            return True
+        return ("desconto irreal" in motivo.lower()
+                and (item.get("desconto_pct") or 0) <= r.TETO_DESCONTO_AMAZON)
+
+    assert publicaria(60) is True,  "cortou oferta boa de 60%"
+    assert publicaria(80) is True,  "cortou cupom legitimo de 80% (a excecao existe para isto)"
+    assert publicaria(90) is True,  "o teto e inclusivo"
+    assert publicaria(95) is False, "95% OFF voltaria para o canal do Daniel"
+    assert publicaria(99) is False, "99% OFF passaria"
+
+
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py
     import traceback

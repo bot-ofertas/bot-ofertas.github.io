@@ -109,12 +109,32 @@ _DOM_SCRIPT = r"""
             if (!asinMatch) continue;
             link = `https://www.amazon.com.br/dp/${asinMatch[1]}`;
 
-            // Título
+            // Titulo.
+            // A /deals nova usa CSS Modules: a classe do card e
+            // `ProductCard-module__card_<hash>` e o hash muda a cada build da
+            // Amazon, entao nome de classe inteiro nao serve de seletor —
+            // tem de casar pelo PREFIXO. Evidencia (rodada #294, 19/09 01:31):
+            // os cards tinham link /dp/, ASIN e preco, e titulo_len=0; era so
+            // o titulo que nao casava.
             const tituloEl = card.querySelector(
                 'h2 a span, h2 span, .a-size-medium.a-color-base, .a-text-normal, ' +
-                '[data-testid="product-title"], .a-size-base-plus'
+                '[data-testid="product-title"], .a-size-base-plus, ' +
+                '[class*="ProductCard-module__title"], ' +
+                '[class*="ProductCard-module__productTitle"]'
             );
-            const titulo = tituloEl ? tituloEl.textContent.trim() : '';
+            let titulo = tituloEl ? tituloEl.textContent.trim() : '';
+
+            // Ultimo recurso, nesta ordem: o texto alternativo da foto e o
+            // aria-label do link carregam o nome do produto mesmo quando a
+            // Amazon troca a estrutura interna do card. Nao dependem de
+            // nenhuma classe, entao sobrevivem ao proximo redesenho.
+            if (!titulo) {
+                const imgAlt = card.querySelector('img[alt]');
+                if (imgAlt) titulo = (imgAlt.getAttribute('alt') || '').trim();
+            }
+            if (!titulo && linkEl) {
+                titulo = (linkEl.getAttribute('aria-label') || '').trim();
+            }
             if (!titulo || titulo.length < 5) continue;
 
             // Preço atual

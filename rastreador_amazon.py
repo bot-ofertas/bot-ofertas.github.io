@@ -49,6 +49,12 @@ CANAIS = {"geral": os.getenv("CANAL_GERAL", "")}
 # Configurável no .env; o valor antigo era 3.
 MAX_POR_EXECUCAO = max(1, int(os.getenv("MAX_POR_RODADA_AMAZON") or "1"))
 DESCONTO_MIN     = 10  # cupons sem desconto calculável passam mesmo assim
+
+# Teto de desconto para cupom da Amazon. O validador corta em 75%, que é
+# apertado demais aqui porque cupom da Amazon incide sobre preço base real.
+# Mas acima disto volta a ser o sinal de preço inflado que a Regra 7 manda
+# recusar — e sem teto nenhum o canal publica "95% OFF" (rodada #294).
+TETO_DESCONTO_AMAZON = 90
 PAUSA_ENTRE_POSTS = 8  # segundos (Amazon é mais sensível a spam)
 SCORE_MINIMO     = 40  # threshold menor pois cupons têm valor extra intrínseco
 
@@ -170,8 +176,26 @@ async def rodar_uma_vez() -> None:
                     # Validação anti-golpe (ajustada — cupons Amazon têm preço base real)
                     aprovado, motivo = validar(item, reputacao={})
                     if not aprovado:
-                        # Para cupons Amazon, rejeita só se for desconto impossível (>90%)
-                        if "desconto irreal" not in motivo.lower():
+                        # O comentário aqui prometia "rejeita só se for desconto
+                        # impossível (>90%)" e o código não fazia isso: qualquer
+                        # motivo com "desconto irreal" caía fora do `continue` e
+                        # o produto era publicado. Não havia teto nenhum. Bug
+                        # real — rodada #294 (19/09 01:33) publicou
+                        # "NIVEA | 95% OFF" no canal: o validador REJEITOU com
+                        # "desconto irreal 95% (possível preço inflado)" e o
+                        # rastreador publicou assim mesmo. Desconto de 95% é o
+                        # sinal clássico de preço-base inflado (Regra 7).
+                        #
+                        # A intenção da exceção é legítima: cupom da Amazon tem
+                        # preço base real e o teto de 75% do validador corta
+                        # oferta boa. A exceção agora é o que o comentário já
+                        # dizia — um teto MAIS ALTO, não a ausência de teto.
+                        desconto = item.get("desconto_pct") or 0
+                        cupom_com_base_real = (
+                            "desconto irreal" in motivo.lower()
+                            and desconto <= TETO_DESCONTO_AMAZON
+                        )
+                        if not cupom_com_base_real:
                             log(f"  ⚠️  Rejeitado [{motivo}]: {item['titulo'][:50]}")
                             continue
 
