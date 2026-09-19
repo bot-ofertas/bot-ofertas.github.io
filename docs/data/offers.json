@@ -1,6 +1,111 @@
 {
   "products": [
     {
+      "titulo": "Jogo De Cartas UNO Clássico Mattel Com 108 Cartas 7 Anos Ou Mais",
+      "preco": 16.73,
+      "preco_original": 24.99,
+      "desconto_pct": 33.1,
+      "foto": "https://m.media-amazon.com/images/I/71yJ6Tu7+zL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 68,
+      "enviado_em": "2026-09-19T09:18:44.537725",
+      "link": "https://www.amazon.com.br/dp/B00CTH0A1Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 16.73,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Pacote 5 Carros Sortidos, Hot Wheels, Mattel, Multicor - não é possível escolher as cores",
+      "preco": 58.99,
+      "preco_original": 84.99,
+      "desconto_pct": 30.6,
+      "foto": "https://m.media-amazon.com/images/I/81GMRnT1SsL._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 71,
+      "enviado_em": "2026-09-19T09:18:35.994927",
+      "link": "https://www.amazon.com.br/dp/B000GKUEVE?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 58.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Vasenol Geleia de Vaselina Hidratante para Pele Ressecada",
+      "preco": 22.78,
+      "preco_original": 33.99,
+      "desconto_pct": 33.0,
+      "foto": "https://m.media-amazon.com/images/I/61VOWQ8WA6L._AC_UL320_.jpg",
+      "categoria": "brinquedos",
+      "score": 67,
+      "enviado_em": "2026-09-19T09:18:27.472212",
+      "link": "https://www.amazon.com.br/dp/B07JR55K68?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 22.78,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Bicicleta Aro 29 Gts Dexter 24 Marchas Freio A Disco Cor Grafite Com Preto Tamanho Do Quadro 21",
+      "preco": 799.0,
+      "preco_original": 1413.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861212-MLA99932433553_112025-AB.webp",
+      "categoria": "redes",
+      "score": 95,
+      "enviado_em": "2026-09-19T09:16:36.400894",
+      "link": "https://www.mercadolivre.com.br/bicicleta-aro-29-gts-dexter-24-marchas-freio-a-disco-cor-grafite-com-preto-tamanho-do-quadro-21/p/MLB37800447?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 799.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Filamento 3d Sunlu Printer Filament Pla +silk De 1.75mm 1kg Dourado",
+      "preco": 114.95,
+      "preco_original": 169.0,
+      "desconto_pct": 31.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935238-MLA86991538446_072025-AB.webp",
+      "categoria": "informatica",
+      "score": 68,
+      "enviado_em": "2026-09-19T09:16:27.223084",
+      "link": "https://www.mercadolivre.com.br/filamento-3d-sunlu-printer-filament-pla-silk-de-175mm-1kg-dourado/p/MLB52068698?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 114.95,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "2 Rolos Etiquetas Térmicas 50X25mm Etiqueta Adesiva Branco para Impressora Térmica Etiqueta Adesivas 5X2.5CM",
+      "preco": 37.43,
+      "preco_original": 78.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743488-MLA115146468014_082026-AB.webp",
+      "categoria": "tablets",
+      "score": 76,
+      "enviado_em": "2026-09-19T09:16:18.327840",
+      "link": "https://www.mercadolivre.com.br/2-rolos-etiquetas-termicas-50x25mm-etiqueta-adesiva-branco-para-impressora-termica-etiqueta-adesivas-5x25cm/p/MLB69560696?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 37.43,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Varal Dobrável De Chão 3 Andares De Roupas Grande Com Rodinha Aba Lateral Retrátil Para Cabide Irsina",
+      "preco": 78.88,
+      "preco_original": 129.0,
+      "desconto_pct": 39.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_909863-MLA89943157034_082025-AB.webp",
+      "categoria": "cameras",
+      "score": 75,
+      "enviado_em": "2026-09-19T09:16:08.728236",
+      "link": "https://www.mercadolivre.com.br/varal-dobravel-de-chao-3-andares-de-roupas-grande-com-rodinha-aba-lateral-retratil-para-cabide-irsina/p/MLB51534391?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 78.88,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Baggio Café Café Torrado e Moído Aroma de Chocolate Trufado 250g",
       "preco": 33.74,
       "preco_original": 134.96,
@@ -270,111 +375,6 @@
       "menor_preco_30d": 777.75,
       "menor_periodo": true,
       "verificada": true
-    },
-    {
-      "titulo": "La Roche-Posay Cicaplast Baume B5+ Cuidado Multirreparador Calmante",
-      "preco": 73.05,
-      "preco_original": 89.9,
-      "desconto_pct": 18.7,
-      "foto": "https://m.media-amazon.com/images/I/41LpbF-1WDL._AC_UL320_.jpg",
-      "categoria": "beleza",
-      "score": 67,
-      "enviado_em": "2026-09-16T09:50:31.715990",
-      "link": "https://www.amazon.com.br/dp/B072MK7BN2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 73.05,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Elseve Collagen Lifter Máscara de Tratamento Condicionante Efeito Teia Para Resgate de Massa com Peptídeos de Colágeno Reconstrói a Fibra e Dá Volume por 72h 300g",
-      "preco": 31.46,
-      "preco_original": 40.99,
-      "desconto_pct": 23.2,
-      "foto": "https://m.media-amazon.com/images/I/71EYznJIxWL._AC_UL320_.jpg",
-      "categoria": "beleza",
-      "score": 73,
-      "enviado_em": "2026-09-16T09:50:23.040304",
-      "link": "https://www.amazon.com.br/dp/B0G45KPX15?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 31.46,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Argan Óleo Reparador 50ml , Lola Cosmetics",
-      "preco": 16.23,
-      "preco_original": 44.9,
-      "desconto_pct": 63.9,
-      "foto": "https://m.media-amazon.com/images/I/41sfmT4opyL._AC_UL320_.jpg",
-      "categoria": "beleza",
-      "score": 69,
-      "enviado_em": "2026-09-16T09:50:14.502789",
-      "link": "https://www.amazon.com.br/dp/B07SBXMSGB?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 16.23,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Mini Quadriciclo 49cc A Gasolina C/nota Fiscal - Dsr",
-      "preco": 4701.0,
-      "preco_original": 6326.0,
-      "desconto_pct": 25.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_915706-MLB92969285017_092025-AB-mini-quadriciclo-49cc-a-gasolina-cnota-fiscal-dsr.webp",
-      "categoria": "brinquedos",
-      "score": 85,
-      "enviado_em": "2026-09-16T09:46:17.428393",
-      "link": "https://produto.mercadolivre.com.br/MLB-3956880337-mini-quadriciclo-49cc-a-gasolina-cnota-fiscal-dsr-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 4701.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Escrivaninha Industrial Mesa Estudo Aparador Office Aço Mdf",
-      "preco": 124.43,
-      "preco_original": 197.0,
-      "desconto_pct": 37.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_995995-MLB116712089111_082026-AB-escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf.webp",
-      "categoria": "moveis",
-      "score": 78,
-      "enviado_em": "2026-09-16T09:45:56.608417",
-      "link": "https://produto.mercadolivre.com.br/MLB-4641352916-escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 124.43,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "HUAWEI WATCH GT 7 Pro 46mm Smart Watch, Bateria de até 21 dias, Caixa em liga de titânio e bisel em cerâmica nano-tech, ECG, Monitoramento da Frequência Cardíaca, Golfe, Ciclismo, Preto",
-      "preco": 1424.0,
-      "preco_original": 2699.0,
-      "desconto_pct": 47.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935533-MLA114994321916_082026-AB.webp",
-      "categoria": "esportes",
-      "score": 97,
-      "enviado_em": "2026-09-16T09:45:47.862410",
-      "link": "https://www.mercadolivre.com.br/huawei-watch-gt-7-pro-46mm-smart-watch-bateria-de-ate-21-dias-caixa-em-liga-de-titanio-e-bisel-em-ceramica-nano-tech-ecg-monitoramento-da-frequencia-cardiaca-golfe-ciclismo-preto/p/MLB77599088?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1424.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Asus Vivobook Go Core I3 N305 8gb 512ssd 15,6 Fhd Cool Silver",
-      "preco": 3136.0,
-      "preco_original": 3999.0,
-      "desconto_pct": 21.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_815942-MLA109216021790_042026-AB.webp",
-      "categoria": "informatica",
-      "score": 76,
-      "enviado_em": "2026-09-16T09:45:39.024505",
-      "link": "https://www.mercadolivre.com.br/notebook-asus-vivobook-go-core-i3-n305-8gb-512ssd-156-fhd-cool-silver/p/MLB35354805?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 3136.0,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
@@ -393,11 +393,11 @@
     "verificada": true
   },
   "stats": {
-    "beleza": {
-      "total": 4,
-      "score_medio": 74,
-      "desconto_medio": 42,
-      "maior_desconto": 63
+    "brinquedos": {
+      "total": 5,
+      "score_medio": 73,
+      "desconto_medio": 33,
+      "maior_desconto": 40
     },
     "ferramentas": {
       "total": 3,
@@ -411,23 +411,23 @@
       "desconto_medio": 52,
       "maior_desconto": 75
     },
-    "brinquedos": {
-      "total": 3,
-      "score_medio": 82,
-      "desconto_medio": 31,
-      "maior_desconto": 40
+    "tablets": {
+      "total": 2,
+      "score_medio": 71,
+      "desconto_medio": 42,
+      "maior_desconto": 52
     },
     "informatica": {
       "total": 2,
-      "score_medio": 80,
-      "desconto_medio": 25,
-      "maior_desconto": 28
+      "score_medio": 76,
+      "desconto_medio": 30,
+      "maior_desconto": 31
     },
-    "esportes": {
+    "cameras": {
       "total": 2,
-      "score_medio": 80,
-      "desconto_medio": 52,
-      "maior_desconto": 56
+      "score_medio": 74,
+      "desconto_medio": 55,
+      "maior_desconto": 70
     },
     "bebes": {
       "total": 2,
@@ -435,17 +435,11 @@
       "desconto_medio": 43,
       "maior_desconto": 58
     },
-    "tablets": {
+    "redes": {
       "total": 1,
-      "score_medio": 66,
-      "desconto_medio": 32,
-      "maior_desconto": 32
-    },
-    "moveis": {
-      "total": 1,
-      "score_medio": 78,
-      "desconto_medio": 37,
-      "maior_desconto": 37
+      "score_medio": 95,
+      "desconto_medio": 43,
+      "maior_desconto": 43
     },
     "monitores": {
       "total": 1,
@@ -465,13 +459,19 @@
       "desconto_medio": 38,
       "maior_desconto": 38
     },
-    "cameras": {
+    "esportes": {
       "total": 1,
-      "score_medio": 72,
-      "desconto_medio": 70,
-      "maior_desconto": 70
+      "score_medio": 63,
+      "desconto_medio": 56,
+      "maior_desconto": 56
+    },
+    "beleza": {
+      "total": 1,
+      "score_medio": 85,
+      "desconto_medio": 61,
+      "maior_desconto": 61
     }
   },
-  "updated_at": "2026-09-18T09:32:40.769914",
+  "updated_at": "2026-09-19T09:18:53.153567",
   "total": 25
 }
