@@ -381,16 +381,24 @@ def test_cupom_da_amazon_tem_teto_de_desconto():
     irreal" escapava do `continue`. A rodada #294 publicou "NIVEA | 95% OFF"
     com o validador tendo REJEITADO o produto. 95% e o sinal classico de
     preco-base inflado que a Regra 7 manda recusar."""
+    import ast as _ast  # noqa: PLC0415
     import pathlib as _p  # noqa: PLC0415
-    import rastreador_amazon as r  # noqa: PLC0415
     from core.validador import validar  # noqa: PLC0415
 
-    assert r.TETO_DESCONTO_AMAZON == 90, "o teto saiu do lugar"
-    assert r.TETO_DESCONTO_AMAZON > 75, \
-        "teto igual ao do validador anula a excecao do cupom"
-
+    # O valor sai do FONTE, nao de `import rastreador_amazon`: aquele modulo
+    # faz `from telegram import Bot` no topo, e o job de testes do CI instala
+    # so python-dotenv e requests. Importar aqui deixa a suite verde nesta
+    # maquina e vermelha no CI — foi o que aconteceu no 7ce6d2d.
     raiz = _p.Path(__file__).resolve().parent.parent
     src = (raiz / "rastreador_amazon.py").read_text(encoding="utf-8")
+
+    teto = None
+    for no in _ast.parse(src).body:
+        if (isinstance(no, _ast.Assign) and isinstance(no.targets[0], _ast.Name)
+                and no.targets[0].id == "TETO_DESCONTO_AMAZON"):
+            teto = _ast.literal_eval(no.value)
+    assert teto == 90, f"o teto saiu do lugar: {teto!r}"
+    assert teto > 75, "teto igual ao do validador anula a excecao do cupom"
     assert "desconto <= TETO_DESCONTO_AMAZON" in src, \
         "a excecao do cupom voltou a ser sem teto"
 
@@ -402,13 +410,36 @@ def test_cupom_da_amazon_tem_teto_de_desconto():
         if ok:
             return True
         return ("desconto irreal" in motivo.lower()
-                and (item.get("desconto_pct") or 0) <= r.TETO_DESCONTO_AMAZON)
+                and (item.get("desconto_pct") or 0) <= teto)
 
     assert publicaria(60) is True,  "cortou oferta boa de 60%"
     assert publicaria(80) is True,  "cortou cupom legitimo de 80% (a excecao existe para isto)"
     assert publicaria(90) is True,  "o teto e inclusivo"
     assert publicaria(95) is False, "95% OFF voltaria para o canal do Daniel"
     assert publicaria(99) is False, "99% OFF passaria"
+
+
+def test_esta_suite_roda_sem_as_dependencias_pesadas():
+    """O job `testes` do CI instala SO python-dotenv e requests. Um import de
+    modulo pesado aqui passa nesta maquina e quebra o CI — foi assim que o
+    7ce6d2d ficou vermelho, importando rastreador_amazon (que faz
+    `from telegram import Bot` no topo). Quem precisa de um valor desses
+    modulos le o FONTE."""
+    import ast as _ast  # noqa: PLC0415
+
+    pesados = {"rastreador_amazon", "rastreador", "startup", "telegram",
+               "playwright", "psutil", "pyautogui"}
+    achados = []
+    for no in _ast.walk(_ast.parse(open(__file__, encoding="utf-8").read())):
+        if isinstance(no, _ast.Import):
+            achados += [a.name.split(".")[0] for a in no.names]
+        elif isinstance(no, _ast.ImportFrom) and no.module:
+            achados.append(no.module.split(".")[0])
+
+    proibidos = pesados & set(achados)
+    assert not proibidos, (
+        "import que o CI nao consegue resolver: %s — leia o fonte em vez de "
+        "importar" % sorted(proibidos))
 
 
 if __name__ == "__main__":
