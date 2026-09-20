@@ -745,6 +745,48 @@ checar("a mensagem da trava ensina o -Forcar",
        "quem esta preso precisa saber que existe saida")
 
 
+# ── corrigir_tudo.ps1 — o resgate quando o aplicar_tudo fica inalcancavel ─
+print("\n[11] corrigir_tudo.ps1 — nao depende de nada do disco antigo")
+
+_cor = os.path.join(RAIZ, "corrigir_tudo.ps1")
+checar("corrigir_tudo.ps1 existe", os.path.isfile(_cor))
+if os.path.isfile(_cor):
+    _corx = open(_cor, encoding="utf-8-sig").read()
+
+    # A razao de existir: se ele chamasse stop.ps1/start.ps1 do disco, seria
+    # inutil justamente no caso que motiva o script (disco desatualizado).
+    for _dep in ("stop.ps1", "start.ps1", "aplicar_tudo.ps1"):
+        checar(f"nao executa {_dep} do disco",
+               f".\\{_dep}" not in _corx and f"Join-Path $Base \"{_dep}\"" not in _corx,
+               "depender do disco antigo anula o proposito do resgate")
+
+    # Mesma armadilha do stop.ps1: precisa casar com os QUATRO filhos.
+    _stx3 = open(os.path.join(RAIZ, "startup.py"), encoding="utf-8").read()
+    import re as _re3
+    _filhos3 = sorted(set(_re3.findall(r'BASE,\s*"([a-z_]+\.py)"', _stx3)))
+    _faltam = [f for f in _filhos3 if f not in _corx]
+    checar("mata todos os filhos do startup.py",
+           not _faltam, f"ficariam vivos: {_faltam}")
+
+    checar("sobe com janela oculta",
+           "-WindowStyle Hidden" in _corx,
+           "sem isso o proprio resgate abre a janela que veio consertar")
+    checar("confere que o bot subiu em vez de so anunciar",
+           "o bot nao subiu" in _corx and "Get-Content $log -Tail" in _corx,
+           "anunciar sem olhar foi o defeito do stop.ps1")
+    # So o codigo executavel: o comentario que EXPLICA por que nao usar
+    # `reset --hard` contem a frase, e casar com ele deixaria o teste verde
+    # mesmo com o comando de volta. Mesma armadilha do _DIAG_SCRIPT da Amazon.
+    _cor_codigo = "\n".join(
+        l for l in _corx.split("\n") if not l.strip().startswith("#"))
+    checar("nao apaga trabalho local (sem reset --hard)",
+           "reset --hard" not in _cor_codigo and "merge --ff-only" in _cor_codigo,
+           "reset --hard descartaria commit local do Daniel sem perguntar")
+    checar("trata a pasta recusada pelo git",
+           "dubious ownership" in _corx,
+           "foi o primeiro erro que travou a maquina dele")
+
+
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")
 _col = os.path.join(RAIZ, "coletar_diagnostico.ps1")
