@@ -160,6 +160,37 @@ def etapa_3_healthcheck() -> None:
         log.warning("[3/4] Watchdog WhatsApp Desktop não subiu: %s", e)
 
 
+# Windows: cada filho e um console app (python.exe). O startup.py sobe
+# DESACOPLADO do console — `garantir_bot.py` usa DETACHED_PROCESS para que o
+# bot sobreviva ao fim da tarefa agendada — entao nao ha console para os
+# filhos herdarem, e o Windows cria UMA JANELA PRETA NOVA para cada um.
+#
+# Bug real (20/09/2026): o Daniel mandou print de tres janelas pretas
+# empilhadas em cima da tela dele, todas com o titulo do python.exe. Elas
+# aparecem a cada subida do bot — inclusive a cada vez que o supervisor
+# religa, de 30 em 30 min.
+#
+# As janelas nao mostram NADA: stdout e stderr de cada filho ja vao para o
+# arquivo de log logo abaixo. Eram quatro janelas vazias atrapalhando o uso
+# do PC, sem nenhuma informacao dentro.
+#
+# CREATE_NO_WINDOW roda o console app sem criar janela. O repositorio ja
+# fazia isso em web/app.py e core/chrome_manager.py; estes quatro Popen e
+# que ficaram para tras.
+#
+# NAO troque isto por pythonw.exe, que e a "solucao" obvia para o mesmo
+# problema: sem console, `sys.stdout` vira None, e `rastreador.py` faz
+# `sys.stdout.reconfigure(encoding="utf-8")` na linha 16 — AttributeError no
+# import, antes de qualquer log. Os tres rastreadores morreriam no ato e o
+# bot inteiro sairia do ar, o que e muito pior do que uma janela aberta.
+# Verificado em 20/09/2026: so `sys.stdout.write`/`.reconfigure` quebram sem
+# console; `print()` e o `logging` sobrevivem (o print do CPython e no-op
+# quando sys.stdout e None).
+_SEM_JANELA: dict = (
+    {"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt" else {}
+)
+
+
 def _iniciar_ml():
     """Sobe só o rastreador ML — usado no start inicial e em reinícios isolados
     (um crash do ML não pode gerar um processo Amazon extra desnecessário)."""
@@ -169,7 +200,7 @@ def _iniciar_ml():
         "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_ml = open(LOG_PATH, "a", encoding="utf-8")
-    proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE)
+    proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE, **_SEM_JANELA)
     with open(PID_PATH, "w") as f:
         f.write(str(proc_ml.pid))
     log.info("[4/4] Rastreador ML PID=%d", proc_ml.pid)
@@ -185,7 +216,7 @@ def _iniciar_amazon():
         "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_az = open(amazon_log_path, "a", encoding="utf-8")
-    proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE)
+    proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "rastreador_amazon.pid"), "w") as f:
         f.write(str(proc_az.pid))
     log.info("[4/4] Rastreador Amazon PID=%d", proc_az.pid)
@@ -201,7 +232,7 @@ def _iniciar_ferramentas():
         "--loop", "15",
     ]
     log_ferr = open(ferr_log_path, "a", encoding="utf-8")
-    proc_ferr = subprocess.Popen(cmd_ferr, stdout=log_ferr, stderr=log_ferr, cwd=BASE)
+    proc_ferr = subprocess.Popen(cmd_ferr, stdout=log_ferr, stderr=log_ferr, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "campanha_ferramentas.pid"), "w") as f:
         f.write(str(proc_ferr.pid))
     log.info("[4/4] Campanha de ferramentas PID=%d", proc_ferr.pid)
@@ -214,7 +245,7 @@ def _iniciar_fila_whatsapp():
     wa_log_path = os.path.join(BASE, "data", "whatsapp_queue_sender.log")
     cmd_wa = [sys.executable, os.path.join(BASE, "whatsapp_queue_sender.py")]
     log_wa = open(wa_log_path, "a", encoding="utf-8")
-    proc_wa = subprocess.Popen(cmd_wa, stdout=log_wa, stderr=log_wa, cwd=BASE)
+    proc_wa = subprocess.Popen(cmd_wa, stdout=log_wa, stderr=log_wa, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "whatsapp_queue_sender.pid"), "w") as f:
         f.write(str(proc_wa.pid))
     log.info("[4/4] Fila de WhatsApp PID=%d", proc_wa.pid)

@@ -618,6 +618,73 @@ if os.path.isfile(_apl):
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])
 
+# ── janelas pretas do Windows ────────────────────────────────────────────
+# Bug real (20/09/2026): o Daniel mandou print de tres janelas pretas VAZIAS
+# empilhadas em cima da tela dele. Sao os rastreadores: o startup.py sobe
+# DESACOPLADO (garantir_bot.py usa DETACHED_PROCESS para o bot sobreviver ao
+# fim da tarefa agendada), entao nao ha console para os filhos herdarem e o
+# Windows cria uma janela nova para cada python.exe. Vazias porque stdout e
+# stderr de cada filho ja vao para arquivo de log.
+print("\n[9] startup.py — filhos sem janela preta no Windows")
+
+_st = os.path.join(RAIZ, "startup.py")
+checar("startup.py existe", os.path.isfile(_st))
+if os.path.isfile(_st):
+    _stx = open(_st, encoding="utf-8").read()
+    import ast as _ast
+
+    _sem_protecao = []
+    for _no in _ast.walk(_ast.parse(_stx)):
+        if (isinstance(_no, _ast.Call) and isinstance(_no.func, _ast.Attribute)
+                and _no.func.attr == "Popen"):
+            # NAO usar `_ok` aqui: e o contador global de verificacoes da
+            # suite (ver checar()). Sobrescreve-lo zera a contagem e o
+            # resumo final mente — aconteceu ao escrever este bloco.
+            _protegido = any(
+                k.arg is None and getattr(k.value, "id", "") == "_SEM_JANELA"
+                for k in _no.keywords)
+            _protegido = _protegido or any(
+                k.arg == "creationflags" for k in _no.keywords)
+            if not _protegido:
+                _sem_protecao.append(_no.lineno)
+
+    checar("todo subprocess.Popen do startup.py evita abrir janela",
+           not _sem_protecao,
+           f"Popen sem protecao nas linhas {_sem_protecao} — volta a piscar "
+           f"janela preta na tela do Daniel")
+
+    checar("a protecao e CREATE_NO_WINDOW, so no Windows",
+           "CREATE_NO_WINDOW" in _stx and 'os.name == "nt"' in _stx,
+           "no Linux/CI o flag nem existe no modulo subprocess")
+
+    # pythonw.exe e a "solucao" obvia para o mesmo problema e MATARIA o bot:
+    # rastreador.py faz sys.stdout.reconfigure() no topo, e sem console
+    # sys.stdout e None -> AttributeError no import.
+    checar("startup.py NAO usa pythonw para subir os filhos",
+           "pythonw" not in _stx.replace("NAO troque isto por pythonw.exe", ""),
+           "pythonw mata rastreador.py no import (sys.stdout.reconfigure)")
+    checar("o perigo do pythonw fica registrado no codigo",
+           "pythonw" in _stx and "reconfigure" in _stx,
+           "sem o aviso, alguem troca por pythonw e derruba os 3 rastreadores")
+
+# E a armadilha do outro lado: quem faz sys.stdout.reconfigure() no topo NAO
+# pode ser lancado sem console. Este teste existe para que, se alguem um dia
+# quiser mesmo ir para pythonw, saiba exatamente quais arquivos tratar antes.
+_frageis = []
+for _nome in ("rastreador.py", "rastreador_amazon.py", "campanha_ferramentas.py",
+              "whatsapp_queue_sender.py"):
+    _cam = os.path.join(RAIZ, _nome)
+    if os.path.isfile(_cam):
+        _txt = open(_cam, encoding="utf-8").read()
+        if "sys.stdout.reconfigure" in _txt or "sys.stderr.reconfigure" in _txt:
+            _frageis.append(_nome)
+
+checar("os filhos que exigem console estao mapeados",
+       True,
+       "")
+print(f"  INFO   exigem console (sys.std*.reconfigure): {_frageis or 'nenhum'}")
+
+
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")
 _col = os.path.join(RAIZ, "coletar_diagnostico.ps1")
