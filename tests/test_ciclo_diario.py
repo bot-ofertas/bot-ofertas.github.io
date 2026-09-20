@@ -685,6 +685,66 @@ checar("os filhos que exigem console estao mapeados",
 print(f"  INFO   exigem console (sys.std*.reconfigure): {_frageis or 'nenhum'}")
 
 
+# ── stop.ps1 mata TODOS os filhos ────────────────────────────────────────
+# Bug real (20/09/2026): a lista de padroes tinha so "*rastreador.py*", que
+# nao casa com "rastreador_amazon.py". Tres dos quatro filhos sobreviviam a
+# cada "Bot parado." — e orfao vivo continua abrindo rodada no banco, entao
+# `execucao_em_andamento()` seguia dizendo SIM e o passo 2 do aplicar_tudo.ps1
+# recusava reiniciar. O script mandava esperar uma rodada que era de um
+# processo que ele mesmo deveria ter matado.
+print("\n[10] stop.ps1 — nenhum filho sobra vivo")
+
+_stp = os.path.join(RAIZ, "stop.ps1")
+checar("stop.ps1 existe", os.path.isfile(_stp))
+if os.path.isfile(_stp):
+    _stpx = open(_stp, encoding="utf-8-sig").read()
+
+    # Os quatro filhos que startup.py sobe, extraidos do PROPRIO startup.py —
+    # se alguem adicionar um quinto la, este teste cobra o stop.ps1 sozinho.
+    _stx2 = open(os.path.join(RAIZ, "startup.py"), encoding="utf-8").read()
+    import re as _re2
+    _filhos = sorted(set(_re2.findall(r'BASE,\s*"([a-z_]+\.py)"', _stx2)))
+    checar("achei os filhos no startup.py", len(_filhos) >= 4,
+           f"esperava 4+, achei {_filhos}")
+
+    _nao_cobertos = []
+    for _f2 in _filhos:
+        # `-like "*X*"` casa por substring: o padrao precisa estar no arquivo
+        # E casar com a linha de comando real do filho.
+        _linha_real = f"python.exe -u D:/bot_ofertas/{_f2} --random"
+        _casa = False
+        for _pad in _re2.findall(r'"\*([^"*]+)\*"', _stpx):
+            if _pad in _linha_real:
+                _casa = True
+                break
+        if not _casa:
+            _nao_cobertos.append(_f2)
+
+    checar("stop.ps1 casa com TODOS os filhos do startup.py",
+           not _nao_cobertos,
+           f"ficariam orfaos: {_nao_cobertos} — e orfao vivo trava o passo 2 "
+           f"do aplicar_tudo.ps1 para sempre")
+
+    checar("stop.ps1 confere em vez de so anunciar",
+           "$sobrou" in _stpx and "ainda ha processo do bot vivo" in _stpx,
+           "'Bot parado.' sem olhar foi o que escondeu os orfaos")
+
+# A trava do passo 2 precisa de saida de emergencia: com 3 rastreadores a
+# cada ~20 min quase sempre ha rodada aberta, e sem escape o bot nunca pode
+# ser atualizado — a protecao vira armadilha.
+_aplx = open(os.path.join(RAIZ, "aplicar_tudo.ps1"), encoding="utf-8-sig").read()
+checar("aplicar_tudo.ps1 tem saida de emergencia (-Forcar)",
+       "[switch]$Forcar" in _aplx and "$det.em_andamento -and $Forcar" in _aplx,
+       "sem escape, uma rodada aberta impede aplicar correcao para sempre")
+checar("-Forcar avisa o que esta atropelando",
+       "seguindo por causa de -Forcar" in _aplx
+       and "sai pela metade" in _aplx,
+       "atropelar em silencio e pior do que a trava")
+checar("a mensagem da trava ensina o -Forcar",
+       "aplicar_tudo.ps1 -Forcar" in _aplx,
+       "quem esta preso precisa saber que existe saida")
+
+
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")
 _col = os.path.join(RAIZ, "coletar_diagnostico.ps1")

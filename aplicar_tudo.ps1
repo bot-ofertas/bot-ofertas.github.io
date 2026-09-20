@@ -29,6 +29,14 @@ param(
     [string]$Branch = "claude/bot-ofertas-n8n-8d7qe2",
     [switch]$SemAgenda,
     [switch]$SemDependencias,
+    # Saida de emergencia do passo 2. A trava de "rodada em andamento" existe
+    # por bom motivo (Regra 10: parar no meio corta um envio pela metade), mas
+    # com tres rastreadores rodando a cada ~20 min quase sempre HA uma rodada
+    # aberta — e a trava passa de protecao a armadilha: o bot nunca pode ser
+    # atualizado. Aconteceu com o Daniel em 20/09/2026, tentativa apos
+    # tentativa, com uma correcao pronta que nao tinha como chegar na maquina.
+    # Com -Forcar o script avisa o que esta atropelando e segue.
+    [switch]$Forcar,
     # Saida de emergencia: se a busca automatica nao achar, aponte o caminho
     #   .\aplicar_tudo.ps1 -Git "C:\...\git.exe" -Python "C:\...\python.exe"
     [string]$Git = "",
@@ -240,6 +248,11 @@ if ($det -eq $null) {
     elseif ($emAndamento -eq "NAO") { Ok "nenhuma rodada em andamento" }
     else { Aviso "nao consegui perguntar ao banco (codigo antigo?) — seguindo" }
 }
+elseif ($det.em_andamento -and $Forcar) {
+    $min = if ($det.ha_minutos -ne $null) { "{0:N1}" -f $det.ha_minutos } else { "?" }
+    Aviso "ha uma rodada aberta ha $min min — seguindo por causa de -Forcar."
+    Write-Host "        Se ela estava publicando, esse envio sai pela metade." -ForegroundColor DarkGray
+}
 elseif ($det.em_andamento) {
     $min = if ($det.ha_minutos -ne $null) { "{0:N1}" -f $det.ha_minutos } else { "?" }
     $faltam = if ($det.ha_minutos -ne $null) { [math]::Max(0, [math]::Ceiling(20 - $det.ha_minutos)) } else { 20 }
@@ -261,6 +274,9 @@ elseif ($det.em_andamento) {
 
     Write-Host ""
     Write-Host "        A trava se solta sozinha em ~$faltam min. Rode de novo depois disso." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "        Se precisar aplicar AGORA (ex.: corrigindo algo que atrapalha):" -ForegroundColor DarkGray
+    Write-Host "          .\aplicar_tudo.ps1 -Forcar" -ForegroundColor White
     exit 1
 }
 else { Ok "nenhuma rodada em andamento" }
