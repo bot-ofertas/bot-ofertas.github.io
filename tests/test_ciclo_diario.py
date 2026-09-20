@@ -787,6 +787,24 @@ if os.path.isfile(_cor):
            "foi o primeiro erro que travou a maquina dele")
 
 
+    # ExecutionPolicy: `.\corrigir_tudo.ps1` morre com PSSecurityException
+    # numa maquina com a politica padrao. O .bat contorna SO para aquela
+    # chamada -- nao altera a politica da maquina (Regra 10).
+    _bat = os.path.join(RAIZ, "corrigir_tudo.bat")
+    checar("ha um .bat para contornar a ExecutionPolicy", os.path.isfile(_bat),
+           "sem ele, o ultimo passo do resgate falha numa maquina padrao")
+    if os.path.isfile(_bat):
+        _batx = open(_bat, encoding="ascii", errors="replace").read()
+        checar("o .bat usa ExecutionPolicy Bypass",
+               "-ExecutionPolicy Bypass" in _batx and "corrigir_tudo.ps1" in _batx)
+        checar("o .bat nao altera a politica da maquina",
+               "Set-ExecutionPolicy" not in _batx,
+               "mudar a politica do PC e configuracao de seguranca (Regra 10)")
+        checar("o .bat funciona por clique duplo (entra na pasta dele)",
+               "%~dp0" in _batx,
+               "sem isso o clique duplo roda a partir de C:\\Windows\\System32")
+
+
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")
 _col = os.path.join(RAIZ, "coletar_diagnostico.ps1")
