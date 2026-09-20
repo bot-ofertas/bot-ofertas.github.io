@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "Kit 5 Potes de Vidro Herméticos 375ml – Tampa com Trava, Vedação Airtight, Ideal para Marmitas, Porta Mantimentos, Alimentos e Organização, Acabamento Premium",
+      "preco": 39.99,
+      "preco_original": 54.99,
+      "desconto_pct": 27.3,
+      "foto": "https://m.media-amazon.com/images/I/61kjxWkcZcL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 62,
+      "enviado_em": "2026-09-20T09:41:39.683264",
+      "link": "https://www.amazon.com.br/dp/B0H7L5H8LT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 39.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
+      "preco": 183.05,
+      "preco_original": 349.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
+      "categoria": "informatica",
+      "score": 81,
+      "enviado_em": "2026-09-20T09:39:18.765487",
+      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 171.94,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Freezer Horizontal 100L Inverter Bivolt Branco Midea",
       "preco": 1249.0,
       "preco_original": 1579.0,
@@ -134,141 +164,41 @@
       "menor_preco_30d": 78.88,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Baggio Café Café Torrado e Moído Aroma de Chocolate Trufado 250g",
-      "preco": 33.74,
-      "preco_original": 134.96,
-      "desconto_pct": 75.0,
-      "foto": "https://m.media-amazon.com/images/I/61RsSLpjOWL._AC_UY218_.jpg",
-      "categoria": "casa",
-      "score": 72,
-      "enviado_em": "2026-09-18T09:32:31.739754",
-      "link": "https://www.amazon.com.br/dp/B075W7XHMY?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 33.74,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Conjunto de Bowls Tigelas de Inox com Tampa Plástica Electrolux",
-      "preco": 99.8,
-      "preco_original": 159.9,
-      "desconto_pct": 37.6,
-      "foto": "https://m.media-amazon.com/images/I/51hUmO15FhL._AC_UY218_.jpg",
-      "categoria": "casa",
-      "score": 79,
-      "enviado_em": "2026-09-18T09:32:23.086805",
-      "link": "https://www.amazon.com.br/dp/B0C2ZNDWK6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 99.8,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Sanduicheira Elétrica Cadence Click - 127V",
-      "preco": 89.0,
-      "preco_original": 159.9,
-      "desconto_pct": 44.3,
-      "foto": "https://m.media-amazon.com/images/I/51UxR8FHe-L._AC_UY218_.jpg",
-      "categoria": "casa",
-      "score": 77,
-      "enviado_em": "2026-09-18T09:32:14.441556",
-      "link": "https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 89.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Camiseta Dry-fit  Preta Caveira Unisex Dark Lab",
-      "preco": 29.9,
-      "preco_original": 69.0,
-      "desconto_pct": 56.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_706587-MLB115944612831_082026-AB-camiseta-dry-fit-preta-caveira-unisex-dark-lab.webp",
-      "categoria": "esportes",
-      "score": 63,
-      "enviado_em": "2026-09-18T09:29:45.887748",
-      "link": "https://produto.mercadolivre.com.br/MLB-3800842215-camiseta-dry-fit-preta-caveira-unisex-dark-lab-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 29.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Notebook Lenovo IdeaPad Slim 3 15IRH10 Intel Core i5-13420H 8GB 512GB SSD Windows 11 15.3\" - 83NS0002BR Luna Grey",
-      "preco": 3818.0,
-      "preco_original": 6199.0,
-      "desconto_pct": 38.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_721945-MLA85788494302_062025-AB.webp",
-      "categoria": "livros",
-      "score": 98,
-      "enviado_em": "2026-09-18T09:29:35.835347",
-      "link": "https://www.mercadolivre.com.br/notebook-lenovo-ideapad-slim-3-15irh10-intel-core-i5-13420h-8gb-512gb-ssd-windows-11-153-83ns0002br-luna-grey/p/MLB51233304?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 3818.0,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 100 Blocos Magnéticos De Montar Construção Brinquedo 100",
-      "preco": 71.94,
-      "preco_original": 119.0,
-      "desconto_pct": 40.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_916503-MLB106850902022_022026-AB--kit-100-blocos-magneticos-de-montar-construcao-brinquedo.webp",
-      "categoria": "brinquedos",
-      "score": 80,
-      "enviado_em": "2026-09-18T09:29:25.205836",
-      "link": "https://www.mercadolivre.com.br/kit-100-blocos-magneticos-de-montar-construcao-brinquedo/up/MLBU3802887639?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 71.94,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Secador Taiff Style 2000w Motor Ac Preto 127 v",
-      "preco": 167.55,
-      "preco_original": 404.0,
-      "desconto_pct": 58.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_701108-MLA105261068161_012026-AB.webp",
-      "categoria": "bebes",
-      "score": 79,
-      "enviado_em": "2026-09-18T09:29:15.995604",
-      "cupom": "R$40 OFF com Cupom",
-      "link": "https://www.mercadolivre.com.br/secador-taiff-style-2000w-motor-ac-preto-127-v/p/MLB18920578?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 167.55,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Bicicleta Aro 29 Gts Dexter 24 Marchas Freio A Disco Cor Grafite Com Preto Tamanho Do Quadro 21",
-    "preco": 799.0,
-    "preco_original": 1413.0,
-    "desconto_pct": 43.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861212-MLA99932433553_112025-AB.webp",
-    "categoria": "redes",
-    "score": 95,
-    "enviado_em": "2026-09-19T09:16:36.400894",
-    "link": "https://www.mercadolivre.com.br/bicicleta-aro-29-gts-dexter-24-marchas-freio-a-disco-cor-grafite-com-preto-tamanho-do-quadro-21/p/MLB37800447?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "excelente",
-    "menor_preco_30d": 799.0,
+    "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
+    "preco": 183.05,
+    "preco_original": 349.0,
+    "desconto_pct": 47.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
+    "categoria": "informatica",
+    "score": 81,
+    "enviado_em": "2026-09-20T09:39:18.765487",
+    "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "boa",
+    "menor_preco_30d": 171.94,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "brinquedos": {
-      "total": 4,
-      "score_medio": 72,
-      "desconto_medio": 34,
-      "maior_desconto": 40
-    },
-    "casa": {
       "total": 3,
-      "score_medio": 76,
-      "desconto_medio": 52,
-      "maior_desconto": 75
+      "score_medio": 69,
+      "desconto_medio": 32,
+      "maior_desconto": 33
+    },
+    "informatica": {
+      "total": 2,
+      "score_medio": 75,
+      "desconto_medio": 39,
+      "maior_desconto": 47
+    },
+    "cupons": {
+      "total": 2,
+      "score_medio": 65,
+      "desconto_medio": 24,
+      "maior_desconto": 27
     },
     "tablets": {
       "total": 1,
@@ -282,30 +212,6 @@
       "desconto_medio": 43,
       "maior_desconto": 43
     },
-    "livros": {
-      "total": 1,
-      "score_medio": 98,
-      "desconto_medio": 38,
-      "maior_desconto": 38
-    },
-    "informatica": {
-      "total": 1,
-      "score_medio": 68,
-      "desconto_medio": 31,
-      "maior_desconto": 31
-    },
-    "esportes": {
-      "total": 1,
-      "score_medio": 63,
-      "desconto_medio": 56,
-      "maior_desconto": 56
-    },
-    "cupons": {
-      "total": 1,
-      "score_medio": 68,
-      "desconto_medio": 21,
-      "maior_desconto": 20
-    },
     "cameras": {
       "total": 1,
       "score_medio": 75,
@@ -317,14 +223,8 @@
       "score_medio": 79,
       "desconto_medio": 26,
       "maior_desconto": 26
-    },
-    "bebes": {
-      "total": 1,
-      "score_medio": 79,
-      "desconto_medio": 58,
-      "maior_desconto": 58
     }
   },
-  "updated_at": "2026-09-19T14:20:05.263672",
-  "total": 16
+  "updated_at": "2026-09-20T09:41:48.265815",
+  "total": 11
 }
