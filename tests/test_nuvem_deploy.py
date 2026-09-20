@@ -979,6 +979,136 @@ def test_nenhum_teste_com_ref_avalia_pelo_relogio_da_parede():
         "fingido:\n  " + "\n  ".join(culpados))
 
 
+def _repo_site(ramo="main"):
+    """Repositorio de verdade (remoto bare + clone) para exercitar o
+    publicar_site() sem fingir a resposta do git."""
+    import subprocess as _sp  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+
+    base = tempfile.mkdtemp(prefix="site_pub_")
+    remoto, pc = os.path.join(base, "remoto"), os.path.join(base, "pc")
+    os.makedirs(remoto)
+    _sp.run(["git", "init", "-q", "--bare", "-b", "main"], cwd=remoto, check=True)
+    os.makedirs(pc)
+    _sp.run(["git", "init", "-q", "-b", "main"], cwd=pc, check=True)
+    for k, v in (("user.email", "t@t"), ("user.name", "t")):
+        _sp.run(["git", "config", k, v], cwd=pc, check=True)
+    _sp.run(["git", "remote", "add", "origin", remoto], cwd=pc, check=True)
+    os.makedirs(os.path.join(pc, "docs", "ofertas"))
+    for f in ("docs/sitemap.xml", "docs/robots.txt", "docs/ofertas/a.html"):
+        open(os.path.join(pc, f), "w").write("v1")
+    _sp.run(["git", "add", "-A"], cwd=pc, check=True)
+    _sp.run(["git", "commit", "-qm", "inicial"], cwd=pc, check=True)
+    _sp.run(["git", "push", "-q", "-u", "origin", "main"], cwd=pc, check=True)
+    if ramo != "main":
+        _sp.run(["git", "checkout", "-qb", ramo], cwd=pc, check=True)
+    return base, remoto, pc
+
+
+def _publica(pc, conteudo):
+    """Chama publicar_site() de verdade neste repositorio, coletando os erros
+    que ele registraria."""
+    from core import site_publisher as sp  # noqa: PLC0415
+    from core import database as _db  # noqa: PLC0415
+
+    erros = []
+    base_antes, estado_antes = sp._BASE, sp._ESTADO_PATH
+    registrar_antes = _db.registrar_erro
+    sp._BASE = pc
+    sp._ESTADO_PATH = os.path.join(pc, "estado_site.txt")
+    _db.registrar_erro = lambda tipo, msg, **kw: erros.append((tipo, msg))
+    try:
+        open(os.path.join(pc, "docs", "ofertas", "a.html"), "w").write(conteudo)
+        return sp.publicar_site(origem="teste"), erros
+    finally:
+        sp._BASE, sp._ESTADO_PATH = base_antes, estado_antes
+        _db.registrar_erro = registrar_antes
+
+
+def test_site_nao_commita_no_ramo_errado():
+    """Bug real (20/09/2026): o PC do Daniel acumulou 121 commits
+    "chore: atualiza site (rastreador-ml)" presos localmente, o site
+    congelado, e NENHUM erro em lugar nenhum.
+
+    `git push origin main` empurra o REF LOCAL `main`, nao o HEAD. Num
+    checkout parado noutro ramo — e e o proprio aplicar_tudo.ps1 que deixa o
+    PC em claude/bot-ofertas-n8n-8d7qe2 — o push responde "Everything
+    up-to-date" com returncode 0. Sucesso silencioso.
+
+    Pior que o site parado: core/papel.py usa essas marcas como sinal de vida
+    do PC. Sem elas a nuvem conclui que o PC morreu e publica por cima (a
+    mesma oferta duas vezes no grupo, Regra 16)."""
+    import shutil  # noqa: PLC0415
+    import subprocess as _sp  # noqa: PLC0415
+
+    base, _remoto, pc = _repo_site(ramo="claude/uma-branch")
+    try:
+        antes = _sp.run(["git", "rev-parse", "HEAD"], cwd=pc,
+                        capture_output=True, text=True).stdout.strip()
+        ok, erros = _publica(pc, "v2")
+        depois = _sp.run(["git", "rev-parse", "HEAD"], cwd=pc,
+                         capture_output=True, text=True).stdout.strip()
+
+        assert ok is False, "publicou de um ramo que ninguem empurra"
+        assert erros and erros[0][0] == "site_publisher_falhou", \
+            "a falha voltou a ser silenciosa"
+        assert "ramo errado" in erros[0][1] and "claude/uma-branch" in erros[0][1], \
+            f"a mensagem nao diz qual e o ramo: {erros[0][1]!r}"
+        assert antes == depois, \
+            "criou commit orfao — e assim que se acumulam 121 deles"
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+
+
+def test_site_publica_de_verdade_quando_esta_na_main():
+    """O caminho bom tem de continuar funcionando, e o commit tem de CHEGAR
+    no remoto — nao basta o push devolver 0."""
+    import shutil  # noqa: PLC0415
+    import subprocess as _sp  # noqa: PLC0415
+
+    base, remoto, pc = _repo_site()
+    try:
+        ok, erros = _publica(pc, "v2")
+        local = _sp.run(["git", "rev-parse", "HEAD"], cwd=pc,
+                        capture_output=True, text=True).stdout.strip()
+        no_remoto = _sp.run(["git", "--git-dir=" + remoto, "rev-parse", "main"],
+                            cwd=pc, capture_output=True, text=True).stdout.strip()
+        assert ok is True, f"nao publicou: {erros}"
+        assert not erros, f"registrou erro no caminho bom: {erros}"
+        assert local == no_remoto, "o commit nao chegou no servidor"
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+
+
+def test_push_que_devolve_zero_sem_levar_nada_e_acusado():
+    """"Everything up-to-date" tambem devolve returncode 0. Confiar no codigo
+    de saida foi o que deixou a falha muda por semanas."""
+    import shutil  # noqa: PLC0415
+
+    from core import site_publisher as sp  # noqa: PLC0415
+
+    base, _remoto, pc = _repo_site()
+    original = sp._git
+    try:
+        def _git_mentiroso(*args, **kw):
+            if args and args[0] == "push":
+                class R:
+                    returncode = 0
+                    stdout = "Everything up-to-date\n"
+                    stderr = ""
+                return R()
+            return original(*args, **kw)
+
+        sp._git = _git_mentiroso
+        ok, erros = _publica(pc, "v3")
+        assert ok is False, "aceitou um push que nao levou nada"
+        assert erros and "push nao levou o commit" in erros[0][1], \
+            f"nao acusou o push mentiroso: {erros}"
+    finally:
+        sp._git = original
+        shutil.rmtree(base, ignore_errors=True)
+
+
 if __name__ == "__main__":
     import traceback
 

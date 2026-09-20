@@ -63,6 +63,12 @@ def _identidade_minima() -> list[str]:
     return ["-c", "user.name=Bot-Ofertas", "-c", "user.email=bot@github.com"]
 
 
+# O site (GitHub Pages) e servido de `main`. Um lugar so para o nome, porque
+# ele aparece no push, na conferencia e na guarda de ramo — e tres copias e
+# onde uma fica para tras.
+_RAMO_DO_SITE = "main"
+
+
 def _pode_publicar_agora() -> bool:
     try:
         with open(_ESTADO_PATH, encoding="utf-8") as f:
@@ -116,6 +122,32 @@ def publicar_site(origem: str = "local") -> bool:
     if not _pode_publicar_agora():
         return False
 
+    # Em que ramo estamos? `git push origin main` empurra o REF LOCAL `main`,
+    # NAO o HEAD. Num checkout parado em outro ramo o commit do site vai para
+    # um lugar que ninguem empurra, e o push responde "Everything up-to-date"
+    # com returncode 0 — sucesso silencioso, o pior tipo de falha.
+    #
+    # Bug real, achado em 2026-09-20: o PC do Daniel tinha 121 commits
+    # "chore: atualiza site (rastreador-ml)" presos localmente, o site
+    # congelado no que a nuvem publica, e NENHUM erro em lugar nenhum. O
+    # proprio aplicar_tudo.ps1 e quem deixa o PC numa branch de trabalho.
+    #
+    # Pior que o site parado, de novo: core/papel.py usa essas marcas no
+    # historico como sinal de vida do PC. Sem elas, um publicador de nuvem
+    # conclui que o PC morreu e publica por cima — a mesma oferta duas vezes
+    # no grupo. Foi exatamente o que me fez afirmar, errado, que o PC dele
+    # estava parado.
+    ramo = _git("rev-parse", "--abbrev-ref", "HEAD")
+    atual = ramo.stdout.strip() if ramo.returncode == 0 else ""
+    if atual and atual != _RAMO_DO_SITE:
+        _falhou(
+            "ramo errado",
+            f"o checkout esta em '{atual}', mas o site e publicado de "
+            f"'{_RAMO_DO_SITE}'. `git push origin {_RAMO_DO_SITE}` nao "
+            f"empurraria este commit — ele ficaria preso local para sempre. "
+            f"Nao vou commitar para nao acumular commit orfao.")
+        return False
+
     try:
         add = _git("add", "docs/ofertas/", "docs/sitemap.xml", "docs/robots.txt")
         if add.returncode != 0:
@@ -157,10 +189,26 @@ def publicar_site(origem: str = "local") -> bool:
             _git("rebase", "--abort")
             return False
 
-        push = _git("push", "origin", "main")
+        local_antes = _git("rev-parse", "HEAD").stdout.strip()
+
+        push = _git("push", "origin", _RAMO_DO_SITE)
         if push.returncode != 0:
             _falhou("git push (o commit fica local para a proxima)",
                     push.stderr.strip()[:300])
+            return False
+
+        # returncode 0 NAO quer dizer que o commit saiu: "Everything
+        # up-to-date" tambem devolve 0. Conferir que o commit local agora
+        # esta no ramo remoto e a unica forma de saber. Anunciar sem olhar
+        # foi o defeito desta funcao por semanas.
+        conf = _git("merge-base", "--is-ancestor", local_antes,
+                    f"origin/{_RAMO_DO_SITE}")
+        if conf.returncode != 0:
+            _falhou(
+                "push nao levou o commit",
+                f"`git push` devolveu 0 mas {local_antes[:8]} nao esta em "
+                f"origin/{_RAMO_DO_SITE}. Saida do push: "
+                f"{(push.stdout + push.stderr).strip()[:200]}")
             return False
 
         _marcar_publicado_agora()
