@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "VEDO Bateria Eletrônica Portátil para Iniciantes com 4 Almofadas Silenciosas, 200 Sons, Banco Ajustável, Pedais Duplos e Fones de Ouvido - Kit Completo para Estúdio e Performances ao Vivo",
+      "preco": 1299.99,
+      "preco_original": 1494.96,
+      "desconto_pct": 13.0,
+      "foto": "https://m.media-amazon.com/images/I/61Yz5xhKU2L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 48,
+      "enviado_em": "2026-09-21T10:31:52.095940",
+      "link": "https://www.amazon.com.br/dp/B0G52J9ZLY?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 1299.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Notebook Vaio Fe16 Amd Ryzen 7 5825u Linux 8gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo - Cinza Grafite Vjfe69f11xb0321h - Permite upgrade de memória RAM e SSD",
+      "preco": 3419.0,
+      "preco_original": 5099.0,
+      "desconto_pct": 32.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_695951-MLA99449832220_112025-AB.webp",
+      "categoria": "notebooks",
+      "score": 87,
+      "enviado_em": "2026-09-21T10:29:27.457874",
+      "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-7-5825u-linux-8gb-ram-512gb-ssd-wi-fi-6-tela-16-ips-wuxga-antirreflexo-cinza-grafite-vjfe69f11xb0321h-permite-upgrade-de-memoria-ram-e-ssd/p/MLB46476929?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3419.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 5 Potes de Vidro Herméticos 375ml – Tampa com Trava, Vedação Airtight, Ideal para Marmitas, Porta Mantimentos, Alimentos e Organização, Acabamento Premium",
       "preco": 39.99,
       "preco_original": 54.99,
@@ -12,7 +42,7 @@
       "link": "https://www.amazon.com.br/dp/B0H7L5H8LT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 39.99,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -59,164 +89,41 @@
       "menor_preco_30d": 221.26,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Jogo De Cartas UNO Clássico Mattel Com 108 Cartas 7 Anos Ou Mais",
-      "preco": 16.73,
-      "preco_original": 24.99,
-      "desconto_pct": 33.1,
-      "foto": "https://m.media-amazon.com/images/I/71yJ6Tu7+zL._AC_UL320_.jpg",
-      "categoria": "brinquedos",
-      "score": 68,
-      "enviado_em": "2026-09-19T09:18:44.537725",
-      "link": "https://www.amazon.com.br/dp/B00CTH0A1Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 16.73,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Pacote 5 Carros Sortidos, Hot Wheels, Mattel, Multicor - não é possível escolher as cores",
-      "preco": 58.99,
-      "preco_original": 84.99,
-      "desconto_pct": 30.6,
-      "foto": "https://m.media-amazon.com/images/I/81GMRnT1SsL._AC_UL320_.jpg",
-      "categoria": "brinquedos",
-      "score": 71,
-      "enviado_em": "2026-09-19T09:18:35.994927",
-      "link": "https://www.amazon.com.br/dp/B000GKUEVE?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 58.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Vasenol Geleia de Vaselina Hidratante para Pele Ressecada",
-      "preco": 22.78,
-      "preco_original": 33.99,
-      "desconto_pct": 33.0,
-      "foto": "https://m.media-amazon.com/images/I/61VOWQ8WA6L._AC_UL320_.jpg",
-      "categoria": "brinquedos",
-      "score": 67,
-      "enviado_em": "2026-09-19T09:18:27.472212",
-      "link": "https://www.amazon.com.br/dp/B07JR55K68?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 22.78,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Bicicleta Aro 29 Gts Dexter 24 Marchas Freio A Disco Cor Grafite Com Preto Tamanho Do Quadro 21",
-      "preco": 799.0,
-      "preco_original": 1413.0,
-      "desconto_pct": 43.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_861212-MLA99932433553_112025-AB.webp",
-      "categoria": "redes",
-      "score": 95,
-      "enviado_em": "2026-09-19T09:16:36.400894",
-      "link": "https://www.mercadolivre.com.br/bicicleta-aro-29-gts-dexter-24-marchas-freio-a-disco-cor-grafite-com-preto-tamanho-do-quadro-21/p/MLB37800447?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 799.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Filamento 3d Sunlu Printer Filament Pla +silk De 1.75mm 1kg Dourado",
-      "preco": 114.95,
-      "preco_original": 169.0,
-      "desconto_pct": 31.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_935238-MLA86991538446_072025-AB.webp",
-      "categoria": "informatica",
-      "score": 68,
-      "enviado_em": "2026-09-19T09:16:27.223084",
-      "link": "https://www.mercadolivre.com.br/filamento-3d-sunlu-printer-filament-pla-silk-de-175mm-1kg-dourado/p/MLB52068698?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 114.95,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "2 Rolos Etiquetas Térmicas 50X25mm Etiqueta Adesiva Branco para Impressora Térmica Etiqueta Adesivas 5X2.5CM",
-      "preco": 37.43,
-      "preco_original": 78.0,
-      "desconto_pct": 52.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_743488-MLA115146468014_082026-AB.webp",
-      "categoria": "tablets",
-      "score": 76,
-      "enviado_em": "2026-09-19T09:16:18.327840",
-      "link": "https://www.mercadolivre.com.br/2-rolos-etiquetas-termicas-50x25mm-etiqueta-adesiva-branco-para-impressora-termica-etiqueta-adesivas-5x25cm/p/MLB69560696?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 37.43,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Varal Dobrável De Chão 3 Andares De Roupas Grande Com Rodinha Aba Lateral Retrátil Para Cabide Irsina",
-      "preco": 78.88,
-      "preco_original": 129.0,
-      "desconto_pct": 39.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_909863-MLA89943157034_082025-AB.webp",
-      "categoria": "cameras",
-      "score": 75,
-      "enviado_em": "2026-09-19T09:16:08.728236",
-      "link": "https://www.mercadolivre.com.br/varal-dobravel-de-chao-3-andares-de-roupas-grande-com-rodinha-aba-lateral-retratil-para-cabide-irsina/p/MLB51534391?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 78.88,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
-    "preco": 183.05,
-    "preco_original": 349.0,
-    "desconto_pct": 47.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
-    "categoria": "informatica",
-    "score": 81,
-    "enviado_em": "2026-09-20T09:39:18.765487",
-    "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 171.94,
+    "titulo": "Notebook Vaio Fe16 Amd Ryzen 7 5825u Linux 8gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo - Cinza Grafite Vjfe69f11xb0321h - Permite upgrade de memória RAM e SSD",
+    "preco": 3419.0,
+    "preco_original": 5099.0,
+    "desconto_pct": 32.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_695951-MLA99449832220_112025-AB.webp",
+    "categoria": "notebooks",
+    "score": 87,
+    "enviado_em": "2026-09-21T10:29:27.457874",
+    "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-7-5825u-linux-8gb-ram-512gb-ssd-wi-fi-6-tela-16-ips-wuxga-antirreflexo-cinza-grafite-vjfe69f11xb0321h-permite-upgrade-de-memoria-ram-e-ssd/p/MLB46476929?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 3419.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "brinquedos": {
-      "total": 3,
-      "score_medio": 69,
-      "desconto_medio": 32,
-      "maior_desconto": 33
-    },
-    "informatica": {
-      "total": 2,
-      "score_medio": 75,
-      "desconto_medio": 39,
-      "maior_desconto": 47
-    },
     "cupons": {
-      "total": 2,
-      "score_medio": 65,
-      "desconto_medio": 24,
+      "total": 3,
+      "score_medio": 59,
+      "desconto_medio": 20,
       "maior_desconto": 27
     },
-    "tablets": {
+    "notebooks": {
       "total": 1,
-      "score_medio": 76,
-      "desconto_medio": 52,
-      "maior_desconto": 52
+      "score_medio": 87,
+      "desconto_medio": 32,
+      "maior_desconto": 32
     },
-    "redes": {
+    "informatica": {
       "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 43,
-      "maior_desconto": 43
-    },
-    "cameras": {
-      "total": 1,
-      "score_medio": 75,
-      "desconto_medio": 39,
-      "maior_desconto": 39
+      "score_medio": 81,
+      "desconto_medio": 47,
+      "maior_desconto": 47
     },
     "beleza": {
       "total": 1,
@@ -225,6 +132,6 @@
       "maior_desconto": 26
     }
   },
-  "updated_at": "2026-09-20T09:41:48.265815",
-  "total": 11
+  "updated_at": "2026-09-21T10:32:00.719066",
+  "total": 6
 }
