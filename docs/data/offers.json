@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "Kit 5 Potes de Vidro Herméticos 375ml – Tampa com Trava, Vedação Airtight, Ideal para Marmitas, Porta Mantimentos, Alimentos e Organização, Acabamento Premium",
+      "preco": 39.99,
+      "preco_original": 54.99,
+      "desconto_pct": 27.3,
+      "foto": "https://m.media-amazon.com/images/I/61kjxWkcZcL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 67,
+      "enviado_em": "2026-09-22T09:43:17.334745",
+      "link": "https://www.amazon.com.br/dp/B0H7L5H8LT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 39.99,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Conj de Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox",
+      "preco": 482.21,
+      "preco_original": 1099.0,
+      "desconto_pct": 56.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_911575-MLA115299730288_082026-AB.webp",
+      "categoria": "saude",
+      "score": 95,
+      "enviado_em": "2026-09-22T09:41:49.202933",
+      "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 482.21,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "VEDO Bateria Eletrônica Portátil para Iniciantes com 4 Almofadas Silenciosas, 200 Sons, Banco Ajustável, Pedais Duplos e Fones de Ouvido - Kit Completo para Estúdio e Performances ao Vivo",
       "preco": 1299.99,
       "preco_original": 1494.96,
@@ -29,109 +59,43 @@
       "menor_preco_30d": 3419.0,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Kit 5 Potes de Vidro Herméticos 375ml – Tampa com Trava, Vedação Airtight, Ideal para Marmitas, Porta Mantimentos, Alimentos e Organização, Acabamento Premium",
-      "preco": 39.99,
-      "preco_original": 54.99,
-      "desconto_pct": 27.3,
-      "foto": "https://m.media-amazon.com/images/I/61kjxWkcZcL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 62,
-      "enviado_em": "2026-09-20T09:41:39.683264",
-      "link": "https://www.amazon.com.br/dp/B0H7L5H8LT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 39.99,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
-      "preco": 183.05,
-      "preco_original": 349.0,
-      "desconto_pct": 47.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
-      "categoria": "informatica",
-      "score": 81,
-      "enviado_em": "2026-09-20T09:39:18.765487",
-      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 171.94,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Freezer Horizontal 100L Inverter Bivolt Branco Midea",
-      "preco": 1249.0,
-      "preco_original": 1579.0,
-      "desconto_pct": 20.9,
-      "foto": "https://m.media-amazon.com/images/I/41GOo1UPNmL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 68,
-      "enviado_em": "2026-09-19T14:19:56.264700",
-      "link": "https://www.amazon.com.br/dp/B0FK163DY6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 1249.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Perfume Club De Nuit Intense Da Armaf Edt 105ml Masculino",
-      "preco": 221.26,
-      "preco_original": 299.0,
-      "desconto_pct": 26.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_863486-MLB114945658162_082026-AB--perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino.webp",
-      "categoria": "beleza",
-      "score": 79,
-      "enviado_em": "2026-09-19T14:18:42.892627",
-      "link": "https://www.mercadolivre.com.br/perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino/up/MLBU4793518944?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 221.26,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Notebook Vaio Fe16 Amd Ryzen 7 5825u Linux 8gb RAM 512gb Ssd Wi-Fi 6 Tela 16\" Ips Wuxga Antirreflexo - Cinza Grafite Vjfe69f11xb0321h - Permite upgrade de memória RAM e SSD",
-    "preco": 3419.0,
-    "preco_original": 5099.0,
-    "desconto_pct": 32.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_695951-MLA99449832220_112025-AB.webp",
-    "categoria": "notebooks",
-    "score": 87,
-    "enviado_em": "2026-09-21T10:29:27.457874",
-    "link": "https://www.mercadolivre.com.br/notebook-vaio-fe16-amd-ryzen-7-5825u-linux-8gb-ram-512gb-ssd-wi-fi-6-tela-16-ips-wuxga-antirreflexo-cinza-grafite-vjfe69f11xb0321h-permite-upgrade-de-memoria-ram-e-ssd/p/MLB46476929?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Conj de Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox",
+    "preco": 482.21,
+    "preco_original": 1099.0,
+    "desconto_pct": 56.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_911575-MLA115299730288_082026-AB.webp",
+    "categoria": "saude",
+    "score": 95,
+    "enviado_em": "2026-09-22T09:41:49.202933",
+    "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 3419.0,
+    "menor_preco_30d": 482.21,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 3,
-      "score_medio": 59,
+      "total": 2,
+      "score_medio": 58,
       "desconto_medio": 20,
       "maior_desconto": 27
+    },
+    "saude": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 56,
+      "maior_desconto": 56
     },
     "notebooks": {
       "total": 1,
       "score_medio": 87,
       "desconto_medio": 32,
       "maior_desconto": 32
-    },
-    "informatica": {
-      "total": 1,
-      "score_medio": 81,
-      "desconto_medio": 47,
-      "maior_desconto": 47
-    },
-    "beleza": {
-      "total": 1,
-      "score_medio": 79,
-      "desconto_medio": 26,
-      "maior_desconto": 26
     }
   },
-  "updated_at": "2026-09-21T10:32:00.719066",
-  "total": 6
+  "updated_at": "2026-09-22T09:43:26.018926",
+  "total": 4
 }
