@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "MIFA A90 Caixas de Som Portáteis Bluetooth, Alto-falante Bluetooth portátil IPX7 à prova d'água, 60W Bass, Emparelhamento estéreo sem fio, Mic embutido, Suporte Micro SD, USB, AUX-in, USB-C Charing",
+      "preco": 295.22,
+      "preco_original": 379.0,
+      "desconto_pct": 22.1,
+      "foto": "https://m.media-amazon.com/images/I/61+pHP685TL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 60,
+      "enviado_em": "2026-09-23T09:51:01.232832",
+      "link": "https://www.amazon.com.br/dp/B09FKWS793?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 295.22,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+      "preco": 449.0,
+      "preco_original": 623.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-09-23T09:49:15.631034",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 449.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Kit 5 Potes de Vidro Herméticos 375ml – Tampa com Trava, Vedação Airtight, Ideal para Marmitas, Porta Mantimentos, Alimentos e Organização, Acabamento Premium",
       "preco": 39.99,
       "preco_original": 54.99,
@@ -12,7 +42,7 @@
       "link": "https://www.amazon.com.br/dp/B0H7L5H8LT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "boa",
       "menor_preco_30d": 39.99,
-      "menor_periodo": true,
+      "menor_periodo": false,
       "verificada": true
     },
     {
@@ -62,25 +92,25 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Conj de Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox",
-    "preco": 482.21,
-    "preco_original": 1099.0,
-    "desconto_pct": 56.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_911575-MLA115299730288_082026-AB.webp",
-    "categoria": "saude",
-    "score": 95,
-    "enviado_em": "2026-09-22T09:41:49.202933",
-    "link": "https://www.mercadolivre.com.br/conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox/p/MLB32717965?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "excelente",
-    "menor_preco_30d": 482.21,
-    "menor_periodo": false,
+    "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+    "preco": 449.0,
+    "preco_original": 623.0,
+    "desconto_pct": 28.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+    "categoria": "bebes",
+    "score": 73,
+    "enviado_em": "2026-09-23T09:49:15.631034",
+    "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "boa",
+    "menor_preco_30d": 449.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 2,
+      "total": 3,
       "score_medio": 58,
-      "desconto_medio": 20,
+      "desconto_medio": 21,
       "maior_desconto": 27
     },
     "saude": {
@@ -94,8 +124,14 @@
       "score_medio": 87,
       "desconto_medio": 32,
       "maior_desconto": 32
+    },
+    "bebes": {
+      "total": 1,
+      "score_medio": 73,
+      "desconto_medio": 28,
+      "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-22T09:43:26.018926",
-  "total": 4
+  "updated_at": "2026-09-23T09:51:10.393395",
+  "total": 6
 }
