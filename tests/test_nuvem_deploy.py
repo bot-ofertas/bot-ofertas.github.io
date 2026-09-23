@@ -1109,6 +1109,49 @@ def test_push_que_devolve_zero_sem_levar_nada_e_acusado():
         shutil.rmtree(base, ignore_errors=True)
 
 
+def test_nuvem_publica_mais_de_uma_oferta_por_loja_na_rodada():
+    """O padrao do codigo (1 por loja) e certo para o PC, que roda a cada
+    ~20 min. Na nuvem ele estrangula o canal: o GitHub entrega ~1 das 7
+    rodadas agendadas, entao 1 por loja vira DUAS ofertas no dia inteiro.
+
+    Medido em 20-23/09/2026: um unico commit de site por dia (09:41, 10:32,
+    09:43, 09:51 UTC), quatro dias seguidos. Aumentar a frequencia do cron
+    nao e opcao — a organizacao ja foi sinalizada pelo GitHub por atividade
+    automatizada excessiva. Publicar mais POR rodada nao mexe nisso."""
+    # Sem PyYAML de proposito: o job `testes` do CI instala so python-dotenv
+    # e requests (.github/workflows/testes.yml). Um `import yaml` aqui passa
+    # nesta maquina e quebra o CI — e o mesmo erro que o import de
+    # rastreador_amazon causou em tests/test_qualidade.py (19/09/2026), e o
+    # test_dependencias pegou de novo.
+    import re as _re  # noqa: PLC0415
+
+    with open(os.path.join(BASE, ".github", "workflows", "bot.yml"),
+              encoding="utf-8") as f:
+        texto = f.read()
+
+    achados = dict(_re.findall(
+        r"^\s*(MAX_POR_RODADA_[A-Z]+):\s*(.+)$", texto, _re.M))
+
+    assert "MAX_POR_RODADA_ML" in achados, \
+        "a nuvem voltou ao padrao 1 do codigo — 2 ofertas no dia inteiro"
+    assert "MAX_POR_RODADA_AMAZON" in achados, \
+        "a Amazon voltou ao padrao 1 na nuvem"
+
+    # Ajustavel sem mexer em codigo, como PAPEL/HORA_LIGAR ja sao.
+    for chave, valor in achados.items():
+        assert "vars." + chave in valor, \
+            f"{chave} cravado no workflow — o Daniel nao consegue ajustar"
+
+    # Iguais entre as lojas: o pedido dele era equilibrio entre marketplaces
+    # (2026-09-17, "uma oferta de cada loja"), nao volume de um so.
+    numeros = {c: int(_re.search(r"'(\d+)'", v).group(1))
+               for c, v in achados.items()}
+    assert len(set(numeros.values())) == 1, \
+        f"lojas com limites diferentes quebra o equilibrio pedido: {numeros}"
+    assert all(n > 1 for n in numeros.values()), \
+        f"limite 1 na nuvem e o que estrangula o canal: {numeros}"
+
+
 if __name__ == "__main__":
     import traceback
 

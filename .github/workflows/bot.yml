@@ -156,6 +156,25 @@ jobs:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           ML_AFFILIATE_TOOL_ID: ${{ secrets.ML_AFFILIATE_TOOL_ID }}
+          # Quantas ofertas esta rodada publica, POR LOJA.
+          #
+          # O padrao do codigo e 1, que e o certo para o PC: ele roda a cada
+          # ~20 min, entao "uma de cada loja por rodada" (pedido do Daniel em
+          # 2026-09-17) distribui bem ao longo do dia. Na nuvem o mesmo 1
+          # estrangula o canal: o GitHub entrega ~1 das 7 rodadas agendadas,
+          # entao 1 por loja vira DUAS ofertas no dia inteiro.
+          #
+          # Medido em 20-23/09/2026: um unico commit de site por dia
+          # (09:41, 10:32, 09:43, 09:51 UTC) — quatro dias seguidos com uma
+          # rodada so. Aumentar a frequencia do cron nao e opcao: a
+          # organizacao ja foi sinalizada pelo GitHub por atividade
+          # automatizada excessiva (ver o comentario do `schedule` acima).
+          # Publicar mais POR rodada nao aumenta a frequencia de execucao.
+          #
+          # Iguais entre as lojas de proposito: o pedido era equilibrio entre
+          # marketplaces, nao volume de um so. Ajustavel sem mexer em codigo
+          # pelas variaveis do repositorio (Settings > Variables).
+          MAX_POR_RODADA_ML: ${{ vars.MAX_POR_RODADA_ML || '3' }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           # n8n: as rodadas da nuvem (janela em que o PC fica desligado)
@@ -188,6 +207,25 @@ jobs:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
+          # Quantas ofertas esta rodada publica, POR LOJA.
+          #
+          # O padrao do codigo e 1, que e o certo para o PC: ele roda a cada
+          # ~20 min, entao "uma de cada loja por rodada" (pedido do Daniel em
+          # 2026-09-17) distribui bem ao longo do dia. Na nuvem o mesmo 1
+          # estrangula o canal: o GitHub entrega ~1 das 7 rodadas agendadas,
+          # entao 1 por loja vira DUAS ofertas no dia inteiro.
+          #
+          # Medido em 20-23/09/2026: um unico commit de site por dia
+          # (09:41, 10:32, 09:43, 09:51 UTC) — quatro dias seguidos com uma
+          # rodada so. Aumentar a frequencia do cron nao e opcao: a
+          # organizacao ja foi sinalizada pelo GitHub por atividade
+          # automatizada excessiva (ver o comentario do `schedule` acima).
+          # Publicar mais POR rodada nao aumenta a frequencia de execucao.
+          #
+          # Iguais entre as lojas de proposito: o pedido era equilibrio entre
+          # marketplaces, nao volume de um so. Ajustavel sem mexer em codigo
+          # pelas variaveis do repositorio (Settings > Variables).
+          MAX_POR_RODADA_AMAZON: ${{ vars.MAX_POR_RODADA_AMAZON || '3' }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
