@@ -132,7 +132,21 @@ def _e_duplicata(item: dict) -> bool:
     # isto) em vez do link — o link pode virar meli.la/XXXXX depois do
     # afiliado oficial, sem nenhuma relação textual com a URL original.
     produto_id = item.get("id") or _id_produto(item)
-    return db.produto_id_existe(produto_id)
+    if db.produto_id_existe(produto_id):
+        return True
+
+    # Deduplicacao ENTRE publicadores. O banco acima so conhece o que ESTA
+    # maquina publicou; PC, GitHub Actions e servidor tem bancos separados e
+    # nenhum enxerga o outro (Regra 16). Quando dois acham a mesma oferta
+    # quente, ela sai duas vezes no grupo. As paginas ja commitadas em
+    # docs/ofertas/ sao o registro comum que faltava ler.
+    try:
+        from core.publicados_site import ja_publicado  # noqa: PLC0415
+        return ja_publicado(produto_id)
+    except Exception:
+        # Falha aqui nunca pode calar o bot: sem a checagem extra volta a
+        # valer so o banco local, que e o que ja valia antes.
+        return False
 
 
 # ── Processamento de cada categoria ──────────────────────────────────────────

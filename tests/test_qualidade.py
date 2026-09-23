@@ -442,6 +442,67 @@ def test_esta_suite_roda_sem_as_dependencias_pesadas():
         "importar" % sorted(proibidos))
 
 
+def test_registro_compartilhado_so_aceita_id_oficial():
+    """Falso positivo aqui e pior do que nao ter a checagem: faria o bot
+    PULAR uma oferta boa achando que ja publicou, e em silencio.
+
+    Uma regex frouxa (`-[A-Z0-9]{8,}\\.html$`) colhia "22099816" e
+    "6555005904" de slugs terminados em numero — medido na pasta real em
+    2026-09-23, oito IDs invalidos. Regra 11: usar o ID oficial do anuncio."""
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    casos_bons = {
+        "algo-qualquer-MLB54067366.html": "MLB54067366",
+        "outro-produto-MLBU77700863.html": "MLBU77700863",
+        "caixa-de-som-B09FKWS793.html": "B09FKWS793",
+    }
+    for nome, esperado in casos_bons.items():
+        m = ps._ID_NO_NOME.search(nome)
+        assert m and m.group(1) == esperado, f"nao extraiu {esperado} de {nome}"
+
+    casos_ruins = [
+        "kit-organizador-78-litros-22099816.html",   # slug terminado em numero
+        "porta-copos-carro-6555005904.html",
+        "produto-sem-id.html",
+        "algo-XYZ123.html",                          # curto demais
+    ]
+    for nome in casos_ruins:
+        assert ps._ID_NO_NOME.search(nome) is None, \
+            f"colheu ID invalido de {nome} — o bot pularia oferta boa"
+
+
+def test_registro_compartilhado_nao_cala_o_bot_quando_nao_consegue_ler():
+    """"Nao consegui olhar" nunca pode virar "ja foi publicado" — mesmo
+    principio do psutil no supervisor e do checkout raso na Regra 16."""
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    base_antes, cache_antes = ps._PASTA, ps._cache
+    try:
+        ps._PASTA = "/caminho/que/nao/existe/ofertas"
+        ps._cache = None
+        assert ps.ids_publicados() == frozenset(), "inventou IDs sem pasta"
+        assert ps.ja_publicado("MLB54067366") is False, \
+            "sem conseguir ler, disse que ja publicou — calaria o bot"
+    finally:
+        ps._PASTA, ps._cache = base_antes, cache_antes
+
+
+def test_os_dois_rastreadores_consultam_o_registro_compartilhado():
+    """PC, GitHub Actions e servidor tem bancos separados e nenhum enxerga o
+    outro. Sem esta checagem a mesma oferta sai duas vezes no grupo."""
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    for arquivo in ("rastreador.py", "rastreador_amazon.py"):
+        src = (raiz / arquivo).read_text(encoding="utf-8")
+        assert "publicados_site" in src and "ja_publicado" in src, \
+            f"{arquivo} voltou a deduplicar so pelo banco local"
+        # E a falha da checagem extra nao pode derrubar a rodada.
+        i = src.index("publicados_site")
+        assert "except Exception" in src[max(0, i - 400):i + 400], \
+            f"{arquivo} usa o registro compartilhado sem protecao"
+
+
 if __name__ == "__main__":
     # Permite rodar sem pytest: python tests/test_qualidade.py
     import traceback

@@ -163,7 +163,17 @@ async def rodar_uma_vez() -> None:
 
                     # Deduplicação — pelo ID estável, não pelo link (que já vem
                     # tagueado com ?tag=..., sem relação garantida com registros antigos)
-                    if db.produto_id_existe(produto_id):
+                    # Alem do banco local, o registro compartilhado do
+                    # site: outro publicador (PC/Actions/servidor) pode ter
+                    # postado este mesmo ASIN, e os bancos nao se enxergam.
+                    _ja = db.produto_id_existe(produto_id)
+                    if not _ja:
+                        try:
+                            from core.publicados_site import ja_publicado  # noqa: PLC0415
+                            _ja = ja_publicado(produto_id)
+                        except Exception:
+                            _ja = False
+                    if _ja:
                         log(f"  ↩️  Duplicata: {item['titulo'][:50]}")
                         continue
 
