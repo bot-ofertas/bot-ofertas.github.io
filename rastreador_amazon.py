@@ -142,6 +142,14 @@ async def rodar_uma_vez() -> None:
             produtos = []
         log(f"  {len(produtos)} produto(s) encontrado(s) na Amazon Brasil")
 
+        # Funil da rodada. Ate aqui este rastreador nao tinha contador
+        # NENHUM: uma rodada que achava 20 cupons e publicava 1 nao deixava
+        # registro de onde os outros 19 ficaram, e a pergunta "por que so
+        # saiu 1 da Amazon?" nao tinha resposta no log (ver core/funil.py).
+        from core.funil import Funil  # noqa: PLC0415
+        funil = Funil("amazon", meta=MAX_POR_EXECUCAO)
+        funil.encontradas(len(produtos))
+
         com_cupom = sum(1 for p in produtos if p.get("cupom"))
         log(f"  {com_cupom} com cupom de desconto")
 
@@ -150,9 +158,14 @@ async def rodar_uma_vez() -> None:
         # um "Timed out" seco (registro real de 2026-08-25 23:20).
         from integrations.telegram_bot import criar_bot  # noqa: PLC0415
         async with criar_bot(TOKEN_TELEGRAM) as bot:
-            for item in produtos:
+            for indice, item in enumerate(produtos):
                 if publicados >= MAX_POR_EXECUCAO:
+                    funil.marcar("nao_avaliadas", len(produtos) - indice)
                     break
+
+                if not (item.get("titulo") or "").strip() or not item.get("link"):
+                    funil.marcar("incompletas")
+                    continue
 
                 produto_id = _id_amazon(item)
                 item["id"] = produto_id
@@ -175,12 +188,14 @@ async def rodar_uma_vez() -> None:
                             _ja = False
                     if _ja:
                         log(f"  ↩️  Duplicata: {item['titulo'][:50]}")
+                        funil.marcar("duplicadas")
                         continue
 
                     # Quarentena: produto que já falhou várias vezes ao
                     # publicar sai de rotação até expirar (ver core/database).
                     if db.em_quarentena(produto_id):
                         log(f"  🚫 Em quarentena: {item['titulo'][:50]}")
+                        funil.marcar("quarentena")
                         continue
 
                     # Validação anti-golpe (ajustada — cupons Amazon têm preço base real)
@@ -207,6 +222,7 @@ async def rodar_uma_vez() -> None:
                         )
                         if not cupom_com_base_real:
                             log(f"  ⚠️  Rejeitado [{motivo}]: {item['titulo'][:50]}")
+                            funil.marcar("rejeitadas")
                             continue
 
                     # Score
@@ -218,6 +234,7 @@ async def rodar_uma_vez() -> None:
 
                     if score < SCORE_MINIMO:
                         log(f"  📊 Score {score} < {SCORE_MINIMO}: {item['titulo'][:50]}")
+                        funil.marcar("score_baixo")
                         continue
 
                     cupom_info = f" [cupom: {item['cupom']}]" if item.get("cupom") else ""
@@ -260,6 +277,7 @@ async def rodar_uma_vez() -> None:
                         db.marcar_enviado(produto_id)
                         db.limpar_falha_publicacao(produto_id)
                         publicados += 1
+                        funil.marcar("publicadas")
                         log(f"  📤 Publicado! ({publicados}/{MAX_POR_EXECUCAO})")
 
                         try:
@@ -319,6 +337,7 @@ async def rodar_uma_vez() -> None:
                         # na rodada seguinte, para sempre, sem sequer virar
                         # registro em erros_log. Agora conta tentativa e entra
                         # em quarentena igual ao fluxo do Mercado Livre.
+                        funil.marcar("falharam")
                         db.registrar_erro("telegram", "falha ao publicar", produto_id)
                         falha = db.registrar_falha_publicacao(
                             produto_id, "falha ao publicar no Telegram (Amazon)",
@@ -341,10 +360,16 @@ async def rodar_uma_vez() -> None:
                     from core.error_logger import log_erro  # noqa: PLC0415
                     log_erro("amazon.item_falhou", e_item, {"produto_id": produto_id})
                     log(f"  ⚠️  Erro ao processar item: {e_item}")
+                    funil.marcar("erros")
                     continue
 
         log(f"\n{'=' * 55}")
         log(f"Amazon: {publicados} cupom(s) publicado(s)")
+
+        try:
+            funil.fechar(log)
+        except Exception as _e_funil:
+            log(f"⚠️  Funil nao registrado: {_e_funil}")
 
         try:
             from core.metrics import inc  # noqa: PLC0415

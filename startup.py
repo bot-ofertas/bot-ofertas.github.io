@@ -60,6 +60,8 @@ def _rastreador_ja_rodando() -> bool:
                     return True
                 if "campanha_ferramentas.py" in cl and "--loop" in cl:
                     return True
+                if "rastreador_magalu.py" in cl and "--loop" in cl:
+                    return True
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
     except ImportError:
@@ -223,6 +225,38 @@ def _iniciar_amazon():
     return proc_az
 
 
+def _iniciar_magalu():
+    """Sobe o rastreador Magazine Luiza — o terceiro marketplace.
+
+    Devolve None quando MAGALU_VITRINE nao esta configurada, e o supervisor
+    trata None como "nao existe" em vez de "caiu". Sem esse guard o
+    processo subiria, imprimiria o aviso de vitrine ausente, sairia em ~1s
+    e queimaria as 3 tentativas do supervisor a cada rodada — o mesmo
+    padrao de ruido que a Regra 15 descreve para o `.env` invalido.
+    """
+    try:
+        from affiliates.magalu import magalu_ativo  # noqa: PLC0415
+        if not magalu_ativo():
+            log.info("[4/4] Magalu inativo (MAGALU_VITRINE ausente) — nao sera iniciado.")
+            return None
+    except Exception as erro:
+        log.warning("[4/4] Nao foi possivel checar o Magalu: %s", erro)
+        return None
+
+    log.info("[4/4] Iniciando rastreador Magalu (intervalo aleatório ~20 min)…")
+    magalu_log_path = os.path.join(BASE, "data", "rastreador_magalu.log")
+    cmd_mg = [
+        sys.executable, os.path.join(BASE, "rastreador_magalu.py"),
+        "--random", "--loop-min", "18", "--loop-max", "22",
+    ]
+    log_mg = open(magalu_log_path, "a", encoding="utf-8")
+    proc_mg = subprocess.Popen(cmd_mg, stdout=log_mg, stderr=log_mg, cwd=BASE, **_SEM_JANELA)
+    with open(os.path.join(BASE, "data", "rastreador_magalu.pid"), "w") as f:
+        f.write(str(proc_mg.pid))
+    log.info("[4/4] Rastreador Magalu PID=%d", proc_mg.pid)
+    return proc_mg
+
+
 def _iniciar_ferramentas():
     """Sobe a campanha de ferramentas — mesma lógica de isolamento dos outros."""
     log.info("[4/4] Iniciando campanha de ferramentas (a cada 15 min)…")
@@ -256,9 +290,10 @@ def etapa_4_iniciar_rastreador() -> tuple:
     """Sobe rastreadores ML, Amazon, campanha de ferramentas e fila de WhatsApp em paralelo."""
     proc_ml = _iniciar_ml()
     proc_az = _iniciar_amazon()
+    proc_mg = _iniciar_magalu()
     proc_ferr = _iniciar_ferramentas()
     proc_wa = _iniciar_fila_whatsapp()
-    return proc_ml, proc_az, proc_ferr, proc_wa
+    return proc_ml, proc_az, proc_mg, proc_ferr, proc_wa
 
 
 class _Tracker:
@@ -287,16 +322,23 @@ def monitorar(procs) -> None:
        semanas até desistir de um processo saudável.
     """
     # procs pode ser um Popen único (legacy) ou tupla (ml, amazon, ferramentas, fila_wa)
+    # Tolerante ao tamanho da tupla: a entrada do Magalu mudou a aridade de
+    # 4 para 5, e um desempacotamento fixo quebraria um startup.py antigo
+    # chamando um monitorar() novo (ou o contrario) com ValueError — em
+    # producao isso e o supervisor inteiro morrendo, nao um aviso.
     if isinstance(procs, tuple):
-        proc_ml, proc_az, proc_ferr, proc_wa = procs
+        lista = list(procs) + [None] * (5 - len(procs))
+        proc_ml, proc_az, proc_mg, proc_ferr, proc_wa = lista[:5]
     else:
-        proc_ml, proc_az, proc_ferr, proc_wa = procs, None, None, None
+        proc_ml = procs
+        proc_az = proc_mg = proc_ferr = proc_wa = None
 
     RESET_APOS_SEGUNDOS = 2 * 60 * 60  # 2h estável reseta o contador de falhas
 
     trackers = [
         _Tracker("ML", _iniciar_ml, proc_ml),
         _Tracker("Amazon", _iniciar_amazon, proc_az),
+        _Tracker("Magalu", _iniciar_magalu, proc_mg),
         _Tracker("Campanha Ferramentas", _iniciar_ferramentas, proc_ferr),
         _Tracker("Fila WhatsApp", _iniciar_fila_whatsapp, proc_wa),
     ]

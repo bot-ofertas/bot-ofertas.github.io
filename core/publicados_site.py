@@ -46,7 +46,9 @@ _PASTA = os.path.join(_BASE, "docs", "ofertas")
 # "6555005904", que nao sao IDs de produto. Falso positivo aqui e pior do
 # que nao ter a checagem: faria o bot PULAR uma oferta boa achando que ja
 # publicou, e em silencio.
-_ID_NO_NOME = re.compile(r"-(MLBU?\d+|B[A-Z0-9]{9})\.html$")
+# `MLU\d{6,15}` e o Magalu (ver rastreador_magalu._id_magalu). Nao colide
+# com `MLBU\d+` do ML: aquele exige o "B" na terceira letra.
+_ID_NO_NOME = re.compile(r"-(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})\.html$")
 
 # Reler a pasta a cada checagem seria um listdir por produto avaliado. O
 # conteudo so muda quando alguem publica, entao um cache curto basta — e
@@ -89,7 +91,8 @@ def ja_publicado(produto_id: str) -> bool:
     """True se este ID ja aparece nas paginas do site.
 
     `produto_id` pode vir com prefixo/sufixo do scraper; a comparacao usa o
-    ID oficial embutido nele (MLB/MLBU do Mercado Livre, ASIN da Amazon),
+    ID oficial embutido nele (MLB/MLBU do Mercado Livre, ASIN da Amazon,
+    MLU+codigo do Magalu),
     que e o mesmo que o nome do arquivo carrega (Regra 11).
     """
     if not produto_id:
@@ -99,7 +102,7 @@ def ja_publicado(produto_id: str) -> bool:
         return True
     # O id do scraper pode ser "MLB123..." ou trazer o codigo dentro de um
     # slug maior; procura o codigo oficial dentro dele.
-    for m in re.finditer(r"(MLBU?\d+|B[A-Z0-9]{9})", produto_id.upper()):
+    for m in re.finditer(r"(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})", produto_id.upper()):
         if m.group(1) in publicados:
             return True
     return False

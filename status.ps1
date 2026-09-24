@@ -30,6 +30,7 @@ function Get-BotProc($padrao) {
 $monitorados = [ordered]@{
     "Rastreador ML"       = "*rastreador.py*"
     "Rastreador Amazon"   = "*rastreador_amazon.py*"
+    "Rastreador Magalu"   = "*rastreador_magalu.py*"
     "Campanha Ferramentas" = "*campanha_ferramentas.py*"
     "Fila WhatsApp"       = "*whatsapp_queue_sender.py*"
     "Startup (pai)"       = "*startup.py*"

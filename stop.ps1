@@ -17,6 +17,7 @@ $PADROES_BOT = @(
     "*startup.py*",                 # o processo PAI (Regra 10)
     "*rastreador.py*",              # ML
     "*rastreador_amazon.py*",       # Amazon
+    "*rastreador_magalu.py*",       # Magazine Luiza
     "*campanha_ferramentas.py*",    # campanha de ferramentas
     "*whatsapp_queue_sender.py*",   # consumidor da fila de WhatsApp
     "*setup_whatsapp*"

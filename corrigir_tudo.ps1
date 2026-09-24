@@ -28,13 +28,14 @@ function Ok($t)        { Write-Host "  OK: $t"    -ForegroundColor Green }
 function Aviso($t)     { Write-Host "  AVISO: $t" -ForegroundColor Yellow }
 function Erro($t)      { Write-Host "  ERRO: $t"  -ForegroundColor Red }
 
-# Os quatro filhos que o startup.py sobe, mais o pai. Lista literal de
+# Os cinco filhos que o startup.py sobe, mais o pai. Lista literal de
 # proposito: "rastreador.py" NAO casa com "rastreador_amazon.py", e foi
 # exatamente esse engano que deixou tres orfaos vivos a cada "Bot parado."
 $PADROES = @(
     "startup.py",
     "rastreador.py",
     "rastreador_amazon.py",
+    "rastreador_magalu.py",
     "campanha_ferramentas.py",
     "whatsapp_queue_sender.py"
 )

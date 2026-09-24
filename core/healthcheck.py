@@ -235,6 +235,39 @@ def _status_papel() -> dict:
         return {"erro": str(e)[:120]}
 
 
+def _status_funil() -> dict:
+    """Ultimo funil de cada marketplace (ver core/funil.py).
+
+    E a resposta de "por que saiu 1 oferta e nao 3" sem precisar abrir o
+    log: cada fonte traz quantas encontrou, quantas publicou e qual foi a
+    maior porta de perda. Regra 11 — toda integracao reporta saude propria
+    no /health.
+    """
+    try:
+        from core.funil import ultimo_por_fonte  # noqa: PLC0415
+        por_fonte = ultimo_por_fonte()
+    except Exception as erro:
+        return {"ok": False, "erro": str(erro)[:200]}
+
+    if not por_fonte:
+        return {"ok": True, "fontes": {}, "obs": "nenhuma rodada registrada ainda"}
+
+    resumo = {}
+    for fonte, registro in por_fonte.items():
+        resumo[fonte] = {
+            "encontradas": registro.get("encontradas"),
+            "publicadas": registro.get("publicadas"),
+            "meta": registro.get("meta"),
+            "motivo": registro.get("motivo"),
+            "nao_contabilizadas": registro.get("nao_contabilizadas"),
+            "ts": registro.get("ts"),
+        }
+    # `nao_contabilizadas != 0` significa oferta sumindo entre as etapas —
+    # e defeito de contador no rastreador, nao ruido. Aparece como falha.
+    vazando = [f for f, r in resumo.items() if r.get("nao_contabilizadas")]
+    return {"ok": not vazando, "fontes": resumo, "vazando": vazando}
+
+
 def _status_quarentena() -> dict:
     """Produtos que falharam ao publicar e estão fora de rotação.
 
@@ -277,6 +310,7 @@ class _Handler(BaseHTTPRequestHandler):
                 "ml_token": _status_ml_token(),
                 "pausa": _status_pausa(),
                 "quarentena": _status_quarentena(),
+                "funil": _status_funil(),
                 "janela": _status_janela(),
                 "papel": _status_papel(),
             }
@@ -301,6 +335,21 @@ class _Handler(BaseHTTPRequestHandler):
             limite = int(q.get("limit", ["50"])[0])
             from core.error_logger import erros_recentes  # noqa: PLC0415
             self._resp(200, {"erros": erros_recentes(limite)})
+            return
+        if self.path.startswith("/funil"):
+            # /funil?limit=20 — historico do funil por marketplace.
+            from urllib.parse import urlparse, parse_qs  # noqa: PLC0415
+            q = parse_qs(urlparse(self.path).query)
+            try:
+                limite = max(1, min(200, int(q.get("limit", ["20"])[0])))
+            except ValueError:
+                limite = 20
+            try:
+                from core.funil import ultimos, ultimo_por_fonte  # noqa: PLC0415
+                self._resp(200, {"atual": ultimo_por_fonte(),
+                                 "historico": ultimos(limite)})
+            except Exception as e:
+                self._resp(500, {"error": str(e)[:200]})
             return
         if self.path == "/stats":
             # Estatísticas para n8n dashboard
@@ -427,7 +476,7 @@ class _Handler(BaseHTTPRequestHandler):
                          "endpoints": [
                              "/dashboard", "/health", "/errors", "/stats",
                              "/metrics", "/cache", "/quedas", "/feed.xml",
-                             "/quarentena", "/divulgacao",
+                             "/quarentena", "/divulgacao", "/funil",
                              "POST /oferta", "POST /alerta", "POST /n8n/comando",
                          ]})
 

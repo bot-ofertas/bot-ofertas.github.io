@@ -157,6 +157,7 @@ async def processar_categoria(
     publicados: list[int],
     exec_id: int,
     contadores: dict,
+    funil,
 ) -> None:
     if publicados[0] >= MAX_POR_EXECUCAO:
         return
@@ -173,20 +174,30 @@ async def processar_categoria(
         return
 
     contadores["encontrados"] += len(itens)
+    funil.encontradas(len(itens))
     log(f"  {len(itens)} produto(s) com desconto ≥{DESCONTO_MINIMO}%")
 
     postados_categoria = 0  # respeita MAX_POR_CATEGORIA — antes essa constante existia mas nunca era checada
 
-    for item in itens:
+    for indice, item in enumerate(itens):
+        # O que sobra quando a cota estoura nao e "descartado": e nao
+        # avaliado. Sem essa distincao o funil mostra perda onde houve
+        # apenas limite, e a pergunta "faltou oferta ou faltou vaga?"
+        # continua sem resposta.
         if publicados[0] >= MAX_POR_EXECUCAO:
+            funil.marcar("nao_avaliadas", len(itens) - indice)
             break
         if postados_categoria >= MAX_POR_CATEGORIA:
+            funil.marcar("nao_avaliadas", len(itens) - indice)
             break
 
         titulo = (item.get("titulo") or "")
         titulo_curto = titulo[:55]
 
         if not titulo or not item.get("link"):
+            # Descarte que ate aqui saia por um `continue` mudo: nao
+            # aparecia em contador nenhum (Regra 7 - dados incompletos).
+            funil.marcar("incompletas")
             continue
 
         produto_id = _id_produto(item)
@@ -200,6 +211,7 @@ async def processar_categoria(
             if _e_duplicata(item):
                 log(f"  ↩️  Duplicata: {titulo_curto}")
                 contadores["duplicatas"] += 1
+                funil.marcar("duplicadas")
                 continue
 
             # ── 1b. Quarentena de publicação ──────────────────────────────────────
@@ -212,6 +224,7 @@ async def processar_categoria(
             if db.em_quarentena(produto_id):
                 log(f"  🚫 Em quarentena (falhas anteriores): {titulo_curto}")
                 contadores["duplicatas"] += 1
+                funil.marcar("quarentena")
                 continue
 
             # ── 2. Validação anti-golpe ───────────────────────────────────────────
@@ -219,6 +232,7 @@ async def processar_categoria(
             if not aprovado:
                 log(f"  ⚠️  Rejeitado [{motivo}]: {titulo_curto}")
                 contadores["erros"] += 1
+                funil.marcar("rejeitadas")
                 continue
 
             # ── 3. Score ──────────────────────────────────────────────────────────
@@ -227,6 +241,7 @@ async def processar_categoria(
 
             if score < SCORE_MINIMO:
                 log(f"  📊 Score {score} < {SCORE_MINIMO}: {titulo_curto}")
+                funil.marcar("score_baixo")
                 continue
 
             log(f"  📊 {titulo_curto} | {item.get('desconto_pct', 0):.0f}% OFF | score {score}")
@@ -239,6 +254,7 @@ async def processar_categoria(
                 log(f"  ❌ Nenhum provedor para {url_original[:60]}")
                 db.registrar_erro("affiliate", f"sem provedor para {url_original}", produto_id)
                 contadores["links_falharam"] += 1
+                funil.marcar("sem_afiliado")
                 continue
 
             # Reivindicação atômica — fecha a corrida com campanha_ferramentas.py
@@ -251,6 +267,7 @@ async def processar_categoria(
             if not db.claim_produto(produto_id, titulo):
                 log(f"  ↩️  Já reivindicado por outro processo: {titulo_curto}")
                 contadores["duplicatas"] += 1
+                funil.marcar("reivindicadas")
                 continue
 
             log(f"     🔗 Gerando link de afiliado ({provider.name})...")
@@ -269,6 +286,7 @@ async def processar_categoria(
                 # já fica registrado em erros_log via registrar_erro acima.
                 db.liberar_claim(produto_id)
                 contadores["links_falharam"] += 1
+                funil.marcar("sem_afiliado")
                 continue
 
             eh_melila = "meli.la/" in link_afiliado
@@ -322,6 +340,7 @@ async def processar_categoria(
                 publicados[0] += 1
                 postados_categoria += 1
                 contadores["publicados"] += 1
+                funil.marcar("publicadas")
                 log(f"  ✅ Publicado! ({publicados[0]}/{MAX_POR_EXECUCAO})")
 
                 # Evento para o n8n — alimenta os workflows de divulgação,
@@ -406,6 +425,7 @@ async def processar_categoria(
                     log(f"  ⚠️  Falha {falha['tentativas']}/{falha['max_tentativas']} "
                         f"ao publicar: {titulo_curto}")
                 contadores["erros"] += 1
+                funil.marcar("falharam")
         except Exception as e_item:
             # Um item malformado (campo inesperado, exceção não prevista em
             # validar/score/publicar) não pode derrubar a categoria inteira —
@@ -419,6 +439,7 @@ async def processar_categoria(
             # em liberar_claim só apaga linhas ainda com status='processing').
             db.liberar_claim(produto_id)
             contadores["erros"] += 1
+            funil.marcar("erros")
             continue
 
 
@@ -476,6 +497,10 @@ async def rodar_uma_vez() -> None:
         "duplicatas": 0,
         "erros": 0,
     }
+    # Funil da rodada — responde "por que publicou N e nao MAX_POR_EXECUCAO"
+    # com numeros, nao com suposicao (ver core/funil.py).
+    from core.funil import Funil  # noqa: PLC0415
+    funil = Funil("mercadolivre", meta=MAX_POR_EXECUCAO)
 
     log("\n" + "=" * 55)
     log(f"Rastreador iniciado — {resumo_horario()}")
@@ -515,7 +540,8 @@ async def rodar_uma_vez() -> None:
                 if nicho in categorias_postadas:
                     continue
                 antes = publicados[0]
-                await processar_categoria(bot, nicho, publicados, exec_id, contadores)
+                await processar_categoria(bot, nicho, publicados, exec_id,
+                                          contadores, funil)
                 if publicados[0] > antes:
                     categorias_postadas.add(nicho)
     finally:
@@ -543,6 +569,14 @@ async def rodar_uma_vez() -> None:
         f"{contadores['links_falharam']} falha(s) de link."
     )
     log(f"⏱️  Tempo total: {time.time() - t_inicio:.1f}s")
+
+    # Funil ANTES do resumo do n8n: e ele que nomeia a maior porta de perda
+    # da rodada. Best-effort — um contador nunca derruba uma publicacao ja
+    # concluida (Regra 6/13).
+    try:
+        funil.fechar(log)
+    except Exception as _e_funil:
+        log(f"⚠️  Funil nao registrado: {_e_funil}")
 
     # Resumo da rodada para o n8n (painel, relatório diário e watchdog).
     n8n.emitir("rodada_concluida", {
