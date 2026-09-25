@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "MIFA A90 Caixas de Som Portáteis Bluetooth, Alto-falante Bluetooth portátil IPX7 à prova d'água, 60W Bass, Emparelhamento estéreo sem fio, Mic embutido, Suporte Micro SD, USB, AUX-in, USB-C Charing",
+      "preco": 295.22,
+      "preco_original": 379.0,
+      "desconto_pct": 22.1,
+      "foto": "https://m.media-amazon.com/images/I/61+pHP685TL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 65,
+      "enviado_em": "2026-09-25T10:07:24.695802",
+      "link": "https://www.amazon.com.br/dp/B09FKWS793?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 295.22,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+      "preco": 449.0,
+      "preco_original": 623.0,
+      "desconto_pct": 28.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+      "categoria": "bebes",
+      "score": 73,
+      "enviado_em": "2026-09-25T10:04:58.857244",
+      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 449.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "VEDO Bateria Eletrônica Portátil para Iniciantes com 4 Almofadas Silenciosas, 200 Sons, Banco Ajustável, Pedais Duplos e Fones de Ouvido - Kit Completo para Estúdio e Performances ao Vivo",
       "preco": 1299.99,
       "preco_original": 1494.96,
@@ -29,57 +59,27 @@
       "menor_preco_30d": 31.9,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "MIFA A90 Caixas de Som Portáteis Bluetooth, Alto-falante Bluetooth portátil IPX7 à prova d'água, 60W Bass, Emparelhamento estéreo sem fio, Mic embutido, Suporte Micro SD, USB, AUX-in, USB-C Charing",
-      "preco": 295.22,
-      "preco_original": 379.0,
-      "desconto_pct": 22.1,
-      "foto": "https://m.media-amazon.com/images/I/61+pHP685TL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 60,
-      "enviado_em": "2026-09-23T09:51:01.232832",
-      "link": "https://www.amazon.com.br/dp/B09FKWS793?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 295.22,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
-      "preco": 449.0,
-      "preco_original": 623.0,
-      "desconto_pct": 28.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
-      "categoria": "bebes",
-      "score": 73,
-      "enviado_em": "2026-09-23T09:49:15.631034",
-      "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 449.0,
-      "menor_periodo": true,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Bermuda Masculina 2 Em 1 Compressão Short Dry Fit Academia",
-    "preco": 31.9,
-    "preco_original": 54.0,
-    "desconto_pct": 41.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_911963-MLB117718616671_092026-AB-bermuda-masculina-2-em-1-compresso-short-dry-fit-academia.webp",
-    "categoria": "moda",
-    "score": 87,
-    "enviado_em": "2026-09-24T09:46:16.075354",
-    "link": "https://produto.mercadolivre.com.br/MLB-5332470222-bermuda-masculina-2-em-1-compresso-short-dry-fit-academia-_JM?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "excelente",
-    "menor_preco_30d": 31.9,
-    "menor_periodo": false,
+    "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
+    "preco": 449.0,
+    "preco_original": 623.0,
+    "desconto_pct": 28.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
+    "categoria": "bebes",
+    "score": 73,
+    "enviado_em": "2026-09-25T10:04:58.857244",
+    "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
+    "classe": "boa",
+    "menor_preco_30d": 449.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
     "cupons": {
       "total": 2,
-      "score_medio": 57,
+      "score_medio": 59,
       "desconto_medio": 18,
       "maior_desconto": 22
     },
@@ -96,6 +96,6 @@
       "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-24T09:47:44.551109",
+  "updated_at": "2026-09-25T10:07:33.830708",
   "total": 4
 }
