@@ -1315,8 +1315,12 @@ def test_erro_com_excecao_leva_traceback_ao_relatorio():
     from core import error_logger as el
 
     with tempfile.TemporaryDirectory() as tmp:
-        antes = (el.DESKTOP_TXT, el.JSON_LOG, el._espelhar_no_n8n)
-        el.DESKTOP_TXT = os.path.join(tmp, "desktop.txt")
+        # O destino do bloco de notas virou função (`_arquivo_desktop()`): o
+        # caminho é resolvido em core/execucao_log.py, uma vez, para o
+        # arquivo cair na pasta "problemas de execução" da Área de Trabalho.
+        desktop_txt = os.path.join(tmp, "desktop.txt")
+        antes = (el._arquivo_desktop, el.JSON_LOG, el._espelhar_no_n8n)
+        el._arquivo_desktop = lambda: desktop_txt
         el.JSON_LOG = os.path.join(tmp, "erros.jsonl")
         el._espelhar_no_n8n = lambda entrada: None
 
@@ -1344,10 +1348,10 @@ def test_erro_com_excecao_leva_traceback_ao_relatorio():
 
         try:
             rodada_da_campanha()
-            texto = open(el.DESKTOP_TXT, encoding="utf-8").read()
+            texto = open(desktop_txt, encoding="utf-8").read()
         finally:
             db._conn = conn_antes
-            el.DESKTOP_TXT, el.JSON_LOG, el._espelhar_no_n8n = antes
+            el._arquivo_desktop, el.JSON_LOG, el._espelhar_no_n8n = antes
 
     assert "TimedOut: Timed out" in texto, f"perdeu o TIPO da excecao:\n{texto}"
     assert "Traceback" in texto, f"perdeu o traceback:\n{texto}"

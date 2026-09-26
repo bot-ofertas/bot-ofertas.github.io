@@ -10,6 +10,15 @@ Retorna JSON com status de cada componente:
   - system: CPU, RAM
 
 Uso: importado por startup.py, roda em thread daemon.
+
+Também roda avulso, para conferir o sistema sem subir o bot:
+
+    python -m core.healthcheck          (ou: python core/healthcheck.py)
+
+Nesse modo imprime o JSON, sai com código 1 se algum componente crítico
+estiver fora, e deixa um bloco no log da Área de Trabalho
+("problemas de execução/log de execução.txt") dizendo o que estava fora —
+é o que a rotina diária do projeto executa.
 """
 from __future__ import annotations
 
@@ -250,6 +259,89 @@ def _status_quarentena() -> dict:
         return {"total": -1, "erro": str(e)[:120]}
 
 
+_COMPONENTES = {
+    "chrome": _status_chrome,
+    "whatsapp": _status_whatsapp,
+    "telegram": _status_telegram,
+    "rastreador": _status_rastreador,
+    "sistema": _status_sistema,
+    "erros": _status_erros,
+    "ultimo_post": _status_ultimo_post,
+    "n8n": _status_n8n,
+    "ml_token": _status_ml_token,
+    "pausa": _status_pausa,
+    "quarentena": _status_quarentena,
+    "janela": _status_janela,
+    "papel": _status_papel,
+}
+
+# Estado dos críticos na última consulta — ver _registrar_mudanca_de_saude().
+_ultimos_criticos: set[str] = set()
+
+
+def montar_status() -> dict:
+    """Monta o payload de /health (mesma resposta para o endpoint e para a
+    linha de comando — duas montagens paralelas divergiriam na primeira
+    mudança).
+
+    Cada componente é coletado isolado: um import quebrado em `core.papel`
+    derrubava o /health inteiro com 500 e o `status.ps1` dizia apenas
+    "Healthcheck OFF", justamente quando havia algo a relatar. Agora o
+    componente que estourou vira `{"ok": false, "erro": ...}` e o resto da
+    resposta continua servindo.
+    """
+    payload: dict = {}
+    for nome, coletor in _COMPONENTES.items():
+        try:
+            payload[nome] = coletor()
+        except Exception as e:
+            log.warning("healthcheck: componente %s falhou: %s", nome, e)
+            payload[nome] = {"ok": False, "erro": f"{type(e).__name__}: {e}"[:200]}
+
+    # `payload["chrome"]["ok"] or True` estava na lista: constante
+    # True, sem efeito nenhum -- o Chrome dedicado é opcional desde
+    # que o WhatsApp passou a usar o app nativo (ver startup.py), e
+    # a intenção era justamente NÃO deixá-lo reprovar a saúde. Fica
+    # explícito agora, em vez de disfarçado de condição.
+    criticos = {
+        "telegram": bool(payload["telegram"].get("ok")),
+        "rastreador": bool(payload["rastreador"].get("ok")),
+    }
+    payload["ok"] = all(criticos.values())
+    payload["criticos_com_falha"] = [k for k, v in criticos.items() if not v]
+    _registrar_mudanca_de_saude(set(payload["criticos_com_falha"]))
+    return payload
+
+
+def _registrar_mudanca_de_saude(falhando: set[str]) -> None:
+    """Grava no log da Área de Trabalho a MUDANÇA de estado, não o estado.
+
+    /health é consultado pelo status.ps1, pelo heartbeat do n8n e pelo
+    watchdog — registrar a cada consulta encheria o arquivo com a mesma
+    linha centenas de vezes por dia, e um log que ninguém consegue ler é
+    um log que não existe. O que interessa é a transição: quando um
+    componente crítico cai e quando ele volta.
+    """
+    global _ultimos_criticos
+    if falhando == _ultimos_criticos:
+        return
+    caiu = sorted(falhando - _ultimos_criticos)
+    voltou = sorted(_ultimos_criticos - falhando)
+    _ultimos_criticos = set(falhando)
+    try:
+        if caiu:
+            from core.error_logger import registrar_evento  # noqa: PLC0415
+            registrar_evento(
+                "healthcheck.componente_critico_caiu",
+                "componente(s) crítico(s) fora do ar: " + ", ".join(caiu),
+            )
+        if voltou:
+            from core import execucao_log  # noqa: PLC0415
+            execucao_log.etapa("healthcheck: " + ", ".join(voltou) + " voltou ao normal")
+    except Exception:
+        pass
+
+
 class _Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return  # silencia log de requests HTTP
@@ -265,34 +357,8 @@ class _Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            payload = {
-                "chrome": _status_chrome(),
-                "whatsapp": _status_whatsapp(),
-                "telegram": _status_telegram(),
-                "rastreador": _status_rastreador(),
-                "sistema": _status_sistema(),
-                "erros": _status_erros(),
-                "ultimo_post": _status_ultimo_post(),
-                "n8n": _status_n8n(),
-                "ml_token": _status_ml_token(),
-                "pausa": _status_pausa(),
-                "quarentena": _status_quarentena(),
-                "janela": _status_janela(),
-                "papel": _status_papel(),
-            }
-            # `payload["chrome"]["ok"] or True` estava na lista: constante
-            # True, sem efeito nenhum -- o Chrome dedicado é opcional desde
-            # que o WhatsApp passou a usar o app nativo (ver startup.py), e
-            # a intenção era justamente NÃO deixá-lo reprovar a saúde. Fica
-            # explícito agora, em vez de disfarçado de condição.
-            criticos = {
-                "telegram": payload["telegram"]["ok"],
-                "rastreador": payload["rastreador"]["ok"],
-            }
-            overall_ok = all(criticos.values())
-            payload["ok"] = overall_ok
-            payload["criticos_com_falha"] = [k for k, v in criticos.items() if not v]
-            self._resp(200 if overall_ok else 503, payload)
+            payload = montar_status()
+            self._resp(200 if payload["ok"] else 503, payload)
             return
         if self.path.startswith("/errors"):
             # /errors?limit=50 — últimos erros em JSON (para n8n)
@@ -578,12 +644,25 @@ def _servir():
     try:
         ThreadingHTTPServer((BIND, PORTA), _Handler).serve_forever()
     except Exception as e:
+        # Só um log.warning aqui era um ponto cego: com a porta 8724 ocupada
+        # (bot anterior meio morto, outro programa), o healthcheck não subia,
+        # o status.ps1 mostrava "Healthcheck OFF" e nada dizia POR QUE.
         log.warning("Healthcheck não iniciou: %s", e)
+        try:
+            from core.error_logger import log_erro  # noqa: PLC0415
+            log_erro("healthcheck.nao_subiu", e, {"bind": BIND, "porta": PORTA})
+        except Exception:
+            pass
 
 
 def iniciar_healthcheck(com_n8n: bool = True) -> None:
     threading.Thread(target=_servir, name="healthcheck", daemon=True).start()
     log.info("Healthcheck em http://%s:%d/health", BIND, PORTA)
+    try:
+        from core import execucao_log  # noqa: PLC0415
+        execucao_log.etapa(f"healthcheck escutando em http://{BIND}:{PORTA}/health")
+    except Exception:
+        pass
     if not com_n8n:
         return
     # Heartbeat para o n8n: é o que permite ao watchdog na nuvem perceber
@@ -594,3 +673,39 @@ def iniciar_healthcheck(com_n8n: bool = True) -> None:
         iniciar_heartbeat(int(os.getenv("N8N_HEARTBEAT_S", "300")))
     except Exception as e:
         log.warning("Heartbeat n8n não iniciou: %s (não crítico)", e)
+
+
+# ── Modo linha de comando ────────────────────────────────────────────────────
+
+def verificar_uma_vez() -> dict:
+    """Roda a verificação completa uma vez e deixa o bloco no log da Área de
+    Trabalho. É o que a rotina diária executa."""
+    from core import execucao_log  # noqa: PLC0415
+
+    with execucao_log.abrir_execucao("healthcheck — verificação avulsa") as ex:
+        status = montar_status()
+        for nome in sorted(_COMPONENTES):
+            bloco = status.get(nome) or {}
+            if "ok" not in bloco:
+                continue  # sistema/erros/ultimo_post não têm veredito próprio
+            ok = bool(bloco.get("ok"))
+            motivo = bloco.get("erro") or bloco.get("motivo") or ""
+            ex.etapa(f"{nome}: {'OK' if ok else 'FORA'}", ok=ok, detalhe=str(motivo))
+        if status["ok"]:
+            ex.definir_resumo("todos os componentes críticos respondendo")
+        else:
+            ex.erro("componentes críticos com falha",
+                    mensagem=", ".join(status["criticos_com_falha"]),
+                    onde="core/healthcheck.py → montar_status()")
+    return status
+
+
+if __name__ == "__main__":
+    import sys  # noqa: PLC0415
+
+    # Rodando como script (`python core/healthcheck.py`), sys.path[0] é core/
+    # e os `from core.X import ...` de dentro dos coletores não resolvem.
+    sys.path.insert(0, _BASE)
+    _status = verificar_uma_vez()
+    print(json.dumps(_status, ensure_ascii=False, indent=2))
+    sys.exit(0 if _status["ok"] else 1)

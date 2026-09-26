@@ -80,10 +80,28 @@ não fica sem imagem; o que se evita é perder a oferta inteira porque o
 ## Regra 9 — Logs e diagnóstico
 
 `data/bot.log` (log corrente ativo — checar este, não `data/startup.log` que
-é legado de antes da migração para D:\), `data/errors.jsonl` (estruturado),
-relatório legível em `C:\Users\Daniel\Desktop\problemas de execucao.txt`
-(gerado por `gerar_relatorio_problemas.py`, atualizado toda madrugada por
-`verificacao_diaria.py`). Healthcheck em `http://127.0.0.1:8724/health`.
+é legado de antes da migração para D:\), `data/errors.jsonl` (estruturado) e
+a pasta **`problemas de execução`** na Área de Trabalho, que é o que o Daniel
+abre. O caminho dela sai de `core/execucao_log.py` — **um lugar só**, nunca
+montado à mão com `~/Desktop` (erra com OneDrive e com o nome em português) —
+e dentro dela ficam três arquivos:
+
+- `log de execução.txt`: um bloco por execução, terminando em `RESULTADO` com
+  `SEM ERROS`, `ERRO` (mais arquivo/função/linha da falha) ou `INTERROMPIDA`
+  (processo morto antes de fechar o bloco — desligamento da Regra 15, queda).
+  Escrito por `core/execucao_log.py`: `abrir_execucao()` em volta de cada
+  unidade de trabalho (uma rodada, a subida do `startup.py`, um healthcheck
+  avulso), `etapa()` nos pontos alcançados e `erro()` no ponto de falha.
+- `erros detalhados.txt`: um bloco por erro com traceback (`core/error_logger.py`).
+- `relatório de problemas.txt`: resumo de 24h (`gerar_relatorio_problemas.py`,
+  atualizado toda madrugada por `verificacao_diaria.py`).
+
+Regra prática: **execução que quebra nunca pode aparecer como "SEM ERROS", e
+execução que morre no meio nunca pode desaparecer do log** — quem captura uma
+exceção e segue (Regra 6) registra o ponto de falha por `log_erro()` /
+`registrar_evento()`, que alimentam o bloco da execução em curso. Healthcheck
+em `http://127.0.0.1:8724/health`, ou `python -m core.healthcheck` para
+conferir sem subir o bot.
 
 ## Regra 10 — Operacional (restart/deploy)
 

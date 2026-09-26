@@ -11,6 +11,10 @@ Se a geração falhar → produto enfileirado como pendente, NÃO publicado.
 Como usar:
     python rastreador.py              → roda uma vez agora
     python rastreador.py --loop 60   → roda a cada 60 minutos continuamente
+
+Cada rodada deixa um bloco no log da Área de Trabalho
+("problemas de execução/log de execução.txt") dizendo se houve erro e em que
+ponto — ver core/execucao_log.py.
 """
 import sys
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -30,6 +34,7 @@ from telegram import Bot
 
 from core.error_logger import setup_logging
 setup_logging()
+from core import execucao_log
 from core.scorer import score_inteligente
 from core.validador import validar
 from core.scheduler import e_bom_momento, resumo_horario
@@ -413,12 +418,15 @@ async def processar_categoria(
 async def rodar_uma_vez() -> None:
     t_inicio = time.time()
     db.inicializar()
+    execucao_log.etapa("banco de dados pronto")
     removidos = db.limpar_antigos(dias=2)
     if removidos:
         log(f"🧹 Limpeza automática: {removidos} produto(s) antigos removidos do banco")
 
     if not TOKEN_TELEGRAM:
         print("❌ TOKEN_TELEGRAM não definido no .env")
+        execucao_log.erro("configuração do .env",
+                          mensagem="TOKEN_TELEGRAM não definido — nada pode ser publicado")
         return
 
     # Pausa operacional (bandeira em data/pausado.flag, criável pelo n8n via
@@ -429,6 +437,9 @@ async def rodar_uma_vez() -> None:
         info_pausa = pausa.info()
         log(f"⏸️  Publicação pausada desde {info_pausa.get('pausado_em', '?')} "
             f"({info_pausa.get('motivo', '')}) — nada a fazer nesta rodada.")
+        execucao_log.resumo("rodada pulada: publicação pausada "
+                            f"({info_pausa.get('motivo', '')})")
+        execucao_log.etapa("publicação pausada — rodada pulada de propósito", ok=False)
         return
 
     # Papel desta instancia (core/papel.py). No PC nao muda nada — sem a
@@ -441,6 +452,8 @@ async def rodar_uma_vez() -> None:
     _bloqueado, _motivo_papel = _papel.bloqueado()
     if _bloqueado:
         log(f"\u23f8\ufe0f  Rodada ML nao publica: {_motivo_papel}")
+        execucao_log.resumo(f"rodada pulada: {_motivo_papel}")
+        execucao_log.etapa(f"papel desta instância não publica: {_motivo_papel}", ok=False)
         return
 
     # Pré-checagem de DNS. Sem rede, cada passo seguinte gastaria dezenas de
@@ -449,6 +462,8 @@ async def rodar_uma_vez() -> None:
     # com causa nomeada no log e no relatório de problemas.
     if not dns_ok():
         log("🌐 Sem resolução de DNS — pulando a rodada (rede fora do ar).")
+        execucao_log.erro("rede", mensagem="DNS indisponível — rodada pulada "
+                                           "(o PC está sem internet)")
         db.registrar_erro("rede", "DNS indisponível — rodada pulada")
         n8n.emitir("rodada_pulada", {"motivo": "dns_indisponivel"})
         return
@@ -481,6 +496,8 @@ async def rodar_uma_vez() -> None:
     ordem = CATEGORIAS_ATIVAS[:]
     random.shuffle(ordem)
     log(f"  Ordem desta rodada: {' → '.join(ordem)}")
+    execucao_log.etapa("varredura das categorias iniciada",
+                       detalhe=" → ".join(ordem))
 
     categorias_postadas: set[str] = set()
 
@@ -529,6 +546,14 @@ async def rodar_uma_vez() -> None:
         f"{contadores['links_falharam']} falha(s) de link."
     )
     log(f"⏱️  Tempo total: {time.time() - t_inicio:.1f}s")
+    _resumo_rodada = (
+        f"{contadores['publicados']} publicado(s), "
+        f"{contadores['links_gerados']} link(s) de afiliado, "
+        f"{contadores['links_falharam']} falha(s) de link, "
+        f"{contadores['duplicatas']} duplicata(s), {contadores['erros']} erro(s)"
+    )
+    execucao_log.etapa("rodada concluída", detalhe=_resumo_rodada)
+    execucao_log.resumo(_resumo_rodada)
 
     # Resumo da rodada para o n8n (painel, relatório diário e watchdog).
     n8n.emitir("rodada_concluida", {
@@ -615,14 +640,24 @@ def main() -> None:
         else:
             log(f"Modo contínuo: a cada {args.loop} minuto(s). Ctrl+C para parar.")
         while True:
-            try:
-                asyncio.run(rodar_uma_vez())
-            except Exception as e:
-                log(f"⚠️  Rodada falhou inesperadamente: {e}")
-                db.registrar_erro("rodada_falhou", str(e), exc=e)
-                n8n.emitir("rodada_falhou", {
-                    "erro": f"{type(e).__name__}: {e}"[:300], "fonte": "mercadolivre",
-                })
+            # Um bloco por rodada, não um por processo: em --loop o processo
+            # fica de pé por horas, e um bloco só, aberto do café da manhã
+            # até o desligamento da Regra 15, não responderia "a rodada das
+            # 14h deu erro?" — que é a pergunta que o log existe pra responder.
+            with execucao_log.abrir_execucao("rastreador ML — uma rodada"):
+                try:
+                    asyncio.run(rodar_uma_vez())
+                except Exception as e:
+                    log(f"⚠️  Rodada falhou inesperadamente: {e}")
+                    # Registra o ponto de falha ANTES do banco: se o
+                    # registrar_erro() abaixo estourar (banco travado), o
+                    # espelho dele para o log da Área de Trabalho não roda e
+                    # a rodada apareceria como "SEM ERROS".
+                    execucao_log.erro("rodada do rastreador", exc=e)
+                    db.registrar_erro("rodada_falhou", str(e), exc=e)
+                    n8n.emitir("rodada_falhou", {
+                        "erro": f"{type(e).__name__}: {e}"[:300], "fonte": "mercadolivre",
+                    })
             if args.random:
                 proximo = random.randint(args.loop_min, args.loop_max)
             else:
@@ -630,7 +665,8 @@ def main() -> None:
             log(f"\n⏳ Próxima rodada em {proximo} minuto(s)...")
             time.sleep(proximo * 60)
     else:
-        asyncio.run(rodar_uma_vez())
+        with execucao_log.abrir_execucao("rastreador ML — execução única"):
+            asyncio.run(rodar_uma_vez())
 
 
 if __name__ == "__main__":

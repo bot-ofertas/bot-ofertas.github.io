@@ -5,7 +5,10 @@ ERROR LOGGER — grava erros em JSON estruturado para debug e integração exter
 Cada erro é gravado em data/errors.jsonl (uma linha JSON por erro) com:
   timestamp, level, module, function, file, line, exception, traceback, context
 
-Também registra no data/bot.log tradicional (texto).
+Também registra no data/bot.log tradicional (texto), no arquivo legível
+"erros detalhados.txt" da pasta "problemas de execução" da Área de Trabalho
+(ver core/execucao_log.py) e como ponto de falha do bloco da execução em
+curso — é assim que o log de execução responde "em que ponto deu erro".
 
 Uso:
     from core.error_logger import setup_logging, log_erro
@@ -26,6 +29,7 @@ import traceback
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
+from core import execucao_log
 from core.segredos import FiltroDeSegredos, redigir
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,20 +39,18 @@ os.makedirs(LOG_DIR, exist_ok=True)
 TXT_LOG = os.path.join(LOG_DIR, "bot.log")
 JSON_LOG = os.path.join(LOG_DIR, "errors.jsonl")
 
-# Bloco de notas humano-legível na Área de Trabalho — para o usuário revisar
-def _desktop_path() -> str:
-    for env in ("USERPROFILE", "HOME"):
-        p = os.environ.get(env)
-        if p:
-            d = os.path.join(p, "Desktop")
-            if os.path.isdir(d):
-                return d
-            d = os.path.join(p, "Área de Trabalho")
-            if os.path.isdir(d):
-                return d
-    return LOG_DIR  # fallback: grava em data/
 
-DESKTOP_TXT = os.path.join(_desktop_path(), "Problemas de execução para corrigir.txt")
+def _arquivo_desktop() -> str:
+    """Bloco de notas humano-legível, dentro da pasta única da Área de Trabalho.
+
+    Era um .txt solto na mesa, resolvido aqui por USERPROFILE/Desktop — que
+    erra quando o OneDrive assume a pasta ou quando o Windows em português a
+    mostra como "Área de Trabalho", e nesses casos o arquivo caía em data/
+    sem ninguém notar. Agora quem resolve o caminho é
+    `core/execucao_log.pasta_problemas()`, um lugar só, e o arquivo fica ao
+    lado do log de execução em vez de competir com ele por atenção.
+    """
+    return execucao_log.caminho_erros_detalhados()
 
 
 def setup_logging(nivel: int = logging.INFO) -> None:
@@ -135,6 +137,18 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
         _gravar_desktop_txt(entrada)
     except Exception:
         pass
+    # Ponto de falha do bloco da execução em curso (no-op se não houver uma
+    # aberta). Sem isto, o log de execução diria "SEM ERROS" numa rodada em
+    # que um envio falhou: quem captura a exceção chama log_erro() e segue,
+    # justamente para o Telegram não depender do WhatsApp (Regra 6).
+    try:
+        execucao_log.erro(
+            operacao, exc=exc,
+            onde=f"{entrada['arquivo']} → {entrada['funcao']}(), linha {entrada['linha']}"
+            if entrada["arquivo"] else "",
+        )
+    except Exception:
+        pass
     # Texto tradicional
     logging.getLogger("bot").error(
         "[%s] %s: %s @ %s:%d ctx=%s",
@@ -147,8 +161,9 @@ def log_erro(operacao: str, exc: BaseException, contexto: dict | None = None,
 
 def _gravar_desktop_txt(e: dict) -> None:
     """Anexa o erro em formato humano-legível no bloco de notas do Desktop."""
-    header_novo = not os.path.exists(DESKTOP_TXT)
-    with open(DESKTOP_TXT, "a", encoding="utf-8") as f:
+    destino = _arquivo_desktop()
+    header_novo = not os.path.exists(destino)
+    with open(destino, "a", encoding="utf-8") as f:
         if header_novo:
             f.write("=" * 78 + "\n")
             f.write("  PROBLEMAS DE EXECUÇÃO PARA CORRIGIR — Bot Ofertas\n")
@@ -204,6 +219,10 @@ def registrar_evento(operacao: str, mensagem: str, contexto: dict | None = None)
         pass
     try:
         _gravar_desktop_txt(entrada)
+    except Exception:
+        pass
+    try:
+        execucao_log.erro(operacao, mensagem=str(mensagem))
     except Exception:
         pass
     _espelhar_no_n8n(entrada)

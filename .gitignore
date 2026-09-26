@@ -16,6 +16,10 @@ envios.log
 rastreador.log
 monitor.log
 data/monitor_status.json
+# ponteiro para a pasta da Area de Trabalho (varia por maquina/usuario)
+data/caminho_log_execucao.txt
+# fallback do log de execucao quando nao existe Area de Trabalho (Linux/deploy)
+data/problemas de execução/
 data/rastreador_auto.log
 data/ml_profile/
 data/bot_ofertas.db
