@@ -89,6 +89,16 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_segredos.py
 
+      - name: Teste do envio pela Evolution API (WhatsApp)
+        # A Regra 16 elegeu a Evolution API como o unico envio possivel no
+        # servidor, e todo o caminho dela quebrava em quatro pontos ao mesmo
+        # tempo — inclusive o script da configuracao inicial, que abortava
+        # mandando configurar a chave que ja estava no .env. Este passo trava
+        # tambem a confirmacao antes de mandar mensagem de verdade (Regra 5).
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_whatsapp_api.py
+
       - name: Teste de sistema (bot + n8n montados)
         # Sobe o healthcheck, um "n8n" local que executa os Code nodes reais
         # dos workflows, e faz o caminho inteiro: evento assinado -> n8n ->
