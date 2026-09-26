@@ -97,6 +97,15 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python tests/test_sistema_completo.py
 
+      - name: Terceiro marketplace (Magalu) e funil de publicacao
+        # Duas metades da mesma pergunta: "por que nao saem as 3 ofertas,
+        # uma de cada loja?". O Magalu nunca tinha sido implementado (a
+        # terceira oferta nao existia), e nenhum rastreador contava onde as
+        # ofertas se perdiam (nao dava para provar isso sem ler o codigo).
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tests/test_magalu_funil.py
+
       - name: Conferir que todo teste em tests/ roda neste workflow
         # Os testes são chamados um a um, por nome, para que a falha diga
         # QUAL área quebrou em vez de "pytest falhou". O preço disso é que um

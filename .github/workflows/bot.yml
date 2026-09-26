@@ -144,6 +144,7 @@ jobs:
         run: |
           python tests/test_qualidade.py
           python tests/test_n8n_integracao.py
+          python tests/test_magalu_funil.py
 
       - name: Gerar banner ALERTA CUPOM
         if: steps.janela.outputs.pular != '1'
@@ -156,6 +157,25 @@ jobs:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           ML_AFFILIATE_TOOL_ID: ${{ secrets.ML_AFFILIATE_TOOL_ID }}
+          # Quantas ofertas esta rodada publica, POR LOJA.
+          #
+          # O padrao do codigo e 1, que e o certo para o PC: ele roda a cada
+          # ~20 min, entao "uma de cada loja por rodada" (pedido do Daniel em
+          # 2026-09-17) distribui bem ao longo do dia. Na nuvem o mesmo 1
+          # estrangula o canal: o GitHub entrega ~1 das 7 rodadas agendadas,
+          # entao 1 por loja vira DUAS ofertas no dia inteiro.
+          #
+          # Medido em 20-23/09/2026: um unico commit de site por dia
+          # (09:41, 10:32, 09:43, 09:51 UTC) — quatro dias seguidos com uma
+          # rodada so. Aumentar a frequencia do cron nao e opcao: a
+          # organizacao ja foi sinalizada pelo GitHub por atividade
+          # automatizada excessiva (ver o comentario do `schedule` acima).
+          # Publicar mais POR rodada nao aumenta a frequencia de execucao.
+          #
+          # Iguais entre as lojas de proposito: o pedido era equilibrio entre
+          # marketplaces, nao volume de um so. Ajustavel sem mexer em codigo
+          # pelas variaveis do repositorio (Settings > Variables).
+          MAX_POR_RODADA_ML: ${{ vars.MAX_POR_RODADA_ML || '3' }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           # n8n: as rodadas da nuvem (janela em que o PC fica desligado)
@@ -188,6 +208,25 @@ jobs:
           TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
           CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
           AMAZON_AFFILIATE_TAG: ${{ secrets.AMAZON_AFFILIATE_TAG }}
+          # Quantas ofertas esta rodada publica, POR LOJA.
+          #
+          # O padrao do codigo e 1, que e o certo para o PC: ele roda a cada
+          # ~20 min, entao "uma de cada loja por rodada" (pedido do Daniel em
+          # 2026-09-17) distribui bem ao longo do dia. Na nuvem o mesmo 1
+          # estrangula o canal: o GitHub entrega ~1 das 7 rodadas agendadas,
+          # entao 1 por loja vira DUAS ofertas no dia inteiro.
+          #
+          # Medido em 20-23/09/2026: um unico commit de site por dia
+          # (09:41, 10:32, 09:43, 09:51 UTC) — quatro dias seguidos com uma
+          # rodada so. Aumentar a frequencia do cron nao e opcao: a
+          # organizacao ja foi sinalizada pelo GitHub por atividade
+          # automatizada excessiva (ver o comentario do `schedule` acima).
+          # Publicar mais POR rodada nao aumenta a frequencia de execucao.
+          #
+          # Iguais entre as lojas de proposito: o pedido era equilibrio entre
+          # marketplaces, nao volume de um so. Ajustavel sem mexer em codigo
+          # pelas variaveis do repositorio (Settings > Variables).
+          MAX_POR_RODADA_AMAZON: ${{ vars.MAX_POR_RODADA_AMAZON || '3' }}
           WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
@@ -200,6 +239,35 @@ jobs:
             echo "AMAZON_AFFILIATE_TAG nao configurada — pulando Amazon."
           fi
         continue-on-error: true   # Amazon não bloqueia o ML
+
+      - name: Rodar ofertas Magazine Luiza (se configurado)
+        if: steps.janela.outputs.pular != '1'
+        # Terceira loja. Mesmo teto e mesma politica de isolamento da
+        # Amazon: roda ANTES dos passos que salvam o banco de deduplicacao
+        # e atualizam o site, entao o teto proprio existe para o
+        # `timeout-minutes` do JOB nunca ser quem mata a rodada — se fosse,
+        # o banco nao seria salvo e a rodada seguinte REPUBLICARIA tudo.
+        timeout-minutes: 6
+        env:
+          TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
+          CANAL_GERAL: ${{ secrets.CANAL_GERAL }}
+          # Vitrine do Parceiro Magalu. Nao e segredo de autenticacao (ela
+          # aparece na URL publica da loja), mas fica em `vars` e nao no
+          # arquivo para o valor do Daniel nao entrar no historico do Git.
+          MAGALU_VITRINE: ${{ vars.MAGALU_VITRINE }}
+          MAX_POR_RODADA_MAGALU: ${{ vars.MAX_POR_RODADA_MAGALU || '3' }}
+          WHATSAPP_GROUP_ID: ${{ secrets.WHATSAPP_GROUP_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_TOKEN: ${{ secrets.N8N_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          if [ -n "$MAGALU_VITRINE" ]; then
+            python rastreador_magalu.py
+          else
+            echo "MAGALU_VITRINE nao configurada — pulando Magalu."
+          fi
+        continue-on-error: true   # Magalu não bloqueia ML nem Amazon
 
       - name: Salvar banco atualizado no cache
         uses: actions/cache/save@v4

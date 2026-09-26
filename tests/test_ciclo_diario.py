@@ -588,9 +588,222 @@ if os.path.isfile(_apl):
            and "& $git config --global --add safe.directory" not in _t,
            "confiar numa pasta e decisao do dono, nao do script")
 
+    # 16. Bug real de 19/09/2026: o passo 2 parou duas vezes seguidas com
+    #     "ha uma rodada de publicacao em andamento. Espere ela terminar" e
+    #     nada mais. Sem a hora de inicio, sem dizer se o processo dono da
+    #     rodada ainda vive, e sem dizer que a trava se solta sozinha em
+    #     20 min. Uma rodada de verdade e uma rodada que morreu com o
+    #     processo tinham a MESMA mensagem, e so uma delas se resolve
+    #     esperando.
+    checar("a trava de rodada diz ha quanto tempo ela comecou",
+           "detalhe_execucao_em_andamento" in _t and "comecou ha" in _t,
+           "a trava volta a bloquear sem dizer sobre o que")
+    checar("a trava diz se o processo dono da rodada ainda vive",
+           "processos_vivos" in _t and "checagem_confiavel" in _t,
+           "sem isso, rodada viva e rodada morta sao indistinguiveis")
+    checar("a trava avisa que se solta sozinha",
+           "se solta sozinha" in _t,
+           "esperar sem prazo foi o que travou o bot do Daniel")
+    # O JSON tem de vir marcado: `import startup` imprime a linha do logger
+    # ANTES dele, e sem a marca o ConvertFrom-Json falha e o script cai no
+    # caminho antigo SEM AVISAR -- a melhoria vira no-op silencioso.
+    checar("o JSON do diagnostico vem marcado para nao se misturar ao log",
+           '"##DET##"' in _t and "-like \"##DET##*\"" in _t,
+           "a linha do logger se mistura ao JSON e o diagnostico e descartado")
+    checar("ainda funciona com codigo antigo (sem a funcao nova)",
+           "execucao_em_andamento" in _t and "codigo antigo" in _t,
+           "um checkout mais velho ficaria sem o passo 2")
+
     # Regra 10: o processo que sobe e o PAI.
     checar("sobe pelo start.ps1 (processo pai), nao pelos filhos",
            "start.ps1" in _t and "rastreador.py" not in _t.split("Passo 9")[-1])
+
+# ── janelas pretas do Windows ────────────────────────────────────────────
+# Bug real (20/09/2026): o Daniel mandou print de tres janelas pretas VAZIAS
+# empilhadas em cima da tela dele. Sao os rastreadores: o startup.py sobe
+# DESACOPLADO (garantir_bot.py usa DETACHED_PROCESS para o bot sobreviver ao
+# fim da tarefa agendada), entao nao ha console para os filhos herdarem e o
+# Windows cria uma janela nova para cada python.exe. Vazias porque stdout e
+# stderr de cada filho ja vao para arquivo de log.
+print("\n[9] startup.py — filhos sem janela preta no Windows")
+
+_st = os.path.join(RAIZ, "startup.py")
+checar("startup.py existe", os.path.isfile(_st))
+if os.path.isfile(_st):
+    _stx = open(_st, encoding="utf-8").read()
+    import ast as _ast
+
+    _sem_protecao = []
+    for _no in _ast.walk(_ast.parse(_stx)):
+        if (isinstance(_no, _ast.Call) and isinstance(_no.func, _ast.Attribute)
+                and _no.func.attr == "Popen"):
+            # NAO usar `_ok` aqui: e o contador global de verificacoes da
+            # suite (ver checar()). Sobrescreve-lo zera a contagem e o
+            # resumo final mente — aconteceu ao escrever este bloco.
+            _protegido = any(
+                k.arg is None and getattr(k.value, "id", "") == "_SEM_JANELA"
+                for k in _no.keywords)
+            _protegido = _protegido or any(
+                k.arg == "creationflags" for k in _no.keywords)
+            if not _protegido:
+                _sem_protecao.append(_no.lineno)
+
+    checar("todo subprocess.Popen do startup.py evita abrir janela",
+           not _sem_protecao,
+           f"Popen sem protecao nas linhas {_sem_protecao} — volta a piscar "
+           f"janela preta na tela do Daniel")
+
+    checar("a protecao e CREATE_NO_WINDOW, so no Windows",
+           "CREATE_NO_WINDOW" in _stx and 'os.name == "nt"' in _stx,
+           "no Linux/CI o flag nem existe no modulo subprocess")
+
+    # pythonw.exe e a "solucao" obvia para o mesmo problema e MATARIA o bot:
+    # rastreador.py faz sys.stdout.reconfigure() no topo, e sem console
+    # sys.stdout e None -> AttributeError no import.
+    checar("startup.py NAO usa pythonw para subir os filhos",
+           "pythonw" not in _stx.replace("NAO troque isto por pythonw.exe", ""),
+           "pythonw mata rastreador.py no import (sys.stdout.reconfigure)")
+    checar("o perigo do pythonw fica registrado no codigo",
+           "pythonw" in _stx and "reconfigure" in _stx,
+           "sem o aviso, alguem troca por pythonw e derruba os 3 rastreadores")
+
+# E a armadilha do outro lado: quem faz sys.stdout.reconfigure() no topo NAO
+# pode ser lancado sem console. Este teste existe para que, se alguem um dia
+# quiser mesmo ir para pythonw, saiba exatamente quais arquivos tratar antes.
+_frageis = []
+for _nome in ("rastreador.py", "rastreador_amazon.py", "campanha_ferramentas.py",
+              "whatsapp_queue_sender.py"):
+    _cam = os.path.join(RAIZ, _nome)
+    if os.path.isfile(_cam):
+        _txt = open(_cam, encoding="utf-8").read()
+        if "sys.stdout.reconfigure" in _txt or "sys.stderr.reconfigure" in _txt:
+            _frageis.append(_nome)
+
+checar("os filhos que exigem console estao mapeados",
+       True,
+       "")
+print(f"  INFO   exigem console (sys.std*.reconfigure): {_frageis or 'nenhum'}")
+
+
+# ── stop.ps1 mata TODOS os filhos ────────────────────────────────────────
+# Bug real (20/09/2026): a lista de padroes tinha so "*rastreador.py*", que
+# nao casa com "rastreador_amazon.py". Tres dos quatro filhos sobreviviam a
+# cada "Bot parado." — e orfao vivo continua abrindo rodada no banco, entao
+# `execucao_em_andamento()` seguia dizendo SIM e o passo 2 do aplicar_tudo.ps1
+# recusava reiniciar. O script mandava esperar uma rodada que era de um
+# processo que ele mesmo deveria ter matado.
+print("\n[10] stop.ps1 — nenhum filho sobra vivo")
+
+_stp = os.path.join(RAIZ, "stop.ps1")
+checar("stop.ps1 existe", os.path.isfile(_stp))
+if os.path.isfile(_stp):
+    _stpx = open(_stp, encoding="utf-8-sig").read()
+
+    # Os quatro filhos que startup.py sobe, extraidos do PROPRIO startup.py —
+    # se alguem adicionar um quinto la, este teste cobra o stop.ps1 sozinho.
+    _stx2 = open(os.path.join(RAIZ, "startup.py"), encoding="utf-8").read()
+    import re as _re2
+    _filhos = sorted(set(_re2.findall(r'BASE,\s*"([a-z_]+\.py)"', _stx2)))
+    checar("achei os filhos no startup.py", len(_filhos) >= 4,
+           f"esperava 4+, achei {_filhos}")
+
+    _nao_cobertos = []
+    for _f2 in _filhos:
+        # `-like "*X*"` casa por substring: o padrao precisa estar no arquivo
+        # E casar com a linha de comando real do filho.
+        _linha_real = f"python.exe -u D:/bot_ofertas/{_f2} --random"
+        _casa = False
+        for _pad in _re2.findall(r'"\*([^"*]+)\*"', _stpx):
+            if _pad in _linha_real:
+                _casa = True
+                break
+        if not _casa:
+            _nao_cobertos.append(_f2)
+
+    checar("stop.ps1 casa com TODOS os filhos do startup.py",
+           not _nao_cobertos,
+           f"ficariam orfaos: {_nao_cobertos} — e orfao vivo trava o passo 2 "
+           f"do aplicar_tudo.ps1 para sempre")
+
+    checar("stop.ps1 confere em vez de so anunciar",
+           "$sobrou" in _stpx and "ainda ha processo do bot vivo" in _stpx,
+           "'Bot parado.' sem olhar foi o que escondeu os orfaos")
+
+# A trava do passo 2 precisa de saida de emergencia: com 3 rastreadores a
+# cada ~20 min quase sempre ha rodada aberta, e sem escape o bot nunca pode
+# ser atualizado — a protecao vira armadilha.
+_aplx = open(os.path.join(RAIZ, "aplicar_tudo.ps1"), encoding="utf-8-sig").read()
+checar("aplicar_tudo.ps1 tem saida de emergencia (-Forcar)",
+       "[switch]$Forcar" in _aplx and "$det.em_andamento -and $Forcar" in _aplx,
+       "sem escape, uma rodada aberta impede aplicar correcao para sempre")
+checar("-Forcar avisa o que esta atropelando",
+       "seguindo por causa de -Forcar" in _aplx
+       and "sai pela metade" in _aplx,
+       "atropelar em silencio e pior do que a trava")
+checar("a mensagem da trava ensina o -Forcar",
+       "aplicar_tudo.ps1 -Forcar" in _aplx,
+       "quem esta preso precisa saber que existe saida")
+
+
+# ── corrigir_tudo.ps1 — o resgate quando o aplicar_tudo fica inalcancavel ─
+print("\n[11] corrigir_tudo.ps1 — nao depende de nada do disco antigo")
+
+_cor = os.path.join(RAIZ, "corrigir_tudo.ps1")
+checar("corrigir_tudo.ps1 existe", os.path.isfile(_cor))
+if os.path.isfile(_cor):
+    _corx = open(_cor, encoding="utf-8-sig").read()
+
+    # A razao de existir: se ele chamasse stop.ps1/start.ps1 do disco, seria
+    # inutil justamente no caso que motiva o script (disco desatualizado).
+    for _dep in ("stop.ps1", "start.ps1", "aplicar_tudo.ps1"):
+        checar(f"nao executa {_dep} do disco",
+               f".\\{_dep}" not in _corx and f"Join-Path $Base \"{_dep}\"" not in _corx,
+               "depender do disco antigo anula o proposito do resgate")
+
+    # Mesma armadilha do stop.ps1: precisa casar com os QUATRO filhos.
+    _stx3 = open(os.path.join(RAIZ, "startup.py"), encoding="utf-8").read()
+    import re as _re3
+    _filhos3 = sorted(set(_re3.findall(r'BASE,\s*"([a-z_]+\.py)"', _stx3)))
+    _faltam = [f for f in _filhos3 if f not in _corx]
+    checar("mata todos os filhos do startup.py",
+           not _faltam, f"ficariam vivos: {_faltam}")
+
+    checar("sobe com janela oculta",
+           "-WindowStyle Hidden" in _corx,
+           "sem isso o proprio resgate abre a janela que veio consertar")
+    checar("confere que o bot subiu em vez de so anunciar",
+           "o bot nao subiu" in _corx and "Get-Content $log -Tail" in _corx,
+           "anunciar sem olhar foi o defeito do stop.ps1")
+    # So o codigo executavel: o comentario que EXPLICA por que nao usar
+    # `reset --hard` contem a frase, e casar com ele deixaria o teste verde
+    # mesmo com o comando de volta. Mesma armadilha do _DIAG_SCRIPT da Amazon.
+    _cor_codigo = "\n".join(
+        l for l in _corx.split("\n") if not l.strip().startswith("#"))
+    checar("nao apaga trabalho local (sem reset --hard)",
+           "reset --hard" not in _cor_codigo and "merge --ff-only" in _cor_codigo,
+           "reset --hard descartaria commit local do Daniel sem perguntar")
+    checar("trata a pasta recusada pelo git",
+           "dubious ownership" in _corx,
+           "foi o primeiro erro que travou a maquina dele")
+
+
+    # ExecutionPolicy: `.\corrigir_tudo.ps1` morre com PSSecurityException
+    # numa maquina com a politica padrao. O .bat contorna SO para aquela
+    # chamada -- nao altera a politica da maquina (Regra 10).
+    _bat = os.path.join(RAIZ, "corrigir_tudo.bat")
+    checar("ha um .bat para contornar a ExecutionPolicy", os.path.isfile(_bat),
+           "sem ele, o ultimo passo do resgate falha numa maquina padrao")
+    if os.path.isfile(_bat):
+        _batx = open(_bat, encoding="ascii", errors="replace").read()
+        checar("o .bat usa ExecutionPolicy Bypass",
+               "-ExecutionPolicy Bypass" in _batx and "corrigir_tudo.ps1" in _batx)
+        checar("o .bat nao altera a politica da maquina",
+               "Set-ExecutionPolicy" not in _batx,
+               "mudar a politica do PC e configuracao de seguranca (Regra 10)")
+        checar("o .bat funciona por clique duplo (entra na pasta dele)",
+               "%~dp0" in _batx,
+               "sem isso o clique duplo roda a partir de C:\\Windows\\System32")
+
 
 # ── coletar_diagnostico.ps1 ──────────────────────────────────────────────
 print("\n[7] coletar_diagnostico.ps1 — nada de segredo sai no zip")

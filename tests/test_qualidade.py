@@ -6,6 +6,7 @@ preservação do parâmetro de afiliado nos links.
 Rodar:
     python -m pytest tests/ -v
 """
+import io
 import os
 import sys
 
@@ -440,6 +441,243 @@ def test_esta_suite_roda_sem_as_dependencias_pesadas():
     assert not proibidos, (
         "import que o CI nao consegue resolver: %s — leia o fonte em vez de "
         "importar" % sorted(proibidos))
+
+
+def test_registro_compartilhado_so_aceita_id_oficial():
+    """Falso positivo aqui e pior do que nao ter a checagem: faria o bot
+    PULAR uma oferta boa achando que ja publicou, e em silencio.
+
+    Uma regex frouxa (`-[A-Z0-9]{8,}\\.html$`) colhia "22099816" e
+    "6555005904" de slugs terminados em numero — medido na pasta real em
+    2026-09-23, oito IDs invalidos. Regra 11: usar o ID oficial do anuncio."""
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    casos_bons = {
+        "algo-qualquer-MLB54067366.html": "MLB54067366",
+        "outro-produto-MLBU77700863.html": "MLBU77700863",
+        "caixa-de-som-B09FKWS793.html": "B09FKWS793",
+    }
+    for nome, esperado in casos_bons.items():
+        m = ps._ID_NO_NOME.search(nome)
+        assert m and m.group(1) == esperado, f"nao extraiu {esperado} de {nome}"
+
+    casos_ruins = [
+        "kit-organizador-78-litros-22099816.html",   # slug terminado em numero
+        "porta-copos-carro-6555005904.html",
+        "produto-sem-id.html",
+        "algo-XYZ123.html",                          # curto demais
+    ]
+    for nome in casos_ruins:
+        assert ps._ID_NO_NOME.search(nome) is None, \
+            f"colheu ID invalido de {nome} — o bot pularia oferta boa"
+
+
+def test_registro_compartilhado_nao_cala_o_bot_quando_nao_consegue_ler():
+    """"Nao consegui olhar" nunca pode virar "ja foi publicado" — mesmo
+    principio do psutil no supervisor e do checkout raso na Regra 16."""
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    base_antes, cache_antes = ps._PASTA, ps._cache
+    try:
+        ps._PASTA = "/caminho/que/nao/existe/ofertas"
+        ps._cache = None
+        assert ps.ids_publicados() == frozenset(), "inventou IDs sem pasta"
+        assert ps.ja_publicado("MLB54067366") is False, \
+            "sem conseguir ler, disse que ja publicou — calaria o bot"
+    finally:
+        ps._PASTA, ps._cache = base_antes, cache_antes
+
+
+def _pagina_de_teste(pasta, produto, dias_atras=0):
+    """Gera uma pagina REAL com core.blog_generator e a envelhece se preciso.
+
+    Usa o gerador de verdade de proposito: se um dia ele mudar o formato do
+    preco ou da data, e este teste que quebra — nao a deduplicacao em
+    producao, em silencio, republicando oferta no grupo.
+    """
+    import datetime as _dt          # noqa: PLC0415
+    import os as _os                # noqa: PLC0415
+    from core import blog_generator as bg  # noqa: PLC0415
+
+    antes = bg.OFERTAS_DIR
+    try:
+        bg.OFERTAS_DIR = str(pasta)
+        rel = bg.gerar_landing(produto)
+    finally:
+        bg.OFERTAS_DIR = antes
+    assert rel, "o gerador real nao produziu a pagina"
+
+    caminho = _os.path.join(str(pasta), _os.path.basename(rel))
+    if dias_atras:
+        html = io.open(caminho, encoding="utf-8").read()
+        hoje = _dt.datetime.now()
+        velho = (hoje - _dt.timedelta(days=dias_atras))
+        html = html.replace(hoje.strftime("%d/%m/%Y"), velho.strftime("%d/%m/%Y"))
+        io.open(caminho, "w", encoding="utf-8").write(html)
+    return caminho
+
+
+def test_repost_so_quando_a_oferta_melhorou_de_verdade():
+    """Bug real medido em 2026-09-26: o volante Logitech G29 (MLB22307702)
+    saiu no grupo em 04/09, 13/09 e 26/09 pelo MESMO preco (R$ 1599,00,
+    20% OFF). `limpar_antigos(dias=2)` apaga a linha de `produtos` justamente
+    para permitir repostar "o mesmo produto com oferta diferente" — mas nada
+    comparava a oferta. E bloquear para sempre seria o erro oposto: sao 2495
+    paginas em docs/ofertas/, muitas de produto que hoje esta bem mais
+    barato."""
+    import tempfile  # noqa: PLC0415
+
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    produto = {
+        "id": "MLB22307702",
+        "titulo": "Volante Gamer Logitech G29 Driving Force para PlayStation e PC",
+        "preco": 1599.0,
+        "preco_original": 1999.0,
+        "link": "https://www.mercadolivre.com.br/p/MLB22307702?matt_tool=47114387",
+        "loja": "mercadolivre",
+        "categoria": "games",
+    }
+
+    base_pasta, base_cache = ps._PASTA, ps._cache
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            _pagina_de_teste(tmp, produto, dias_atras=13)
+            ps._PASTA, ps._cache = tmp, None
+            assert ps.ids_publicados() == frozenset({"MLB22307702"}), \
+                "nao reconheceu a pagina gerada pelo gerador real"
+            assert ps.oferta_publicada("MLB22307702")[0] == 1599.0, \
+                "nao leu o preco publicado da pagina real"
+
+            # O bug: mesma oferta, 13 dias depois.
+            assert ps.ja_publicado("MLB22307702", 1599.0) is True, \
+                "republicaria a MESMA oferta (R$ 1599) no grupo"
+            assert ps.ja_publicado("MLB22307702", 1583.0) is True, \
+                "1% mais barato nao e oferta nova"
+            assert ps.ja_publicado("MLB22307702", 1650.0) is True, \
+                "mais CARO que o publicado e passou"
+
+            # O erro oposto: queda real precisa passar.
+            assert ps.ja_publicado("MLB22307702", 1199.0) is False, \
+                "25% mais barato ficou bloqueado — oferta boa fora de rotacao"
+
+            # Sem preco, o comportamento antigo (conservador) continua.
+            assert ps.ja_publicado("MLB22307702") is True, \
+                "sem preco deixou de bloquear"
+        finally:
+            ps._PASTA, ps._cache = base_pasta, base_cache
+
+    # Publicado HOJE nao volta nem com queda grande: 2 dias e o mesmo prazo
+    # de limpar_antigos(dias=2), senao a mesma oferta sai duas vezes no dia.
+    with tempfile.TemporaryDirectory() as tmp2:
+        try:
+            _pagina_de_teste(tmp2, produto, dias_atras=0)
+            ps._PASTA, ps._cache = tmp2, None
+            assert ps.ja_publicado("MLB22307702", 999.0) is True, \
+                "repostou no mesmo dia da primeira publicacao"
+        finally:
+            ps._PASTA, ps._cache = base_pasta, base_cache
+
+
+def test_pagina_ilegivel_mantem_o_bloqueio():
+    """Aqui "nao sei" fica do lado de bloquear, e o inverso de ids_publicados():
+    sem conseguir LISTAR a pasta o bot perderia a checagem toda e calaria
+    (Regra 16); com a pagina listada mas ilegivel, deixar passar republica a
+    mesma oferta no grupo (Regra 11) e bloquear custa uma rodada."""
+    import tempfile  # noqa: PLC0415
+
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    base_pasta, base_cache = ps._PASTA, ps._cache
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            with io.open(os.path.join(tmp, "algo-MLB54067366.html"),
+                         "w", encoding="utf-8") as fh:
+                fh.write("<html>pagina sem preco nem data</html>")
+            ps._PASTA, ps._cache = tmp, None
+            assert ps.oferta_publicada("MLB54067366") is None
+            assert ps.ja_publicado("MLB54067366", 10.0) is True, \
+                "pagina ilegivel liberou repost"
+        finally:
+            ps._PASTA, ps._cache = base_pasta, base_cache
+
+
+def test_os_tres_rastreadores_passam_o_preco_na_dedup():
+    """Sem o preco, `ja_publicado()` bloqueia para sempre (2495 paginas) e
+    nenhuma queda de preco volta ao grupo. Guarda por AST, nao por texto:
+    regex casa comentario e o projeto ja teve teste vazio por isso."""
+    import ast       # noqa: PLC0415
+    import pathlib as _p  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    for arquivo in ("rastreador.py", "rastreador_amazon.py", "rastreador_magalu.py"):
+        caminho = raiz / arquivo
+        if not caminho.exists():          # magalu so existe apos a vitrine
+            continue
+        arvore = ast.parse(caminho.read_text(encoding="utf-8"))
+        chamadas = [
+            n for n in ast.walk(arvore)
+            if isinstance(n, ast.Call)
+            and isinstance(n.func, ast.Name) and n.func.id == "ja_publicado"
+        ]
+        assert chamadas, f"{arquivo} nao chama ja_publicado()"
+        for c in chamadas:
+            assert len(c.args) >= 2, (
+                f"{arquivo}:{c.lineno} chama ja_publicado() sem o preco — "
+                "bloquearia o produto para sempre")
+
+
+def test_os_dois_rastreadores_consultam_o_registro_compartilhado():
+    """PC, GitHub Actions e servidor tem bancos separados e nenhum enxerga o
+    outro. Sem esta checagem a mesma oferta sai duas vezes no grupo."""
+    import pathlib as _p  # noqa: PLC0415
+
+    import ast  # noqa: PLC0415
+
+    raiz = _p.Path(__file__).resolve().parent.parent
+    for arquivo in ("rastreador.py", "rastreador_amazon.py", "rastreador_magalu.py"):
+        caminho = raiz / arquivo
+        if not caminho.exists():          # magalu so existe apos a vitrine
+            continue
+        src = caminho.read_text(encoding="utf-8")
+        assert "publicados_site" in src and "ja_publicado" in src, \
+            f"{arquivo} voltou a deduplicar so pelo banco local"
+
+        # E a falha da checagem extra nao pode derrubar a rodada. A versao
+        # anterior media isso por DISTANCIA EM CARACTERES ("except Exception"
+        # a menos de 400 chars do import) e reprovava por um comentario novo
+        # perto da chamada, sem nada ter mudado na protecao. Pela arvore a
+        # pergunta e a certa: a chamada esta DENTRO de um try que captura
+        # Exception?
+        arvore = ast.parse(src)
+        protegidas = set()
+        for no in ast.walk(arvore):
+            if not isinstance(no, ast.Try):
+                continue
+            pega_exception = any(
+                h.type is None
+                or (isinstance(h.type, ast.Name) and h.type.id == "Exception")
+                for h in no.handlers
+            )
+            if not pega_exception:
+                continue
+            for corpo in no.body:
+                for filho in ast.walk(corpo):
+                    if (isinstance(filho, ast.Call)
+                            and isinstance(filho.func, ast.Name)
+                            and filho.func.id == "ja_publicado"):
+                        protegidas.add(filho.lineno)
+
+        todas = {
+            n.lineno for n in ast.walk(arvore)
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "ja_publicado"
+        }
+        assert todas, f"{arquivo} nao chama ja_publicado()"
+        assert todas <= protegidas, (
+            f"{arquivo}: ja_publicado() fora de try/except Exception nas "
+            f"linhas {sorted(todas - protegidas)} — uma falha da checagem "
+            "extra derrubaria a rodada")
 
 
 if __name__ == "__main__":

@@ -60,6 +60,8 @@ def _rastreador_ja_rodando() -> bool:
                     return True
                 if "campanha_ferramentas.py" in cl and "--loop" in cl:
                     return True
+                if "rastreador_magalu.py" in cl and "--loop" in cl:
+                    return True
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
     except ImportError:
@@ -160,6 +162,37 @@ def etapa_3_healthcheck() -> None:
         log.warning("[3/4] Watchdog WhatsApp Desktop não subiu: %s", e)
 
 
+# Windows: cada filho e um console app (python.exe). O startup.py sobe
+# DESACOPLADO do console — `garantir_bot.py` usa DETACHED_PROCESS para que o
+# bot sobreviva ao fim da tarefa agendada — entao nao ha console para os
+# filhos herdarem, e o Windows cria UMA JANELA PRETA NOVA para cada um.
+#
+# Bug real (20/09/2026): o Daniel mandou print de tres janelas pretas
+# empilhadas em cima da tela dele, todas com o titulo do python.exe. Elas
+# aparecem a cada subida do bot — inclusive a cada vez que o supervisor
+# religa, de 30 em 30 min.
+#
+# As janelas nao mostram NADA: stdout e stderr de cada filho ja vao para o
+# arquivo de log logo abaixo. Eram quatro janelas vazias atrapalhando o uso
+# do PC, sem nenhuma informacao dentro.
+#
+# CREATE_NO_WINDOW roda o console app sem criar janela. O repositorio ja
+# fazia isso em web/app.py e core/chrome_manager.py; estes quatro Popen e
+# que ficaram para tras.
+#
+# NAO troque isto por pythonw.exe, que e a "solucao" obvia para o mesmo
+# problema: sem console, `sys.stdout` vira None, e `rastreador.py` faz
+# `sys.stdout.reconfigure(encoding="utf-8")` na linha 16 — AttributeError no
+# import, antes de qualquer log. Os tres rastreadores morreriam no ato e o
+# bot inteiro sairia do ar, o que e muito pior do que uma janela aberta.
+# Verificado em 20/09/2026: so `sys.stdout.write`/`.reconfigure` quebram sem
+# console; `print()` e o `logging` sobrevivem (o print do CPython e no-op
+# quando sys.stdout e None).
+_SEM_JANELA: dict = (
+    {"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt" else {}
+)
+
+
 def _iniciar_ml():
     """Sobe só o rastreador ML — usado no start inicial e em reinícios isolados
     (um crash do ML não pode gerar um processo Amazon extra desnecessário)."""
@@ -169,7 +202,7 @@ def _iniciar_ml():
         "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_ml = open(LOG_PATH, "a", encoding="utf-8")
-    proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE)
+    proc_ml = subprocess.Popen(cmd_ml, stdout=log_ml, stderr=log_ml, cwd=BASE, **_SEM_JANELA)
     with open(PID_PATH, "w") as f:
         f.write(str(proc_ml.pid))
     log.info("[4/4] Rastreador ML PID=%d", proc_ml.pid)
@@ -185,11 +218,43 @@ def _iniciar_amazon():
         "--random", "--loop-min", "18", "--loop-max", "22",
     ]
     log_az = open(amazon_log_path, "a", encoding="utf-8")
-    proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE)
+    proc_az = subprocess.Popen(cmd_az, stdout=log_az, stderr=log_az, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "rastreador_amazon.pid"), "w") as f:
         f.write(str(proc_az.pid))
     log.info("[4/4] Rastreador Amazon PID=%d", proc_az.pid)
     return proc_az
+
+
+def _iniciar_magalu():
+    """Sobe o rastreador Magazine Luiza — o terceiro marketplace.
+
+    Devolve None quando MAGALU_VITRINE nao esta configurada, e o supervisor
+    trata None como "nao existe" em vez de "caiu". Sem esse guard o
+    processo subiria, imprimiria o aviso de vitrine ausente, sairia em ~1s
+    e queimaria as 3 tentativas do supervisor a cada rodada — o mesmo
+    padrao de ruido que a Regra 15 descreve para o `.env` invalido.
+    """
+    try:
+        from affiliates.magalu import magalu_ativo  # noqa: PLC0415
+        if not magalu_ativo():
+            log.info("[4/4] Magalu inativo (MAGALU_VITRINE ausente) — nao sera iniciado.")
+            return None
+    except Exception as erro:
+        log.warning("[4/4] Nao foi possivel checar o Magalu: %s", erro)
+        return None
+
+    log.info("[4/4] Iniciando rastreador Magalu (intervalo aleatório ~20 min)…")
+    magalu_log_path = os.path.join(BASE, "data", "rastreador_magalu.log")
+    cmd_mg = [
+        sys.executable, os.path.join(BASE, "rastreador_magalu.py"),
+        "--random", "--loop-min", "18", "--loop-max", "22",
+    ]
+    log_mg = open(magalu_log_path, "a", encoding="utf-8")
+    proc_mg = subprocess.Popen(cmd_mg, stdout=log_mg, stderr=log_mg, cwd=BASE, **_SEM_JANELA)
+    with open(os.path.join(BASE, "data", "rastreador_magalu.pid"), "w") as f:
+        f.write(str(proc_mg.pid))
+    log.info("[4/4] Rastreador Magalu PID=%d", proc_mg.pid)
+    return proc_mg
 
 
 def _iniciar_ferramentas():
@@ -201,7 +266,7 @@ def _iniciar_ferramentas():
         "--loop", "15",
     ]
     log_ferr = open(ferr_log_path, "a", encoding="utf-8")
-    proc_ferr = subprocess.Popen(cmd_ferr, stdout=log_ferr, stderr=log_ferr, cwd=BASE)
+    proc_ferr = subprocess.Popen(cmd_ferr, stdout=log_ferr, stderr=log_ferr, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "campanha_ferramentas.pid"), "w") as f:
         f.write(str(proc_ferr.pid))
     log.info("[4/4] Campanha de ferramentas PID=%d", proc_ferr.pid)
@@ -214,7 +279,7 @@ def _iniciar_fila_whatsapp():
     wa_log_path = os.path.join(BASE, "data", "whatsapp_queue_sender.log")
     cmd_wa = [sys.executable, os.path.join(BASE, "whatsapp_queue_sender.py")]
     log_wa = open(wa_log_path, "a", encoding="utf-8")
-    proc_wa = subprocess.Popen(cmd_wa, stdout=log_wa, stderr=log_wa, cwd=BASE)
+    proc_wa = subprocess.Popen(cmd_wa, stdout=log_wa, stderr=log_wa, cwd=BASE, **_SEM_JANELA)
     with open(os.path.join(BASE, "data", "whatsapp_queue_sender.pid"), "w") as f:
         f.write(str(proc_wa.pid))
     log.info("[4/4] Fila de WhatsApp PID=%d", proc_wa.pid)
@@ -225,9 +290,10 @@ def etapa_4_iniciar_rastreador() -> tuple:
     """Sobe rastreadores ML, Amazon, campanha de ferramentas e fila de WhatsApp em paralelo."""
     proc_ml = _iniciar_ml()
     proc_az = _iniciar_amazon()
+    proc_mg = _iniciar_magalu()
     proc_ferr = _iniciar_ferramentas()
     proc_wa = _iniciar_fila_whatsapp()
-    return proc_ml, proc_az, proc_ferr, proc_wa
+    return proc_ml, proc_az, proc_mg, proc_ferr, proc_wa
 
 
 class _Tracker:
@@ -256,16 +322,23 @@ def monitorar(procs) -> None:
        semanas até desistir de um processo saudável.
     """
     # procs pode ser um Popen único (legacy) ou tupla (ml, amazon, ferramentas, fila_wa)
+    # Tolerante ao tamanho da tupla: a entrada do Magalu mudou a aridade de
+    # 4 para 5, e um desempacotamento fixo quebraria um startup.py antigo
+    # chamando um monitorar() novo (ou o contrario) com ValueError — em
+    # producao isso e o supervisor inteiro morrendo, nao um aviso.
     if isinstance(procs, tuple):
-        proc_ml, proc_az, proc_ferr, proc_wa = procs
+        lista = list(procs) + [None] * (5 - len(procs))
+        proc_ml, proc_az, proc_mg, proc_ferr, proc_wa = lista[:5]
     else:
-        proc_ml, proc_az, proc_ferr, proc_wa = procs, None, None, None
+        proc_ml = procs
+        proc_az = proc_mg = proc_ferr = proc_wa = None
 
     RESET_APOS_SEGUNDOS = 2 * 60 * 60  # 2h estável reseta o contador de falhas
 
     trackers = [
         _Tracker("ML", _iniciar_ml, proc_ml),
         _Tracker("Amazon", _iniciar_amazon, proc_az),
+        _Tracker("Magalu", _iniciar_magalu, proc_mg),
         _Tracker("Campanha Ferramentas", _iniciar_ferramentas, proc_ferr),
         _Tracker("Fila WhatsApp", _iniciar_fila_whatsapp, proc_wa),
     ]
