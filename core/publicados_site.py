@@ -117,6 +117,17 @@ def ids_publicados() -> frozenset[str]:
     return frozenset(_mapa())
 
 
+# `core/blog_generator.py:65` monta o nome do arquivo com `pid[:12]`: um ID
+# mais longo que 12 chars chega TRUNCADO na pasta. Medido em 26/09/2026:
+# `MLBU2939238991` (14) virou `...-MLBU29392389.html`, o registro procurava o
+# ID inteiro, nunca achava, e o monitor portatil foi republicado no grupo com
+# 4,2% de queda — abaixo do minimo, justamente o caso que a checagem existe
+# para barrar. Sao 639 paginas com ID de exatamente 12 chars, todas nessa
+# situacao. Cortar aqui em vez de mudar o nome do arquivo e de proposito:
+# trocar `pid[:12]` mudaria a URL das 2495 paginas ja indexadas.
+_TRUNCADO = 12
+
+
 def _id_oficial(produto_id: str) -> str | None:
     """O ID oficial deste produto que JA aparece nas paginas, ou None."""
     if not produto_id:
@@ -126,9 +137,20 @@ def _id_oficial(produto_id: str) -> str | None:
         return produto_id
     # O id do scraper pode ser "MLB123..." ou trazer o codigo dentro de um
     # slug maior; procura o codigo oficial dentro dele.
-    for m in re.finditer(r"(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})", produto_id.upper()):
-        if m.group(1) in publicados:
-            return m.group(1)
+    codigos = [m.group(1) for m in
+               re.finditer(r"(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})", produto_id.upper())]
+    for codigo in codigos:
+        if codigo in publicados:
+            return codigo
+    # Nada bateu inteiro: tenta o ID como o nome do arquivo o guarda, cortado.
+    # Uma colisao aqui exigiria dois anuncios com os mesmos 12 primeiros chars
+    # do ID oficial; se acontecer, o custo e pular uma oferta boa, e nao mandar
+    # a mesma duas vezes no grupo (Regra 11, o erro mais caro dos dois).
+    for codigo in codigos:
+        if len(codigo) > _TRUNCADO:
+            curto = codigo[:_TRUNCADO]
+            if curto in publicados:
+                return curto
     return None
 
 
