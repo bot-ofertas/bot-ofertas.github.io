@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "titulo": "Acer Aspire 5 Notebook 15.6\" AMD Ryzen 5 512GB SSD 16GB",
+      "preco": 3594.0,
+      "preco_original": 5799.0,
+      "desconto_pct": 38.0,
+      "foto": "https://m.media-amazon.com/images/I/71xtw8GoY7L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 93,
+      "enviado_em": "2026-09-26T09:46:48.696676",
+      "link": "https://www.amazon.com.br/dp/B083LGFDGJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3594.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Volante Gamer Logitech G29 Driving Force para PlayStation e PC",
+      "preco": 1599.0,
+      "preco_original": 1999.0,
+      "desconto_pct": 20.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_730363-MLA99890032125_112025-AB.webp",
+      "categoria": "games",
+      "score": 76,
+      "enviado_em": "2026-09-26T09:45:29.905112",
+      "link": "https://www.mercadolivre.com.br/volante-gamer-logitech-g29-driving-force-para-playstation-e-pc/p/MLB22307702?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 1599.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "MIFA A90 Caixas de Som Portáteis Bluetooth, Alto-falante Bluetooth portátil IPX7 à prova d'água, 60W Bass, Emparelhamento estéreo sem fio, Mic embutido, Suporte Micro SD, USB, AUX-in, USB-C Charing",
       "preco": 295.22,
       "preco_original": 379.0,
@@ -62,18 +92,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Fritadeira Air Fryer Philco 16 Litros Paf16c Preto 220v",
-    "preco": 449.0,
-    "preco_original": 623.0,
-    "desconto_pct": 28.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_841702-MLA110401871238_052026-AB.webp",
-    "categoria": "bebes",
-    "score": 73,
-    "enviado_em": "2026-09-25T10:04:58.857244",
-    "link": "https://www.mercadolivre.com.br/fritadeira-air-fryer-philco-16-litros-paf16c-preto-220v/p/MLB66895633?matt_tool=47114387&matt_source=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 449.0,
-    "menor_periodo": true,
+    "titulo": "Acer Aspire 5 Notebook 15.6\" AMD Ryzen 5 512GB SSD 16GB",
+    "preco": 3594.0,
+    "preco_original": 5799.0,
+    "desconto_pct": 38.0,
+    "foto": "https://m.media-amazon.com/images/I/71xtw8GoY7L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "categoria": "ofertas_dia",
+    "score": 93,
+    "enviado_em": "2026-09-26T09:46:48.696676",
+    "link": "https://www.amazon.com.br/dp/B083LGFDGJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 3594.0,
+    "menor_periodo": false,
     "verificada": true
   },
   "stats": {
@@ -83,11 +113,23 @@
       "desconto_medio": 18,
       "maior_desconto": 22
     },
+    "ofertas_dia": {
+      "total": 1,
+      "score_medio": 93,
+      "desconto_medio": 38,
+      "maior_desconto": 38
+    },
     "moda": {
       "total": 1,
       "score_medio": 87,
       "desconto_medio": 41,
       "maior_desconto": 41
+    },
+    "games": {
+      "total": 1,
+      "score_medio": 76,
+      "desconto_medio": 20,
+      "maior_desconto": 20
     },
     "bebes": {
       "total": 1,
@@ -96,6 +138,6 @@
       "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-25T10:07:33.830708",
-  "total": 4
+  "updated_at": "2026-09-26T09:46:57.278135",
+  "total": 6
 }
