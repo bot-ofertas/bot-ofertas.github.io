@@ -1,6 +1,96 @@
 {
   "products": [
     {
+      "titulo": "Cafeteira Espresso Oster Nova PrimaLatte Inox - 127V",
+      "preco": 879.9,
+      "preco_original": 1039.0,
+      "desconto_pct": 15.3,
+      "foto": "https://m.media-amazon.com/images/I/51GG7fY49xL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 51,
+      "enviado_em": "2026-09-26T15:23:56.686221",
+      "link": "https://www.amazon.com.br/dp/B09GG8P1VZ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 879.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Espumador de Leite Elétrico Oster 4 em 1-127V",
+      "preco": 219.9,
+      "preco_original": 279.9,
+      "desconto_pct": 21.4,
+      "foto": "https://m.media-amazon.com/images/I/519IQI0o9YL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 53,
+      "enviado_em": "2026-09-26T15:23:48.052996",
+      "link": "https://www.amazon.com.br/dp/B0BYB7WKJR?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 219.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Caixa de Som Ativa Bluetooth JBL Eon One Compact Preta - Bivolt",
+      "preco": 5470.92,
+      "preco_original": 7199.99,
+      "desconto_pct": 24.0,
+      "foto": "https://m.media-amazon.com/images/I/51QrNNWcpoL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 79,
+      "enviado_em": "2026-09-26T15:23:39.463923",
+      "link": "https://www.amazon.com.br/dp/B096YJ7DYV?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 5470.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fone De Ouvido Gamer Headset Led  Computador Microfone Pc Preto",
+      "preco": 75.0,
+      "preco_original": 159.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_887290-MLB111930992521_052026-AB--fone-de-ouvido-gamer-headset-led--computador-microfone-pc.webp",
+      "categoria": "games",
+      "score": 78,
+      "enviado_em": "2026-09-26T15:20:40.250181",
+      "link": "https://www.mercadolivre.com.br/fone-de-ouvido-gamer-headset-led--computador-microfone-pc/up/MLBU3987862616?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 75.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Colchão Casal Emma Basics 17 – 138x188cm - Espuma D28 17cm com Tecnologia Alemã, Embalado à Vácuo, Firmeza Ideal, Suporte Confortável",
+      "preco": 1149.0,
+      "preco_original": 2198.0,
+      "desconto_pct": 47.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778694-MLA106762245832_022026-AB.webp",
+      "categoria": "redes",
+      "score": 95,
+      "enviado_em": "2026-09-26T15:20:30.679638",
+      "link": "https://www.mercadolivre.com.br/colchao-casal-emma-basics-17-138x188cm-espuma-d28-17cm-com-tecnologia-alema-embalado-vacuo-firmeza-ideal-suporte-confortavel/p/MLB23873195?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1149.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Monitor Portátil 15.6'' Tela Externa Hdr Ips 1080p Ultrafino Preto 127/220v",
+      "preco": 368.6,
+      "preco_original": 650.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_679072-MLB113431542820_072026-AB--monitor-portatil-156-tela-externa-hdr-ips-1080p-ultrafino.webp",
+      "categoria": "informatica",
+      "score": 86,
+      "enviado_em": "2026-09-26T15:20:21.072606",
+      "link": "https://www.mercadolivre.com.br/monitor-portatil-156-tela-externa-hdr-ips-1080p-ultrafino/up/MLBU2939238991?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 368.6,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Acer Aspire 5 Notebook 15.6\" AMD Ryzen 5 512GB SSD 16GB",
       "preco": 3594.0,
       "preco_original": 5799.0,
@@ -59,59 +149,41 @@
       "menor_preco_30d": 449.0,
       "menor_periodo": true,
       "verificada": true
-    },
-    {
-      "titulo": "VEDO Bateria Eletrônica Portátil para Iniciantes com 4 Almofadas Silenciosas, 200 Sons, Banco Ajustável, Pedais Duplos e Fones de Ouvido - Kit Completo para Estúdio e Performances ao Vivo",
-      "preco": 1299.99,
-      "preco_original": 1494.96,
-      "desconto_pct": 13.0,
-      "foto": "https://m.media-amazon.com/images/I/61Yz5xhKU2L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 53,
-      "enviado_em": "2026-09-24T09:47:35.490180",
-      "link": "https://www.amazon.com.br/dp/B0G52J9ZLY?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 1299.99,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Bermuda Masculina 2 Em 1 Compressão Short Dry Fit Academia",
-      "preco": 31.9,
-      "preco_original": 54.0,
-      "desconto_pct": 41.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_911963-MLB117718616671_092026-AB-bermuda-masculina-2-em-1-compresso-short-dry-fit-academia.webp",
-      "categoria": "moda",
-      "score": 87,
-      "enviado_em": "2026-09-24T09:46:16.075354",
-      "link": "https://produto.mercadolivre.com.br/MLB-5332470222-bermuda-masculina-2-em-1-compresso-short-dry-fit-academia-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 31.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Acer Aspire 5 Notebook 15.6\" AMD Ryzen 5 512GB SSD 16GB",
-    "preco": 3594.0,
-    "preco_original": 5799.0,
-    "desconto_pct": 38.0,
-    "foto": "https://m.media-amazon.com/images/I/71xtw8GoY7L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-    "categoria": "ofertas_dia",
-    "score": 93,
-    "enviado_em": "2026-09-26T09:46:48.696676",
-    "link": "https://www.amazon.com.br/dp/B083LGFDGJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "titulo": "Colchão Casal Emma Basics 17 – 138x188cm - Espuma D28 17cm com Tecnologia Alemã, Embalado à Vácuo, Firmeza Ideal, Suporte Confortável",
+    "preco": 1149.0,
+    "preco_original": 2198.0,
+    "desconto_pct": 47.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_778694-MLA106762245832_022026-AB.webp",
+    "categoria": "redes",
+    "score": 95,
+    "enviado_em": "2026-09-26T15:20:30.679638",
+    "link": "https://www.mercadolivre.com.br/colchao-casal-emma-basics-17-138x188cm-espuma-d28-17cm-com-tecnologia-alema-embalado-vacuo-firmeza-ideal-suporte-confortavel/p/MLB23873195?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 3594.0,
+    "menor_preco_30d": 1149.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "cupons": {
+      "total": 4,
+      "score_medio": 62,
+      "desconto_medio": 21,
+      "maior_desconto": 24
+    },
+    "games": {
       "total": 2,
-      "score_medio": 59,
-      "desconto_medio": 18,
-      "maior_desconto": 22
+      "score_medio": 77,
+      "desconto_medio": 36,
+      "maior_desconto": 52
+    },
+    "redes": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 47,
+      "maior_desconto": 47
     },
     "ofertas_dia": {
       "total": 1,
@@ -119,17 +191,11 @@
       "desconto_medio": 38,
       "maior_desconto": 38
     },
-    "moda": {
+    "informatica": {
       "total": 1,
-      "score_medio": 87,
-      "desconto_medio": 41,
-      "maior_desconto": 41
-    },
-    "games": {
-      "total": 1,
-      "score_medio": 76,
-      "desconto_medio": 20,
-      "maior_desconto": 20
+      "score_medio": 86,
+      "desconto_medio": 43,
+      "maior_desconto": 43
     },
     "bebes": {
       "total": 1,
@@ -138,6 +204,6 @@
       "maior_desconto": 28
     }
   },
-  "updated_at": "2026-09-26T09:46:57.278135",
-  "total": 6
+  "updated_at": "2026-09-26T15:24:05.689990",
+  "total": 10
 }
