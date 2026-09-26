@@ -366,7 +366,17 @@ async def rodar_uma_vez() -> None:
                     continue
 
         log(f"\n{'=' * 55}")
-        log(f"Amazon: {publicados} cupom(s) publicado(s)")
+        # "N cupom(s) publicado(s)" logo depois de "0 com cupom de desconto" e
+        # uma contradicao no proprio log: o que sai sao ofertas com % OFF, e
+        # cupom e outra coisa. Medido na rodada 312 (26/09/2026): a fonte
+        # curada https://www.amazon.com.br/coupons — pela nota em
+        # integrations/amazon_scraper.py:46 a UNICA onde o badge de cupom
+        # aparece — devolveu "Amazon.com.br Algo deu errado" nas DUAS
+        # tentativas, enquanto ofertas_dia, brinquedos e eletrodomesticos se
+        # recuperaram na segunda. Ou seja: o rastreador publicou promocao, nao
+        # cupom, e o resumo dizia o contrario.
+        log(f"Amazon: {publicados} oferta(s) publicada(s) "
+            f"— {com_cupom} com cupom nesta rodada")
 
         try:
             funil.fechar(log)
