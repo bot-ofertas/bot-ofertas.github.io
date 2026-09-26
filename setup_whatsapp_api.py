@@ -55,11 +55,19 @@ def start_docker() -> bool:
     if not os.path.exists(yml):
         print(f"❌ {yml} não encontrado")
         return False
+    # `--env-file` e obrigatorio aqui. Com `-f docker/evolution.yml`, o
+    # docker compose adota `docker/` como diretorio do projeto e procura o
+    # .env ALI — nao na raiz. Sem isto ele recusa subir com "required
+    # variable EVOLUTION_API_KEY is missing a value" mesmo com a chave
+    # preenchida no .env da raiz, e este passo 1/4 nunca passava numa
+    # maquina recem-instalada.
+    env_file = os.path.join(BASE, ".env")
+    comando = ["docker", "compose"]
+    if os.path.exists(env_file):
+        comando += ["--env-file", env_file]
+    comando += ["-f", yml, "up", "-d"]
     try:
-        subprocess.run(
-            ["docker", "compose", "-f", yml, "up", "-d"],
-            check=True, cwd=BASE,
-        )
+        subprocess.run(comando, check=True, cwd=BASE)
     except FileNotFoundError:
         print("❌ Docker não instalado. Instale Docker Desktop e tente de novo.")
         return False

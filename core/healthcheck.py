@@ -9,7 +9,12 @@ Retorna JSON com status de cada componente:
   - rastreador: quantos posts na última rodada
   - system: CPU, RAM
 
-Uso: importado por startup.py, roda em thread daemon.
+Dois usos:
+  - importado por startup.py: `iniciar_healthcheck()` sobe o servidor numa
+    thread daemon;
+  - `python -m core.healthcheck`: verificação única, sem servidor nenhum —
+    é o último passo do install.ps1 ("a instalação ficou de pé?"). Sai com
+    código 1 se algo que a INSTALAÇÃO controla estiver faltando.
 """
 from __future__ import annotations
 
@@ -250,6 +255,59 @@ def _status_quarentena() -> dict:
         return {"total": -1, "erro": str(e)[:120]}
 
 
+_COLETORES = (
+    ("chrome", _status_chrome),
+    ("whatsapp", _status_whatsapp),
+    ("telegram", _status_telegram),
+    ("rastreador", _status_rastreador),
+    ("sistema", _status_sistema),
+    ("erros", _status_erros),
+    ("ultimo_post", _status_ultimo_post),
+    ("n8n", _status_n8n),
+    ("ml_token", _status_ml_token),
+    ("pausa", _status_pausa),
+    ("quarentena", _status_quarentena),
+    ("janela", _status_janela),
+    ("papel", _status_papel),
+)
+
+
+def coletar() -> dict:
+    """Monta a carga do `/health`.
+
+    Vive fora do handler HTTP porque o `python -m core.healthcheck` — a
+    verificação final da instalação — precisa exatamente disto sem subir
+    servidor nenhum. Com a montagem dentro do `do_GET`, a única forma de ler
+    o estado era por HTTP, e numa máquina recém-instalada não há processo
+    para responder.
+
+    Cada coletor é chamado isolado: antes, um deles levantando exceção
+    (o `_status_chrome`, por exemplo, que importa `core.chrome_manager` sem
+    try/except) derrubava o handler inteiro e o `/health` devolvia 500 sem
+    corpo — o `status.ps1` lia isso como "healthcheck OFF", ou seja, o bot
+    inteiro dado como morto por causa de um componente opcional.
+    """
+    payload: dict = {}
+    for nome, fn in _COLETORES:
+        try:
+            payload[nome] = fn()
+        except Exception as e:
+            payload[nome] = {"ok": False, "erro": f"{type(e).__name__}: {e}"[:160]}
+
+    # `payload["chrome"]["ok"] or True` estava na lista: constante
+    # True, sem efeito nenhum -- o Chrome dedicado é opcional desde
+    # que o WhatsApp passou a usar o app nativo (ver startup.py), e
+    # a intenção era justamente NÃO deixá-lo reprovar a saúde. Fica
+    # explícito agora, em vez de disfarçado de condição.
+    criticos = {
+        "telegram": payload["telegram"].get("ok", False),
+        "rastreador": payload["rastreador"].get("ok", False),
+    }
+    payload["ok"] = all(criticos.values())
+    payload["criticos_com_falha"] = [k for k, v in criticos.items() if not v]
+    return payload
+
+
 class _Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return  # silencia log de requests HTTP
@@ -265,34 +323,8 @@ class _Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            payload = {
-                "chrome": _status_chrome(),
-                "whatsapp": _status_whatsapp(),
-                "telegram": _status_telegram(),
-                "rastreador": _status_rastreador(),
-                "sistema": _status_sistema(),
-                "erros": _status_erros(),
-                "ultimo_post": _status_ultimo_post(),
-                "n8n": _status_n8n(),
-                "ml_token": _status_ml_token(),
-                "pausa": _status_pausa(),
-                "quarentena": _status_quarentena(),
-                "janela": _status_janela(),
-                "papel": _status_papel(),
-            }
-            # `payload["chrome"]["ok"] or True` estava na lista: constante
-            # True, sem efeito nenhum -- o Chrome dedicado é opcional desde
-            # que o WhatsApp passou a usar o app nativo (ver startup.py), e
-            # a intenção era justamente NÃO deixá-lo reprovar a saúde. Fica
-            # explícito agora, em vez de disfarçado de condição.
-            criticos = {
-                "telegram": payload["telegram"]["ok"],
-                "rastreador": payload["rastreador"]["ok"],
-            }
-            overall_ok = all(criticos.values())
-            payload["ok"] = overall_ok
-            payload["criticos_com_falha"] = [k for k, v in criticos.items() if not v]
-            self._resp(200 if overall_ok else 503, payload)
+            payload = coletar()
+            self._resp(200 if payload["ok"] else 503, payload)
             return
         if self.path.startswith("/errors"):
             # /errors?limit=50 — últimos erros em JSON (para n8n)
@@ -594,3 +626,222 @@ def iniciar_healthcheck(com_n8n: bool = True) -> None:
         iniciar_heartbeat(int(os.getenv("N8N_HEARTBEAT_S", "300")))
     except Exception as e:
         log.warning("Heartbeat n8n não iniciou: %s (não crítico)", e)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+#  VERIFICAÇÃO DE INSTALAÇÃO  —  `python -m core.healthcheck`
+# ══════════════════════════════════════════════════════════════════════════
+# O `/health` responde "o bot está publicando agora?". Logo depois de
+# instalar, a resposta é NÃO e está tudo certo: nada foi iniciado ainda.
+# Usar o `ok` do /health como nota da instalação reprovaria toda instalação
+# bem-sucedida. O que se verifica aqui é só o que a instalação controla:
+# os pacotes importam, o .env foi preenchido, o data/ aceita escrita.
+
+# Pacote importado pelo caminho principal (publicar no Telegram e no
+# WhatsApp). Não é a requirements.txt inteira: é o subconjunto cuja falta
+# deixa o bot de pé sem publicar nada — o modo de falha mudo que originou
+# o tests/test_dependencias.py.
+_IMPORTS_ESSENCIAIS = (
+    ("dotenv", "python-dotenv"),
+    ("telegram", "python-telegram-bot"),
+    ("requests", "requests"),
+    ("flask", "flask"),
+    ("psutil", "psutil"),
+    ("PIL", "Pillow"),
+)
+
+# Só no Windows. Daqui vem o win32clipboard que põe a foto na área de
+# transferência; sem ele o envio do WhatsApp é abortado pela Regra 5 (foto e
+# legenda saem juntas ou não saem) e o único vestígio é um log.warning.
+_IMPORTS_WINDOWS = (("win32clipboard", "pywin32"),)
+
+# Sem estas duas o startup.py sai em ~1s: é a instalação que não terminou.
+_ENV_OBRIGATORIAS = ("TOKEN_TELEGRAM", "CANAL_GERAL")
+
+# Estas não reprovam a instalação — o bot publica no Telegram sem elas
+# (Regra 6: o Telegram nunca depende do WhatsApp) — mas o silêncio do
+# WhatsApp precisa ter uma linha explicando o motivo.
+_ENV_WHATSAPP = ("WHATSAPP_GROUP_ID", "WHATSAPP_GROUP_NAME")
+
+
+def _valores_do_exemplo() -> dict:
+    """Os valores de exemplo do `.env.example`, por nome de variável.
+
+    O install.ps1 cria o `.env` copiando o `.env.example`, então "existe a
+    variável" não quer dizer "foi preenchida": o valor pode ser o
+    `cole_aqui_o_token_do_BotFather` que vem no molde. Comparar com o
+    próprio `.env.example` detecta isso sem manter uma lista de placeholders
+    aqui — um exemplo novo já entra valendo.
+    """
+    exemplo: dict = {}
+    caminho = os.path.join(_BASE, ".env.example")
+    try:
+        with open(caminho, encoding="utf-8") as f:
+            for linha in f:
+                linha = linha.strip()
+                if not linha or linha.startswith("#") or "=" not in linha:
+                    continue
+                nome, _, valor = linha.partition("=")
+                exemplo[nome.strip()] = valor.strip()
+    except OSError:
+        pass
+    return exemplo
+
+
+def _preenchida(nome: str, exemplo: dict) -> tuple[bool, str]:
+    """A variável tem valor de verdade, ou ainda é o molde?"""
+    valor = (os.getenv(nome) or "").strip()
+    if not valor:
+        return False, "vazia no .env"
+    padrao = exemplo.get(nome, "")
+    if padrao and valor == padrao:
+        return False, "ainda com o valor de exemplo do .env.example"
+    return True, "preenchida"
+
+
+def verificar_instalacao() -> dict:
+    """Confere o que a instalação controla. Não inicia nada.
+
+    Devolve {"ok": bool, "itens": [(critico, ok, titulo, detalhe), ...]}.
+    `ok` ignora os itens não críticos de propósito: uma instalação sem
+    WhatsApp configurado está completa e publica no Telegram.
+    """
+    itens = []
+
+    # 1. Pacotes Python
+    esperados = list(_IMPORTS_ESSENCIAIS)
+    if os.name == "nt":
+        esperados += list(_IMPORTS_WINDOWS)
+    faltando = []
+    for modulo, pacote in esperados:
+        try:
+            __import__(modulo)
+        except Exception:
+            faltando.append(pacote)
+    itens.append((
+        True, not faltando, "Pacotes Python",
+        "todos importam" if not faltando
+        else "faltam: " + ", ".join(sorted(set(faltando)))
+        + " — rode: python -m pip install -r requirements.txt",
+    ))
+
+    # 2. .env existe
+    env_path = os.path.join(_BASE, ".env")
+    tem_env = os.path.isfile(env_path)
+    itens.append((
+        True, tem_env, "Arquivo .env",
+        env_path if tem_env
+        else "não existe — copie o .env.example para .env e preencha",
+    ))
+
+    # 3. Variáveis obrigatórias preenchidas (não o molde)
+    exemplo = _valores_do_exemplo()
+    if tem_env:
+        for nome in _ENV_OBRIGATORIAS:
+            ok, detalhe = _preenchida(nome, exemplo)
+            itens.append((True, ok, f"{nome}", detalhe))
+
+        # 4. WhatsApp — informativo (Regra 6)
+        pendentes = [n for n in _ENV_WHATSAPP if not _preenchida(n, exemplo)[0]]
+        itens.append((
+            False, not pendentes, "WhatsApp (grupo)",
+            "configurado" if not pendentes
+            else "sem " + ", ".join(pendentes)
+            + " — o Telegram publica normalmente, o WhatsApp fica parado",
+        ))
+
+    # 5. data/ aceita escrita — é onde moram o banco, os logs e a fila
+    data_dir = os.path.join(_BASE, "data")
+    try:
+        os.makedirs(data_dir, exist_ok=True)
+        teste = os.path.join(data_dir, ".escrita_ok")
+        with open(teste, "w", encoding="utf-8") as f:
+            f.write("ok")
+        os.remove(teste)
+        itens.append((True, True, "Pasta data/", data_dir))
+    except OSError as e:
+        itens.append((True, False, "Pasta data/", f"sem permissão de escrita: {e}"))
+
+    # 6. Evolution API — opcional, e só se a chave foi configurada.
+    #    Ler o QR no celular é decisão do Daniel (Regra 16), não se
+    #    automatiza; aqui só se diz se o container está no ar.
+    chave_evo = (os.getenv("EVOLUTION_API_KEY") or "").strip()
+    if chave_evo and chave_evo != exemplo.get("EVOLUTION_API_KEY", ""):
+        url = os.getenv("WHATSAPP_WEBHOOK_URL") or "http://localhost:8080"
+        try:
+            import requests  # noqa: PLC0415
+            r = requests.get(url, timeout=3)
+            no_ar = r.status_code < 500
+            itens.append((False, no_ar, "Evolution API (Docker)",
+                          f"{url} respondeu {r.status_code}" if no_ar
+                          else f"{url} devolveu {r.status_code}"))
+        except Exception as e:
+            itens.append((
+                False, False, "Evolution API (Docker)",
+                f"{url} não respondeu ({type(e).__name__}) — suba com: "
+                "docker compose --env-file .env -f docker/evolution.yml up -d",
+            ))
+    else:
+        itens.append((False, False, "Evolution API (Docker)",
+                      "sem EVOLUTION_API_KEY no .env — opcional no PC, "
+                      "onde o envio usa o WhatsApp Desktop (Regra 5)"))
+
+    return {"ok": all(ok for critico, ok, _, _ in itens if critico),
+            "itens": itens}
+
+
+def _imprimir_instalacao(resultado: dict) -> None:
+    print("=" * 62)
+    print("  BOT OFERTAS - VERIFICACAO DA INSTALACAO")
+    print("=" * 62)
+    for critico, ok, titulo, detalhe in resultado["itens"]:
+        if ok:
+            marca = "[OK]  "
+        elif critico:
+            marca = "[FALHA]"
+        else:
+            marca = "[aviso]"
+        print(f"  {marca} {titulo}: {detalhe}")
+    print("-" * 62)
+    if resultado["ok"]:
+        print("  Instalacao COMPLETA. Inicie com:  .\\start.ps1")
+    else:
+        print("  Instalacao INCOMPLETA - resolva os itens [FALHA] acima.")
+    print("=" * 62)
+
+
+def _main(argv: list) -> int:
+    if "--servir" in argv:
+        # Sobe o endpoint em primeiro plano — serve para conferir o /health
+        # sem depender do startup.py inteiro.
+        print(f"Healthcheck em http://{BIND}:{PORTA}/health (Ctrl+C encerra)")
+        _servir()
+        return 0
+
+    if "--saude" in argv:
+        # Estado corrente dos componentes (o mesmo corpo do /health), sem
+        # precisar de um bot rodando para responder.
+        print(json.dumps(coletar(), ensure_ascii=False, indent=2))
+        return 0
+
+    resultado = verificar_instalacao()
+    if "--json" in argv:
+        print(json.dumps(
+            {"ok": resultado["ok"],
+             "itens": [{"critico": c, "ok": o, "titulo": t, "detalhe": d}
+                       for c, o, t, d in resultado["itens"]]},
+            ensure_ascii=False, indent=2))
+    else:
+        _imprimir_instalacao(resultado)
+    return 0 if resultado["ok"] else 1
+
+
+if __name__ == "__main__":
+    import sys
+
+    # `python -m core.healthcheck` a partir da raiz já resolve os imports
+    # `core.*`; `python core/healthcheck.py` não, e é o que se digita por
+    # engano. Garante a raiz no sys.path para os dois funcionarem.
+    if _BASE not in sys.path:
+        sys.path.insert(0, _BASE)
+    raise SystemExit(_main(sys.argv[1:]))
