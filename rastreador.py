@@ -142,7 +142,11 @@ def _e_duplicata(item: dict) -> bool:
     # docs/ofertas/ sao o registro comum que faltava ler.
     try:
         from core.publicados_site import ja_publicado  # noqa: PLC0415
-        return ja_publicado(produto_id)
+        # Com o preco, um produto ja publicado deixa de ser duplicata
+        # quando a oferta melhorou de verdade (>=2 dias e >=5% mais
+        # barato). Sem o preco, seriam 2495 paginas bloqueadas para
+        # sempre; com ele, o G29 a R$ 1599 pela terceira vez nao sai.
+        return ja_publicado(produto_id, item.get("preco"))
     except Exception:
         # Falha aqui nunca pode calar o bot: sem a checagem extra volta a
         # valer so o banco local, que e o que ja valia antes.

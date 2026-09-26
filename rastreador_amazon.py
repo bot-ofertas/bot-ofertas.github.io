@@ -183,7 +183,9 @@ async def rodar_uma_vez() -> None:
                     if not _ja:
                         try:
                             from core.publicados_site import ja_publicado  # noqa: PLC0415
-                            _ja = ja_publicado(produto_id)
+                            # Com o preco: repost so quando a oferta
+                            # melhorou (>=2 dias e >=5% mais barato).
+                            _ja = ja_publicado(produto_id, item.get("preco"))
                         except Exception:
                             _ja = False
                     if _ja:

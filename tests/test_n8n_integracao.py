@@ -683,6 +683,19 @@ def test_configurar_liga_comandos_remotos_so_com_n8n_local():
         "o bind saiu de 127.0.0.1 — isso expoe /n8n/comando na rede local")
 
     saida, env_final = rodar("https://daniel.app.n8n.cloud")
+    # Sem python-dotenv o setup_n8n.py nao LE o .env que este teste escreveu:
+    # _api_url() cai no default localhost e a assercao abaixo reprova por um
+    # motivo que nao e o dela. Dizer qual e a dependencia que falta em vez de
+    # apontar para uma falha de seguranca inexistente (visto em 2026-09-26
+    # neste container; no CI passa porque ele instala requirements.txt).
+    try:
+        import dotenv  # noqa: F401,PLC0415
+    except ImportError:
+        raise AssertionError(
+            "python-dotenv nao instalado: setup_n8n.py ignora o .env do teste "
+            "e cai no default http://localhost:5678, entao este caso nunca "
+            "chega a ser exercido. `pip install -r requirements.txt` e rode de "
+            "novo — nao ha nada de errado no codigo aqui.")
     assert re.search(r"(?m)^BOT_API_URL=\s*$", env_final), (
         "n8n fora da maquina nao pode ligar o caminho de volta sozinho:\n" + saida)
     assert "decisão sua" in saida or "decisao sua" in saida, saida

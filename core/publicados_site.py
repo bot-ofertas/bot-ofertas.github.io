@@ -31,6 +31,7 @@ import logging
 import os
 import re
 import time
+from datetime import datetime, timedelta
 
 log = logging.getLogger("publicados_site")
 
@@ -55,13 +56,37 @@ _ID_NO_NOME = re.compile(r"-(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})\.html$")
 # curto de proposito: numa rodada longa o outro publicador pode ter
 # commitado no meio.
 _CACHE_S = 120.0
-_cache: "tuple[float, frozenset[str]] | None" = None
+_cache: "tuple[float, dict[str, str]] | None" = None
 
 
-def ids_publicados() -> frozenset[str]:
-    """IDs de anuncio ja publicados por QUALQUER publicador, segundo o repo.
+# Ter pagina no site NAO bloqueia o produto para sempre. `limpar_antigos()`
+# apaga a linha de `produtos` em 2 dias exatamente para permitir repostar "o
+# mesmo produto com oferta diferente" (docstring de core/database.py). O que
+# nunca existiu foi a segunda metade dessa frase: nada comparava a OFERTA.
+# Medido em 2026-09-26: o volante Logitech G29 (MLB22307702) saiu em 04/09,
+# 13/09 e 26/09 pelo MESMO preco (R$ 1599,00, 20% OFF) — tres vezes a mesma
+# oferta no grupo. E sao 2495 paginas em docs/ofertas/: bloquear todas para
+# sempre seria o erro oposto, tirar de rotacao produto que hoje esta 40%
+# mais barato.
+#
+# Os dois dados necessarios ja estao na propria pagina, gerados sempre
+# (core/blog_generator.py): o preco em `product:price:amount` e a data em
+# "verificada em <strong>dd/mm/aaaa". Sem rede, sem banco, sem git — le
+# so a pagina do candidato, nao as 2495.
+_DIAS_MINIMOS_REPOST = float(os.getenv("DIAS_MINIMOS_REPOST") or 2)
+_QUEDA_MINIMA_REPOST_PCT = float(os.getenv("QUEDA_MINIMA_REPOST_PCT") or 5)
 
-    Devolve conjunto vazio quando a pasta nao existe ou nao da para ler —
+_PRECO_NA_PAGINA = re.compile(
+    r'property="product:price:amount"\s+content="([0-9]+(?:\.[0-9]+)?)"')
+# Sem o "as" acentuado de proposito: a data basta e a regex fica imune a
+# qualquer surpresa de encoding na leitura da pagina.
+_DATA_NA_PAGINA = re.compile(r"verificada em <strong>(\d{2})/(\d{2})/(\d{4})")
+
+
+def _mapa() -> dict[str, str]:
+    """{ID oficial: nome do arquivo} das paginas ja publicadas.
+
+    Devolve dict vazio quando a pasta nao existe ou nao da para ler —
     "nao consegui olhar" nunca pode virar "ja foi publicado", senao uma
     leitura falha calaria o bot inteiro (mesmo principio do psutil no
     supervisor e do checkout raso na Regra 16).
@@ -71,38 +96,122 @@ def ids_publicados() -> frozenset[str]:
     if _cache is not None and (agora - _cache[0]) < _CACHE_S:
         return _cache[1]
 
-    ids: set[str] = set()
+    achados: dict[str, str] = {}
     try:
         for nome in os.listdir(_PASTA):
             m = _ID_NO_NOME.search(nome)
             if m:
-                ids.add(m.group(1))
+                achados[m.group(1)] = nome
     except FileNotFoundError:
         pass
     except OSError as e:
         log.warning("nao consegui ler %s (%s) — seguindo so com o banco local",
                     _PASTA, e)
 
-    _cache = (agora, frozenset(ids))
+    _cache = (agora, achados)
     return _cache[1]
 
 
-def ja_publicado(produto_id: str) -> bool:
-    """True se este ID ja aparece nas paginas do site.
+def ids_publicados() -> frozenset[str]:
+    """IDs de anuncio ja publicados por QUALQUER publicador, segundo o repo."""
+    return frozenset(_mapa())
 
-    `produto_id` pode vir com prefixo/sufixo do scraper; a comparacao usa o
-    ID oficial embutido nele (MLB/MLBU do Mercado Livre, ASIN da Amazon,
-    MLU+codigo do Magalu),
-    que e o mesmo que o nome do arquivo carrega (Regra 11).
-    """
+
+def _id_oficial(produto_id: str) -> str | None:
+    """O ID oficial deste produto que JA aparece nas paginas, ou None."""
     if not produto_id:
-        return False
-    publicados = ids_publicados()
+        return None
+    publicados = _mapa()
     if produto_id in publicados:
-        return True
+        return produto_id
     # O id do scraper pode ser "MLB123..." ou trazer o codigo dentro de um
     # slug maior; procura o codigo oficial dentro dele.
     for m in re.finditer(r"(MLBU?\d+|MLU\d{6,15}|B[A-Z0-9]{9})", produto_id.upper()):
         if m.group(1) in publicados:
-            return True
+            return m.group(1)
+    return None
+
+
+def oferta_publicada(produto_id: str) -> "tuple[float, datetime] | None":
+    """(preco, quando) da ultima vez que este produto virou pagina no site.
+
+    None quando o produto nao tem pagina, ou quando a pagina existe mas nao
+    da para extrair os dois dados. Quem decide o repost trata esse None como
+    "nao sei" e mantem o bloqueio: aqui o custo dos dois erros e o da Regra
+    16 invertido em escala pequena — deixar passar republica a MESMA oferta
+    no grupo (Regra 11), bloquear custa uma oferta que volta na rodada
+    seguinte.
+    """
+    nome = None
+    alvo = _id_oficial(produto_id)
+    if alvo:
+        nome = _mapa().get(alvo)
+    if not nome:
+        return None
+    try:
+        with open(os.path.join(_PASTA, nome), encoding="utf-8", errors="replace") as fh:
+            html = fh.read()
+    except OSError as e:
+        log.warning("nao consegui ler a pagina %s (%s)", nome, e)
+        return None
+
+    mp = _PRECO_NA_PAGINA.search(html)
+    md = _DATA_NA_PAGINA.search(html)
+    if not mp or not md:
+        return None
+    try:
+        preco = float(mp.group(1))
+        quando = datetime(int(md.group(3)), int(md.group(2)), int(md.group(1)))
+    except (ValueError, OverflowError):
+        return None
+    if preco <= 0:
+        return None
+    return preco, quando
+
+
+def ja_publicado(produto_id: str, preco: "float | None" = None) -> bool:
+    """True se este ID ja aparece nas paginas do site.
+
+    `produto_id` pode vir com prefixo/sufixo do scraper; a comparacao usa o
+    ID oficial embutido nele (MLB/MLBU do Mercado Livre, ASIN da Amazon,
+    MLU+codigo do Magalu), que e o mesmo que o nome do arquivo carrega
+    (Regra 11).
+
+    Com `preco` informado, um produto ja publicado deixa de ser duplicata
+    quando a oferta melhorou de verdade: passaram `DIAS_MINIMOS_REPOST` (2,
+    o mesmo prazo de `limpar_antigos`) E o preco caiu pelo menos
+    `QUEDA_MINIMA_REPOST_PCT` (5%) em relacao ao publicado. Sem `preco`, o
+    comportamento e o de antes: ja tem pagina, e duplicata.
+    """
+    alvo = _id_oficial(produto_id)
+    if alvo is None:
+        return False
+    if preco is None:
+        return True
+    try:
+        preco = float(preco)
+    except (TypeError, ValueError):
+        return True
+    if preco <= 0:
+        return True
+
+    anterior = oferta_publicada(alvo)
+    if anterior is None:
+        return True          # pagina ilegivel: "nao sei" mantem o bloqueio
+    preco_pub, quando = anterior
+
+    if datetime.now() - quando < timedelta(days=_DIAS_MINIMOS_REPOST):
+        return True
+    teto = preco_pub * (1.0 - _QUEDA_MINIMA_REPOST_PCT / 100.0)
+    if preco > teto:
+        return True
+
+    queda = (1.0 - preco / preco_pub) * 100.0
+    log.info("repost liberado: %s R$ %.2f -> R$ %.2f (-%.1f%%), publicado em %s",
+             alvo, preco_pub, preco, queda, quando.strftime("%d/%m/%Y"))
+    try:
+        from core.metrics import inc  # noqa: PLC0415
+        inc("repost_por_queda_de_preco")
+    except Exception:
+        pass
     return False
