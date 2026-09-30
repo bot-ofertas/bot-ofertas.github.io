@@ -1,6 +1,96 @@
 {
   "products": [
     {
+      "titulo": "Pocket Balança Digital Portátil de Mão Até 50kg Com Alça Trava, Visor LCD Grande Para Bagagem, Pesca e Alta Precisão Ideal para Bagagem Pesca e Uso Doméstico Compacta e Resistente Linha Premium",
+      "preco": 24.99,
+      "preco_original": 29.99,
+      "desconto_pct": 16.7,
+      "foto": "https://m.media-amazon.com/images/I/51+5K6prVFL._AC_UL320_.jpg",
+      "categoria": "moda",
+      "score": 48,
+      "enviado_em": "2026-09-30T11:02:30.095204",
+      "link": "https://www.amazon.com.br/dp/B0F1BSW83R?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 24.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Elgin",
+      "preco": 5.9,
+      "preco_original": 7.4,
+      "desconto_pct": 20.3,
+      "foto": "https://m.media-amazon.com/images/I/51VtczCfYsL._AC_UL320_.jpg",
+      "categoria": "moda",
+      "score": 47,
+      "enviado_em": "2026-09-30T11:02:21.554930",
+      "link": "https://www.amazon.com.br/dp/B07DF89T1T?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 5.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Nutrify",
+      "preco": 50.34,
+      "preco_original": 59.97,
+      "desconto_pct": 16.1,
+      "foto": "https://m.media-amazon.com/images/I/71x1cjtLxcL._AC_UL320_.jpg",
+      "categoria": "moda",
+      "score": 48,
+      "enviado_em": "2026-09-30T11:02:12.993116",
+      "link": "https://www.amazon.com.br/dp/B09S4NYWWW?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 50.34,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Luminária Meia Lua Pendente Led Profissional Regulagem",
+      "preco": 195.49,
+      "preco_original": 595.0,
+      "desconto_pct": 67.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_639325-MLB90442599929_082025-AB-luminaria-meia-lua-pendente-led-profissional-regulagem.webp",
+      "categoria": "casa",
+      "score": 83,
+      "enviado_em": "2026-09-30T11:00:27.831100",
+      "link": "https://produto.mercadolivre.com.br/MLB-5496546540-luminaria-meia-lua-pendente-led-profissional-regulagem-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 195.49,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "The Blood Of Dawnwalker Steelbook Edition Ps5 Midia Fisica",
+      "preco": 368.56,
+      "preco_original": 506.0,
+      "desconto_pct": 27.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_936559-MLB114848240477_072026-AB--the-blood-of-dawnwalker-steelbook-edition-ps5-midia-fisica.webp",
+      "categoria": "games",
+      "score": 67,
+      "enviado_em": "2026-09-30T11:00:18.914336",
+      "link": "https://www.mercadolivre.com.br/the-blood-of-dawnwalker-steelbook-edition-ps5-midia-fisica/up/MLBU4356873921?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 368.56,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Perfume Club De Nuit Intense Da Armaf Edt 105ml Masculino",
+      "preco": 208.25,
+      "preco_original": 265.0,
+      "desconto_pct": 21.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_887864-MLB108264754941_032026-AB--perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino.webp",
+      "categoria": "beleza",
+      "score": 73,
+      "enviado_em": "2026-09-30T11:00:10.055691",
+      "link": "https://www.mercadolivre.com.br/perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino/up/MLBU3782392794?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 208.25,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Marvel Legends Series X-Men, conjunto duplo de figuras de ação Deathbird e Marvel's Gladiator",
       "preco": 218.22,
       "preco_original": 424.27,
@@ -113,25 +203,43 @@
       "desconto_medio": 53,
       "maior_desconto": 66
     },
+    "moda": {
+      "total": 3,
+      "score_medio": 48,
+      "desconto_medio": 18,
+      "maior_desconto": 20
+    },
+    "beleza": {
+      "total": 2,
+      "score_medio": 84,
+      "desconto_medio": 34,
+      "maior_desconto": 47
+    },
+    "games": {
+      "total": 1,
+      "score_medio": 67,
+      "desconto_medio": 27,
+      "maior_desconto": 27
+    },
     "eletronicos": {
       "total": 1,
       "score_medio": 87,
       "desconto_medio": 56,
       "maior_desconto": 56
     },
+    "casa": {
+      "total": 1,
+      "score_medio": 83,
+      "desconto_medio": 67,
+      "maior_desconto": 67
+    },
     "cameras": {
       "total": 1,
       "score_medio": 93,
       "desconto_medio": 41,
       "maior_desconto": 41
-    },
-    "beleza": {
-      "total": 1,
-      "score_medio": 94,
-      "desconto_medio": 47,
-      "maior_desconto": 47
     }
   },
-  "updated_at": "2026-09-29T11:14:29.771840",
-  "total": 6
+  "updated_at": "2026-09-30T11:02:38.937030",
+  "total": 12
 }
