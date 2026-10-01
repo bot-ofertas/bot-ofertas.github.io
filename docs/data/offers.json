@@ -1,6 +1,97 @@
 {
   "products": [
     {
+      "titulo": "Meditações de Marco Aurélio",
+      "preco": 15.0,
+      "preco_original": 29.9,
+      "desconto_pct": 49.8,
+      "foto": "https://m.media-amazon.com/images/I/71hX8DZp6FL._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 57,
+      "enviado_em": "2026-10-01T11:30:16.561269",
+      "link": "https://www.amazon.com.br/dp/658781767X?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 15.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Alcançando excelência em vendas - spin selling",
+      "preco": 64.85,
+      "preco_original": 98.5,
+      "desconto_pct": 34.2,
+      "foto": "https://m.media-amazon.com/images/I/61ZxdpZEAOL._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 62,
+      "enviado_em": "2026-10-01T11:30:08.053617",
+      "link": "https://www.amazon.com.br/dp/8550823384?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 64.85,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WAP Aspirador de Pó Automotivo Car 12V2, Portátil, 420ml, com Recipiente Removível e Filtro Lavável, 180W 12VDC",
+      "preco": 86.44,
+      "preco_original": 119.9,
+      "desconto_pct": 27.9,
+      "foto": "https://m.media-amazon.com/images/I/71zj-+xJrbL._AC_UL320_.jpg",
+      "categoria": "automotivo",
+      "score": 65,
+      "enviado_em": "2026-10-01T11:29:59.548557",
+      "link": "https://www.amazon.com.br/dp/B0CLDRS18S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 86.44,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Escritório Giratória HomeNow Columbus Presidente Preta com Tela Mesh",
+      "preco": 302.58,
+      "preco_original": 494.0,
+      "desconto_pct": 38.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651752-MLA95643261450_102025-AB.webp",
+      "categoria": "moveis",
+      "score": 85,
+      "enviado_em": "2026-10-01T11:27:25.786596",
+      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh/p/MLB57032440?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 302.58,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Masculino Feminino Kappa Park 2.0 Original",
+      "preco": 71.92,
+      "preco_original": 169.0,
+      "desconto_pct": 57.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_612669-MLB117966660109_092026-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
+      "categoria": "impressoras",
+      "score": 73,
+      "enviado_em": "2026-10-01T11:27:17.012387",
+      "cupom": "R$15 OFF com Cupom",
+      "link": "https://produto.mercadolivre.com.br/MLB-4049279695-tnis-masculino-feminino-kappa-park-20-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 71.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeirinha Infantil Para Carro 9-36kg Passeio Com Segurança Cadeirinha Infantil Preto",
+      "preco": 319.9,
+      "preco_original": 616.0,
+      "desconto_pct": 48.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_920911-MLA98813793822_112025-AB.webp",
+      "categoria": "automotivo",
+      "score": 83,
+      "enviado_em": "2026-10-01T11:27:07.514271",
+      "link": "https://www.mercadolivre.com.br/cadeirinha-infantil-para-carro-9-36kg-passeio-com-seguranca-cadeirinha-infantil-preto/p/MLB62469792?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 319.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Pocket Balança Digital Portátil de Mão Até 50kg Com Alça Trava, Visor LCD Grande Para Bagagem, Pesca e Alta Precisão Ideal para Bagagem Pesca e Uso Doméstico Compacta e Resistente Linha Premium",
       "preco": 24.99,
       "preco_original": 29.99,
@@ -89,119 +180,29 @@
       "menor_preco_30d": 208.25,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Marvel Legends Series X-Men, conjunto duplo de figuras de ação Deathbird e Marvel's Gladiator",
-      "preco": 218.22,
-      "preco_original": 424.27,
-      "desconto_pct": 48.6,
-      "foto": "https://m.media-amazon.com/images/I/81H7i-8h93L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 83,
-      "enviado_em": "2026-09-29T11:14:20.997756",
-      "link": "https://www.amazon.com.br/dp/B0DN6S7FNT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 218.22,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smartphone Motorola Moto G77 5g - 256GB 24GB (8GB RAM + 16GB RAM Boost) camera 108MP Ultra-Pixel, tela 1.5k extreme Amoled 120hz, ultrarresistente - Marrom",
-      "preco": 1698.99,
-      "preco_original": 2999.0,
-      "desconto_pct": 43.3,
-      "foto": "https://m.media-amazon.com/images/I/61zXvb3EmiL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 95,
-      "enviado_em": "2026-09-29T11:14:11.951074",
-      "link": "https://www.amazon.com.br/dp/B0GLSLLGZL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1698.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Fritadeira Philco Air Fryer Oven 12L PFR2200P - 127V",
-      "preco": 399.0,
-      "preco_original": 1199.9,
-      "desconto_pct": 66.7,
-      "foto": "https://m.media-amazon.com/images/I/612gXC9waVL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 83,
-      "enviado_em": "2026-09-29T11:14:02.753627",
-      "link": "https://www.amazon.com.br/dp/B08R93TVRG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 399.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Projetor Portátil 4k Hd Android 11.0 Smart Wifi 5g Bluetooth Branco 127/220v",
-      "preco": 151.62,
-      "preco_original": 349.0,
-      "desconto_pct": 56.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_828936-MLB88748640584_082025-AB--projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth.webp",
-      "categoria": "eletronicos",
-      "score": 87,
-      "enviado_em": "2026-09-29T11:12:33.860332",
-      "link": "https://www.mercadolivre.com.br/projetor-portatil-4k-hd-android-110-smart-wifi-5g-bluetooth/up/MLBU767944712?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 151.62,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Patinete Elétrico Drift Triciclo Infantil 36v 250w Bluetooth Azul",
-      "preco": 647.99,
-      "preco_original": 1099.0,
-      "desconto_pct": 41.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_615458-MLB112203616208_062026-AB--patinete-eletrico-drift-triciclo-infantil-36v-250w-bluetooth.webp",
-      "categoria": "cameras",
-      "score": 93,
-      "enviado_em": "2026-09-29T11:12:24.905668",
-      "link": "https://www.mercadolivre.com.br/patinete-eletrico-drift-triciclo-infantil-36v-250w-bluetooth/up/MLBU4100304055?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 647.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
-      "preco": 120.7,
-      "preco_original": 230.0,
-      "desconto_pct": 47.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB--perfume-sedutor-arabe-sabah-100ml-original-feminino.webp",
-      "categoria": "beleza",
-      "score": 94,
-      "enviado_em": "2026-09-29T11:12:15.838718",
-      "link": "https://www.mercadolivre.com.br/perfume-sedutor-arabe-sabah-100ml-original-feminino/up/MLBU3054985330?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 120.7,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Motorola Moto G77 5g - 256GB 24GB (8GB RAM + 16GB RAM Boost) camera 108MP Ultra-Pixel, tela 1.5k extreme Amoled 120hz, ultrarresistente - Marrom",
-    "preco": 1698.99,
-    "preco_original": 2999.0,
-    "desconto_pct": 43.3,
-    "foto": "https://m.media-amazon.com/images/I/61zXvb3EmiL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-    "categoria": "ofertas_dia",
-    "score": 95,
-    "enviado_em": "2026-09-29T11:14:11.951074",
-    "link": "https://www.amazon.com.br/dp/B0GLSLLGZL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "titulo": "Cadeira de Escritório Giratória HomeNow Columbus Presidente Preta com Tela Mesh",
+    "preco": 302.58,
+    "preco_original": 494.0,
+    "desconto_pct": 38.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651752-MLA95643261450_102025-AB.webp",
+    "categoria": "moveis",
+    "score": 85,
+    "enviado_em": "2026-10-01T11:27:25.786596",
+    "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh/p/MLB57032440?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1698.99,
+    "menor_preco_30d": 302.58,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "ofertas_dia": {
-      "total": 3,
-      "score_medio": 87,
-      "desconto_medio": 53,
-      "maior_desconto": 66
+    "automotivo": {
+      "total": 4,
+      "score_medio": 67,
+      "desconto_medio": 40,
+      "maior_desconto": 49
     },
     "moda": {
       "total": 3,
@@ -209,11 +210,17 @@
       "desconto_medio": 18,
       "maior_desconto": 20
     },
-    "beleza": {
-      "total": 2,
-      "score_medio": 84,
-      "desconto_medio": 34,
-      "maior_desconto": 47
+    "moveis": {
+      "total": 1,
+      "score_medio": 85,
+      "desconto_medio": 38,
+      "maior_desconto": 38
+    },
+    "impressoras": {
+      "total": 1,
+      "score_medio": 73,
+      "desconto_medio": 57,
+      "maior_desconto": 57
     },
     "games": {
       "total": 1,
@@ -221,25 +228,19 @@
       "desconto_medio": 27,
       "maior_desconto": 27
     },
-    "eletronicos": {
-      "total": 1,
-      "score_medio": 87,
-      "desconto_medio": 56,
-      "maior_desconto": 56
-    },
     "casa": {
       "total": 1,
       "score_medio": 83,
       "desconto_medio": 67,
       "maior_desconto": 67
     },
-    "cameras": {
+    "beleza": {
       "total": 1,
-      "score_medio": 93,
-      "desconto_medio": 41,
-      "maior_desconto": 41
+      "score_medio": 73,
+      "desconto_medio": 21,
+      "maior_desconto": 21
     }
   },
-  "updated_at": "2026-09-30T11:02:38.937030",
+  "updated_at": "2026-10-01T11:30:25.293965",
   "total": 12
 }
