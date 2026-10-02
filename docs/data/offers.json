@@ -1,6 +1,81 @@
 {
   "products": [
     {
+      "titulo": "Kit Haltere 6 em 1 Ajustável para Musculação - Preto - Multifuncional com Barra e Kettlebell",
+      "preco": 160.64,
+      "preco_original": 299.0,
+      "desconto_pct": 46.3,
+      "foto": "https://m.media-amazon.com/images/I/61ISeRgb21L._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 82,
+      "enviado_em": "2026-10-02T10:58:59.429274",
+      "link": "https://www.amazon.com.br/dp/B0FNVLLQKT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 160.64,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Kit 5 Faixas Elásticas Elásticos Alongamento Pilates Yoga Exercícios Condicionamento Físico Yoga Saúde Relaxamento Academia Músculos Personal Trainer Thera Band Fitness Mini Bands",
+      "preco": 7.8,
+      "preco_original": 11.14,
+      "desconto_pct": 30.0,
+      "foto": "https://m.media-amazon.com/images/I/719fD1g-wvL._AC_UL320_.jpg",
+      "categoria": "esportes",
+      "score": 61,
+      "enviado_em": "2026-10-02T10:58:50.724304",
+      "link": "https://www.amazon.com.br/dp/B07KQMVYKL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 7.8,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Central Multimídia Universal Mp5 1 Din 7 Espelha Dvd+ Cam Kit Multimidia 1 Din",
+      "preco": 217.83,
+      "preco_original": 397.0,
+      "desconto_pct": 45.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_757088-MLB108558652508_032026-AB--central-multimidia-universal-mp5-1-din-7-espelha-dvd-cam.webp",
+      "categoria": "cameras",
+      "score": 82,
+      "enviado_em": "2026-10-02T10:57:42.939494",
+      "link": "https://www.mercadolivre.com.br/central-multimidia-universal-mp5-1-din-7-espelha-dvd-cam/up/MLBU2975549211?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 217.83,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7\", Nfc, Ip54 - Preto",
+      "preco": 845.0,
+      "preco_original": 1499.0,
+      "desconto_pct": 43.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_868127-MLA118013296557_092026-AB.webp",
+      "categoria": "celulares",
+      "score": 95,
+      "enviado_em": "2026-10-02T10:57:32.433370",
+      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB65114795?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 845.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Projetor Portátil HY300 Mini 4K Compatível Android 11 Wi-Fi 5G Bluetooth Smart Portátil Rotação 180° Tela Grande para Filmes Séries Jogos Aulas e Apresentações Home Theater Cinema",
+      "preco": 184.92,
+      "preco_original": 249.0,
+      "desconto_pct": 26.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755982-MLA116318113946_092026-AB.webp",
+      "categoria": "eletronicos",
+      "score": 62,
+      "enviado_em": "2026-10-02T10:57:22.585062",
+      "link": "https://www.mercadolivre.com.br/projetor-portatil-hy300-mini-4k-compativel-android-11-wi-fi-5g-bluetooth-smart-portatil-rotacao-180-tela-grande-para-filmes-series-jogos-aulas-e-apresentacoes-home-theater-cinema/p/MLB78825658?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 184.92,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Meditações de Marco Aurélio",
       "preco": 15.0,
       "preco_original": 29.9,
@@ -183,17 +258,17 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira de Escritório Giratória HomeNow Columbus Presidente Preta com Tela Mesh",
-    "preco": 302.58,
-    "preco_original": 494.0,
-    "desconto_pct": 38.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651752-MLA95643261450_102025-AB.webp",
-    "categoria": "moveis",
-    "score": 85,
-    "enviado_em": "2026-10-01T11:27:25.786596",
-    "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh/p/MLB57032440?matt_tool=47114387&matt_source=bot_telegram",
+    "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7\", Nfc, Ip54 - Preto",
+    "preco": 845.0,
+    "preco_original": 1499.0,
+    "desconto_pct": 43.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_868127-MLA118013296557_092026-AB.webp",
+    "categoria": "celulares",
+    "score": 95,
+    "enviado_em": "2026-10-02T10:57:32.433370",
+    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB65114795?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 302.58,
+    "menor_preco_30d": 845.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -209,6 +284,12 @@
       "score_medio": 48,
       "desconto_medio": 18,
       "maior_desconto": 20
+    },
+    "esportes": {
+      "total": 2,
+      "score_medio": 72,
+      "desconto_medio": 38,
+      "maior_desconto": 46
     },
     "moveis": {
       "total": 1,
@@ -228,11 +309,29 @@
       "desconto_medio": 27,
       "maior_desconto": 27
     },
+    "eletronicos": {
+      "total": 1,
+      "score_medio": 62,
+      "desconto_medio": 26,
+      "maior_desconto": 26
+    },
+    "celulares": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 43,
+      "maior_desconto": 43
+    },
     "casa": {
       "total": 1,
       "score_medio": 83,
       "desconto_medio": 67,
       "maior_desconto": 67
+    },
+    "cameras": {
+      "total": 1,
+      "score_medio": 82,
+      "desconto_medio": 45,
+      "maior_desconto": 45
     },
     "beleza": {
       "total": 1,
@@ -241,6 +340,6 @@
       "maior_desconto": 21
     }
   },
-  "updated_at": "2026-10-01T11:30:25.293965",
-  "total": 12
+  "updated_at": "2026-10-02T10:59:08.367947",
+  "total": 17
 }
