@@ -1,6 +1,96 @@
 {
   "products": [
     {
+      "titulo": "Shampoo de Glicerina Johnson's Baby, 400ml",
+      "preco": 17.99,
+      "preco_original": 44.98,
+      "desconto_pct": 60.0,
+      "foto": "https://m.media-amazon.com/images/I/51NmcQASBhL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 64,
+      "enviado_em": "2026-10-03T10:18:45.385806",
+      "link": "https://www.amazon.com.br/dp/B07DHRPTPB?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 17.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Clear Shampoo Men Anticaspa Ice Cool Menthol 400Ml",
+      "preco": 23.24,
+      "preco_original": 31.99,
+      "desconto_pct": 27.4,
+      "foto": "https://m.media-amazon.com/images/I/71cW-39wjXL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 67,
+      "enviado_em": "2026-10-03T10:18:36.596790",
+      "link": "https://www.amazon.com.br/dp/B07LFGWRC7?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 23.24,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "celimax Shot Tightening Booster - 15ml",
+      "preco": 85.5,
+      "preco_original": 169.0,
+      "desconto_pct": 49.4,
+      "foto": "https://m.media-amazon.com/images/I/51zdLqgadJL._AC_UL320_.jpg",
+      "categoria": "beleza",
+      "score": 88,
+      "enviado_em": "2026-10-03T10:18:27.911582",
+      "link": "https://www.amazon.com.br/dp/B0DK4Y2YP3?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 85.5,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Furadeira De Impacto Profissional 1/2 Pol 13mm 750w Tbf750 Função Reversa Controle de Velocidade 220V The Black Tools",
+      "preco": 189.9,
+      "preco_original": 286.0,
+      "desconto_pct": 33.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_758307-MLA114375889903_072026-AB.webp",
+      "categoria": "ferramentas",
+      "score": 71,
+      "enviado_em": "2026-10-03T10:17:19.647498",
+      "link": "https://www.mercadolivre.com.br/furadeira-de-impacto-profissional-12-pol-13mm-750w-tbf750-funcao-reversa-controle-de-velocidade-220v-the-black-tools/p/MLB28769719?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 189.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Tênis Fitness Academia Feminino Esportivo Caminhada Corrida",
+      "preco": 94.9,
+      "preco_original": 149.0,
+      "desconto_pct": 36.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_660920-MLB111579400735_052026-AB-tnis-fitness-academia-feminino-esportivo-caminhada-corrida.webp",
+      "categoria": "moda",
+      "score": 85,
+      "enviado_em": "2026-10-03T10:17:09.173099",
+      "link": "https://produto.mercadolivre.com.br/MLB-5964576452-tnis-fitness-academia-feminino-esportivo-caminhada-corrida-_JM?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 94.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Samsung Smart Tv 43 Qled Full Hd Q5f 2025, Xbox Cloud Gaming, Canais Gratuitos, Hdr, Som Em Movimento Virtual",
+      "preco": 1557.0,
+      "preco_original": 2799.0,
+      "desconto_pct": 44.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_612999-MLA102412809695_122025-AB.webp",
+      "categoria": "tvs",
+      "score": 95,
+      "enviado_em": "2026-10-03T10:16:58.901803",
+      "link": "https://www.mercadolivre.com.br/samsung-smart-tv-43-qled-full-hd-q5f-2025-xbox-cloud-gaming-canais-gratuitos-hdr-som-em-movimento-virtual/p/MLB63467528?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1557.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Kit Haltere 6 em 1 Ajustável para Musculação - Preto - Multifuncional com Barra e Kettlebell",
       "preco": 160.64,
       "preco_original": 299.0,
@@ -165,110 +255,20 @@
       "menor_preco_30d": 319.9,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Pocket Balança Digital Portátil de Mão Até 50kg Com Alça Trava, Visor LCD Grande Para Bagagem, Pesca e Alta Precisão Ideal para Bagagem Pesca e Uso Doméstico Compacta e Resistente Linha Premium",
-      "preco": 24.99,
-      "preco_original": 29.99,
-      "desconto_pct": 16.7,
-      "foto": "https://m.media-amazon.com/images/I/51+5K6prVFL._AC_UL320_.jpg",
-      "categoria": "moda",
-      "score": 48,
-      "enviado_em": "2026-09-30T11:02:30.095204",
-      "link": "https://www.amazon.com.br/dp/B0F1BSW83R?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 24.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Elgin",
-      "preco": 5.9,
-      "preco_original": 7.4,
-      "desconto_pct": 20.3,
-      "foto": "https://m.media-amazon.com/images/I/51VtczCfYsL._AC_UL320_.jpg",
-      "categoria": "moda",
-      "score": 47,
-      "enviado_em": "2026-09-30T11:02:21.554930",
-      "link": "https://www.amazon.com.br/dp/B07DF89T1T?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 5.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Nutrify",
-      "preco": 50.34,
-      "preco_original": 59.97,
-      "desconto_pct": 16.1,
-      "foto": "https://m.media-amazon.com/images/I/71x1cjtLxcL._AC_UL320_.jpg",
-      "categoria": "moda",
-      "score": 48,
-      "enviado_em": "2026-09-30T11:02:12.993116",
-      "link": "https://www.amazon.com.br/dp/B09S4NYWWW?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 50.34,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Luminária Meia Lua Pendente Led Profissional Regulagem",
-      "preco": 195.49,
-      "preco_original": 595.0,
-      "desconto_pct": 67.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_639325-MLB90442599929_082025-AB-luminaria-meia-lua-pendente-led-profissional-regulagem.webp",
-      "categoria": "casa",
-      "score": 83,
-      "enviado_em": "2026-09-30T11:00:27.831100",
-      "link": "https://produto.mercadolivre.com.br/MLB-5496546540-luminaria-meia-lua-pendente-led-profissional-regulagem-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 195.49,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "The Blood Of Dawnwalker Steelbook Edition Ps5 Midia Fisica",
-      "preco": 368.56,
-      "preco_original": 506.0,
-      "desconto_pct": 27.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_936559-MLB114848240477_072026-AB--the-blood-of-dawnwalker-steelbook-edition-ps5-midia-fisica.webp",
-      "categoria": "games",
-      "score": 67,
-      "enviado_em": "2026-09-30T11:00:18.914336",
-      "link": "https://www.mercadolivre.com.br/the-blood-of-dawnwalker-steelbook-edition-ps5-midia-fisica/up/MLBU4356873921?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 368.56,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Perfume Club De Nuit Intense Da Armaf Edt 105ml Masculino",
-      "preco": 208.25,
-      "preco_original": 265.0,
-      "desconto_pct": 21.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_887864-MLB108264754941_032026-AB--perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino.webp",
-      "categoria": "beleza",
-      "score": 73,
-      "enviado_em": "2026-09-30T11:00:10.055691",
-      "link": "https://www.mercadolivre.com.br/perfume-club-de-nuit-intense-da-armaf-edt-105ml-masculino/up/MLBU3782392794?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 208.25,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7\", Nfc, Ip54 - Preto",
-    "preco": 845.0,
-    "preco_original": 1499.0,
-    "desconto_pct": 43.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_868127-MLA118013296557_092026-AB.webp",
-    "categoria": "celulares",
+    "titulo": "Samsung Smart Tv 43 Qled Full Hd Q5f 2025, Xbox Cloud Gaming, Canais Gratuitos, Hdr, Som Em Movimento Virtual",
+    "preco": 1557.0,
+    "preco_original": 2799.0,
+    "desconto_pct": 44.0,
+    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_612999-MLA102412809695_122025-AB.webp",
+    "categoria": "tvs",
     "score": 95,
-    "enviado_em": "2026-10-02T10:57:32.433370",
-    "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB65114795?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-10-03T10:16:58.901803",
+    "link": "https://www.mercadolivre.com.br/samsung-smart-tv-43-qled-full-hd-q5f-2025-xbox-cloud-gaming-canais-gratuitos-hdr-som-em-movimento-virtual/p/MLB63467528?matt_tool=47114387&matt_source=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 845.0,
+    "menor_preco_30d": 1557.0,
     "menor_periodo": false,
     "verificada": true
   },
@@ -279,11 +279,11 @@
       "desconto_medio": 40,
       "maior_desconto": 49
     },
-    "moda": {
+    "beleza": {
       "total": 3,
-      "score_medio": 48,
-      "desconto_medio": 18,
-      "maior_desconto": 20
+      "score_medio": 73,
+      "desconto_medio": 46,
+      "maior_desconto": 60
     },
     "esportes": {
       "total": 2,
@@ -291,11 +291,23 @@
       "desconto_medio": 38,
       "maior_desconto": 46
     },
+    "tvs": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 44,
+      "maior_desconto": 44
+    },
     "moveis": {
       "total": 1,
       "score_medio": 85,
       "desconto_medio": 38,
       "maior_desconto": 38
+    },
+    "moda": {
+      "total": 1,
+      "score_medio": 85,
+      "desconto_medio": 36,
+      "maior_desconto": 36
     },
     "impressoras": {
       "total": 1,
@@ -303,11 +315,11 @@
       "desconto_medio": 57,
       "maior_desconto": 57
     },
-    "games": {
+    "ferramentas": {
       "total": 1,
-      "score_medio": 67,
-      "desconto_medio": 27,
-      "maior_desconto": 27
+      "score_medio": 71,
+      "desconto_medio": 33,
+      "maior_desconto": 33
     },
     "eletronicos": {
       "total": 1,
@@ -321,25 +333,13 @@
       "desconto_medio": 43,
       "maior_desconto": 43
     },
-    "casa": {
-      "total": 1,
-      "score_medio": 83,
-      "desconto_medio": 67,
-      "maior_desconto": 67
-    },
     "cameras": {
       "total": 1,
       "score_medio": 82,
       "desconto_medio": 45,
       "maior_desconto": 45
-    },
-    "beleza": {
-      "total": 1,
-      "score_medio": 73,
-      "desconto_medio": 21,
-      "maior_desconto": 21
     }
   },
-  "updated_at": "2026-10-02T10:59:08.367947",
+  "updated_at": "2026-10-03T10:18:54.581510",
   "total": 17
 }
