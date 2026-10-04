@@ -1,6 +1,96 @@
 {
   "products": [
     {
+      "titulo": "LEGO Technic McLaren P1, Conjunto de Hipercarro para Adultos 42172",
+      "preco": 2419.9,
+      "preco_original": 4499.99,
+      "desconto_pct": 46.2,
+      "foto": "https://m.media-amazon.com/images/I/813KclKm09L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 95,
+      "enviado_em": "2026-10-04T11:03:11.042349",
+      "link": "https://www.amazon.com.br/dp/B0CV2CLZXJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2419.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Dreame H60 GT, Aspirador Vertical Sem Fio Seco e Úmido, Sucção 21kPa, Manuseio Leve, 0 Emaranhados, Reclinável 180°, Limpeza com Escova Dupla, Lavagem Quente 90°C, Limpeza com Água Fresca, 220V-240V",
+      "preco": 2698.99,
+      "preco_original": 2999.0,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/61hkhmYnNKL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 52,
+      "enviado_em": "2026-10-04T11:03:01.866819",
+      "link": "https://www.amazon.com.br/dp/B0GY4H64Y1?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 2698.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "L'Oréal Professionnel Absolut Repair, Óleo de Tratamento Capilar Leave-in Multi-Benefícios 10 em 1, Cabelos Secos e Danificados, Proteína e Óleo de Proteína de Trigo, 30ml",
+      "preco": 56.62,
+      "preco_original": 84.9,
+      "desconto_pct": 33.3,
+      "foto": "https://m.media-amazon.com/images/I/61g91pR25kL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 69,
+      "enviado_em": "2026-10-04T11:02:52.595975",
+      "link": "https://www.amazon.com.br/dp/B0CPYDJLH2?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 56.62,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fogão a Gás Mesa Inox e Forno 50L Limpa Fácil Esmaltec IDEAL POP F4ISP Cor Preto 4 bocas",
+      "preco": 509.15,
+      "preco_original": 949.0,
+      "desconto_pct": 46.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_645138-MLA99508591658_112025-AB.webp",
+      "categoria": "eletrodomesticos",
+      "score": 92,
+      "enviado_em": "2026-10-04T11:01:23.190684",
+      "link": "https://www.mercadolivre.com.br/fogao-a-gas-mesa-inox-e-forno-50l-limpa-facil-esmaltec-ideal-pop-f4isp-cor-preto-4-bocas/p/MLB46112439?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 509.15,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Fone De Ouvido Headphone Dapon H02D Bluetooth 5.1 Over-ear 22h Preto",
+      "preco": 70.3,
+      "preco_original": 149.0,
+      "desconto_pct": 52.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_673950-MLA99394598783_112025-AB.webp",
+      "categoria": "games",
+      "score": 83,
+      "enviado_em": "2026-10-04T11:01:13.166138",
+      "link": "https://www.mercadolivre.com.br/fone-de-ouvido-headphone-dapon-h02d-bluetooth-51-over-ear-22h-preto/p/MLB24117280?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 70.3,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "Papel Report Premium A4 75g Branco Pacote 500 Folhas",
+      "preco": 31.98,
+      "preco_original": 55.0,
+      "desconto_pct": 42.0,
+      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_906670-MLA115752495340_092026-AB.webp",
+      "categoria": "tablets",
+      "score": 75,
+      "enviado_em": "2026-10-04T11:01:03.073878",
+      "link": "https://www.mercadolivre.com.br/papel-report-premium-a4-75g-branco-pacote-500-folhas/p/MLB21590318?matt_tool=47114387&matt_source=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 31.98,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Shampoo de Glicerina Johnson's Baby, 400ml",
       "preco": 17.99,
       "preco_original": 44.98,
@@ -89,195 +179,29 @@
       "menor_preco_30d": 1557.0,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Kit Haltere 6 em 1 Ajustável para Musculação - Preto - Multifuncional com Barra e Kettlebell",
-      "preco": 160.64,
-      "preco_original": 299.0,
-      "desconto_pct": 46.3,
-      "foto": "https://m.media-amazon.com/images/I/61ISeRgb21L._AC_UL320_.jpg",
-      "categoria": "esportes",
-      "score": 82,
-      "enviado_em": "2026-10-02T10:58:59.429274",
-      "link": "https://www.amazon.com.br/dp/B0FNVLLQKT?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 160.64,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Kit 5 Faixas Elásticas Elásticos Alongamento Pilates Yoga Exercícios Condicionamento Físico Yoga Saúde Relaxamento Academia Músculos Personal Trainer Thera Band Fitness Mini Bands",
-      "preco": 7.8,
-      "preco_original": 11.14,
-      "desconto_pct": 30.0,
-      "foto": "https://m.media-amazon.com/images/I/719fD1g-wvL._AC_UL320_.jpg",
-      "categoria": "esportes",
-      "score": 61,
-      "enviado_em": "2026-10-02T10:58:50.724304",
-      "link": "https://www.amazon.com.br/dp/B07KQMVYKL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 7.8,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Central Multimídia Universal Mp5 1 Din 7 Espelha Dvd+ Cam Kit Multimidia 1 Din",
-      "preco": 217.83,
-      "preco_original": 397.0,
-      "desconto_pct": 45.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_757088-MLB108558652508_032026-AB--central-multimidia-universal-mp5-1-din-7-espelha-dvd-cam.webp",
-      "categoria": "cameras",
-      "score": 82,
-      "enviado_em": "2026-10-02T10:57:42.939494",
-      "link": "https://www.mercadolivre.com.br/central-multimidia-universal-mp5-1-din-7-espelha-dvd-cam/up/MLBU2975549211?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 217.83,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Celular Samsung Galaxy A17 Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7\", Nfc, Ip54 - Preto",
-      "preco": 845.0,
-      "preco_original": 1499.0,
-      "desconto_pct": 43.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_868127-MLA118013296557_092026-AB.webp",
-      "categoria": "celulares",
-      "score": 95,
-      "enviado_em": "2026-10-02T10:57:32.433370",
-      "link": "https://www.mercadolivre.com.br/celular-samsung-galaxy-a17-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto/p/MLB65114795?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 845.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Projetor Portátil HY300 Mini 4K Compatível Android 11 Wi-Fi 5G Bluetooth Smart Portátil Rotação 180° Tela Grande para Filmes Séries Jogos Aulas e Apresentações Home Theater Cinema",
-      "preco": 184.92,
-      "preco_original": 249.0,
-      "desconto_pct": 26.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_755982-MLA116318113946_092026-AB.webp",
-      "categoria": "eletronicos",
-      "score": 62,
-      "enviado_em": "2026-10-02T10:57:22.585062",
-      "link": "https://www.mercadolivre.com.br/projetor-portatil-hy300-mini-4k-compativel-android-11-wi-fi-5g-bluetooth-smart-portatil-rotacao-180-tela-grande-para-filmes-series-jogos-aulas-e-apresentacoes-home-theater-cinema/p/MLB78825658?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 184.92,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Meditações de Marco Aurélio",
-      "preco": 15.0,
-      "preco_original": 29.9,
-      "desconto_pct": 49.8,
-      "foto": "https://m.media-amazon.com/images/I/71hX8DZp6FL._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 57,
-      "enviado_em": "2026-10-01T11:30:16.561269",
-      "link": "https://www.amazon.com.br/dp/658781767X?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 15.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Alcançando excelência em vendas - spin selling",
-      "preco": 64.85,
-      "preco_original": 98.5,
-      "desconto_pct": 34.2,
-      "foto": "https://m.media-amazon.com/images/I/61ZxdpZEAOL._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 62,
-      "enviado_em": "2026-10-01T11:30:08.053617",
-      "link": "https://www.amazon.com.br/dp/8550823384?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 64.85,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "WAP Aspirador de Pó Automotivo Car 12V2, Portátil, 420ml, com Recipiente Removível e Filtro Lavável, 180W 12VDC",
-      "preco": 86.44,
-      "preco_original": 119.9,
-      "desconto_pct": 27.9,
-      "foto": "https://m.media-amazon.com/images/I/71zj-+xJrbL._AC_UL320_.jpg",
-      "categoria": "automotivo",
-      "score": 65,
-      "enviado_em": "2026-10-01T11:29:59.548557",
-      "link": "https://www.amazon.com.br/dp/B0CLDRS18S?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 86.44,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Cadeira de Escritório Giratória HomeNow Columbus Presidente Preta com Tela Mesh",
-      "preco": 302.58,
-      "preco_original": 494.0,
-      "desconto_pct": 38.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_651752-MLA95643261450_102025-AB.webp",
-      "categoria": "moveis",
-      "score": 85,
-      "enviado_em": "2026-10-01T11:27:25.786596",
-      "link": "https://www.mercadolivre.com.br/cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh/p/MLB57032440?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 302.58,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Tênis Masculino Feminino Kappa Park 2.0 Original",
-      "preco": 71.92,
-      "preco_original": 169.0,
-      "desconto_pct": 57.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_612669-MLB117966660109_092026-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
-      "categoria": "impressoras",
-      "score": 73,
-      "enviado_em": "2026-10-01T11:27:17.012387",
-      "cupom": "R$15 OFF com Cupom",
-      "link": "https://produto.mercadolivre.com.br/MLB-4049279695-tnis-masculino-feminino-kappa-park-20-original-_JM?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 71.92,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Cadeirinha Infantil Para Carro 9-36kg Passeio Com Segurança Cadeirinha Infantil Preto",
-      "preco": 319.9,
-      "preco_original": 616.0,
-      "desconto_pct": 48.0,
-      "foto": "https://http2.mlstatic.com/D_Q_NP_2X_920911-MLA98813793822_112025-AB.webp",
-      "categoria": "automotivo",
-      "score": 83,
-      "enviado_em": "2026-10-01T11:27:07.514271",
-      "link": "https://www.mercadolivre.com.br/cadeirinha-infantil-para-carro-9-36kg-passeio-com-seguranca-cadeirinha-infantil-preto/p/MLB62469792?matt_tool=47114387&matt_source=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 319.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Samsung Smart Tv 43 Qled Full Hd Q5f 2025, Xbox Cloud Gaming, Canais Gratuitos, Hdr, Som Em Movimento Virtual",
-    "preco": 1557.0,
-    "preco_original": 2799.0,
-    "desconto_pct": 44.0,
-    "foto": "https://http2.mlstatic.com/D_Q_NP_2X_612999-MLA102412809695_122025-AB.webp",
-    "categoria": "tvs",
+    "titulo": "LEGO Technic McLaren P1, Conjunto de Hipercarro para Adultos 42172",
+    "preco": 2419.9,
+    "preco_original": 4499.99,
+    "desconto_pct": 46.2,
+    "foto": "https://m.media-amazon.com/images/I/813KclKm09L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "categoria": "ofertas_dia",
     "score": 95,
-    "enviado_em": "2026-10-03T10:16:58.901803",
-    "link": "https://www.mercadolivre.com.br/samsung-smart-tv-43-qled-full-hd-q5f-2025-xbox-cloud-gaming-canais-gratuitos-hdr-som-em-movimento-virtual/p/MLB63467528?matt_tool=47114387&matt_source=bot_telegram",
+    "enviado_em": "2026-10-04T11:03:11.042349",
+    "link": "https://www.amazon.com.br/dp/B0CV2CLZXJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 1557.0,
+    "menor_preco_30d": 2419.9,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "automotivo": {
-      "total": 4,
-      "score_medio": 67,
-      "desconto_medio": 40,
-      "maior_desconto": 49
+    "ofertas_dia": {
+      "total": 3,
+      "score_medio": 72,
+      "desconto_medio": 30,
+      "maior_desconto": 46
     },
     "beleza": {
       "total": 3,
@@ -285,23 +209,17 @@
       "desconto_medio": 46,
       "maior_desconto": 60
     },
-    "esportes": {
-      "total": 2,
-      "score_medio": 72,
-      "desconto_medio": 38,
-      "maior_desconto": 46
-    },
     "tvs": {
       "total": 1,
       "score_medio": 95,
       "desconto_medio": 44,
       "maior_desconto": 44
     },
-    "moveis": {
+    "tablets": {
       "total": 1,
-      "score_medio": 85,
-      "desconto_medio": 38,
-      "maior_desconto": 38
+      "score_medio": 75,
+      "desconto_medio": 42,
+      "maior_desconto": 42
     },
     "moda": {
       "total": 1,
@@ -309,11 +227,11 @@
       "desconto_medio": 36,
       "maior_desconto": 36
     },
-    "impressoras": {
+    "games": {
       "total": 1,
-      "score_medio": 73,
-      "desconto_medio": 57,
-      "maior_desconto": 57
+      "score_medio": 83,
+      "desconto_medio": 52,
+      "maior_desconto": 52
     },
     "ferramentas": {
       "total": 1,
@@ -321,25 +239,13 @@
       "desconto_medio": 33,
       "maior_desconto": 33
     },
-    "eletronicos": {
+    "eletrodomesticos": {
       "total": 1,
-      "score_medio": 62,
-      "desconto_medio": 26,
-      "maior_desconto": 26
-    },
-    "celulares": {
-      "total": 1,
-      "score_medio": 95,
-      "desconto_medio": 43,
-      "maior_desconto": 43
-    },
-    "cameras": {
-      "total": 1,
-      "score_medio": 82,
-      "desconto_medio": 45,
-      "maior_desconto": 45
+      "score_medio": 92,
+      "desconto_medio": 46,
+      "maior_desconto": 46
     }
   },
-  "updated_at": "2026-10-03T10:18:54.581510",
-  "total": 17
+  "updated_at": "2026-10-04T11:03:20.250192",
+  "total": 12
 }
