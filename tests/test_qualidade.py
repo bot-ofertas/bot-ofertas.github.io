@@ -579,6 +579,52 @@ def test_repost_so_quando_a_oferta_melhorou_de_verdade():
             ps._PASTA, ps._cache = base_pasta, base_cache
 
 
+def test_id_truncado_no_nome_do_arquivo_ainda_e_reconhecido():
+    """Bug real medido na rodada 314 (26/09/2026, 15:20 UTC).
+
+    `core/blog_generator.py` monta o nome com `pid[:12]`, entao o ID
+    `MLBU2939238991` (14 chars) virou `...-MLBU29392389.html`. O registro
+    compartilhado procurava o ID inteiro, nunca achava, e o Monitor Portatil
+    15.6" foi republicado no grupo com queda de 4,2% (R$ 384,60 -> R$ 368,60)
+    — abaixo do minimo de 5%, exatamente o que a checagem existe para barrar.
+    Sao 639 paginas com ID de 12 chars na pasta, todas nessa situacao."""
+    import tempfile  # noqa: PLC0415
+
+    from core import publicados_site as ps  # noqa: PLC0415
+
+    produto = {
+        "id": "MLBU2939238991",          # 14 chars: o nome do arquivo corta em 12
+        "titulo": "Monitor Portatil 15.6'' Tela Externa Hdr Ips 1080p Ultrafino",
+        "preco": 384.60,
+        "preco_original": 499.00,
+        "link": "https://www.mercadolivre.com.br/up/MLBU2939238991?matt_tool=47114387",
+        "loja": "mercadolivre",
+        "categoria": "informatica",
+    }
+
+    base_pasta, base_cache = ps._PASTA, ps._cache
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            caminho = _pagina_de_teste(tmp, produto, dias_atras=46)
+            assert "MLBU29392389.html" in os.path.basename(caminho), \
+                "o gerador deixou de truncar — este teste precisa ser revisto"
+            ps._PASTA, ps._cache = tmp, None
+
+            assert ps._id_oficial("MLBU2939238991") == "MLBU29392389", \
+                "nao reconheceu o ID truncado — republicaria no grupo"
+            assert ps.oferta_publicada("MLBU2939238991")[0] == 384.60
+
+            assert ps.ja_publicado("MLBU2939238991", 368.60) is True, \
+                "-4,2% passou: foi exatamente o repost indevido da rodada 314"
+            assert ps.ja_publicado("MLBU2939238991", 350.00) is False, \
+                "-9% ficou bloqueado — queda real precisa voltar ao grupo"
+
+            # E o ID curto continua batendo direto, sem depender do corte.
+            assert ps.ja_publicado("MLBU29392389", 368.60) is True
+        finally:
+            ps._PASTA, ps._cache = base_pasta, base_cache
+
+
 def test_pagina_ilegivel_mantem_o_bloqueio():
     """Aqui "nao sei" fica do lado de bloquear, e o inverso de ids_publicados():
     sem conseguir LISTAR a pasta o bot perderia a checagem toda e calaria
