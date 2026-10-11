@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "WAP Extratora Portátil Spot Cleaner W3, 3 em 1, Borrifa, Esfrega e Extrai, com Sistema de Autolimpeza, 1450W 127V",
+      "preco": 443.0,
+      "preco_original": 849.9,
+      "desconto_pct": 47.9,
+      "foto": "https://m.media-amazon.com/images/I/71YOp9GJX2L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 96,
+      "enviado_em": "2026-10-11T11:25:14.321846",
+      "link": "https://www.amazon.com.br/dp/B0CH3WBKN6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 443.0,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
+      "titulo": "whiskas Ração Whiskas Frango Para Gatos Adultos 10 1 Kg",
+      "preco": 160.0,
+      "preco_original": 199.9,
+      "desconto_pct": 20.0,
+      "foto": "https://m.media-amazon.com/images/I/61lE2bIQ6gL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 49,
+      "enviado_em": "2026-10-11T11:25:05.185887",
+      "link": "https://www.amazon.com.br/dp/B07XQDD526?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 160.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Amazon Fire TV Stick HD (modelo mais recente), Controle Remoto por Voz com Alexa, alimentado pela TV, com configuração simples e Acesso Antecipado à Alexa+",
+      "preco": 246.9,
+      "preco_original": 479.0,
+      "desconto_pct": 48.5,
+      "foto": "https://m.media-amazon.com/images/I/614YeT6MRAL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 84,
+      "enviado_em": "2026-10-11T11:24:56.023955",
+      "link": "https://www.amazon.com.br/dp/B0DVK166SV?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 246.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Electrolux, Pote Hermetico, 12 unidades, A23122901, cinza",
       "preco": 77.8,
       "preco_original": 129.9,
@@ -47,26 +92,26 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Smartphone Motorola Razr 60 256GB 12GB RAM, Tela Dobravel 6.9 pOLED, Camera IP48, Branco",
-    "preco": 2999.0,
-    "preco_original": 5499.0,
-    "desconto_pct": 45.5,
-    "foto": "https://m.media-amazon.com/images/I/61Ik2Dj2zTL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "titulo": "WAP Extratora Portátil Spot Cleaner W3, 3 em 1, Borrifa, Esfrega e Extrai, com Sistema de Autolimpeza, 1450W 127V",
+    "preco": 443.0,
+    "preco_original": 849.9,
+    "desconto_pct": 47.9,
+    "foto": "https://m.media-amazon.com/images/I/71YOp9GJX2L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
     "categoria": "cupons",
-    "score": 95,
-    "enviado_em": "2026-10-10T11:09:53.871805",
-    "link": "https://www.amazon.com.br/dp/B0F8KVQZQX?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "score": 96,
+    "enviado_em": "2026-10-11T11:25:14.321846",
+    "link": "https://www.amazon.com.br/dp/B0CH3WBKN6?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
     "classe": "excelente",
-    "menor_preco_30d": 2999.0,
-    "menor_periodo": false,
+    "menor_preco_30d": 443.0,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 2,
-      "score_medio": 89,
+      "total": 5,
+      "score_medio": 81,
       "desconto_medio": 39,
-      "maior_desconto": 45
+      "maior_desconto": 48
     },
     "casa": {
       "total": 1,
@@ -75,6 +120,6 @@
       "maior_desconto": 40
     }
   },
-  "updated_at": "2026-10-10T11:10:22.332118",
-  "total": 3
+  "updated_at": "2026-10-11T11:25:25.415620",
+  "total": 6
 }
