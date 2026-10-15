@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Castanha-do-Pará 500g Orgânica Inteira – Fonte de Proteína Vegetal e Selênio – Vegana, Kosher, Sem Glúten, Sem Conservantes – Floresta em Pé",
+      "preco": 66.29,
+      "preco_original": 78.89,
+      "desconto_pct": 16.0,
+      "foto": "https://m.media-amazon.com/images/I/81nEUFVRt8L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 45,
+      "enviado_em": "2026-10-15T09:48:27.895626",
+      "link": "https://www.amazon.com.br/dp/B0FQK39HKS?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 66.29,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Cadeira de Escritório Presidente Executiva Marrom com Molas Ensacadas, Encosto Alto Acolchoado, Altura Regulável, Giro 360°, Braços Revestidos e Base Cromada com Rodízios",
+      "preco": 599.9,
+      "preco_original": 790.0,
+      "desconto_pct": 24.1,
+      "foto": "https://m.media-amazon.com/images/I/61m6jPnwt-L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 66,
+      "enviado_em": "2026-10-15T09:48:18.676944",
+      "link": "https://www.amazon.com.br/dp/B0H4M9CGZL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 599.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "NAC 600mg 120 Cápsulas 4 Meses de Uso, Longa Duração 2x Mais, com Molibdênio e Selênio, Fortalvit",
+      "preco": 72.9,
+      "preco_original": 96.9,
+      "desconto_pct": 24.8,
+      "foto": "https://m.media-amazon.com/images/I/61XbBNvBG-L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 59,
+      "enviado_em": "2026-10-15T09:48:10.085057",
+      "link": "https://www.amazon.com.br/dp/B0DLVH2WN4?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 72.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Vitamina B12 Ativa (metilcobalamina) Longa Duração: 4 Meses de Uso, 120 Cápsulas,Fortalvit",
       "preco": 54.9,
       "preco_original": 62.9,
@@ -12,7 +57,7 @@
       "link": "https://www.amazon.com.br/dp/B0DD2FHQ3P?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "ruim",
       "menor_preco_30d": 54.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -27,7 +72,7 @@
       "link": "https://www.amazon.com.br/dp/B0G2682GZF?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "ruim",
       "menor_preco_30d": 78.89,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -42,33 +87,33 @@
       "link": "https://www.amazon.com.br/dp/B0D9ZY6B9G?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "ruim",
       "menor_preco_30d": 64.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Vitamina B12 Ativa (metilcobalamina) Longa Duração: 4 Meses de Uso, 120 Cápsulas,Fortalvit",
-    "preco": 54.9,
-    "preco_original": 62.9,
-    "desconto_pct": 12.7,
-    "foto": "https://m.media-amazon.com/images/I/61-T11tf4dL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "titulo": "Cadeira de Escritório Presidente Executiva Marrom com Molas Ensacadas, Encosto Alto Acolchoado, Altura Regulável, Giro 360°, Braços Revestidos e Base Cromada com Rodízios",
+    "preco": 599.9,
+    "preco_original": 790.0,
+    "desconto_pct": 24.1,
+    "foto": "https://m.media-amazon.com/images/I/61m6jPnwt-L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
     "categoria": "cupons",
-    "score": 41,
-    "enviado_em": "2026-10-14T10:06:40.040254",
-    "link": "https://www.amazon.com.br/dp/B0DD2FHQ3P?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-    "classe": "ruim",
-    "menor_preco_30d": 54.9,
+    "score": 66,
+    "enviado_em": "2026-10-15T09:48:18.676944",
+    "link": "https://www.amazon.com.br/dp/B0H4M9CGZL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "boa",
+    "menor_preco_30d": 599.9,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 3,
-      "score_medio": 41,
-      "desconto_medio": 12,
-      "maior_desconto": 12
+      "total": 6,
+      "score_medio": 49,
+      "desconto_medio": 17,
+      "maior_desconto": 24
     }
   },
-  "updated_at": "2026-10-14T10:06:50.695500",
-  "total": 3
+  "updated_at": "2026-10-15T09:48:38.994643",
+  "total": 6
 }
