@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Freeco Bloqueador De Odores Sanitarios - Lavanda 60ml Pack com 12 unidades",
+      "preco": 117.0,
+      "preco_original": 182.9,
+      "desconto_pct": 36.0,
+      "foto": "https://m.media-amazon.com/images/I/61FgBohsBbL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 73,
+      "enviado_em": "2026-10-16T09:41:39.821714",
+      "link": "https://www.amazon.com.br/dp/B08521LB58?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 117.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Samsung Ar-condicionado Split Digital Inverter Ultra Connect AI 12.000 BTUs Frio AR12DYFZAWKNAZ",
+      "preco": 2209.0,
+      "preco_original": 3939.0,
+      "desconto_pct": 43.9,
+      "foto": "https://m.media-amazon.com/images/I/51CGLBYdeIL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 95,
+      "enviado_em": "2026-10-16T09:41:30.936377",
+      "link": "https://www.amazon.com.br/dp/B0DKVCTTFN?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 2209.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Robô Aspirador Roborock QR598 | Aspira e Passa Pano | Sucção HyperForce 8.000Pa | Navegação LiDAR | Base Multifuncional Inteligente | Controle por App | Alexa e Google Assistant | Preto",
+      "preco": 5173.99,
+      "preco_original": 6049.99,
+      "desconto_pct": 14.5,
+      "foto": "https://m.media-amazon.com/images/I/61wFUcrmyAL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 62,
+      "enviado_em": "2026-10-16T09:41:22.334448",
+      "link": "https://www.amazon.com.br/dp/B0FZ841F1H?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 5173.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Castanha-do-Pará 500g Orgânica Inteira – Fonte de Proteína Vegetal e Selênio – Vegana, Kosher, Sem Glúten, Sem Conservantes – Floresta em Pé",
       "preco": 66.29,
       "preco_original": 78.89,
@@ -12,7 +57,7 @@
       "link": "https://www.amazon.com.br/dp/B0FQK39HKS?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 66.29,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -42,7 +87,7 @@
       "link": "https://www.amazon.com.br/dp/B0DLVH2WN4?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "media",
       "menor_preco_30d": 72.9,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     },
     {
@@ -92,28 +137,34 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Cadeira de Escritório Presidente Executiva Marrom com Molas Ensacadas, Encosto Alto Acolchoado, Altura Regulável, Giro 360°, Braços Revestidos e Base Cromada com Rodízios",
-    "preco": 599.9,
-    "preco_original": 790.0,
-    "desconto_pct": 24.1,
-    "foto": "https://m.media-amazon.com/images/I/61m6jPnwt-L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-    "categoria": "cupons",
-    "score": 66,
-    "enviado_em": "2026-10-15T09:48:18.676944",
-    "link": "https://www.amazon.com.br/dp/B0H4M9CGZL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 599.9,
+    "titulo": "Samsung Ar-condicionado Split Digital Inverter Ultra Connect AI 12.000 BTUs Frio AR12DYFZAWKNAZ",
+    "preco": 2209.0,
+    "preco_original": 3939.0,
+    "desconto_pct": 43.9,
+    "foto": "https://m.media-amazon.com/images/I/51CGLBYdeIL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "categoria": "ofertas_dia",
+    "score": 95,
+    "enviado_em": "2026-10-16T09:41:30.936377",
+    "link": "https://www.amazon.com.br/dp/B0DKVCTTFN?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 2209.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 6,
-      "score_medio": 49,
-      "desconto_medio": 17,
+      "total": 7,
+      "score_medio": 51,
+      "desconto_medio": 16,
       "maior_desconto": 24
+    },
+    "ofertas_dia": {
+      "total": 2,
+      "score_medio": 84,
+      "desconto_medio": 40,
+      "maior_desconto": 43
     }
   },
-  "updated_at": "2026-10-15T09:48:38.994643",
-  "total": 6
+  "updated_at": "2026-10-16T09:41:50.460327",
+  "total": 9
 }
