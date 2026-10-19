@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Ar Condicionado Split Midea Inverter Lite 12000 Btu R32 Frio 42ebvcb12m5 Branco 220v",
+      "preco": 1851.08,
+      "preco_original": 3929.0,
+      "desconto_pct": 52.9,
+      "foto": "https://m.media-amazon.com/images/I/51+HydOKbWL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 95,
+      "enviado_em": "2026-10-19T10:42:56.149963",
+      "link": "https://www.amazon.com.br/dp/B0HCXKT67F?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 1851.08,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Twotrees Gravador a laser TTS-10 Pro, máquina de gravação a laser de alta precisão de 10000 mW, cortador a laser, velocidade de 30.0000 mm/min, máquina de gravação a laser de 0,069 mm para bricolage",
+      "preco": 1619.99,
+      "preco_original": 1799.99,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/818ssb9GfFL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 47,
+      "enviado_em": "2026-10-19T10:42:47.510307",
+      "link": "https://www.amazon.com.br/dp/B0BCFRRW6Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 1619.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "TRIO.MAGNÉSIO - Longa Duração: 2 Meses de Uso, Bisglicinato - Dimalato - Taurato, 260mg Alta Concentração,120 Cápsulas, Fortalvit",
+      "preco": 62.9,
+      "preco_original": 69.9,
+      "desconto_pct": 10.0,
+      "foto": "https://m.media-amazon.com/images/I/6137qbdSwAL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 40,
+      "enviado_em": "2026-10-19T10:42:38.878903",
+      "link": "https://www.amazon.com.br/dp/B0DD2WSRPG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 62.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Pack Ração Úmida Pedigree Sachê Carne ao Molho para Cães Adultos de Raças Pequenas - Leve 18 Pague 15",
       "preco": 50.36,
       "desconto_pct": 0.0,
@@ -46,121 +91,24 @@
       "menor_preco_30d": 20.8,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Ar Condicionado 9000 Btus Split Hi Wall Inverter Midea Frio Ai Ecomaster 220v",
-      "preco": 1837.98,
-      "preco_original": 2189.0,
-      "desconto_pct": 16.0,
-      "foto": "https://m.media-amazon.com/images/I/51XHzWTiUPL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 60,
-      "enviado_em": "2026-10-17T09:12:55.374982",
-      "link": "https://www.amazon.com.br/dp/B0FCSP9NS4?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 1837.98,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Smartphone Motorola Edge 70 5G Crystals by Swarovski - 512GB 12GB RAM + 12GB RAM Boost, Ultrafino, 3 cameras 50MP e tela extreme Amoled 120hz - Cloud Dancer",
-      "preco": 3099.0,
-      "preco_original": 5999.0,
-      "desconto_pct": 48.3,
-      "foto": "https://m.media-amazon.com/images/I/61LyzNkloEL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 95,
-      "enviado_em": "2026-10-17T09:12:46.863477",
-      "link": "https://www.amazon.com.br/dp/B0GMY41LM8?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 3099.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Headset Gamer Corsair HS80 RGB WIRELESS, Drivers 50mm, Preto - CA-9011235-NA",
-      "preco": 661.49,
-      "preco_original": 741.16,
-      "desconto_pct": 10.7,
-      "foto": "https://m.media-amazon.com/images/I/71yULbWE8KL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 43,
-      "enviado_em": "2026-10-17T09:12:38.042893",
-      "link": "https://www.amazon.com.br/dp/B09BBPTDWX?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "ruim",
-      "menor_preco_30d": 661.49,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Freeco Bloqueador De Odores Sanitarios - Lavanda 60ml Pack com 12 unidades",
-      "preco": 117.0,
-      "preco_original": 182.9,
-      "desconto_pct": 36.0,
-      "foto": "https://m.media-amazon.com/images/I/61FgBohsBbL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 73,
-      "enviado_em": "2026-10-16T09:41:39.821714",
-      "link": "https://www.amazon.com.br/dp/B08521LB58?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 117.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Samsung Ar-condicionado Split Digital Inverter Ultra Connect AI 12.000 BTUs Frio AR12DYFZAWKNAZ",
-      "preco": 2209.0,
-      "preco_original": 3939.0,
-      "desconto_pct": 43.9,
-      "foto": "https://m.media-amazon.com/images/I/51CGLBYdeIL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 95,
-      "enviado_em": "2026-10-16T09:41:30.936377",
-      "link": "https://www.amazon.com.br/dp/B0DKVCTTFN?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 2209.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Robô Aspirador Roborock QR598 | Aspira e Passa Pano | Sucção HyperForce 8.000Pa | Navegação LiDAR | Base Multifuncional Inteligente | Controle por App | Alexa e Google Assistant | Preto",
-      "preco": 5173.99,
-      "preco_original": 6049.99,
-      "desconto_pct": 14.5,
-      "foto": "https://m.media-amazon.com/images/I/61wFUcrmyAL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 62,
-      "enviado_em": "2026-10-16T09:41:22.334448",
-      "link": "https://www.amazon.com.br/dp/B0FZ841F1H?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 5173.99,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Biscoito Pedigree Biscrok Para Cães Adultos Multi, 1 kg",
-    "preco": 20.8,
-    "preco_original": 38.9,
-    "desconto_pct": 46.5,
-    "foto": "https://m.media-amazon.com/images/I/71KB3+DMqcL._AC_UL320_.jpg",
-    "categoria": "pet",
-    "score": 80,
-    "enviado_em": "2026-10-18T09:30:55.744860",
-    "cupom": "20% de desconto",
-    "link": "https://www.amazon.com.br/dp/B07XQ7M2P7?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-    "classe": "boa",
-    "menor_preco_30d": 20.8,
+    "titulo": "Ar Condicionado Split Midea Inverter Lite 12000 Btu R32 Frio 42ebvcb12m5 Branco 220v",
+    "preco": 1851.08,
+    "preco_original": 3929.0,
+    "desconto_pct": 52.9,
+    "foto": "https://m.media-amazon.com/images/I/51+HydOKbWL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "categoria": "ofertas_dia",
+    "score": 95,
+    "enviado_em": "2026-10-19T10:42:56.149963",
+    "link": "https://www.amazon.com.br/dp/B0HCXKT67F?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 1851.08,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
-    "ofertas_dia": {
-      "total": 4,
-      "score_medio": 81,
-      "desconto_medio": 36,
-      "maior_desconto": 48
-    },
     "pet": {
       "total": 3,
       "score_medio": 65,
@@ -169,11 +117,17 @@
     },
     "cupons": {
       "total": 2,
-      "score_medio": 53,
-      "desconto_medio": 13,
-      "maior_desconto": 14
+      "score_medio": 44,
+      "desconto_medio": 10,
+      "maior_desconto": 10
+    },
+    "ofertas_dia": {
+      "total": 1,
+      "score_medio": 95,
+      "desconto_medio": 53,
+      "maior_desconto": 52
     }
   },
-  "updated_at": "2026-10-18T09:31:25.507389",
-  "total": 9
+  "updated_at": "2026-10-19T10:43:07.212817",
+  "total": 6
 }
