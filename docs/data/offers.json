@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "JBL, Barra de Som, BAR 1000 MK2, Soundbar, 7.1.4 Canais, Dolby Atmos - Preta",
+      "preco": 3999.9,
+      "preco_original": 6799.0,
+      "desconto_pct": 41.2,
+      "foto": "https://m.media-amazon.com/images/I/51uDRDZZ+HL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 95,
+      "enviado_em": "2026-10-20T10:00:12.747314",
+      "link": "https://www.amazon.com.br/dp/B0FPRN2K78?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 3999.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "CÁLCIO + D3 K2 MK7-120 Cápsulas, Longa duração: 2 Meses de Uso - Cálcio Elementar (400mg) Vitamina D3, Vitamina K2-MK7, Fortalvit",
+      "preco": 55.48,
+      "preco_original": 64.9,
+      "desconto_pct": 14.5,
+      "foto": "https://m.media-amazon.com/images/I/61NpbldpitL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 42,
+      "enviado_em": "2026-10-20T10:00:04.066981",
+      "link": "https://www.amazon.com.br/dp/B0DXQDV36G?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 55.48,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Suporte Articulado para TV 32 a 58 Polegadas até 30 kg, Suporte de Parede Universal com Giro, Inclinação e Avanço, Compatível com Padrão VESA, Aço Reforçado",
+      "preco": 49.99,
+      "preco_original": 79.99,
+      "desconto_pct": 37.5,
+      "foto": "https://m.media-amazon.com/images/I/71qjcRACRLL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 73,
+      "enviado_em": "2026-10-20T09:59:54.829567",
+      "link": "https://www.amazon.com.br/dp/B0H6CS31C1?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 49.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Ar Condicionado Split Midea Inverter Lite 12000 Btu R32 Frio 42ebvcb12m5 Branco 220v",
       "preco": 1851.08,
       "preco_original": 3929.0,
@@ -42,54 +87,7 @@
       "link": "https://www.amazon.com.br/dp/B0DD2WSRPG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
       "classe": "ruim",
       "menor_preco_30d": 62.9,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Pack Ração Úmida Pedigree Sachê Carne ao Molho para Cães Adultos de Raças Pequenas - Leve 18 Pague 15",
-      "preco": 50.36,
-      "desconto_pct": 0.0,
-      "foto": "https://m.media-amazon.com/images/I/81IzmHr72pL._AC_UL320_.jpg",
-      "categoria": "pet",
-      "score": 50,
-      "enviado_em": "2026-10-18T09:31:14.283624",
-      "cupom": "20% de desconto",
-      "link": "https://www.amazon.com.br/dp/B0DPXSDD9R?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 50.36,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Dreamies Petisco Carne Tentadora Gatos Adultos 150G",
-      "preco": 17.69,
-      "preco_original": 117.93,
-      "desconto_pct": 85.0,
-      "foto": "https://m.media-amazon.com/images/I/71l46osyqnL._AC_UL320_.jpg",
-      "categoria": "pet",
-      "score": 64,
-      "enviado_em": "2026-10-18T09:31:04.755171",
-      "cupom": "20% de desconto",
-      "link": "https://www.amazon.com.br/dp/B0BWQ5VHJQ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 17.69,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Biscoito Pedigree Biscrok Para Cães Adultos Multi, 1 kg",
-      "preco": 20.8,
-      "preco_original": 38.9,
-      "desconto_pct": 46.5,
-      "foto": "https://m.media-amazon.com/images/I/71KB3+DMqcL._AC_UL320_.jpg",
-      "categoria": "pet",
-      "score": 80,
-      "enviado_em": "2026-10-18T09:30:55.744860",
-      "cupom": "20% de desconto",
-      "link": "https://www.amazon.com.br/dp/B07XQ7M2P7?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "boa",
-      "menor_preco_30d": 20.8,
-      "menor_periodo": false,
+      "menor_periodo": true,
       "verificada": true
     }
   ],
@@ -109,25 +107,19 @@
     "verificada": true
   },
   "stats": {
-    "pet": {
-      "total": 3,
-      "score_medio": 65,
-      "desconto_medio": 44,
-      "maior_desconto": 85
-    },
     "cupons": {
-      "total": 2,
-      "score_medio": 44,
-      "desconto_medio": 10,
-      "maior_desconto": 10
+      "total": 4,
+      "score_medio": 51,
+      "desconto_medio": 18,
+      "maior_desconto": 37
     },
     "ofertas_dia": {
-      "total": 1,
+      "total": 2,
       "score_medio": 95,
-      "desconto_medio": 53,
+      "desconto_medio": 47,
       "maior_desconto": 52
     }
   },
-  "updated_at": "2026-10-19T10:43:07.212817",
+  "updated_at": "2026-10-20T10:00:23.836650",
   "total": 6
 }
