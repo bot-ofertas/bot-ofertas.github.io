@@ -1,6 +1,52 @@
 {
   "products": [
     {
+      "titulo": "Pack Ração Úmida Whiskas Sachê Carne ao Molho para Gatos Adultos - Leve 20 Pague 16",
+      "preco": 49.21,
+      "preco_original": 51.8,
+      "desconto_pct": 5.0,
+      "foto": "https://m.media-amazon.com/images/I/81kVX-5Hg0L._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 52,
+      "enviado_em": "2026-10-21T10:01:21.989914",
+      "cupom": "20% de desconto",
+      "link": "https://www.amazon.com.br/dp/B0DPXVL7LK?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 49.21,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Pack Nestlé Purina Friskies Ração Úmida Para Gatos Adultos Carne Ao Molho - Com 15 Sachês 85g",
+      "preco": 38.74,
+      "desconto_pct": 0.0,
+      "foto": "https://m.media-amazon.com/images/I/61mNnwoG-EL._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 50,
+      "enviado_em": "2026-10-21T10:01:13.268067",
+      "cupom": "15% de desconto",
+      "link": "https://www.amazon.com.br/dp/B07PN67ZGJ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 38.74,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Pack Nestlé Purina Friskies Ração Úmida Para Gatos Adultos Frango Ao Molho - Com 15 Sachês 85g",
+      "preco": 34.0,
+      "desconto_pct": 0.0,
+      "foto": "https://m.media-amazon.com/images/I/6143RojzqnL._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 50,
+      "enviado_em": "2026-10-21T10:01:04.565172",
+      "cupom": "15% de desconto",
+      "link": "https://www.amazon.com.br/dp/B08T1TW43G?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 34.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "JBL, Barra de Som, BAR 1000 MK2, Soundbar, 7.1.4 Canais, Dolby Atmos - Preta",
       "preco": 3999.9,
       "preco_original": 6799.0,
@@ -92,17 +138,18 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Ar Condicionado Split Midea Inverter Lite 12000 Btu R32 Frio 42ebvcb12m5 Branco 220v",
-    "preco": 1851.08,
-    "preco_original": 3929.0,
-    "desconto_pct": 52.9,
-    "foto": "https://m.media-amazon.com/images/I/51+HydOKbWL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-    "categoria": "ofertas_dia",
-    "score": 95,
-    "enviado_em": "2026-10-19T10:42:56.149963",
-    "link": "https://www.amazon.com.br/dp/B0HCXKT67F?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-    "classe": "excelente",
-    "menor_preco_30d": 1851.08,
+    "titulo": "Pack Ração Úmida Whiskas Sachê Carne ao Molho para Gatos Adultos - Leve 20 Pague 16",
+    "preco": 49.21,
+    "preco_original": 51.8,
+    "desconto_pct": 5.0,
+    "foto": "https://m.media-amazon.com/images/I/81kVX-5Hg0L._AC_UL320_.jpg",
+    "categoria": "pet",
+    "score": 52,
+    "enviado_em": "2026-10-21T10:01:21.989914",
+    "cupom": "20% de desconto",
+    "link": "https://www.amazon.com.br/dp/B0DPXVL7LK?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "media",
+    "menor_preco_30d": 49.21,
     "menor_periodo": false,
     "verificada": true
   },
@@ -113,6 +160,12 @@
       "desconto_medio": 18,
       "maior_desconto": 37
     },
+    "pet": {
+      "total": 3,
+      "score_medio": 51,
+      "desconto_medio": 2,
+      "maior_desconto": 5
+    },
     "ofertas_dia": {
       "total": 2,
       "score_medio": 95,
@@ -120,6 +173,6 @@
       "maior_desconto": 52
     }
   },
-  "updated_at": "2026-10-20T10:00:23.836650",
-  "total": 6
+  "updated_at": "2026-10-21T10:01:32.582205",
+  "total": 9
 }
