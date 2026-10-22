@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Headset Gamer HyperX Cloud III – Compatível com PC, PS5, Xbox Series X|S, Drivers Angulados de 53mm, Áudio DTS, Microfone de 10 mm, USB-C, USB-A, Fio de 3,5 mm, Preto (727A8AA)",
+      "preco": 391.42,
+      "preco_original": 486.9,
+      "desconto_pct": 19.6,
+      "foto": "https://m.media-amazon.com/images/I/71AMEEP3HLL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 51,
+      "enviado_em": "2026-10-22T10:01:58.024464",
+      "link": "https://www.amazon.com.br/dp/B0C3BSZ56D?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 391.42,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Colchão Casal Luuna Original 24cm, 4 Espumas, Suporte Coluna, 10 Anos",
+      "preco": 2399.0,
+      "preco_original": 2699.0,
+      "desconto_pct": 11.1,
+      "foto": "https://m.media-amazon.com/images/I/51h-QZHnjwL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 52,
+      "enviado_em": "2026-10-22T10:01:49.456015",
+      "link": "https://www.amazon.com.br/dp/B019YBYBSC?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 2399.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Azeite de Oliva Virgem Herdade do Esporão 3 Litros",
+      "preco": 159.9,
+      "preco_original": 179.9,
+      "desconto_pct": 11.1,
+      "foto": "https://m.media-amazon.com/images/I/516-1SxMZnL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "cupons",
+      "score": 40,
+      "enviado_em": "2026-10-22T10:01:40.883171",
+      "link": "https://www.amazon.com.br/dp/B07K2LKH8N?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "ruim",
+      "menor_preco_30d": 159.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Pack Ração Úmida Whiskas Sachê Carne ao Molho para Gatos Adultos - Leve 20 Pague 16",
       "preco": 49.21,
       "preco_original": 51.8,
@@ -90,74 +135,28 @@
       "menor_preco_30d": 49.99,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Ar Condicionado Split Midea Inverter Lite 12000 Btu R32 Frio 42ebvcb12m5 Branco 220v",
-      "preco": 1851.08,
-      "preco_original": 3929.0,
-      "desconto_pct": 52.9,
-      "foto": "https://m.media-amazon.com/images/I/51+HydOKbWL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "ofertas_dia",
-      "score": 95,
-      "enviado_em": "2026-10-19T10:42:56.149963",
-      "link": "https://www.amazon.com.br/dp/B0HCXKT67F?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "excelente",
-      "menor_preco_30d": 1851.08,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Twotrees Gravador a laser TTS-10 Pro, máquina de gravação a laser de alta precisão de 10000 mW, cortador a laser, velocidade de 30.0000 mm/min, máquina de gravação a laser de 0,069 mm para bricolage",
-      "preco": 1619.99,
-      "preco_original": 1799.99,
-      "desconto_pct": 10.0,
-      "foto": "https://m.media-amazon.com/images/I/818ssb9GfFL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 47,
-      "enviado_em": "2026-10-19T10:42:47.510307",
-      "link": "https://www.amazon.com.br/dp/B0BCFRRW6Q?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 1619.99,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "TRIO.MAGNÉSIO - Longa Duração: 2 Meses de Uso, Bisglicinato - Dimalato - Taurato, 260mg Alta Concentração,120 Cápsulas, Fortalvit",
-      "preco": 62.9,
-      "preco_original": 69.9,
-      "desconto_pct": 10.0,
-      "foto": "https://m.media-amazon.com/images/I/6137qbdSwAL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 40,
-      "enviado_em": "2026-10-19T10:42:38.878903",
-      "link": "https://www.amazon.com.br/dp/B0DD2WSRPG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "ruim",
-      "menor_preco_30d": 62.9,
-      "menor_periodo": true,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Pack Ração Úmida Whiskas Sachê Carne ao Molho para Gatos Adultos - Leve 20 Pague 16",
-    "preco": 49.21,
-    "preco_original": 51.8,
-    "desconto_pct": 5.0,
-    "foto": "https://m.media-amazon.com/images/I/81kVX-5Hg0L._AC_UL320_.jpg",
-    "categoria": "pet",
+    "titulo": "Colchão Casal Luuna Original 24cm, 4 Espumas, Suporte Coluna, 10 Anos",
+    "preco": 2399.0,
+    "preco_original": 2699.0,
+    "desconto_pct": 11.1,
+    "foto": "https://m.media-amazon.com/images/I/51h-QZHnjwL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "categoria": "cupons",
     "score": 52,
-    "enviado_em": "2026-10-21T10:01:21.989914",
-    "cupom": "20% de desconto",
-    "link": "https://www.amazon.com.br/dp/B0DPXVL7LK?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "enviado_em": "2026-10-22T10:01:49.456015",
+    "link": "https://www.amazon.com.br/dp/B019YBYBSC?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
     "classe": "media",
-    "menor_preco_30d": 49.21,
+    "menor_preco_30d": 2399.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "cupons": {
-      "total": 4,
-      "score_medio": 51,
-      "desconto_medio": 18,
+      "total": 5,
+      "score_medio": 52,
+      "desconto_medio": 19,
       "maior_desconto": 37
     },
     "pet": {
@@ -167,12 +166,12 @@
       "maior_desconto": 5
     },
     "ofertas_dia": {
-      "total": 2,
+      "total": 1,
       "score_medio": 95,
-      "desconto_medio": 47,
-      "maior_desconto": 52
+      "desconto_medio": 41,
+      "maior_desconto": 41
     }
   },
-  "updated_at": "2026-10-21T10:01:32.582205",
+  "updated_at": "2026-10-22T10:02:08.809010",
   "total": 9
 }
