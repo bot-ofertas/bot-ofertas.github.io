@@ -30,25 +30,17 @@ import urllib.parse
 log = logging.getLogger(__name__)
 
 def _placeholder(valor: str) -> bool:
-    """True para os valores de exemplo do `.env.example`.
+    """Reexporta a checagem de `integrations.whatsapp_api` (o historico do
+    bug e a razao de a regra morar la estao na docstring de la).
 
-    Um placeholder e uma string nao-vazia, entao passaria por configuracao
-    de verdade e ligaria o envio apontando para um grupo que nao existe —
-    pior que estar desligado, porque a fila consome o item e o marca como
-    processado. Mesma convencao do `setup_n8n._efetivo`.
-
-    A checagem por prefixo sozinha nao cobria o exemplo que o
-    `deploy/.env.example` traz para a nuvem: `120363XXXXXXXXX@g.us`. Ele nao
-    comeca com nenhum dos prefixos, entao `wa_ativo()` respondia True num
-    servidor recem-instalado e a fila drenava as ofertas para um JID que nao
-    existe — em silencio, uma a cada 30-45 min. Um JID de verdade e so
-    digitos antes do `@`, entao a corrida de `X` maiusculos e assinatura
-    segura de exemplo nao preenchido.
+    A regra ficava aqui e o `whatsapp_api._configurada()` nao a consultava,
+    entao o `wa_ativo()` barrava o JID de exemplo e o caminho da Evolution
+    API — que e a TENTATIVA 1 de `enviar_para_grupo()` — deixava passar. Duas
+    respostas para a mesma pergunta e a pior das duas ganhava. Agora existe
+    uma so; este nome continua por causa de quem ja importa daqui.
     """
-    v = valor.lower()
-    if v.startswith(("cole_aqui", "cole-aqui", "seu_", "sua_", "exemplo")):
-        return True
-    return "xxx" in v
+    from integrations.whatsapp_api import _placeholder as _p  # noqa: PLC0415
+    return _p(valor)
 
 
 def nome_do_grupo() -> str:
