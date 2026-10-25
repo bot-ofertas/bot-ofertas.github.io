@@ -1,6 +1,53 @@
 {
   "products": [
     {
+      "titulo": "Pack Nestlé Purina Friskies Ração Úmida Para Gatos Adultos Atum Ao Molho - Com 15 Sachês 85g",
+      "preco": 38.9,
+      "desconto_pct": 0.0,
+      "foto": "https://m.media-amazon.com/images/I/61YlTgFF9YL._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 50,
+      "enviado_em": "2026-10-25T09:45:06.656541",
+      "cupom": "15% de desconto",
+      "link": "https://www.amazon.com.br/dp/B07HMB8YTP?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 38.9,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "WHISKAS Ração Carne Gatos Adultos 2,7 kg",
+      "preco": 34.76,
+      "preco_original": 49.9,
+      "desconto_pct": 30.3,
+      "foto": "https://m.media-amazon.com/images/I/61ypdtO-HAL._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 75,
+      "enviado_em": "2026-10-25T09:44:57.949771",
+      "cupom": "20% de desconto",
+      "link": "https://www.amazon.com.br/dp/B0B91Z6VRQ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 34.76,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Dreamies Petisco Carne Tentadora Gatos Adultos 150G",
+      "preco": 11.92,
+      "preco_original": 20.9,
+      "desconto_pct": 43.0,
+      "foto": "https://m.media-amazon.com/images/I/71l46osyqnL._AC_UL320_.jpg",
+      "categoria": "pet",
+      "score": 85,
+      "enviado_em": "2026-10-25T09:44:49.131062",
+      "cupom": "20% de desconto",
+      "link": "https://www.amazon.com.br/dp/B0BWQ5VHJQ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "excelente",
+      "menor_preco_30d": 11.92,
+      "menor_periodo": true,
+      "verificada": true
+    },
+    {
       "titulo": "Apple 2025 iPad Air de 13 polegadas (Wi-Fi + Cellular, 256 GB) - Cinzento sideral (M3)",
       "preco": 5999.98,
       "preco_original": 6666.66,
@@ -44,73 +91,35 @@
       "menor_preco_30d": 607.5,
       "menor_periodo": false,
       "verificada": true
-    },
-    {
-      "titulo": "Headset Gamer HyperX Cloud III – Compatível com PC, PS5, Xbox Series X|S, Drivers Angulados de 53mm, Áudio DTS, Microfone de 10 mm, USB-C, USB-A, Fio de 3,5 mm, Preto (727A8AA)",
-      "preco": 391.42,
-      "preco_original": 486.9,
-      "desconto_pct": 19.6,
-      "foto": "https://m.media-amazon.com/images/I/71AMEEP3HLL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 51,
-      "enviado_em": "2026-10-22T10:01:58.024464",
-      "link": "https://www.amazon.com.br/dp/B0C3BSZ56D?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 391.42,
-      "menor_periodo": true,
-      "verificada": true
-    },
-    {
-      "titulo": "Colchão Casal Luuna Original 24cm, 4 Espumas, Suporte Coluna, 10 Anos",
-      "preco": 2399.0,
-      "preco_original": 2699.0,
-      "desconto_pct": 11.1,
-      "foto": "https://m.media-amazon.com/images/I/51h-QZHnjwL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 52,
-      "enviado_em": "2026-10-22T10:01:49.456015",
-      "link": "https://www.amazon.com.br/dp/B019YBYBSC?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "media",
-      "menor_preco_30d": 2399.0,
-      "menor_periodo": false,
-      "verificada": true
-    },
-    {
-      "titulo": "Azeite de Oliva Virgem Herdade do Esporão 3 Litros",
-      "preco": 159.9,
-      "preco_original": 179.9,
-      "desconto_pct": 11.1,
-      "foto": "https://m.media-amazon.com/images/I/516-1SxMZnL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-      "categoria": "cupons",
-      "score": 40,
-      "enviado_em": "2026-10-22T10:01:40.883171",
-      "link": "https://www.amazon.com.br/dp/B07K2LKH8N?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-      "classe": "ruim",
-      "menor_preco_30d": 159.9,
-      "menor_periodo": false,
-      "verificada": true
     }
   ],
   "produto_do_dia": {
-    "titulo": "Ômega 3 Plus 33/22 990mg EPA + 660mg DHA (33/22), 120 Cápsulas, Fortalvit | 1650mg de Ômega 3 · Quase o Dobro de EPA e DHA das Fórmulas Comuns 18/12 · Óleo de Peixe Concentrado",
-    "preco": 99.8,
-    "preco_original": 134.9,
-    "desconto_pct": 26.0,
-    "foto": "https://m.media-amazon.com/images/I/61cFaCAmHTL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
-    "categoria": "cupons",
-    "score": 62,
-    "enviado_em": "2026-10-24T09:29:10.326079",
-    "link": "https://www.amazon.com.br/dp/B0GVVNF4VL?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
-    "classe": "media",
-    "menor_preco_30d": 99.8,
-    "menor_periodo": false,
+    "titulo": "Dreamies Petisco Carne Tentadora Gatos Adultos 150G",
+    "preco": 11.92,
+    "preco_original": 20.9,
+    "desconto_pct": 43.0,
+    "foto": "https://m.media-amazon.com/images/I/71l46osyqnL._AC_UL320_.jpg",
+    "categoria": "pet",
+    "score": 85,
+    "enviado_em": "2026-10-25T09:44:49.131062",
+    "cupom": "20% de desconto",
+    "link": "https://www.amazon.com.br/dp/B0BWQ5VHJQ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "classe": "excelente",
+    "menor_preco_30d": 11.92,
+    "menor_periodo": true,
     "verificada": true
   },
   "stats": {
+    "pet": {
+      "total": 3,
+      "score_medio": 70,
+      "desconto_medio": 24,
+      "maior_desconto": 43
+    },
     "cupons": {
-      "total": 5,
-      "score_medio": 49,
-      "desconto_medio": 16,
+      "total": 2,
+      "score_medio": 52,
+      "desconto_medio": 18,
       "maior_desconto": 26
     },
     "ofertas_dia": {
@@ -120,6 +129,6 @@
       "maior_desconto": 10
     }
   },
-  "updated_at": "2026-10-24T09:29:30.149030",
+  "updated_at": "2026-10-25T09:45:17.485305",
   "total": 6
 }
