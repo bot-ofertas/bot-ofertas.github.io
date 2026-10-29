@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Apple iPhone 16 (128 GB) – Rosa",
+      "preco": 5084.99,
+      "preco_original": 6799.0,
+      "desconto_pct": 25.2,
+      "foto": "https://m.media-amazon.com/images/I/71Z-rd+PWgL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 75,
+      "enviado_em": "2026-10-29T11:29:21.328267",
+      "link": "https://www.amazon.com.br/dp/B0DJFT8HZC?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 5084.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 15 (128 GB) — Preto",
+      "preco": 4199.0,
+      "preco_original": 5999.0,
+      "desconto_pct": 30.0,
+      "foto": "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 80,
+      "enviado_em": "2026-10-29T11:29:12.737106",
+      "link": "https://www.amazon.com.br/dp/B0CP6CVJSG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4199.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple 2025 MacBook Pro (de 14 polegadas, Chip M5 da Apple com CPU de 10 núcleos e GPU de 10 núcleos., 32GB Memória unificada, 1 TB) - Prateado",
+      "preco": 19999.0,
+      "preco_original": 25799.0,
+      "desconto_pct": 22.5,
+      "foto": "https://m.media-amazon.com/images/I/41BacKrHsxL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 77,
+      "enviado_em": "2026-10-29T11:29:04.155873",
+      "link": "https://www.amazon.com.br/dp/B0GR1YNLC8?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 19999.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Apple iPhone 16 (128 GB) – Branco",
       "preco": 5063.99,
       "preco_original": 6799.0,
@@ -47,28 +92,28 @@
     }
   ],
   "produto_do_dia": {
-    "titulo": "Samsung Lava e Seca WD11M com Digital Inverter WD11M4473PX Inox Look 11/7kg - 127V",
-    "preco": 3514.05,
-    "preco_original": 4838.9,
-    "desconto_pct": 27.4,
-    "foto": "https://m.media-amazon.com/images/I/516qpWn6k2L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+    "titulo": "Apple iPhone 15 (128 GB) — Preto",
+    "preco": 4199.0,
+    "preco_original": 5999.0,
+    "desconto_pct": 30.0,
+    "foto": "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
     "categoria": "ofertas_dia",
-    "score": 82,
-    "enviado_em": "2026-10-28T11:13:17.457603",
-    "link": "https://www.amazon.com.br/dp/B0BZ129NTZ?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+    "score": 80,
+    "enviado_em": "2026-10-29T11:29:12.737106",
+    "link": "https://www.amazon.com.br/dp/B0CP6CVJSG?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
     "classe": "boa",
-    "menor_preco_30d": 3514.05,
+    "menor_preco_30d": 4199.0,
     "menor_periodo": false,
     "verificada": true
   },
   "stats": {
     "ofertas_dia": {
-      "total": 3,
-      "score_medio": 70,
-      "desconto_medio": 21,
-      "maior_desconto": 27
+      "total": 6,
+      "score_medio": 74,
+      "desconto_medio": 24,
+      "maior_desconto": 30
     }
   },
-  "updated_at": "2026-10-28T11:13:36.420185",
-  "total": 3
+  "updated_at": "2026-10-29T11:29:32.031846",
+  "total": 6
 }
