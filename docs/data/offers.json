@@ -1,6 +1,51 @@
 {
   "products": [
     {
+      "titulo": "Geladeira Electrolux 1p 400l Ib6s Inox Bivolt",
+      "preco": 3529.0,
+      "preco_original": 4272.63,
+      "desconto_pct": 17.4,
+      "foto": "https://m.media-amazon.com/images/I/41R+BErnAmL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 61,
+      "enviado_em": "2026-10-31T10:53:49.211445",
+      "link": "https://www.amazon.com.br/dp/B0FTTJMGB4?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "media",
+      "menor_preco_30d": 3529.0,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 15 (256 GB) — Azul",
+      "preco": 4887.78,
+      "preco_original": 6799.0,
+      "desconto_pct": 28.1,
+      "foto": "https://m.media-amazon.com/images/I/41+jLq6yJKL._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 78,
+      "enviado_em": "2026-10-31T10:53:39.943854",
+      "link": "https://www.amazon.com.br/dp/B0CP6BZHK3?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 4887.78,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
+      "titulo": "Apple iPhone 16 (128 GB) – Ultramarino",
+      "preco": 5063.99,
+      "preco_original": 6799.0,
+      "desconto_pct": 25.5,
+      "foto": "https://m.media-amazon.com/images/I/71Q3GA4-J9L._AC_SF226,226_QL85_.jpg?aicid=discounts-widgets-horizonte",
+      "categoria": "ofertas_dia",
+      "score": 75,
+      "enviado_em": "2026-10-31T10:53:31.176928",
+      "link": "https://www.amazon.com.br/dp/B0DJFRYWK8?tag=silver1230c-20&linkCode=as2&ascsubtag=bot_telegram",
+      "classe": "boa",
+      "menor_preco_30d": 5063.99,
+      "menor_periodo": false,
+      "verificada": true
+    },
+    {
       "titulo": "Micro-ondas Philco 20L Branco Pintura Limpa Fácil PMO24B 127v",
       "preco": 413.15,
       "preco_original": 463.9,
@@ -108,9 +153,9 @@
   },
   "stats": {
     "ofertas_dia": {
-      "total": 3,
-      "score_medio": 77,
-      "desconto_medio": 26,
+      "total": 6,
+      "score_medio": 74,
+      "desconto_medio": 25,
       "maior_desconto": 30
     },
     "eletrodomesticos": {
@@ -120,6 +165,6 @@
       "maior_desconto": 38
     }
   },
-  "updated_at": "2026-10-30T11:22:05.855721",
-  "total": 6
+  "updated_at": "2026-10-31T10:54:00.055546",
+  "total": 9
 }
